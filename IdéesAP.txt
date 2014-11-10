@@ -1,0 +1,89 @@
+
+== Coder du code fonctionnel en objets	
+
+Meyer :
+	Code structuré en classes pour actions users (menu)
+	Cf. Meyer
+	Voir BU
+
+Permet de montrer que l'approche objet ne s'applique pas QUE aux données ...
+Mais c'est pas un pattern ...
+Sauf que on peut dire que on met en place un "patron" pour le dév local de l'appli pour rendre l'appli extensible facilement.
+
+== MVC/JTable
+
+Illustrer un MVC
+
+Etudier le JTable avec patron MC-V
+	MC : JTable, composant Java "complet"
+	V : TableModel à développer par appli
+		Méthodes appelées par MV :
+			Méthodes getItem(col, lig), getRowCount(), getColumnName (col), ...
+			isCellEditable(col, lig) , setValueAt(v, lig, col), ...
+		Méthodes pour "rafraichir la Vue"
+			fireTableDataChanged(), fireTableRowsInserted(...), fireTableCellUpdated, ...
+
+On peut aussi illustrer la "délégation" (objet, pas pattern)
+	TableUI : IG
+	Renderers : affichage
+	Editors : saisie
+	SelectionModel : modes de sélection
+
+Mais déjà illustré dans les composants Container avec les layouts managers. 
+Le REsouligner ?
+
+== Java pattern observer
+
+Java 
+interface Observer
+	méthode update (Observable o, Object arg)
++ classe Observable
+	Implémente la mécanique : add/removeObserver(), notifyObservers(), hasChanged(), ...
+	Reste à ajouter les modifs et les lancements de notifyObservers() (+ méca associée de l'API)
+	Classe car code
+
+== Quelques idées de Patterns et comment les "montrer"
+
+Infos tirées de 
+https://app.box.com/shared/yrlj0takyhjeg1mefacy
+
+	
+=== Strategy -> classes abstraites/interfaces
+	Implémentation de code variant
+	Jeu : Personnages et 3 comportements : combattre(), seDeplacer(), soigner()
+		3 interfaces pour chaque comportement + implémentations
+		1 classe Personnage avec méthodes combattre(), seDeplacer(), soigner()
+			Délégation aux comportements associés
+			
+=== Decorator -> flux 
+	Expliqué en gateaux : gateau + couche chocolat + couche caramel, les 3 == patisseries
+	Pâtisserie super-classe de tout le monde
+	public class Main{
+		public static void main(String[] args){
+			Patisserie pat = new CoucheChocolat(
+				new CoucheCaramel(
+					new CoucheBiscuit(
+						new CoucheChocolat(
+							new Gateau()))));
+			System.out.println(pat.preparer());
+		}
+	}
+=== Observer -> Swing 
+	Une JFrame qui écoute une horloge 
+
+=== Singleton -> BD
+	Connexion unique à la BD
+
+=== DAO -> BD
+	Classes POJO -> BD et inverse
+	
+=== Factory
+	Factory de création d'instances de DAO
+	Factory de Factory de création d'instances de DAO (ex : pour une BD my, pour XML, ...)
+	
+=== MVC -> expliqué sur Swing une calculette
+	MVC Calculette
+	La Vue écoute le Modèle
+
+=== Join/Fork -> Interne à java ??
+	Faire du thread.start() et thread.join() + facilement ...

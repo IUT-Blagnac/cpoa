@@ -5,8 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
-<meta name="author" content="Jean-Michel Bruel">
-<title>DUT-Info/S3/M3105 (CPOA)</title>
+<title>Design patterns</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -412,227 +411,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>DUT-Info/S3/M3105 (CPOA)</h1>
-<div class="details">
-<span id="author" class="author">Jean-Michel Bruel</span><br>
-<span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2014-11-10 - First draft</span>
-</div>
+<h1>Design patterns</h1>
 </div>
 <div id="content">
 <div class="sect1">
 <h2 id="_introduction"><a class="link" href="#_introduction">1. Introduction</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Ce cours porte sur la <strong>C</strong>onception et <strong>P</strong>rogrammation <strong>O</strong>bjet <strong>A</strong>vancée.</p>
-</div>
-<div class="sect2">
-<h3 id="_concepts_bonnes_pratiques_et_patrons"><a class="link" href="#_concepts_bonnes_pratiques_et_patrons">1.1. Concepts, bonnes pratiques et patrons</a></h3>
-<div class="paragraph">
-<p>Vous avez appris (cf. M2103 et M2104) un certain nombre
-de <strong>concepts objets</strong> :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Abstraction</p>
-</li>
-<li>
-<p>Encapsulation</p>
-</li>
-<li>
-<p>Polymorphisme</p>
-</li>
-<li>
-<p>Héritage</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Vous avez/allez ensuite appris des <strong>bonnes pratiques</strong> :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Identifier les aspects qui varient et les séparer des aspects constants</p>
-</li>
-<li>
-<p>Programmer une interface, non une implémentation</p>
-</li>
-<li>
-<p>Préférer la composition à l&#8217;héritage</p>
-</li>
-<li>
-<p>Les classes doivent être ouvertes à l&#8217;extension, mais fermées à la modification</p>
-</li>
-<li>
-<p>Dépendez d&#8217;abstractions. Ne dépendez pas de classes concrètes (inversion des dépendances)</p>
-</li>
-<li>
-<p>Ne parlez pas aux inconnus</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>L&#8217;étape suivante consiste à apprendre les bonnes solutions de
-conception, ce qu&#8217;on appelle les <strong>patrons de conception</strong>
-(ou <em>design patterns</em> en anglais).</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_organisation"><a class="link" href="#_organisation">1.2. Organisation</a></h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="/Users/bruel/dev/images/icons/note.png" alt="Note">
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Rappel du rythme : 1 cours, 1 TD et 2 TPs par semaine. Pendant 8 semaines.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>La première semaine est consacré au principe des patrons
-de conception, en partant d&#8217;un exemple (cours en fin de semaine).</p>
-</li>
-<li>
-<p>Les 5 suivantes sont consacrées à l&#8217;étude de certains patrons classiques.
-Mise en pratique sur des exercices en TP.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="/Users/bruel/dev/images/icons/note.png" alt="Note">
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Les TPs sont décalés d&#8217;une semaine (conception et étude d&#8217;un ou
-plusieurs patrons semaine <code>N</code> et mise en oeuvre en TP semaine <code>N+1</code>).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Les 3 suivantes, les étudiants en mode projet pour faire du
-<em>refactoring</em> d&#8217;applications réelles (conception aidée en TD sur
-les modèles <a href="http://www.uml.org/">UML&#8482;</a>, mise en oeuvre en TP).</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Voici une proposition de déroulement des semaines :</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Semaine 1</dt>
-<dd>
-<p>SuperCanard, le grand classique, <a href="#Stratégie">[Stratégie]</a></p>
-</dd>
-<dt class="hdlist1">Semaine 2</dt>
-<dd>
-<p>L&#8217;exemple de Meyer : menus en objet</p>
-</dd>
-<dt class="hdlist1">Semaine 3</dt>
-<dd>
-<p>Premiers patrons</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#Singleton">[Singleton]</a></p>
-</li>
-<li>
-<p><a href="#Observateur">[Observateur]</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p>version intuitive (2 interfaces)</p>
-</li>
-<li>
-<p>version Java (classe <code>Observable</code>)</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">Semaine 4</dt>
-<dd>
-<p>Patrons Fabrique, Proxy, Etat</p>
-</dd>
-<dt class="hdlist1">Semaine 5</dt>
-<dd>
-<p>Patrons Décorateur, Façade, Visiteur</p>
-</dd>
-<dt class="hdlist1">Semaine 6</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>MVC avec l&#8217;exemple <code>JTable</code> de <a href="https://www.java.com/fr/">Java</a></p>
-</li>
-<li>
-<p>Patrons Chaîne de responsabilité (juste en cours)</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">Semaines 7 et 8</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Quelques idées de projet final :</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Refactorer un code généré par <a href="http://cruise.eecs.uottawa.ca/umple/">Umple</a>.</p>
-</li>
-<li>
-<p>Refactorer le code de MPA (mais pas le leur, celui d&#8217;un autre groupe)</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_evaluation_et_notation"><a class="link" href="#_evaluation_et_notation">1.3. Evaluation et notation</a></h3>
-<div class="paragraph">
-<p>Comme prévu par le <a href="http://webetud2.iut-blagnac.fr/pluginfile.php/1653/mod_resource/content/4/Contr%C3%B4les-2014-2015_S3.pdf">planning des contrôles</a>,
-les étudiants auront :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>une note de projet (TPs + projet final) &#8658; coef. 1</p>
-</li>
-<li>
-<p>une note d&#8217;examen final (semaine 5) &#8658; coef. 2</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_design_patterns"><a class="link" href="#_design_patterns">2. Design patterns</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_introduction_2"><a class="link" href="#_introduction_2">2.1. Introduction</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -647,8 +431,10 @@ les étudiants auront :</p>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_patrons_à_aborder"><a class="link" href="#_patrons_à_aborder">2.2. Patrons à aborder</a></h3>
+</div>
+<div class="sect1">
+<h2 id="_patrons_à_aborder"><a class="link" href="#_patrons_à_aborder">2. Patrons à aborder</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -768,13 +554,15 @@ les étudiants auront :</p>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_td_supercanard"><a class="link" href="#_td_supercanard">2.3. TD SuperCanard</a></h3>
+</div>
+<div class="sect1">
+<h2 id="_td_supercanard"><a class="link" href="#_td_supercanard">3. TD SuperCanard</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Voici un exemple de déroulement de TD</p>
 </div>
-<div class="sect3">
-<h4 id="_application_existante"><a class="link" href="#_application_existante">2.3.1. Application existante</a></h4>
+<div class="sect2">
+<h3 id="_application_existante"><a class="link" href="#_application_existante">3.1. Application existante</a></h3>
 <div class="paragraph">
 <p>Soit l&#8217;application <code>SuperCanard</code> dont le modèle est
 décrit ci-dessous :</p>
@@ -786,8 +574,8 @@ décrit ci-dessous :</p>
 <div class="title">Figure 1. Une application existante (source plantUML <a href="superCanard.plantuml">ici</a>)</div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_modification_amélioration"><a class="link" href="#_modification_amélioration">2.3.2. Modification/Amélioration</a></h4>
+<div class="sect2">
+<h3 id="_modification_amélioration"><a class="link" href="#_modification_amélioration">3.2. Modification/Amélioration</a></h3>
 <div class="paragraph">
 <p>Nous voulons maintenant ajouter une méthode :</p>
 </div>
@@ -799,8 +587,10 @@ décrit ci-dessous :</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h3>
+</div>
+<div class="sect1">
+<h2 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h2>
+<div class="sectionbody">
 <div class="dlist glossary">
 <dl>
 <dt><a id="Observateur"></a> Observateur (<em>observer<sup>uk</sup></em>)</dt>
@@ -818,8 +608,10 @@ décrit ci-dessous :</p>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_références"><a class="link" href="#_références">Références</a></h3>
+</div>
+<div class="sect1">
+<h2 id="_références"><a class="link" href="#_références">Références</a></h2>
+<div class="sectionbody">
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
@@ -834,25 +626,8 @@ Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_about"><a class="link" href="#_about">About&#8230;&#8203;</a></h2>
-<div class="sectionbody">
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Document réalisé par <a href="mailto:jbruel@gmail.com">Jean-Michel Bruel</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.1</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
-Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
-<span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="/Users/bruel/dev/images/icons/88x31.png" alt="Licence Creative Commons"></a></span>
-<a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0<br>
 Last updated 2014-11-10 09:52:00 CET
 </div>
 </div>
