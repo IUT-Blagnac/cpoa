@@ -1,7 +1,7 @@
 #-----------------------------------------------------
 MAIN=main
-ICONSDIR=/Users/bruel/dev/images/icons
-IMAGESDIR=/Users/bruel/dev/Papyrus4Education/images
+ICONSDIR=images/icons
+IMAGESDIR=images
 STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
 ASCIIDOC=asciidoc -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a imagesdir=$(IMAGESDIR) -a data-uri
 #HIGHLIGHT=coderay
