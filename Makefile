@@ -27,7 +27,7 @@ images/%.png: images/%.plantuml
 
 %.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a toc2 -b html5 -a numbered $<
+	$(DOCTOR) -a toc2 -b html5 -a numbered -a data-uri $<
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
