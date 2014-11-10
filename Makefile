@@ -1,7 +1,7 @@
 #-----------------------------------------------------
 MAIN=main
-ICONSDIR=/Users/bruel/dev/images/icons
-IMAGESDIR=/Users/bruel/dev/Papyrus4Education/images
+ICONSDIR=./images/icons
+IMAGESDIR=./images
 STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
 ASCIIDOC=asciidoc -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a imagesdir=$(IMAGESDIR) -a data-uri
 #HIGHLIGHT=coderay
@@ -27,7 +27,7 @@ images/%.png: images/%.plantuml
 
 %.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a toc2 -b html5 -a numbered -a data-uri $<
+	$(DOCTOR) -a toc2 -b html5 -a numbered $<
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
