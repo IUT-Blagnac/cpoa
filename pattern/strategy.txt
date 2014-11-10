@@ -1,0 +1,3 @@
+*Stratégie* définit une famille d'algorithmes, encapsule chacun d'eux et les
+rend interchangeables.
+Il permet à l'algorithme de varier indépendamment des clients qui l'utilisent.

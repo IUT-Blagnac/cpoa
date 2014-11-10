@@ -409,8 +409,73 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<style>
+.listingblock .pygments .hll { background-color: #ffffcc }
+.listingblock .pygments  { background: #f8f8f8; }
+.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-o { color: #666666 } /* Operator */
+.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>DUT-Info/S3/M3105 (CPOA)</h1>
 <div class="details">
@@ -418,6 +483,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.0,</span>
 <span id="revdate">2014-11-10 - First draft</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_concepts_bonnes_pratiques_et_patrons">1.1. Concepts, bonnes pratiques et patrons</a></li>
+<li><a href="#_organisation">1.2. Organisation</a></li>
+<li><a href="#_evaluation_et_notation">1.3. Evaluation et notation</a></li>
+</ul>
+</li>
+<li><a href="#_glossaire_et_définition">Glossaire et définition</a></li>
+<li><a href="#_références">Références</a></li>
+<li><a href="#_définitions_de_patrons">Définitions de patrons</a></li>
+<li><a href="#_about">About&#8230;&#8203;</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
@@ -486,7 +567,7 @@ conception, ce qu&#8217;on appelle les <strong>patrons de conception</strong>
 <table>
 <tr>
 <td class="icon">
-<img src="/Users/bruel/dev/images/icons/note.png" alt="Note">
+<img src="images/icons/note.png" alt="Note">
 </td>
 <td class="content">
 <div class="paragraph">
@@ -509,7 +590,7 @@ Mise en pratique sur des exercices en TP.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="/Users/bruel/dev/images/icons/note.png" alt="Note">
+<img src="images/icons/note.png" alt="Note">
 </td>
 <td class="content">
 <div class="paragraph">
@@ -629,178 +710,8 @@ les étudiants auront :</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_design_patterns"><a class="link" href="#_design_patterns">2. Design patterns</a></h2>
+<h2 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_introduction_2"><a class="link" href="#_introduction_2">2.1. Introduction</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Supercanard</p>
-</li>
-<li>
-<p>Tests</p>
-</li>
-<li>
-<p>Conclusion</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_patrons_à_aborder"><a class="link" href="#_patrons_à_aborder">2.2. Patrons à aborder</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Ceux déjà pratiqués</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#Singleton">[Singleton]</a></p>
-</li>
-<li>
-<p><a href="#Observateur">[Observateur]</a></p>
-</li>
-<li>
-<p>Fabrique (<em>factory</em>) (cf. parser sax)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Les "pressentis"</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#Stratégie">[Stratégie]</a></p>
-</li>
-<li>
-<p>Itérateur</p>
-</li>
-<li>
-<p>Composite</p>
-</li>
-<li>
-<p>Etat</p>
-</li>
-<li>
-<p>Proxy</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Les nouveaux</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Décorateur</p>
-</li>
-<li>
-<p>Commande</p>
-</li>
-<li>
-<p>Adaptateur</p>
-</li>
-<li>
-<p>Façade</p>
-</li>
-<li>
-<p>Patron de méthode</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Les "avancés"</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Chaînes de responsabilité</p>
-</li>
-<li>
-<p>Visiteur</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Ceux qu&#8217;on n&#8217;aura pas le temps d&#8217;aborder</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Prototype</p>
-</li>
-<li>
-<p>Mémento</p>
-</li>
-<li>
-<p>Médiateur</p>
-</li>
-<li>
-<p>Interprète</p>
-</li>
-<li>
-<p>Poids-mouche</p>
-</li>
-<li>
-<p>Monteur</p>
-</li>
-<li>
-<p>Pont</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Concepts avancés</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Patrons de patrons (exemple du MVC)</p>
-</li>
-<li>
-<p>Anti-patrons</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_td_supercanard"><a class="link" href="#_td_supercanard">2.3. TD SuperCanard</a></h3>
-<div class="paragraph">
-<p>Voici un exemple de déroulement de TD</p>
-</div>
-<div class="sect3">
-<h4 id="_application_existante"><a class="link" href="#_application_existante">2.3.1. Application existante</a></h4>
-<div class="paragraph">
-<p>Soit l&#8217;application <code>SuperCanard</code> dont le modèle est
-décrit ci-dessous :</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/superCanard.png" alt="superCanard">
-</div>
-<div class="title">Figure 1. Une application existante (source plantUML <a href="superCanard.plantuml">ici</a>)</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_modification_amélioration"><a class="link" href="#_modification_amélioration">2.3.2. Modification/Amélioration</a></h4>
-<div class="paragraph">
-<p>Nous voulons maintenant ajouter une méthode :</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/superCanard2-note.png" alt="superCanard2 note">
-</div>
-<div class="title">Figure 2. Nouvelle fonctionnalité</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h3>
 <div class="dlist glossary">
 <dl>
 <dt><a id="Observateur"></a> Observateur (<em>observer<sup>uk</sup></em>)</dt>
@@ -818,8 +729,10 @@ décrit ci-dessous :</p>
 </dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_références"><a class="link" href="#_références">Références</a></h3>
+</div>
+<div class="sect1">
+<h2 id="_références"><a class="link" href="#_références">Références</a></h2>
+<div class="sectionbody">
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
@@ -833,6 +746,19 @@ Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_définitions_de_patrons"><a class="link" href="#_définitions_de_patrons">Définitions de patrons</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="title">Example 1. Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
+<div class="content">
+<div class="paragraph">
+<p><strong>Stratégie</strong> définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les rend interchangeables.
+Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#8217;utilisent.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_about"><a class="link" href="#_about">About&#8230;&#8203;</a></h2>
@@ -842,7 +768,7 @@ Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le
 <div class="paragraph">
 <p>Document réalisé par <a href="mailto:jbruel@gmail.com">Jean-Michel Bruel</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.1</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
 Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
-<span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="/Users/bruel/dev/images/icons/88x31.png" alt="Licence Creative Commons"></a></span>
+<span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="./images/images/icons/88x31.png" alt="Licence Creative Commons"></a></span>
 <a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p>
 </div>
 </div>
@@ -853,11 +779,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-<<<<<<< HEAD
-Last updated 2014-11-10 09:52:00 CET
-=======
-Last updated 2014-11-10 10:28:34 CET
->>>>>>> uri
+Last updated 2014-11-10 17:22:17 CET
 </div>
 </div>
 </body>
