@@ -21,9 +21,9 @@ DEP=definitions.txt glossaire.txt refs.txt
 
 all: $(OUTPUT)/*.html
 
-images/plantuml/%.png: plantuml/%.txt
+images/%.png: images/%.plantuml
 	@echo '==> Compiling plantUML files to generate PNG'
-	java -jar /Users/bruel/dev/asciidoc/plantuml.jar $<
+	java -jar plantuml.jar $<
 
 %.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
@@ -49,3 +49,7 @@ images/plantuml/%.png: plantuml/%.txt
 roadmap.html: $(MAIN).$(EXT)
 	@echo '==> Compiling asciidoc files to generate standalone file for Google Drive'
 	$(DOCTOR) -b html5 -a numbered -a data-uri $< -o $@
+
+TD1-sujet.html: TD1.$(EXT) $(DEP)
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
+	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a data-uri -o TD1-sujet.html TD1.asc

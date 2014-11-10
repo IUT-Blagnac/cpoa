@@ -1,0 +1,52 @@
+@startuml
+
+'-----------------------------------
+' UML concepts illustrated
+' JMB 2014
+'-----------------------------------
+
+'hide circle
+hide empty members
+hide empty methods
+
+
+abstract class Personnage {
+ComportementArme arme
+{abstract} combattre()
+setArme(ComportementArme a) {this.arme = a;}
+}
+class Reine {
+combattre() {...}
+}
+class Roi {
+combattre() {...}
+}
+class ComportementPoignard {
+utiliserArme() {// implémente coup de poignard}
+}
+class ComportementArc {
+utiliserArme() {// implémente tirer une flêche}
+}
+class ComportementEpee {
+utiliserArme() {// implémente frapper à l'épée}
+}
+interface ComportementArme{
+{abstract} utiliserArme()
+}
+class Troll {
+combattre() {...}
+}
+class Chevalier {
+combattre() {...}
+}
+Personnage <|-- Roi
+Personnage <|-- Reine
+Personnage <|-- Chevalier
+Personnage <|-- Troll
+Personnage o--> "1..*" ComportementArme
+
+ComportementEpee ..|> ComportementArme
+ComportementPoignard ..|> ComportementArme
+ComportementArc ..|> ComportementArme
+
+@enduml
