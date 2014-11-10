@@ -1,0 +1,9 @@
+ifndef::references[]
+:references:
+
+== Références
+
+[bibliography]
+- [[[Freeman04]]] Design Pattrn Head First, O'Reilly, 09/2004.
+
+endif::references[]

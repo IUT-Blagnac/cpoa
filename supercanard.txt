@@ -1,0 +1,20 @@
+== TD SuperCanard
+
+Voici un exemple de déroulement de TD
+
+=== Application existante
+
+Soit l'application `SuperCanard` dont le modèle est
+décrit ci-dessous :
+
+.Une application existante (source plantUML link:superCanard.plantuml[ici])
+image::superCanard.png[]
+
+=== Modification/Amélioration
+
+Nous voulons maintenant ajouter une méthode :
+
+.Nouvelle fonctionnalité
+
+image::superCanard2-note.png[]
+
