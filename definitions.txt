@@ -2,6 +2,7 @@
 :standHeight: 250
 :standScreen: 500
 :standWidth: 250
+:definitions:
 
 // raccourcis sites
 :aadl: http://www.aadl.info/[AADL]indexterm:[AADL]

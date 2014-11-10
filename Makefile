@@ -16,6 +16,7 @@ DECK=swiss
 EXT=asc
 PANDOC=pandoc
 OUTPUT=.
+DEP=definitions.txt glossaire.txt refs.txt
 #-----------------------------------------------------
 
 all: $(OUTPUT)/*.html
@@ -24,16 +25,16 @@ images/plantuml/%.png: plantuml/%.txt
 	@echo '==> Compiling plantUML files to generate PNG'
 	java -jar /Users/bruel/dev/asciidoc/plantuml.jar $<
 
-%.html: %.$(EXT)
+%.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -b html5 -a numbered -a data-uri $< 
+	$(DOCTOR) --base-dir=. -a toc2 -b html5 -a numbered -a data-uri $<
 
-%.deckjs.html: %.txt
+%.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
 #	$(ASCIIDOC) -a slides -b deckjs -a data-uri -a deckjs_theme=$(DECK) -o $@ $<
 	$(DOCTOR) -T ../asciidoctor-backends/haml/deckjs/ -a slides -a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a images=$(IMAGESDIR) -o $@ $<
 
-%.reveal.html: %.txt
+%.reveal.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate reveal.js'
 	$(DOCTOR) -T ../asciidoctor-backends/haml/reveal/ -a slides -a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a images=$(IMAGESDIR) -o $@ $<
 

@@ -2,6 +2,7 @@
 
 Voici un exemple de déroulement de TD
 
+ifdef::slides[:leveloffset: -1]
 === Application existante
 
 Soit l'application `SuperCanard` dont le modèle est
@@ -18,3 +19,4 @@ Nous voulons maintenant ajouter une méthode :
 
 image::superCanard2-note.png[]
 
+ifdef::slides[:leveloffset: +1]
