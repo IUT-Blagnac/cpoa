@@ -18,19 +18,19 @@ PANDOC=pandoc
 OUTPUT=.
 #-----------------------------------------------------
 
-all: $(OUTPUT)/*.html 
+all: $(OUTPUT)/*.html
 
 images/plantuml/%.png: plantuml/%.txt
 	@echo '==> Compiling plantUML files to generate PNG'
 	java -jar /Users/bruel/dev/asciidoc/plantuml.jar $<
-        
+
 %.html: %.$(EXT)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -b html5 -a numbered $< 
+	$(DOCTOR) -b html5 -a numbered -a data-uri $< 
 
 %.deckjs.html: %.txt
 	@echo '==> Compiling asciidoc files to generate Deckjs'
-#	$(ASCIIDOC) -a slides -b deckjs -a data-uri -a deckjs_theme=$(DECK) -o $@ $< 
+#	$(ASCIIDOC) -a slides -b deckjs -a data-uri -a deckjs_theme=$(DECK) -o $@ $<
 	$(DOCTOR) -T ../asciidoctor-backends/haml/deckjs/ -a slides -a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a images=$(IMAGESDIR) -o $@ $<
 
 %.reveal.html: %.txt
@@ -44,7 +44,7 @@ images/plantuml/%.png: plantuml/%.txt
 %.wiki: %.xml
 	@echo '==> Compiling DocBook files with Pandoc to generate MediaWiki'
 	$(PANDOC) -f docbook -t mediawiki -s $< -o $@
-	
+
 roadmap.html: $(MAIN).$(EXT)
 	@echo '==> Compiling asciidoc files to generate standalone file for Google Drive'
 	$(DOCTOR) -b html5 -a numbered -a data-uri $< -o $@
