@@ -1,0 +1,8 @@
+= Conception et Programmation Objet Avancée (M3105)
+
+Ce site regroupe le matériel pédagogique de module M3105 de
+deuxième année du DUT Informatique de l'IUT de Blagnac.
+
+Pour tout renseignement ou commentaire, contactez mailto:jbruel@gmail.com[Jean-Michel Bruel].
+
+Pour les résultats de ce projet, cf. http://jmbruel.github.io/cpoa/.

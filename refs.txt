@@ -1,0 +1,10 @@
+ifndef::references[]
+:references:
+
+== Références
+
+[bibliography]
+- [[[Freeman04]]] Design Pattrn Head First, O'Reilly, 09/2004.
+- [[[Cysboy]]] Apprenez à programmer en Java. Par `cysboy`.
+Disponible https://app.box.com/shared/yrlj0takyhjeg1mefacy[ici] (le {localdate}).
+endif::references[]
