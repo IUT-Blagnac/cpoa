@@ -1,0 +1,15 @@
+language: ruby
+install:
+- gem install asciidoctor tilt haml
+script:
+- asciidoctor --version
+- ls -alF
+- asciidoctor -a icons -a data-uri -b html5 -a toc -a numbered -a imagesdir=images main.asc -o output/main.html
+- git clone git://github.com/asciidoctor/asciidoctor-backends.git
+- asciidoctor -a icons -a data-uri -a slides -T asciidoctor-backends/haml/deckjs/ -b deckjs -a imagesdir=images main.asc -o output/main.slides.html
+- ls -al output
+after_success: ./update-gh-pages.sh
+
+env:
+  global:
+  - secure: JpIaoHIKL4n5K579myLztI6PE3SaAfnlEdpRqjnIop0T3DqtCySDgZzzxi/HizrCtWQvKf4gYpzHWMjFl+yxuaBHBP5O09NZTmPdbxDuLg+UECgRQmOLteoxehBWtoFB2ayLY9kEi0sXhE4OLusLSq4xifQORrAHev5cVLbYRh4=
