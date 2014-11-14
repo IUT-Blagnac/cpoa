@@ -25,6 +25,10 @@ images/%.png: images/%.plantuml
 	@echo '==> Compiling plantUML files to generate PNG'
 	java -jar plantuml.jar $<
 
+pattern/%.png: pattern/%.plantuml
+	@echo '==> Compiling plantUML files to generate PNG'
+	java -jar plantuml.jar $<
+
 %.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a toc2 -b html5 -a numbered $<
@@ -53,3 +57,7 @@ roadmap.html: $(MAIN).$(EXT)
 TD1-sujet.html: TD1.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a data-uri -o TD1-sujet.html TD1.asc
+
+TD1-prof.html: TD1.$(EXT) $(DEP)
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
+	$(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered -a data-uri -o TD1-prof.html TD1.asc

@@ -1,1 +1,5 @@
-*Singleton* garantit qu'une classe n'a qu'une seule instance et fournit un point d'accès global à cette instance.
+*{patron}* garantit qu'une classe n'a qu'une seule instance et fournit un point d'accès global à cette instance.
+
+
+.Modèle UML du patron _{patron}_
+image::{patron}.png[]

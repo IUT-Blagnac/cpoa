@@ -482,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2014-11-10 - First draft</span>
+<span id="revdate">2014-11-13 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -494,9 +494,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_evaluation_et_notation">1.3. Evaluation et notation</a></li>
 </ul>
 </li>
-<li><a href="#_glossaire_et_définition">Glossaire et définition</a></li>
+<li><a href="#_glossaire_et_définition">Glossaire et définition</a>
+<ul class="sectlevel2">
+<li><a href="#_patrons_de_création">Patrons de création</a></li>
+<li><a href="#_patrons_comportementaux">Patrons comportementaux</a></li>
+</ul>
+</li>
 <li><a href="#_références">Références</a></li>
-<li><a href="#_définitions_de_patrons">Définitions de patrons</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
 </div>
@@ -712,21 +716,45 @@ les étudiants auront :</p>
 <div class="sect1">
 <h2 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h2>
 <div class="sectionbody">
-<div class="dlist glossary">
+<div class="sect2">
+<h3 id="_patrons_de_création"><a class="link" href="#_patrons_de_création">Patrons de création</a></h3>
+<div class="dlist">
 <dl>
-<dt><a id="Observateur"></a> Observateur (<em>observer<sup>uk</sup></em>)</dt>
+<dt class="hdlist1"><a id="Singleton"></a> Singleton</dt>
 <dd>
-<p>définit une relation entre objets de type un-à-plusieurs, de façon que, lorsqu&#8217;un objet change d&#8217;état, tous ceux qui en dépendent en soient notifiés et soient mis à jour automatiquement.</p>
-</dd>
-<dt><a id="Singleton"></a> Singleton</dt>
-<dd>
-<p>garantit qu&#8217;une classe n&#8217;a qu&#8217;une seule instance et fournit un point d&#8217;accès global à cette instance.</p>
-</dd>
-<dt><a id="Stratégie"></a> Stratégie</dt>
-<dd>
-<p>définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les rend interchangeables.</p>
+<p><strong>Singleton</strong> garantit qu&#8217;une classe n&#8217;a qu&#8217;une seule instance et fournit un point d&#8217;accès global à cette instance.</p>
 </dd>
 </dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/Singleton.png" alt="Singleton">
+</div>
+<div class="title">Figure 1. Modèle UML du patron <em>Singleton</em></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_patrons_comportementaux"><a class="link" href="#_patrons_comportementaux">Patrons comportementaux</a></h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="Observateur"></a> Observateur (<em>Observer<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Observateur</strong> définit une relation entre objets de type un-à-plusieurs, de façon que, lorsqu&#8217;un objet change d&#8217;état, tous ceux qui en dépendent en soient notifiés et soient mis à jour automatiquement.</p>
+</dd>
+<dt class="hdlist1"><a id="Stratégie"></a> Stratégie (<em>Strategy<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Stratégie</strong> définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les
+rend interchangeables.
+Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#8217;utilisent.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/strategy.png" alt="strategy">
+</div>
+<div class="title">Figure 2. Modèle UML du patron <em>Strategy</em></div>
+</div>
 </div>
 </div>
 </div>
@@ -736,27 +764,18 @@ les étudiants auront :</p>
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
-<p><a id="Freeman04"></a>[Freeman04] Design Pattrn Head First, O&#8217;Reilly, 09/2004.</p>
+<p><a id="GoF"></a>[GoF] Design Patterns: Elements of reusable object oriented software. 1994.</p>
 </li>
 <li>
-<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>.
-Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-10).</p>
+<p><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First, O&#8217;Reilly, 09/2004.</p>
+</li>
+<li>
+<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-13).</p>
+</li>
+<li>
+<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-13).</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_définitions_de_patrons"><a class="link" href="#_définitions_de_patrons">Définitions de patrons</a></h2>
-<div class="sectionbody">
-<div class="exampleblock">
-<div class="title">Example 1. Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
-<div class="content">
-<div class="paragraph">
-<p><strong>Stratégie</strong> définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les rend interchangeables.
-Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#8217;utilisent.</p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -779,7 +798,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2014-11-10 17:22:17 CET
+Last updated 2014-11-10 22:02:41 CET
 </div>
 </div>
 </body>

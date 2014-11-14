@@ -4,12 +4,20 @@ ifndef::glossaire[]
 [glossary]
 == Glossaire et définition
 
+
 [glossary]
-[[Observateur]] Observateur (_Observer^uk^_)::
-include::pattern/observer.txt[]
+
+=== Patrons de création
+
+:patron: Singleton
 
 [[Singleton]] Singleton::
 include::pattern/singleton.txt[]
+
+=== Patrons comportementaux
+
+[[Observateur]] Observateur (_Observer^uk^_)::
+include::pattern/observer.txt[]
 
 [[Stratégie]] Stratégie (_Strategy^uk^_)::
 include::pattern/strategy.txt[]

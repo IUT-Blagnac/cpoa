@@ -38,11 +38,11 @@ class CanardMuet{
 cancaner() {// ne rien faire}
 }
 
-NePasVoler ..|> ComportementVol
-VolerAvecDesAiles ..|> ComportementVol
+ComportementVol <|.. NePasVoler
+ComportementVol <|.. VolerAvecDesAiles
 
-Cancan ..|> ComportementCancan
-Coincoin ..|> ComportementCancan
-CanardMuet ..|> ComportementCancan
+ComportementCancan <|.. Cancan
+ComportementCancan <|.. Coincoin
+ComportementCancan <|.. CanardMuet
 
 @enduml
