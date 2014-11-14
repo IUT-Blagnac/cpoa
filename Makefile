@@ -60,4 +60,4 @@ TD1-sujet.html: TD1.$(EXT) $(DEP)
 
 TD1-prof.html: TD1.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered -a data-uri -o TD1-prof.html TD1.asc
+	$(DOCTOR) -a prof -a toc2 -a correction -a theme=compact -b html5 -a numbered -a data-uri -o TD1-prof.html TD1.asc
