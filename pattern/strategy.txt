@@ -2,5 +2,5 @@
 rend interchangeables.
 Il permet à l'algorithme de varier indépendamment des clients qui l'utilisent.
 
-.Modèle UML du patron _Strategy_
+ifndef::slides[.Modèle UML du patron _Strategy_]
 image::strategy.png[]

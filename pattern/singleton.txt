@@ -2,5 +2,5 @@
 fournit un point d'accès global à cette instance.
 
 
-.Modèle UML du patron _Singleton_
+ifndef::slides[.Modèle UML du patron _Singleton_]
 image::singleton.png[]
