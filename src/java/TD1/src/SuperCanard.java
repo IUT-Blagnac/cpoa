@@ -1,4 +1,4 @@
-public class CanardTest {
+public class SuperCanard {
 
 	public static void main(String[] args) {
 		Canard c1 = new Colvert();
