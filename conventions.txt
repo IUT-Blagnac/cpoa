@@ -1,0 +1,20 @@
+ifndef::conventions[]
+:conventions:
+
+== Conventions d'écriture
+
+=== Diagrammes UML
+
+Les diagrammes {uml} sont réalisés avec {plantUML} avec des conventions
+graphiques propres qui sont listées ci-dessous.
+
+.Convention {plantuml} pour la visibilité des propriétés/méthodes
+image::conventions1.png[]
+
+.Symboles pour les types de classes
+image::conventions.png[]
+
+//=== Symboles
+
+
+endif::conventions[]
