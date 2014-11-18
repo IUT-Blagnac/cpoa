@@ -1,3 +1,7 @@
+/**
+ * @author bruel
+ *
+ */
 public class SuperCanard {
 
 	public static void main(String[] args) {
