@@ -1,14 +1,16 @@
 
-== Coder du code fonctionnel en objets	
+== Coder du code fonctionnel en objets
 
 Meyer :
-	Code structuré en classes pour actions users (menu)
+	Code structurï¿½ en classes pour actions users (menu)
 	Cf. Meyer
 	Voir BU
 
-Permet de montrer que l'approche objet ne s'applique pas QUE aux données ...
+Permet de montrer que l'approche objet ne s'applique pas QUE aux donnï¿½es ...
 Mais c'est pas un pattern ...
-Sauf que on peut dire que on met en place un "patron" pour le dév local de l'appli pour rendre l'appli extensible facilement.
+Sauf que on peut dire que on met en place un "patron" pour le dï¿½v local de l'appli pour rendre l'appli extensible facilement.
+
+Voir aussi http://blog.symprise.net/2009/01/revisiting-fowlers-video-store-01-object-oriented-syntax/
 
 == MVC/JTable
 
@@ -16,48 +18,48 @@ Illustrer un MVC
 
 Etudier le JTable avec patron MC-V
 	MC : JTable, composant Java "complet"
-	V : TableModel à développer par appli
-		Méthodes appelées par MV :
-			Méthodes getItem(col, lig), getRowCount(), getColumnName (col), ...
+	V : TableModel ï¿½ dï¿½velopper par appli
+		Mï¿½thodes appelï¿½es par MV :
+			Mï¿½thodes getItem(col, lig), getRowCount(), getColumnName (col), ...
 			isCellEditable(col, lig) , setValueAt(v, lig, col), ...
-		Méthodes pour "rafraichir la Vue"
+		Mï¿½thodes pour "rafraichir la Vue"
 			fireTableDataChanged(), fireTableRowsInserted(...), fireTableCellUpdated, ...
 
-On peut aussi illustrer la "délégation" (objet, pas pattern)
+On peut aussi illustrer la "dï¿½lï¿½gation" (objet, pas pattern)
 	TableUI : IG
 	Renderers : affichage
 	Editors : saisie
-	SelectionModel : modes de sélection
+	SelectionModel : modes de sï¿½lection
 
-Mais déjà illustré dans les composants Container avec les layouts managers. 
+Mais dï¿½jï¿½ illustrï¿½ dans les composants Container avec les layouts managers.
 Le REsouligner ?
 
 == Java pattern observer
 
-Java 
+Java
 interface Observer
-	méthode update (Observable o, Object arg)
+	mï¿½thode update (Observable o, Object arg)
 + classe Observable
-	Implémente la mécanique : add/removeObserver(), notifyObservers(), hasChanged(), ...
-	Reste à ajouter les modifs et les lancements de notifyObservers() (+ méca associée de l'API)
+	Implï¿½mente la mï¿½canique : add/removeObserver(), notifyObservers(), hasChanged(), ...
+	Reste ï¿½ ajouter les modifs et les lancements de notifyObservers() (+ mï¿½ca associï¿½e de l'API)
 	Classe car code
 
-== Quelques idées de Patterns et comment les "montrer"
+== Quelques idï¿½es de Patterns et comment les "montrer"
 
-Infos tirées de 
+Infos tirï¿½es de
 https://app.box.com/shared/yrlj0takyhjeg1mefacy
 
-	
+
 === Strategy -> classes abstraites/interfaces
-	Implémentation de code variant
+	Implï¿½mentation de code variant
 	Jeu : Personnages et 3 comportements : combattre(), seDeplacer(), soigner()
-		3 interfaces pour chaque comportement + implémentations
-		1 classe Personnage avec méthodes combattre(), seDeplacer(), soigner()
-			Délégation aux comportements associés
-			
-=== Decorator -> flux 
-	Expliqué en gateaux : gateau + couche chocolat + couche caramel, les 3 == patisseries
-	Pâtisserie super-classe de tout le monde
+		3 interfaces pour chaque comportement + implï¿½mentations
+		1 classe Personnage avec mï¿½thodes combattre(), seDeplacer(), soigner()
+			Dï¿½lï¿½gation aux comportements associï¿½s
+
+=== Decorator -> flux
+	Expliquï¿½ en gateaux : gateau + couche chocolat + couche caramel, les 3 == patisseries
+	Pï¿½tisserie super-classe de tout le monde
 	public class Main{
 		public static void main(String[] args){
 			Patisserie pat = new CoucheChocolat(
@@ -68,22 +70,22 @@ https://app.box.com/shared/yrlj0takyhjeg1mefacy
 			System.out.println(pat.preparer());
 		}
 	}
-=== Observer -> Swing 
-	Une JFrame qui écoute une horloge 
+=== Observer -> Swing
+	Une JFrame qui ï¿½coute une horloge
 
 === Singleton -> BD
-	Connexion unique à la BD
+	Connexion unique ï¿½ la BD
 
 === DAO -> BD
 	Classes POJO -> BD et inverse
-	
-=== Factory
-	Factory de création d'instances de DAO
-	Factory de Factory de création d'instances de DAO (ex : pour une BD my, pour XML, ...)
-	
-=== MVC -> expliqué sur Swing une calculette
-	MVC Calculette
-	La Vue écoute le Modèle
 
-=== Join/Fork -> Interne à java ??
+=== Factory
+	Factory de crï¿½ation d'instances de DAO
+	Factory de Factory de crï¿½ation d'instances de DAO (ex : pour une BD my, pour XML, ...)
+
+=== MVC -> expliquï¿½ sur Swing une calculette
+	MVC Calculette
+	La Vue ï¿½coute le Modï¿½le
+
+=== Join/Fork -> Interne ï¿½ java ??
 	Faire du thread.start() et thread.join() + facilement ...

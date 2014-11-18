@@ -4,12 +4,14 @@ ifndef::glossaire[]
 [glossary]
 == Glossaire et définition
 
+WARNING: Ces définitions seront enrichies au fur et à mesure des patrons
+étudiés.
+
+ifdef::slides[:leveloffset: -1]
 
 [glossary]
 
 === Patrons de création
-
-:patron: Singleton
 
 [[Singleton]] Singleton::
 include::pattern/singleton.txt[]
@@ -21,5 +23,7 @@ include::pattern/observer.txt[]
 
 [[Stratégie]] Stratégie (_Strategy^uk^_)::
 include::pattern/strategy.txt[]
+
+ifdef::slides[:leveloffset: +1]
 
 endif::glossaire[]

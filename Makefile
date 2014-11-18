@@ -38,7 +38,7 @@ pattern/%.png: pattern/%.plantuml
 #	$(ASCIIDOC) -a slides -b deckjs -a data-uri -a deckjs_theme=$(DECK) -o $@ $<
 	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
 	-a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) \
-	-a images=$(IMAGESDIR) -o $@ $<
+	-a images=$(IMAGESDIR) -a prof -o $@ $<
 
 %.reveal.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate reveal.js'
