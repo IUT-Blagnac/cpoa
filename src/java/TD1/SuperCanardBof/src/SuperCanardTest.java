@@ -3,6 +3,10 @@ import junit.framework.TestSuite;
 import junit.framework.TestCase;
 import java.io.*;
 
+/**
+ * @author bruel
+ *
+ */
 public class SuperCanardTest extends TestCase {
   static int totalAssertions = 0;
   static int bilanAssertions = 0;

@@ -1,3 +1,7 @@
+/**
+ * @author bruel
+ *
+ */
 
 public class CanardEnPlastique extends Canard {
 

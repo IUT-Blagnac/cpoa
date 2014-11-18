@@ -1,3 +1,7 @@
+/**
+ * @author bruel
+ *
+ */
 abstract public class Canard {
 
 	public void cancaner() {
@@ -8,9 +12,10 @@ abstract public class Canard {
 		System.out.println("Je nage comme un Canard!");
 	}
 
-	abstract public void afficher();
-	
 	public void voler() {
 		System.out.println("Je vole avec des ailes!");
 	}
+
+	abstract public void afficher();
+	
 }
