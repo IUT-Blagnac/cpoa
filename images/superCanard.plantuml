@@ -24,9 +24,7 @@ class Mandarin {
 afficher()  {//Spécifique aux Mandarins...}
 }
 
-Colvert  --|> Canard
-Mandarin --|> Canard
-
-Colvert "1" -- Mandarin
+Canard <|-- Colvert
+Canard <|-- Mandarin
 
 @enduml

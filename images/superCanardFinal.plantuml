@@ -52,17 +52,17 @@ afficher()
 }
 
 
-NePasVoler ..|> ComportementVol
-VolerAvecDesAiles ..|> ComportementVol
+ComportementVol <|.. NePasVoler
+ComportementVol <|.. VolerAvecDesAiles
 
-Cancan ..|> ComportementCancan
-Coincoin ..|> ComportementCancan
-CanardMuet ..|> ComportementCancan
+ComportementCancan <|.. Cancan
+ComportementCancan <|.. Coincoin
+ComportementCancan <|.. CanardMuet
 
-Colvert --|> Canard
-Leurre --|> Canard
-Mandarin --|> Canard
-CanardEnPlastique --|> Canard
+Canard <|-- Colvert
+Canard <|-- Mandarin
+Canard <|-- Leurre
+Canard <|-- CanardEnPlastique
 
 Canard o--> "1" ComportementVol
 Canard o--> "1" ComportementCancan

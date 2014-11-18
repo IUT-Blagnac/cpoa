@@ -45,8 +45,9 @@ Personnage <|-- Chevalier
 Personnage <|-- Troll
 Personnage o--> "1..*" ComportementArme
 
-ComportementEpee ..|> ComportementArme
-ComportementPoignard ..|> ComportementArme
-ComportementArc ..|> ComportementArme
+ComportementArme <|.. ComportementEpee
+ComportementArme <|.. ComportementPoignard
+ComportementArme <|.. ComportementArc
+
 
 @enduml

@@ -17,7 +17,7 @@ interface Volant {
 voler()
 }
 
-class Canard {
+abstract class Canard {
 nager()
 afficher()
 }
@@ -34,10 +34,10 @@ class CanardEnPlastique {
 class Leurre {
 }
 
-Leurre --|> Canard
-CanardEnPlastique --|> Canard
-Mandarin --|> Canard
-Colvert --|> Canard
+Canard <|-- Leurre
+Canard <|-- CanardEnPlastique
+Canard <|-- Mandarin
+Canard <|-- Colvert
 
 Volant <|..Colvert
 Volant <|..Mandarin
