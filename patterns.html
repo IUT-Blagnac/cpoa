@@ -481,7 +481,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Jean-Michel Bruel (@jmbruel, jbruel@gmail.com)</span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2014-11-17 - First draft</span>
+<span id="revdate">2014-11-18 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -493,7 +493,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_premier_patron">2.2. Premier patron</a></li>
 <li><a href="#_premier_exemple_d_utilisation_de_patron">2.3. Premier exemple d&#8217;utilisation de patron</a></li>
 <li><a href="#_autre_exemple_concret">2.4. Autre exemple concret</a></li>
-<li><a href="#__non_réutilisation">2.5. (non) Réutilisation</a></li>
+<li><a href="#_d_autres_exemples">2.5. D&#8217;autres exemples</a></li>
+<li><a href="#__non_réutilisation">2.6. (non) Réutilisation</a></li>
 </ul>
 </li>
 <li><a href="#_un_peu_d_histoire">3. Un peu d&#8217;histoire</a></li>
@@ -504,10 +505,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#__em_strong_l_strong_iskov_substitution_principle_em">4.3. <em><strong>L</strong>iskov Substitution Principle</em></a></li>
 <li><a href="#__em_strong_i_strong_nterface_segregation_principle_em">4.4. <em><strong>I</strong>nterface Segregation Principle</em></a></li>
 <li><a href="#__em_strong_d_strong_ependency_inversion_principle_em">4.5. <em><strong>D</strong>ependency Inversion Principle</em></a></li>
+<li><a href="#_solid_et_patrons">4.6. SOLID et patrons</a></li>
 </ul>
 </li>
 <li><a href="#_grasp">5. GRASP</a></li>
-<li><a href="#_patrons_à_aborder">6. Patrons à aborder</a></li>
+<li><a href="#_les_patrons_comment_ça_marche">6. Les patrons : comment ça marche ?</a>
+<ul class="sectlevel2">
+<li><a href="#_intérêt">6.1. Intérêt</a></li>
+<li><a href="#_définifion">6.2. Définifion</a></li>
+<li><a href="#_patrons_à_aborder">6.3. Patrons à aborder</a></li>
+</ul>
+</li>
 <li><a href="#_glossaire_et_définition">Glossaire et définition</a>
 <ul class="sectlevel2">
 <li><a href="#_patrons_de_création">Patrons de création</a></li>
@@ -533,6 +541,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <img src="./images/phdComics.png" alt="phdComics">
 </div>
 <div class="title">Figure 1. Les patrons : des réponses éprouvées à des problèmes récurrents</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+––––––––––––––––––
+Science is what we understand well enough to explain to a computer.
+Art is everything else we do.
+––––––––––––––––––
+</blockquote>
+<div class="attribution">
+&#8212; Donald Knuth
+</div>
 </div>
 </div>
 </div>
@@ -862,7 +881,60 @@ différents (<code>HTMLFormater</code> et <code>XMLFormater</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="__non_réutilisation"><a class="link" href="#__non_réutilisation">2.5. (non) Réutilisation</a></h3>
+<h3 id="_d_autres_exemples"><a class="link" href="#_d_autres_exemples">2.5. D&#8217;autres exemples</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La fonction standard <code>sort()</code> de python</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span class="tok-o">&gt;&gt;&gt;</span> <span class="tok-nb">sorted</span><span class="tok-p">(</span><span class="tok-s">&quot;This is a test string from Andrew&quot;</span><span class="tok-o">.</span><span class="tok-n">split</span><span class="tok-p">(),</span> <span class="tok-n">key</span><span class="tok-o">=</span><span class="tok-nb">str</span><span class="tok-o">.</span><span class="tok-n">lower</span><span class="tok-p">)</span>
+<span class="tok-p">[</span><span class="tok-s">&#39;a&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;Andrew&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;from&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;is&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;string&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;test&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;This&#39;</span><span class="tok-p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Stratégie de cryptage en fonction de la taille d&#8217;un fichier</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">File</span> <span class="tok-n">file</span> <span class="tok-o">=</span> <span class="tok-n">getFile</span><span class="tok-o">();</span>
+ <span class="tok-n">Cipher</span> <span class="tok-n">c</span> <span class="tok-o">=</span> <span class="tok-n">CipherFactory</span><span class="tok-o">.</span><span class="tok-na">getCipher</span><span class="tok-o">(</span> <span class="tok-n">file</span><span class="tok-o">.</span><span class="tok-na">size</span><span class="tok-o">()</span> <span class="tok-o">);</span>
+ <span class="tok-n">c</span><span class="tok-o">.</span><span class="tok-na">performAction</span><span class="tok-o">();</span>
+
+<span class="tok-c1">// implementations:</span>
+<span class="tok-kd">interface</span>  <span class="tok-nc">Cipher</span>  <span class="tok-o">{</span>
+     <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">();</span>
+<span class="tok-o">}</span>
+<span class="tok-kd">class</span> <span class="tok-nc">InMemoryCipherStrategy</span> <span class="tok-kd">implements</span> <span class="tok-n">Cipher</span> <span class="tok-o">{</span>
+         <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+             <span class="tok-c1">// load in byte[] ....</span>
+         <span class="tok-o">}</span>
+<span class="tok-o">}</span>
+<span class="tok-kd">class</span> <span class="tok-nc">SwaptToDiskCipher</span> <span class="tok-kd">implements</span> <span class="tok-n">Cipher</span> <span class="tok-o">{</span>
+         <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+             <span class="tok-c1">// swapt partial results to file.</span>
+         <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Plus de détails <a href="http://stackoverflow.com/questions/370258/real-world-example-of-the-strategy-pattern">ici</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__non_réutilisation"><a class="link" href="#__non_réutilisation">2.6. (non) Réutilisation</a></h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -918,14 +990,23 @@ C&#8217;est un mixin qu&#8217;il suffit d&#8217;inclure dans la classe qui doit 
 <dd>
 <p><strong>Beck</strong> et <strong>Cunningham</strong> : patterns pour des interfaces utilisateurs</p>
 </dd>
-<dt class="hdlist1">1994</dt>
+<dt class="hdlist1">1988</dt>
+<dd>
+<p><strong>Meyer</strong> : livre sur l&#8217;orienté objet (langage <a href="http://fr.wikipedia.org/wiki/Eiffel_(langage)">Eiffel</a>), devenu la bible pour
+beaucoup de programmeurs (cf. <a href="#Meyer88">[Meyer88]</a>)</p>
+</dd>
+<dt class="hdlist1">1990-1995</dt>
 <dd>
 <p><strong>Gamma</strong>, Helm, Johnson et Vlissides : LE livre de référence (cf. <a href="#GoF">[GoF]</a>)
 NOTE:  Les patterns de ce livre sont connus comme les <strong>Gof</strong> pour « <em>Gang of Four</em> ».</p>
 </dd>
+<dt class="hdlist1">2003</dt>
+<dd>
+<p><strong>Martin</strong> : principes SOLID (cf. <a href="#Martin03">[Martin03]</a>)</p>
+</dd>
 <dt class="hdlist1">2004</dt>
 <dd>
-<p><strong>Craig Larman</strong> décrit des modèles de conception : les Patterns <strong>GRASP</strong></p>
+<p><strong>Craig Larman</strong> décrit des modèles de conception : les Patterns <strong>GRASP</strong> (cf. <a href="#Larman05">[Larman05]</a>)</p>
 </dd>
 </dl>
 </div>
@@ -981,6 +1062,19 @@ NOTE:  Les patterns de ce livre sont connus comme les <strong>Gof</strong> pour 
 <pre>Ouvert à l'extension mais fermé à la modification</pre>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Une fois écrite et testée, une classe ne devrait être modifiée que pour
+être corrigée! Toute modification devrait être possible par extension.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="__em_strong_l_strong_iskov_substitution_principle_em"><a class="link" href="#__em_strong_l_strong_iskov_substitution_principle_em">4.3. <em><strong>L</strong>iskov Substitution Principle</em></a></h3>
@@ -994,6 +1088,31 @@ NOTE:  Les patterns de ce livre sont connus comme les <strong>Gof</strong> pour 
 <pre>Une classe doit pouvoir être remplacée par une instance d'un de ses
 sous-types, sans modifier la cohérence du programme</pre>
 </div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Un carré est un rectangle a deux côtés égaux.</p>
+</div>
+</blockquote>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/carre.png" alt="carre" width="10%">
+</div>
+<div class="title">Figure 5. Exemple classique de violation du principe de substitution de Liskov</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Peut-on toujours substituer un <code>Carré</code> à la place d&#8217;un <code>Rectangle</code> ?
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1022,18 +1141,145 @@ seule interface générale</pre>
 <pre>Il faut dépendre des abstractions, pas des implémentations</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Ce principe indique :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les modules de haut niveau (abstraits) ne doivent pas dépendre des modules de bas niveau.
+Les deux doivent dépendre d&#8217;abstractions.</p>
+</li>
+<li>
+<p>Les abstractions ne doivent pas dépendre des détails d&#8217;implémentation.
+C&#8217;est l&#8217;inverse : les détails doivent dépendre des abstractions.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Ainsi ce principe va à l&#8217;encontre de l&#8217;intuition classique.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_solid_et_patrons"><a class="link" href="#_solid_et_patrons">4.6. SOLID et patrons</a></h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Important">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Lesquels des 5 principes SOLID s&#8217;appliquent bien à <em>Strategy</em> ?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_grasp"><a class="link" href="#_grasp">5. GRASP</a></h2>
 <div class="sectionbody">
-
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>The critical design tool for software development is <strong>a mind well educated in
+design principles</strong>. It is not the UML or any other technology.</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; Craig Larman<br>
+<cite>2005</cite>
+</div>
+</div>
+<div class="paragraph">
+<p>Il s&#8217;agit d&#8217;un ensemble de patrons, plutôt orientés conception (UML). Nous en
+aborderons certains au travers des exemples de ce module (cf. <a href="#Larman05">[Larman05]</a>).</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_patrons_à_aborder"><a class="link" href="#_patrons_à_aborder">6. Patrons à aborder</a></h2>
+<h2 id="_les_patrons_comment_ça_marche"><a class="link" href="#_les_patrons_comment_ça_marche">6. Les patrons : comment ça marche ?</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_intérêt"><a class="link" href="#_intérêt">6.1. Intérêt</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Réponses éprouvées à des problèmes récurrents</p>
+</li>
+<li>
+<p>Vocabulaire commun</p>
+</li>
+</ul>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>T&#8217;as qu&#8217;à utiliser une <em>factory</em>!</p>
+</div>
+</blockquote>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_définifion"><a class="link" href="#_définifion">6.2. Définifion</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Nom</p>
+</li>
+<li>
+<p>Problème</p>
+</li>
+<li>
+<p>Solution</p>
+</li>
+<li>
+<p>Conséquences</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Exemple de <em>Strategy</em> :</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>Nom</strong></dt>
+<dd>
+<p><em>Strategy</em></p>
+</dd>
+<dt class="hdlist1"><strong>Problème</strong></dt>
+<dd>
+<p>Situations où il est nécessaire de permuter dynamiquement les
+algorithmes utilisés</p>
+</dd>
+<dt class="hdlist1"><strong>Solution</strong></dt>
+<dd>
+<p>Définir une famille d&#8217;algorithmes, encapsuler chacun d&#8217;eux en tant
+qu&#8217;objet, et les rendre interchangeables.</p>
+</dd>
+<dt class="hdlist1"><strong>Conséquences</strong></dt>
+<dd>
+<p>Ce patron laisse les algorithmes changer indépendamment des
+clients qui les emploient.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_patrons_à_aborder"><a class="link" href="#_patrons_à_aborder">6.3. Patrons à aborder</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1154,9 +1400,23 @@ seule interface générale</pre>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h2>
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Ces définitions seront enrichies au fur et à mesure des patrons
+étudiés.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
 <h3 id="_patrons_de_création"><a class="link" href="#_patrons_de_création">Patrons de création</a></h3>
 <div class="dlist">
@@ -1172,7 +1432,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="./images/singleton.png" alt="singleton">
 </div>
-<div class="title">Figure 5. Modèle UML du patron <em>Singleton</em></div>
+<div class="title">Figure 6. Modèle UML du patron <em>Singleton</em></div>
 </div>
 </div>
 <div class="sect2">
@@ -1195,7 +1455,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <img src="./images/strategy.png" alt="strategy">
 </div>
-<div class="title">Figure 6. Modèle UML du patron <em>Strategy</em></div>
+<div class="title">Figure 7. Modèle UML du patron <em>Strategy</em></div>
 </div>
 </div>
 </div>
@@ -1212,10 +1472,21 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <p><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First, O&#8217;Reilly, 09/2004.</p>
 </li>
 <li>
-<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-17).</p>
+<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-18).</p>
 </li>
 <li>
-<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-17).</p>
+<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-18).</p>
+</li>
+<li>
+<p><a id="Larman05"></a>[Larman05] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
+and Iterative Development (3rd ed.). Prentice Hall. 2005. ISBN 0-13-148906-2.</p>
+</li>
+<li>
+<p><a id="Meyer88"></a>[Meyer88] Meyer, Bertrand. Object-Oriented Software Construction. Prentice Hall. 1988. ISBN 0-13-629049-3.</p>
+</li>
+<li>
+<p><a id="Martin03"></a>[Martin03] “Principles Of OOD”, Robert C. Martin (“Uncle BOB”), <a href="http://butunclebob.com" class="bare">http://butunclebob.com</a> (Last verified 2014-07-17).
+Note the reference to “the first five principles”, though the acronym is not used in this article. Dates back to at least 2003.</p>
 </li>
 </ul>
 </div>
@@ -1234,13 +1505,13 @@ graphiques propres qui sont listées ci-dessous.</p>
 <div class="content">
 <img src="./images/conventions1.png" alt="conventions1">
 </div>
-<div class="title">Figure 7. Convention http://plantuml.sourceforge.net/[plantUML] pour la visibilité des propriétés/méthodes</div>
+<div class="title">Figure 8. Convention http://plantuml.sourceforge.net/[plantUML] pour la visibilité des propriétés/méthodes</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="./images/conventions.png" alt="conventions">
 </div>
-<div class="title">Figure 8. Symboles pour les types de classes</div>
+<div class="title">Figure 9. Symboles pour les types de classes</div>
 </div>
 </div>
 </div>
@@ -1261,7 +1532,7 @@ graphiques propres qui sont listées ci-dessous.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2014-11-17 08:54:24 CET
+Last updated 2014-11-18 09:01:23 CET
 </div>
 </div>
 </body>
