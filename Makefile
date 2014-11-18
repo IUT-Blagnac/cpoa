@@ -25,6 +25,10 @@ images/%.png: images/%.plantuml
 	@echo '==> Compiling plantUML files to generate PNG'
 	java -jar plantuml.jar $<
 
+pattern/%.png: pattern/%.plantuml
+	@echo '==> Compiling plantUML files to generate PNG'
+	java -jar plantuml.jar $<
+
 %.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a toc2 -b html5 -a numbered $<
@@ -32,7 +36,9 @@ images/%.png: images/%.plantuml
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
 #	$(ASCIIDOC) -a slides -b deckjs -a data-uri -a deckjs_theme=$(DECK) -o $@ $<
-	$(DOCTOR) -T ../asciidoctor-backends/haml/deckjs/ -a slides -a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a images=$(IMAGESDIR) -o $@ $<
+	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
+	-a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) \
+	-a images=$(IMAGESDIR) -a prof -o $@ $<
 
 %.reveal.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate reveal.js'
@@ -53,3 +59,11 @@ roadmap.html: $(MAIN).$(EXT)
 TD1-sujet.html: TD1.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a data-uri -o TD1-sujet.html TD1.asc
+
+TD1-prof.html: TD1.$(EXT) $(DEP)
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
+	$(DOCTOR) -a prof -a toc2 -a correction -a theme=compact -b html5 -a numbered -a data-uri -o TD1-prof.html TD1.asc
+
+cours:
+	cp main.html index.html
+	

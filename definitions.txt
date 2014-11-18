@@ -21,6 +21,7 @@
 :ea: http://www.sparxsystems.com.au/products/mdg/tech/sysml/index.html[Enterprise Architect]
 :eclipse: http://www.eclipse.org[eclipse]indexterm:[eclipse]
 :eclipseDocStyleGuide: https://wiki.eclipse.org/Eclipse_Doc_Style_Guide[Eclipse Doc Style Guide]
+:eiffel: http://fr.wikipedia.org/wiki/Eiffel_(langage)[Eiffel]
 :gemoc: http://gemoc.org/[GEMOC]
 :git: link:http://git-scm.com/[Git]
 :github: link:https://github.com/[GitHub]

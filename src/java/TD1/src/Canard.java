@@ -1,7 +1,7 @@
 abstract public class Canard {
 
-	ComportementVol comportementVol;
-	ComportementCancan comportementCancan;
+	protected ComportementVol comportementVol;
+	protected ComportementCancan comportementCancan;
 
 	public void effectuerCancan() {
 		comportementCancan.cancaner();

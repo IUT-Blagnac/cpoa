@@ -4,12 +4,26 @@ ifndef::glossaire[]
 [glossary]
 == Glossaire et définition
 
+WARNING: Ces définitions seront enrichies au fur et à mesure des patrons
+étudiés.
+
+ifdef::slides[:leveloffset: -1]
+
 [glossary]
-[[Observateur]] Observateur (_observer^uk^_)::
-  définit une relation entre objets de type un-à-plusieurs, de façon que, lorsqu'un objet change d'état, tous ceux qui en dépendent en soient notifiés et soient mis à jour automatiquement.
+
+=== Patrons de création
+
 [[Singleton]] Singleton::
-  garantit qu'une classe n'a qu'une seule instance et fournit un point d'accès global à cette instance.
-[[Stratégie]] Stratégie::
-  définit une famille d'algorithmes, encapsule chacun d'eux et les rend interchangeables.
+include::pattern/singleton.txt[]
+
+=== Patrons comportementaux
+
+[[Observateur]] Observateur (_Observer^uk^_)::
+include::pattern/observer.txt[]
+
+[[Stratégie]] Stratégie (_Strategy^uk^_)::
+include::pattern/strategy.txt[]
+
+ifdef::slides[:leveloffset: +1]
 
 endif::glossaire[]
