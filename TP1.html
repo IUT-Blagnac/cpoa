@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-18}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-19}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Sujet TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
@@ -22,10 +22,16 @@
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_rappel_sur_le_patron_stratégie">1. Rappel sur le patron Stratégie</a></li>
-<li><a href="#_déroulement_du_tp">2. Déroulement du TP</a></li>
-<li><a href="#_amélioration">3. Amélioration</a></li>
-<li><a href="#_utilisation_du_comportement_dynamique">4. Utilisation du comportement dynamique</a></li>
-<li><a href="#setArme">Exemple d&#8217;organisation en paquetages</a></li>
+<li><a href="#_reprise_du_td">2. Reprise du TD</a></li>
+<li><a href="#_jeu_d_aventure">3. Jeu d&#8217;aventure</a>
+<ul class="sectlevel2">
+<li><a href="#_bases">3.1. Bases</a></li>
+<li><a href="#_améliorations">3.2. Améliorations</a></li>
+<li><a href="#_utilisation_du_comportement_dynamique">3.3. Utilisation du comportement dynamique</a></li>
+</ul>
+</li>
+<li><a href="#setArme">Appendix A: Exemple d&#8217;organisation en paquetages</a></li>
+<li><a href="#_pour_aller_plus_loin">Appendix B: Pour aller plus loin</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
 </div>
@@ -44,11 +50,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">1. Je sais programmer en <a href="https://www.java.com/fr/">Java</a>.
 2. J&#8217;ai conscience qu&#8217;il faut réfléchir avant de se lancer dans le codage.
 3. Je maîtrise les concepts objet de base (héritage, polymorphisme, &#8230;&#8203;).
-4. J&#8217;ai réalisé le TD <code>SuperCanard</code>!</p></td>
+4. J&#8217;ai réalisé le TD <code>SuperCanard</code> et donc connait le patron <em>Strategy</em>!</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comprendre ce qu&#8217;est une <strong>conception</strong>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comprendre ce qu&#8217;est une <strong>conception</strong> et implémenter mon premier patron.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
@@ -87,7 +93,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 </div>
 </div>
 <div class="sect1">
-<h2 id="_déroulement_du_tp"><a class="link" href="#_déroulement_du_tp">2. Déroulement du TP</a></h2>
+<h2 id="_reprise_du_td"><a class="link" href="#_reprise_du_td">2. Reprise du TD</a></h2>
 <div class="sectionbody">
 <div class="admonitionblock note">
 <table>
@@ -107,45 +113,50 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Téléchargez le code de l&#8217;appication <code>SuperCanard</code> existante <a href="TP1.zip">ici</a>.</p>
+<p>Téléchargez le code de l&#8217;application <code>SuperCanard</code> existante <a href="TP1.zip">ici</a>.</p>
 </li>
 <li>
 <p>Lancez l&#8217;application elle-même pour vérifier que tout fonctionne.</p>
 </li>
 <li>
-<p>Ecrivez un jeu de tests <code>JUnit</code> pour vérifier de manière automatique que tout fonctionne
-(une ébauche est déjà réalisée dans la classe <code>SuperCanardTest.java</code>).</p>
+<p>Regardez le programme de test fonctionnel <code>SuperCanardTest</code> qui vérifie de manière automatique que tout fonctionne.</p>
 </li>
 <li>
-<p>Implémentez le patron <em>Strategy</em> comme préparé en TD, en implémentant l&#8217;organisation en
-paquetage vue en cours (cf. <a href="#setArme">fin de TP</a>).</p>
+<p>Implémentez rapidement le patron <em>Strategy</em> comme préparé en TD en modifiant le code en conséquence.</p>
 </li>
 <li>
-<p>Rejouez vos tests pour vérifier que tout fonctionne toujours.</p>
+<p>Rejouez les tests pour vérifier que tout fonctionne toujours.</p>
 </li>
 </ol>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
-</td>
-<td class="content">
-Attention, après refactoring, il faut changer le nom du programme à tester en <code>appli.SuperCanard</code>
-si vous suivez l&#8217;organisation recommandée.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_amélioration"><a class="link" href="#_amélioration">3. Amélioration</a></h2>
+<h2 id="_jeu_d_aventure"><a class="link" href="#_jeu_d_aventure">3. Jeu d&#8217;aventure</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_bases"><a class="link" href="#_bases">3.1. Bases</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>En utilisant le patron <em>Strategy</em>, et en utilisant l&#8217;organisation en
+paquetage donnée en <a href="#setArme">fin de TP</a>), implémentez les classes et comportements du jeu d&#8217;aventure
+du TD1 (section "pour aller plus loin") et dont voici les bases :</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/aventure.png"><img src="images/aventure.png" alt="aventure"></a>
+</div>
+<div class="title">Figure 2. Un jeu d&#8217;aventure minimaliste</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_améliorations"><a class="link" href="#_améliorations">3.2. Améliorations</a></h3>
 <div class="paragraph">
-<p>On souhaite maintenant obliger les concepteurs de tout nouveau <code>Canard</code> à
-implémenter les deux comportements.</p>
+<p>On souhaite maintenant obliger les concepteurs de tout nouveau <code>Personnage</code> à
+implémenter systématiquement à l&#8217;instanciation le comportement d&#8217;arme.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -168,16 +179,14 @@ il est tout à fait légal de créer un constructeur pour une classe abstraite&#
 <p>Implémentez cette solution en modifiant votre application</p>
 </li>
 <li>
-<p>Testez d&#8217;ajouter une nouvelle classe de <code>Canard</code> qui n&#8217;implémente pas le vol
+<p>Testez d&#8217;ajouter une nouvelle classe de <code>Personnage</code> qui n&#8217;implémente pas le comportement
 et vérifiez que ça ne passe pas la compilation.</p>
 </li>
 </ol>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_utilisation_du_comportement_dynamique"><a class="link" href="#_utilisation_du_comportement_dynamique">4. Utilisation du comportement dynamique</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_utilisation_du_comportement_dynamique"><a class="link" href="#_utilisation_du_comportement_dynamique">3.3. Utilisation du comportement dynamique</a></h3>
 <div class="paragraph">
 <p>On souhaite pleinement bénéficier du changement possible de comportement
 à l&#8217;exécution.</p>
@@ -185,38 +194,19 @@ et vérifiez que ça ne passe pas la compilation.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Implémentez une méthode <code>setVol()</code> qui permette d&#8217;associer un comportement
-de vol donné à un <code>Canard</code>.</p>
+<p>Réalisez une application qui, à partir d&#8217;un menu, permet de créér
+un personnage parmis les types possibles, et de lui affecter une arme.</p>
 </li>
 <li>
-<p>Réalisez un petit <code>main</code> de test à base de menu pour faire affecter à l&#8217;utilisateur
-les comportements.</p>
-</li>
-<li>
-<p>On souhaite implémenter un nouveau comportement de vol révolutionnaire pour les
-<code>Canard</code> : le vol en V. Dans ce type de vol, chaque <code>Canard</code> doit voler en fonction
-de ses congénaires suivant l&#8217;algorithme ci-dessous. Implémentez une version
-minimale (ne vous embettez pas avec une interface graphique, sauf si vous avez fini ;-)
-de ce comportement.</p>
+<p>Vérifiez qu&#8217;en changeant d&#8217;arme, le comportement change.</p>
 </li>
 </ol>
-</div>
-<div class="listingblock">
-<div class="title">Exemple d&#8217;algorithme du vol en V</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="C"><span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">rang</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-c1">// je suis le premier</span>
-	<span class="tok-n">voler</span><span class="tok-p">();</span>
-<span class="tok-k">else</span> <span class="tok-c1">// je dois me placer derrière le bon Canard</span>
-	<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">canards</span><span class="tok-p">[</span><span class="tok-n">rang</span><span class="tok-p">].</span><span class="tok-n">exists</span><span class="tok-p">())</span> <span class="tok-c1">// s&#39;il y a déjà un compère</span>
-		<span class="tok-n">volerADroite</span><span class="tok-p">()</span> <span class="tok-c1">// je me mets à sa droite</span>
-	<span class="tok-k">else</span> <span class="tok-n">volerAGauche</span><span class="tok-p">();</span> <span class="tok-c1">// sinon, je me mets à sa gauche</span>
-<span class="tok-n">rang</span><span class="tok-o">+=</span><span class="tok-mi">1</span><span class="tok-p">;</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="setArme"><a class="link" href="#setArme">Exemple d&#8217;organisation en paquetages</a></h2>
+<h2 id="setArme"><a class="link" href="#setArme">Appendix A: Exemple d&#8217;organisation en paquetages</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Le principe est d&#8217;avoir :</p>
@@ -224,7 +214,7 @@ de ce comportement.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>un <em>package</em> pour les classes métiers (<code>Canard</code>,<code>Colvert</code>, etc.)</p>
+<p>un <em>package</em> pour les classes métiers (e.g., <code>Canard</code>,<code>Colvert</code>, etc.)</p>
 </li>
 <li>
 <p>un autre pour les comportements (1 par type de comportement en fait)</p>
@@ -236,7 +226,7 @@ aux implémentations (<code>impl</code>).</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Ce qui donne :</p>
+<p>Ce qui donne pour l&#8217;application <code>SuperCanard</code> :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -261,18 +251,22 @@ aux implémentations (<code>impl</code>).</p>
                     └── VolerAvecDesAiles.java</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/note.png" alt="Note">
-</td>
-<td class="content">
-Ceci n&#8217;est qu&#8217;un exemple. Ce genre d&#8217;organisation est souvent dicté par l&#8217;expérience de l&#8217;équipe
-ou de l&#8217;entreprise.
-</td>
-</tr>
-</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pour_aller_plus_loin"><a class="link" href="#_pour_aller_plus_loin">Appendix B: Pour aller plus loin</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Vous pouvez imaginer une application graphique :-)</p>
+</li>
+<li>
+<p>Repérez la partie de votre application principale qui fait le lien entre une arme
+donnée et le comportement à affecter au personnage. Comment pourrait-on améliorer cette
+"correspondance"?</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -294,7 +288,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-18 11:46:21 CET
+Last updated 2014-11-19 11:36:12 CET
 </div>
 </div>
 </body>
