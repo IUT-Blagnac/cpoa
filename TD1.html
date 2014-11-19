@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.1">
+<meta name="author" content="Dut/Info-S3/M3105">
+<meta name="copyright" content="{date=2014-11-18}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<title>CPOA - Sujet TD 1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="./pygments-default.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>CPOA - Sujet TD 1</h1>
+<div class="details">
+<span id="author" class="author">Dut/Info-S3/M3105</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_rappel_du_cours">1. Rappel du cours</a></li>
+<li><a href="#_l_application_supercanard">2. L&#8217;application SuperCanard</a>
+<ul class="sectlevel2">
+<li><a href="#_application_existante">2.1. Application existante</a></li>
+<li><a href="#_modification_amélioration">2.2. Modification/Amélioration</a></li>
+<li><a href="#_catastrophe">2.3. Catastrophe!</a></li>
+<li><a href="#_solution_1_redéfinition_de_méthodes">2.4. Solution 1 : redéfinition de méthodes</a></li>
+<li><a href="#_solution_2_utilisation_des_interfaces">2.5. Solution 2 : utilisation des interfaces</a></li>
+<li><a href="#_solution_3_isoler_ce_qui_varie">2.6. Solution 3 : isoler ce qui varie</a></li>
+<li><a href="#_votre_premier_em_design_pattern_em">2.7. Votre premier <em>Design Pattern</em></a></li>
+</ul>
+</li>
+<li><a href="#_pour_aller_plus_loin">Pour aller plus loin</a></li>
+<li><a href="#_about">About&#8230;&#8203;</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<table id="cartouche" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PreReq</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1. Je sais programmer en <a href="https://www.java.com/fr/">Java</a>.
+</p><p class="tableblock">2. J&#8217;ai conscience qu&#8217;il faut réfléchir avant de se lancer dans le codage.
+</p><p class="tableblock">3. Je maîtrise les concepts objet de base (héritage, polymorphisme, &#8230;&#8203;).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comprendre ce qu&#8217;est une <strong>conception</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong> TD et <strong>2</strong> TP de 1,5h (sur 2 semaines).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rappel_du_cours"><a class="link" href="#_rappel_du_cours">1. Rappel du cours</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ce TD étant le premier de l&#8217;année, aucune référence au cours de cette année
+n&#8217;est requise. Le cours du semestre dernier (M2104) est considéré comme acquis!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_l_application_supercanard"><a class="link" href="#_l_application_supercanard">2. L&#8217;application SuperCanard</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Les exercices de ce TD sont tirés de l&#8217;excellent livre "Tête la première : Design Pattern".
+Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. Editions O&#8217;Reilly. 2005.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_application_existante"><a class="link" href="#_application_existante">2.1. Application existante</a></h3>
+<div class="paragraph">
+<p>Soit l&#8217;application (un jeu de simulation de mare aux canards) <code>SuperCanard</code> dont le modèle est
+décrit ci-dessous :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/superCanard.png" alt="superCanard">
+</div>
+<div class="title">Figure 1. Extrait d&#8217;une application existante (source plantUML <a href="images/superCanard.plantuml">ici</a>)</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+De nombreuses autres classes héritent de <code>Canard</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Voici un exemple de code :</p>
+</div>
+<div class="listingblock">
+<div class="title">Première version de Canard.java</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Canard</span> <span class="tok-o">{</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je cancane comme un Canard!&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">nager</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je nage comme un Canard!&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">();</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Première version de Colvert.java</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">extends</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je suis un Colvert&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modification_amélioration"><a class="link" href="#_modification_amélioration">2.2. Modification/Amélioration</a></h3>
+<div class="paragraph">
+<p>Votre hiérarchie vous demande maintenant d&#8217;améliorer l&#8217;application
+pour être plus proche de la réalité.</p>
+</div>
+<div class="paragraph">
+<p>Vous décidez d&#8217;ajouter une méthode <code>voler()</code> à vos canards :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/superCanard2-note.png" alt="superCanard2 note">
+</div>
+<div class="title">Figure 2. Nouvelle fonctionnalité</div>
+</div>
+<div class="listingblock">
+<div class="title">Deuxième version de Canard.java</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Canard</span> <span class="tok-o">{</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je cancane comme un Canard!&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">nager</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je nage comme un Canard!&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">();</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je vole comme un Canard!&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">};</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_catastrophe"><a class="link" href="#_catastrophe">2.3. Catastrophe!</a></h3>
+<div class="paragraph">
+<p>La hiérarchie vous appelle en urgence : des canards en plastiques se mettent
+à voler dans l&#8217;application!</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Vous avez oublié que certains canards ne volaient pas!
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Complétez la phrase suivante : L'<strong>héritage</strong> c&#8217;est super pour faire
+de la &#8230;&#8203;&#8230;&#8203;&#8230;&#8203;&#8230;&#8203;. mais c&#8217;est plus problématique pour les aspects &#8230;&#8203;&#8230;&#8203;&#8230;&#8203;&#8230;&#8203;.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_solution_1_redéfinition_de_méthodes"><a class="link" href="#_solution_1_redéfinition_de_méthodes">2.4. Solution 1 : redéfinition de méthodes</a></h3>
+<div class="paragraph">
+<p>Vous songez à une première solution simple : redéfinir la méthode <code>voler()</code>
+dans les canards qui ne volent pas.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Complétez le code java suivant pour réaliser cette solution :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">CanardEnPlastique</span> <span class="tok-kd">extends</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+
+	<span class="tok-nd">@Override</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je suis un CanardEnPlastique!&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+
+
+
+
+
+
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Dans la liste ci-après, quels sont les inconvénients à utiliser l’héritage pour
+définir le comportement de <code>Canard</code> ? (Plusieurs choix possibles.) :</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10063; Le code est dupliqué entre les sous-classes.</p>
+</li>
+<li>
+<p>&#10063; Les changements de comportements au moment de l&#8217;exécution sont difficiles.</p>
+</li>
+<li>
+<p>&#10063; Nous ne pouvons pas avoir de canards qui dansent.</p>
+</li>
+<li>
+<p>&#10063; Il est difficile de connaître tous les comportements des canards</p>
+</li>
+<li>
+<p>&#10063; Les canards ne peuvent pas voler et cancaner en même temps.</p>
+</li>
+<li>
+<p>&#10063; Les modifications peuvent affecter involontairement d&#8217;autres canards.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_solution_2_utilisation_des_interfaces"><a class="link" href="#_solution_2_utilisation_des_interfaces">2.5. Solution 2 : utilisation des interfaces</a></h3>
+<div class="paragraph">
+<p>Vous songez à utiliser les interfaces pour améliorer le code.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sur le diagramme suivant indiquez les relations d&#8217;héritage (<code>extends</code> de java)
+et d&#8217;implémentation (<code>implements</code> de java) :</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/superCanardInterfaces.png" alt="superCanardInterfaces">
+</div>
+</div>
+</li>
+<li>
+<p>Que pensez-vous de la conception obtenue ?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_solution_3_isoler_ce_qui_varie"><a class="link" href="#_solution_3_isoler_ce_qui_varie">2.6. Solution 3 : isoler ce qui varie</a></h3>
+<div class="paragraph">
+<p>Vous êtes confrontés au même problème que dans le module <code>MPA</code> de ce début
+d&#8217;année : <strong>LE CHANGEMENT</strong>!</p>
+</div>
+<div class="paragraph">
+<p>Nous allons donc appliquer un bon principe de conception :</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/yinyang.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="paragraph">
+<p>Identifiez les aspects de votre code qui varient et
+séparez-les de ceux qui demeurent constants.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Quels sont les deux principales choses qui varient dans votre code?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_implémentation_des_comportements"><a class="link" href="#_implémentation_des_comportements">2.6.1. Implémentation des comportements</a></h4>
+<div class="paragraph">
+<p>Commençons par implémenter les comportements de manière séparée.
+Pour cela nous rappelons un bon principe que vous avez déjà utilisé :</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/yinyang.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="paragraph">
+<p>Programmer une interface, non une implémentation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>En appliquant le principe ci-dessus, proposez une conception (diagramme de classe uniquement)
+avec les classes et/ou interfaces (à vous de juger) suivantes : <code>ComportementVol</code>,
+<code>VolerAvecDesAiles</code>, <code>NePasVoler</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_intégration_du_comportement"><a class="link" href="#_intégration_du_comportement">2.6.2. Intégration du comportement</a></h4>
+<div class="paragraph">
+<p>Il nous faut maintenant relier les classes de canards à leur comportement.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ajouter à la classe <code>Canard</code> deux variables d&#8217;instance.</p>
+</li>
+<li>
+<p>Enlevez les méthodes devenues inutiles.</p>
+</li>
+<li>
+<p>Remplacez-les (donnez les implémentations) par les méthodes
+<code>effectuerVol()</code> et <code>effectuerCancan()</code> (qui utilisent les vartiables d&#8217;instances
+précédentes).</p>
+</li>
+<li>
+<p>Modifiez les constructeurs de <code>Colvert</code> (par exemple) pour indiquer
+comment vos variables d&#8217;instance sont initialisées.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_résumé_et_mise_en_oeuvre"><a class="link" href="#_résumé_et_mise_en_oeuvre">2.6.3. Résumé et mise en oeuvre</a></h4>
+<div class="paragraph">
+<p>Il est temps maintenant de prendre du recul et d&#8217;expérimenter les
+avantages de notre nouvelle conception.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Réalisez le diagramme de classe complet de l&#8217;application.</p>
+</li>
+<li>
+<p>Que feriez-vous pour ajouter la propulsion à réaction à l&#8217;application?</p>
+</li>
+<li>
+<p>Voyez-vous une classe qui pourrait utiliser le comportement de <code>Cancan</code>
+et qui n&#8217;est pas un <code>Canard</code>?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_votre_premier_em_design_pattern_em"><a class="link" href="#_votre_premier_em_design_pattern_em">2.7. Votre premier <em>Design Pattern</em></a></h3>
+<div class="sect3">
+<h4 id="_la_pattern_stratégie"><a class="link" href="#_la_pattern_stratégie">2.7.1. La pattern Stratégie</a></h4>
+<div class="paragraph">
+<p>En fait vous venez de mettre en oeuvre votre premier <em>Design Pattern</em> :
+le patron <em>Strategy</em> (<strong>Stratégie</strong> en français).</p>
+</div>
+<div id="strategy" class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/pattern.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
+<div class="paragraph">
+<p><strong>Stratégie</strong> définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les
+rend interchangeables.
+Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#8217;utilisent.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/strategy.png" alt="strategy">
+</div>
+<div class="title">Figure 3. Modèle UML du patron <em>Strategy</em></div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/google-strategy.png"><img src="images/google-strategy.png" alt="google strategy"></a>
+</div>
+<div class="title">Figure 4. Quelques exemples de description du patron <em>Strategy</em></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mise_en_oeuvre_et_révision"><a class="link" href="#_mise_en_oeuvre_et_révision">2.7.2. Mise en oeuvre et révision</a></h4>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Warning">
+</td>
+<td class="content">
+<div class="paragraph">
+<p>On vous demande de reprendre un jeu d&#8217;aventure dont
+seul le modèle ci-dessous est fourni.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/aventure-sujet.png"><img src="images/aventure-sujet.png" alt="aventure sujet"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Réorganiser les classes</p>
+</li>
+<li>
+<p>Identifier les classes abstraites, les interfaces et les classes ordinaires.</p>
+</li>
+<li>
+<p>Tracer les liens entre les classes ("est un", implémentation, "a un")</p>
+</li>
+<li>
+<p>Placer la méthode <code>setArme()</code> ci-dessous :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">setArme</span><span class="tok-o">(</span><span class="tok-n">ComportementArme</span> <span class="tok-n">a</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+  <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">arme</span> <span class="tok-o">=</span> <span class="tok-n">a</span><span class="tok-o">;</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pour_aller_plus_loin"><a class="link" href="#_pour_aller_plus_loin">Pour aller plus loin</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nous avons utilisé sans le nommer un troisième bon principe :</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/yinyang.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="paragraph">
+<p>Préférez la composition à l&#8217;héritage.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Quelle différence entre notre conception finale
+et une implémentation du type :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Canard</span> <span class="tok-kd">implements</span> <span class="tok-n">ComportementVol</span> <span class="tok-o">{...}</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>Mots-croisés</strong></div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/crossword1.png"><img src="images/crossword1.png" alt="crossword1"></a>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Comment testeriez-vous la mise en oeuvre du patron <a href="#strategy">Strategy</a>?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+N&#8217;hésitez pas à consulter un autre exemple, orienté "jeux de rôle",
+<a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici (p.116)</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about"><a class="link" href="#_about">About&#8230;&#8203;</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Document réalisé par <a href="mailto:{email}">Dut/Info-S3/M3105</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.1</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
+Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
+<span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="images/88x31.png" alt="Licence Creative Commons"></a></span>
+<a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-11-18 09:18:38 CET
+</div>
+</div>
+</body>
+</html>
