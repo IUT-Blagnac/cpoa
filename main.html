@@ -482,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2014-11-19 - First draft</span>
+<span id="revdate">2014-11-20 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -775,17 +775,36 @@ l&#8217;opération de typage <em>à la volée</em>, <strong>lors de l&#8217;exé
 <div class="listingblock">
 <div class="title">Exemple de typage dynamique</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">class</span> <span class="tok-nc">A</span><span class="tok-o">{</span>
-	<span class="tok-kt">int</span> <span class="tok-n">x</span><span class="tok-o">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author André Peninou</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Type</span> <span class="tok-o">{</span>
+	<span class="tok-kt">void</span> <span class="tok-nf">m</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span> <span class="tok-o">(</span><span class="tok-s">&quot;Type&quot;</span><span class="tok-o">);</span>
+		<span class="tok-o">}</span>
 <span class="tok-o">}</span>
-
-<span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span><span class="tok-o">{</span>
-	<span class="tok-kt">int</span> <span class="tok-n">y</span><span class="tok-o">;</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">SousType</span> <span class="tok-kd">extends</span> <span class="tok-n">Type</span> <span class="tok-o">{</span>
+	<span class="tok-kt">void</span> <span class="tok-nf">m</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span> <span class="tok-o">(</span><span class="tok-s">&quot;SousType&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+	<span class="tok-kt">void</span> <span class="tok-nf">autreM</span><span class="tok-o">(){</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span> <span class="tok-o">(</span><span class="tok-s">&quot;Spécifique SousType&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
 <span class="tok-o">}</span>
-
 <span class="tok-o">...</span>
-<span class="tok-n">A</span> <span class="tok-n">v1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">B</span><span class="tok-o">();</span>
-<span class="tok-n">B</span> <span class="tok-n">v2</span> <span class="tok-o">=</span> <span class="tok-o">(</span><span class="tok-n">B</span><span class="tok-o">)</span> <span class="tok-n">v1</span><span class="tok-o">;</span></code></pre>
+		<span class="tok-n">Type</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Type</span><span class="tok-o">();</span>
+		<span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">m</span><span class="tok-o">();</span> <span class="tok-c1">// &quot;Type&quot;</span>
+
+		<span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">SousType</span><span class="tok-o">();</span>
+		<span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">m</span><span class="tok-o">();</span> <span class="tok-c1">// &quot;SousType&quot;</span>
+		<span class="tok-c1">// Statique : a est un Type (à la compil)</span>
+		<span class="tok-c1">// Dynamique : a est un SousType au runtime.</span>
+
+		<span class="tok-c1">// D&#39;où :</span>
+		<span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">SousType</span><span class="tok-o">();</span>
+		<span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">autreM</span><span class="tok-o">();</span>
+		<span class="tok-c1">// NOK car type statique == A =&gt; autreM() n&#39;existe pas à la compilation</span>
+<span class="tok-o">...</span></code></pre>
 </div>
 </div>
 </div>
@@ -877,7 +896,7 @@ des aspects de ce module.</p>
 <p>est <em>private</em>, il est accessible uniquement depuis sa propre classe ;</p>
 </li>
 <li>
-<p>a la visibilité <em>package</em> (par défaut), il est accessible de partout dans
+<p>a la visibilité <em>package</em> (visibilité par défaut, pas de mot-clef), il est accessible de partout dans
 le paquetage de <code>A</code> mais de nulle part ailleurs ;</p>
 </li>
 <li>
@@ -918,45 +937,61 @@ Ci-dessus, les niveaux de visibilité sont rangés par visibilité croissante.
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">package</span> <span class="tok-n">UN</span><span class="tok-o">;</span>
-<span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>
-  <span class="tok-o">...</span>
-<span class="tok-o">{</span>
-    <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">A</span> <span class="tok-o">();</span>
-    <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : même si bizarre</span>
-    <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// OK : visible package</span>
-<span class="tok-o">}</span>
-<span class="tok-o">}</span>
+  <span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>
+    <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">A</span> <span class="tok-o">();</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : même si bizarre</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// OK : visible package</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span>
 
 <span class="tok-kn">package</span> <span class="tok-n">UN</span><span class="tok-o">;</span>
-<span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>
-<span class="tok-o">...</span>
-<span class="tok-o">{</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// OK : visible package</span>
-<span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
+  <span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>
+    <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// OK : visible package</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">package</span> <span class="tok-n">DEUX</span><span class="tok-o">;</span>
-<span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>
-  <span class="tok-o">...</span>
-<span class="tok-o">{</span>
-    <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">A</span> <span class="tok-o">();</span>
-    <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// NON OK : normal</span>
-    <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>
-<span class="tok-o">}</span>
-<span class="tok-o">}</span>
+  <span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>
+      <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">A</span> <span class="tok-o">();</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// NON OK : normal</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span>
 
-<span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>
-  <span class="tok-o">...</span>
-<span class="tok-o">{</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal car protected et héritage</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>
-<span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
+  <span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>
+      <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal car protected et héritage</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>À la question <code>private</code> ou <code>protected</code> ? Quel est le mieux pour les attributs ?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>C&#8217;est une question de <strong>style de programmation</strong> !</p>
+</li>
+<li>
+<p>Puristes (Meyer) &#8658; <code>private</code></p>
+</li>
+<li>
+<p>Parfois utile : cf. <em>Strategy</em>, évite les getters/setters</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1426,6 +1461,49 @@ C&#8217;est un mixin qu&#8217;il suffit d&#8217;inclure dans la classe qui doit 
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_association_ou_composition"><a class="link" href="#_association_ou_composition">4.2.7. Association ou composition</a></h4>
+<div class="paragraph">
+<p>On trouve deux modèles <a href="http://www.uml.org/">UML&#8482;</a> :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/strategy-compo.png" alt="strategy compo">
+</div>
+<div class="title">Figure 5. <em>Strategy</em>  et composition</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/strategy-assoc.png" alt="strategy assoc">
+</div>
+<div class="title">Figure 6. <em>Strategy</em>  et association</div>
+</div>
+<div class="paragraph">
+<p>Et donc deux implémentations :</p>
+</div>
+<div class="listingblock">
+<div class="title">Composition &#8658; le composé encapsule les composants</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">extends</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+
+	<span class="tok-kd">protected</span> <span class="tok-nf">Colvert</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">this</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">VolerAvecDesAiles</span><span class="tok-o">(),</span> <span class="tok-k">new</span> <span class="tok-nf">Cancan</span><span class="tok-o">());</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">...</span>
+<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Colvert</span><span class="tok-o">();</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Association &#8658; le composant existe "en dehors"</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-o">...</span>
+<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">VolerAvecDesAiles</span><span class="tok-o">();</span>
+<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Cancan</span><span class="tok-o">();</span>
+<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Colvert</span><span class="tok-o">(</span><span class="tok-n">vol</span><span class="tok-o">,</span><span class="tok-n">cri</span><span class="tok-o">);</span>
+<span class="tok-o">...</span></code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_un_peu_d_histoire"><a class="link" href="#_un_peu_d_histoire">4.3. Un peu d&#8217;histoire</a></h3>
@@ -1547,7 +1625,7 @@ sous-types, sans modifier la cohérence du programme</pre>
 <div class="content">
 <img src="images/carre.png" alt="carre" width="10%">
 </div>
-<div class="title">Figure 5. Exemple classique de violation du principe de substitution de Liskov</div>
+<div class="title">Figure 7. Exemple classique de violation du principe de substitution de Liskov</div>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1873,7 +1951,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/singleton.png" alt="singleton">
 </div>
-<div class="title">Figure 6. Modèle UML du patron <em>Singleton</em></div>
+<div class="title">Figure 8. Modèle UML du patron <em>Singleton</em></div>
 </div>
 <div class="dlist">
 <dl>
@@ -1888,7 +1966,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/fabrique.svg" alt="fabrique">
 </div>
-<div class="title">Figure 7. Modèle UML du patron Fabrique</div>
+<div class="title">Figure 9. Modèle UML du patron Fabrique</div>
 </div>
 <div class="dlist">
 <dl>
@@ -1904,7 +1982,7 @@ leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
 <div class="content">
 <img src="images/fabrique-abstraite.svg" alt="fabrique abstraite">
 </div>
-<div class="title">Figure 8. Modèle UML du patron Fabrique Abstraite</div>
+<div class="title">Figure 10. Modèle UML du patron Fabrique Abstraite</div>
 </div>
 </div>
 <div class="sect3">
@@ -1927,7 +2005,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <img src="images/strategy.png" alt="strategy">
 </div>
-<div class="title">Figure 9. Modèle UML du patron <em>Strategy</em></div>
+<div class="title">Figure 11. Modèle UML du patron <em>Strategy</em></div>
 </div>
 </div>
 </div>
@@ -1942,10 +2020,10 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <p><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First, O&#8217;Reilly, 09/2004.</p>
 </li>
 <li>
-<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-19).</p>
+<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-20).</p>
 </li>
 <li>
-<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-19).</p>
+<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-20).</p>
 </li>
 <li>
 <p><a id="Larman05"></a>[Larman05] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
@@ -1973,13 +2051,13 @@ graphiques propres qui sont listées ci-dessous.</p>
 <div class="content">
 <img src="images/conventions1.png" alt="conventions1">
 </div>
-<div class="title">Figure 10. Convention http://plantuml.sourceforge.net/[plantUML] pour la visibilité des propriétés/méthodes</div>
+<div class="title">Figure 12. Convention http://plantuml.sourceforge.net/[plantUML] pour la visibilité des propriétés/méthodes</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/conventions.png" alt="conventions">
 </div>
-<div class="title">Figure 11. Symboles pour les types de classes</div>
+<div class="title">Figure 13. Symboles pour les types de classes</div>
 </div>
 </div>
 </div>
@@ -2014,7 +2092,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.1<br>
-Last updated 2014-11-19 11:38:59 CET
+Last updated 2014-11-20 00:35:30 CET
 </div>
 </div>
 </body>
