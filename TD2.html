@@ -7,14 +7,14 @@
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
 <meta name="copyright" content="{date=2014-11-19}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
-<title>CPOA - Sujet TD 2</title>
+<title>CPOA - Support TD 2</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="./pygments-default.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>CPOA - Sujet TD 2</h1>
+<h1>CPOA - Support TD 2</h1>
 <div class="details">
 <span id="author" class="author">Dut/Info-S3/M3105</span><br>
 </div>
@@ -22,18 +22,17 @@
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_rappel_du_cours">1. Rappel du cours</a></li>
-<li><a href="#_application">2. Application</a>
+<li><a href="#_la_fabrique_de_chocolat">2. La fabrique de chocolat</a>
 <ul class="sectlevel2">
-<li><a href="#_exemple_de_code_d_accès_à_une_base_de_données">2.1. Exemple de code d&#8217;accès à une base de données</a></li>
-<li><a href="#_réflexion_sur_l_unicité_des_instances">2.2. Réflexion sur l&#8217;unicité des instances</a></li>
-<li><a href="#_essayons_de_limiter_la_création_d_une_seule_instance">2.3. Essayons de limiter la création d&#8217;une seule instance</a></li>
-<li><a href="#_application_à_chocobon">2.4. Application à Chocobon</a></li>
-<li><a href="#_problème_de_la_solution_précédente">2.5. Problème de la solution précédente</a></li>
+<li><a href="#_problème_initial">2.1. Problème initial</a></li>
+<li><a href="#_amélioration_1">2.2. Amélioration 1</a></li>
+<li><a href="#_amélioration_2">2.3. Amélioration 2</a></li>
+<li><a href="#_c_est_pas_fini">2.4. C&#8217;est pas fini!</a></li>
 </ul>
 </li>
-<li><a href="#_le_patron_singleton">3. Le patron Singleton</a></li>
-<li><a href="#_le_patron_fabrique">4. Le patron Fabrique</a></li>
-<li><a href="#_le_patron_fabrique_abstraite">5. Le patron Fabrique Abstraite</a></li>
+<li><a href="#_application_aux_bases_de_données">3. Application aux bases de données</a></li>
+<li><a href="#_le_patron_singleton">4. Le patron Singleton</a></li>
+<li><a href="#_le_patron_fabrique">5. Le patron Fabrique</a></li>
 <li><a href="#_pour_aller_plus_loin">Pour aller plus loin</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
@@ -42,6 +41,22 @@
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/caution.png" alt="Caution">
+</td>
+<td class="content">
+<div class="title">Version corrigée</div>
+<div class="paragraph">
+<p>Cette version comporte des indications pour les
+réponses aux exercices.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table id="cartouche" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 9%;">
@@ -84,22 +99,423 @@ N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.
 </table>
 </div>
 <div class="paragraph">
-<p>Dans ce TD nous allons travailler autour des patrons <a href="#Singleton">Design pattern : <strong>Singleton</strong></a> et <a href="#Fabrique">Design pattern : <strong>Fabrique</strong></a>.</p>
+<p>Dans ce TD nous allons travailler autour des patrons <a href="#Singleton">Singleton</a> et <a href="#Fabrique">Fabrique</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_application"><a class="link" href="#_application">2. Application</a></h2>
+<h2 id="_la_fabrique_de_chocolat"><a class="link" href="#_la_fabrique_de_chocolat">2. La fabrique de chocolat</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Idée : Je ne veux qu&#8217;il n&#8217;y ait qu&#8217;une seule fenêtre de type d&#8217;édition.</p>
+<p>Vous participez au développement d&#8217;un simulateur de fabriques
+de chocolat modernes dont des bouilleurs sont assistés par ordinateur.</p>
+</div>
+<div class="paragraph">
+<p>La tâche du bouilleur consiste à contenir un mélange de chocolat et de lait,
+à le porter à ébullition puis à le transmettre à la phase suivante où il est
+transformé en plaquettes de chocolat.</p>
 </div>
 <div class="sect2">
-<h3 id="_exemple_de_code_d_accès_à_une_base_de_données"><a class="link" href="#_exemple_de_code_d_accès_à_une_base_de_données">2.1. Exemple de code d&#8217;accès à une base de données</a></h3>
+<h3 id="_problème_initial"><a class="link" href="#_problème_initial">2.1. Problème initial</a></h3>
+<div class="paragraph">
+<p>Voici la classe contrôleur du bouilleur industriel de <em>Bonchoco, SA</em>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Contrôleur du bouilleur en Java</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel (taken from Design Pattren - Head First, O&#39;Reilly, 09/2004)</span>
+<span class="tok-cm"> *</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-o">{</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
+
+	<span class="tok-kd">public</span> <span class="tok-nf">BouilleurChocolat</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
+		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remplir</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">estVide</span><span class="tok-o">())</span> <span class="tok-o">{</span>
+			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
+			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
+			<span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat</span>
+		<span class="tok-o">}</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">vider</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">if</span> <span class="tok-o">(!</span><span class="tok-n">estVide</span><span class="tok-o">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">estBouilli</span><span class="tok-o">())</span> <span class="tok-o">{</span>
+			<span class="tok-c1">// vider le mélange</span>
+			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">bouillir</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">if</span> <span class="tok-o">(!</span><span class="tok-n">estVide</span><span class="tok-o">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-o">!</span><span class="tok-n">estBouilli</span><span class="tok-o">())</span> <span class="tok-o">{</span>
+			<span class="tok-c1">// porter le contenu à ébullition</span>
+			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">estVide</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-n">vide</span><span class="tok-o">;}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">estBouilli</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-n">bouilli</span><span class="tok-o">;}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>À quoi servent les attributs <code>vide</code> et <code>bouilli</code>?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="paragraph">
+<p>Si vous étudiez le code, vous constatez qu&#8217;ils ont essayé très soigneusement d&#8217;éviter
+les catastrophes, par exemple de vider deux mille litres de mélange qui n&#8217;a pas bouilli,
+de remplir un bouilleur déjà plein ou de faire bouillir un bouilleur vide !</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Vous faîtes un cauchemar horrible (quoi que) où vous vous noyez dans du chocolat.
+Vous vous réveillez en sursaut avec une crainte terrible.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Que pourrait-il se passer avec plusieurs instances de contrôleurs?</p>
+</li>
+<li>
+<p>De quoi faudrait-il s&#8217;assurer pour éviter ce problème?</p>
+</li>
+<li>
+<p>Trouvez des exemples de situations où il est important de n&#8217;avoir
+qu&#8217;une seule instance d&#8217;une classe donnée?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Que l&#8217;un remplisse alors que l&#8217;autre n&#8217;a pas vidé par exemple.</p>
+</li>
+<li>
+<p>S&#8217;assurer de n&#8217;avoir qu&#8217;une seule instance de ce contrôleur.</p>
+</li>
+<li>
+<p>Quelques exemples :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>accès unique à une base de données (on vient de le voir)</p>
+</li>
+<li>
+<p>objet "parent" d&#8217;une interface</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_amélioration_1"><a class="link" href="#_amélioration_1">2.2. Amélioration 1</a></h3>
+<div class="paragraph">
+<p>Vous vous souvenez des premiers exercices <a href="https://www.java.com/fr/">Java</a>  sur les variables de classe
+et vous proposez d&#8217;utiliser un compteur d&#8217;instance pour solutionner le problème.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Vous essayez de modifier le constructeur pour qu&#8217;il ne fonctionne que si le compteur d&#8217;instance est à 0.
+Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurCptChocolat</span> <span class="tok-o">{</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">nbInstance</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span>
+
+	<span class="tok-kd">private</span> <span class="tok-nf">BouilleurCptChocolat</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
+		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">nbInstance</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">nbInstance</span> <span class="tok-o">=</span> <span class="tok-mi">1</span><span class="tok-o">;</span>
+			<span class="tok-k">return</span> <span class="tok-k">this</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+		<span class="tok-k">else</span> <span class="tok-o">{</span>
+			<span class="tok-k">return</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="paragraph">
+<p>Pas de return dans un constructeur.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_amélioration_2"><a class="link" href="#_amélioration_2">2.3. Amélioration 2</a></h3>
+<div class="paragraph">
+<p>Vous changez de stratégie car vous vous souvenez avoir déjà vu ce type de code :</p>
+</div>
+<div class="listingblock">
+<div class="title">Idée!</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-err">￼</span><span class="tok-kd">public</span> <span class="tok-n">MaClasse</span> <span class="tok-o">{</span>
+	<span class="tok-kd">private</span> <span class="tok-nf">MaClasse</span><span class="tok-o">()</span> <span class="tok-o">{...}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Est-ce autorisé de rendre privé le constructeur?</p>
+</li>
+<li>
+<p>Comment créer une instance dans ces conditions? N&#8217;a-t&#8217;on pas tout simplement une classe inutilisable?</p>
+</li>
+<li>
+<p>Complétez le code suivant de façon à résoudre le problème :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-o">{</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
+	<span class="tok-o">...</span>
+	<span class="tok-o">...</span>
+
+	        <span class="tok-n">BouilleurChocolat</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-o">...</span>
+		<span class="tok-o">...</span>
+		<span class="tok-o">}</span>
+
+	<span class="tok-o">...</span>
+	<span class="tok-o">...</span>
+	<span class="tok-o">...</span>
+	<span class="tok-o">...</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remplir</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">estVide</span><span class="tok-o">())</span> <span class="tok-o">{</span>
+			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
+			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
+			<span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat }</span>
+		<span class="tok-o">}</span>
+		<span class="tok-c1">// reste du code de BouilleurChocolat...</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Donnez un exemple d&#8217;utilisation de cette classe.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Oui!</p>
+</li>
+<li>
+<p>En implémentant une fonction qui s&#8217;en charge.</p>
+<div class="listingblock">
+<div class="title">Extrait de la solution</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span> <span class="tok-o">{</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
+
+	<span class="tok-kd">private</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
+		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span>
+		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_est_pas_fini"><a class="link" href="#_c_est_pas_fini">2.4. C&#8217;est pas fini!</a></h3>
+<div class="paragraph">
+<p>Vos cauchemars continuent! Mais cette fois ils sont en anglais! Vous voyez un
+grand gaillard irlandais vous menacez (en fait vous confondez <em>threat</em> et <em>thread</em>).</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>En quoi les <em>threads</em> peuvent-ils poser des problèmes dans votre solution?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="paragraph">
+<p>Accès concurrent au 1er appel de <code>getInstance()</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_application_aux_bases_de_données"><a class="link" href="#_application_aux_bases_de_données">3. Application aux bases de données</a></h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="title">Programme d&#8217;accès à une BD en Java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Unresolved</span> <span class="tok-n">directive</span> <span class="tok-n">in</span> <span class="tok-n">TD2</span><span class="tok-o">.</span><span class="tok-na">asc</span> <span class="tok-o">-</span> <span class="tok-nl">include:</span><span class="tok-o">:</span><span class="tok-n">src</span><span class="tok-o">/</span><span class="tok-n">java</span><span class="tok-o">/</span><span class="tok-n">TD2</span><span class="tok-o">/</span><span class="tok-n">src</span><span class="tok-o">/</span><span class="tok-n">Transact</span><span class="tok-o">.</span><span class="tok-na">java</span><span class="tok-o">[]</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel (taken from https://app.box.com/shared/yrlj0takyhjeg1mefacy)</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Transact</span> <span class="tok-o">{</span>
+	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-k">try</span> <span class="tok-o">{</span>
+			<span class="tok-n">Class</span><span class="tok-o">.</span><span class="tok-na">forName</span><span class="tok-o">(</span><span class="tok-s">&quot;org.postgresql.Driver&quot;</span><span class="tok-o">);</span>
+			<span class="tok-n">String</span> <span class="tok-n">url</span> <span class="tok-o">=</span> <span class="tok-s">&quot;jdbc:postgresql://localhost:5432/Ecole&quot;</span><span class="tok-o">;</span>
+			<span class="tok-n">String</span> <span class="tok-n">user</span> <span class="tok-o">=</span> <span class="tok-s">&quot;postgres&quot;</span><span class="tok-o">;</span>
+			<span class="tok-n">String</span> <span class="tok-n">passwd</span> <span class="tok-o">=</span> <span class="tok-s">&quot;batterie&quot;</span><span class="tok-o">;</span>
+			<span class="tok-n">Connection</span> <span class="tok-n">conn</span> <span class="tok-o">=</span> <span class="tok-n">DriverManager</span><span class="tok-o">.</span><span class="tok-na">getConnection</span><span class="tok-o">(</span><span class="tok-n">url</span><span class="tok-o">,</span> <span class="tok-n">user</span><span class="tok-o">,</span> <span class="tok-n">passwd</span><span class="tok-o">);</span>
+			<span class="tok-n">conn</span><span class="tok-o">.</span><span class="tok-na">setAutoCommit</span><span class="tok-o">(</span><span class="tok-kc">false</span><span class="tok-o">);</span>
+			<span class="tok-n">Statement</span> <span class="tok-n">state</span> <span class="tok-o">=</span> <span class="tok-n">conn</span><span class="tok-o">.</span><span class="tok-na">createStatement</span><span class="tok-o">(</span><span class="tok-n">ResultSet</span><span class="tok-o">.</span><span class="tok-na">TYPE_SCROLL_SENSITIVE</span><span class="tok-o">,</span> <span class="tok-n">ResultSet</span><span class="tok-o">.</span><span class="tok-na">CONCUR_UPDATABLE</span><span class="tok-o">);</span>
+			<span class="tok-n">String</span> <span class="tok-n">query</span> <span class="tok-o">=</span> <span class="tok-s">&quot;UPDATE professeur SET ...&quot;</span><span class="tok-o">;</span>
+			<span class="tok-n">ResultSet</span> <span class="tok-n">result</span> <span class="tok-o">=</span> <span class="tok-n">state</span><span class="tok-o">.</span><span class="tok-na">executeQuery</span><span class="tok-o">(</span><span class="tok-s">&quot;SELECT * FROM professeur...&quot;</span><span class="tok-o">);</span>
+			<span class="tok-n">result</span><span class="tok-o">.</span><span class="tok-na">first</span><span class="tok-o">();</span>
+			<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;NOM : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">result</span><span class="tok-o">.</span><span class="tok-na">getString</span><span class="tok-o">(</span><span class="tok-s">&quot;prof_nom&quot;</span><span class="tok-o">)</span>
+					<span class="tok-o">+</span> <span class="tok-s">&quot; - PRENOM : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">result</span><span class="tok-o">.</span><span class="tok-na">getString</span><span class="tok-o">(</span><span class="tok-s">&quot;prof_prenom&quot;</span><span class="tok-o">));</span>
+			<span class="tok-n">state</span><span class="tok-o">.</span><span class="tok-na">executeUpdate</span><span class="tok-o">(</span><span class="tok-n">query</span><span class="tok-o">);</span>
+			<span class="tok-n">result</span> <span class="tok-o">=</span> <span class="tok-n">state</span><span class="tok-o">.</span><span class="tok-na">executeQuery</span><span class="tok-o">(</span><span class="tok-s">&quot;SELECT * FROM professeur ...&quot;</span><span class="tok-o">);</span>
+			<span class="tok-n">result</span><span class="tok-o">.</span><span class="tok-na">first</span><span class="tok-o">();</span>
+			<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;NOM : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">result</span><span class="tok-o">.</span><span class="tok-na">getString</span><span class="tok-o">(</span><span class="tok-s">&quot;prof_nom&quot;</span><span class="tok-o">)</span>
+					<span class="tok-o">+</span> <span class="tok-s">&quot; - PRENOM : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">result</span><span class="tok-o">.</span><span class="tok-na">getString</span><span class="tok-o">(</span><span class="tok-s">&quot;prof_prenom&quot;</span><span class="tok-o">));</span>
+			<span class="tok-n">result</span><span class="tok-o">.</span><span class="tok-na">close</span><span class="tok-o">();</span>
+			<span class="tok-n">state</span><span class="tok-o">.</span><span class="tok-na">close</span><span class="tok-o">();</span>
+			<span class="tok-o">}</span>
+		<span class="tok-k">catch</span> <span class="tok-o">(</span><span class="tok-n">Exception</span> <span class="tok-n">e</span><span class="tok-o">)</span> <span class="tok-o">{</span>       <span class="tok-n">e</span><span class="tok-o">.</span><span class="tok-na">printStackTrace</span><span class="tok-o">();</span>     <span class="tok-o">}</span>
+		<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -117,61 +533,25 @@ N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.
 </tr>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_réflexion_sur_l_unicité_des_instances"><a class="link" href="#_réflexion_sur_l_unicité_des_instances">2.2. Réflexion sur l&#8217;unicité des instances</a></h3>
-<div class="admonitionblock warning">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<img src="images/icons/solution.png" alt="Important">
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title">Solution</div>
 <div class="paragraph">
-<p>Trouvez des exemples de situations où il est important de n&#8217;avoir
-qu&#8217;une seule instance d&#8217;une classe donnée?</p>
+<p>Un objet créé pour chaque accès!</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_essayons_de_limiter_la_création_d_une_seule_instance"><a class="link" href="#_essayons_de_limiter_la_création_d_une_seule_instance">2.3. Essayons de limiter la création d&#8217;une seule instance</a></h3>
-<div class="sect3">
-<h4 id="_avec_une_variable_de_classe_compteur"><a class="link" href="#_avec_une_variable_de_classe_compteur">2.3.1. Avec une variable de classe compteur</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_avec_une_méthode_getinstance"><a class="link" href="#_avec_une_méthode_getinstance">2.3.2. Avec une méthode getInstance()</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="_en_interdisant_l_accès_au_constructeur"><a class="link" href="#_en_interdisant_l_accès_au_constructeur">2.3.3. En interdisant l&#8217;accès au constructeur</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-nf">maClasse</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-	<span class="tok-kd">private</span> <span class="tok-nf">MaClasse</span><span class="tok-o">()</span> <span class="tok-o">{}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_application_à_chocobon"><a class="link" href="#_application_à_chocobon">2.4. Application à Chocobon</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="_problème_de_la_solution_précédente"><a class="link" href="#_problème_de_la_solution_précédente">2.5. Problème de la solution précédente</a></h3>
-<div class="paragraph">
-<p>Multithreading</p>
-</div>
-</div>
-</div>
 </div>
 <div class="sect1">
-<h2 id="_le_patron_singleton"><a class="link" href="#_le_patron_singleton">3. Le patron Singleton</a></h2>
+<h2 id="_le_patron_singleton"><a class="link" href="#_le_patron_singleton">4. Le patron Singleton</a></h2>
 <div class="sectionbody">
 <div id="Singleton" class="admonitionblock note">
 <table>
@@ -204,7 +584,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_le_patron_fabrique"><a class="link" href="#_le_patron_fabrique">4. Le patron Fabrique</a></h2>
+<h2 id="_le_patron_fabrique"><a class="link" href="#_le_patron_fabrique">5. Le patron Fabrique</a></h2>
 <div class="sectionbody">
 <div id="Fabrique" class="admonitionblock note">
 <table>
@@ -215,7 +595,14 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <td class="content">
 <div class="title">Design pattern : <strong>Fabrique</strong></div>
 <div class="paragraph">
-<p>Unresolved directive in TD2.asc - include::pattern/fabrique.txt[]</p>
+<p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
+à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrique.svg" alt="fabrique">
+</div>
+<div class="title">Figure 3. Modèle UML du patron Fabrique</div>
 </div>
 </td>
 </tr>
@@ -225,30 +612,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <a class="image" href="images/google-fabrique.png"><img src="images/google-fabrique.png" alt="google fabrique"></a>
 </div>
-<div class="title">Figure 3. Quelques exemples de description du patron Fabrique</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_le_patron_fabrique_abstraite"><a class="link" href="#_le_patron_fabrique_abstraite">5. Le patron Fabrique Abstraite</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>[[Fabrique Abstraite]]</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/pattern.jpeg" alt="Note">
-</td>
-<td class="content">
-<div class="title">Design pattern : <strong>Fabrique Abstraite</strong></div>
-<div class="paragraph">
-<p>Unresolved directive in TD2.asc - include::pattern/fabrique-abstraite.txt[]</p>
-</div>
-</td>
-</tr>
-</table>
+<div class="title">Figure 4. Quelques exemples de description du patron Fabrique</div>
 </div>
 </div>
 </div>
@@ -270,6 +634,65 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </tr>
 </table>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="paragraph">
+<p>Quelques éléments de solution :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>En <a href="https://www.java.com/fr/">Java</a> les variables globales sont des références statiques à des objets.</p>
+</li>
+<li>
+<p>Problème déjà vu de l&#8217;instanciation à la demande vs. au démarrage.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>Mots-croisés</strong></div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/crossword2.png"><img src="images/crossword1.png" alt="crossword1"></a>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/crossword2-sol.png"><img src="images/crossword2-sol.png" alt="crossword2 sol"></a>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -278,8 +701,15 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
-<div class="paragraph">
-<p>Comment testeriez-vous la mise en oeuvre du patron <a href="#singleton">Singleton</a>?</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Comment testeriez-vous la mise en oeuvre du patron <a href="#Singleton">Singleton</a>?</p>
+</li>
+<li>
+<p>Comment testeriez-vous la mise en oeuvre du patron <a href="#Fabrique">Fabrique</a>?</p>
+</li>
+</ol>
 </div>
 </td>
 </tr>
@@ -293,7 +723,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </td>
 <td class="content">
 N&#8217;hésitez pas à consulter
-<a href="http://thecodersbreakfast.net/index.php?post/2008/02/25/26-de-la-bonne-implementation-du-singleton-en-java">le site où j&#8217;ai tiré cet exercice</a>.
+<a href="http://thecodersbreakfast.net/index.php?post/2008/02/25/26-de-la-bonne-implementation-du-singleton-en-java">le site dont je me suis inspiré</a>.
 </td>
 </tr>
 </table>
@@ -318,7 +748,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-19 13:29:10 CET
+Last updated 2014-11-19 15:24:54 CET
 </div>
 </div>
 </body>

@@ -16,6 +16,12 @@ ifdef::slides[:leveloffset: -1]
 [[Singleton]] Singleton::
 include::pattern/singleton.txt[]
 
+[[Fabrique]] Fabrique::
+include::pattern/fabrique.txt[]
+
+[[FabriqueAbstraite]] Fabrique abstraite::
+include::pattern/fabrique-abstraite.txt[]
+
 === Patrons comportementaux
 
 [[Observateur]] Observateur (_Observer^uk^_)::

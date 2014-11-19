@@ -1736,7 +1736,7 @@ clients qui les emploient.</p>
 <p><a href="#Observateur">[Observateur]</a></p>
 </li>
 <li>
-<p>Fabrique (<em>factory</em>) (cf. parser sax)</p>
+<p><a href="#Fabrique">[Fabrique]</a> (<em>factory</em>) (cf. parser sax)</p>
 </li>
 </ul>
 </div>
@@ -1875,6 +1875,37 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </div>
 <div class="title">Figure 6. Modèle UML du patron <em>Singleton</em></div>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="Fabrique"></a> Fabrique</dt>
+<dd>
+<p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
+à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrique.svg" alt="fabrique">
+</div>
+<div class="title">Figure 7. Modèle UML du patron Fabrique</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="FabriqueAbstraite"></a> Fabrique abstraite</dt>
+<dd>
+<p><strong>Fabrique</strong> (abstraite) fournit une interface pour la création de familles
+d&#8217;objets apparentés ou interdépendants, sans qu&#8217;il soit nécessaire de spécifier
+leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrique-abstraite.svg" alt="fabrique abstraite">
+</div>
+<div class="title">Figure 8. Modèle UML du patron Fabrique Abstraite</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_patrons_comportementaux"><a class="link" href="#_patrons_comportementaux">Patrons comportementaux</a></h4>
@@ -1896,7 +1927,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <img src="images/strategy.png" alt="strategy">
 </div>
-<div class="title">Figure 7. Modèle UML du patron <em>Strategy</em></div>
+<div class="title">Figure 9. Modèle UML du patron <em>Strategy</em></div>
 </div>
 </div>
 </div>
@@ -1942,13 +1973,13 @@ graphiques propres qui sont listées ci-dessous.</p>
 <div class="content">
 <img src="images/conventions1.png" alt="conventions1">
 </div>
-<div class="title">Figure 8. Convention http://plantuml.sourceforge.net/[plantUML] pour la visibilité des propriétés/méthodes</div>
+<div class="title">Figure 10. Convention http://plantuml.sourceforge.net/[plantUML] pour la visibilité des propriétés/méthodes</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/conventions.png" alt="conventions">
 </div>
-<div class="title">Figure 9. Symboles pour les types de classes</div>
+<div class="title">Figure 11. Symboles pour les types de classes</div>
 </div>
 </div>
 </div>
@@ -1983,7 +2014,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.1<br>
-Last updated 2014-11-18 18:03:58 CET
+Last updated 2014-11-19 11:38:59 CET
 </div>
 </div>
 </body>

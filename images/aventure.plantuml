@@ -12,7 +12,7 @@ hide empty methods
 
 abstract class Personnage {
 ComportementArme arme
-{abstract} combattre()
+combattre() {this.arme.utiliserArme();}
 setArme(ComportementArme a) {this.arme = a;}
 }
 class Reine {
@@ -22,13 +22,10 @@ class Roi {
 combattre() {...}
 }
 class ComportementPoignard {
-utiliserArme() {// implémente coup de poignard}
 }
 class ComportementArc {
-utiliserArme() {// implémente tirer une flêche}
 }
 class ComportementEpee {
-utiliserArme() {// implémente frapper à l'épée}
 }
 interface ComportementArme{
 {abstract} utiliserArme()
