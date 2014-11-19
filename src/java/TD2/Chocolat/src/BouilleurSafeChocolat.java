@@ -12,7 +12,7 @@ public class BouilleurSafeChocolat {
 		bouilli = false; 
 		}
 	
-	public BouilleurSafeChocolat getInstance() {
+	public static BouilleurSafeChocolat getInstance() {
 		if (uniqueInstance == null) {
 			uniqueInstance = new BouilleurSafeChocolat();
 		}
