@@ -16,8 +16,12 @@ ifdef::slides[:leveloffset: -1]
 [[Singleton]] Singleton::
 include::pattern/singleton.txt[]
 
+ifdef::slides[=== Patrons de création (suite)]
+
 [[Fabrique]] Fabrique::
 include::pattern/fabrique.txt[]
+
+ifdef::slides[=== Patrons de création (suite)]
 
 [[FabriqueAbstraite]] Fabrique abstraite::
 include::pattern/fabrique-abstraite.txt[]
@@ -27,8 +31,17 @@ include::pattern/fabrique-abstraite.txt[]
 [[Observateur]] Observateur (_Observer^uk^_)::
 include::pattern/observer.txt[]
 
+ifdef::slides[=== Patrons comportementaux (suite)]
+
 [[Stratégie]] Stratégie (_Strategy^uk^_)::
 include::pattern/strategy.txt[]
+
+=== Patrons structurels
+
+Adaptateur::
+  TBD
+Composite::
+  TBD
 
 ifdef::slides[:leveloffset: +1]
 

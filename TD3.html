@@ -22,13 +22,9 @@
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_rappel_du_cours">1. Rappel du cours</a></li>
-<li><a href="#_le_singleton_pour_le_jeu_d_aventure">2. Le singleton pour le jeu d&#8217;aventure</a>
-<ul class="sectlevel2">
-<li><a href="#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton">2.1. Et si on améliorait le jeu d&#8217;aventure avec Singleton?</a></li>
-<li><a href="#_problème_du_main_de_test_du_jeu_d_aventure">2.2. Problème du main de test du jeu d&#8217;aventure</a></li>
-</ul>
-</li>
-<li><a href="#_le_patron_fabrique">3. Le patron Fabrique</a></li>
+<li><a href="#_problème_du_main_de_test_du_jeu_d_aventure">2. Problème du main de test du jeu d&#8217;aventure</a></li>
+<li><a href="#_la_pizzeria_o_reilly">3. La pizzeria O&#8217;Reilly</a></li>
+<li><a href="#_le_patron_fabrique">4. Le patron Fabrique</a></li>
 <li><a href="#_pour_aller_plus_loin">Pour aller plus loin</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
@@ -97,122 +93,8 @@ N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_le_singleton_pour_le_jeu_d_aventure"><a class="link" href="#_le_singleton_pour_le_jeu_d_aventure">2. Le singleton pour le jeu d&#8217;aventure</a></h2>
+<h2 id="_problème_du_main_de_test_du_jeu_d_aventure"><a class="link" href="#_problème_du_main_de_test_du_jeu_d_aventure">2. Problème du main de test du jeu d&#8217;aventure</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Peut-on combiner les deux derniers patrons vus en TD (<em>Strategy</em> et Singleton)?
-En effet, les comportements sont portés par des objets pour l&#8217;aspect algorithme,
-mais il n&#8217;y a pas de raison de ne pas les partagés entre tous les objets qui
-"utilisent" ce comportement?!</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/note.png" alt="Note">
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Dans la plupart des cas ces deux patrons ne vont <strong>pas du tout ensemble</strong>.
-Cette stratégie n&#8217;est recommandée que dans un cas bien précis d&#8217;utilisation de
-<em>Strategy</em> : celle où les comportements sont simples et "statiques" (pas de
-	consomation de ressources par exemple) et où l&#8217;on utilise une association :</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/strategy-assoc.png" alt="strategy assoc">
-</div>
-</div>
-<div class="paragraph">
-<p>Avec une implémentation du type :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-o">...</span>
-<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">VolerAvecDesAiles</span><span class="tok-o">();</span>
-<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Cancan</span><span class="tok-o">();</span>
-<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Colvert</span><span class="tok-o">(</span><span class="tok-n">vol</span><span class="tok-o">,</span><span class="tok-n">cri</span><span class="tok-o">);</span>
-<span class="tok-o">...</span></code></pre>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton"><a class="link" href="#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton">2.1. Et si on améliorait le jeu d&#8217;aventure avec Singleton?</a></h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
-</td>
-<td class="content">
-<div class="title"><strong>QUESTION</strong></div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Faites en sorte que les instances d&#8217;objet affectées à chaque comportement
-d&#8217;un <code>Personnage</code> soient uniques pour chaque comportement distinct.</p>
-</li>
-<li>
-<p>Pourquoi ne peut-on pas utiliser de <code>getInstance()</code> dans le cas
-d&#8217;une composition ?</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Extrait de solution (disponible sur le GitHub pour les profs)</p>
-<div class="listingblock">
-<div class="title">Extrait de ComportemenEpee.java</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ComportementEpee</span> <span class="tok-kd">implements</span> <span class="tok-n">ComportementArme</span> <span class="tok-o">{</span>
-
-	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">ComportementEpee</span> <span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">();</span>
-
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">ComportementEpee</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
-	<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Extrait de Chevalier.java</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Chevalier</span> <span class="tok-kd">extends</span> <span class="tok-n">Personnage</span> <span class="tok-o">{</span>
-
-	<span class="tok-kd">protected</span> <span class="tok-nf">Chevalier</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">nom</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-		<span class="tok-k">this</span><span class="tok-o">(</span><span class="tok-n">nom</span><span class="tok-o">,</span> <span class="tok-n">ComportementEpee</span><span class="tok-o">.</span><span class="tok-na">getInstance</span><span class="tok-o">(),</span> <span class="tok-n">ComportementACheval</span><span class="tok-o">.</span><span class="tok-na">getInstance</span><span class="tok-o">());</span>
-	<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Car dans une composition les objets possèdent les instances de leur
-comportement. Elles sont donc uniques.</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_problème_du_main_de_test_du_jeu_d_aventure"><a class="link" href="#_problème_du_main_de_test_du_jeu_d_aventure">2.2. Problème du main de test du jeu d&#8217;aventure</a></h3>
 <div class="paragraph">
 <p>Vous avez sûrement dans votre <code>main</code> du code de jeu une partie du code
 du style :</p>
@@ -311,11 +193,20 @@ adapté.</p>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Vous complèterez le code du jeu d&#8217;aventure en TP. Mais avant cela étudions le patron
+<em>Factory</em> sur une exemple complet.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_le_patron_fabrique"><a class="link" href="#_le_patron_fabrique">3. Le patron Fabrique</a></h2>
+<h2 id="_la_pizzeria_o_reilly"><a class="link" href="#_la_pizzeria_o_reilly">3. La pizzeria O&#8217;Reilly</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_le_patron_fabrique"><a class="link" href="#_le_patron_fabrique">4. Le patron Fabrique</a></h2>
 <div class="sectionbody">
 <div id="Fabrique" class="admonitionblock note">
 <table>
@@ -389,7 +280,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-19 23:53:00 CET
+Last updated 2014-11-20 00:42:01 CET
 </div>
 </div>
 </body>
