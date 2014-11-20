@@ -25,6 +25,7 @@
 <li><a href="#_problème_du_main_de_test_du_jeu_d_aventure">2. Problème du main de test du jeu d&#8217;aventure</a></li>
 <li><a href="#_la_pizzeria_o_reilly">3. La pizzeria O&#8217;Reilly</a></li>
 <li><a href="#_le_patron_fabrique">4. Le patron Fabrique</a></li>
+<li><a href="#_application_au_jeu_d_aventure">5. Application au jeu d&#8217;aventure</a></li>
 <li><a href="#_pour_aller_plus_loin">Pour aller plus loin</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
@@ -202,7 +203,60 @@ adapté.</p>
 <div class="sect1">
 <h2 id="_la_pizzeria_o_reilly"><a class="link" href="#_la_pizzeria_o_reilly">3. La pizzeria O&#8217;Reilly</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Vous êtes embauché dans une pizzeria pour faire &#8230;&#8203; de l&#8217;informatique!</p>
+</div>
+<div class="paragraph">
+<p>Soit le code de départ suivant :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel taken from O&#39;Reilly Head First Design Patterns</span>
+<span class="tok-cm"> *</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Pizzeria</span> <span class="tok-o">{</span>
 
+	<span class="tok-kd">public</span> <span class="tok-n">Pizza</span> <span class="tok-nf">commanderPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-n">Pizza</span> <span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
+
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;grecque&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;poivrons&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaPoivrons</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span>
+
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">preparer</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">cuire</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">couper</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">emballer</span><span class="tok-o">();</span>
+		<span class="tok-k">return</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Identifiez ce qui varie dans ce code.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -236,6 +290,12 @@ adapté.</p>
 </div>
 <div class="title">Figure 2. Quelques exemples de description du patron Fabrique</div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_application_au_jeu_d_aventure"><a class="link" href="#_application_au_jeu_d_aventure">5. Application au jeu d&#8217;aventure</a></h2>
+<div class="sectionbody">
+
 </div>
 </div>
 <div class="sect1">
@@ -280,7 +340,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-20 00:42:01 CET
+Last updated 2014-11-20 10:59:56 CET
 </div>
 </div>
 </body>
