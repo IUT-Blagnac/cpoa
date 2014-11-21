@@ -7,7 +7,7 @@ public class BouilleurCptChocolat {
 	private boolean bouilli; 
 	private static int nbInstance = 0;
 	
-	private BouilleurCptChocolat() {
+	public BouilleurCptChocolat() {
 		vide = true;
 		bouilli = false;
 		if (nbInstance == 0) {
