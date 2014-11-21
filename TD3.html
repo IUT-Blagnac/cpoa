@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-20}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-21}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Support TD 3</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
@@ -211,31 +211,7 @@ adapté.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
-<span class="tok-cm"> * @author bruel taken from O&#39;Reilly Head First Design Patterns</span>
-<span class="tok-cm"> *</span>
-<span class="tok-cm"> */</span>
-<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Pizzeria</span> <span class="tok-o">{</span>
-
-	<span class="tok-kd">public</span> <span class="tok-n">Pizza</span> <span class="tok-nf">commanderPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-		<span class="tok-n">Pizza</span> <span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
-
-		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
-			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;grecque&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
-			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;poivrons&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
-			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaPoivrons</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span>
-
-		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">preparer</span><span class="tok-o">();</span>
-		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">cuire</span><span class="tok-o">();</span>
-		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">couper</span><span class="tok-o">();</span>
-		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">emballer</span><span class="tok-o">();</span>
-		<span class="tok-k">return</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
-	<span class="tok-o">}</span>
-
-<span class="tok-o">}</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Unresolved</span> <span class="tok-n">directive</span> <span class="tok-n">in</span> <span class="tok-n">TD3</span><span class="tok-o">.</span><span class="tok-na">asc</span> <span class="tok-o">-</span> <span class="tok-nl">include:</span><span class="tok-o">:</span><span class="tok-n">src</span><span class="tok-o">/</span><span class="tok-n">java</span><span class="tok-o">/</span><span class="tok-n">Pizzeria</span><span class="tok-o">/</span><span class="tok-n">src</span><span class="tok-o">/</span><span class="tok-n">Pizzeria</span><span class="tok-o">.</span><span class="tok-na">java</span><span class="tok-o">[]</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -249,7 +225,9 @@ adapté.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Identifiez ce qui varie dans ce code.</p>
+<p>Identifiez ce qui varie dans ce code (si la pression du marché fait
+ajouter des pizzas à la carte ou si une pizza n&#8217;a plus de succès et doit
+disparaître, etc.).</p>
 </li>
 </ol>
 </div>
@@ -340,7 +318,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-20 10:59:56 CET
+Last updated 2014-11-21 10:47:12 CET
 </div>
 </div>
 </body>
