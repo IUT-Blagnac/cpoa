@@ -66,6 +66,12 @@ class Compte {
 
 package application {
 
+/'
+class Main {
+	+void main(String[] args)
+}
+'/
+
 abstract class GenericActionAB {
 	-String lineMessage
 	-String code
@@ -133,15 +139,11 @@ class Action4 {
 
 }
 
-class Main {
-	+void main(String[] args)
-}
-
 ' Structural relationships
 
 Action <|.. ActionList
 
-AgenceBancaire o-- Compte
+AgenceBancaire o--> "*" Compte
 
 Action <|.. GenericActionAB
 ActionList <|.. ActionListAB
@@ -151,7 +153,7 @@ GenericActionAB <|-- Action2
 GenericActionAB <|-- Action3
 GenericActionAB <|-- Action4
 
-' Derpendancy relationships
+' Dependency relationships
 
 /'
 Action ..> ActionContext
@@ -168,5 +170,6 @@ Main ..> Action3
 Main ..> Action4
 Main ..> ActionListAB
 '/
+
 
 @enduml 
