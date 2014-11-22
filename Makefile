@@ -17,6 +17,8 @@ EXT=asc
 PANDOC=pandoc
 OUTPUT=.
 DEP=definitions.txt glossaire.txt refs.txt
+SOURCEFILES = ./src/java/CodingDojo/src/*.java
+DOC = doc
 #-----------------------------------------------------
 
 all: $(OUTPUT)/*.html
@@ -66,3 +68,6 @@ TD2-prof.html: TD1.$(EXT) $(DEP)
 
 cours:
 	cp main.html index.html
+
+javadoc : $(CLASSFILES)
+	javadoc -version -author -doclet org.asciidoctor.Asciidoclet -docletpath doclet/asciidoclet-1.5.0.jar -overview -d $(DOC) $(SOURCEFILES)

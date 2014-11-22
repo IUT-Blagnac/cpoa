@@ -1,7 +1,11 @@
-import junit.textui.TestRunner;
-import junit.framework.TestSuite;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
 import junit.framework.TestCase;
-import java.io.*;
+import junit.framework.TestSuite;
 
 public class SuperCanardTest extends TestCase {
   static int totalAssertions = 0;
@@ -18,10 +22,11 @@ public class SuperCanardTest extends TestCase {
   public static void main(String[] args) {
     if ( args.length > 0 ) { programmeATester = args[0] ; }
     System.out.println("Tests du programme : " + programmeATester);
-    junit.textui.TestRunner.run(new TestSuite(SuperCanardTest.class));
+    junit.textui.TestRunner.run(new TestSuite(SuperCanardTest2.class));
   }
 
-  protected void setUp() throws IOException {
+  @Override
+protected void setUp() throws IOException {
           //executionProgrammeATester = Runtime.getRuntime().exec("\"c:\\Program Files\\Java\\jre7\\bin\\java.exe\" -cp U:\\E\\MPA\\projet\\workspace\\G0A1\\bin "+programmeATester);
           //executionProgrammeATester = Runtime.getRuntime().exec("java.exe -cp U:\\E\\MPA\\projet\\workspace\\G0A1\\bin "+programmeATester);
           executionProgrammeATester = Runtime.getRuntime().exec("java -cp .:./bin "+programmeATester);
