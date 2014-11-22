@@ -1,0 +1,15 @@
+.bundle/
+Gemfile.lock
+asciidoclet/
+book/
+build.xml
+deck.js/
+doc/
+doclet/
+plantUmlDoclet.jar
+script.js
+src/java/.metadata/
+src/java/CodingDojo/
+src/java/SuperCanardBof/
+stylesheet.css
+vendor/
