@@ -15,36 +15,27 @@ ComportementArme arme
 combattre() {this.arme.utiliserArme();}
 setArme(ComportementArme a) {this.arme = a;}
 }
-class Reine {
-combattre() {...}
-}
-class Roi {
-combattre() {...}
-}
-class ComportementPoignard {
-}
-class ComportementArc {
-}
 class ComportementEpee {
 }
 interface ComportementArme{
 {abstract} utiliserArme()
 }
-class Troll {
-combattre() {...}
-}
 class Chevalier {
 combattre() {...}
 }
-Personnage <|-- Roi
-Personnage <|-- Reine
+
+class SimpleFabriqueArme {
+	{static} creerComportementArme(String type) : ComportementArme
+}
+
+Main *--> "1" SimpleFabriqueArme
+Main *--> "*" Personnage
+
 Personnage <|-- Chevalier
-Personnage <|-- Troll
 Personnage o--> "1..*" ComportementArme
 
 ComportementArme <|.. ComportementEpee
-ComportementArme <|.. ComportementPoignard
-ComportementArme <|.. ComportementArc
+ComportementArme <-- SimpleFabriqueArme
 
 
 @enduml

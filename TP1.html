@@ -10,13 +10,31 @@
 <title>CPOA - Sujet TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./pygments-default.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>CPOA - Sujet TP 1</h1>
 <div class="details">
 <span id="author" class="author">Dut/Info-S3/M3105</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_rappel_sur_le_patron_stratégie">1. Rappel sur le patron Stratégie</a></li>
+<li><a href="#_reprise_du_td">2. Reprise du TD</a></li>
+<li><a href="#_jeu_d_aventure">3. Jeu d&#8217;aventure</a>
+<ul class="sectlevel2">
+<li><a href="#_bases">3.1. Bases</a></li>
+<li><a href="#_améliorations">3.2. Améliorations</a></li>
+<li><a href="#_utilisation_du_comportement_dynamique">3.3. Utilisation du comportement dynamique</a></li>
+</ul>
+</li>
+<li><a href="#setArme">Appendix A: Exemple d&#8217;organisation en paquetages</a></li>
+<li><a href="#_modèles_et_tests_d_architecture">Appendix B: Modèles et tests d&#8217;architecture</a></li>
+<li><a href="#_pour_aller_plus_loin">Appendix C: Pour aller plus loin</a></li>
+<li><a href="#_about">About&#8230;&#8203;</a></li>
+</ul>
 </div>
 </div>
 <div id="content">
@@ -54,7 +72,7 @@
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<img src="images/icons/pattern.jpeg" alt="Note">
 </td>
 <td class="content">
 <div class="title">Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
@@ -82,7 +100,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<img src="images/icons/note.png" alt="Note">
 </td>
 <td class="content">
 <div class="paragraph">
@@ -96,16 +114,58 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Téléchargez le code de l&#8217;application <code>SuperCanard</code> existante <a href="TP1.zip">ici</a>.</p>
+<p>Téléchargez le code de l&#8217;application <code>SuperCanardBof</code> existante <a href="TP1.zip">TP1.zip</a>.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Attention quelques étapes sont nécessaires à l&#8217;utilisation de ces fichiers sous eclipse/Windows :</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Importer dans <a href="http://www.eclipse.org">eclipse</a> le projet (menu:File[Import&#8230;&#8203; &gt; Existing Projects into Worspace]
+et choisir <code>TP1.zip</code> que vous venez de télécharger.</p>
+</li>
+<li>
+<p>Positionner <code>Junit</code> dans le <code>Classpath</code>(btn:[Clic Droit] sur votre projet
+menu:Properties[Java Build Path &gt; Add Library] et choisir <code>Junit4</code>)</p>
+</li>
+<li>
+<p>Si Windows, dans la ligne suivante de <code>SuperCanardTest</code>, il faut remplacer
+les deux points de l&#8217;option <code>-cp</code> par un point virgule :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-o">.</span><span class="tok-na">getRuntime</span><span class="tok-o">().</span><span class="tok-na">exec</span><span class="tok-o">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-o">);</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p>Lancez l&#8217;application elle-même pour vérifier que tout fonctionne.</p>
 </li>
 <li>
-<p>Regardez le programme de test fonctionnel <code>SuperCanardTest</code> qui vérifie de manière automatique que tout fonctionne.</p>
+<p>Regardez le programme de test fonctionnel <code>SuperCanardTest</code> qui vérifie de
+manière automatique que tout fonctionne comme on le faisait en MPA.</p>
 </li>
 <li>
-<p>Implémentez rapidement le patron <em>Strategy</em> comme préparé en TD en modifiant le code en conséquence.</p>
+<p>Regardez le programme de test fonctionnel <code>SuperCanardTest2</code> qui vérifie de
+manière automatique que tout fonctionne, mais d&#8217;une manière plus proche des
+tests unitaires.</p>
+</li>
+<li>
+<p>Implémentez rapidement le patron <em>Strategy</em> comme préparé en TD en modifiant
+le code en conséquence.</p>
 </li>
 <li>
 <p>Rejouez les tests pour vérifier que tout fonctionne toujours.</p>
@@ -124,7 +184,7 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <li>
 <p>En utilisant le patron <em>Strategy</em>, et en utilisant l&#8217;organisation en
 paquetage donnée en <a href="#setArme">fin de TP</a>), implémentez les classes et comportements du jeu d&#8217;aventure
-du TD1 (section "pour aller plus loin") et dont voici les bases :</p>
+du TD1 (section 2.7.2) et dont voici les bases :</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="images/aventure.png"><img src="images/aventure.png" alt="aventure"></a>
@@ -149,7 +209,7 @@ implémenter systématiquement à l&#8217;instanciation le comportement d&#8217;
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
 il est tout à fait légal de créer un constructeur pour une classe abstraite&#8230;&#8203;
@@ -213,7 +273,7 @@ aux implémentations (<code>impl</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">        ├── appli
+<pre class="pygments highlight"><code data-lang="shell">        ├── appli
         │   ├── Canard.java
         │   ├── CanardEnPlastique.java
         │   ├── Colvert.java
@@ -237,10 +297,216 @@ aux implémentations (<code>impl</code>).</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_pour_aller_plus_loin"><a class="link" href="#_pour_aller_plus_loin">Appendix B: Pour aller plus loin</a></h2>
+<h2 id="_modèles_et_tests_d_architecture"><a class="link" href="#_modèles_et_tests_d_architecture">Appendix B: Modèles et tests d&#8217;architecture</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>En utilisant la doclet pour Javadoc de <a href="http://plantuml.sourceforge.net/">plantUML</a>, il est possible d&#8217;obtenir
+le diagramme de classe correspondant à son architecture de manière automatique.</p>
+</div>
+<div class="paragraph">
+<p>Prenons l&#8217;exemple de l&#8217;application <code>SuperCanardBof</code>.</p>
+</div>
+<div class="paragraph">
+<p>On peut écrire le script suivant :</p>
+</div>
+<div class="listingblock">
+<div class="title">Génération automatique de diagramme PlantUML (source <a href="src/java/SuperCanardBof/plantuml.sh">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="shell">#!/bin/sh
+UML=&#39;model.uml&#39;
+TYPE=&#39;PNG&#39;
+DOCLETPATH=&#39;/Users/bruel/dev/teaching/dut/cpoa/doclet&#39;
+echo &quot;Creating $UML...&quot;
+javadoc \
+-private \
+-quiet \
+-J-DdestinationFile=$UML \
+-J-DcreatePackages=false \
+-J-DshowPublicMethods=true \
+-J-DshowPublicConstructors=false \
+-J-DshowPublicFields=true \
+-doclet de.mallox.doclet.PlantUMLDoclet -docletpath $DOCLETPATH/plantUmlDoclet.jar \
+-sourcepath src src/**
+echo &quot;Done.&quot;
+
+TYPE=&#39;png&#39;
+echo &quot;Converting $UML to $TYPE...&quot;
+java -jar bin/plantuml.jar \
+  -config &quot;./config.cfg&quot; \
+  -t $TYPE $UML
+echo &quot;Done.&quot;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ce qui permet d&#8217;obtenir automatiquement le diagramme suivant :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/superCanardBofGenerated.png"><img src="images/superCanardBofGenerated.png" alt="superCanardBofGenerated" width="90%"></a>
+</div>
+<div class="title">Figure 3. Modèle de l&#8217;application <code>SuperCanardBof</code> (généré automatiquement)</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Observez dans les sources des fichiers Java comment il est possible d&#8217;ajouter
+des éléments directement dans le code à destination du plantUML généré.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>L&#8217;intérêt est double :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>le modèle est par définition conforme au code</p>
+</li>
+<li>
+<p>on peut le tester :-)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Voici un exemple simple de test qui vérifie quelques points simples de
+l&#8217;architecture de l&#8217;application :</p>
+</div>
+<div class="listingblock">
+<div class="title">Test du modèle UML généré en Ruby (source <a href="src/java/SuperCanardBof/checkModel.rb">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-nb">require</span> <span class="tok-s2">&quot;minitest/autorun&quot;</span>
+<span class="tok-no">MODEL_NAME</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;model.uml&quot;</span>
+
+
+<span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
+
+  <span class="tok-c1">#------------ General tests about plantUML</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-c1">#------------ Specific tests about expected content</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_is_abstract</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+
+<span class="tok-k">end</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ce qui donne le résultat :</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ruby checkModel.rb
+MiniTest::Unit::TestCase is now Minitest::Test. From checkModel.rb:12:in `&lt;main&gt;'
+Run options: --seed 21820
+
+# Running:
+
+...
+
+Finished in 0.002029s, 1478.5609 runs/s, 1478.5609 assertions/s.
+
+3 runs, 3 assertions, 0 failures, 0 errors, 0 skips</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Si vous voulez vérifier que votre modèle d&#8217;architecture est bien conforme
+à ce qui est demandé, vous pouvez utiliser le programme de test suivant :</p>
+</div>
+<div class="listingblock">
+<div class="title">Test du patron <em>Strategy</em> sur les <code>Canard</code> en Ruby (source <a href="src/java/TD1/checkModel.rb">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-nb">require</span> <span class="tok-s2">&quot;minitest/autorun&quot;</span>
+<span class="tok-no">MODEL_NAME</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;model.uml&quot;</span>
+
+<span class="tok-k">module</span> <span class="tok-nn">MiniTest</span>
+  <span class="tok-k">class</span> <span class="tok-nc">Unit</span>
+    <span class="tok-k">class</span> <span class="tok-nc">TestCase</span>
+      <span class="tok-c1">#Define new assertion</span>
+      <span class="tok-k">def</span> <span class="tok-nf">assert_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+        <span class="tok-n">assert_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+      <span class="tok-k">end</span>
+      <span class="tok-k">def</span> <span class="tok-nf">assert_not_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+        <span class="tok-n">assert_not_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+      <span class="tok-k">end</span>
+    <span class="tok-k">end</span>
+  <span class="tok-k">end</span>
+<span class="tok-k">end</span>
+
+<span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
+
+  <span class="tok-c1">#------------ General tests about plantUML</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-c1">#------------ Specific tests about expected content</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_is_abstract</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementCancan_behavior</span>
+    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard .*--&gt; &quot;.*&quot; ComportementCancan/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementVol_behavior</span>
+    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard .*--&gt; &quot;.*&quot; ComportementVol/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_is_an_Interface</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface ComportementCancan/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_is_an_Interface</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface ComportementVol/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_Interface_has_concrete_implementation</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementCancan &lt;|../</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_Interface_has_concrete_implementation</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementVol &lt;|../</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
+
+<span class="tok-k">end</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pour_aller_plus_loin"><a class="link" href="#_pour_aller_plus_loin">Appendix C: Pour aller plus loin</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
+<li>
+<p>Testez les limites de votre implémentation (par exemple avez-vous pensé à
+ce qui se passe si quelqu&#8217;un fait un <code>new Chevalier(null,null)</code> ?).</p>
+</li>
 <li>
 <p>Vous pouvez imaginer une application graphique :-)</p>
 </li>
@@ -248,6 +514,43 @@ aux implémentations (<code>impl</code>).</p>
 <p>Repérez la partie de votre application principale qui fait le lien entre une arme
 donnée et le comportement à affecter au personnage. Comment pourrait-on améliorer cette
 "correspondance"?</p>
+</li>
+<li>
+<p>À propos de <code>SuperCanardTest2</code> :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>c&#8217;est intéressant pour les méthodes qui produisent des lignes sur la sortie standard</p>
+</li>
+<li>
+<p>ça reste du test unitaire qui se rapproche du test fonctionnel
+parce que l&#8217;on réécris le <code>main()</code> dans les fonctions de test</p>
+</li>
+<li>
+<p>les méthodes produisent des messages sur la sortie standard. Bien sûr il aurait
+été préférable qu&#8217;elles retournent des <code>String</code></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Java n&#8217;est pas l&#8217;idéal pour faire du test fonctionnel.
+Ce serait plus simple de faire les tests fonctionnels avec python ou ruby
+car ils sont proches de l&#8217;OS et plus efficaces pour faire toute sorte de <em>parsing</em>
+et de <em>matching</em>. Utiliser un autre langage
+pour les tests fonctionnels illustre aussi clairement qu&#8217;il s&#8217;agit de se placer
+à l&#8217;extérieur du programme testé.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ol>
 </div>
@@ -271,7 +574,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-23 15:48:55 CET
+Last updated 2014-11-23 15:46:28 CET
 </div>
 </div>
 </body>
