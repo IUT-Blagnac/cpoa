@@ -10,7 +10,7 @@
 <title>CPOA - Sujet TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./pygments-default.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -72,7 +72,7 @@
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<img src="images/icons/pattern.jpeg" alt="Note">
 </td>
 <td class="content">
 <div class="title">Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
@@ -100,7 +100,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<img src="images/icons/note.png" alt="Note">
 </td>
 <td class="content">
 <div class="paragraph">
@@ -119,7 +119,7 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
 <div class="paragraph">
@@ -140,7 +140,7 @@ menu:Properties[Java Build Path &gt; Add Library] et choisir <code>Junit4</code>
 les deux points de l&#8217;option <code>-cp</code> par un point virgule :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">executionProgrammeATester = <span style="color:#0a5;font-weight:bold">Runtime</span>.getRuntime().exec(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java -cp .;./bin </span><span style="color:#710">&quot;</span></span>+programmeATester);</code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-o">.</span><span class="tok-na">getRuntime</span><span class="tok-o">().</span><span class="tok-na">exec</span><span class="tok-o">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-o">);</span></code></pre>
 </div>
 </div>
 </li>
@@ -209,7 +209,7 @@ implémenter systématiquement à l&#8217;instanciation le comportement d&#8217;
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
 il est tout à fait légal de créer un constructeur pour une classe abstraite&#8230;&#8203;
@@ -273,7 +273,7 @@ aux implémentations (<code>impl</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">        ├── appli
+<pre class="pygments highlight"><code data-lang="shell">        ├── appli
         │   ├── Canard.java
         │   ├── CanardEnPlastique.java
         │   ├── Colvert.java
@@ -312,10 +312,10 @@ le diagramme de classe correspondant à son architecture de manière automatique
 <div class="listingblock">
 <div class="title">Génération automatique de diagramme PlantUML (source <a href="src/java/SuperCanardBof/plantuml.sh">ici</a>)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="shell">#!/bin/sh
-UML='model.uml'
-TYPE='PNG'
-DOCLETPATH='/Users/bruel/dev/teaching/dut/cpoa/doclet'
+<pre class="pygments highlight"><code data-lang="shell">#!/bin/sh
+UML=&#39;model.uml&#39;
+TYPE=&#39;PNG&#39;
+DOCLETPATH=&#39;/Users/bruel/dev/teaching/dut/cpoa/doclet&#39;
 echo &quot;Creating $UML...&quot;
 javadoc \
 -private \
@@ -329,7 +329,7 @@ javadoc \
 -sourcepath src src/**
 echo &quot;Done.&quot;
 
-TYPE='png'
+TYPE=&#39;png&#39;
 echo &quot;Converting $UML to $TYPE...&quot;
 java -jar bin/plantuml.jar \
   -config &quot;./config.cfg&quot; \
@@ -350,7 +350,7 @@ echo &quot;Done.&quot;</code></pre>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
 Observez dans les sources des fichiers Java comment il est possible d&#8217;ajouter
@@ -379,32 +379,32 @@ l&#8217;architecture de l&#8217;application :</p>
 <div class="listingblock">
 <div class="title">Test du modèle UML généré en Ruby (source <a href="src/java/SuperCanardBof/checkModel.rb">ici</a>)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="ruby">require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">minitest/autorun</span><span style="color:#710">&quot;</span></span>
-<span style="color:#036;font-weight:bold">MODEL_NAME</span> = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">model.uml</span><span style="color:#710">&quot;</span></span>
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-nb">require</span> <span class="tok-s2">&quot;minitest/autorun&quot;</span>
+<span class="tok-no">MODEL_NAME</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;model.uml&quot;</span>
 
 
-<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">TestGeneratedModel</span> &lt; <span style="color:#036;font-weight:bold">MiniTest</span>::<span style="color:#036;font-weight:bold">Unit</span>::<span style="color:#036;font-weight:bold">TestCase</span>
+<span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
 
-  <span style="color:#777">#------------ General tests about plantUML</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_generated_model_exists</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.exists?(<span style="color:#036;font-weight:bold">MODEL_NAME</span>))
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-c1">#------------ General tests about plantUML</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_generated_model_is_plantuml</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">@startuml</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_generated_model_exists</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.exists?(<span style="color:#036;font-weight:bold">MODEL_NAME</span>))
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#777">#------------ Specific tests about expected content</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_class_Canard_is_abstract</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">abstract Canard</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-c1">#------------ Specific tests about expected content</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_is_abstract</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
 
-<span style="color:#080;font-weight:bold">end</span></code></pre>
+<span class="tok-k">end</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -432,68 +432,69 @@ Finished in 0.002029s, 1478.5609 runs/s, 1478.5609 assertions/s.
 <div class="listingblock">
 <div class="title">Test du patron <em>Strategy</em> sur les <code>Canard</code> en Ruby (source <a href="src/java/TD1/checkModel.rb">ici</a>)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="ruby">require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">minitest/autorun</span><span style="color:#710">&quot;</span></span>
-<span style="color:#036;font-weight:bold">MODEL_NAME</span> = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">model.uml</span><span style="color:#710">&quot;</span></span>
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-nb">require</span> <span class="tok-s2">&quot;minitest/autorun&quot;</span>
+<span class="tok-no">MODEL_NAME</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;model.uml&quot;</span>
 
-<span style="color:#080;font-weight:bold">module</span> <span style="color:#B06;font-weight:bold">MiniTest</span>
-  <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Unit</span>
-    <span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">TestCase</span>
-      <span style="color:#777">#Define new assertion</span>
-      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">assert_contains</span>(string_to_test, substring_to_verify)
-        assert_match( string_to_test, substring_to_verify)
-      <span style="color:#080;font-weight:bold">end</span>
-      <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">assert_not_contains</span>(string_to_test, substring_to_verify)
-        assert_not_match( string_to_test, substring_to_verify)
-      <span style="color:#080;font-weight:bold">end</span>
-    <span style="color:#080;font-weight:bold">end</span>
-  <span style="color:#080;font-weight:bold">end</span>
-<span style="color:#080;font-weight:bold">end</span>
+<span class="tok-k">module</span> <span class="tok-nn">MiniTest</span>
+  <span class="tok-k">class</span> <span class="tok-nc">Unit</span>
+    <span class="tok-k">class</span> <span class="tok-nc">TestCase</span>
+      <span class="tok-c1">#Define new assertion</span>
+      <span class="tok-k">def</span> <span class="tok-nf">assert_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+        <span class="tok-n">assert_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+      <span class="tok-k">end</span>
+      <span class="tok-k">def</span> <span class="tok-nf">assert_not_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+        <span class="tok-n">assert_not_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+      <span class="tok-k">end</span>
+    <span class="tok-k">end</span>
+  <span class="tok-k">end</span>
+<span class="tok-k">end</span>
+<span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">.</span><span class="tok-n">after_tests</span> <span class="tok-p">{</span> <span class="tok-nb">p</span> <span class="tok-vi">@_assertions</span> <span class="tok-p">}</span>
 
-<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">TestGeneratedModel</span> &lt; <span style="color:#036;font-weight:bold">MiniTest</span>::<span style="color:#036;font-weight:bold">Unit</span>::<span style="color:#036;font-weight:bold">TestCase</span>
+<span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
+  <span class="tok-c1">#------------ General tests about plantUML</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-nb">print</span> <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#777">#------------ General tests about plantUML</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_generated_model_exists</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.exists?(<span style="color:#036;font-weight:bold">MODEL_NAME</span>))
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@enduml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_generated_model_is_plantuml</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">@startuml</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_generated_model_exists</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.exists?(<span style="color:#036;font-weight:bold">MODEL_NAME</span>))
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-c1">#------------ Specific tests about expected content</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_is_abstract</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#777">#------------ Specific tests about expected content</span>
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_class_Canard_is_abstract</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">abstract Canard</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementCancan_behavior</span>
+    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementCancan/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_class_Canard_has_ComportementCancan_behavior</span>
-    assert_contains(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Canard .*--&gt; &quot;.*&quot; ComportementCancan</span><span style="color:#404">/</span></span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).join)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementVol_behavior</span>
+    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementVol/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_class_Canard_has_ComportementVol_behavior</span>
-    assert_contains(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">Canard .*--&gt; &quot;.*&quot; ComportementVol</span><span style="color:#404">/</span></span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).join)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_is_an_Interface</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementCancan/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_ComportementCancan_is_an_Interface</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">interface ComportementCancan</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_is_an_Interface</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementVol/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_ComportementVol_is_an_Interface</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">interface ComportementVol</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_Interface_has_concrete_implementation</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementCancan\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_ComportementCancan_Interface_has_concrete_implementation</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">ComportementCancan &lt;|..</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
+  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_Interface_has_concrete_implementation</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementVol\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+  <span class="tok-k">end</span>
 
-  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">test_ComportementVol_Interface_has_concrete_implementation</span>
-    assert_equal(<span style="color:#069">true</span>, <span style="color:#036;font-weight:bold">File</span>.readlines(<span style="color:#036;font-weight:bold">MODEL_NAME</span>).grep(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">ComportementVol &lt;|..</span><span style="color:#404">/</span></span>).any?)
-  <span style="color:#080;font-weight:bold">end</span>
-
-<span style="color:#080;font-weight:bold">end</span></code></pre>
+<span class="tok-k">end</span></code></pre>
 </div>
 </div>
 </div>
@@ -533,7 +534,7 @@ parce que l&#8217;on réécris le <code>main()</code> dans les fonctions de test
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<img src="images/icons/note.png" alt="Note">
 </td>
 <td class="content">
 <div class="paragraph">
