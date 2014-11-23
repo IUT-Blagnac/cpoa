@@ -10,7 +10,7 @@
 <title>CPOA - Sujet TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="./pygments-default.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -71,7 +71,7 @@
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/pattern.jpeg" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="title">Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
@@ -99,7 +99,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/note.png" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -118,7 +118,7 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -139,7 +139,7 @@ menu:Properties[Java Build Path &gt; Add Library] et choisir <code>Junit4</code>
 les deux points de l&#8217;option <code>-cp</code> par un point virgule :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-o">.</span><span class="tok-na">getRuntime</span><span class="tok-o">().</span><span class="tok-na">exec</span><span class="tok-o">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-o">);</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">executionProgrammeATester = <span style="color:#0a5;font-weight:bold">Runtime</span>.getRuntime().exec(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">java -cp .;./bin </span><span style="color:#710">&quot;</span></span>+programmeATester);</code></pre>
 </div>
 </div>
 </li>
@@ -208,7 +208,7 @@ implémenter systématiquement à l&#8217;instanciation le comportement d&#8217;
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 il est tout à fait légal de créer un constructeur pour une classe abstraite&#8230;&#8203;
@@ -272,7 +272,7 @@ aux implémentations (<code>impl</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="shell">        ├── appli
+<pre class="CodeRay highlight"><code data-lang="shell">        ├── appli
         │   ├── Canard.java
         │   ├── CanardEnPlastique.java
         │   ├── Colvert.java
@@ -330,7 +330,7 @@ parce que l&#8217;on réécris le <code>main()</code> dans les fonctions de test
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/note.png" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -371,7 +371,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-23 09:56:29 CET
+Last updated 2014-11-23 10:00:13 CET
 </div>
 </div>
 </body>

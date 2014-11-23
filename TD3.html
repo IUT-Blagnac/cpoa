@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-21}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-23}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Support TD 3</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="./pygments-default.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -38,7 +38,7 @@
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/caution.png" alt="Caution">
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
 <div class="title">Version corrigée</div>
@@ -83,7 +83,7 @@ réponses aux exercices.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.github.io/cpoa/">Support de Cours</a>.
@@ -103,14 +103,14 @@ du style :</p>
 <div class="listingblock">
 <div class="title">Adaptation des comportements à la situation</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java">		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Epee&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">());</span>
-		<span class="tok-o">}</span>
-		<span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Arc&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementArc</span><span class="tok-o">());</span>
-		<span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-o">...</span>
-			<span class="tok-o">...</span>
-		<span class="tok-o">}</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">                <span style="color:#080;font-weight:bold">if</span> (choix == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Epee</span><span style="color:#710">&quot;</span></span>) {
+                        perso.setArme(<span style="color:#080;font-weight:bold">new</span> ComportementEpee());
+                }
+                <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (choix == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Arc</span><span style="color:#710">&quot;</span></span>) {
+                        perso.setArme(<span style="color:#080;font-weight:bold">new</span> ComportementArc());
+                <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> ...
+                        ...
+                }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -130,7 +130,7 @@ du style :</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -154,7 +154,7 @@ adapté.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/solution.png" alt="Important">
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 <div class="title">Solution</div>
@@ -165,18 +165,18 @@ adapté.</p>
 <div class="listingblock">
 <div class="title">Extrait de FabriqueArme.java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">SimpleFabriqueArme</span> <span class="tok-o">{</span>
-	<span class="tok-kd">public</span> <span class="tok-n">ComportementArme</span> <span class="tok-nf">creerComportementArme</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-		<span class="tok-n">ComportementArme</span> <span class="tok-n">cpt</span> <span class="tok-o">=</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
-		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;Epee&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
-			<span class="tok-n">cpt</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span>
-		<span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;Arc&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
-			<span class="tok-n">cpt</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ComportementArc</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span>
-		<span class="tok-k">return</span> <span class="tok-n">cpt</span><span class="tok-o">;</span>
-	<span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">SimpleFabriqueArme</span> {
+        <span style="color:#088;font-weight:bold">public</span> ComportementArme creerComportementArme(<span style="color:#0a5;font-weight:bold">String</span> type) {
+                ComportementArme cpt = <span style="color:#069">null</span>;
+                <span style="color:#080;font-weight:bold">if</span> (type.equals(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Epee</span><span style="color:#710">&quot;</span></span>)) {
+                        cpt = <span style="color:#080;font-weight:bold">new</span> ComportementEpee();
+                }
+                <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (type.equals(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Arc</span><span style="color:#710">&quot;</span></span>)) {
+                        cpt = <span style="color:#080;font-weight:bold">new</span> ComportementArc();
+                }
+                <span style="color:#080;font-weight:bold">return</span> cpt;
+        }
+}</code></pre>
 </div>
 </div>
 </li>
@@ -211,14 +211,14 @@ adapté.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Unresolved</span> <span class="tok-n">directive</span> <span class="tok-n">in</span> <span class="tok-n">TD3</span><span class="tok-o">.</span><span class="tok-na">asc</span> <span class="tok-o">-</span> <span class="tok-nl">include:</span><span class="tok-o">:</span><span class="tok-n">src</span><span class="tok-o">/</span><span class="tok-n">java</span><span class="tok-o">/</span><span class="tok-n">Pizzeria</span><span class="tok-o">/</span><span class="tok-n">src</span><span class="tok-o">/</span><span class="tok-n">Pizzeria</span><span class="tok-o">.</span><span class="tok-na">java</span><span class="tok-o">[]</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in TD3.asc - include::src/java/Pizzeria/src/Pizzeria.java<span style="color:#339;font-weight:bold">[]</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -244,7 +244,7 @@ disparaître, etc.).</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/pattern.jpeg" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="title">Design pattern : <strong>Fabrique</strong></div>
@@ -283,7 +283,7 @@ disparaître, etc.).</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -318,7 +318,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-21 10:47:12 CET
+Last updated 2014-11-23 10:00:13 CET
 </div>
 </div>
 </body>

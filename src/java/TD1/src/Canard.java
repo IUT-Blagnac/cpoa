@@ -1,6 +1,17 @@
+/**
+ * @author bruel
+ * @navassoc - - comportementVol ComportementVol
+ * @navassoc - - comportementCancan ComportementCancan
+ */
 abstract public class Canard {
 
+	/**
+	 * @overrideAssoc
+	 */
 	protected ComportementVol comportementVol;
+	/**
+	 * @overrideAssoc
+	 */
 	protected ComportementCancan comportementCancan;
 
 	public void effectuerCancan() {

@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-21}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-23}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Sujet TD 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="./pygments-default.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -81,7 +81,7 @@ n&#8217;est requise. Le cours du semestre dernier (M2104) est considéré comme 
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/note.png" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 Les exercices de ce TD sont tirés de l&#8217;excellent livre "Tête la première : Design Pattern".
@@ -106,7 +106,7 @@ décrit ci-dessous :</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/note.png" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 De nombreuses autres classes héritent de <code>Canard</code>.
@@ -120,30 +120,30 @@ De nombreuses autres classes héritent de <code>Canard</code>.
 <div class="listingblock">
 <div class="title">Première version de Canard.java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Canard</span> <span class="tok-o">{</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#088;font-weight:bold">abstract</span> <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Canard</span> {
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je cancane comme un Canard!&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span>
+        <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> cancaner() {
+                <span style="color:#0a5;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Je cancane comme un Canard!</span><span style="color:#710">&quot;</span></span>);
+        }
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">nager</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je nage comme un Canard!&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span>
+        <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> nager() {
+                <span style="color:#0a5;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Je nage comme un Canard!</span><span style="color:#710">&quot;</span></span>);
+        }
 
-	<span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">();</span>
-<span class="tok-o">}</span></code></pre>
+        <span style="color:#088;font-weight:bold">abstract</span> <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> afficher();
+}</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Première version de Colvert.java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">extends</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Colvert</span> <span style="color:#088;font-weight:bold">extends</span> Canard {
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je suis un Colvert&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span>
+        <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> afficher() {
+                <span style="color:#0a5;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Je suis un Colvert</span><span style="color:#710">&quot;</span></span>);
+        }
 
-<span class="tok-o">}</span></code></pre>
+}</code></pre>
 </div>
 </div>
 </div>
@@ -165,22 +165,22 @@ pour être plus proche de la réalité.</p>
 <div class="listingblock">
 <div class="title">Deuxième version de Canard.java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Canard</span> <span class="tok-o">{</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#088;font-weight:bold">abstract</span> <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Canard</span> {
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je cancane comme un Canard!&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span>
+        <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> cancaner() {
+                <span style="color:#0a5;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Je cancane comme un Canard!</span><span style="color:#710">&quot;</span></span>);
+        }
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">nager</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je nage comme un Canard!&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span>
+        <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> nager() {
+                <span style="color:#0a5;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Je nage comme un Canard!</span><span style="color:#710">&quot;</span></span>);
+        }
 
-	<span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">();</span>
+        <span style="color:#088;font-weight:bold">abstract</span> <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> afficher();
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je vole comme un Canard!&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">};</span>
-<span class="tok-o">}</span></code></pre>
+        <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> voler() {
+                <span style="color:#0a5;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Je vole comme un Canard!</span><span style="color:#710">&quot;</span></span>);
+        };
+}</code></pre>
 </div>
 </div>
 </div>
@@ -194,7 +194,7 @@ pour être plus proche de la réalité.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 Vous avez oublié que certains canards ne volaient pas!
@@ -206,7 +206,7 @@ Vous avez oublié que certains canards ne volaient pas!
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -229,7 +229,7 @@ dans les canards qui ne volent pas.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -238,19 +238,19 @@ dans les canards qui ne volent pas.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">CanardEnPlastique</span> <span class="tok-kd">extends</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">CanardEnPlastique</span> <span style="color:#088;font-weight:bold">extends</span> Canard {
 
-	<span class="tok-nd">@Override</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">afficher</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je suis un CanardEnPlastique!&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span>
-
-
+        <span style="color:#007">@Override</span>
+        <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">void</span> afficher() {
+                <span style="color:#0a5;font-weight:bold">System</span>.out.println(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Je suis un CanardEnPlastique!</span><span style="color:#710">&quot;</span></span>);
+        }
 
 
 
 
-<span class="tok-o">}</span></code></pre>
+
+
+}</code></pre>
 </div>
 </div>
 </td>
@@ -261,7 +261,7 @@ dans les canards qui ne volent pas.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -272,22 +272,22 @@ définir le comportement de <code>Canard</code> ? (Plusieurs choix possibles.) :
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p>&#10063; Le code est dupliqué entre les sous-classes.</p>
+<p><i class="fa fa-square-o"></i> Le code est dupliqué entre les sous-classes.</p>
 </li>
 <li>
-<p>&#10063; Les changements de comportements au moment de l&#8217;exécution sont difficiles.</p>
+<p><i class="fa fa-square-o"></i> Les changements de comportements au moment de l&#8217;exécution sont difficiles.</p>
 </li>
 <li>
-<p>&#10063; Nous ne pouvons pas avoir de canards qui dansent.</p>
+<p><i class="fa fa-square-o"></i> Nous ne pouvons pas avoir de canards qui dansent.</p>
 </li>
 <li>
-<p>&#10063; Il est difficile de connaître tous les comportements des canards</p>
+<p><i class="fa fa-square-o"></i> Il est difficile de connaître tous les comportements des canards</p>
 </li>
 <li>
-<p>&#10063; Les canards ne peuvent pas voler et cancaner en même temps.</p>
+<p><i class="fa fa-square-o"></i> Les canards ne peuvent pas voler et cancaner en même temps.</p>
 </li>
 <li>
-<p>&#10063; Les modifications peuvent affecter involontairement d&#8217;autres canards.</p>
+<p><i class="fa fa-square-o"></i> Les modifications peuvent affecter involontairement d&#8217;autres canards.</p>
 </li>
 </ul>
 </div>
@@ -305,7 +305,7 @@ définir le comportement de <code>Canard</code> ? (Plusieurs choix possibles.) :
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -343,7 +343,7 @@ d&#8217;année : <strong>LE CHANGEMENT</strong>!</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/yinyang.jpeg" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="title">Principe de conception</div>
@@ -359,7 +359,7 @@ séparez-les de ceux qui demeurent constants.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -380,7 +380,7 @@ Pour cela nous rappelons un bon principe que vous avez déjà utilisé :</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/yinyang.jpeg" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="title">Principe de conception</div>
@@ -395,7 +395,7 @@ Pour cela nous rappelons un bon principe que vous avez déjà utilisé :</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -418,7 +418,7 @@ avec les classes et/ou interfaces (à vous de juger) suivantes : <code>Comportem
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -456,7 +456,7 @@ avantages de notre nouvelle conception.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -492,7 +492,7 @@ le patron <em>Strategy</em> (<strong>Stratégie</strong> en français).</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/pattern.jpeg" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="title">Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
@@ -524,7 +524,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/tuxteacher.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -551,9 +551,9 @@ seul le modèle ci-dessous est fourni.</p>
 <p>Placer la méthode <code>setArme()</code> ci-dessous :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">setArme</span><span class="tok-o">(</span><span class="tok-n">ComportementArme</span> <span class="tok-n">a</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-  <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">arme</span> <span class="tok-o">=</span> <span class="tok-n">a</span><span class="tok-o">;</span>
-<span class="tok-o">}</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java">setArme(ComportementArme a) {
+  <span style="color:#963">this</span>.arme = a;
+}</code></pre>
 </div>
 </div>
 </li>
@@ -577,7 +577,7 @@ seul le modèle ci-dessous est fourni.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/yinyang.jpeg" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="title">Principe de conception</div>
@@ -592,7 +592,7 @@ seul le modèle ci-dessous est fourni.</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -602,7 +602,7 @@ et une implémentation du type :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">abstract</span> <span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Canard</span> <span class="tok-kd">implements</span> <span class="tok-n">ComportementVol</span> <span class="tok-o">{...}</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#088;font-weight:bold">abstract</span> <span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Canard</span> <span style="color:#088;font-weight:bold">implements</span> ComportementVol {...}</code></pre>
 </div>
 </div>
 </td>
@@ -613,7 +613,7 @@ et une implémentation du type :</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>Mots-croisés</strong></div>
@@ -630,7 +630,7 @@ et une implémentation du type :</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -645,7 +645,7 @@ et une implémentation du type :</p>
 <table>
 <tr>
 <td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 N&#8217;hésitez pas à consulter un autre exemple, orienté "jeux de rôle",
@@ -674,7 +674,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-21 10:47:12 CET
+Last updated 2014-11-23 10:00:13 CET
 </div>
 </div>
 </body>
