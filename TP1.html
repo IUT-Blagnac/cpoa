@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-22}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-23}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Sujet TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
@@ -312,6 +312,43 @@ ce qui se passe si quelqu&#8217;un fait un <code>new Chevalier(null,null)</code>
 donnée et le comportement à affecter au personnage. Comment pourrait-on améliorer cette
 "correspondance"?</p>
 </li>
+<li>
+<p>À propos de <code>SuperCanardTest2</code> :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>c&#8217;est intéressant pour les méthodes qui produisent des lignes sur la sortie standard</p>
+</li>
+<li>
+<p>ça reste du test unitaire qui se rapproche du test fonctionnel
+parce que l&#8217;on réécris le <code>main()</code> dans les fonctions de test</p>
+</li>
+<li>
+<p>les méthodes produisent des messages sur la sortie standard. Bien sûr il aurait
+été préférable qu&#8217;elles retournent des <code>String</code></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Java n&#8217;est pas l&#8217;idéal pour faire du test fonctionnel.
+Ce serait plus simple de faire les tests fonctionnels avec python ou ruby
+car ils sont proches de l&#8217;OS et plus efficaces pour faire toute sorte de <em>parsing</em>
+et de <em>matching</em>. Utiliser un autre langage
+pour les tests fonctionnels illustre aussi clairement qu&#8217;il s&#8217;agit de se placer
+à l&#8217;extérieur du programme testé.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
 </ol>
 </div>
 </div>
@@ -334,7 +371,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-22 23:44:41 CET
+Last updated 2014-11-23 09:56:29 CET
 </div>
 </div>
 </body>
