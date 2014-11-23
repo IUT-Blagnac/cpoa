@@ -4,9 +4,9 @@ import simuaventure.comportements.arme.ComportementArme;
 
 public class ComportementEpee implements ComportementArme {
 
-	private static ComportementEpee uniqueInstance = new ComportementEpee();
+	private final static ComportementEpee uniqueInstance = new ComportementEpee();
 	
-	public static ComportementEpee getInstance() {
+	public final static  ComportementEpee getInstance() {
 		return uniqueInstance;
 	}
 
