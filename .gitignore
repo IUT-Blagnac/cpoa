@@ -12,3 +12,4 @@ src/java/.metadata/
 src/java/CodingDojo/
 stylesheet.css
 vendor/
+*.deckjs.html
