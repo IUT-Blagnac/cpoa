@@ -448,16 +448,17 @@ Finished in 0.002029s, 1478.5609 runs/s, 1478.5609 assertions/s.
     <span class="tok-k">end</span>
   <span class="tok-k">end</span>
 <span class="tok-k">end</span>
+<span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">.</span><span class="tok-n">after_tests</span> <span class="tok-p">{</span> <span class="tok-nb">p</span> <span class="tok-vi">@_assertions</span> <span class="tok-p">}</span>
 
 <span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
-
   <span class="tok-c1">#------------ General tests about plantUML</span>
   <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+    <span class="tok-nb">print</span> <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
     <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@enduml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
@@ -470,27 +471,27 @@ Finished in 0.002029s, 1478.5609 runs/s, 1478.5609 assertions/s.
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementCancan_behavior</span>
-    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard .*--&gt; &quot;.*&quot; ComportementCancan/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementCancan/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementVol_behavior</span>
-    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard .*--&gt; &quot;.*&quot; ComportementVol/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementVol/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_is_an_Interface</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface ComportementCancan/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementCancan/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_is_an_Interface</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface ComportementVol/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementVol/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_Interface_has_concrete_implementation</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementCancan &lt;|../</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementCancan\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
   <span class="tok-k">end</span>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_Interface_has_concrete_implementation</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementVol &lt;|../</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementVol\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
   <span class="tok-k">end</span>
 
 <span class="tok-k">end</span></code></pre>
@@ -574,7 +575,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-23 15:46:28 CET
+Last updated 2014-11-23 16:01:51 CET
 </div>
 </div>
 </body>
