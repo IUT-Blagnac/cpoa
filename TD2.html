@@ -7,14 +7,14 @@
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
 <meta name="copyright" content="{date=2014-11-23}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
-<title>CPOA - Support TD 2</title>
+<title>CPOA - Sujet TD 2</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="./pygments-default.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>CPOA - Support TD 2</h1>
+<h1>CPOA - Sujet TD 2</h1>
 <div class="details">
 <span id="author" class="author">Dut/Info-S3/M3105</span><br>
 </div>
@@ -47,22 +47,6 @@
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/caution.png" alt="Caution">
-</td>
-<td class="content">
-<div class="title">Version corrigée</div>
-<div class="paragraph">
-<p>Cette version comporte des indications pour les
-réponses aux exercices.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <table id="cartouche" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 9%;">
@@ -186,23 +170,6 @@ transformé en plaquettes de chocolat.</p>
 </tr>
 </table>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="paragraph">
-<p>Si vous étudiez le code, vous constatez qu&#8217;ils ont essayé très soigneusement d&#8217;éviter
-les catastrophes, par exemple de vider deux mille litres de mélange qui n&#8217;a pas bouilli,
-de remplir un bouilleur déjà plein ou de faire bouillir un bouilleur vide !</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Vous faîtes un cauchemar horrible (quoi que) où vous vous noyez dans du chocolat.
 Vous vous réveillez en sursaut avec une crainte terrible.</p>
@@ -226,44 +193,6 @@ Vous vous réveillez en sursaut avec une crainte terrible.</p>
 <li>
 <p>Trouvez des exemples de situations où il est important de n&#8217;avoir
 qu&#8217;une seule instance d&#8217;une classe donnée.</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Que l&#8217;un remplisse alors que l&#8217;autre n&#8217;a pas vidé par exemple.</p>
-</li>
-<li>
-<p>S&#8217;assurer de n&#8217;avoir qu&#8217;une seule instance de ce contrôleur.</p>
-</li>
-<li>
-<p>Quelques exemples :</p>
-<div class="ulist">
-<ul>
-<li>
-<p>accès unique à une base de données (on vient de le voir)</p>
-</li>
-<li>
-<p>objet "parent" d&#8217;une interface</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
 </li>
 </ol>
 </div>
@@ -308,21 +237,6 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 			<span class="tok-k">return</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
 		<span class="tok-o">}</span></code></pre>
 </div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="paragraph">
-<p>Pas de return dans un constructeur.</p>
 </div>
 </td>
 </tr>
@@ -391,49 +305,6 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 </li>
 <li>
 <p>Donnez un exemple d&#8217;utilisation de cette classe.</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Oui!</p>
-</li>
-<li>
-<p>En implémentant une fonction qui s&#8217;en charge.</p>
-<div class="listingblock">
-<div class="title">Extrait de la solution</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span> <span class="tok-o">{</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
-
-	<span class="tok-kd">private</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
-		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
-		<span class="tok-o">}</span>
-
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kd">final</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span>
-		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
-	<span class="tok-o">}</span></code></pre>
-</div>
-</div>
 </li>
 </ol>
 </div>
@@ -603,12 +474,6 @@ problème en reconstituant un enchaînement erroné possible avec deux threads.
 <pre class="pygments highlight"><code data-lang="java">	<span class="tok-o">}</span></code></pre>
 </div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/thread-sol.png" alt="IMPORTANT">
-</div>
-<div class="title">Figure 1. Solution</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_solution_au_multithreading"><a class="link" href="#_solution_au_multithreading">2.5. Solution au multithreading</a></h3>
@@ -627,90 +492,6 @@ problème en reconstituant un enchaînement erroné possible avec deux threads.
 <ol class="arabic">
 <li>
 <p>Proposez une solution simple à ce problème.</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="paragraph">
-<p>Il suffit de faire de <code>getInstance()</code> une méthode synchronisée :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</div></td><td class="code"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span> <span class="tok-o">{</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
-
-	<span class="tok-kd">private</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
-		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-o">;</span>
-		<span class="tok-o">}</span>
-
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kd">synchronized</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span>
-		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
-	<span class="tok-o">}</span>
-</td></tr></table></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Explications :</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Thread 1 appelle <code>getInstance()</code> et détermine que <code>uniqueInstance</code> est <code>null</code> en ligne 13</p>
-</li>
-<li>
-<p>Thread 1 entre dans le bloc <code>if</code> puis est préempté par le thread 2 avant
-l&#8217;exécution de la ligne 14</p>
-</li>
-<li>
-<p>Thread 2 appelle <code>getInstance()</code> et détermine que <code>uniqueInstance</code> est <code>null</code> en ligne  13</p>
-</li>
-<li>
-<p>Thread 2 entre dans le bloc <code>if</code>, crée un nouveau <code>BouilleurSafeChocolat</code> et
-assigne ce nouvel objet à la variable <code>uniqueInstance</code> en ligne  14</p>
-</li>
-<li>
-<p>Thread 2 retourne la référence au <code>BouilleurSafeChocolat</code> en ligne  16</p>
-</li>
-<li>
-<p>Thread 2 est préempté par le Thread 1</p>
-</li>
-<li>
-<p>Thread 1 reprend où il s&#8217;était arrêté et exécute la ligne 14 créant alors une autre instance de <code>BouilleurSafeChocolat</code></p>
-</li>
-<li>
-<p>Thread 1 retourne cette nouvelle instance en ligne  16</p>
 </li>
 </ol>
 </div>
@@ -739,48 +520,6 @@ assigne ce nouvel objet à la variable <code>uniqueInstance</code> en ligne  14<
 </li>
 <li>
 <p>Proposez une solution où l&#8217;instance est créé au démarrage plutôt qu&#8217;à la demande.</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Une seule fois, lors du 1er passage dans la méthode!!</p>
-</li>
-<li>
-<p>C&#8217;est bien trop consomateur en ressource! En pratique, il y a des copies de
-blocs de mémoire, ce qui prend du temps.</p>
-</li>
-<li>
-<p>Voici un exemple :</p>
-<div class="listingblock">
-<div class="title">Création de l&#8217;instance unique au démarrage</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Singleton</span> <span class="tok-o">{</span>
-	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kd">final</span> <span class="tok-n">Singleton</span> <span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Singleton</span><span class="tok-o">();</span>
-	<span class="tok-kd">private</span> <span class="tok-nf">Singleton</span><span class="tok-o">()</span> <span class="tok-o">{}</span>
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">Singleton</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>En adoptant cette approche, nous nous reposons sur la JVM pour créer
-l&#8217;unique instance du Singleton quand la classe est chargée.
-La JVM garantit que l&#8217;instance sera créée avant qu&#8217;un thread
-quelconque n&#8217;accède à la variable statique <code>uniqueInstance</code>.</p>
-</div>
 </li>
 </ol>
 </div>
@@ -826,17 +565,11 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/singleton.png" alt="singleton">
 </div>
-<div class="title">Figure 2. Modèle UML du patron <em>Singleton</em></div>
+<div class="title">Figure 1. Modèle UML du patron <em>Singleton</em></div>
 </div>
 </td>
 </tr>
 </table>
-</div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="images/google-singleton.png"><img src="images/google-singleton.png" alt="google singleton"></a>
-</div>
-<div class="title">Figure 3. Quelques exemples de description du patron Singleton</div>
 </div>
 </div>
 </div>
@@ -912,51 +645,6 @@ d&#8217;une composition (dans le constructeur du composé) ?</p>
 </tr>
 </table>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Extrait de solution (disponible sur le GitHub pour les profs)</p>
-<div class="listingblock">
-<div class="title">Extrait de ComportemenEpee.java</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ComportementEpee</span> <span class="tok-kd">implements</span> <span class="tok-n">ComportementArme</span> <span class="tok-o">{</span>
-
-	<span class="tok-kd">private</span> <span class="tok-kd">final</span> <span class="tok-kd">static</span> <span class="tok-n">ComportementEpee</span> <span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">();</span>
-
-	<span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">static</span>  <span class="tok-n">ComportementEpee</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span>
-	<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Extrait de Chevalier.java</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Chevalier</span> <span class="tok-kd">extends</span> <span class="tok-n">Personnage</span> <span class="tok-o">{</span>
-
-	<span class="tok-kd">protected</span> <span class="tok-nf">Chevalier</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">nom</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-		<span class="tok-k">this</span><span class="tok-o">(</span><span class="tok-n">nom</span><span class="tok-o">,</span> <span class="tok-n">ComportementEpee</span><span class="tok-o">.</span><span class="tok-na">getInstance</span><span class="tok-o">(),</span> <span class="tok-n">ComportementACheval</span><span class="tok-o">.</span><span class="tok-na">getInstance</span><span class="tok-o">());</span>
-	<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Car dans une composition les objets possèdent les instances de leur
-comportement. Elles sont donc uniques.</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -990,31 +678,6 @@ On voit que ce n&#8217;est pas toujours évident de combiner les patrons entre e
 </tr>
 </table>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="paragraph">
-<p>Quelques éléments de solution :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>En <a href="https://www.java.com/fr/">Java</a> les variables globales sont des références statiques à des objets.</p>
-</li>
-<li>
-<p>Problème déjà vu de l&#8217;instanciation à la demande vs. au démarrage.</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -1026,23 +689,6 @@ On voit que ce n&#8217;est pas toujours évident de combiner les patrons entre e
 <div class="imageblock">
 <div class="content">
 <a class="image" href="images/crossword2.png"><img src="images/crossword2.png" alt="crossword2"></a>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="images/crossword2-sol.png"><img src="images/crossword2-sol.png" alt="crossword2 sol"></a>
 </div>
 </div>
 </td>
@@ -1125,7 +771,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-23 19:08:50 CET
+Last updated 2014-11-23 19:26:23 CET
 </div>
 </div>
 </body>
