@@ -1,5 +1,5 @@
 *Fabrique* (simple) définit une interface pour la création d'un objet, mais en laissant
-à des sous-classes le choix des classes à instancier (voir aussi <<Fabrique abstraite>>).
+à des sous-classes le choix des classes à instancier (voir aussi <<FabriqueAbstraite,Fabrique abstraite>>).
 
 ifndef::slides[.Modèle UML du patron Fabrique]
 image::fabrique.svg[]

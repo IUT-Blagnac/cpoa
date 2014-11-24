@@ -1,0 +1,175 @@
+@startuml
+
+package action {
+
+interface Action {
+	String message()
+	String stringCode()
+	void execute(ActionContext<E> ac)
+}
+
+interface ActionList {
+	String title()
+	boolean addAction(Action<E> ac)
+	boolean removeAction(Action<E> ac)
+	int listSize()
+	Action<E> getAction(int index)
+}
+
+interface ActionContext {
+	E getContext()
+}
+
+
+}
+
+package banque {
+
+class AgenceBancaire {
+	-String nom
+	-String loc
+	-ArrayList<Compte> alCptes
+	+AgenceBancaire(String pNomAgence, String pLocAgence)
+	+String getNomAgence()
+	+String getLocAgence()
+	+int getNbComptes()
+	+Compte getCompte(String pNumCompte)
+	+Compte[] getComptesDe(String pNomProprietaire)
+	+void afficher()
+	+String toString()
+	+void addCompte(Compte pCompteAAjouter)
+	+void removeCompte(String pNumCompte)
+	-Compte trouveCompte(String pNC)
+}
+
+class Compte {
+	-String proprietaire
+	-String numCompte
+	-double debits
+	-double credits
+	-int nbDebits
+	-int nbCredits
+	+Compte()
+	+Compte(String pNumCompte, String pNomProp)
+	+double soldeCompte()
+	+String getProprietaire()
+	+String getNumCompte()
+	+void afficher()
+	+String toString()
+	+void retirer(double pSomme)
+	+void deposer(double pSomme)
+	+void setProprietaire(String pNomProp)
+}
+
+
+}
+
+package application {
+
+/'
+class Main {
+	+void main(String[] args)
+}
+'/
+
+abstract class GenericActionAB {
+	-String lineMessage
+	-String code
+	+GenericActionAB(String m, String c)
+	+String message()
+	+String stringCode()
+	+void execute(ActionContext<AgenceBancaire> ac)
+}
+
+
+class ActionListAB {
+	-String title
+	-List<Action<AgenceBancaire>> myMenu
+	-String dec
+	-String decTwice
+	-String numberOptSep
+	+ActionListAB(String m, String c, String t)
+	+String title()
+	+boolean addAction(Action<AgenceBancaire> ac)
+	+boolean removeAction(Action<AgenceBancaire> ac)
+	+int listSize()
+	+Action<AgenceBancaire> getAction(int index)
+	+void execute(ActionContext<AgenceBancaire> ac)
+	-int readResponse()
+	-void printMenu()
+	-void printTitle(AgenceBancaire ac)
+	-void tempo()
+}
+
+
+
+class ActionContextAB {
+	-AgenceBancaire theAg
+	+ActionContextAB(AgenceBancaire ag)
+	+AgenceBancaire getContext()
+}
+
+
+}
+
+
+package application.actions {
+
+class Action1 {
+	+Action1(String m, String c)
+	+void execute(ActionContext<AgenceBancaire> ac)
+}
+
+
+class Action2 {
+	+Action2(String m, String c)
+	+void execute(ActionContext<AgenceBancaire> ac)
+}
+
+
+class Action3 {
+	+Action3(String m, String c)
+	+void execute(ActionContext<AgenceBancaire> ac)
+}
+
+class Action4 {
+	+Action4(String m, String c)
+	+void execute(ActionContext<AgenceBancaire> ac)
+}
+
+}
+
+' Structural relationships
+
+Action <|.. ActionList
+
+AgenceBancaire o--> "*" Compte
+
+Action <|.. GenericActionAB
+ActionList <|.. ActionListAB
+ActionContext <|.. ActionContextAB
+GenericActionAB <|-- Action1
+GenericActionAB <|-- Action2
+GenericActionAB <|-- Action3
+GenericActionAB <|-- Action4
+
+' Dependency relationships
+
+/'
+Action ..> ActionContext
+
+ActionListAB ..> ActionContextAB
+GenericActionAB ..> ActionContextAB
+ActionContextAB ..> AgenceBancaire
+
+Main ..> ActionContextAB
+Main ..> AgenceBancaire
+Main ..> Action1
+Main ..> Action2
+Main ..> Action3
+Main ..> Action4
+Main ..> ActionListAB
+'/
+
+
+@enduml 

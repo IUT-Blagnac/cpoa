@@ -58,6 +58,11 @@ public class SuperCanardTest2 {
 	private String readLine() {
 		String content = outContent.toString();
 		outContent.reset();
+<<<<<<< HEAD
 		return content.split("\n")[0];
+=======
+		//return content.split("\n")[0]; //potential Windows problem
+		return content.split("\r\n|\n")[0];
+>>>>>>> master
 	}
 }

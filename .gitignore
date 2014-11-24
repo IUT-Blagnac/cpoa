@@ -10,6 +10,12 @@ plantUmlDoclet.jar
 script.js
 src/java/.metadata/
 src/java/CodingDojo/
+<<<<<<< HEAD
 src/java/SuperCanardBof/
 stylesheet.css
 vendor/
+=======
+stylesheet.css
+vendor/
+*.deckjs.html
+>>>>>>> master

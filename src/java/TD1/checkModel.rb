@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 # -------------------
 # Author::    Jean-Michel Bruel  (mailto:jbruel@gmail.com)
+=======
+# usage: ruby checkModel.rb
+# -------------------
+# Author::    Jean-Michel Bruel  (mailto:jbruel@gmail.com) improved by JMI
+>>>>>>> master
 # Copyright:: Copyright (c) 2014 JMB
 # License::   Distributes under the same terms as Ruby
 # -------------------
@@ -21,16 +27,29 @@ module MiniTest
     end
   end
 end
+<<<<<<< HEAD
 
 class TestGeneratedModel < MiniTest::Unit::TestCase
 
   #------------ General tests about plantUML
   def test_generated_model_exists
     assert_equal(true, File.exists?(MODEL_NAME))
+=======
+MiniTest::Unit.after_tests { p @_assertions }
+
+class TestGeneratedModel < MiniTest::Unit::TestCase
+  #------------ General tests about plantUML
+  def test_generated_model_exists
+    print assert_equal(true, File.exists?(MODEL_NAME))
+>>>>>>> master
   end
 
   def test_generated_model_is_plantuml
     assert_equal(true, File.readlines(MODEL_NAME).grep(/@startuml/).any?)
+<<<<<<< HEAD
+=======
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/@enduml/).any?)
+>>>>>>> master
   end
 
   def test_generated_model_exists
@@ -43,6 +62,7 @@ class TestGeneratedModel < MiniTest::Unit::TestCase
   end
 
   def test_class_Canard_has_ComportementCancan_behavior
+<<<<<<< HEAD
     assert_contains(/Canard .*--> ".*" ComportementCancan/, File.readlines(MODEL_NAME).join)
   end
 
@@ -64,6 +84,29 @@ class TestGeneratedModel < MiniTest::Unit::TestCase
 
   def test_ComportementVol_Interface_has_concrete_implementation
     assert_equal(true, File.readlines(MODEL_NAME).grep(/ComportementVol <|../).any?)
+=======
+    assert_contains(/Canard\s+--> ".*" ComportementCancan/, File.readlines(MODEL_NAME).join)
+  end
+
+  def test_class_Canard_has_ComportementVol_behavior
+    assert_contains(/Canard\s+--> ".*" ComportementVol/, File.readlines(MODEL_NAME).join)
+  end
+
+  def test_ComportementCancan_is_an_Interface
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/interface\s+ComportementCancan/).any?)
+  end
+
+  def test_ComportementVol_is_an_Interface
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/interface\s+ComportementVol/).any?)
+  end
+
+  def test_ComportementCancan_Interface_has_concrete_implementation
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/ComportementCancan\s+<\|\.\./).any?)
+  end
+
+  def test_ComportementVol_Interface_has_concrete_implementation
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/ComportementVol\s+<\|\.\./).any?)
+>>>>>>> master
   end
 
 end

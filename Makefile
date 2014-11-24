@@ -17,6 +17,8 @@ EXT=asc
 PANDOC=pandoc
 OUTPUT=.
 DEP=definitions.txt glossaire.txt refs.txt
+SOURCEFILES = ./src/java/CodingDojo/src/*.java
+DOC = doc
 #-----------------------------------------------------
 
 all: $(OUTPUT)/*.html
@@ -56,14 +58,16 @@ roadmap.html: $(MAIN).$(EXT)
 	@echo '==> Compiling asciidoc files to generate standalone file for Google Drive'
 	$(DOCTOR) -b html5 -a numbered -a data-uri $< -o $@
 
-TD1-sujet.html: TD1.$(EXT) $(DEP)
+TD2-sujet.html: TD1.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a data-uri -o TD1-sujet.html TD1.asc
+	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a data-uri -o TD2-sujet.html TD2.asc
 
-TD1-prof.html: TD1.$(EXT) $(DEP)
+%-prof.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a prof -a toc2 -a correction -a theme=compact -b html5 -a numbered -a data-uri -o TD1-prof.html TD1.asc
+	$(DOCTOR) -a prof -a toc2 -a correction -a theme=compact -b html5 -a numbered -a data-uri $< -o $@
 
 cours:
 	cp main.html index.html
-	
+
+javadoc : $(CLASSFILES)
+	javadoc -version -author -doclet org.asciidoctor.Asciidoclet -docletpath doclet/asciidoclet-1.5.0.jar -overview -d $(DOC) $(SOURCEFILES)

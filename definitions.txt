@@ -29,6 +29,7 @@
 :grafcet: http://fr.wikipedia.org/wiki/Grafcet[Grafcet]
 :java: https://www.java.com/fr/[Java]
 :javadoc: link:http://fr.wikipedia.org/wiki/Javadoc[Javadoc]
+:latex: http://fr.wikipedia.org/wiki/LaTeX[LaTeX]
 :magicDraw: http://www.nomagic.com/[MagicDraw]
 :marte: http://www.omgmarte.org/[MARTE]indexterm:[MARTE]
 :mediawiki: https://www.mediawiki.org[MediaWiki]

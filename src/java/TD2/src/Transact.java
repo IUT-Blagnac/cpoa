@@ -1,16 +1,7 @@
 /**
- * 
- */
-
-/**
  * @author bruel (taken from https://app.box.com/shared/yrlj0takyhjeg1mefacy)
- *
  */
 public class Transact {
-
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		try {       
 			Class.forName("org.postgresql.Driver");                

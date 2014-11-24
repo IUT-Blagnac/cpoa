@@ -14,7 +14,7 @@ guard 'shell' do
     doc = Asciidoctor.load_file(m[0])
     p '-----------------------------------------'
     p 'rendering: ' << doc.doctitle
-    Asciidoctor.render_file(m[0], {:in_place => true, :safe => :unsafe, :toc2 => true})}
+    Asciidoctor.render_file(m[0], {:in_place => true, :safe => :unsafe})}
 #    :attributes => {
 #'stylesheet' => '/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css',
 #'icons' => true,

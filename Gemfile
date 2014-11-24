@@ -8,4 +8,5 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'rspec'
   gem 'rspec-expectations'
+  gem 'link-checker'
 end
