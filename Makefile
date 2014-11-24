@@ -62,9 +62,9 @@ TD2-sujet.html: TD1.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a data-uri -o TD2-sujet.html TD2.asc
 
-TD2-prof.html: TD1.$(EXT) $(DEP)
+%-prof.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a prof -a toc2 -a correction -a theme=compact -b html5 -a numbered -a data-uri -o TD2-prof.html TD2.asc
+	$(DOCTOR) -a prof -a toc2 -a correction -a theme=compact -b html5 -a numbered -a data-uri $< -o $@
 
 cours:
 	cp main.html index.html
