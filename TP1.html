@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-24}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-25}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Sujet TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
@@ -21,13 +21,14 @@
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_rappel_sur_le_patron_stratégie">1. Rappel sur le patron Stratégie</a></li>
-<li><a href="#_reprise_du_td">2. Reprise du TD</a></li>
-<li><a href="#_jeu_d_aventure">3. Jeu d&#8217;aventure</a>
+<li><a href="#_fichiers_utiles">1. Fichiers utiles</a></li>
+<li><a href="#_rappel_sur_le_patron_stratégie">2. Rappel sur le patron Stratégie</a></li>
+<li><a href="#_reprise_du_td">3. Reprise du TD</a></li>
+<li><a href="#_jeu_d_aventure">4. Jeu d&#8217;aventure</a>
 <ul class="sectlevel2">
-<li><a href="#_bases">3.1. Bases</a></li>
-<li><a href="#_améliorations">3.2. Améliorations</a></li>
-<li><a href="#_utilisation_du_comportement_dynamique">3.3. Utilisation du comportement dynamique</a></li>
+<li><a href="#_bases">4.1. Bases</a></li>
+<li><a href="#_améliorations">4.2. Améliorations</a></li>
+<li><a href="#_utilisation_du_comportement_dynamique">4.3. Utilisation du comportement dynamique</a></li>
 </ul>
 </li>
 <li><a href="#setArme">Appendix A: Exemple d&#8217;organisation en paquetages</a></li>
@@ -66,7 +67,25 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rappel_sur_le_patron_stratégie"><a class="link" href="#_rappel_sur_le_patron_stratégie">1. Rappel sur le patron Stratégie</a></h2>
+<h2 id="_fichiers_utiles"><a class="link" href="#_fichiers_utiles">1. Fichiers utiles</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>le <a href="util/plantUML.bat">plantuml.bat</a></p>
+</li>
+<li>
+<p>la <a href="util/plantUmlDoclet.jar">doclet pour javadoc</a></p>
+</li>
+<li>
+<p>le <a href="util/plantuml.jar">jar plantuml</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rappel_sur_le_patron_stratégie"><a class="link" href="#_rappel_sur_le_patron_stratégie">2. Rappel sur le patron Stratégie</a></h2>
 <div class="sectionbody">
 <div id="strategy" class="admonitionblock note">
 <table>
@@ -94,7 +113,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 </div>
 </div>
 <div class="sect1">
-<h2 id="_reprise_du_td"><a class="link" href="#_reprise_du_td">2. Reprise du TD</a></h2>
+<h2 id="_reprise_du_td"><a class="link" href="#_reprise_du_td">3. Reprise du TD</a></h2>
 <div class="sectionbody">
 <div class="admonitionblock note">
 <table>
@@ -175,10 +194,10 @@ le code en conséquence.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_jeu_d_aventure"><a class="link" href="#_jeu_d_aventure">3. Jeu d&#8217;aventure</a></h2>
+<h2 id="_jeu_d_aventure"><a class="link" href="#_jeu_d_aventure">4. Jeu d&#8217;aventure</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_bases"><a class="link" href="#_bases">3.1. Bases</a></h3>
+<h3 id="_bases"><a class="link" href="#_bases">4.1. Bases</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -196,7 +215,7 @@ du TD1 (section 2.7.2) et dont voici les bases :</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_améliorations"><a class="link" href="#_améliorations">3.2. Améliorations</a></h3>
+<h3 id="_améliorations"><a class="link" href="#_améliorations">4.2. Améliorations</a></h3>
 <div class="paragraph">
 <p>On souhaite maintenant obliger les concepteurs de tout nouveau <code>Personnage</code> à
 implémenter systématiquement à l&#8217;instanciation le comportement d&#8217;arme.</p>
@@ -229,7 +248,7 @@ et vérifiez que ça ne passe pas la compilation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_utilisation_du_comportement_dynamique"><a class="link" href="#_utilisation_du_comportement_dynamique">3.3. Utilisation du comportement dynamique</a></h3>
+<h3 id="_utilisation_du_comportement_dynamique"><a class="link" href="#_utilisation_du_comportement_dynamique">4.3. Utilisation du comportement dynamique</a></h3>
 <div class="paragraph">
 <p>On souhaite pleinement bénéficier du changement possible de comportement
 à l&#8217;exécution.</p>
@@ -582,7 +601,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-24 14:25:11 CET
+Last updated 2014-11-25 09:30:43 CET
 </div>
 </div>
 </body>
