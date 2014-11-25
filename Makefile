@@ -42,7 +42,6 @@ pattern/%.png: pattern/%.plantuml
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
-#	$(ASCIIDOC) -a slides -b deckjs -a data-uri -a deckjs_theme=$(DECK) -o $@ $<
 	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
 	-a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) \
 	-a images=$(IMAGESDIR) -a prof -o $@ $<
@@ -73,6 +72,9 @@ TD2-sujet.html: TD1.$(EXT) $(DEP)
 
 cours:
 	cp main.html index.html
+
+cours2:
+	$(DOCTOR) -a toc2 -b html5 -a numbered -a stylesheet=$(STYLE) -a data-uri -o cours2.html wip.asc
 
 test:
 	$(DOCTOR) -a toc2 -b html5 -a numbered -a stylesheet=$(STYLE) -o wip2.html wip.asc
