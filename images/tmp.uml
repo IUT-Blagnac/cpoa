@@ -1,0 +1,13 @@
+@startuml
+
+'-----------------------------------
+' UML patterns illustrated
+' JMB 2014
+'-----------------------------------
+
+'----------- Circuit normal ----------
+[*] --> 1A
+1A --> 2A : exam [succès]
+2A --> [*] : exam [succès]
+
+@enduml

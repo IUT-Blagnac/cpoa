@@ -2,7 +2,8 @@
 MAIN=main
 ICONSDIR=images/icons
 IMAGESDIR=images
-STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
+#STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
+STYLE=/Users/bruel/dev/asciidoctor/asciidoctor-stylesheet-factory/stylesheets/jmb.css
 ASCIIDOC=asciidoc -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a imagesdir=$(IMAGESDIR) -a data-uri
 #HIGHLIGHT=coderay
 #HIGHLIGHT=highlightjs
@@ -26,6 +27,10 @@ all: $(OUTPUT)/*.html
 images/%.png: images/%.plantuml
 	@echo '==> Compiling plantUML files to generate PNG'
 	java -jar plantuml.jar $<
+
+images/%.svg: images/%.plantuml
+	@echo '==> Compiling plantUML files to generate SVG'
+	java -jar plantuml.jar -t SVG $<
 
 pattern/%.png: pattern/%.plantuml
 	@echo '==> Compiling plantUML files to generate PNG'
@@ -68,6 +73,12 @@ TD2-sujet.html: TD1.$(EXT) $(DEP)
 
 cours:
 	cp main.html index.html
+
+test:
+	$(DOCTOR) -a toc2 -b html5 -a numbered -a stylesheet=$(STYLE) -o wip2.html wip.asc
+	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
+	-a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) \
+	-a images=$(IMAGESDIR) -a prof -a stylesheet=$(STYLE) -o wip2.deckjs.html wip.asc
 
 javadoc : $(CLASSFILES)
 	javadoc -version -author -doclet org.asciidoctor.Asciidoclet -docletpath doclet/asciidoclet-1.5.0.jar -overview -d $(DOC) $(SOURCEFILES)
