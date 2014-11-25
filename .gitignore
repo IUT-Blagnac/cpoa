@@ -18,4 +18,9 @@ vendor/
 stylesheet.css
 vendor/
 *.deckjs.html
+<<<<<<< HEAD
 >>>>>>> master
+=======
+images/.metadata
+
+>>>>>>> 53ce4d8... dessins cours
