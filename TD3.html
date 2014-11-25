@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-23}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-25}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Support TD 3</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./pygments-default.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -38,7 +38,7 @@
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
+<img src="images/icons/caution.png" alt="Caution">
 </td>
 <td class="content">
 <div class="title">Version corrigée</div>
@@ -83,7 +83,7 @@ réponses aux exercices.</p>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
 N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.github.io/cpoa/">Support de Cours</a>.
@@ -97,20 +97,20 @@ N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.
 <h2 id="_problème_du_main_de_test_du_jeu_d_aventure"><a class="link" href="#_problème_du_main_de_test_du_jeu_d_aventure">2. Problème du main de test du jeu d&#8217;aventure</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Vous avez sûrement dans votre <code>main</code> du code de jeu une partie du code
-du style :</p>
+<p>Vous avez sûrement dans votre <code>main</code> de l&#8217;application de jeu d&#8217;aventure
+une partie du code ressamblant à ceci :</p>
 </div>
 <div class="listingblock">
 <div class="title">Adaptation des comportements à la situation</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">                <span style="color:#080;font-weight:bold">if</span> (choix == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Epee</span><span style="color:#710">&quot;</span></span>) {
-                        perso.setArme(<span style="color:#080;font-weight:bold">new</span> ComportementEpee());
-                }
-                <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (choix == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Arc</span><span style="color:#710">&quot;</span></span>) {
-                        perso.setArme(<span style="color:#080;font-weight:bold">new</span> ComportementArc());
-                <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> ...
-                        ...
-                }</code></pre>
+<pre class="pygments highlight"><code data-lang="java">		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Epee&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">());</span>
+		<span class="tok-o">}</span>
+		<span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Arc&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementArc</span><span class="tok-o">());</span>
+		<span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-o">...</span>
+			<span class="tok-o">...</span>
+		<span class="tok-o">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -124,25 +124,34 @@ du style :</p>
 <li>
 <p>rajouter des <code>if then else</code> à chaque nouvelle arme</p>
 </li>
+<li>
+<p>suppression de certaines armes</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
 </ul>
 </div>
 <div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<img src="images/icons/warning.png" alt="Warning">
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong>QUESTION(s)</strong></div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Isoler ce code dans une classe <code>SimpleFabriqueArme</code> qui possèdera
 une méthode <code>creerComportementArme(String type)</code> qui retourne le comportement
-adapté.</p>
+adapté en fonction du paramètre reçu.</p>
 </li>
 <li>
-<p>Donnez le schéma <a href="http://www.uml.org/">UML&#8482;</a> de la nouvelle organisation.</p>
+<p>Donnez le diagramme de classe <a href="http://www.uml.org/">UML&#8482;</a> de la nouvelle organisation.</p>
+</li>
+<li>
+<p>Donnez le diagramme de séquence du main.</p>
 </li>
 </ol>
 </div>
@@ -154,7 +163,7 @@ adapté.</p>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<img src="images/icons/solution.png" alt="Important">
 </td>
 <td class="content">
 <div class="title">Solution</div>
@@ -165,30 +174,49 @@ adapté.</p>
 <div class="listingblock">
 <div class="title">Extrait de FabriqueArme.java</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span style="color:#088;font-weight:bold">public</span> <span style="color:#339;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">SimpleFabriqueArme</span> {
-        <span style="color:#088;font-weight:bold">public</span> ComportementArme creerComportementArme(<span style="color:#0a5;font-weight:bold">String</span> type) {
-                ComportementArme cpt = <span style="color:#069">null</span>;
-                <span style="color:#080;font-weight:bold">if</span> (type.equals(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Epee</span><span style="color:#710">&quot;</span></span>)) {
-                        cpt = <span style="color:#080;font-weight:bold">new</span> ComportementEpee();
-                }
-                <span style="color:#080;font-weight:bold">else</span> <span style="color:#080;font-weight:bold">if</span> (type.equals(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Arc</span><span style="color:#710">&quot;</span></span>)) {
-                        cpt = <span style="color:#080;font-weight:bold">new</span> ComportementArc();
-                }
-                <span style="color:#080;font-weight:bold">return</span> cpt;
-        }
-}</code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">SimpleFabriqueArme</span> <span class="tok-o">{</span>
+	<span class="tok-kd">public</span> <span class="tok-n">ComportementArme</span> <span class="tok-nf">creerComportementArme</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-n">ComportementArme</span> <span class="tok-n">compAdequat</span> <span class="tok-o">=</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;Epee&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">compAdequat</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span>
+		<span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;Arc&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">compAdequat</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ComportementArc</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span>
+		<span class="tok-k">else</span> <span class="tok-n">compAdequat</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ComportementArmeless</span><span class="tok-o">();</span>
+		<span class="tok-k">return</span> <span class="tok-n">compAdequat</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Modèle de la fabrique de comportements d&#8217;armes</p>
-</li>
-</ol>
-</div>
+<p>Diagramme de classe de la fabrique de comportements d&#8217;armes</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/fabriqueArme.png" alt="fabriqueArme">
 </div>
+</div>
+</li>
+<li>
+<p>Diagramme de séquence du <code>main</code>. Par exemple avec le code de test suivant :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Chevalier</span> <span class="tok-n">perso</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Chevalier</span><span class="tok-o">(</span><span class="tok-s">&quot;JMI&quot;</span><span class="tok-o">);</span>
+
+<span class="tok-n">SimpleFabriqueArme</span> <span class="tok-n">fabrique</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">SimpleFabriqueArme</span><span class="tok-o">();</span>
+
+<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-n">fabrique</span><span class="tok-o">.</span><span class="tok-na">creerComportementArme</span><span class="tok-o">(</span><span class="tok-s">&quot;Epee&quot;</span><span class="tok-o">));</span>
+<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">frapper</span><span class="tok-o">();</span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabriqueArme-seq.svg" alt="fabriqueArme seq">
+</div>
+</div>
+</li>
+</ol>
 </div>
 </td>
 </tr>
@@ -211,25 +239,48 @@ adapté.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in TD3.asc - include::src/java/Pizzeria/src/Pizzeria.java<span style="color:#339;font-weight:bold">[]</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel (from O&#39;Reilly Head-First series)</span>
+<span class="tok-cm"> *</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Pizzeria</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">Pizza</span> <span class="tok-nf">commanderPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Pizza</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+	<span class="tok-err">￼￼</span>
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;grecque&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaGrecque</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;poivrons&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaPoivrons</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span>
+
+		<span class="tok-err">￼</span><span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">preparer</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">cuire</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">couper</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">emballer</span><span class="tok-o">();</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<img src="images/icons/warning.png" alt="Warning">
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
+<div class="paragraph">
 <p>Identifiez ce qui varie dans ce code (si la pression du marché fait
-ajouter des pizzas à la carte ou si une pizza n&#8217;a plus de succès et doit
-disparaître, etc.).</p>
-</li>
-</ol>
+	ajouter des pizzas à la carte ou si une pizza n&#8217;a plus de succès et doit
+	disparaître, etc.).</p>
 </div>
 </td>
 </tr>
@@ -244,7 +295,7 @@ disparaître, etc.).</p>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<img src="images/icons/pattern.jpeg" alt="Note">
 </td>
 <td class="content">
 <div class="title">Design pattern : <strong>Fabrique</strong></div>
@@ -283,7 +334,7 @@ disparaître, etc.).</p>
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<img src="images/icons/warning.png" alt="Warning">
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
@@ -318,7 +369,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-23 16:01:51 CET
+Last updated 2014-11-25 19:09:26 CET
 </div>
 </div>
 </body>

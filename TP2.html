@@ -21,7 +21,12 @@
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_fichiers_utiles_pour_la_génération_de_modèles">1. Fichiers utiles pour la génération de modèles</a></li>
+<li><a href="#_Éléments_utiles_pour_les_tps">1. Éléments utiles pour les TPs</a>
+<ul class="sectlevel2">
+<li><a href="#_fichiers_utiles_pour_la_génération_de_modèles">1.1. Fichiers utiles pour la génération de modèles</a></li>
+<li><a href="#_plugins_http_www_eclipse_org_eclipse_indexterm_eclipse_utiles">1.2. Plugins http://www.eclipse.org[eclipse]indexterm:[eclipse] utiles</a></li>
+</ul>
+</li>
 <li><a href="#_rappel_sur_le_patron_singleton">2. Rappel sur le patron Singleton</a></li>
 <li><a href="#_reprise_du_td_2_en_mode_dojo_1ère_séance_de_tp">3. Reprise du TD 2 en mode Dojo (1ère séance de TP)</a>
 <ul class="sectlevel2">
@@ -69,8 +74,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_fichiers_utiles_pour_la_génération_de_modèles"><a class="link" href="#_fichiers_utiles_pour_la_génération_de_modèles">1. Fichiers utiles pour la génération de modèles</a></h2>
+<h2 id="_Éléments_utiles_pour_les_tps"><a class="link" href="#_Éléments_utiles_pour_les_tps">1. Éléments utiles pour les TPs</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_fichiers_utiles_pour_la_génération_de_modèles"><a class="link" href="#_fichiers_utiles_pour_la_génération_de_modèles">1.1. Fichiers utiles pour la génération de modèles</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -83,6 +90,42 @@
 <p>le <a href="util/plantuml.jar">jar plantuml</a></p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_plugins_http_www_eclipse_org_eclipse_indexterm_eclipse_utiles"><a class="link" href="#_plugins_http_www_eclipse_org_eclipse_indexterm_eclipse_utiles">1.2. Plugins http://www.eclipse.org[eclipse]indexterm:[eclipse] utiles</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://infinitest.github.io/">InfiniTest</a></p>
+</li>
+<li>
+<p>Le plugin PlantUML, que vous pourrez installer ceomme ceci :</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/market.png"><img src="images/market.png" alt="market" width="30%"></a>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/plugin.png"><img src="images/plugin.png" alt="plugin" width="50%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Ce qui permet, non seulement d&#8217;avoir un éditeur pour plantUML et d&#8217;immédiatement
+voir le rendu graphique (à condition d&#8217;avoir ouvert la vue par <span class="menuseq"><span class="menu">Window</span>&#160;&#9656; <span class="submenu">Show View</span>&#160;&#9656; <span class="submenu">Other&#8230;&#8203;</span>&#160;&#9656; <span class="menuitem">PlantUML</span></span>),
+mais aussi d&#8217;avoir immédiatement le source PlantUML et le rendu UML de vos classes java en édition
+(cf. <a href="#eclipse-plant">ci-dessous</a>)!</p>
+</div>
+<div id="eclipse-plant" class="imageblock">
+<div class="content">
+<a class="image" href="images/eclipse-plant.png"><img src="images/eclipse-plant.png" alt="eclipse plant" width="100%"></a>
+</div>
+<div class="title">Figure 1. PlantUML en temps réel</div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -105,7 +148,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/singleton.png" alt="singleton">
 </div>
-<div class="title">Figure 1. Modèle UML du patron <em>Singleton</em></div>
+<div class="title">Figure 2. Modèle UML du patron <em>Singleton</em></div>
 </div>
 </td>
 </tr>
@@ -154,7 +197,7 @@ sera implémentée et fonctionnelle.</p>
 <td class="content">
 On pourra avantageusement installer le plug-in eclipse
 <a href="http://infinitest.github.io/">InfiniTest</a> qui permet de runner les tests à
-chaque sauvegarde
+chaque sauvegarde (cf. plus haut)
 </td>
 </tr>
 </table>
@@ -227,7 +270,7 @@ le plus tôt est en général le moins compliqué.</p>
 <div class="content">
 <a class="image" href="images/aventure.png"><img src="images/aventure.png" alt="aventure"></a>
 </div>
-<div class="title">Figure 2. Un jeu d&#8217;aventure minimaliste</div>
+<div class="title">Figure 3. Un jeu d&#8217;aventure minimaliste</div>
 </div>
 <div class="paragraph">
 <p>Implémentez le patron singleton comme demandé à la
@@ -345,7 +388,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-25 15:14:33 CET
+Last updated 2014-11-25 18:38:05 CET
 </div>
 </div>
 </body>
