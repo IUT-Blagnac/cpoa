@@ -40,6 +40,10 @@ pattern/%.png: pattern/%.plantuml
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a toc2 -b html5 -a numbered $<
 
+%.full.html: %.$(EXT) $(DEP)
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
+	$(DOCTOR) -a toc2 -a data-uri -b html5 -a numbered -o $@ $<
+
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
 	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
