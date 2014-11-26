@@ -11,6 +11,6 @@ public class MainTest {
 //	}
 
 	public void Main() {
-		System.out.println("Hello Workd!");
+		System.out.println("Hello World!");
 	}
 }

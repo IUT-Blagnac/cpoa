@@ -277,10 +277,59 @@ adapté en fonction du paramètre reçu.</p>
 </td>
 <td class="content">
 <div class="title"><strong>QUESTION</strong></div>
-<div class="paragraph">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
 <p>Identifiez ce qui varie dans ce code (si la pression du marché fait
-	ajouter des pizzas à la carte ou si une pizza n&#8217;a plus de succès et doit
-	disparaître, etc.).</p>
+ajouter des pizzas à la carte ou si une pizza n&#8217;a plus de succès et doit
+disparaître, etc.).</p>
+</li>
+<li>
+<p>Isolez dans une</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Le <code>if</code> à remplacer par un <code>pizza = fabrique.creerPizza(type);</code> et
+ajouter le code suivant dans la classe :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java">	<span class="tok-n">SimpleFabriqueDePizzas</span> <span class="tok-n">fabrique</span><span class="tok-o">;</span>
+
+	<span class="tok-kd">public</span> <span class="tok-nf">Pizzeria</span><span class="tok-o">(</span><span class="tok-n">SimpleFabriqueDePizzas</span> <span class="tok-n">fabrique</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">fabrique</span> <span class="tok-o">=</span> <span class="tok-n">fabrique</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Faire remarquer que la pizza n&#8217;est plus la propriété de la pizzeria, mais
+de la fabrique!
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
 </div>
 </td>
 </tr>
@@ -369,7 +418,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-25 19:09:26 CET
+Last updated 2014-11-25 21:29:48 CET
 </div>
 </div>
 </body>
