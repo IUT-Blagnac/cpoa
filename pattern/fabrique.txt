@@ -2,4 +2,4 @@
 à des sous-classes le choix des classes à instancier (voir aussi <<FabriqueAbstraite,Fabrique abstraite>>).
 
 ifndef::slides[.Modèle UML du patron Fabrique]
-image::fabrique.svg[]
+image::fabrique.png[]

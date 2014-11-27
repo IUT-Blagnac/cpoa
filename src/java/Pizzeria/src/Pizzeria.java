@@ -4,7 +4,7 @@
  */
 public class Pizzeria {
 
-	Pizza commanderPizza(String type) {
+	public Pizza commanderPizza(String type) {
 
 		Pizza pizza;
 
@@ -24,5 +24,4 @@ public class Pizzeria {
 		return pizza;
 		}
 
-	}
 }
