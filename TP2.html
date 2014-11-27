@@ -29,8 +29,8 @@
 </li>
 <li><a href="#_rappel_sur_le_patron_singleton">2. Rappel sur le patron Singleton</a></li>
 <li><a href="#_mise_en_oeuvre_de_singleton">3. Mise en oeuvre de Singleton</a></li>
-<li><a href="#_le_patron_fabrique_simple">4. Le patron Fabrique (simple)</a></li>
-<li><a href="#_mise_en_oeuvre_de_fabrique_simple">5. Mise en oeuvre de Fabrique Simple</a></li>
+<li><a href="#_le_patron_fabrique_em_factory_em">4. Le patron Fabrique (<em>Factory</em>)</a></li>
+<li><a href="#_mise_en_oeuvre_de_fabrique">5. Mise en oeuvre de Fabrique</a></li>
 <li><a href="#_pour_aller_plus_loin">Appendix A: Pour aller plus loin</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
@@ -50,11 +50,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">1. Je sais programmer en <a href="https://www.java.com/fr/">Java</a>.
 2. J&#8217;ai conscience qu&#8217;il faut réfléchir avant de se lancer dans le codage.
 3. J&#8217;ai compris ce qu&#8217;est un patron.
-4. J&#8217;ai réalisé le TD <code>BonChoco</code> et donc connait le patron Singleton!</p></td>
+4. J&#8217;ai réalisé le TD <code>BonChoco</code> et <code>Pizza</code> et donc connait les patron Singleton
+et <em>Factory</em>!</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comprendre ce qu&#8217;est une <strong>conception</strong> et implémenter mon deuxième patron.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comprendre ce qu&#8217;est une <strong>conception</strong> et implémenter des patrons.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
@@ -198,10 +199,10 @@ de classe automatiquement</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_le_patron_fabrique_simple"><a class="link" href="#_le_patron_fabrique_simple">4. Le patron Fabrique (simple)</a></h2>
+<h2 id="_le_patron_fabrique_em_factory_em"><a class="link" href="#_le_patron_fabrique_em_factory_em">4. Le patron Fabrique (<em>Factory</em>)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Nous y sommes, vous venez de décortiquer le patron Fabrique Simple</p>
+<p>Nous y sommes, vous venez de décortiquer le patron Fabrique.</p>
 </div>
 <div id="Fabrique" class="admonitionblock note">
 <table>
@@ -210,14 +211,14 @@ de classe automatiquement</p>
 <img src="images/icons/pattern.jpeg" alt="Note">
 </td>
 <td class="content">
-<div class="title">Design pattern : <strong>Fabrique (simple)</strong></div>
+<div class="title">Design pattern : <strong>Fabrique (<em>Factoty</em>)</strong></div>
 <div class="paragraph">
 <p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
 à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/fabrique.svg" alt="fabrique">
+<img src="images/fabrique.png" alt="fabrique">
 </div>
 <div class="title">Figure 4. Modèle UML du patron Fabrique</div>
 </div>
@@ -228,10 +229,46 @@ de classe automatiquement</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mise_en_oeuvre_de_fabrique_simple"><a class="link" href="#_mise_en_oeuvre_de_fabrique_simple">5. Mise en oeuvre de Fabrique Simple</a></h2>
+<h2 id="_mise_en_oeuvre_de_fabrique"><a class="link" href="#_mise_en_oeuvre_de_fabrique">5. Mise en oeuvre de Fabrique</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>En reprenant le <a href="http://iut-blagnac.github.io/cpoa/TD3.full.html">TD3</a> :</p>
+<p>En reprenant le <a href="http://iut-blagnac.github.io/cpoa/TD3.full.html">TD3</a>
+et en utilisant le code de la classe <a href="src/java/Pizzeria/src/Pizza.java">Pizza.java</a> suivant :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel</span>
+<span class="tok-cm"> *</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">abstract</span> <span class="tok-kd">class</span> <span class="tok-nc">Pizza</span> <span class="tok-o">{</span>
+	<span class="tok-n">String</span> <span class="tok-n">nom</span><span class="tok-o">;</span>
+	<span class="tok-n">String</span> <span class="tok-n">pate</span><span class="tok-o">;</span>
+	<span class="tok-n">String</span> <span class="tok-n">sauce</span><span class="tok-o">;</span>
+	<span class="tok-n">ArrayList</span> <span class="tok-n">garnitures</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ArrayList</span><span class="tok-o">();</span>
+
+	<span class="tok-kt">void</span> <span class="tok-nf">preparer</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Préparation de &quot;</span> <span class="tok-o">+</span> <span class="tok-n">nom</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Étalage de la pâte...&quot;</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Ajout de la sauce...&quot;</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Ajout des garnitures: &quot;</span><span class="tok-o">);</span>
+			<span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">garnitures</span><span class="tok-o">.</span><span class="tok-na">size</span><span class="tok-o">();</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot; &quot;</span> <span class="tok-o">+</span> <span class="tok-n">garnitures</span><span class="tok-o">.</span><span class="tok-na">get</span><span class="tok-o">(</span><span class="tok-n">i</span><span class="tok-o">));</span> <span class="tok-o">}</span>
+	<span class="tok-o">}</span>
+	<span class="tok-kt">void</span> <span class="tok-nf">cuire</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Cuisson 25 minutes à 180°&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+	<span class="tok-kt">void</span> <span class="tok-nf">couper</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Découpage en parts triangulaires&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span>
+	<span class="tok-kt">void</span> <span class="tok-nf">emballer</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Emballage dans une boîte officielle&quot;</span><span class="tok-o">);</span>
+		<span class="tok-err">￼￼￼￼￼</span><span class="tok-o">}</span>
+	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">getNom</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-n">nom</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -245,8 +282,7 @@ de classe automatiquement</p>
 <ol class="arabic">
 <li>
 <p>Implémentez complètement l&#8217;application de Pizzeria de manière à ce que le
-programme de test ci-dessous produise le résultat ci-dessous.
-<a href="http://iut-blagnac.github.io/cpoa/TD2.html#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton">section 4.2 du TD2</a>.</p>
+programme de test ci-dessous produise le résultat ci-dessous.</p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -354,7 +390,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-27 09:13:37 CET
+Last updated 2014-11-27 15:31:34 CET
 </div>
 </div>
 </body>
