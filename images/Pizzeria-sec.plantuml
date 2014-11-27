@@ -9,7 +9,7 @@ actor c as ":Client"
 
 participant s as ":System"
 
-c -> s : commander Pizza fromage à Strasbourg
+c -> s : commander Pizza fromage de Strasbourg
 create p as ":PizzeriaStrasbourg"
 s -> p : new
 s -> p : commanderPizza("fromage")

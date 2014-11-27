@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-25}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-27}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Sujet TP 2</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
@@ -24,22 +24,13 @@
 <li><a href="#_Éléments_utiles_pour_les_tps">1. Éléments utiles pour les TPs</a>
 <ul class="sectlevel2">
 <li><a href="#_fichiers_utiles_pour_la_génération_de_modèles">1.1. Fichiers utiles pour la génération de modèles</a></li>
-<li><a href="#_plugins_http_www_eclipse_org_eclipse_indexterm_eclipse_utiles">1.2. Plugins http://www.eclipse.org[eclipse]indexterm:[eclipse] utiles</a></li>
+<li><a href="#_plugins_eclipse_utiles">1.2. Plugins eclipse utiles</a></li>
 </ul>
 </li>
 <li><a href="#_rappel_sur_le_patron_singleton">2. Rappel sur le patron Singleton</a></li>
-<li><a href="#_reprise_du_td_2_en_mode_dojo_1ère_séance_de_tp">3. Reprise du TD 2 en mode Dojo (1ère séance de TP)</a>
-<ul class="sectlevel2">
-<li><a href="#_le_principe">3.1. Le principe :</a></li>
-<li><a href="#_les_règles">3.2. Les règles</a></li>
-</ul>
-</li>
-<li><a href="#_jeu_d_aventure_2ème_séance_de_tp">4. Jeu d&#8217;aventure (2ème séance de TP)</a>
-<ul class="sectlevel2">
-<li><a href="#_mise_en_oeuvre_de_singleton">4.1. Mise en oeuvre de Singleton</a></li>
-<li><a href="#_modèles_et_tests_d_architecture">4.2. Modèles et tests d&#8217;architecture</a></li>
-</ul>
-</li>
+<li><a href="#_mise_en_oeuvre_de_singleton">3. Mise en oeuvre de Singleton</a></li>
+<li><a href="#_le_patron_fabrique_simple">4. Le patron Fabrique (simple)</a></li>
+<li><a href="#_mise_en_oeuvre_de_fabrique_simple">5. Mise en oeuvre de Fabrique Simple</a></li>
 <li><a href="#_pour_aller_plus_loin">Appendix A: Pour aller plus loin</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
@@ -93,14 +84,14 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_plugins_http_www_eclipse_org_eclipse_indexterm_eclipse_utiles"><a class="link" href="#_plugins_http_www_eclipse_org_eclipse_indexterm_eclipse_utiles">1.2. Plugins http://www.eclipse.org[eclipse]indexterm:[eclipse] utiles</a></h3>
+<h3 id="_plugins_eclipse_utiles"><a class="link" href="#_plugins_eclipse_utiles">1.2. Plugins eclipse utiles</a></h3>
 <div class="ulist">
 <ul>
 <li>
 <p><a href="http://infinitest.github.io/">InfiniTest</a></p>
 </li>
 <li>
-<p>Le plugin PlantUML, que vous pourrez installer ceomme ceci :</p>
+<p>Le plugin PlantUML, que vous pourrez installer comme ceci (<a href="http://www.eclipse.org">eclipse</a> Luna!):</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="images/market.png"><img src="images/market.png" alt="market" width="30%"></a>
@@ -169,102 +160,10 @@ N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://jmbruel.gith
 </div>
 </div>
 <div class="sect1">
-<h2 id="_reprise_du_td_2_en_mode_dojo_1ère_séance_de_tp"><a class="link" href="#_reprise_du_td_2_en_mode_dojo_1ère_séance_de_tp">3. Reprise du TD 2 en mode Dojo (1ère séance de TP)</a></h2>
+<h2 id="_mise_en_oeuvre_de_singleton"><a class="link" href="#_mise_en_oeuvre_de_singleton">3. Mise en oeuvre de Singleton</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Nous allons reprendre succinctement
-le <a href="http://iut-blagnac.github.io/cpoa/TD2.html">TD2</a> en mode
-<a href="http://fr.wikipedia.org/wiki/Coding_Dojo">Coding Dojo</a> en espérant
-que cela vous donne envie de participer à ceux organisés certains jeudi à l&#8217;IUT.</p>
-</div>
-<div class="sect2">
-<h3 id="_le_principe"><a class="link" href="#_le_principe">3.1. Le principe :</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Le prof de TP initie l&#8217;exercice en ouvrant un eclipse et en commençant un
-test qui commence par échouer et qui "passera" quand la fonctionalité attendue
-sera implémentée et fonctionnelle.</p>
-</li>
-<li>
-<p>Il vérifie que son test échoue bien</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
-</td>
-<td class="content">
-On pourra avantageusement installer le plug-in eclipse
-<a href="http://infinitest.github.io/">InfiniTest</a> qui permet de runner les tests à
-chaque sauvegarde (cf. plus haut)
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Il fait en sorte que le test passe au vert  le plus vite possible</p>
-</li>
-<li>
-<p>Il "refactor" éventuellement (faire passer le test au vert mais de façon
-intelligente, éviter la duplication de code, réorganiser les classes, etc.)</p>
-</li>
-<li>
-<p>Quand tout est au vert on passe à une fonctionnalité suivante</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_les_règles"><a class="link" href="#_les_règles">3.2. Les règles</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Toutes les 5 minutes (timer sonore) on change de personne aux commandes
-(au clavier/souris en l&#8217;occurence)</p>
-</li>
-<li>
-<p>Il faut un "maître du temps"</p>
-</li>
-<li>
-<p>Tout le monde participe au codage (et ne fait pas du code de son côté)</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/note.png" alt="Note">
-</td>
-<td class="content">
-Les machines ne sont donc pas utiles pour cette partie! Seule la machine
-connectée au vidéoprojecteur est utilisée.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Le volontariat c&#8217;est mieux, mais le prof est libre d&#8217;organiser le tour de rôle.</p>
-</li>
-<li>
-<p>En 90' de TP on peut faire passer 18 personnes, donc tout le monde y passe et
-le plus tôt est en général le moins compliqué.</p>
-</li>
-<li>
-<p>Merci à ceux qui ont déjà participé aux coding dojos de montrer l&#8217;exemple ;-)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_jeu_d_aventure_2ème_séance_de_tp"><a class="link" href="#_jeu_d_aventure_2ème_séance_de_tp">4. Jeu d&#8217;aventure (2ème séance de TP)</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_mise_en_oeuvre_de_singleton"><a class="link" href="#_mise_en_oeuvre_de_singleton">4.1. Mise en oeuvre de Singleton</a></h3>
-<div class="paragraph">
-<p>En reprenant le jeu d&#8217;aventure du TP1 :</p>
+<p>En reprenant le jeu d&#8217;aventure du TP1 et le <a href="http://iut-blagnac.github.io/cpoa/TD2.html">TD2</a> :</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -272,92 +171,150 @@ le plus tôt est en général le moins compliqué.</p>
 </div>
 <div class="title">Figure 3. Un jeu d&#8217;aventure minimaliste</div>
 </div>
-<div class="paragraph">
-<p>Implémentez le patron singleton comme demandé à la
-<a href="http://iut-blagnac.github.io/cpoa/TD2.html#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton">section 4.2 du TD2</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_modèles_et_tests_d_architecture"><a class="link" href="#_modèles_et_tests_d_architecture">4.2. Modèles et tests d&#8217;architecture</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
 <div class="olist arabic">
 <ol class="arabic">
+<li>
+<p>Implémentez le patron singleton comme demandé à la
+<a href="http://iut-blagnac.github.io/cpoa/TD2.html#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton">section 4.2 du TD2</a>.</p>
+</li>
 <li>
 <p>En utilisant la doclet pour Javadoc de <a href="http://plantuml.sourceforge.net/">plantUML</a>, comme au TP1, générez votre diagramme
 de classe automatiquement</p>
 </li>
-<li>
-<p>Réalisez un test en Java de votre architecture, en vous inspirant du code de
-test qui vérifie quelques points simples de l&#8217;architecture de l&#8217;application <code>SuperCanard</code> :</p>
-<div class="listingblock">
-<div class="title">Test du patron <em>Strategy</em> sur les <code>Canard</code> en Ruby (source <a href="src/java/TD1/checkModel.rb">ici</a>)</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-nb">require</span> <span class="tok-s2">&quot;minitest/autorun&quot;</span>
-<span class="tok-no">MODEL_NAME</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;model.uml&quot;</span>
-
-<span class="tok-k">module</span> <span class="tok-nn">MiniTest</span>
-  <span class="tok-k">class</span> <span class="tok-nc">Unit</span>
-    <span class="tok-k">class</span> <span class="tok-nc">TestCase</span>
-      <span class="tok-c1">#Define new assertion</span>
-      <span class="tok-k">def</span> <span class="tok-nf">assert_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-        <span class="tok-n">assert_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-      <span class="tok-k">end</span>
-      <span class="tok-k">def</span> <span class="tok-nf">assert_not_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-        <span class="tok-n">assert_not_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-      <span class="tok-k">end</span>
-    <span class="tok-k">end</span>
-  <span class="tok-k">end</span>
-<span class="tok-k">end</span>
-<span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">.</span><span class="tok-n">after_tests</span> <span class="tok-p">{</span> <span class="tok-nb">p</span> <span class="tok-vi">@_assertions</span> <span class="tok-p">}</span>
-
-<span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
-  <span class="tok-c1">#------------ General tests about plantUML</span>
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
-    <span class="tok-nb">print</span> <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@enduml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-c1">#------------ Specific tests about expected content</span>
-  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_is_abstract</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementCancan_behavior</span>
-    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementCancan/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementVol_behavior</span>
-    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementVol/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_is_an_Interface</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementCancan/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_is_an_Interface</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementVol/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_Interface_has_concrete_implementation</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementCancan\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_Interface_has_concrete_implementation</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementVol\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-<span class="tok-k">end</span></code></pre>
+</ol>
 </div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_le_patron_fabrique_simple"><a class="link" href="#_le_patron_fabrique_simple">4. Le patron Fabrique (simple)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nous y sommes, vous venez de décortiquer le patron Fabrique Simple</p>
+</div>
+<div id="Fabrique" class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/pattern.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Fabrique (simple)</strong></div>
+<div class="paragraph">
+<p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
+à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrique.svg" alt="fabrique">
+</div>
+<div class="title">Figure 4. Modèle UML du patron Fabrique</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mise_en_oeuvre_de_fabrique_simple"><a class="link" href="#_mise_en_oeuvre_de_fabrique_simple">5. Mise en oeuvre de Fabrique Simple</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>En reprenant le <a href="http://iut-blagnac.github.io/cpoa/TD3.full.html">TD3</a> :</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Implémentez complètement l&#8217;application de Pizzeria de manière à ce que le
+programme de test ci-dessous produise le résultat ci-dessous.
+<a href="http://iut-blagnac.github.io/cpoa/TD2.html#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton">section 4.2 du TD2</a>.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Commencez par écrire ce programme et servez-vous des <em>QuickFix</em> pour "générer"
+un maximum de code.
+</td>
+</tr>
+</table>
 </div>
 </li>
+<li>
+<p>Générez votre diagramme de classe automatiquement</p>
+</li>
 </ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>On utilisera le modèle suivant pour les pizzas :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Pizzas-dc.png" alt="Pizzas dc">
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Programme de test</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">PizzaTestDrive</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-n">Pizzeria</span> <span class="tok-n">boutiqueBrest</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzeriaBrest</span><span class="tok-o">();</span>
+    <span class="tok-n">Pizzeria</span> <span class="tok-n">boutiqueStrasbourg</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzeriaStrasbourg</span><span class="tok-o">();</span>
+
+    <span class="tok-n">Pizza</span> <span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-n">boutiqueBrest</span><span class="tok-o">.</span><span class="tok-na">commanderPizza</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;JMB a commandé une &quot;</span> <span class="tok-o">+</span> <span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">getNom</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;\n&quot;</span><span class="tok-o">);</span>
+
+    <span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-n">boutiqueStrasbourg</span><span class="tok-o">.</span><span class="tok-na">commanderPizza</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;JMI a commandé une &quot;</span> <span class="tok-o">+</span> <span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">getNom</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;\n&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Résultat d&#8217;exécution</div>
+<div class="content">
+<pre>$ java PizzaTestDrive
+Préparation de Pizza sauce style brest au fromage Étalage de la pâte...
+Ajout de la sauce...
+Ajout des garnitures :
+Parmigiano reggiano râpé
+Cuisson 25 minutes à 180°
+Découpage en parts triangulaires
+Emballage dans une boîte officielle
+JMB a commandé une Pizza sauce style brest et fromage
+Préparation de Pizza pâte Strasbourg et fromage Étalage de la pâte...
+Ajout de la sauce...
+Ajout des garnitures :
+Mozzarella en lamelles
+Cuisson 25 minutes à 180°
+Découpage en parts carrées
+Emballage dans une boîte officielle
+JMI a commandé une Pizza pâte Strasbourg et fromage</pre>
 </div>
 </div>
 </div>
@@ -365,8 +322,17 @@ test qui vérifie quelques points simples de l&#8217;architecture de l&#8217;app
 <div class="sect1">
 <h2 id="_pour_aller_plus_loin"><a class="link" href="#_pour_aller_plus_loin">Appendix A: Pour aller plus loin</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Réalisez un test en Java de votre architecture, en vous inspirant du code de
+test qui vérifie quelques points simples de l&#8217;architecture de votre application.
+Vous pourrez vous inspirer du test du patron <em>Strategy</em> en Ruby (source <a href="modelTest/checkModel.rb">ici</a>)</p>
+</li>
+<li>
 <p>Reprenez les section "pour aller plus loin" des TDs 1 et 2.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -388,7 +354,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-25 18:38:05 CET
+Last updated 2014-11-27 09:13:37 CET
 </div>
 </div>
 </body>
