@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.1">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2014-11-25}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2014-11-26}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Support TD 3</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
 <link rel="stylesheet" href="./asciidoctor.css">
@@ -22,11 +22,22 @@
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_rappel_du_cours">1. Rappel du cours</a></li>
-<li><a href="#_problème_du_main_de_test_du_jeu_d_aventure">2. Problème du main de test du jeu d&#8217;aventure</a></li>
-<li><a href="#_la_pizzeria_o_reilly">3. La pizzeria O&#8217;Reilly</a></li>
-<li><a href="#_le_patron_fabrique">4. Le patron Fabrique</a></li>
-<li><a href="#_application_au_jeu_d_aventure">5. Application au jeu d&#8217;aventure</a></li>
-<li><a href="#_pour_aller_plus_loin">Pour aller plus loin</a></li>
+<li><a href="#_la_pizzeria_o_reilly">2. La pizzeria O&#8217;Reilly</a></li>
+<li><a href="#_on_y_est_presque">3. On y est presque&#8230;&#8203;</a>
+<ul class="sectlevel2">
+<li><a href="#_succès_des_pizzérias_o_reilly_les_franchises">3.1. Succès des pizzérias O&#8217;Reilly : les franchises</a></li>
+<li><a href="#_la_dérive_chacun_travaille_comme_il_l_entend">3.2. La dérive : chacun travaille comme il l&#8217;entend!</a></li>
+<li><a href="#_laisser_les_sous_classes_décider">3.3. Laisser les sous-classes décider</a></li>
+<li><a href="#_déclarer_une_méthode_de_fabrique">3.4. Déclarer une méthode de fabrique</a></li>
+<li><a href="#_récapitulons">3.5. Récapitulons</a></li>
+</ul>
+</li>
+<li><a href="#_le_patron_fabrique_simple">4. Le patron Fabrique (simple)</a></li>
+<li><a href="#_pour_aller_plus_loin">Pour aller plus loin</a>
+<ul class="sectlevel2">
+<li><a href="#_problème_du_main_de_test_du_jeu_d_aventure">Problème du main de test du jeu d&#8217;aventure</a></li>
+</ul>
+</li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
 </div>
@@ -94,8 +105,534 @@ N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_problème_du_main_de_test_du_jeu_d_aventure"><a class="link" href="#_problème_du_main_de_test_du_jeu_d_aventure">2. Problème du main de test du jeu d&#8217;aventure</a></h2>
+<h2 id="_la_pizzeria_o_reilly"><a class="link" href="#_la_pizzeria_o_reilly">2. La pizzeria O&#8217;Reilly</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Vous êtes embauché dans une pizzeria pour faire &#8230;&#8203; de l&#8217;informatique!</p>
+</div>
+<div class="paragraph">
+<p>Soit le code de départ suivant :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel (from O&#39;Reilly Head-First series)</span>
+<span class="tok-cm"> *</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Pizzeria</span> <span class="tok-o">{</span>
+
+	<span class="tok-n">Pizza</span> <span class="tok-nf">commanderPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+
+		<span class="tok-n">Pizza</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;grecque&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaGrecque</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;poivrons&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaPoivrons</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span>
+
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">preparer</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">cuire</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">couper</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">emballer</span><span class="tok-o">();</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Identifiez ce qui varie dans ce code (si la pression du marché fait
+ajouter des pizzas à la carte ou si une pizza n&#8217;a plus de succès et doit
+disparaître, etc.).</p>
+</li>
+<li>
+<p>Isolez dans une classe <code>SimpleFabriqueDePizzas</code> ce code.</p>
+</li>
+<li>
+<p>Réalisez le diagramme de classe obtenu.</p>
+</li>
+<li>
+<p>Quel est l’avantage de procéder ainsi ? Ne transfère-t&#8217;on pas
+simplement le problème à un autre objet ?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Le <code>if</code> à remplacer par un <code>pizza = fabrique.creerPizza(type);</code>
+et on ajoute le code suivant dans la classe :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java">	<span class="tok-n">SimpleFabriqueDePizzas</span> <span class="tok-n">fabrique</span><span class="tok-o">;</span>
+
+	<span class="tok-kd">public</span> <span class="tok-nf">Pizzeria</span><span class="tok-o">(</span><span class="tok-n">SimpleFabriqueDePizzas</span> <span class="tok-n">fabrique</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">fabrique</span> <span class="tok-o">=</span> <span class="tok-n">fabrique</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Faire remarquer que la pizza n&#8217;est plus la propriété de la pizzeria, mais
+de la fabrique!
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Code de <code>SimpleFabriqueDePizzas</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel</span>
+<span class="tok-cm"> * @depend - new - Pizza</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">SimpleFabriqueDePizzas</span> <span class="tok-o">{</span>
+
+	<span class="tok-kd">public</span> <span class="tok-n">Pizza</span> <span class="tok-nf">creerPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-n">Pizza</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;saumon&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaSaumon</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;royale&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaRoyale</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-o">{</span>
+			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaVegetarienne</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Diagramme de classe :</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Pizzeria2.png" alt="Pizzeria2">
+</div>
+</div>
+</li>
+<li>
+<p>En encapsulant la création des pizzas dans une seule classe, nous n’avons plus qu’un seul endroit auquel apporter
+des modifications quand l’implémentation change.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_on_y_est_presque"><a class="link" href="#_on_y_est_presque">3. On y est presque&#8230;&#8203;</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nous sommes arrivé à une situation propre, qui s&#8217;apparente
+à un patron de conception. Mais avant d&#8217;en arriver à la définition
+du patron lui-même, nous allons améliorer un peu les choses.</p>
+</div>
+<div class="sect2">
+<h3 id="_succès_des_pizzérias_o_reilly_les_franchises"><a class="link" href="#_succès_des_pizzérias_o_reilly_les_franchises">3.1. Succès des pizzérias O&#8217;Reilly : les franchises</a></h3>
+<div class="paragraph">
+<p>Plusieurs villes veulent ouvrir des pizzérias comme la votre.
+Votre patron, très content de vos programmes souhaite imposer à toutes
+les futures pizzérias d&#8217;utiliser vos codes.</p>
+</div>
+<div class="paragraph">
+<p>Le problème : les pizzas au fromage de Starsbourg sont différentes
+des pizzas aux fromages de Corse!</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Proposez une solution où <code>SimpleFabriqueDePizzas</code> serait une
+classe abstraite.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="paragraph">
+<p>Simplement ajouter abstract, créer plusieurs sous-classes et avoir
+une utilisation du style :</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">FabriqueDePizzasBrest</span> <span class="tok-n">fabriqueBrest</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">FabriqueDePizzasBrest</span><span class="tok-o">();</span>
+<span class="tok-n">Pizzeria</span> <span class="tok-n">boutiqueBrest</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Pizzeria</span><span class="tok-o">(</span><span class="tok-n">fabriqueBrest</span><span class="tok-o">);</span>
+<span class="tok-n">boutiqueBrest</span><span class="tok-o">.</span><span class="tok-na">commander</span><span class="tok-o">(</span><span class="tok-s">&quot;Végétarienne&quot;</span><span class="tok-o">);</span>
+<span class="tok-o">...</span>
+<span class="tok-n">FabriqueDePizzasStrasbourg</span> <span class="tok-n">fabriqueStrasbourg</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">FabriqueDePizzasStrasbourg</span><span class="tok-o">();</span>
+<span class="tok-n">Pizzeria</span> <span class="tok-n">boutiqueStrasbourg</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Pizzeria</span><span class="tok-o">(</span><span class="tok-n">fabriqueStrasbourg</span><span class="tok-o">);</span>
+<span class="tok-n">boutiqueStrasbourg</span><span class="tok-o">.</span><span class="tok-na">commander</span><span class="tok-o">(</span><span class="tok-s">&quot;Végétarienne&quot;</span><span class="tok-o">);</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_la_dérive_chacun_travaille_comme_il_l_entend"><a class="link" href="#_la_dérive_chacun_travaille_comme_il_l_entend">3.2. La dérive : chacun travaille comme il l&#8217;entend!</a></h3>
+<div class="paragraph">
+<p>Les pizzerias utilisent bien vos fabriques mais ont changé
+les procédures : certains ne coupent pas les pizzas, changent les
+temps de cuissons, et les pizzérias O&#8217;Reilly perdent leur
+identités. Il nous faut <strong>restructurer</strong> les pizzérias.</p>
+</div>
+<div class="paragraph">
+<p>Un consultant italien payé fort cher (heureusement en pizzas!)
+propose de revenir à une structure suivante :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">abstract</span> <span class="tok-kd">class</span> <span class="tok-nc">Pizzeria</span> <span class="tok-o">{</span>
+	<span class="tok-kd">public</span> <span class="tok-n">Pizza</span> <span class="tok-nf">commanderPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-n">Pizza</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+
+		<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-n">creerPizza</span><span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">);</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">preparer</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">cuire</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">couper</span><span class="tok-o">();</span>
+		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">emballer</span><span class="tok-o">();</span>
+
+		<span class="tok-k">return</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-kd">abstract</span> <span class="tok-nf">creerPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">);</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Quelles sont les différences avec notre conception actuelle?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pizzeria est maintenant abstraite (vous allez voir pourquoi ci-dessous).</p>
+</li>
+<li>
+<p>Maintenant, <code>creerPizza()</code> est de nouveau un appel à une méthode de Pizzeria
+et non à un objet fabrique.</p>
+</li>
+<li>
+<p>Notre "méthode de fabrication" est maintenant abstraite dans <code>Pizzeria</code>.</p>
+</li>
+<li>
+<p>Et nous avons transféré notre objet fabrique à cette méthode.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_laisser_les_sous_classes_décider"><a class="link" href="#_laisser_les_sous_classes_décider">3.3. Laisser les sous-classes décider</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Dans le schéma suivant, placez les méthodes au bon endroit de
+façon à ce que les procédures soient respectées tout en ayant des pizzas
+à variantes "régionales".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Pizzeria3.png" alt="Pizzeria3">
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Pizzeria3-sol.png" alt="Pizzeria3 sol">
+</div>
+</div>
+<div class="paragraph">
+<p>Chaque sous-classe redéfinit la méthode <code>creerPizza()</code>,
+tandis que toutes les sous-classes utilisent la méthode <code>commanderPizza()</code>
+définie dans <code>Pizzeria</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Nous pourrions faire de <code>commanderPizza()</code> une méthode finale.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Voici un exemple de Pizzeria concrète :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">PizzeriaBrest</span> <span class="tok-kd">extends</span> <span class="tok-n">Pizzeria</span> <span class="tok-o">{</span>
+	<span class="tok-n">Pizza</span> <span class="tok-nf">creerPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">item</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+	<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromageStyleBrest</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;vegetarienne&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaVegetarienneStyleBrest</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fruitsDeMer&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFruitsDeMerStyleBrest</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;poivrons&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
+		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaPoivronsStyleBrest</span><span class="tok-o">();</span>
+		<span class="tok-o">}</span> <span class="tok-k">else</span>
+		<span class="tok-k">return</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_déclarer_une_méthode_de_fabrique"><a class="link" href="#_déclarer_une_méthode_de_fabrique">3.4. Déclarer une méthode de fabrique</a></h3>
+<div class="paragraph">
+<p>Rien qu&#8217;en apportant une ou deux transformations à <code>Pizzeria</code>,
+nous sommes passés d&#8217;un objet gérant l&#8217;instanciation de nos classes concrètes
+à un ensemble de sous-classes qui assument maintenant cette responsabilité.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Quelle est la déclaration exacte de la méthode <code>creerPizza()</code>
+de la classe <code>Pizzeria</code> ?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">protected</span> <span class="tok-kd">abstract</span> <span class="tok-n">Pizza</span> <span class="tok-nf">creerPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">);</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>protected abstract</code> : Comme une méthode de fabrication est abstraite,
+on compte sur les sous-classes pour gérer la création des objets.</p>
+</li>
+<li>
+<p><code>Pizza</code> : Une méthode de fabrication retourne un Produit qu&#8217;on utilise généralement
+dans les méthodes définies dans la superclasse.</p>
+</li>
+<li>
+<p><code>creerPizza</code>: Une méthode de fabrique isole le client (le code de la superclasse,
+tel <code>commanderPizza()</code> : elle lui évite de devoir connaître la sorte de
+Produit concret qui est réellement créée.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_récapitulons"><a class="link" href="#_récapitulons">3.5. Récapitulons</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Donnez le diagramme de séquence d&#8217;une "commande de pizza au fromage
+de type Strasbourg".</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/solution.png" alt="Important">
+</td>
+<td class="content">
+<div class="title">Solution</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Pizzeria-sec.png" alt="Pizzeria sec">
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Vous implémenterez les classes manquantes en TP.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_le_patron_fabrique_simple"><a class="link" href="#_le_patron_fabrique_simple">4. Le patron Fabrique (simple)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nous y sommes, vous venez de décortiquer le patron Fabrique Simple</p>
+</div>
+<div id="Fabrique" class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/pattern.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Fabrique (simple)</strong></div>
+<div class="paragraph">
+<p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
+à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrique.svg" alt="fabrique">
+</div>
+<div class="title">Figure 1. Modèle UML du patron Fabrique</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/google-fabrique.png"><img src="images/google-fabrique.png" alt="google fabrique"></a>
+</div>
+<div class="title">Figure 2. Quelques exemples de description du patron Fabrique</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pour_aller_plus_loin"><a class="link" href="#_pour_aller_plus_loin">Pour aller plus loin</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_problème_du_main_de_test_du_jeu_d_aventure"><a class="link" href="#_problème_du_main_de_test_du_jeu_d_aventure">Problème du main de test du jeu d&#8217;aventure</a></h3>
 <div class="paragraph">
 <p>Vous avez sûrement dans votre <code>main</code> de l&#8217;application de jeu d&#8217;aventure
 une partie du code ressamblant à ceci :</p>
@@ -103,14 +640,14 @@ une partie du code ressamblant à ceci :</p>
 <div class="listingblock">
 <div class="title">Adaptation des comportements à la situation</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java">		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Epee&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">());</span>
-		<span class="tok-o">}</span>
-		<span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Arc&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementArc</span><span class="tok-o">());</span>
-		<span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-o">...</span>
-			<span class="tok-o">...</span>
-		<span class="tok-o">}</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Epee&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+	<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementEpee</span><span class="tok-o">());</span>
+<span class="tok-o">}</span>
+<span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">choix</span> <span class="tok-o">==</span> <span class="tok-s">&quot;Arc&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+	<span class="tok-n">perso</span><span class="tok-o">.</span><span class="tok-na">setArme</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">ComportementArc</span><span class="tok-o">());</span>
+	<span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-o">...</span>
+	<span class="tok-o">...</span>
+<span class="tok-o">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -228,177 +765,6 @@ adapté en fonction du paramètre reçu.</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_la_pizzeria_o_reilly"><a class="link" href="#_la_pizzeria_o_reilly">3. La pizzeria O&#8217;Reilly</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Vous êtes embauché dans une pizzeria pour faire &#8230;&#8203; de l&#8217;informatique!</p>
-</div>
-<div class="paragraph">
-<p>Soit le code de départ suivant :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
-<span class="tok-cm"> * @author bruel (from O&#39;Reilly Head-First series)</span>
-<span class="tok-cm"> *</span>
-<span class="tok-cm"> */</span>
-<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Pizzeria</span> <span class="tok-o">{</span>
-
-	<span class="tok-n">Pizza</span> <span class="tok-nf">commanderPizza</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">type</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-
-		<span class="tok-n">Pizza</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
-	<span class="tok-err">￼￼</span>
-		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;fromage&quot;</span><span class="tok-o">))</span> <span class="tok-o">{</span>
-			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;grecque&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaGrecque</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">type</span><span class="tok-o">.</span><span class="tok-na">equals</span><span class="tok-o">(</span><span class="tok-s">&quot;poivrons&quot;</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-			<span class="tok-n">pizza</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">PizzaPoivrons</span><span class="tok-o">();</span>
-		<span class="tok-o">}</span>
-
-		<span class="tok-err">￼</span><span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">preparer</span><span class="tok-o">();</span>
-		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">cuire</span><span class="tok-o">();</span>
-		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">couper</span><span class="tok-o">();</span>
-		<span class="tok-n">pizza</span><span class="tok-o">.</span><span class="tok-na">emballer</span><span class="tok-o">();</span>
-
-		<span class="tok-k">return</span> <span class="tok-n">pizza</span><span class="tok-o">;</span>
-		<span class="tok-o">}</span>
-
-	<span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
-</td>
-<td class="content">
-<div class="title"><strong>QUESTION</strong></div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Identifiez ce qui varie dans ce code (si la pression du marché fait
-ajouter des pizzas à la carte ou si une pizza n&#8217;a plus de succès et doit
-disparaître, etc.).</p>
-</li>
-<li>
-<p>Isolez dans une</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/solution.png" alt="Important">
-</td>
-<td class="content">
-<div class="title">Solution</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Le <code>if</code> à remplacer par un <code>pizza = fabrique.creerPizza(type);</code> et
-ajouter le code suivant dans la classe :</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java">	<span class="tok-n">SimpleFabriqueDePizzas</span> <span class="tok-n">fabrique</span><span class="tok-o">;</span>
-
-	<span class="tok-kd">public</span> <span class="tok-nf">Pizzeria</span><span class="tok-o">(</span><span class="tok-n">SimpleFabriqueDePizzas</span> <span class="tok-n">fabrique</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-		<span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">fabrique</span> <span class="tok-o">=</span> <span class="tok-n">fabrique</span><span class="tok-o">;</span>
-	<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/note.png" alt="Note">
-</td>
-<td class="content">
-Faire remarquer que la pizza n&#8217;est plus la propriété de la pizzeria, mais
-de la fabrique!
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_le_patron_fabrique"><a class="link" href="#_le_patron_fabrique">4. Le patron Fabrique</a></h2>
-<div class="sectionbody">
-<div id="Fabrique" class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/pattern.jpeg" alt="Note">
-</td>
-<td class="content">
-<div class="title">Design pattern : <strong>Fabrique</strong></div>
-<div class="paragraph">
-<p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
-à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/fabrique.svg" alt="fabrique">
-</div>
-<div class="title">Figure 1. Modèle UML du patron Fabrique</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="images/google-fabrique.png"><img src="images/google-fabrique.png" alt="google fabrique"></a>
-</div>
-<div class="title">Figure 2. Quelques exemples de description du patron Fabrique</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_application_au_jeu_d_aventure"><a class="link" href="#_application_au_jeu_d_aventure">5. Application au jeu d&#8217;aventure</a></h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pour_aller_plus_loin"><a class="link" href="#_pour_aller_plus_loin">Pour aller plus loin</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
-</td>
-<td class="content">
-<div class="title"><strong>QUESTION</strong></div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Comment testeriez-vous la mise en oeuvre du patron <a href="#Fabrique">Fabrique</a>?</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 <div class="sect1">
 <h2 id="_about"><a class="link" href="#_about">About&#8230;&#8203;</a></h2>
@@ -418,7 +784,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-11-25 21:29:48 CET
+Last updated 2014-11-26 23:54:36 CET
 </div>
 </div>
 </body>

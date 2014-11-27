@@ -3,6 +3,7 @@ package simuavanture.appli;
 import simuaventure.comportements.arme.ComportementArme;
 import simuaventure.comportements.deplacement.ComportementDeplacement;
 
+
 public abstract class Personnage {
 	private ComportementArme comportementArme;
 	private ComportementDeplacement comportemeDeplacement;
