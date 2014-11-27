@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.1">
+<meta name="generator" content="Asciidoctor 1.5.2">
 <meta name="author" content="Jean-Michel Bruel">
 <title>DUT-Info/S3/M3105 (CPOA)</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
 /* Remove the comments around the @import statement below when using this as a custom stylesheet */
-/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400";*/
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400";*/
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
@@ -275,8 +275,8 @@ dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
 ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.unstyled,ol.unnumbered,ul.checklist,ul.none{list-style-type:none}
 ul.unstyled,ol.unnumbered,ul.checklist{margin-left:.625em}
-ul.checklist li>p:first-child>.fa-check-square-o:first-child,ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
-ul.checklist li>p:first-child>input[type="checkbox"]:first-child{position:relative;top:1px}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1em;font-size:.85em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{width:1em;position:relative;top:1px}
 ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
 ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
 ul.inline>li>*{display:block}
@@ -481,8 +481,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
-<span id="revnumber">version 1.1,</span>
-<span id="revdate">2014-11-23 - First draft</span>
+<span id="revnumber">version 1.2,</span>
+<span id="revdate">2014-11-27 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -506,17 +506,97 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_design_patterns">4. Design patterns</a>
 <ul class="sectlevel2">
 <li><a href="#_introduction_importance_des_patrons">4.1. Introduction : importance des patrons</a></li>
-<li><a href="#_point_sur_le_td_de_la_semaine_passée">4.2. Point sur le TD de la semaine passée</a></li>
+<li><a href="#_point_sur_le_td_singleton">4.2. Point sur le TD Singleton</a></li>
 <li><a href="#_un_peu_d_histoire">4.3. Un peu d&#8217;histoire</a></li>
 <li><a href="#_exemples_de_bons_principes">4.4. Exemples de bons principes</a></li>
 <li><a href="#_grasp">4.5. GRASP</a></li>
 <li><a href="#_les_patrons_comment_ça_marche">4.6. Les patrons : comment ça marche ?</a></li>
-<li><a href="#_glossaire_et_définition">Glossaire et définition</a></li>
-<li><a href="#_références">Références</a></li>
-<li><a href="#_conventions_d_écriture">Conventions d&#8217;écriture</a></li>
-<li><a href="#_crédits_photos">Crédits photos</a></li>
 </ul>
 </li>
+<li><a href="#_utilité_générale_des_code_enum_code">5. Utilité générale des <code>enum</code></a>
+<ul class="sectlevel2">
+<li><a href="#_modélisation">5.1. Modélisation</a></li>
+<li><a href="#_propriétés">5.2. Propriétés</a></li>
+<li><a href="#_méthodes_de_base">5.3. Méthodes de base</a></li>
+<li><a href="#_exemple_plus_complexe">5.4. Exemple plus complexe</a></li>
+</ul>
+</li>
+<li><a href="#_point_sur_les_documents_demandés_en_ptut">6. Point sur les documents demandés en PTut</a>
+<ul class="sectlevel2">
+<li><a href="#_dossier_d_analyse_et_conception">6.1. Dossier d&#8217;Analyse et Conception</a></li>
+<li><a href="#_sommaire">6.2. Sommaire</a></li>
+<li><a href="#_introduction_2">6.3. Introduction</a></li>
+<li><a href="#_mof_et_mot_actuels_et_nouveaux">6.4. MOF et MOT actuels et nouveaux</a></li>
+<li><a href="#_diagramme_des_uc">6.5. Diagramme des UC</a></li>
+<li><a href="#_architecture_mvc">6.6. Architecture MVC</a></li>
+<li><a href="#_diagramme_des_classes_métier">6.7. Diagramme des Classes métier</a></li>
+<li><a href="#_schéma_du_package_métier">6.8. Schéma du Package Métier</a></li>
+<li><a href="#_script_de_création_de_la_base_et_des_vues_de_données">6.9. Script de création de la base et des vues de données</a></li>
+<li><a href="#_diagramme_des_classes_contrôleur">6.10. Diagramme des Classes contrôleur</a></li>
+<li><a href="#_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants">6.11. Diagramme de Séquence Système pour les cas d&#8217;utilisation « importants »</a></li>
+<li><a href="#_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents">6.12. Diagramme de Séquence et Diagramme des Classes Participantes pour un des UC précédents</a></li>
+<li><a href="#_sni_et_sep_sef">6.13. SNI et SEP/SEF</a></li>
+<li><a href="#_maquettes_d_écrans_et_dessins">6.14. Maquettes d’écrans et dessins</a></li>
+<li><a href="#_annexes_interviews_des_utilisateurs">6.15. Annexes : interviews des utilisateurs</a></li>
+<li><a href="#_conclusions">6.16. Conclusions</a></li>
+</ul>
+</li>
+<li><a href="#_un_nouveau_diagramme_uml_très_utile">7. Un nouveau diagramme UML très utile</a>
+<ul class="sectlevel2">
+<li><a href="#_transitions">7.1. Transitions</a></li>
+<li><a href="#_exemple_de_transitions">7.2. Exemple de transitions</a></li>
+<li><a href="#_refactoring">7.3. Refactoring</a></li>
+<li><a href="#_transitions_internes">7.4. Transitions internes</a></li>
+<li><a href="#_conditions">7.5. Conditions</a></li>
+<li><a href="#_etats_complexes">7.6. Etats complexes</a></li>
+<li><a href="#_notion_de_concurrence">7.7. Notion de concurrence</a></li>
+</ul>
+</li>
+<li><a href="#_point_sur_le_td_de_la_semaine_passée">8. Point sur le TD de la semaine passée</a>
+<ul class="sectlevel2">
+<li><a href="#_principes_de_conception_2">8.1. Principes de conception</a></li>
+<li><a href="#_patron_singleton">8.2. Patron Singleton</a></li>
+<li><a href="#_exemples_d_utilisation_du_patron_singleton">8.3. Exemples d&#8217;utilisation du patron Singleton</a></li>
+<li><a href="#_implémentations_java_du_patron_singleton">8.4. Implémentations Java du patron Singleton</a></li>
+</ul>
+</li>
+<li><a href="#_point_sur_le_td_fabrique">9. Point sur le TD Fabrique</a>
+<ul class="sectlevel2">
+<li><a href="#_principes_de_conception_3">9.1. Principes de conception</a></li>
+<li><a href="#_premier_exemple_d_utilisation_de_patron_2">9.2. Premier exemple d&#8217;utilisation de patron</a></li>
+<li><a href="#_autre_exemple_concret_2">9.3. Autre exemple concret</a></li>
+<li><a href="#_d_autres_exemples_2">9.4. D&#8217;autres exemples</a></li>
+<li><a href="#__non_réutilisation_2">9.5. (non) Réutilisation</a></li>
+<li><a href="#_association_ou_composition_2">9.6. Association ou composition</a></li>
+</ul>
+</li>
+<li><a href="#_un_peu_d_histoire_2">10. Un peu d&#8217;histoire</a></li>
+<li><a href="#_exemples_de_bons_principes_2">11. Exemples de bons principes</a>
+<ul class="sectlevel2">
+<li><a href="#__em_strong_s_strong_ingle_responsibility_principle_em_2">11.1. <em><strong>S</strong>ingle Responsibility Principle</em></a></li>
+<li><a href="#__em_strong_o_strong_pen_closed_principle_em_2">11.2. <em><strong>O</strong>pen-Closed Principle</em></a></li>
+<li><a href="#__em_strong_l_strong_iskov_substitution_principle_em_2">11.3. <em><strong>L</strong>iskov Substitution Principle</em></a></li>
+<li><a href="#__em_strong_i_strong_nterface_segregation_principle_em_2">11.4. <em><strong>I</strong>nterface Segregation Principle</em></a></li>
+<li><a href="#__em_strong_d_strong_ependency_inversion_principle_em_2">11.5. <em><strong>D</strong>ependency Inversion Principle</em></a></li>
+<li><a href="#_solid_et_patrons_2">11.6. SOLID et patrons</a></li>
+</ul>
+</li>
+<li><a href="#_grasp_2">12. GRASP</a></li>
+<li><a href="#_les_patrons_comment_ça_marche_2">13. Les patrons : comment ça marche ?</a>
+<ul class="sectlevel2">
+<li><a href="#_intérêt_2">13.1. Intérêt</a></li>
+<li><a href="#_définifion_2">13.2. Définifion</a></li>
+<li><a href="#_patrons_à_aborder_2">13.3. Patrons à aborder</a></li>
+</ul>
+</li>
+<li><a href="#_glossaire_et_définition">Glossaire et définition</a>
+<ul class="sectlevel2">
+<li><a href="#_patrons_de_création">Patrons de création</a></li>
+<li><a href="#_patrons_comportementaux">Patrons comportementaux</a></li>
+<li><a href="#_patrons_structurels">Patrons structurels</a></li>
+</ul>
+</li>
+<li><a href="#_références">Références</a></li>
 <li><a href="#_about">About&#8230;&#8203;</a></li>
 </ul>
 </div>
@@ -650,6 +730,10 @@ les modèles <a href="http://www.uml.org/">UML&#8482;</a>, mise en oeuvre en TP)
 </dd>
 <dt class="hdlist1">Semaine 3</dt>
 <dd>
+<p>Patrons Fabrique, Proxy, Etat</p>
+</dd>
+<dt class="hdlist1">Semaine 4</dt>
+<dd>
 <div class="ulist">
 <ul>
 <li>
@@ -667,10 +751,6 @@ les modèles <a href="http://www.uml.org/">UML&#8482;</a>, mise en oeuvre en TP)
 </li>
 </ul>
 </div>
-</dd>
-<dt class="hdlist1">Semaine 4</dt>
-<dd>
-<p>Patrons Fabrique, Proxy, Etat</p>
 </dd>
 <dt class="hdlist1">Semaine 5</dt>
 <dd>
@@ -1036,7 +1116,7 @@ Art is everything else we do.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_point_sur_le_td_de_la_semaine_passée"><a class="link" href="#_point_sur_le_td_de_la_semaine_passée">4.2. Point sur le TD de la semaine passée</a></h3>
+<h3 id="_point_sur_le_td_singleton"><a class="link" href="#_point_sur_le_td_singleton">4.2. Point sur le TD Singleton</a></h3>
 <div class="sect3">
 <h4 id="_principes_de_conception"><a class="link" href="#_principes_de_conception">4.2.1. Principes de conception</a></h4>
 <div class="admonitionblock note">
@@ -1939,8 +2019,1805 @@ clients qui les emploient.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utilité_générale_des_code_enum_code"><a class="link" href="#_utilité_générale_des_code_enum_code">5. Utilité générale des <code>enum</code></a></h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h3>
+<h3 id="_modélisation"><a class="link" href="#_modélisation">5.1. Modélisation</a></h3>
+<div class="paragraph">
+<p>Le type enumération est souvent utilisé en modélisation :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/enum.png"><img src="images/enum.png" alt="enum" width="30%"></a>
+</div>
+<div class="title">Figure 8. Exemple de classe Enumeration en UML</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_propriétés"><a class="link" href="#_propriétés">5.2. Propriétés</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Civilite</span> <span class="tok-o">{</span>
+  <span class="tok-n">MADAME</span><span class="tok-o">,</span> <span class="tok-n">MONSIEUR</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chaque élément d&#8217;une énumération est un objet à part entière</p>
+</li>
+<li>
+<p>Les objets <code>enum</code> héritent de <code>java.lang.Enum</code></p>
+</li>
+<li>
+<p>On peut compléter les comportements des objets en ajoutant des méthodes</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_méthodes_de_base"><a class="link" href="#_méthodes_de_base">5.3. Méthodes de base</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>toString()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">);</span> <span class="tok-c1">//MADAME</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>valueOf()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">valueOf</span><span class="tok-o">(</span><span class="tok-s">&quot;MONSIEUR&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>values()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span><span class="tok-o">[]</span> <span class="tok-n">civilites</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">values</span><span class="tok-o">()</span> <span class="tok-o">;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>ordinal()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span> <span class="tok-o">;</span>
+<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Civilite : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span> <span class="tok-o">+</span> <span class="tok-s">&quot; [&quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span><span class="tok-o">.</span><span class="tok-na">ordinal</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;]&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span>
+<span class="tok-c1">// Civilite : MONSIEUR [1]</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Le 1er numéro d&#8217;ordre est 0.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><code>compareTo()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">.</span><span class="tok-na">compareTo</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span><span class="tok-o">))</span> <span class="tok-o">;</span>
+<span class="tok-c1">// -1</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exemple_plus_complexe"><a class="link" href="#_exemple_plus_complexe">5.4. Exemple plus complexe</a></h3>
+<div class="listingblock">
+<div class="title">(source : <a href="http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1" class="bare">http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Langage</span> <span class="tok-o">{</span>
+  <span class="tok-c1">//Objets directement construits</span>
+  <span class="tok-n">JAVA</span><span class="tok-o">(</span><span class="tok-s">&quot;Langage JAVA&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Eclipse&quot;</span><span class="tok-o">),</span>
+  <span class="tok-n">C</span> <span class="tok-o">(</span><span class="tok-s">&quot;Lanage C&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Code Block&quot;</span><span class="tok-o">),</span>
+  <span class="tok-n">CPlus</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage C++&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Visual studio&quot;</span><span class="tok-o">),</span>
+  <span class="tok-n">PHP</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage PHP&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;PS Pad&quot;</span><span class="tok-o">);</span>
+
+  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">name</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>
+  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">editor</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>
+
+  <span class="tok-c1">//Constructeur</span>
+  <span class="tok-n">Langage</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">editor</span><span class="tok-o">){</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span> <span class="tok-o">=</span> <span class="tok-n">name</span><span class="tok-o">;</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">editor</span> <span class="tok-o">=</span> <span class="tok-n">editor</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">getEditor</span><span class="tok-o">(){</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Editeur : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">editor</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">toString</span><span class="tok-o">(){</span>
+    <span class="tok-k">return</span> <span class="tok-n">name</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[]){</span>
+    <span class="tok-n">Langage</span> <span class="tok-n">l1</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">JAVA</span><span class="tok-o">;</span>
+    <span class="tok-n">Langage</span> <span class="tok-n">l2</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">PHP</span><span class="tok-o">;</span>
+
+    <span class="tok-n">l1</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>
+    <span class="tok-n">l2</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_point_sur_les_documents_demandés_en_ptut"><a class="link" href="#_point_sur_les_documents_demandés_en_ptut">6. Point sur les documents demandés en PTut</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dossier_d_analyse_et_conception"><a class="link" href="#_dossier_d_analyse_et_conception">6.1. Dossier d&#8217;Analyse et Conception</a></h3>
+<div class="paragraph">
+<p>Les consignes Moodle pour le document à rendre pour le module de PTut mentionne
+une liste impressionante de modèles à fournir :</p>
+</div>
+<div class="literalblock">
+<div class="title">Structure du dossier</div>
+<div class="content">
+<pre>Sommaire
+Introduction (description du sujet, problématique, plan)
+MOF et MOT actuels
+Nouveaux MOF et MOT
+Diagramme des UC
+Architecture MVC
+Diagramme des Classes métier (sans les méthodes)
+Schéma du Package Métier
+Script de création de la base de données (format ORACLE)
+Script de création des vues de données / fichiers info. du nouveau MOT (format ORACLE)
+Diagramme des Classes contrôleur (avec les méthodes)
+Diagramme de Séquence Système pour les cas d'utilisation « importants »
+Diagramme de Séquence et Diagramme des Classes Participantes pour un des UC précédents
+SNI et SEP/SEF
+Maquettes d’écrans et d’états imprimés
+Dessins de quelques pages complexes
+Dessins d’états imprimés
+Annexes : interviews des utilisateurs</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sommaire"><a class="link" href="#_sommaire">6.2. Sommaire</a></h3>
+<div class="paragraph">
+<p>Si vous utilisez :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a> &#8658; <code>-a toc2</code> dans les options de génération</p>
+</li>
+<li>
+<p><a href="http://fr.wikipedia.org/wiki/LaTeX">LaTeX</a> &#8658; <code>\tableofcontents</code> dans le corps du document</p>
+</li>
+<li>
+<p>Open-Office-Like &#8658; insertion du genre :</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="menuseq"><span class="menu">Insert</span>&#160;&#9656; <span class="submenu">Indexes and Tables</span>&#160;&#9656; <span class="menuitem">Indexes and Tables</span></span></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Ne jamais faire le sommaire "à la main"!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_introduction_2"><a class="link" href="#_introduction_2">6.3. Introduction</a></h3>
+<div class="paragraph">
+<p>Contenu :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>description du sujet</p>
+</li>
+<li>
+<p>problématique</p>
+</li>
+<li>
+<p>plan</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Faites un effort! C&#8217;est la première chose qu&#8217;on regarde!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mof_et_mot_actuels_et_nouveaux"><a class="link" href="#_mof_et_mot_actuels_et_nouveaux">6.4. MOF et MOT actuels et nouveaux</a></h3>
+<div class="paragraph">
+<p>Les premières années 2012/2013 faisaient du Merise :</p>
+</div>
+<div class="paragraph">
+<p>Voici des exemples</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AgenceVoyageMOTNew.jpeg" alt="AgenceVoyageMOTNew">
+</div>
+<div class="title">Figure 9. Exemple de MOT</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/mof.png" alt="mof">
+</div>
+<div class="title">Figure 10. Exemple de MOF</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Important">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Quels sont les équivalents que vous connaissez?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_diagramme_des_uc"><a class="link" href="#_diagramme_des_uc">6.5. Diagramme des UC</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/uc2.png" alt="uc2">
+</div>
+<div class="title">Figure 11. Exemple de diagramme des Cas d&#8217;Utilisation</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Valable pour tous les PTUTs</p>
+</li>
+<li>
+<p>C&#8217;est en général le 1er diagramme <a href="http://www.uml.org/">UML&#8482;</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_architecture_mvc"><a class="link" href="#_architecture_mvc">6.6. Architecture MVC</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/mvc-exp1-ds.png" alt="mvc exp1 ds">
+</div>
+<div class="title">Figure 12. Exemple de diagramme de séquence</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_diagramme_des_classes_métier"><a class="link" href="#_diagramme_des_classes_métier">6.7. Diagramme des Classes métier</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Exemple de PTuts pour lequel ça ne s&#8217;y prette pas :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Robot qui se déplace dans un environnement</p>
+</li>
+<li>
+<p>Programme de scripting</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Exemple de PTuts pour lequel ça s&#8217;y prette :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Refactoring d&#8217;application existante</p>
+</li>
+<li>
+<p>Base de données</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_schéma_du_package_métier"><a class="link" href="#_schéma_du_package_métier">6.8. Schéma du Package Métier</a></h3>
+<div class="paragraph">
+<p>Architecture de l&#8217;application</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_script_de_création_de_la_base_et_des_vues_de_données"><a class="link" href="#_script_de_création_de_la_base_et_des_vues_de_données">6.9. Script de création de la base et des vues de données</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Uniquement si ce n&#8217;est pas prématuré!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_diagramme_des_classes_contrôleur"><a class="link" href="#_diagramme_des_classes_contrôleur">6.10. Diagramme des Classes contrôleur</a></h3>
+<div class="paragraph">
+<p>Extrapolez si vous n&#8217;appliquez pas le MVC :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>quelles vont être vos méthodes (ou fonctionalités) importantes</p>
+</li>
+<li>
+<p>qui fait quoi?</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants"><a class="link" href="#_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants">6.11. Diagramme de Séquence Système pour les cas d&#8217;utilisation « importants »</a></h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Rappel : un DSS par UC
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/mvc-exp1-ds.png" alt="mvc exp1 ds">
+</div>
+<div class="title">Figure 13. Exemple de diagramme de séquence</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents"><a class="link" href="#_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents">6.12. Diagramme de Séquence et Diagramme des Classes Participantes pour un des UC précédents</a></h3>
+<div class="paragraph">
+<p>Uniquement pour illustrer les aspects artitecture, échanges, etc.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sni_et_sep_sef"><a class="link" href="#_sni_et_sep_sef">6.13. SNI et SEP/SEF</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/sni-exp.png" alt="sni exp">
+</div>
+<div class="title">Figure 14. Exemple de SNI</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maquettes_d_écrans_et_dessins"><a class="link" href="#_maquettes_d_écrans_et_dessins">6.14. Maquettes d’écrans et dessins</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/bruel-balsamiq.png" alt="bruel balsamiq">
+</div>
+<div class="title">Figure 15. Exemple de diagramme Balsamiq</div>
+</div>
+<div class="paragraph">
+<p>Outils de dessins d&#8217;écrans complexes :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.balsamiq.com/" class="bare">http://www.balsamiq.com/</a></p>
+</li>
+<li>
+<p><a href="http://glade.gnome.org/" class="bare">http://glade.gnome.org/</a></p>
+</li>
+<li>
+<p><a href="http://www.eclipse.org/windowbuilder/" class="bare">http://www.eclipse.org/windowbuilder/</a></p>
+</li>
+<li>
+<p><a href="http://socialcompare.com/en/comparison/mockup-wireframing-design-tools" class="bare">http://socialcompare.com/en/comparison/mockup-wireframing-design-tools</a></p>
+</li>
+<li>
+<p><a href="http://mockflow.comm" class="bare">http://mockflow.comm</a> (limitations pour la version gratuite)</p>
+</li>
+<li>
+<p><a href="http://www.mobjectify.com/" class="bare">http://www.mobjectify.com/</a></p>
+</li>
+<li>
+<p><a href="https://gomockingbird.com/" class="bare">https://gomockingbird.com/</a></p>
+</li>
+<li>
+<p><a href="http://iphonemockup.lkmc.ch/" class="bare">http://iphonemockup.lkmc.ch/</a> (pour iphone)</p>
+</li>
+<li>
+<p><a href="http://pencil.evolus.vn/en-US/Home.aspx" class="bare">http://pencil.evolus.vn/en-US/Home.aspx</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_annexes_interviews_des_utilisateurs"><a class="link" href="#_annexes_interviews_des_utilisateurs">6.15. Annexes : interviews des utilisateurs</a></h3>
+<div class="paragraph">
+<p>Importance des comptes-rendus</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conclusions"><a class="link" href="#_conclusions">6.16. Conclusions</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Le "contenu-type" est <strong>obsolète</strong>!
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Vous devez l'<strong>adapter</strong> à votre situation!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Pour tout renseignements supplémentaires :
+<a href="http://jmbhome.herokuapp.com/teaching/ACSI/acsi.html" class="bare">http://jmbhome.herokuapp.com/teaching/ACSI/acsi.html</a></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Important">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Des questions sur votre groupe en particulier?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_un_nouveau_diagramme_uml_très_utile"><a class="link" href="#_un_nouveau_diagramme_uml_très_utile">7. Un nouveau diagramme UML très utile</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/etat1.png" alt="etat1">
+</div>
+<div class="title">Figure 16. Exemple de diagramme d&#8217;état</div>
+</div>
+<div class="paragraph">
+<p>Les diagrammes d'<strong>états-transitions</strong> (plus simplement diagramme d&#8217;état) d&#8217;<a href="http://www.uml.org/">UML&#8482;</a>
+décrivent le comportement interne d&#8217;un objet à l&#8217;aide d&#8217;un automate à états finis.</p>
+</div>
+<div class="paragraph">
+<p>Les notions importantes de ce diagramme :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>états</p>
+</li>
+<li>
+<p>actions</p>
+</li>
+<li>
+<p>événements déclencheurs</p>
+<div class="ulist">
+<ul>
+<li>
+<p>signaux</p>
+</li>
+<li>
+<p>invocations de méthode</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_transitions"><a class="link" href="#_transitions">7.1. Transitions</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/etat2.png" alt="etat2">
+</div>
+<div class="title">Figure 17. Transition entre états</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>Événement</strong></dt>
+<dd>
+<p>Un signal, une invocation de méthode, etc.</p>
+</dd>
+<dt class="hdlist1"><strong>Condition</strong></dt>
+<dd>
+<p>Un booléen</p>
+</dd>
+<dt class="hdlist1"><strong>Action</strong></dt>
+<dd>
+<p>Affectation, invocation de méthode</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exemple_de_transitions"><a class="link" href="#_exemple_de_transitions">7.2. Exemple de transitions</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/etat3.png" alt="etat3">
+</div>
+<div class="title">Figure 18. Transition entre états</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_refactoring"><a class="link" href="#_refactoring">7.3. Refactoring</a></h3>
+<div class="paragraph">
+<p>On peut remplacer les actions systématiques des transitions entrantes :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/etat4.png" alt="etat4">
+</div>
+<div class="title">Figure 19. Transition entre états</div>
+</div>
+<div class="paragraph">
+<p>par une <strong>transition interne</strong> : <code>entry</code> :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/etat5.png" alt="etat5">
+</div>
+<div class="title">Figure 20. Exemple de transition interne</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transitions_internes"><a class="link" href="#_transitions_internes">7.4. Transitions internes</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/mdp.png" alt="mdp">
+</div>
+<div class="title">Figure 21. Exemple de transitions internes</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>entry</strong></dt>
+<dd>
+<p>permet de spécifier une activité qui s&#8217;accomplit quand on entre dans l&#8217;état.</p>
+</dd>
+<dt class="hdlist1"><strong>exit</strong></dt>
+<dd>
+<p>permet de spécifier une activité qui s&#8217;accomplit quand on sort de l&#8217;état.</p>
+</dd>
+<dt class="hdlist1"><strong>do</strong></dt>
+<dd>
+<p>commence dès que l&#8217;activité <code>entry</code> est terminée.
+Lorsque cette activité est terminée, une transition
+d&#8217;achèvement peut être déclenchée.
+Si une transition se déclenche pendant que l&#8217;activité <code>do</code>
+est en cours, cette dernière est interrompue et
+l&#8217;activité <code>exit</code> de l&#8217;état s&#8217;exécute.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conditions"><a class="link" href="#_conditions">7.5. Conditions</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/conditions.png" alt="conditions">
+</div>
+<div class="title">Figure 22. Les conditions doivent être exclusives</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Important">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Réalisez un diagramme d&#8217;état UML représentant les différents états
+de l&#8217;eau (liquide, solide, gazeux).</p>
+</li>
+<li>
+<p>Réalisez un diagramme d&#8217;état UML représentant les états d&#8217;un étudiant de son
+arrivée en 1ère année à sa sortie de l&#8217;IUT en fonction des résultats aux différents
+examens (uniquement les années, pas les semestres).</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_etats_complexes"><a class="link" href="#_etats_complexes">7.6. Etats complexes</a></h3>
+<div class="paragraph">
+<p>Un état peut lui-même être doté d&#8217;un comportement et donc représenter à lui
+seul une machine à état. Par exemple :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/sousetats.png" alt="sousetats">
+</div>
+<div class="title">Figure 23. Etats "Composite"</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Important">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Intégrez les semestres aux diagramme précédent (étudiants)</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notion_de_concurrence"><a class="link" href="#_notion_de_concurrence">7.7. Notion de concurrence</a></h3>
+<div class="paragraph">
+<p>On peut représenter l&#8217;évolution de différentes machines de manière concurrente
+(parallèle). Par exemple :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/concurrence.png" alt="concurrence">
+</div>
+<div class="title">Figure 24. Etats "Concurrents"</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Important">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Réalisez le diagramme d&#8217;état d&#8217;une machine à boisson rendant la monnaie.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Pour aller plus loin sur ce diagramme : <a href="http://laurent-audibert.developpez.com/Cours-UML/?page=diagramme-etats-transitions" class="bare">http://laurent-audibert.developpez.com/Cours-UML/?page=diagramme-etats-transitions</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_point_sur_le_td_de_la_semaine_passée"><a class="link" href="#_point_sur_le_td_de_la_semaine_passée">8. Point sur le TD de la semaine passée</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_principes_de_conception_2"><a class="link" href="#_principes_de_conception_2">8.1. Principes de conception</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Pas de nouveau principes de conception particuliers pour le
+patron <a href="#singleton">[singleton]</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_patron_singleton"><a class="link" href="#_patron_singleton">8.2. Patron Singleton</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/pattern.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Singleton</strong></div>
+<div class="paragraph">
+<p><strong>Singleton</strong> garantit qu&#8217;une classe n&#8217;a qu&#8217;une seule instance et
+fournit un point d&#8217;accès global à cette instance.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/singleton.png" alt="singleton">
+</div>
+<div class="title">Figure 25. Modèle UML du patron <em>Singleton</em></div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/google-singleton.png"><img src="images/google-singleton.png" alt="google singleton"></a>
+</div>
+<div class="title">Figure 26. Quelques exemples de description du patron Singleton</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exemples_d_utilisation_du_patron_singleton"><a class="link" href="#_exemples_d_utilisation_du_patron_singleton">8.3. Exemples d&#8217;utilisation du patron Singleton</a></h3>
+<div class="paragraph">
+<p>Quelques exemple de l&#8217;utilisation industrielle de <a href="#singleton">[singleton]</a> :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Thread pools</em> (pour contrôler les <em>threads</em>)</p>
+</li>
+<li>
+<p>Connexions SQL</p>
+</li>
+<li>
+<p>Objets de type <em>Registry</em></p>
+</li>
+<li>
+<p>Objets gérant les préférences utilisateur</p>
+</li>
+<li>
+<p>Caches</p>
+</li>
+<li>
+<p>Les classes <em>Factory</em></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implémentations_java_du_patron_singleton"><a class="link" href="#_implémentations_java_du_patron_singleton">8.4. Implémentations Java du patron Singleton</a></h3>
+<div class="sect3">
+<h4 id="_initialisation_directe_de_la_variable_instance"><a class="link" href="#_initialisation_directe_de_la_variable_instance">8.4.1. Initialisation directe de la variable instance</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java">    <span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">class</span> <span class="tok-nc">Singleton</span> <span class="tok-o">{</span>
+      <span class="tok-kd">private</span> <span class="tok-kd">final</span> <span class="tok-kd">static</span> <span class="tok-kd">volatile</span> <span class="tok-n">Singleton</span> <span class="tok-n">instance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Singleton</span><span class="tok-o">();</span>
+      <span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">static</span> <span class="tok-n">Singleton</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-n">instance</span><span class="tok-o">;</span> <span class="tok-o">}</span>
+      <span class="tok-kd">private</span> <span class="tok-nf">Singleton</span><span class="tok-o">()</span> <span class="tok-o">{}</span>
+      <span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+On n&#8217;a pas vu cette implémentation en TD!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_initialisation_dans_un_bloc_code_static_code"><a class="link" href="#_initialisation_dans_un_bloc_code_static_code">8.4.2. Initialisation dans un bloc <code>static</code></a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">class</span> <span class="tok-nc">Singleton</span> <span class="tok-o">{</span>
+        <span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kd">volatile</span> <span class="tok-n">Singleton</span> <span class="tok-n">instance</span> <span class="tok-o">=</span> <span class="tok-kc">null</span><span class="tok-o">;</span>
+        <span class="tok-kd">static</span> <span class="tok-o">{</span>
+          <span class="tok-n">instance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Singleton</span><span class="tok-o">();</span>
+        <span class="tok-o">}</span>
+        <span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">static</span> <span class="tok-n">Singleton</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-n">instance</span><span class="tok-o">;</span> <span class="tok-o">}</span>
+        <span class="tok-kd">private</span> <span class="tok-nf">Singleton</span><span class="tok-o">()</span> <span class="tok-o">{}</span>
+        <span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_utilisation_d_un_code_enum_code"><a class="link" href="#_utilisation_d_un_code_enum_code">8.4.3. Utilisation d&#8217;un <code>enum</code></a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java">        <span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Singleton</span> <span class="tok-o">{</span>
+          <span class="tok-n">SINGLETON</span><span class="tok-o">;</span>
+          <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">Singleton</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-n">SINGLETON</span><span class="tok-o">;</span> <span class="tok-o">}</span>
+        <span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>On n&#8217;a pas vu cette implémentation en TD!</p>
+</li>
+<li>
+<p>Les <code>enum</code>, bien connues en C, sont apparues à la version <code>1.5</code> de Java!</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Exemple d&#8217;utilisation de ce type d&#8217;implémentation</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">MonSingleton</span> <span class="tok-o">{</span>
+  <span class="tok-n">INSTANCE</span><span class="tok-o">;</span>
+
+  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">attribute</span> <span class="tok-o">=</span> <span class="tok-s">&quot;World&quot;</span><span class="tok-o">;</span>
+
+  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">sayHello</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-s">&quot;Hello &quot;</span> <span class="tok-o">+</span> <span class="tok-n">attribute</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Et on l&#8217;appelle avec :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">MonSingleton</span><span class="tok-o">.</span><span class="tok-na">INSTANCE</span><span class="tok-o">.</span><span class="tok-na">sayHello</span><span class="tok-o">();</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Intérêts/Limites d&#8217;utiliser un <code>enum</code> :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>les enumérations classiques sont <em>thread-safe</em> car elles sont
+initialisées par le <em>classloader</em></p>
+</li>
+<li>
+<p>on ne peut pas utiliser l&#8217;héritage</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Pour aller plus loin, cf/ <a href="http://blog.zenika.com/index.php?post/2014/06/11/Quelques-patterns-d-implementation-avec-les-enums-java">ce site</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_point_sur_le_td_fabrique"><a class="link" href="#_point_sur_le_td_fabrique">9. Point sur le TD Fabrique</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_principes_de_conception_3"><a class="link" href="#_principes_de_conception_3">9.1. Principes de conception</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/pattern.jpeg" alt="Note">
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Fabrique</strong> (<em>Factory</em>)</div>
+<div class="paragraph">
+<p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
+à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrique.png" alt="fabrique">
+</div>
+<div class="title">Figure 27. Modèle UML du patron Fabrique</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_premier_exemple_d_utilisation_de_patron_2"><a class="link" href="#_premier_exemple_d_utilisation_de_patron_2">9.2. Premier exemple d&#8217;utilisation de patron</a></h3>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/pizzeria1.png"><img src="images/pizzeria1.png" alt="pizzeria1"></a>
+</div>
+<div class="title">Figure 28. 1er exemple d&#8217;utilisation de Fabrique</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/pizzeria.png"><img src="images/pizzeria.png" alt="pizzeria"></a>
+</div>
+<div class="title">Figure 29. Exemple complet d&#8217;utilisation de Fabrique</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_autre_exemple_concret_2"><a class="link" href="#_autre_exemple_concret_2">9.3. Autre exemple concret</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Cet exemple est tiré de
+<a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">ce cours</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Le problème</strong></p>
+</div>
+<div class="paragraph">
+<p>Vous avez une classe <code>FileWriter</code> qui a pour rôle d&#8217;écrire dans un fichier
+ainsi qu&#8217;une classe <code>DBWriter</code>. Dans un premier temps, ces classes ne
+contiennent qu&#8217;une méthode <code>write()</code> qui n&#8217;écrira que le texte passé
+en paramètre.</p>
+</div>
+<div class="paragraph">
+<p>Au fil du temps, vous vous rendez compte que c&#8217;est dommage qu&#8217;elles ne
+fassent que ça et vous aimeriez bien qu&#8217;elles puissent écrire en différents
+formats (HTML, XML, etc.) : les classes doivent donc formater puis écrire.</p>
+</div>
+<div class="paragraph">
+<p><strong>La solution</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns"><img src="images/strategyWriter.png" alt="strategyWriter"></a>
+</div>
+<div class="title">Figure 30. Application du pattern <a href="#strategy">[strategy]</a> (<a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">source</a>)</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/formater-icon.png" alt="Note">
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">L&#8217;interface en <code>PHP</code> (code source <a href="src/php/Formater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">interface</span> <span class="tok-nx">Formater</span>
+<span class="tok-p">{</span>
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/writer-icon.png" alt="Note">
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe abstraite <code>Writer</code> (code source <a href="src/php/Writer.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">abstract</span> <span class="tok-k">class</span> <span class="tok-nc">Writer</span>
+<span class="tok-p">{</span>
+  <span class="tok-c1">// Attribut contenant l&#39;instance du formateur que l&#39;on veut utiliser.</span>
+  <span class="tok-k">protected</span> <span class="tok-nv">$formater</span><span class="tok-p">;</span>
+
+  <span class="tok-k">abstract</span> <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">write</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">);</span>
+
+  <span class="tok-c1">// Nous voulons une instance d&#39;une classe implémentant Formater en paramètre.</span>
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">__construct</span><span class="tok-p">(</span><span class="tok-nx">Formater</span> <span class="tok-nv">$formater</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">formater</span> <span class="tok-o">=</span> <span class="tok-nv">$formater</span><span class="tok-p">;</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/filewriter-icon.png" alt="Note">
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>FileWriter</code> (code source <a href="src/php/FileWriter.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">class</span> <span class="tok-nc">FileWriter</span> <span class="tok-k">extends</span> <span class="tok-nx">Writer</span>
+<span class="tok-p">{</span>
+  <span class="tok-c1">// Attribut stockant le chemin du fichier.</span>
+  <span class="tok-k">protected</span> <span class="tok-nv">$file</span><span class="tok-p">;</span>
+
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">__construct</span><span class="tok-p">(</span><span class="tok-nx">Formater</span> <span class="tok-nv">$formater</span><span class="tok-p">,</span> <span class="tok-nv">$file</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-k">parent</span><span class="tok-o">::</span><span class="tok-na">__construct</span><span class="tok-p">(</span><span class="tok-nv">$formater</span><span class="tok-p">);</span>
+    <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">file</span> <span class="tok-o">=</span> <span class="tok-nv">$file</span><span class="tok-p">;</span>
+  <span class="tok-p">}</span>
+
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">write</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-nv">$f</span> <span class="tok-o">=</span> <span class="tok-nb">fopen</span><span class="tok-p">(</span><span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">file</span><span class="tok-p">,</span> <span class="tok-s1">&#39;w&#39;</span><span class="tok-p">);</span>
+    <span class="tok-nb">fwrite</span><span class="tok-p">(</span><span class="tok-nv">$f</span><span class="tok-p">,</span> <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">formater</span><span class="tok-o">-&gt;</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">));</span>
+    <span class="tok-nb">fclose</span><span class="tok-p">(</span><span class="tok-nv">$f</span><span class="tok-p">);</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/dbwriter-icon.png" alt="Note">
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>DBWriter</code> (code source <a href="src/php/DBWriter.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">class</span> <span class="tok-nc">DBWriter</span> <span class="tok-k">extends</span> <span class="tok-nx">Writer</span>
+<span class="tok-p">{</span>
+  <span class="tok-k">protected</span> <span class="tok-nv">$db</span><span class="tok-p">;</span>
+
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">__construct</span><span class="tok-p">(</span><span class="tok-nx">Formater</span> <span class="tok-nv">$formater</span><span class="tok-p">,</span> <span class="tok-nx">PDO</span> <span class="tok-nv">$db</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-k">parent</span><span class="tok-o">::</span><span class="tok-na">__construct</span><span class="tok-p">(</span><span class="tok-nv">$formater</span><span class="tok-p">);</span>
+    <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">db</span> <span class="tok-o">=</span> <span class="tok-nv">$db</span><span class="tok-p">;</span>
+  <span class="tok-p">}</span>
+
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">write</span> <span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-nv">$q</span> <span class="tok-o">=</span> <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">db</span><span class="tok-o">-&gt;</span><span class="tok-na">prepare</span><span class="tok-p">(</span><span class="tok-s1">&#39;INSERT INTO lorem_ipsum SET text = :text&#39;</span><span class="tok-p">);</span>
+    <span class="tok-nv">$q</span><span class="tok-o">-&gt;</span><span class="tok-na">bindValue</span><span class="tok-p">(</span><span class="tok-s1">&#39;:text&#39;</span><span class="tok-p">,</span> <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">formater</span><span class="tok-o">-&gt;</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">));</span>
+    <span class="tok-nv">$q</span><span class="tok-o">-&gt;</span><span class="tok-na">execute</span><span class="tok-p">();</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Enfin, nous avons nos trois formateurs.
+L&#8217;un ne fait rien de particulier (<code>TextFormater</code>),
+et les deux autres formatent le texte en deux langages
+différents (<code>HTMLFormater</code> et <code>XMLFormater</code>).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/formaters-icon.png" alt="Note">
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>TextFormater</code> (code source <a href="src/php/TextFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">class</span> <span class="tok-nc">TextFormater</span> <span class="tok-k">implements</span> <span class="tok-nx">Formater</span>
+<span class="tok-p">{</span>
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-k">return</span> <span class="tok-s1">&#39;Date : &#39;</span> <span class="tok-o">.</span> <span class="tok-nb">time</span><span class="tok-p">()</span> <span class="tok-o">.</span> <span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;Texte : &#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$text</span><span class="tok-p">;</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">La classe <code>HTMLFormater</code> (code source <a href="src/php/HTMLFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">class</span> <span class="tok-nc">HTMLFormater</span> <span class="tok-k">implements</span> <span class="tok-nx">Formater</span>
+<span class="tok-p">{</span>
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-k">return</span> <span class="tok-s1">&#39;&lt;p&gt;Date : &#39;</span> <span class="tok-o">.</span> <span class="tok-nb">time</span><span class="tok-p">()</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;br /&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span> <span class="tok-s1">&#39;Texte : &#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$text</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;/p&gt;&#39;</span><span class="tok-p">;</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">La classe <code>XMLFormater</code> (code source <a href="src/php/XMLFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">class</span> <span class="tok-nc">XMLFormater</span> <span class="tok-k">implements</span> <span class="tok-nx">Formater</span>
+<span class="tok-p">{</span>
+  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-k">return</span> <span class="tok-s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>
+           <span class="tok-s1">&#39;&lt;message&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>
+           <span class="tok-s2">&quot;</span><span class="tok-se">\t</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;date&gt;&#39;</span> <span class="tok-o">.</span> <span class="tok-nb">time</span><span class="tok-p">()</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;/date&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>
+           <span class="tok-s2">&quot;</span><span class="tok-se">\t</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;texte&gt;&#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$text</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;/texte&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>
+           <span class="tok-s1">&#39;&lt;/message&gt;&#39;</span><span class="tok-p">;</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_d_autres_exemples_2"><a class="link" href="#_d_autres_exemples_2">9.4. D&#8217;autres exemples</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La fonction standard <code>sort()</code> de python</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"><span class="tok-o">&gt;&gt;&gt;</span> <span class="tok-nb">sorted</span><span class="tok-p">(</span><span class="tok-s">&quot;This is a test string from Andrew&quot;</span><span class="tok-o">.</span><span class="tok-n">split</span><span class="tok-p">(),</span> <span class="tok-n">key</span><span class="tok-o">=</span><span class="tok-nb">str</span><span class="tok-o">.</span><span class="tok-n">lower</span><span class="tok-p">)</span>
+<span class="tok-p">[</span><span class="tok-s">&#39;a&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;Andrew&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;from&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;is&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;string&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;test&#39;</span><span class="tok-p">,</span> <span class="tok-s">&#39;This&#39;</span><span class="tok-p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Stratégie de cryptage en fonction de la taille d&#8217;un fichier</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">File</span> <span class="tok-n">file</span> <span class="tok-o">=</span> <span class="tok-n">getFile</span><span class="tok-o">();</span>
+ <span class="tok-n">Cipher</span> <span class="tok-n">c</span> <span class="tok-o">=</span> <span class="tok-n">CipherFactory</span><span class="tok-o">.</span><span class="tok-na">getCipher</span><span class="tok-o">(</span> <span class="tok-n">file</span><span class="tok-o">.</span><span class="tok-na">size</span><span class="tok-o">()</span> <span class="tok-o">);</span>
+ <span class="tok-n">c</span><span class="tok-o">.</span><span class="tok-na">performAction</span><span class="tok-o">();</span>
+
+<span class="tok-c1">// implementations:</span>
+<span class="tok-kd">interface</span>  <span class="tok-nc">Cipher</span>  <span class="tok-o">{</span>
+     <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">();</span>
+<span class="tok-o">}</span>
+<span class="tok-kd">class</span> <span class="tok-nc">InMemoryCipherStrategy</span> <span class="tok-kd">implements</span> <span class="tok-n">Cipher</span> <span class="tok-o">{</span>
+         <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+             <span class="tok-c1">// load in byte[] ....</span>
+         <span class="tok-o">}</span>
+<span class="tok-o">}</span>
+<span class="tok-kd">class</span> <span class="tok-nc">SwaptToDiskCipher</span> <span class="tok-kd">implements</span> <span class="tok-n">Cipher</span> <span class="tok-o">{</span>
+         <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+             <span class="tok-c1">// swapt partial results to file.</span>
+         <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Plus de détails <a href="http://stackoverflow.com/questions/370258/real-world-example-of-the-strategy-pattern">ici</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__non_réutilisation_2"><a class="link" href="#__non_réutilisation_2">9.5. (non) Réutilisation</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Les patrons <strong>ne sont pas réutilisables</strong>!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Il faut implémeter la solution qu&#8217;il représente à chaque fois.</p>
+</div>
+<div class="paragraph">
+<p>Exception : certains font l&#8217;objet d&#8217;une librairie.</p>
+</div>
+<div class="paragraph">
+<p>Par exemple le patron Singleton existe dans la bibliothèque standard du
+langage  en <a href="https://www.ruby-lang.org">Ruby</a>.
+C&#8217;est un mixin qu&#8217;il suffit d&#8217;inclure dans la classe qui doit être un singleton.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-k">class</span> <span class="tok-nc">Klass</span>
+   <span class="tok-kp">include</span> <span class="tok-no">Singleton</span>
+   <span class="tok-c1"># ...</span>
+<span class="tok-k">end</span>
+
+<span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-n">b</span>  <span class="tok-o">=</span> <span class="tok-no">Klass</span><span class="tok-o">.</span><span class="tok-n">instance</span><span class="tok-p">,</span> <span class="tok-no">Klass</span><span class="tok-o">.</span><span class="tok-n">instance</span>
+
+<span class="tok-n">a</span> <span class="tok-o">==</span> <span class="tok-n">b</span>
+<span class="tok-c1"># =&gt; true</span>
+
+<span class="tok-no">Klass</span><span class="tok-o">.</span><span class="tok-n">new</span>
+<span class="tok-c1"># =&gt; NoMethodError - new is private ...</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_association_ou_composition_2"><a class="link" href="#_association_ou_composition_2">9.6. Association ou composition</a></h3>
+<div class="paragraph">
+<p>On trouve deux modèles <a href="http://www.uml.org/">UML&#8482;</a> :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/strategy-compo.png" alt="strategy compo">
+</div>
+<div class="title">Figure 31. <em>Strategy</em>  et composition</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/strategy-assoc.png" alt="strategy assoc">
+</div>
+<div class="title">Figure 32. <em>Strategy</em>  et association</div>
+</div>
+<div class="paragraph">
+<p>Et donc deux implémentations :</p>
+</div>
+<div class="listingblock">
+<div class="title">Composition &#8658; le composé encapsule les composants</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">extends</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+
+	<span class="tok-kd">protected</span> <span class="tok-nf">Colvert</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+		<span class="tok-k">this</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">VolerAvecDesAiles</span><span class="tok-o">(),</span> <span class="tok-k">new</span> <span class="tok-nf">Cancan</span><span class="tok-o">());</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">...</span>
+<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Colvert</span><span class="tok-o">();</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Association &#8658; le composant existe "en dehors"</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-o">...</span>
+<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">VolerAvecDesAiles</span><span class="tok-o">();</span>
+<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Cancan</span><span class="tok-o">();</span>
+<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Colvert</span><span class="tok-o">(</span><span class="tok-n">vol</span><span class="tok-o">,</span><span class="tok-n">cri</span><span class="tok-o">);</span>
+<span class="tok-o">...</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_un_peu_d_histoire_2"><a class="link" href="#_un_peu_d_histoire_2">10. Un peu d&#8217;histoire</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">1977</dt>
+<dd>
+<p><strong>Alexander</strong> : patterns pour les architectures (les vraies)
+<span class="image"><a class="image" href="images/Alexander.png"><img src="images/Alexander.png" alt="Alexander" width="10%"></a></span></p>
+</dd>
+<dt class="hdlist1">1987</dt>
+<dd>
+<p><strong>Beck</strong> et <strong>Cunningham</strong> : patterns pour des interfaces utilisateurs</p>
+</dd>
+<dt class="hdlist1">1988</dt>
+<dd>
+<p><strong>Meyer</strong> : livre sur l&#8217;orienté objet (langage <a href="http://fr.wikipedia.org/wiki/Eiffel_(langage)">Eiffel</a>), devenu la bible pour
+beaucoup de programmeurs (cf. <a href="#Meyer88">[Meyer88]</a>)</p>
+</dd>
+<dt class="hdlist1">1990-1995</dt>
+<dd>
+<p><strong>Gamma</strong>, Helm, Johnson et Vlissides : LE livre de référence (cf. <a href="#GoF">[GoF]</a>)
+<span class="image"><a class="image" href="images/GoF.png"><img src="images/GoF.png" alt="GoF" width="10%"></a></span></p>
+</dd>
+<dt class="hdlist1">2003</dt>
+<dd>
+<p><strong>Martin</strong> : principes SOLID (cf. <a href="#Martin03">[Martin03]</a>)</p>
+</dd>
+<dt class="hdlist1">2004</dt>
+<dd>
+<p><strong>Craig Larman</strong> décrit des modèles de conception : les Patterns <strong>GRASP</strong> (cf. <a href="#Larman05">[Larman05]</a>)</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Les patterns de ce livre sont connus comme les <strong>Gof</strong> pour « <em>Gang of Four</em> ».
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exemples_de_bons_principes_2"><a class="link" href="#_exemples_de_bons_principes_2">11. Exemples de bons principes</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>SOLID</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em><strong>S</strong>ingle Responsibility Principle</em></p>
+</li>
+<li>
+<p><em><strong>O</strong>pen-Closed Principle</em></p>
+</li>
+<li>
+<p><em><strong>L</strong>iskov Substitution Principle</em></p>
+</li>
+<li>
+<p><em><strong>I</strong>nterface Segregation Principle</em></p>
+</li>
+<li>
+<p><em><strong>D</strong>ependency Inversion Principle</em></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="__em_strong_s_strong_ingle_responsibility_principle_em_2"><a class="link" href="#__em_strong_s_strong_ingle_responsibility_principle_em_2">11.1. <em><strong>S</strong>ingle Responsibility Principle</em></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/solid-s.jpg" alt="solid s">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Responsabilité =&gt; Sujet à changement</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_strong_o_strong_pen_closed_principle_em_2"><a class="link" href="#__em_strong_o_strong_pen_closed_principle_em_2">11.2. <em><strong>O</strong>pen-Closed Principle</em></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/solid-o.jpg" alt="solid o">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Ouvert à l'extension mais fermé à la modification</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+Une fois écrite et testée, une classe ne devrait être modifiée que pour
+être corrigée! Toute modification devrait être possible par extension.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_strong_l_strong_iskov_substitution_principle_em_2"><a class="link" href="#__em_strong_l_strong_iskov_substitution_principle_em_2">11.3. <em><strong>L</strong>iskov Substitution Principle</em></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/solid-l.jpg" alt="solid l">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Une classe doit pouvoir être remplacée par une instance d'un de ses
+sous-types, sans modifier la cohérence du programme</pre>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Un carré est un rectangle a deux côtés égaux.</p>
+</div>
+</blockquote>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/carre.png" alt="carre" width="10%">
+</div>
+<div class="title">Figure 33. Exemple classique de violation du principe de substitution de Liskov</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Peut-on toujours substituer un <code>Carré</code> à la place d&#8217;un <code>Rectangle</code> ?
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_strong_i_strong_nterface_segregation_principle_em_2"><a class="link" href="#__em_strong_i_strong_nterface_segregation_principle_em_2">11.4. <em><strong>I</strong>nterface Segregation Principle</em></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/solid-i.jpg" alt="solid i">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une
+seule interface générale</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_strong_d_strong_ependency_inversion_principle_em_2"><a class="link" href="#__em_strong_d_strong_ependency_inversion_principle_em_2">11.5. <em><strong>D</strong>ependency Inversion Principle</em></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/solid-d.jpg" alt="solid d">
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Il faut dépendre des abstractions, pas des implémentations</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ce principe indique :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les modules de haut niveau (abstraits) ne doivent pas dépendre des modules de bas niveau.
+Les deux doivent dépendre d&#8217;abstractions.</p>
+</li>
+<li>
+<p>Les abstractions ne doivent pas dépendre des détails d&#8217;implémentation.
+C&#8217;est l&#8217;inverse : les détails doivent dépendre des abstractions.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Ainsi ce principe va à l&#8217;encontre de l&#8217;intuition classique.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_solid_et_patrons_2"><a class="link" href="#_solid_et_patrons_2">11.6. SOLID et patrons</a></h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tuxteacher.png" alt="Important">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Lesquels des 5 principes SOLID s&#8217;appliquent bien à <em>Strategy</em> ?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grasp_2"><a class="link" href="#_grasp_2">12. GRASP</a></h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>The critical design tool for software development is <strong>a mind well educated in
+design principles</strong>. It is not the UML or any other technology.</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; Craig Larman<br>
+<cite>2005</cite>
+</div>
+</div>
+<div class="paragraph">
+<p>Il s&#8217;agit d&#8217;un ensemble de patrons, plutôt orientés conception (UML). Nous en
+aborderons certains au travers des exemples de ce module (cf. <a href="#Larman05">[Larman05]</a>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_les_patrons_comment_ça_marche_2"><a class="link" href="#_les_patrons_comment_ça_marche_2">13. Les patrons : comment ça marche ?</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_intérêt_2"><a class="link" href="#_intérêt_2">13.1. Intérêt</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Réponses éprouvées à des problèmes récurrents</p>
+</li>
+<li>
+<p>Vocabulaire commun</p>
+</li>
+</ul>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>T&#8217;as qu&#8217;à utiliser une <em>factory</em>!</p>
+</div>
+</blockquote>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_définifion_2"><a class="link" href="#_définifion_2">13.2. Définifion</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Nom</p>
+</li>
+<li>
+<p>Problème</p>
+</li>
+<li>
+<p>Solution</p>
+</li>
+<li>
+<p>Conséquences</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Exemple de <em>Strategy</em> :</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>Nom</strong></dt>
+<dd>
+<p><em>Strategy</em></p>
+</dd>
+<dt class="hdlist1"><strong>Problème</strong></dt>
+<dd>
+<p>Situations où il est nécessaire de pouvoir définir dynamiquement les
+algorithmes utilisés.</p>
+</dd>
+<dt class="hdlist1"><strong>Solution</strong></dt>
+<dd>
+<p>Définir une famille d&#8217;algorithmes, encapsuler chacun d&#8217;eux en tant
+qu&#8217;objet, et les rendre interchangeables.</p>
+</dd>
+<dt class="hdlist1"><strong>Conséquences</strong></dt>
+<dd>
+<p>Ce patron laisse les algorithmes changer indépendamment des
+clients qui les emploient.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_patrons_à_aborder_2"><a class="link" href="#_patrons_à_aborder_2">13.3. Patrons à aborder</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ceux déjà pratiqués</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Singleton">[Singleton]</a></p>
+</li>
+<li>
+<p><a href="#Observateur">[Observateur]</a></p>
+</li>
+<li>
+<p><a href="#Fabrique">[Fabrique]</a> (<em>factory</em>) (cf. parser sax)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Les "pressentis"</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Stratégie">[Stratégie]</a></p>
+</li>
+<li>
+<p>Itérateur</p>
+</li>
+<li>
+<p>Composite</p>
+</li>
+<li>
+<p>Etat</p>
+</li>
+<li>
+<p>Proxy</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Les nouveaux</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Décorateur</p>
+</li>
+<li>
+<p>Commande</p>
+</li>
+<li>
+<p>Adaptateur</p>
+</li>
+<li>
+<p>Façade</p>
+</li>
+<li>
+<p>Patron de méthode</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Les "avancés"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Chaînes de responsabilité</p>
+</li>
+<li>
+<p>Visiteur</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ceux qu&#8217;on n&#8217;aura pas le temps d&#8217;aborder</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Prototype</p>
+</li>
+<li>
+<p>Mémento</p>
+</li>
+<li>
+<p>Médiateur</p>
+</li>
+<li>
+<p>Interprète</p>
+</li>
+<li>
+<p>Poids-mouche</p>
+</li>
+<li>
+<p>Monteur</p>
+</li>
+<li>
+<p>Pont</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Concepts avancés</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Patrons de patrons (exemple du MVC)</p>
+</li>
+<li>
+<p>Anti-patrons</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h2>
+<div class="sectionbody">
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -1954,8 +3831,8 @@ Ces définitions seront enrichies au fur et à mesure des patrons
 </tr>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_patrons_de_création"><a class="link" href="#_patrons_de_création">Patrons de création</a></h4>
+<div class="sect2">
+<h3 id="_patrons_de_création"><a class="link" href="#_patrons_de_création">Patrons de création</a></h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1"><a id="Singleton"></a> Singleton</dt>
@@ -1969,7 +3846,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/singleton.png" alt="singleton">
 </div>
-<div class="title">Figure 8. Modèle UML du patron <em>Singleton</em></div>
+<div class="title">Figure 34. Modèle UML du patron <em>Singleton</em></div>
 </div>
 <div class="dlist">
 <dl>
@@ -1982,9 +3859,9 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/fabrique.svg" alt="fabrique">
+<img src="images/fabrique.png" alt="fabrique">
 </div>
-<div class="title">Figure 9. Modèle UML du patron Fabrique</div>
+<div class="title">Figure 35. Modèle UML du patron Fabrique</div>
 </div>
 <div class="dlist">
 <dl>
@@ -2000,11 +3877,11 @@ leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
 <div class="content">
 <img src="images/fabrique-abstraite.svg" alt="fabrique abstraite">
 </div>
-<div class="title">Figure 10. Modèle UML du patron Fabrique Abstraite</div>
+<div class="title">Figure 36. Modèle UML du patron Fabrique Abstraite</div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_patrons_comportementaux"><a class="link" href="#_patrons_comportementaux">Patrons comportementaux</a></h4>
+<div class="sect2">
+<h3 id="_patrons_comportementaux"><a class="link" href="#_patrons_comportementaux">Patrons comportementaux</a></h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1"><a id="Observateur"></a> Observateur (<em>Observer<sup>uk</sup></em>)</dt>
@@ -2023,11 +3900,11 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <img src="images/strategy.png" alt="strategy">
 </div>
-<div class="title">Figure 11. Modèle UML du patron <em>Strategy</em></div>
+<div class="title">Figure 37. Modèle UML du patron <em>Strategy</em></div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_patrons_structurels"><a class="link" href="#_patrons_structurels">Patrons structurels</a></h4>
+<div class="sect2">
+<h3 id="_patrons_structurels"><a class="link" href="#_patrons_structurels">Patrons structurels</a></h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Adaptateur</dt>
@@ -2042,8 +3919,10 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_références"><a class="link" href="#_références">Références</a></h3>
+</div>
+<div class="sect1">
+<h2 id="_références"><a class="link" href="#_références">Références</a></h2>
+<div class="sectionbody">
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
@@ -2053,10 +3932,10 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <p><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First, O&#8217;Reilly, 09/2004.</p>
 </li>
 <li>
-<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-23).</p>
+<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-27).</p>
 </li>
 <li>
-<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-23).</p>
+<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-27).</p>
 </li>
 <li>
 <p><a id="Larman05"></a>[Larman05] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
@@ -2072,39 +3951,6 @@ Note the reference to “the first five principles”, though the acronym is not
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_conventions_d_écriture"><a class="link" href="#_conventions_d_écriture">Conventions d&#8217;écriture</a></h3>
-<div class="sect3">
-<h4 id="_diagrammes_uml"><a class="link" href="#_diagrammes_uml">Diagrammes UML</a></h4>
-<div class="paragraph">
-<p>Les diagrammes <a href="http://www.uml.org/">UML&#8482;</a> sont réalisés avec <a href="http://plantuml.sourceforge.net/">plantUML</a> avec des conventions
-graphiques propres qui sont listées ci-dessous.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/conventions1.png" alt="conventions1">
-</div>
-<div class="title">Figure 12. Convention plantuml pour la visibilité des propriétés/méthodes</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/conventions.png" alt="conventions">
-</div>
-<div class="title">Figure 13. Symboles pour les types de classes</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_crédits_photos"><a class="link" href="#_crédits_photos">Crédits photos</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://lostechies.com/derickbailey/2009/02/11/solid-development-principles-in-motivational-pictures/" class="bare">http://lostechies.com/derickbailey/2009/02/11/solid-development-principles-in-motivational-pictures/</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 </div>
 <div class="sect1">
 <h2 id="_about"><a class="link" href="#_about">About&#8230;&#8203;</a></h2>
@@ -2112,7 +3958,7 @@ graphiques propres qui sont listées ci-dessous.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Document réalisé par <a href="mailto:jbruel@gmail.com">Jean-Michel Bruel</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.1</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
+<p>Document réalisé par <a href="mailto:jbruel@gmail.com">Jean-Michel Bruel</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.2</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
 Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
 <span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="images/88x31.png" alt="Licence Creative Commons"></a></span>
 <a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p>
@@ -2124,8 +3970,8 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.1<br>
-Last updated 2014-11-23 00:07:02 CET
+Version 1.2<br>
+Last updated 2014-11-27 22:49:00 CET
 </div>
 </div>
 </body>
