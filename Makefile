@@ -2,8 +2,8 @@
 MAIN=main
 ICONSDIR=images/icons
 IMAGESDIR=images
-#STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
-STYLE=/Users/bruel/dev/asciidoctor/asciidoctor-stylesheet-factory/stylesheets/jmb.css
+STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
+#STYLE=/Users/bruel/dev/asciidoctor/asciidoctor-stylesheet-factory/stylesheets/jmb.css
 ASCIIDOC=asciidoc -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a imagesdir=$(IMAGESDIR) -a data-uri
 #HIGHLIGHT=coderay
 #HIGHLIGHT=highlightjs
@@ -47,7 +47,8 @@ pattern/%.png: pattern/%.plantuml
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
 	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
-	-a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) \
+	-a data-uri -a deckjs_theme=$(DECK) \
+	-a icons=font -a iconsdir=$(ICONSDIR) \
 	-a images=$(IMAGESDIR) -a prof -o $@ $<
 
 %.reveal.html: %.$(EXT)  $(DEP)

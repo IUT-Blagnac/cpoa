@@ -1,6 +1,15 @@
 /**
- * @author bruel
+ * = Asciidoclet
  *
+ * Sample comments that include `source code` by mailto:jbruel@gmail.com[JMB].
+ *
+ * [source,java]
+ * --
+ * include::src/java/Pizzeria/src/Pizza.java[lines=14..34]
+ * --
+ *
+ * @author bruel
+ * 
  */
 public abstract class Pizza { 
 	String nom;
@@ -22,11 +31,5 @@ public abstract class Pizza {
 	void couper() {
 		System.out.println("Découpage en parts triangulaires");
 	}
-	void emballer() {
-		System.out.println("Emballage dans une boîte officielle");
-		￼￼￼￼￼}
-	public String getNom() { 
-		return nom;
-	} 
 }
 

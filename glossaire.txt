@@ -36,6 +36,11 @@ ifdef::slides[=== Patrons comportementaux (suite)]
 [[Stratégie]] Stratégie (_Strategy^uk^_)::
 include::pattern/strategy.txt[]
 
+ifdef::slides[=== Patrons comportementaux (suite)]
+
+[[Etat]] État (_State^uk^_)::
+include::pattern/etat.txt[]
+
 === Patrons structurels
 
 Adaptateur::
