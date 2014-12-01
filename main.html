@@ -482,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2014-11-30 - First draft</span>
+<span id="revdate">2014-12-01 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -559,15 +559,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_implémentations_java_du_patron_singleton">7.4. Implémentations Java du patron Singleton</a></li>
 </ul>
 </li>
-<li><a href="#_point_sur_le_td_fabrique">8. Point sur le TD Fabrique</a>
+<li><a href="#_point_sur_le_tp">8. Point sur le TP</a></li>
+<li><a href="#_point_sur_le_td_fabrique">9. Point sur le TD Fabrique</a>
 <ul class="sectlevel2">
-<li><a href="#_principes_de_conception_3">8.1. Principes de conception</a></li>
-<li><a href="#_premier_exemple_d_utilisation_de_patron_2">8.2. Premier exemple d&#8217;utilisation de patron</a></li>
-<li><a href="#_autre_exemple_concret_2">8.3. Autre exemple concret</a></li>
+<li><a href="#_principes_de_conception_3">9.1. Principes de conception</a></li>
+<li><a href="#_premier_exemple_d_utilisation_de_patron_2">9.2. Premier exemple d&#8217;utilisation de patron</a></li>
+<li><a href="#_autre_exemple_concret_2">9.3. Autre exemple concret</a></li>
 </ul>
 </li>
-<li><a href="#_mais_c_est_pas_fini">9. Mais c&#8217;est pas fini!</a></li>
-<li><a href="#_patron_etat">10. Patron Etat</a></li>
+<li><a href="#_mais_c_est_pas_fini">10. Mais c&#8217;est pas fini!</a></li>
+<li><a href="#_fabrique_abstraite">11. Fabrique abstraite</a></li>
+<li><a href="#_retour_sur_la_machine_à_état_uml">12. Retour sur la machine à état UML</a></li>
+<li><a href="#_tp_en_mode_dojo">13. TP en mode Dojo</a>
+<ul class="sectlevel2">
+<li><a href="#_le_principe">13.1. Le principe</a></li>
+<li><a href="#_les_règles">13.2. Les règles</a></li>
+</ul>
+</li>
+<li><a href="#_le_distributeur_de_bonbons">14. Le distributeur de bonbons</a>
+<ul class="sectlevel2">
+<li><a href="#_implémentation_intuitive">14.1. Implémentation intuitive</a></li>
+<li><a href="#_erreur_d_implémentations">14.2. Erreur d&#8217;implémentations</a></li>
+<li><a href="#_une_meilleure_implémentation">14.3. Une meilleure implémentation</a></li>
+<li><a href="#_illutration">14.4. Illutration</a></li>
+<li><a href="#_le_patron_etat">14.5. Le patron Etat</a></li>
+</ul>
+</li>
 <li><a href="#_glossaire_et_définition">Glossaire et définition</a>
 <ul class="sectlevel2">
 <li><a href="#_patrons_de_création">Patrons de création</a></li>
@@ -2818,7 +2835,7 @@ initialisées par le <em>classloader</em></p>
 <img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
-Pour aller plus loin, cf/ <a href="http://blog.zenika.com/index.php?post/2014/06/11/Quelques-patterns-d-implementation-avec-les-enums-java">ce site</a>.
+Pour aller plus loin, cf. <a href="http://blog.zenika.com/index.php?post/2014/06/11/Quelques-patterns-d-implementation-avec-les-enums-java">ce site</a>.
 </td>
 </tr>
 </table>
@@ -2828,10 +2845,58 @@ Pour aller plus loin, cf/ <a href="http://blog.zenika.com/index.php?post/2014/06
 </div>
 </div>
 <div class="sect1">
-<h2 id="_point_sur_le_td_fabrique"><a class="link" href="#_point_sur_le_td_fabrique">8. Point sur le TD Fabrique</a></h2>
+<h2 id="_point_sur_le_tp"><a class="link" href="#_point_sur_le_tp">8. Point sur le TP</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-vg">$assertFileContains</span> <span class="tok-o">=</span> <span class="tok-o">[</span>
+<span class="tok-sr">/@startuml/m</span><span class="tok-p">,</span>
+<span class="tok-sr">/@enduml/m</span><span class="tok-p">,</span>
+<span class="tok-sr">/abstract Personnage/m</span><span class="tok-p">,</span>
+<span class="tok-sr">/Personnage\s+--&gt;.*ComportementArme/m</span><span class="tok-p">,</span>
+<span class="tok-sr">/Personnage\s&lt;|--.*/m</span><span class="tok-p">,</span>
+<span class="tok-sr">/interface\s+ComportementArme/m</span><span class="tok-p">,</span>
+<span class="tok-sr">/ComportementArme\s+&lt;\|\.\./m</span><span class="tok-p">,</span>
+<span class="tok-o">]</span>
+
+<span class="tok-no">Dir</span><span class="tok-o">.</span><span class="tok-n">glob</span><span class="tok-p">(</span><span class="tok-s1">&#39;TD1.uml&#39;</span><span class="tok-p">)</span> <span class="tok-k">do</span> <span class="tok-o">|</span><span class="tok-n">rb_file</span><span class="tok-o">|</span>
+<span class="tok-n">notestr</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;&quot;</span>
+<span class="tok-c1"># test file</span>
+<span class="tok-n">notestr</span> <span class="tok-o">+=</span> <span class="tok-p">(</span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-n">rb_file</span><span class="tok-p">))</span> <span class="tok-p">?</span> <span class="tok-s1">&#39;.&#39;</span> <span class="tok-p">:</span> <span class="tok-s1">&#39;F&#39;</span>
+
+<span class="tok-c1"># test file contents</span>
+<span class="tok-n">fileContent</span> <span class="tok-o">=</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">read</span><span class="tok-p">(</span><span class="tok-n">rb_file</span><span class="tok-p">)</span>
+
+<span class="tok-vg">$assertFileContains</span><span class="tok-o">.</span><span class="tok-n">each</span> <span class="tok-p">{</span><span class="tok-o">|</span><span class="tok-n">re</span><span class="tok-o">|</span>
+  <span class="tok-n">notestr</span> <span class="tok-o">+=</span> <span class="tok-p">(</span><span class="tok-n">fileContent</span> <span class="tok-o">=~</span> <span class="tok-n">re</span><span class="tok-p">)</span> <span class="tok-p">?</span> <span class="tok-s1">&#39;.&#39;</span> <span class="tok-p">:</span> <span class="tok-s1">&#39;F&#39;</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sur <strong>71</strong> étudiants :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>51</strong> dépôt &#8658; 20 personnes ont <strong>0/20</strong></p>
+</li>
+<li>
+<p><strong>30</strong> fichiers corrects (ni <code>.jar</code>, ni <code>.zip</code>, ni <code>TD1-John-Smith.uml</code>) &#8658; 21
+<strong>0/20</strong> de plus</p>
+</li>
+<li>
+<p>Sur le 30 fichiers corrects moyenne = 7/8 tests passés en moyenne &#8658; notes
+entre 12,5 et 20 (moyenne <strong>17,5</strong>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_point_sur_le_td_fabrique"><a class="link" href="#_point_sur_le_td_fabrique">9. Point sur le TD Fabrique</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_principes_de_conception_3"><a class="link" href="#_principes_de_conception_3">8.1. Principes de conception</a></h3>
+<h3 id="_principes_de_conception_3"><a class="link" href="#_principes_de_conception_3">9.1. Principes de conception</a></h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2856,7 +2921,7 @@ Pour aller plus loin, cf/ <a href="http://blog.zenika.com/index.php?post/2014/06
 </div>
 </div>
 <div class="sect2">
-<h3 id="_premier_exemple_d_utilisation_de_patron_2"><a class="link" href="#_premier_exemple_d_utilisation_de_patron_2">8.2. Premier exemple d&#8217;utilisation de patron</a></h3>
+<h3 id="_premier_exemple_d_utilisation_de_patron_2"><a class="link" href="#_premier_exemple_d_utilisation_de_patron_2">9.2. Premier exemple d&#8217;utilisation de patron</a></h3>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="images/pizzeria1.png"><img src="images/pizzeria1.png" alt="pizzeria1"></a>
@@ -2871,35 +2936,427 @@ Pour aller plus loin, cf/ <a href="http://blog.zenika.com/index.php?post/2014/06
 </div>
 </div>
 <div class="sect2">
-<h3 id="_autre_exemple_concret_2"><a class="link" href="#_autre_exemple_concret_2">8.3. Autre exemple concret</a></h3>
-<div class="paragraph">
-<p>A trouver</p>
+<h3 id="_autre_exemple_concret_2"><a class="link" href="#_autre_exemple_concret_2">9.3. Autre exemple concret</a></h3>
+<div class="listingblock">
+<div class="title">Factory en PHP (source <a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">class</span> <span class="tok-nc">DBFactory</span>
+<span class="tok-p">{</span>
+  <span class="tok-k">public</span> <span class="tok-k">static</span> <span class="tok-k">function</span> <span class="tok-nf">load</span><span class="tok-p">(</span><span class="tok-nv">$sgbdr</span><span class="tok-p">)</span>
+  <span class="tok-p">{</span>
+    <span class="tok-nv">$classe</span> <span class="tok-o">=</span> <span class="tok-s1">&#39;SGBDR_&#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$sgbdr</span><span class="tok-p">;</span>
+
+    <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-nb">file_exists</span><span class="tok-p">(</span><span class="tok-nv">$chemin</span> <span class="tok-o">=</span> <span class="tok-nv">$classe</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;.class.php&#39;</span><span class="tok-p">))</span>
+    <span class="tok-p">{</span>
+      <span class="tok-k">require</span> <span class="tok-nv">$chemin</span><span class="tok-p">;</span>
+      <span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nv">$classe</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+    <span class="tok-k">else</span>
+    <span class="tok-p">{</span>
+      <span class="tok-k">throw</span> <span class="tok-k">new</span> <span class="tok-nx">RuntimeException</span><span class="tok-p">(</span><span class="tok-s1">&#39;La classe &lt;strong&gt;&#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$classe</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;/strong&gt; n\&#39;a pu être trouvée !&#39;</span><span class="tok-p">);</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Factory en PHP (source <a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="php"><span class="tok-cp">&lt;?php</span>
+<span class="tok-k">try</span>
+<span class="tok-p">{</span>
+  <span class="tok-nv">$mysql</span> <span class="tok-o">=</span> <span class="tok-nx">DBFactory</span><span class="tok-o">::</span><span class="tok-na">load</span><span class="tok-p">(</span><span class="tok-s1">&#39;MySQL&#39;</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
+<span class="tok-k">catch</span> <span class="tok-p">(</span><span class="tok-nx">RuntimeException</span> <span class="tok-nv">$e</span><span class="tok-p">)</span>
+<span class="tok-p">{</span>
+  <span class="tok-k">echo</span> <span class="tok-nv">$e</span><span class="tok-o">-&gt;</span><span class="tok-na">getMessage</span><span class="tok-p">();</span>
+<span class="tok-p">}</span>
+<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mais_c_est_pas_fini"><a class="link" href="#_mais_c_est_pas_fini">9. Mais c&#8217;est pas fini!</a></h2>
+<h2 id="_mais_c_est_pas_fini"><a class="link" href="#_mais_c_est_pas_fini">10. Mais c&#8217;est pas fini!</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Fabrique abstraite</p>
+<p>Reprenons nos pizzas vues en <a href="TD3.html">TD</a></p>
 </div>
-<div class="paragraph">
-<p>&#8658; sera implémenté en TP</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/pizzeria-dep.png" alt="pizzeria dep">
+</div>
+<div class="title">Figure 30. Une pizzeria dépendante</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pizzeria.png" alt="pizzeria">
+</div>
+<div class="title">Figure 31. Une pizzeria dépendante</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Aucune variable ne doit contenir une référence à une classe concrète.</p>
+</li>
+<li>
+<p>Aucune classe ne doit dériver d&#8217;une classe concrète.</p>
+</li>
+<li>
+<p>Aucune classe ne doit redéfinir une méthode implémentée dans une classe de base.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Pizzeria-sec.png" alt="Pizzeria sec">
+</div>
+<div class="title">Figure 32. Une pizzeria avec Fabrique</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Pizzeria-sec1.png" alt="Pizzeria sec1">
+</div>
+<div class="title">Figure 33. Problème de la dépendance des ingrédients</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ingredients.png" alt="ingredients">
+</div>
+<div class="title">Figure 34. Des cartes adaptées</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">FabriqueIngredientsPizza</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Pate</span> <span class="tok-nf">creerPate</span> <span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Sauce</span> <span class="tok-nf">creerSauce</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Fromage</span> <span class="tok-nf">creerFromage</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Legumes</span><span class="tok-o">[]</span> <span class="tok-nf">creerLegumes</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Poivrons</span> <span class="tok-nf">creerPoivrons</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Moules</span> <span class="tok-nf">creerMoules</span><span class="tok-o">();</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">FabriqueIngredientsPizzaBrest</span> <span class="tok-kd">implements</span> <span class="tok-n">FabriqueIngredientsPizza</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Pate</span> <span class="tok-nf">creerPate</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">PateFine</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Sauce</span> <span class="tok-nf">creerSauce</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">SauceMarinara</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+  <span class="tok-o">...</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">FabriqueIngredientsPizzaStrasbourg</span> <span class="tok-kd">implements</span> <span class="tok-n">FabriqueIngredientsPizza</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Pate</span> <span class="tok-nf">creerPate</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">PateEpaisse</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kd">public</span> <span class="tok-n">Sauce</span> <span class="tok-nf">creerSauce</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-nf">SauceTomateCerise</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+  <span class="tok-o">...</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">PizzaFromage</span> <span class="tok-kd">extends</span> <span class="tok-n">Pizza</span> <span class="tok-o">{</span>
+  <span class="tok-n">FabriqueIngredientsPizza</span> <span class="tok-n">fabriqueIngredients</span><span class="tok-o">;</span>
+
+  <span class="tok-kd">public</span> <span class="tok-nf">PizzaFromage</span><span class="tok-o">(</span><span class="tok-n">FabriqueIngredientsPizza</span> <span class="tok-n">fabriqueIngredients</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">fabriqueIngredients</span> <span class="tok-o">=</span> <span class="tok-n">fabriqueIngredients</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kt">void</span> <span class="tok-nf">preparer</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Préparation de &quot;</span> <span class="tok-o">+</span> <span class="tok-n">nom</span><span class="tok-o">);</span>
+    <span class="tok-n">pate</span> <span class="tok-o">=</span> <span class="tok-n">fabriqueIngredients</span><span class="tok-o">.</span><span class="tok-na">creerPate</span><span class="tok-o">();</span>
+    <span class="tok-n">sauce</span> <span class="tok-o">=</span> <span class="tok-n">fabriqueIngredients</span><span class="tok-o">.</span><span class="tok-na">creerSauce</span><span class="tok-o">();</span>
+    <span class="tok-n">fromage</span> <span class="tok-o">=</span> <span class="tok-n">fabriqueIngredients</span><span class="tok-o">.</span><span class="tok-na">creerFromage</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_patron_etat"><a class="link" href="#_patron_etat">10. Patron Etat</a></h2>
+<h2 id="_fabrique_abstraite"><a class="link" href="#_fabrique_abstraite">11. Fabrique abstraite</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Retour sur la machine à état UML</p>
+<p>Nous sommes arrivé à une version du patron Fabrique appelée <a href="#FabriqueAbstraite">Fabrique Abstraite</a> :</p>
 </div>
 <div class="paragraph">
-<p>&#8658; problème de son implémentation</p>
+<p><strong>Fabrique</strong> (abstraite) fournit une interface pour la création de familles
+d&#8217;objets apparentés ou interdépendants, sans qu&#8217;il soit nécessaire de spécifier
+leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrique-abstraite.svg" alt="fabrique abstraite">
+</div>
+<div class="title">Figure 35. Modèle UML du patron Fabrique Abstraite</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_retour_sur_la_machine_à_état_uml"><a class="link" href="#_retour_sur_la_machine_à_état_uml">12. Retour sur la machine à état UML</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Reprenons la machine à état <a href="http://www.uml.org/">UML&#8482;</a> et essayons d&#8217;en implémenter une en <a href="https://www.java.com/fr/">Java</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/stack.png" alt="stack">
+</div>
+<div class="title">Figure 36. Machine à état d&#8217;une pile</div>
 </div>
 <div class="paragraph">
-<p>&#8658; patron état</p>
+<p>Nous allons implémenter cette pile en mode Kata.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+Mais avant ça, petite digression sur les Dojo Coding
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tp_en_mode_dojo"><a class="link" href="#_tp_en_mode_dojo">13. TP en mode Dojo</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_le_principe"><a class="link" href="#_le_principe">13.1. Le principe</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Une personne (généralement le prof de TP) <strong>initie l&#8217;exercice</strong> en
+ouvrant un <a href="http://www.eclipse.org">eclipse</a> et en <strong>commençant par un test</strong> qui commence
+par échouer et qui "passera" quand la fonctionalité attendue sera implémentée et fonctionnelle.</p>
+</li>
+<li>
+<p>Il vérifie que son test échoue bien</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+On pourra avantageusement installer le plug-in eclipse
+<a href="http://infinitest.github.io/">InfiniTest</a> qui permet de runner les tests à
+chaque sauvegarde.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Il fait en sorte que le test <strong>passe au vert</strong> le plus vite possible</p>
+</li>
+<li>
+<p>Il <strong>refactor</strong> éventuellement (faire passer le test au vert mais
+de façon intelligente, éviter la duplication de code, réorganiser
+les classes, etc.)</p>
+</li>
+<li>
+<p>Quand tout est au vert on passe à une fonctionnalité suivante</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_les_règles"><a class="link" href="#_les_règles">13.2. Les règles</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Toutes les 5 minutes (timer sonore) on change de personne aux commandes
+(au clavier/souris en l&#8217;occurence)</p>
+</li>
+<li>
+<p>Il faut un "maître du temps"</p>
+</li>
+<li>
+<p>Tout le monde participe au codage (et ne fait pas du code de son côté)</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Les machines ne sont donc pas utiles pour cette partie! Seule la machine
+connectée au vidéoprojecteur est utilisée.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Le volontariat c&#8217;est mieux, mais le prof est libre d&#8217;organiser le tour de rôle.</p>
+</li>
+<li>
+<p>En 90' on peut faire passer 18 personnes, donc tout le monde y passe et
+le plus tôt est en général le moins compliqué.</p>
+</li>
+<li>
+<p>Merci à ceux qui ont déjà participé aux coding dojos de montrer l&#8217;exemple ;-)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_le_distributeur_de_bonbons"><a class="link" href="#_le_distributeur_de_bonbons">14. Le distributeur de bonbons</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/bonbons.png" alt="bonbons">
+</div>
+<div class="title">Figure 37. Machine à état d&#8217;un distributeur simple</div>
+</div>
+<div class="sect2">
+<h3 id="_implémentation_intuitive"><a class="link" href="#_implémentation_intuitive">14.1. Implémentation intuitive</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">insererPiece</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+  <span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">A_PIECE</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous ne pouvez plus insérer de pièces&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">EPUISE</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous ne pouvez pas insérer de pièce, nous sommes en rupture de stock&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">VENDU</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Veuillez patienter, le bonbon va tomber&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">SANS_PIECE</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-n">etat</span> <span class="tok-o">=</span> <span class="tok-n">A_PIECE</span><span class="tok-o">;</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous avez inséré une pièce&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_erreur_d_implémentations"><a class="link" href="#_erreur_d_implémentations">14.2. Erreur d&#8217;implémentations</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ce code n&#8217;adhère pas au principe Ouvert-Fermé.</p>
+</li>
+<li>
+<p>Cette conception n&#8217;est pas orientée objet.</p>
+</li>
+<li>
+<p>Les transitions ne sont pas explicites. Elles sont enfouies au
+milieu d&#8217;un tas d&#8217;instructions conditionnelles.</p>
+</li>
+<li>
+<p>Nous n&#8217;avons pas encapsulé ce qui varie.</p>
+</li>
+<li>
+<p>Les ajouts ultérieurs sont susceptibles de provoquer des bugs
+dans le code.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_une_meilleure_implémentation"><a class="link" href="#_une_meilleure_implémentation">14.3. Une meilleure implémentation</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Définir une nouvelle interface <code>Etat</code> qui contiendra une méthode pour
+chaque action</p>
+</li>
+<li>
+<p>Implémenter une classe pour chaque <code>Etat</code>. Elles seront responsable du comportement.</p>
+</li>
+<li>
+<p>Se débarrasser de toutes les instructions conditionnelles et les remplacer
+par une délégation à la classe adéquate.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_illutration"><a class="link" href="#_illutration">14.4. Illutration</a></h3>
+<div class="paragraph">
+<p>Etape 1 :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/bonbons-dc.png" alt="bonbons dc">
+</div>
+<div class="title">Figure 38. Inplémentation des états</div>
+</div>
+<div class="paragraph">
+<p>Etape 2</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">EtatSansPiece</span> <span class="tok-kd">implements</span> <span class="tok-n">Etat</span> <span class="tok-o">{</span>
+  <span class="tok-n">Distributeur</span> <span class="tok-n">distributeur</span><span class="tok-o">;</span>
+
+  <span class="tok-kd">public</span> <span class="tok-nf">EtatSansPiece</span><span class="tok-o">(</span><span class="tok-n">Distributeur</span> <span class="tok-n">distributeur</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">distributeur</span> <span class="tok-o">=</span> <span class="tok-n">distributeur</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">insererPiece</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous avez inséré une pièce&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">distributeur</span><span class="tok-o">.</span><span class="tok-na">setEtat</span><span class="tok-o">(</span><span class="tok-n">distributeur</span><span class="tok-o">.</span><span class="tok-na">getEtatAPiece</span><span class="tok-o">());</span>
+  <span class="tok-o">}</span>
+  <span class="tok-o">...</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Etape 3</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Distributeur</span> <span class="tok-o">{</span>
+  <span class="tok-n">Etat</span> <span class="tok-n">etatEpuise</span><span class="tok-o">;</span>
+  <span class="tok-n">Etat</span> <span class="tok-n">etatSansPiece</span><span class="tok-o">;</span>
+  <span class="tok-n">Etat</span> <span class="tok-n">etatAPiece</span><span class="tok-o">;</span>
+  <span class="tok-n">Etat</span> <span class="tok-n">etatVendu</span><span class="tok-o">;</span>
+
+  <span class="tok-n">Etat</span> <span class="tok-n">etat</span> <span class="tok-o">=</span> <span class="tok-n">etatSansPiece</span><span class="tok-o">;</span>
+  <span class="tok-o">...</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">insererPiece</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">etat</span><span class="tok-o">.</span><span class="tok-na">insererPiece</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">...</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_patron_etat"><a class="link" href="#_le_patron_etat">14.5. Le patron Etat</a></h3>
+<div class="paragraph">
+<p><strong>Etat</strong> permet à un objet de modifier son comportement,
+quand son état interne change.
+Tout se passe comme si l&#8217;objet changeait de classe.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/etat.png" alt="etat">
+</div>
+<div class="title">Figure 39. Modèle UML du patron Etat</div>
+</div>
 </div>
 </div>
 </div>
@@ -2934,7 +3391,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/singleton.png" alt="singleton">
 </div>
-<div class="title">Figure 30. Modèle UML du patron <em>Singleton</em></div>
+<div class="title">Figure 40. Modèle UML du patron <em>Singleton</em></div>
 </div>
 <div class="dlist">
 <dl>
@@ -2949,7 +3406,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/fabrique.png" alt="fabrique">
 </div>
-<div class="title">Figure 31. Modèle UML du patron Fabrique</div>
+<div class="title">Figure 41. Modèle UML du patron Fabrique</div>
 </div>
 <div class="dlist">
 <dl>
@@ -2965,7 +3422,7 @@ leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
 <div class="content">
 <img src="images/fabrique-abstraite.svg" alt="fabrique abstraite">
 </div>
-<div class="title">Figure 32. Modèle UML du patron Fabrique Abstraite</div>
+<div class="title">Figure 42. Modèle UML du patron Fabrique Abstraite</div>
 </div>
 </div>
 <div class="sect2">
@@ -2988,7 +3445,23 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <img src="images/strategy.png" alt="strategy">
 </div>
-<div class="title">Figure 33. Modèle UML du patron <em>Strategy</em></div>
+<div class="title">Figure 43. Modèle UML du patron <em>Strategy</em></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="Etat"></a> État (<em>State<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Etat</strong> permet à un objet de modifier son comportement,
+quand son état interne change.
+Tout se passe comme si l&#8217;objet changeait de classe.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/etat.png" alt="etat">
+</div>
+<div class="title">Figure 44. Modèle UML du patron Etat</div>
 </div>
 </div>
 <div class="sect2">
@@ -3020,10 +3493,10 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <p><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First, O&#8217;Reilly, 09/2004.</p>
 </li>
 <li>
-<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-11-30).</p>
+<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-12-01).</p>
 </li>
 <li>
-<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-11-30).</p>
+<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-12-01).</p>
 </li>
 <li>
 <p><a id="Larman05"></a>[Larman05] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
@@ -3059,7 +3532,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.2<br>
-Last updated 2014-11-30 19:53:44 CET
+Last updated 2014-12-01 17:07:43 CET
 </div>
 </div>
 </body>
