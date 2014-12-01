@@ -48,7 +48,7 @@ pattern/%.png: pattern/%.plantuml
 	@echo '==> Compiling asciidoc files to generate Deckjs'
 	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
 	-a data-uri -a deckjs_theme=$(DECK) \
-	-a icons=font -a iconsdir=$(ICONSDIR) \
+	-a icons -a iconsdir=$(ICONSDIR) \
 	-a images=$(IMAGESDIR) -a prof -o $@ $<
 
 %.reveal.html: %.$(EXT)  $(DEP)
