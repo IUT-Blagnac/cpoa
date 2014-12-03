@@ -1,0 +1,102 @@
+== Importance du typage
+
+ifdef::slides[:leveloffset: -1]
+
+=== Différents types de typage
+
+Le fait d'attribuer un type (une classe) à une variable (un objet)
+peut se faire de plusieurs façons :
+
+- statique
+- dynamique
+- _duck typing_
+
+=== Typage statique
+
+On parle de *typage statique* quand la majorité des vérifications de type
+sont effectuées au moment de la *compilation*.
+
+.Exemple de typage statique
+[source,C]
+-----
+int i = 0;  // cette déclaration indique explicitement que
+            // la variable i est de type entier
+-----
+
+=== Typage dynamique
+
+Le *typage dynamique* consiste à laisser l'ordinateur réaliser
+l'opération de typage _à la volée_, *lors de l'exécution du code*.
+
+ifdef::slides[=== Typage dynamique (exemple)]
+
+.Exemple de typage dynamique
+[source,java]
+-------
+/**
+ * @author André Peninou
+ */
+public class Type {
+  void m() {
+    System.out.println ("Type");
+    }
+}
+public class SousType extends Type {
+  void m() {
+    System.out.println ("SousType");
+  }
+  void autreM(){
+    System.out.println ("Spécifique SousType");
+  }
+}
+...
+    Type a = new Type();
+    a.m(); // "Type"
+
+    a = new SousType();
+    a.m(); // "SousType"
+    // Statique : a est un Type (à la compil)
+    // Dynamique : a est un SousType au runtime.
+
+    // D'où :
+    a = new SousType();
+    a.autreM();
+    // NOK car type statique == A => autreM() n'existe pas à la compilation
+...
+
+-------
+
+=== _Duck typing_
+
+Style de *typage dynamique* où la *sémantique* d'un objet (c'est-à-dire son type)
+est déterminée par l'ensemble de ses *méthodes* et de ses *attributs*,
+et non par un type défini et nommé explicitement par le programmeur.
+
+[NOTE]
+======
+L'origine de cette expression est liée à cette citation :
+[quote, James Whitcomb Riley]
+____________________________________________________________________
+Si je vois un animal qui vole comme un canard, cancane comme un canard,
+et nage comme un canard, alors j'appelle cet oiseau un canard.
+____________________________________________________________________
+======
+
+ifdef::slides[=== _Duck typing_ (exemple)]
+
+.Exemple de _duck typing_ en Ruby
+[source,ruby]
+-----
+include::src/ruby/duckTyping.rb[]
+-----
+
+Ce qui donne :
+
+......
+20
+666, the number of the beast
+......
+
+TIP: Pour aller plus loin : http://fr.wikipedia.org/wiki/Duck_typing[]
+
+ifdef::slides[:leveloffset: +1]
