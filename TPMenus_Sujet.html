@@ -1,0 +1,1846 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>CPOA - Sujet TP 2</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>CPOA - Sujet TP 2</h1>
+<span id="author">Dut/Info-S3/M3105</span><br />
+<div id="toc">
+  <div id="toctitle">Table des matières</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="tableblock" id="cartouche">
+<table rules="all"
+style="margin-left:0; margin-right:auto;"
+width="90%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="9%" />
+<col width="90%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">PreReq</p></td>
+<td align="left" valign="top"><p class="table">1. Je sais programmer en Java.</p>
+<p class="table">2 J&#8217;ai conscience qu&#8217;il faut réfléchir avant de se lancer dans le codage.</p>
+<p class="table">3 Je m&#8217;aperçois que un problème de fond est la gestion des changements.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">ObjTD</p></td>
+<td align="left" valign="top"><p class="table">rendre "objet" du code a priori fonctionnel.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Durée</p></td>
+<td align="left" valign="top"><p class="table"><strong>2</strong> TP de 1,5h.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_le_but_objet_ivez_votre_code">1. Le but : "Objet-ivez" votre code</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_le_problème">1.1. Le problème</h3>
+<div class="paragraph"><p>Reprendre l&#8217;application développée en S2 de gestion de comptes bancaires (fichier .zip à importer dans un workspace Eclipse). Cette application utilise 3 classes principales :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+la classe Compte : les comptes bancaires proprement dits
+</p>
+</li>
+<li>
+<p>
+la classe AgenceBancaire : classe composée de Compte permettant de gérer une agence bancaire
+</p>
+</li>
+<li>
+<p>
+la classe ApplicationAgenceBancaire définissant le code fonctionnel de l&#8217;application : un jeu de menu permettant un opérateur de banque de réaliser des opérations courantes.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Cette dernière classe (ApplicationAgenceBancaire) a été écrite dans une approche purement procédurale (ensemble de méthodes statiques).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_le_but">1.2. Le but</h3>
+<div class="paragraph"><p>Le but de ce TP est de passer d&#8217;une approche fonctionnelle/procédurale du code applicatif à une approche objet. Nous allons réécrire et refactorer le code de l&#8217;application en plusieurs étapes pour obtenir un code :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+plus facile à maintenir car plus clair,
+</p>
+</li>
+<li>
+<p>
+plus facile à étendre,
+</p>
+</li>
+<li>
+<p>
+donc plus robuste aux changements.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_etude_et_reprise_de_l_8217_existant">2. Etude et reprise de l&#8217;existant</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Etudier le code proposé pour ApplicationAgenceBancaire.
+</p>
+</li>
+<li>
+<p>
+Comprendre la structure des méthodes (menus, méthodes réalisant les opérations)
+</p>
+</li>
+<li>
+<p>
+Ajouter les fonctions et sous-menu correspondant à l&#8217;exécution suivante :
+</p>
+</li>
+</ol></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>--
+  Agence CAISSE ECUREUIL de PIBRAC
+  Menu Général
+--
+  Choisir :
+    1 - Liste des comptes de l'agence
+    2 - Voir un compte (par son numéro)
+    3 - Menu opérations sur comptes
+    4 - Menu gestion des comptes
+
+    0 - Pour quitter ce menu
+Votre choix ?
+3
+
+--
+  Agence CAISSE ECUREUIL de PIBRAC
+  Menu opérations sur comptes
+--
+  Choisir :
+    1 - Déposer de l'argent sur un compte
+    2 - Retirer de l'argent sur un compte
+
+    0 - Pour quitter ce menu
+Votre choix ?
+0
+Fin de Menu opérations sur comptes
+
+--
+  Agence CAISSE ECUREUIL de PIBRAC
+  Menu Général
+--
+  Choisir :
+    1 - Liste des comptes de l'agence
+    2 - Voir un compte (par son numéro)
+    3 - Menu opérations sur comptes
+    4 - Menu gestion des comptes
+
+    0 - Pour quitter ce menu
+Votre choix ?
+4
+--
+  Agence CAISSE ECUREUIL de PIBRAC
+  Menu gestion des comptes
+--
+  Choisir :
+    1 - Ajouter un compte
+    2 - Supprimer un compte
+
+    0 - Pour quitter ce menu
+Votre choix ?
+0
+
+--
+  Agence CAISSE ECUREUIL de PIBRAC
+  Menu Général
+--
+  Choisir :
+    1 - Liste des comptes de l'agence
+    2 - Voir un compte (par son numéro)
+    3 - Menu opérations sur comptes
+    4 - Menu gestion des comptes
+
+    0 - Pour quitter ce menu
+Votre choix ?</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Attention" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Rencontrez vous des difficultés pour ajouter des fonctions dans ce code qui devient "spaghetti" ?
+</p>
+</li>
+<li>
+<p>
+Que pensez vous de la maintenance de ce code dans 4 ans par un autre programmeur et qui devra ajouter des cascades de menus et de fonctions ?
+</p>
+</li>
+<li>
+<p>
+N&#8217;avez vous pas programmé plusieurs fois la même chose pour faire les menus à l'écran ?
+</p>
+</li>
+</ol></div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objet_iver_les_fonctions">3. "Objet-iver" les fonctions</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_principe">3.1. Principe</h3>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Attention" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Vous pouvez réfléchir 5 minutes avant de commencer cette partie : qu&#8217;est ce qui pourrait devenir objet et quelles classes seront à créer ?</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Nous allons modifier le code en plusieurs classes en observant que :</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Chaque fonction utilisateur pourrait être programmée séparément sous forme d&#8217;un objet que nous appellerons <tt>Action</tt> (option de menu) possédant :
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+le message affiché à l'écran pour "afficher" l&#8217;action dans un menu,
+</p>
+</li>
+<li>
+<p>
+une méthode pour exécuter cette option de menu.
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Un menu pourrait être programmée séparément sous forme d&#8217;un objet que nous appellerons <tt>ActionList</tt> (liste d&#8217;actions de menus) possédant :
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+le message affiché à l'écran pour "afficher" le menu comme un sous-menu de menu,
+</p>
+</li>
+<li>
+<p>
+des méthodes pour ajouter/retirer des options de menus dans ce menu,
+</p>
+</li>
+<li>
+<p>
+une méthode pour exécuter cette ce menu (affichage et déclenchement des actions).
+</p>
+</li>
+</ol></div>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_les_fonctions_utilisateurs_comme_des_objets">3.2. Les fonctions utilisateurs comme des objets</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Faire une copie du code source précédent sous le nom <tt>applicationBanqueAction</tt>.
+</p>
+</li>
+<li>
+<p>
+Créer les packages suivants dans Eclipse :
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>   action
+   application.action
+   application.actionlist</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Etudier la définition d&#8217;interface suivante et insérer sa définition dans votre projet dans le package <tt>action</tt> :
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">package</span></span> action<span style="color: #990000">;</span>
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> banque<span style="color: #990000">.</span>AgenceBancaire<span style="color: #990000">;</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * An Action is an object that implements some action of a user's menu.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is defined by a message, an optional code, an execute method to "do" the action.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">interface</span></span> <span style="color: #008080">Action</span>  <span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Message of the action (to show on screen).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> the message of the action</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #008080">String</span> <span style="font-weight: bold"><span style="color: #000000">actionMessage</span></span> <span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Code of the action (may be used to identify the action among other ones).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> the code of the action</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #008080">String</span> <span style="font-weight: bold"><span style="color: #000000">actionCode</span></span> <span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * The method to call in order to "execute" the action on </span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;code&gt;</span></span><span style="font-style: italic"><span style="color: #9A1900">ag</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;/code&gt;</span></span><span style="font-style: italic"><span style="color: #9A1900">.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> ag the AgenceBancaire on which the action may act on</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@throws</span><span style="font-style: italic"><span style="color: #9A1900"> Exception when an uncaught exception occurs during execution</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">void</span> <span style="font-weight: bold"><span style="color: #000000">execute</span></span><span style="color: #990000">(</span><span style="color: #008080">AgenceBancaire</span> ag<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">throws</span></span> Exception<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Déclarer une classe par action (option de menu) à utiliser. Commencer par "Liste des comptes de l&#8217;agence" :
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Créer une classe (le nom <tt>ActionListeDesComptes</tt> paraît adapté) dans le package <tt>application.action</tt>,
+</p>
+</li>
+<li>
+<p>
+qui implémente <tt>Action</tt>,
+</p>
+</li>
+<li>
+<p>
+dotée de deux attributs (message, code)
+</p>
+</li>
+<li>
+<p>
+écrire le code dont un constructeur correctement paramétré,
+</p>
+</li>
+<li>
+<p>
+la méthode <tt>execute(AgenceBancaire)</tt> réalisera l&#8217;affichage écran de la liste des comptes de l&#8217;agence bancaire en paramètre.
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+De la même manière, déclarer une classe pour l&#8217;action "Voir un compte (par son numéro)" (classe <tt>ActionVoirCompteNumero</tt>) dans le package <tt>application.action</tt>.
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_les_menus_utilisateurs_comme_des_objets">3.3. Les menus utilisateurs comme des objets</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Etudier la définition d&#8217;interface suivante et insérer sa définition dans votre projet dans le package <tt>action</tt> :
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">package</span></span> action<span style="color: #990000">;</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * An ActionList is an object that implements a end-user menu.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is defined by a title (printed on top of the menu).</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is also defined by a list of different action objects that the menu manages.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is attended to :</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - display the end-user menu numbered from 1 (list of messages of actions).</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - display a quit option (0).</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - wait for some user response.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - launch the requested action.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">interface</span></span> <span style="color: #008080">ActionList</span> <span style="font-weight: bold"><span style="color: #0000FF">extends</span></span> Action <span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Title of the list of actions (menu).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> the title of the action list</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #008080">String</span> <span style="font-weight: bold"><span style="color: #000000">listTitle</span></span><span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * The number of actions in the action list.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> number of actions in the action list.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">int</span> <span style="font-weight: bold"><span style="color: #000000">size</span></span><span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Add an action at the end of the list action if it does not yet exists.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> ac the action to add</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> true if action is added, else false</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">boolean</span> <span style="font-weight: bold"><span style="color: #000000">addAction</span></span><span style="color: #990000">(</span><span style="color: #008080">Action</span> ac<span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Déclarer une classe <tt>ActionListAgenceBancaire</tt> dans le package <tt>application.actionlist</tt>,
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+qui implémente <tt>ActionList</tt>,
+</p>
+</li>
+<li>
+<p>
+dotée de quatre attributs (message, code, title, liste des actions). La liste des actions sera les différentes options que l&#8217;action list (menu) devra afficher.
+</p>
+</li>
+<li>
+<p>
+écrire le code dont un constructeur correctement paramétré,
+</p>
+</li>
+<li>
+<p>
+la méthode <tt>execute(AgenceBancaire)</tt> réalisera ce qui est défini dans la documentation. Le menu affiché sera identique à celui de la version antérieure de l&#8217;application. Chaque option de menu sera numérotée par <tt>execute()</tt> de 1 à n (nombre d&#8217;action) + 0 pour sortir du menu.
+</p>
+</li>
+</ol></div>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_et_maintenant_go_maintenance_et_extension_facilitées">3.4. Et maintenant : go ! Maintenance et extension facilitées</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Créer une classe contenant un main et permettant :
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+de créer une instance de chaque classe <tt>Action</tt> créée,
+</p>
+</li>
+<li>
+<p>
+de créer une instance de <tt>ActionListAgenceBancaire</tt>,
+</p>
+</li>
+<li>
+<p>
+lancer <tt>execute()</tt> sur l&#8217;instance de <tt>ActionListAgenceBancaire</tt>.
+</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Attention" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>Ca marche ?</p></div>
+</td>
+</tr></table>
+</div>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Vous pouvez créer les autres actions et sous-menus.
+</p>
+</li>
+<li>
+<p>
+Pourquoi ActionList hérite de Action à votre avis ?
+</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Attention" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>On aurait pu utiliser un autre patron appelé Composite &#8230; plus tard peut être</p></div>
+</td>
+</tr></table>
+</div>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_abstraire_le_problème">4. Abstraire le problème</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_une_nouvelle_application_8230_et_mince_8230">4.1. Une nouvelle application &#8230; et mince &#8230;</h3>
+<div class="paragraph"><p>Supposons que nous devions développer une application de gestion d&#8217;une liste d'élèves (classes Eleve et GroupeEleve). Elle est basée sur un menu permettant de :</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Voir la liste des élèves.
+</p>
+</li>
+<li>
+<p>
+Afficher un élève à partir du nom.
+</p>
+</li>
+<li>
+<p>
+Modifier les notes d&#8217;une élève.
+</p>
+</li>
+<li>
+<p>
+Ajouter un élève dans le groupe.
+</p>
+</li>
+<li>
+<p>
+Retirer un élève du groupe.
+</p>
+</li>
+<li>
+<p>
+&#8230;
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Ca vous rappelle des choses ?</p></div>
+<div class="paragraph"><p>Questions :</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Considérant les nouvelles classes <tt>Eleve</tt> et <tt>GroupeEleve</tt>, peut-on réutiliser telles quelles (sans les modifier) les interfaces <tt>Action</tt> et <tt>ActionList</tt> dans la nouvelle application ?
+</p>
+</li>
+<li>
+<p>
+Si oui : pourquoi ?
+</p>
+</li>
+<li>
+<p>
+Si non : pourquoi ?
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_abstrayons_un_peu_le_problème">4.2. Abstrayons un peu le problème</h3>
+<div class="paragraph"><p>Compte tenu des observations de la section précédente, il faudrait des classes <tt>Action</tt> et <tt>ActionList</tt> dont <tt>execute()</tt> prendrait en paramètre n&#8217;importe quel objet. Utiliser la classe Object ? Non, la généricité est là pour nous aider &#8230;</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Faire une copie du code source précédent sous le nom <tt>applicationBanqueActionGenerique</tt>.
+</p>
+</li>
+<li>
+<p>
+Modifier les déclarations des interfaces <tt>Action</tt> et <tt>ActionList</tt> comme suit (attention, tout le code va devenir "erroné") :
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">package</span></span> action<span style="color: #990000">;</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * An Action is an object that implements some action of a user's menu.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is defined by a message, an optional code, an execute method to "do" the action.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is parameterized by the  type of object on which the action may act on (execute on).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> </span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;E&gt;</span></span><span style="font-style: italic"><span style="color: #9A1900"> The type of object on which the action may act on.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">interface</span></span> <span style="color: #008080">Action</span> <span style="color: #990000">&lt;</span>E<span style="color: #990000">&gt;</span> <span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Message of the action (to show on screen).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> the message of the action</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #008080">String</span> <span style="font-weight: bold"><span style="color: #000000">actionMessage</span></span> <span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Code of the action (may be used to identify the action among an action list).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> the code of the action</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #008080">String</span> <span style="font-weight: bold"><span style="color: #000000">actionCode</span></span> <span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * The method to call in order to "execute" the action on </span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;code&gt;</span></span><span style="font-style: italic"><span style="color: #9A1900">e</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;/code&gt;</span></span><span style="font-style: italic"><span style="color: #9A1900">.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> e the object on which the action may act on</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@throws</span><span style="font-style: italic"><span style="color: #9A1900"> Exception when an uncaught exception occurs during execution</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">void</span> <span style="font-weight: bold"><span style="color: #000000">execute</span></span><span style="color: #990000">(</span><span style="color: #008080">E</span> e<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">throws</span></span> Exception<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-weight: bold"><span style="color: #000080">package</span></span> action<span style="color: #990000">;</span>
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * An ActionList is an object that implements a end-user menu.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is defined by a title (printed on top of the menu).</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is also defined by a list of different action objects that the menu manages.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is attended to :</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - display the end-user menu numbered from 1 (list of messages of actions).</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - display a quit option (0).</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - wait for some user-response.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * - launch the requested action.</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * It is parameterized by the  type of object on which the actions of the list action may act on (execute on).</span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;BR&gt;</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> </span></span><span style="font-weight: bold"><span style="color: #0000FF">&lt;E&gt;</span></span><span style="font-style: italic"><span style="color: #9A1900"> The type of object on which the list action may act on.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">interface</span></span> <span style="color: #008080">ActionList</span><span style="color: #990000">&lt;</span>E<span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">extends</span></span> Action<span style="color: #990000">&lt;</span>E<span style="color: #990000">&gt;</span><span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Title of the list of actions (menu).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> the title of the action list</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #008080">String</span> <span style="font-weight: bold"><span style="color: #000000">listTitle</span></span><span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * The number of actions in the action list.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> number of actions in the action list.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">int</span> <span style="font-weight: bold"><span style="color: #000000">size</span></span><span style="color: #990000">();</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Add an action at the end of the list action if it does not yet exists.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> ac the action to add</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> true if action is added, else false</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">boolean</span> <span style="font-weight: bold"><span style="color: #000000">addAction</span></span><span style="color: #990000">(</span><span style="color: #008080">Action&lt;E&gt;</span> ac<span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+</tt></pre></div></div>
+</li>
+<li>
+<p>
+Modifier chaque classe créée (les <tt>Action</tt> puis <tt>ActionList</tt> puis le <tt>main()</tt>) pour soit implémenter la bonne instanciation des interfaces, soit instancier correctement les objets.
+</p>
+</li>
+<li>
+<p>
+Tout doit fonctionner.
+</p>
+</li>
+<li>
+<p>
+Il n&#8217;y a plus qu'à faire la nouvelle application.
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pour_aller_plus_loin_complétons_et_encore_plus_d_8217_abstraction">5. Pour aller plus loin : complétons et encore plus d&#8217;abstraction</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_une_interface_tt_actionlist_tt_plus_complète">5.1. Une interface <tt>ActionList</tt> plus complète</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Faire une copie du projet précédent
+</p>
+</li>
+<li>
+<p>
+Pour de vraies applications, ajouter à l&#8217;interface <tt>ActionList</tt> les opérations suivantes :
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Add an action in the list action at the specified index if it does not yet exists.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> ac the action to add</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> index index to add the action</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> true if action is added, else false</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@throws</span><span style="font-style: italic"><span style="color: #9A1900"> IndexOutOfBoundsException if (index &lt; 0) || (index &gt; size())</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">boolean</span> <span style="font-weight: bold"><span style="color: #000000">addAction</span></span><span style="color: #990000">(</span><span style="color: #008080">Action&lt;E&gt;</span> ac<span style="color: #990000">,</span> <span style="color: #009900">int</span> index<span style="color: #990000">);</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Remove an action from the list action at the specified index.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> index index to remove the action</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> true</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@throws</span><span style="font-style: italic"><span style="color: #9A1900"> IndexOutOfBoundsException if (index &lt; 0) || (index &gt; size())</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">boolean</span> <span style="font-weight: bold"><span style="color: #000000">removeAction</span></span><span style="color: #990000">(</span><span style="color: #009900">int</span> index<span style="color: #990000">);</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * Remove an action from the list action.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@param</span><span style="font-style: italic"><span style="color: #9A1900"> ac the action to remove</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> true if action is removed (found), else false</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="color: #009900">boolean</span> <span style="font-weight: bold"><span style="color: #000000">removeAction</span></span><span style="color: #990000">(</span><span style="color: #008080">Action&lt;E&gt;</span> ac<span style="color: #990000">);</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * List of the messages of actions contained in the action list</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         * </span></span><span style="color: #009900">@return</span><span style="font-style: italic"><span style="color: #9A1900"> an array of messages of the list action</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">         */</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">public</span></span> String<span style="color: #990000">[]</span> <span style="font-weight: bold"><span style="color: #000000">listOfActions</span></span><span style="color: #990000">()</span> <span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_quid_d_tt_actionlist_tt">5.2. Quid d'<tt>ActionList</tt> ?</h3>
+<div class="paragraph"><p>La classe <tt>ActionListAgenceBancaire</tt> qui met en oeuvre un menu (qui implémente <tt>ActionList</tt>) est ici créée spécifiquement pour <tt>AgenceBancaire</tt>. Mais cela est il nécessaire dans chaque application ? (en supposant ne rien afficher de l'<tt>AgenceBancaire</tt>). On devrait pouvoir faire une classe "générique" de gestion de menus composés d&#8217;actions et réutilisable dans chaque application.</p></div>
+<div class="paragraph"><p>Alors essayons :</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Faire une copie du projet de la section précédente
+</p>
+</li>
+<li>
+<p>
+Déplacer la classe <tt>ActionListAgenceBancaire</tt> dans le package <tt>action</tt>.
+</p>
+</li>
+<li>
+<p>
+Renommer cette classe en un nom contenant "ActionList" et bien choisi. AbstractActionList serait TRES mal choisi.
+</p>
+</li>
+<li>
+<p>
+Pour rendre cette classe générique (et non pas abstraite), modifier l&#8217;en-tête en
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">public</span></span> <span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="color: #008080">GenericActionList</span><span style="color: #990000">&lt;</span>E<span style="color: #990000">&gt;</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">implements</span></span> ActionList<span style="color: #990000">&lt;</span>E<span style="color: #990000">&gt;</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Attention, tout le code va maintenant "klaxonner" en rouge ! normal &#8230;
+</p>
+</li>
+<li>
+<p>
+Modifier chaque fois que nécessaire pour utiliser le type générique E
+</p>
+</li>
+<li>
+<p>
+Enlever tout accès à la classe <tt>AgenceBancaire</tt> (affichage nom de la banque, &#8230;)
+</p>
+</li>
+<li>
+<p>
+Vous devriez arriver au bout &#8230;
+</p>
+</li>
+<li>
+<p>
+Enfin dans le main il y aura quelques "klaxons warnings" sur la création d&#8217;objets de cette nouvelle classe car il faudra indiquer le type paramètre à la création.
+</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Attention" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">
+<div class="paragraph"><p>ATTENTION : faire une classe générique n&#8217;est pas toujours aussi simple. Ici le cas a été simplifié à l&#8217;extrême.</p></div>
+</td>
+</tr></table>
+</div>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_troisième_étape_abstraction_encore_plus">5.3. Troisième étape : abstraction encore plus</h3>
+<div class="paragraph"><p>Le problème :</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Supposons que l&#8217;on veuille utiliser notre application dans une système différent où saisies et affichages ne se font pas sur le terminal d&#8217;exécution de l&#8217;application &#8230; Les instructions utilisant <tt>new Scanner (System.in)</tt> ou <tt>System.out.println &#8230;</tt> deviennent obsolètes.
+</p>
+</li>
+<li>
+<p>
+Tout comme l&#8217;agence utilisée dans les traitements, ces 2 éléments font maintenant partie du <strong>contexte d&#8217;exécution</strong> des actions.
+</p>
+</li>
+<li>
+<p>
+D&#8217;autres éléments pourraient être utilisés : des transactions en cours (réservations aériennes), des bases de données, des connexions diverses, &#8230;
+</p>
+</li>
+<li>
+<p>
+Il faut donc créer un <strong>contexte d&#8217;exécution</strong> qui sera en paramètre des <tt>Action</tt> et <tt>ActionList</tt>.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Allons-y !</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Faire une copie du projet de la section précédente (sans généricité).
+</p>
+</li>
+<li>
+<p>
+Dans le package <tt>application</tt>, créer une classe <tt>ApplicationContextAgenceBancaire</tt> implémentant le pattern <tt>Singleton</tt> permettant d&#8217;accéder :
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+A l&#8217;agence bancaire "en cours".
+</p>
+</li>
+<li>
+<p>
+Au <tt>Scanner</tt> à utiliser. L&#8217;initialiser ici avec un Scanner sur System.in mais autre chose pourrait être utilisé (un fichier, un flux vers un terminal, &#8230;).
+</p>
+</li>
+<li>
+<p>
+A la sortie <tt>PrintStream</tt> à utiliser. Ici ce sera System.out mais autre chose pourrait être utilisé (un fichier, un flux vers un terminal, &#8230;).
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Refactorer tout le code :
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Les classes <tt>Action</tt> et <tt>ActionList</tt> utilisant maintenant le type <tt>ApplicationContextAgenceBancaire</tt> (à la place de <tt>AgenceBancaire</tt>)
+</p>
+</li>
+<li>
+<p>
+Modifier les accès à l&#8217;agence bancaire en utilisant <tt>ApplicationContextAgenceBancaire</tt>.
+</p>
+</li>
+<li>
+<p>
+Modifier les accès à l&#8217;entrée standard en utilisant <tt>ApplicationContextAgenceBancaire</tt>.
+</p>
+</li>
+<li>
+<p>
+Modifier les accès à la sortie standard en utilisant <tt>ApplicationContextAgenceBancaire</tt>.
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Ca marche ??
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Dernière mise à jour 2014-12-05 03:03:51 CET
+</div>
+</div>
+</body>
+</html>
