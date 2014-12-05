@@ -482,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2014-12-01 - First draft</span>
+<span id="revdate">2014-12-04 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -494,12 +494,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_evaluation_et_notation">1.3. Evaluation et notation</a></li>
 </ul>
 </li>
-<li><a href="#_importance_du_typage">2. Importance du typage</a>
+<li><a href="#_rappels_sur_des_éléments_java_importants">2. Rappels sur des éléments Java importants</a>
 <ul class="sectlevel2">
-<li><a href="#_différents_types_de_typage">2.1. Différents types de typage</a></li>
-<li><a href="#_typage_statique">2.2. Typage statique</a></li>
-<li><a href="#_typage_dynamique">2.3. Typage dynamique</a></li>
-<li><a href="#__em_duck_typing_em">2.4. <em>Duck typing</em></a></li>
+<li><a href="#_importance_du_typage">2.1. Importance du typage</a></li>
+<li><a href="#_importance_de_la_visibilité">2.2. Importance de la visibilité</a></li>
+<li><a href="#_retour_sur_les_membres_code_static_code">2.3. Retour sur les Membres <code>static</code></a></li>
+<li><a href="#_utilité_générale_des_code_enum_code">2.4. Utilité générale des <code>enum</code></a></li>
 </ul>
 </li>
 <li><a href="#_design_patterns">3. Design patterns</a>
@@ -512,77 +512,69 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_les_patrons_comment_ça_marche">3.6. Les patrons : comment ça marche ?</a></li>
 </ul>
 </li>
-<li><a href="#_utilité_générale_des_code_enum_code">4. Utilité générale des <code>enum</code></a>
+<li><a href="#_point_sur_les_documents_demandés_en_ptut">4. Point sur les documents demandés en PTut</a>
 <ul class="sectlevel2">
-<li><a href="#_modélisation">4.1. Modélisation</a></li>
-<li><a href="#_propriétés">4.2. Propriétés</a></li>
-<li><a href="#_méthodes_de_base">4.3. Méthodes de base</a></li>
-<li><a href="#_exemple_plus_complexe">4.4. Exemple plus complexe</a></li>
+<li><a href="#_dossier_d_analyse_et_conception">4.1. Dossier d&#8217;Analyse et Conception</a></li>
+<li><a href="#_sommaire">4.2. Sommaire</a></li>
+<li><a href="#_introduction_2">4.3. Introduction</a></li>
+<li><a href="#_mof_et_mot_actuels_et_nouveaux">4.4. MOF et MOT actuels et nouveaux</a></li>
+<li><a href="#_diagramme_des_uc">4.5. Diagramme des UC</a></li>
+<li><a href="#_architecture_mvc">4.6. Architecture MVC</a></li>
+<li><a href="#_diagramme_des_classes_métier">4.7. Diagramme des Classes métier</a></li>
+<li><a href="#_schéma_du_package_métier">4.8. Schéma du Package Métier</a></li>
+<li><a href="#_script_de_création_de_la_base_et_des_vues_de_données">4.9. Script de création de la base et des vues de données</a></li>
+<li><a href="#_diagramme_des_classes_contrôleur">4.10. Diagramme des Classes contrôleur</a></li>
+<li><a href="#_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants">4.11. Diagramme de Séquence Système pour les cas d&#8217;utilisation « importants »</a></li>
+<li><a href="#_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents">4.12. Diagramme de Séquence et Diagramme des Classes Participantes pour un des UC précédents</a></li>
+<li><a href="#_sni_et_sep_sef">4.13. SNI et SEP/SEF</a></li>
+<li><a href="#_maquettes_d_écrans_et_dessins">4.14. Maquettes d’écrans et dessins</a></li>
+<li><a href="#_annexes_interviews_des_utilisateurs">4.15. Annexes : interviews des utilisateurs</a></li>
+<li><a href="#_conclusions">4.16. Conclusions</a></li>
 </ul>
 </li>
-<li><a href="#_point_sur_les_documents_demandés_en_ptut">5. Point sur les documents demandés en PTut</a>
+<li><a href="#_un_nouveau_diagramme_uml_très_utile">5. Un nouveau diagramme UML très utile</a>
 <ul class="sectlevel2">
-<li><a href="#_dossier_d_analyse_et_conception">5.1. Dossier d&#8217;Analyse et Conception</a></li>
-<li><a href="#_sommaire">5.2. Sommaire</a></li>
-<li><a href="#_introduction_2">5.3. Introduction</a></li>
-<li><a href="#_mof_et_mot_actuels_et_nouveaux">5.4. MOF et MOT actuels et nouveaux</a></li>
-<li><a href="#_diagramme_des_uc">5.5. Diagramme des UC</a></li>
-<li><a href="#_architecture_mvc">5.6. Architecture MVC</a></li>
-<li><a href="#_diagramme_des_classes_métier">5.7. Diagramme des Classes métier</a></li>
-<li><a href="#_schéma_du_package_métier">5.8. Schéma du Package Métier</a></li>
-<li><a href="#_script_de_création_de_la_base_et_des_vues_de_données">5.9. Script de création de la base et des vues de données</a></li>
-<li><a href="#_diagramme_des_classes_contrôleur">5.10. Diagramme des Classes contrôleur</a></li>
-<li><a href="#_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants">5.11. Diagramme de Séquence Système pour les cas d&#8217;utilisation « importants »</a></li>
-<li><a href="#_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents">5.12. Diagramme de Séquence et Diagramme des Classes Participantes pour un des UC précédents</a></li>
-<li><a href="#_sni_et_sep_sef">5.13. SNI et SEP/SEF</a></li>
-<li><a href="#_maquettes_d_écrans_et_dessins">5.14. Maquettes d’écrans et dessins</a></li>
-<li><a href="#_annexes_interviews_des_utilisateurs">5.15. Annexes : interviews des utilisateurs</a></li>
-<li><a href="#_conclusions">5.16. Conclusions</a></li>
+<li><a href="#_transitions">5.1. Transitions</a></li>
+<li><a href="#_exemple_de_transitions">5.2. Exemple de transitions</a></li>
+<li><a href="#_refactoring">5.3. Refactoring</a></li>
+<li><a href="#_transitions_internes">5.4. Transitions internes</a></li>
+<li><a href="#_conditions">5.5. Conditions</a></li>
+<li><a href="#_etats_complexes">5.6. Etats complexes</a></li>
+<li><a href="#_notion_de_concurrence">5.7. Notion de concurrence</a></li>
 </ul>
 </li>
-<li><a href="#_un_nouveau_diagramme_uml_très_utile">6. Un nouveau diagramme UML très utile</a>
+<li><a href="#_point_sur_le_td_de_la_semaine_passée">6. Point sur le TD de la semaine passée</a>
 <ul class="sectlevel2">
-<li><a href="#_transitions">6.1. Transitions</a></li>
-<li><a href="#_exemple_de_transitions">6.2. Exemple de transitions</a></li>
-<li><a href="#_refactoring">6.3. Refactoring</a></li>
-<li><a href="#_transitions_internes">6.4. Transitions internes</a></li>
-<li><a href="#_conditions">6.5. Conditions</a></li>
-<li><a href="#_etats_complexes">6.6. Etats complexes</a></li>
-<li><a href="#_notion_de_concurrence">6.7. Notion de concurrence</a></li>
+<li><a href="#_principes_de_conception_2">6.1. Principes de conception</a></li>
+<li><a href="#_patron_singleton">6.2. Patron Singleton</a></li>
+<li><a href="#_exemples_d_utilisation_du_patron_singleton">6.3. Exemples d&#8217;utilisation du patron Singleton</a></li>
+<li><a href="#_implémentations_java_du_patron_singleton">6.4. Implémentations Java du patron Singleton</a></li>
 </ul>
 </li>
-<li><a href="#_point_sur_le_td_de_la_semaine_passée">7. Point sur le TD de la semaine passée</a>
+<li><a href="#_point_sur_le_tp">7. Point sur le TP</a></li>
+<li><a href="#_point_sur_le_td_fabrique">8. Point sur le TD Fabrique</a>
 <ul class="sectlevel2">
-<li><a href="#_principes_de_conception_2">7.1. Principes de conception</a></li>
-<li><a href="#_patron_singleton">7.2. Patron Singleton</a></li>
-<li><a href="#_exemples_d_utilisation_du_patron_singleton">7.3. Exemples d&#8217;utilisation du patron Singleton</a></li>
-<li><a href="#_implémentations_java_du_patron_singleton">7.4. Implémentations Java du patron Singleton</a></li>
+<li><a href="#_principes_de_conception_3">8.1. Principes de conception</a></li>
+<li><a href="#_premier_exemple_d_utilisation_de_patron_2">8.2. Premier exemple d&#8217;utilisation de patron</a></li>
+<li><a href="#_autre_exemple_concret_2">8.3. Autre exemple concret</a></li>
 </ul>
 </li>
-<li><a href="#_point_sur_le_tp">8. Point sur le TP</a></li>
-<li><a href="#_point_sur_le_td_fabrique">9. Point sur le TD Fabrique</a>
+<li><a href="#_mais_c_est_pas_fini">9. Mais c&#8217;est pas fini!</a></li>
+<li><a href="#_fabrique_abstraite">10. Fabrique abstraite</a></li>
+<li><a href="#_retour_sur_la_machine_à_état_uml">11. Retour sur la machine à état UML</a></li>
+<li><a href="#_tp_en_mode_dojo">12. TP en mode Dojo</a>
 <ul class="sectlevel2">
-<li><a href="#_principes_de_conception_3">9.1. Principes de conception</a></li>
-<li><a href="#_premier_exemple_d_utilisation_de_patron_2">9.2. Premier exemple d&#8217;utilisation de patron</a></li>
-<li><a href="#_autre_exemple_concret_2">9.3. Autre exemple concret</a></li>
+<li><a href="#_le_principe">12.1. Le principe</a></li>
+<li><a href="#_les_règles">12.2. Les règles</a></li>
 </ul>
 </li>
-<li><a href="#_mais_c_est_pas_fini">10. Mais c&#8217;est pas fini!</a></li>
-<li><a href="#_fabrique_abstraite">11. Fabrique abstraite</a></li>
-<li><a href="#_retour_sur_la_machine_à_état_uml">12. Retour sur la machine à état UML</a></li>
-<li><a href="#_tp_en_mode_dojo">13. TP en mode Dojo</a>
+<li><a href="#_le_distributeur_de_bonbons">13. Le distributeur de bonbons</a>
 <ul class="sectlevel2">
-<li><a href="#_le_principe">13.1. Le principe</a></li>
-<li><a href="#_les_règles">13.2. Les règles</a></li>
-</ul>
-</li>
-<li><a href="#_le_distributeur_de_bonbons">14. Le distributeur de bonbons</a>
-<ul class="sectlevel2">
-<li><a href="#_implémentation_intuitive">14.1. Implémentation intuitive</a></li>
-<li><a href="#_erreur_d_implémentations">14.2. Erreur d&#8217;implémentations</a></li>
-<li><a href="#_une_meilleure_implémentation">14.3. Une meilleure implémentation</a></li>
-<li><a href="#_illutration">14.4. Illutration</a></li>
-<li><a href="#_le_patron_etat">14.5. Le patron Etat</a></li>
+<li><a href="#_implémentation_intuitive">13.1. Implémentation intuitive</a></li>
+<li><a href="#_erreur_d_implémentations">13.2. Erreur d&#8217;implémentations</a></li>
+<li><a href="#_une_meilleure_implémentation">13.3. Une meilleure implémentation</a></li>
+<li><a href="#_illutration">13.4. Illutration</a></li>
+<li><a href="#_le_patron_etat">13.5. Le patron Etat</a></li>
 </ul>
 </li>
 <li><a href="#_glossaire_et_définition">Glossaire et définition</a>
@@ -726,7 +718,7 @@ les modèles <a href="http://www.uml.org/">UML&#8482;</a>, mise en oeuvre en TP)
 </dd>
 <dt class="hdlist1">Semaine 3</dt>
 <dd>
-<p>Patrons Fabrique, Proxy, Etat</p>
+<p>Patrons <a href="#Fabrique">[Fabrique]</a>, Proxy, <a href="#Etat">[Etat]</a></p>
 </dd>
 <dt class="hdlist1">Semaine 4</dt>
 <dd>
@@ -816,10 +808,12 @@ les étudiants auront :</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_importance_du_typage"><a class="link" href="#_importance_du_typage">2. Importance du typage</a></h2>
+<h2 id="_rappels_sur_des_éléments_java_importants"><a class="link" href="#_rappels_sur_des_éléments_java_importants">2. Rappels sur des éléments Java importants</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_différents_types_de_typage"><a class="link" href="#_différents_types_de_typage">2.1. Différents types de typage</a></h3>
+<h3 id="_importance_du_typage"><a class="link" href="#_importance_du_typage">2.1. Importance du typage</a></h3>
+<div class="sect3">
+<h4 id="_différents_types_de_typage"><a class="link" href="#_différents_types_de_typage">2.1.1. Différents types de typage</a></h4>
 <div class="paragraph">
 <p>Le fait d&#8217;attribuer un type (une classe) à une variable (un objet)
 peut se faire de plusieurs façons :</p>
@@ -838,8 +832,8 @@ peut se faire de plusieurs façons :</p>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_typage_statique"><a class="link" href="#_typage_statique">2.2. Typage statique</a></h3>
+<div class="sect3">
+<h4 id="_typage_statique"><a class="link" href="#_typage_statique">2.1.2. Typage statique</a></h4>
 <div class="paragraph">
 <p>On parle de <strong>typage statique</strong> quand la majorité des vérifications de type
 sont effectuées au moment de la <strong>compilation</strong>.</p>
@@ -852,8 +846,8 @@ sont effectuées au moment de la <strong>compilation</strong>.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_typage_dynamique"><a class="link" href="#_typage_dynamique">2.3. Typage dynamique</a></h3>
+<div class="sect3">
+<h4 id="_typage_dynamique"><a class="link" href="#_typage_dynamique">2.1.3. Typage dynamique</a></h4>
 <div class="paragraph">
 <p>Le <strong>typage dynamique</strong> consiste à laisser l&#8217;ordinateur réaliser
 l&#8217;opération de typage <em>à la volée</em>, <strong>lors de l&#8217;exécution du code</strong>.</p>
@@ -894,8 +888,8 @@ l&#8217;opération de typage <em>à la volée</em>, <strong>lors de l&#8217;exé
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="__em_duck_typing_em"><a class="link" href="#__em_duck_typing_em">2.4. <em>Duck typing</em></a></h3>
+<div class="sect3">
+<h4 id="__em_duck_typing_em"><a class="link" href="#__em_duck_typing_em">2.1.4. <em>Duck typing</em></a></h4>
 <div class="paragraph">
 <p>Style de <strong>typage dynamique</strong> où la <strong>sémantique</strong> d&#8217;un objet (c&#8217;est-à-dire son type)
 est déterminée par l&#8217;ensemble de ses <strong>méthodes</strong> et de ses <strong>attributs</strong>,
@@ -961,8 +955,345 @@ Pour aller plus loin : <a href="http://fr.wikipedia.org/wiki/Duck_typing" class=
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_importance_de_la_visibilité"><a class="link" href="#_importance_de_la_visibilité">2.2. Importance de la visibilité</a></h3>
 <div class="paragraph">
-<p>include:visibilite.txt[]</p>
+<p>Dès que l&#8217;on commence à avoir une application conséquente, l&#8217;organisation
+en <em>package</em> devient obligatoire. Revenons donc sur les questions de
+<strong>visibilité</strong> des propriétés et méthodes, qui seront importants dans la plupart
+des aspects de ce module.</p>
+</div>
+<div class="paragraph">
+<p>Si un champ d&#8217;une classe <code>A</code> :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>est <em>private</em>, il est accessible uniquement depuis sa propre classe ;</p>
+</li>
+<li>
+<p>a la visibilité <em>package</em> (visibilité par défaut, pas de mot-clef), il est accessible de partout dans
+le paquetage de <code>A</code> mais de nulle part ailleurs ;</p>
+</li>
+<li>
+<p>est <em>protected</em>, il est accessible de partout dans le paquetage de <code>A</code> et,
+si <code>A</code> est publique, grosso modo dans les classes héritant de <code>A</code> dans d&#8217;autres
+paquetages ;</p>
+</li>
+<li>
+<p>est <em>public</em>, il est accessible de partout dans le paquetage de <code>A</code> et,
+si <code>A</code> est publique, de partout ailleurs.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Ci-dessus, les niveaux de visibilité sont rangés par visibilité croissante.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">package</span> <span class="tok-n">UN</span><span class="tok-o">;</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">A</span> <span class="tok-o">{</span>
+  <span class="tok-kd">protected</span> <span class="tok-n">String</span> <span class="tok-n">attrprotected</span><span class="tok-o">;</span>
+  <span class="tok-n">String</span> <span class="tok-n">attrfriend</span><span class="tok-o">;</span> <span class="tok-c1">// friend</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Si on définit une deuxième classe dans le même <em>package</em> :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">package</span> <span class="tok-n">UN</span><span class="tok-o">;</span>
+  <span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>
+    <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">A</span> <span class="tok-o">();</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : même si bizarre</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// OK : visible package</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span>
+
+<span class="tok-kn">package</span> <span class="tok-n">UN</span><span class="tok-o">;</span>
+  <span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>
+    <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// OK : visible package</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">package</span> <span class="tok-n">DEUX</span><span class="tok-o">;</span>
+  <span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>
+      <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">A</span> <span class="tok-o">();</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// NON OK : normal</span>
+        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>
+      <span class="tok-o">...</span>
+    <span class="tok-o">{</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal car protected et héritage</span>
+        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>À la question <code>private</code> ou <code>protected</code> ? Quel est le mieux pour les attributs ?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>C&#8217;est une question de <strong>style de programmation</strong> !</p>
+</li>
+<li>
+<p>Puristes (Meyer) &#8658; <code>private</code></p>
+</li>
+<li>
+<p>Parfois utile : cf. <em>Strategy</em>, évite les getters/setters</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Il n&#8217;y a pas de visibilité par défaut en <a href="http://www.uml.org/">UML&#8482;</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_retour_sur_les_membres_code_static_code"><a class="link" href="#_retour_sur_les_membres_code_static_code">2.3. Retour sur les Membres <code>static</code></a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">class</span> <span class="tok-nc">VariableDemo</span>
+<span class="tok-o">{</span>
+  <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">count</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">increment</span><span class="tok-o">()</span>
+  <span class="tok-o">{</span>
+    <span class="tok-n">count</span><span class="tok-o">++;</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[])</span>
+  <span class="tok-o">{</span>
+    <span class="tok-n">VariableDemo</span> <span class="tok-n">obj1</span><span class="tok-o">=</span><span class="tok-k">new</span> <span class="tok-nf">VariableDemo</span><span class="tok-o">();</span>
+    <span class="tok-n">VariableDemo</span> <span class="tok-n">obj2</span><span class="tok-o">=</span><span class="tok-k">new</span> <span class="tok-nf">VariableDemo</span><span class="tok-o">();</span>
+    <span class="tok-n">obj1</span><span class="tok-o">.</span><span class="tok-na">increment</span><span class="tok-o">();</span>
+    <span class="tok-n">obj2</span><span class="tok-o">.</span><span class="tok-na">increment</span><span class="tok-o">();</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Obj1: count is=&quot;</span><span class="tok-o">+</span><span class="tok-n">obj1</span><span class="tok-o">.</span><span class="tok-na">count</span><span class="tok-o">);</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Obj2: count is=&quot;</span><span class="tok-o">+</span><span class="tok-n">obj2</span><span class="tok-o">.</span><span class="tok-na">count</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Obj1: count is=2
+Obj2: count is=2</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_membres_code_static_code_suite"><a class="link" href="#_membres_code_static_code_suite">2.3.1. Membres <code>static</code> (suite)</a></h4>
+<div class="paragraph">
+<p>Comment ça marche :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les variables <code>static</code> sont initialisées au chargement de la classe.</p>
+</li>
+<li>
+<p>Les variables <code>static</code> d&#8217;une classe sont
+initialisées avant que la moindre instance ne soit créée.</p>
+</li>
+<li>
+<p>Les variables <code>static</code> sont initialisées avant que la moindre méthode <code>static</code> ne s&#8217;exécute.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_méthodes_code_static_code"><a class="link" href="#_méthodes_code_static_code">2.3.2. Méthodes <code>static</code></a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">import</span> <span class="tok-nn">java.lang.Math</span><span class="tok-o">;</span>
+
+<span class="tok-kd">class</span> <span class="tok-nc">Another</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-kt">int</span> <span class="tok-n">result</span><span class="tok-o">;</span>
+
+    <span class="tok-n">result</span> <span class="tok-o">=</span> <span class="tok-n">Math</span><span class="tok-o">.</span><span class="tok-na">min</span><span class="tok-o">(</span><span class="tok-mi">10</span><span class="tok-o">,</span> <span class="tok-mi">20</span><span class="tok-o">);</span> <span class="tok-c1">//calling static method min by writing class name</span>
+
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">result</span><span class="tok-o">);</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Math</span><span class="tok-o">.</span><span class="tok-na">max</span><span class="tok-o">(</span><span class="tok-mi">100</span><span class="tok-o">,</span> <span class="tok-mi">200</span><span class="tok-o">));</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_utilité_générale_des_code_enum_code"><a class="link" href="#_utilité_générale_des_code_enum_code">2.4. Utilité générale des <code>enum</code></a></h3>
+<div class="sect3">
+<h4 id="_modélisation"><a class="link" href="#_modélisation">2.4.1. Modélisation</a></h4>
+<div class="paragraph">
+<p>Le type enumération est souvent utilisé en modélisation :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/enum.png"><img src="images/enum.png" alt="enum" width="30%"></a>
+</div>
+<div class="title">Figure 1. Exemple de classe Enumeration en UML</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_propriétés"><a class="link" href="#_propriétés">2.4.2. Propriétés</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Civilite</span> <span class="tok-o">{</span>
+  <span class="tok-n">MADAME</span><span class="tok-o">,</span> <span class="tok-n">MONSIEUR</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chaque élément d&#8217;une énumération est un objet à part entière</p>
+</li>
+<li>
+<p>Les objets <code>enum</code> héritent de <code>java.lang.Enum</code></p>
+</li>
+<li>
+<p>On peut compléter les comportements des objets en ajoutant des méthodes</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_méthodes_de_base"><a class="link" href="#_méthodes_de_base">2.4.3. Méthodes de base</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>toString()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">);</span> <span class="tok-c1">//MADAME</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>valueOf()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">valueOf</span><span class="tok-o">(</span><span class="tok-s">&quot;MONSIEUR&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>values()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span><span class="tok-o">[]</span> <span class="tok-n">civilites</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">values</span><span class="tok-o">()</span> <span class="tok-o">;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>ordinal()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span> <span class="tok-o">;</span>
+<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Civilite : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span> <span class="tok-o">+</span> <span class="tok-s">&quot; [&quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span><span class="tok-o">.</span><span class="tok-na">ordinal</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;]&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span>
+<span class="tok-c1">// Civilite : MONSIEUR [1]</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Le 1er numéro d&#8217;ordre est 0.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><code>compareTo()</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">.</span><span class="tok-na">compareTo</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span><span class="tok-o">))</span> <span class="tok-o">;</span>
+<span class="tok-c1">// -1</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exemple_plus_complexe"><a class="link" href="#_exemple_plus_complexe">2.4.4. Exemple plus complexe</a></h4>
+<div class="listingblock">
+<div class="title">(source : <a href="http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1" class="bare">http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Langage</span> <span class="tok-o">{</span>
+  <span class="tok-c1">//Objets directement construits</span>
+  <span class="tok-n">JAVA</span><span class="tok-o">(</span><span class="tok-s">&quot;Langage JAVA&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Eclipse&quot;</span><span class="tok-o">),</span>
+  <span class="tok-n">C</span> <span class="tok-o">(</span><span class="tok-s">&quot;Lanage C&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Code Block&quot;</span><span class="tok-o">),</span>
+  <span class="tok-n">CPlus</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage C++&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Visual studio&quot;</span><span class="tok-o">),</span>
+  <span class="tok-n">PHP</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage PHP&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;PS Pad&quot;</span><span class="tok-o">);</span>
+
+  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">name</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>
+  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">editor</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>
+
+  <span class="tok-c1">//Constructeur</span>
+  <span class="tok-n">Langage</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">editor</span><span class="tok-o">){</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span> <span class="tok-o">=</span> <span class="tok-n">name</span><span class="tok-o">;</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">editor</span> <span class="tok-o">=</span> <span class="tok-n">editor</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">getEditor</span><span class="tok-o">(){</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Editeur : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">editor</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">toString</span><span class="tok-o">(){</span>
+    <span class="tok-k">return</span> <span class="tok-n">name</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[]){</span>
+    <span class="tok-n">Langage</span> <span class="tok-n">l1</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">JAVA</span><span class="tok-o">;</span>
+    <span class="tok-n">Langage</span> <span class="tok-n">l2</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">PHP</span><span class="tok-o">;</span>
+
+    <span class="tok-n">l1</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>
+    <span class="tok-n">l2</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -976,7 +1307,7 @@ Pour aller plus loin : <a href="http://fr.wikipedia.org/wiki/Duck_typing" class=
 <div class="content">
 <img src="images/phdComics.png" alt="phdComics">
 </div>
-<div class="title">Figure 1. Les patrons : des réponses éprouvées à des problèmes récurrents</div>
+<div class="title">Figure 2. Les patrons : des réponses éprouvées à des problèmes récurrents</div>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -1072,7 +1403,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <img src="images/strategy.png" alt="strategy">
 </div>
-<div class="title">Figure 2. Modèle UML du patron <em>Strategy</em></div>
+<div class="title">Figure 3. Modèle UML du patron <em>Strategy</em></div>
 </div>
 </td>
 </tr>
@@ -1085,7 +1416,7 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <a class="image" href="images/superCanardFinal.png"><img src="images/superCanardFinal.png" alt="superCanardFinal"></a>
 </div>
-<div class="title">Figure 3. Premier exemple d&#8217;utilisation de patron</div>
+<div class="title">Figure 4. Premier exemple d&#8217;utilisation de patron</div>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1136,7 +1467,7 @@ formats (HTML, XML, etc.) : les classes doivent donc formater puis écrire.</p>
 <div class="content">
 <a class="image" href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns"><img src="images/strategyWriter.png" alt="strategyWriter"></a>
 </div>
-<div class="title">Figure 4. Application du pattern <a href="#strategy">[strategy]</a> (<a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">source</a>)</div>
+<div class="title">Figure 5. Application du pattern <a href="#strategy">[strategy]</a> (<a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">source</a>)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1430,13 +1761,13 @@ C&#8217;est un mixin qu&#8217;il suffit d&#8217;inclure dans la classe qui doit 
 <div class="content">
 <img src="images/strategy-compo.png" alt="strategy compo">
 </div>
-<div class="title">Figure 5. <em>Strategy</em>  et composition</div>
+<div class="title">Figure 6. <em>Strategy</em>  et composition</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/strategy-assoc.png" alt="strategy assoc">
 </div>
-<div class="title">Figure 6. <em>Strategy</em>  et association</div>
+<div class="title">Figure 7. <em>Strategy</em>  et association</div>
 </div>
 <div class="paragraph">
 <p>Et donc deux implémentations :</p>
@@ -1598,7 +1929,7 @@ sous-types, sans modifier la cohérence du programme</pre>
 <div class="content">
 <img src="images/carre.png" alt="carre" width="10%">
 </div>
-<div class="title">Figure 7. Exemple classique de violation du principe de substitution de Liskov</div>
+<div class="title">Figure 8. Exemple classique de violation du principe de substitution de Liskov</div>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1806,7 +2137,7 @@ clients qui les emploient.</p>
 <p>Composite</p>
 </li>
 <li>
-<p>Etat</p>
+<p><a href="#Etat">[Etat]</a></p>
 </li>
 <li>
 <p>Proxy</p>
@@ -1897,152 +2228,10 @@ clients qui les emploient.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_utilité_générale_des_code_enum_code"><a class="link" href="#_utilité_générale_des_code_enum_code">4. Utilité générale des <code>enum</code></a></h2>
+<h2 id="_point_sur_les_documents_demandés_en_ptut"><a class="link" href="#_point_sur_les_documents_demandés_en_ptut">4. Point sur les documents demandés en PTut</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_modélisation"><a class="link" href="#_modélisation">4.1. Modélisation</a></h3>
-<div class="paragraph">
-<p>Le type enumération est souvent utilisé en modélisation :</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="images/enum.png"><img src="images/enum.png" alt="enum" width="30%"></a>
-</div>
-<div class="title">Figure 8. Exemple de classe Enumeration en UML</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_propriétés"><a class="link" href="#_propriétés">4.2. Propriétés</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Civilite</span> <span class="tok-o">{</span>
-  <span class="tok-n">MADAME</span><span class="tok-o">,</span> <span class="tok-n">MONSIEUR</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Chaque élément d&#8217;une énumération est un objet à part entière</p>
-</li>
-<li>
-<p>Les objets <code>enum</code> héritent de <code>java.lang.Enum</code></p>
-</li>
-<li>
-<p>On peut compléter les comportements des objets en ajoutant des méthodes</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_méthodes_de_base"><a class="link" href="#_méthodes_de_base">4.3. Méthodes de base</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p><code>toString()</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">);</span> <span class="tok-c1">//MADAME</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>valueOf()</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">valueOf</span><span class="tok-o">(</span><span class="tok-s">&quot;MONSIEUR&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>values()</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span><span class="tok-o">[]</span> <span class="tok-n">civilites</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">values</span><span class="tok-o">()</span> <span class="tok-o">;</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>ordinal()</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span> <span class="tok-o">;</span>
-<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Civilite : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span> <span class="tok-o">+</span> <span class="tok-s">&quot; [&quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span><span class="tok-o">.</span><span class="tok-na">ordinal</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;]&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span>
-<span class="tok-c1">// Civilite : MONSIEUR [1]</span></code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/note.png" alt="Note">
-</td>
-<td class="content">
-Le 1er numéro d&#8217;ordre est 0.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p><code>compareTo()</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">.</span><span class="tok-na">compareTo</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span><span class="tok-o">))</span> <span class="tok-o">;</span>
-<span class="tok-c1">// -1</span></code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_exemple_plus_complexe"><a class="link" href="#_exemple_plus_complexe">4.4. Exemple plus complexe</a></h3>
-<div class="listingblock">
-<div class="title">(source : <a href="http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1" class="bare">http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1</a>)</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Langage</span> <span class="tok-o">{</span>
-  <span class="tok-c1">//Objets directement construits</span>
-  <span class="tok-n">JAVA</span><span class="tok-o">(</span><span class="tok-s">&quot;Langage JAVA&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Eclipse&quot;</span><span class="tok-o">),</span>
-  <span class="tok-n">C</span> <span class="tok-o">(</span><span class="tok-s">&quot;Lanage C&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Code Block&quot;</span><span class="tok-o">),</span>
-  <span class="tok-n">CPlus</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage C++&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Visual studio&quot;</span><span class="tok-o">),</span>
-  <span class="tok-n">PHP</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage PHP&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;PS Pad&quot;</span><span class="tok-o">);</span>
-
-  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">name</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>
-  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">editor</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>
-
-  <span class="tok-c1">//Constructeur</span>
-  <span class="tok-n">Langage</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">editor</span><span class="tok-o">){</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span> <span class="tok-o">=</span> <span class="tok-n">name</span><span class="tok-o">;</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">editor</span> <span class="tok-o">=</span> <span class="tok-n">editor</span><span class="tok-o">;</span>
-  <span class="tok-o">}</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">getEditor</span><span class="tok-o">(){</span>
-    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Editeur : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">editor</span><span class="tok-o">);</span>
-  <span class="tok-o">}</span>
-
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">toString</span><span class="tok-o">(){</span>
-    <span class="tok-k">return</span> <span class="tok-n">name</span><span class="tok-o">;</span>
-  <span class="tok-o">}</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[]){</span>
-    <span class="tok-n">Langage</span> <span class="tok-n">l1</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">JAVA</span><span class="tok-o">;</span>
-    <span class="tok-n">Langage</span> <span class="tok-n">l2</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">PHP</span><span class="tok-o">;</span>
-
-    <span class="tok-n">l1</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>
-    <span class="tok-n">l2</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>
-  <span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_point_sur_les_documents_demandés_en_ptut"><a class="link" href="#_point_sur_les_documents_demandés_en_ptut">5. Point sur les documents demandés en PTut</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_dossier_d_analyse_et_conception"><a class="link" href="#_dossier_d_analyse_et_conception">5.1. Dossier d&#8217;Analyse et Conception</a></h3>
+<h3 id="_dossier_d_analyse_et_conception"><a class="link" href="#_dossier_d_analyse_et_conception">4.1. Dossier d&#8217;Analyse et Conception</a></h3>
 <div class="paragraph">
 <p>Les consignes Moodle pour le document à rendre pour le module de PTut mentionne
 une liste impressionante de modèles à fournir :</p>
@@ -2072,7 +2261,7 @@ Annexes : interviews des utilisateurs</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sommaire"><a class="link" href="#_sommaire">5.2. Sommaire</a></h3>
+<h3 id="_sommaire"><a class="link" href="#_sommaire">4.2. Sommaire</a></h3>
 <div class="paragraph">
 <p>Si vous utilisez :</p>
 </div>
@@ -2106,7 +2295,7 @@ Ne jamais faire le sommaire "à la main"!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_introduction_2"><a class="link" href="#_introduction_2">5.3. Introduction</a></h3>
+<h3 id="_introduction_2"><a class="link" href="#_introduction_2">4.3. Introduction</a></h3>
 <div class="paragraph">
 <p>Contenu :</p>
 </div>
@@ -2137,7 +2326,7 @@ Faites un effort! C&#8217;est la première chose qu&#8217;on regarde!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_mof_et_mot_actuels_et_nouveaux"><a class="link" href="#_mof_et_mot_actuels_et_nouveaux">5.4. MOF et MOT actuels et nouveaux</a></h3>
+<h3 id="_mof_et_mot_actuels_et_nouveaux"><a class="link" href="#_mof_et_mot_actuels_et_nouveaux">4.4. MOF et MOT actuels et nouveaux</a></h3>
 <div class="paragraph">
 <p>Les premières années 2012/2013 faisaient du Merise :</p>
 </div>
@@ -2173,7 +2362,7 @@ Faites un effort! C&#8217;est la première chose qu&#8217;on regarde!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_diagramme_des_uc"><a class="link" href="#_diagramme_des_uc">5.5. Diagramme des UC</a></h3>
+<h3 id="_diagramme_des_uc"><a class="link" href="#_diagramme_des_uc">4.5. Diagramme des UC</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/uc2.png" alt="uc2">
@@ -2192,7 +2381,7 @@ Faites un effort! C&#8217;est la première chose qu&#8217;on regarde!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_architecture_mvc"><a class="link" href="#_architecture_mvc">5.6. Architecture MVC</a></h3>
+<h3 id="_architecture_mvc"><a class="link" href="#_architecture_mvc">4.6. Architecture MVC</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/mvc-exp1-ds.png" alt="mvc exp1 ds">
@@ -2201,7 +2390,7 @@ Faites un effort! C&#8217;est la première chose qu&#8217;on regarde!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_diagramme_des_classes_métier"><a class="link" href="#_diagramme_des_classes_métier">5.7. Diagramme des Classes métier</a></h3>
+<h3 id="_diagramme_des_classes_métier"><a class="link" href="#_diagramme_des_classes_métier">4.7. Diagramme des Classes métier</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2240,13 +2429,13 @@ Faites un effort! C&#8217;est la première chose qu&#8217;on regarde!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_schéma_du_package_métier"><a class="link" href="#_schéma_du_package_métier">5.8. Schéma du Package Métier</a></h3>
+<h3 id="_schéma_du_package_métier"><a class="link" href="#_schéma_du_package_métier">4.8. Schéma du Package Métier</a></h3>
 <div class="paragraph">
 <p>Architecture de l&#8217;application</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_script_de_création_de_la_base_et_des_vues_de_données"><a class="link" href="#_script_de_création_de_la_base_et_des_vues_de_données">5.9. Script de création de la base et des vues de données</a></h3>
+<h3 id="_script_de_création_de_la_base_et_des_vues_de_données"><a class="link" href="#_script_de_création_de_la_base_et_des_vues_de_données">4.9. Script de création de la base et des vues de données</a></h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -2261,7 +2450,7 @@ Uniquement si ce n&#8217;est pas prématuré!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_diagramme_des_classes_contrôleur"><a class="link" href="#_diagramme_des_classes_contrôleur">5.10. Diagramme des Classes contrôleur</a></h3>
+<h3 id="_diagramme_des_classes_contrôleur"><a class="link" href="#_diagramme_des_classes_contrôleur">4.10. Diagramme des Classes contrôleur</a></h3>
 <div class="paragraph">
 <p>Extrapolez si vous n&#8217;appliquez pas le MVC :</p>
 </div>
@@ -2277,7 +2466,7 @@ Uniquement si ce n&#8217;est pas prématuré!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants"><a class="link" href="#_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants">5.11. Diagramme de Séquence Système pour les cas d&#8217;utilisation « importants »</a></h3>
+<h3 id="_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants"><a class="link" href="#_diagramme_de_séquence_système_pour_les_cas_d_utilisation_importants">4.11. Diagramme de Séquence Système pour les cas d&#8217;utilisation « importants »</a></h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -2298,13 +2487,13 @@ Rappel : un DSS par UC
 </div>
 </div>
 <div class="sect2">
-<h3 id="_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents"><a class="link" href="#_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents">5.12. Diagramme de Séquence et Diagramme des Classes Participantes pour un des UC précédents</a></h3>
+<h3 id="_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents"><a class="link" href="#_diagramme_de_séquence_et_diagramme_des_classes_participantes_pour_un_des_uc_précédents">4.12. Diagramme de Séquence et Diagramme des Classes Participantes pour un des UC précédents</a></h3>
 <div class="paragraph">
 <p>Uniquement pour illustrer les aspects artitecture, échanges, etc.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sni_et_sep_sef"><a class="link" href="#_sni_et_sep_sef">5.13. SNI et SEP/SEF</a></h3>
+<h3 id="_sni_et_sep_sef"><a class="link" href="#_sni_et_sep_sef">4.13. SNI et SEP/SEF</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/sni-exp.png" alt="sni exp">
@@ -2313,7 +2502,7 @@ Rappel : un DSS par UC
 </div>
 </div>
 <div class="sect2">
-<h3 id="_maquettes_d_écrans_et_dessins"><a class="link" href="#_maquettes_d_écrans_et_dessins">5.14. Maquettes d’écrans et dessins</a></h3>
+<h3 id="_maquettes_d_écrans_et_dessins"><a class="link" href="#_maquettes_d_écrans_et_dessins">4.14. Maquettes d’écrans et dessins</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/bruel-balsamiq.png" alt="bruel balsamiq">
@@ -2356,13 +2545,13 @@ Rappel : un DSS par UC
 </div>
 </div>
 <div class="sect2">
-<h3 id="_annexes_interviews_des_utilisateurs"><a class="link" href="#_annexes_interviews_des_utilisateurs">5.15. Annexes : interviews des utilisateurs</a></h3>
+<h3 id="_annexes_interviews_des_utilisateurs"><a class="link" href="#_annexes_interviews_des_utilisateurs">4.15. Annexes : interviews des utilisateurs</a></h3>
 <div class="paragraph">
 <p>Importance des comptes-rendus</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_conclusions"><a class="link" href="#_conclusions">5.16. Conclusions</a></h3>
+<h3 id="_conclusions"><a class="link" href="#_conclusions">4.16. Conclusions</a></h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -2410,7 +2599,7 @@ Vous devez l'<strong>adapter</strong> à votre situation!
 </div>
 </div>
 <div class="sect1">
-<h2 id="_un_nouveau_diagramme_uml_très_utile"><a class="link" href="#_un_nouveau_diagramme_uml_très_utile">6. Un nouveau diagramme UML très utile</a></h2>
+<h2 id="_un_nouveau_diagramme_uml_très_utile"><a class="link" href="#_un_nouveau_diagramme_uml_très_utile">5. Un nouveau diagramme UML très utile</a></h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -2449,7 +2638,7 @@ décrivent le comportement interne d&#8217;un objet à l&#8217;aide d&#8217;un a
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_transitions"><a class="link" href="#_transitions">6.1. Transitions</a></h3>
+<h3 id="_transitions"><a class="link" href="#_transitions">5.1. Transitions</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/etat2.png" alt="etat2">
@@ -2474,7 +2663,7 @@ décrivent le comportement interne d&#8217;un objet à l&#8217;aide d&#8217;un a
 </div>
 </div>
 <div class="sect2">
-<h3 id="_exemple_de_transitions"><a class="link" href="#_exemple_de_transitions">6.2. Exemple de transitions</a></h3>
+<h3 id="_exemple_de_transitions"><a class="link" href="#_exemple_de_transitions">5.2. Exemple de transitions</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/etat3.png" alt="etat3">
@@ -2483,7 +2672,7 @@ décrivent le comportement interne d&#8217;un objet à l&#8217;aide d&#8217;un a
 </div>
 </div>
 <div class="sect2">
-<h3 id="_refactoring"><a class="link" href="#_refactoring">6.3. Refactoring</a></h3>
+<h3 id="_refactoring"><a class="link" href="#_refactoring">5.3. Refactoring</a></h3>
 <div class="paragraph">
 <p>On peut remplacer les actions systématiques des transitions entrantes :</p>
 </div>
@@ -2504,7 +2693,7 @@ décrivent le comportement interne d&#8217;un objet à l&#8217;aide d&#8217;un a
 </div>
 </div>
 <div class="sect2">
-<h3 id="_transitions_internes"><a class="link" href="#_transitions_internes">6.4. Transitions internes</a></h3>
+<h3 id="_transitions_internes"><a class="link" href="#_transitions_internes">5.4. Transitions internes</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/mdp.png" alt="mdp">
@@ -2534,7 +2723,7 @@ l&#8217;activité <code>exit</code> de l&#8217;état s&#8217;exécute.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_conditions"><a class="link" href="#_conditions">6.5. Conditions</a></h3>
+<h3 id="_conditions"><a class="link" href="#_conditions">5.5. Conditions</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/conditions.png" alt="conditions">
@@ -2568,7 +2757,7 @@ examens (uniquement les années, pas les semestres).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_etats_complexes"><a class="link" href="#_etats_complexes">6.6. Etats complexes</a></h3>
+<h3 id="_etats_complexes"><a class="link" href="#_etats_complexes">5.6. Etats complexes</a></h3>
 <div class="paragraph">
 <p>Un état peut lui-même être doté d&#8217;un comportement et donc représenter à lui
 seul une machine à état. Par exemple :</p>
@@ -2596,7 +2785,7 @@ seul une machine à état. Par exemple :</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_notion_de_concurrence"><a class="link" href="#_notion_de_concurrence">6.7. Notion de concurrence</a></h3>
+<h3 id="_notion_de_concurrence"><a class="link" href="#_notion_de_concurrence">5.7. Notion de concurrence</a></h3>
 <div class="paragraph">
 <p>On peut représenter l&#8217;évolution de différentes machines de manière concurrente
 (parallèle). Par exemple :</p>
@@ -2638,10 +2827,10 @@ Pour aller plus loin sur ce diagramme : <a href="http://laurent-audibert.develop
 </div>
 </div>
 <div class="sect1">
-<h2 id="_point_sur_le_td_de_la_semaine_passée"><a class="link" href="#_point_sur_le_td_de_la_semaine_passée">7. Point sur le TD de la semaine passée</a></h2>
+<h2 id="_point_sur_le_td_de_la_semaine_passée"><a class="link" href="#_point_sur_le_td_de_la_semaine_passée">6. Point sur le TD de la semaine passée</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_principes_de_conception_2"><a class="link" href="#_principes_de_conception_2">7.1. Principes de conception</a></h3>
+<h3 id="_principes_de_conception_2"><a class="link" href="#_principes_de_conception_2">6.1. Principes de conception</a></h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2657,7 +2846,7 @@ patron <a href="#singleton">[singleton]</a>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_patron_singleton"><a class="link" href="#_patron_singleton">7.2. Patron Singleton</a></h3>
+<h3 id="_patron_singleton"><a class="link" href="#_patron_singleton">6.2. Patron Singleton</a></h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2688,7 +2877,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_exemples_d_utilisation_du_patron_singleton"><a class="link" href="#_exemples_d_utilisation_du_patron_singleton">7.3. Exemples d&#8217;utilisation du patron Singleton</a></h3>
+<h3 id="_exemples_d_utilisation_du_patron_singleton"><a class="link" href="#_exemples_d_utilisation_du_patron_singleton">6.3. Exemples d&#8217;utilisation du patron Singleton</a></h3>
 <div class="paragraph">
 <p>Quelques exemple de l&#8217;utilisation industrielle de <a href="#singleton">[singleton]</a> :</p>
 </div>
@@ -2719,9 +2908,9 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_implémentations_java_du_patron_singleton"><a class="link" href="#_implémentations_java_du_patron_singleton">7.4. Implémentations Java du patron Singleton</a></h3>
+<h3 id="_implémentations_java_du_patron_singleton"><a class="link" href="#_implémentations_java_du_patron_singleton">6.4. Implémentations Java du patron Singleton</a></h3>
 <div class="sect3">
-<h4 id="_initialisation_directe_de_la_variable_instance"><a class="link" href="#_initialisation_directe_de_la_variable_instance">7.4.1. Initialisation directe de la variable instance</a></h4>
+<h4 id="_initialisation_directe_de_la_variable_instance"><a class="link" href="#_initialisation_directe_de_la_variable_instance">6.4.1. Initialisation directe de la variable instance</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java">    <span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">class</span> <span class="tok-nc">Singleton</span> <span class="tok-o">{</span>
@@ -2745,7 +2934,7 @@ On n&#8217;a pas vu cette implémentation en TD!
 </div>
 </div>
 <div class="sect3">
-<h4 id="_initialisation_dans_un_bloc_code_static_code"><a class="link" href="#_initialisation_dans_un_bloc_code_static_code">7.4.2. Initialisation dans un bloc <code>static</code></a></h4>
+<h4 id="_initialisation_dans_un_bloc_code_static_code"><a class="link" href="#_initialisation_dans_un_bloc_code_static_code">6.4.2. Initialisation dans un bloc <code>static</code></a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">class</span> <span class="tok-nc">Singleton</span> <span class="tok-o">{</span>
@@ -2760,7 +2949,7 @@ On n&#8217;a pas vu cette implémentation en TD!
 </div>
 </div>
 <div class="sect3">
-<h4 id="_utilisation_d_un_code_enum_code"><a class="link" href="#_utilisation_d_un_code_enum_code">7.4.3. Utilisation d&#8217;un <code>enum</code></a></h4>
+<h4 id="_utilisation_d_un_code_enum_code"><a class="link" href="#_utilisation_d_un_code_enum_code">6.4.3. Utilisation d&#8217;un <code>enum</code></a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java">        <span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Singleton</span> <span class="tok-o">{</span>
@@ -2845,7 +3034,7 @@ Pour aller plus loin, cf. <a href="http://blog.zenika.com/index.php?post/2014/06
 </div>
 </div>
 <div class="sect1">
-<h2 id="_point_sur_le_tp"><a class="link" href="#_point_sur_le_tp">8. Point sur le TP</a></h2>
+<h2 id="_point_sur_le_tp"><a class="link" href="#_point_sur_le_tp">7. Point sur le TP</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -2893,10 +3082,10 @@ entre 12,5 et 20 (moyenne <strong>17,5</strong>)</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_point_sur_le_td_fabrique"><a class="link" href="#_point_sur_le_td_fabrique">9. Point sur le TD Fabrique</a></h2>
+<h2 id="_point_sur_le_td_fabrique"><a class="link" href="#_point_sur_le_td_fabrique">8. Point sur le TD Fabrique</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_principes_de_conception_3"><a class="link" href="#_principes_de_conception_3">9.1. Principes de conception</a></h3>
+<h3 id="_principes_de_conception_3"><a class="link" href="#_principes_de_conception_3">8.1. Principes de conception</a></h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2921,7 +3110,7 @@ entre 12,5 et 20 (moyenne <strong>17,5</strong>)</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_premier_exemple_d_utilisation_de_patron_2"><a class="link" href="#_premier_exemple_d_utilisation_de_patron_2">9.2. Premier exemple d&#8217;utilisation de patron</a></h3>
+<h3 id="_premier_exemple_d_utilisation_de_patron_2"><a class="link" href="#_premier_exemple_d_utilisation_de_patron_2">8.2. Premier exemple d&#8217;utilisation de patron</a></h3>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="images/pizzeria1.png"><img src="images/pizzeria1.png" alt="pizzeria1"></a>
@@ -2936,7 +3125,7 @@ entre 12,5 et 20 (moyenne <strong>17,5</strong>)</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_autre_exemple_concret_2"><a class="link" href="#_autre_exemple_concret_2">9.3. Autre exemple concret</a></h3>
+<h3 id="_autre_exemple_concret_2"><a class="link" href="#_autre_exemple_concret_2">8.3. Autre exemple concret</a></h3>
 <div class="listingblock">
 <div class="title">Factory en PHP (source <a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">ici</a>)</div>
 <div class="content">
@@ -2980,7 +3169,7 @@ entre 12,5 et 20 (moyenne <strong>17,5</strong>)</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mais_c_est_pas_fini"><a class="link" href="#_mais_c_est_pas_fini">10. Mais c&#8217;est pas fini!</a></h2>
+<h2 id="_mais_c_est_pas_fini"><a class="link" href="#_mais_c_est_pas_fini">9. Mais c&#8217;est pas fini!</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Reprenons nos pizzas vues en <a href="TD3.html">TD</a></p>
@@ -3086,7 +3275,7 @@ entre 12,5 et 20 (moyenne <strong>17,5</strong>)</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_fabrique_abstraite"><a class="link" href="#_fabrique_abstraite">11. Fabrique abstraite</a></h2>
+<h2 id="_fabrique_abstraite"><a class="link" href="#_fabrique_abstraite">10. Fabrique abstraite</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Nous sommes arrivé à une version du patron Fabrique appelée <a href="#FabriqueAbstraite">Fabrique Abstraite</a> :</p>
@@ -3105,7 +3294,7 @@ leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_retour_sur_la_machine_à_état_uml"><a class="link" href="#_retour_sur_la_machine_à_état_uml">12. Retour sur la machine à état UML</a></h2>
+<h2 id="_retour_sur_la_machine_à_état_uml"><a class="link" href="#_retour_sur_la_machine_à_état_uml">11. Retour sur la machine à état UML</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Reprenons la machine à état <a href="http://www.uml.org/">UML&#8482;</a> et essayons d&#8217;en implémenter une en <a href="https://www.java.com/fr/">Java</a>.</p>
@@ -3134,10 +3323,10 @@ Mais avant ça, petite digression sur les Dojo Coding
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tp_en_mode_dojo"><a class="link" href="#_tp_en_mode_dojo">13. TP en mode Dojo</a></h2>
+<h2 id="_tp_en_mode_dojo"><a class="link" href="#_tp_en_mode_dojo">12. TP en mode Dojo</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_le_principe"><a class="link" href="#_le_principe">13.1. Le principe</a></h3>
+<h3 id="_le_principe"><a class="link" href="#_le_principe">12.1. Le principe</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3181,7 +3370,7 @@ les classes, etc.)</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_les_règles"><a class="link" href="#_les_règles">13.2. Les règles</a></h3>
+<h3 id="_les_règles"><a class="link" href="#_les_règles">12.2. Les règles</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3223,7 +3412,7 @@ le plus tôt est en général le moins compliqué.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_le_distributeur_de_bonbons"><a class="link" href="#_le_distributeur_de_bonbons">14. Le distributeur de bonbons</a></h2>
+<h2 id="_le_distributeur_de_bonbons"><a class="link" href="#_le_distributeur_de_bonbons">13. Le distributeur de bonbons</a></h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -3232,7 +3421,7 @@ le plus tôt est en général le moins compliqué.</p>
 <div class="title">Figure 37. Machine à état d&#8217;un distributeur simple</div>
 </div>
 <div class="sect2">
-<h3 id="_implémentation_intuitive"><a class="link" href="#_implémentation_intuitive">14.1. Implémentation intuitive</a></h3>
+<h3 id="_implémentation_intuitive"><a class="link" href="#_implémentation_intuitive">13.1. Implémentation intuitive</a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">insererPiece</span><span class="tok-o">()</span> <span class="tok-o">{</span>
@@ -3251,7 +3440,7 @@ le plus tôt est en général le moins compliqué.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_erreur_d_implémentations"><a class="link" href="#_erreur_d_implémentations">14.2. Erreur d&#8217;implémentations</a></h3>
+<h3 id="_erreur_d_implémentations"><a class="link" href="#_erreur_d_implémentations">13.2. Erreur d&#8217;implémentations</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3275,7 +3464,7 @@ dans le code.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_une_meilleure_implémentation"><a class="link" href="#_une_meilleure_implémentation">14.3. Une meilleure implémentation</a></h3>
+<h3 id="_une_meilleure_implémentation"><a class="link" href="#_une_meilleure_implémentation">13.3. Une meilleure implémentation</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3293,7 +3482,7 @@ par une délégation à la classe adéquate.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_illutration"><a class="link" href="#_illutration">14.4. Illutration</a></h3>
+<h3 id="_illutration"><a class="link" href="#_illutration">13.4. Illutration</a></h3>
 <div class="paragraph">
 <p>Etape 1 :</p>
 </div>
@@ -3345,7 +3534,7 @@ par une délégation à la classe adéquate.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_le_patron_etat"><a class="link" href="#_le_patron_etat">14.5. Le patron Etat</a></h3>
+<h3 id="_le_patron_etat"><a class="link" href="#_le_patron_etat">13.5. Le patron Etat</a></h3>
 <div class="paragraph">
 <p><strong>Etat</strong> permet à un objet de modifier son comportement,
 quand son état interne change.
@@ -3493,10 +3682,10 @@ Tout se passe comme si l&#8217;objet changeait de classe.</p>
 <p><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First, O&#8217;Reilly, 09/2004.</p>
 </li>
 <li>
-<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-12-01).</p>
+<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-12-04).</p>
 </li>
 <li>
-<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-12-01).</p>
+<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-12-04).</p>
 </li>
 <li>
 <p><a id="Larman05"></a>[Larman05] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
@@ -3532,7 +3721,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.2<br>
-Last updated 2014-12-01 17:07:43 CET
+Last updated 2014-12-04 08:21:39 CET
 </div>
 </div>
 </body>

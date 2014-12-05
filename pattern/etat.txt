@@ -1,0 +1,6 @@
+*Etat* permet à un objet de modifier son comportement,
+quand son état interne change.
+Tout se passe comme si l'objet changeait de classe.
+
+ifndef::slides[.Modèle UML du patron Etat]
+image::etat.png[]
