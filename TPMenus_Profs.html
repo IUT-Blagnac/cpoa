@@ -851,7 +851,7 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">PreReq</p></td>
 <td align="left" valign="top"><p class="table">1. Je sais programmer en Java.</p>
 <p class="table">2 J&#8217;ai conscience qu&#8217;il faut réfléchir avant de se lancer dans le codage.</p>
-<p class="table">3 Je m&#8217;aperçois que un problème de fond est la gestion des changements.</p></td>
+<p class="table">3 Je m&#8217;aperçois qu&#8217;un problème de fond est la gestion des changements.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">ObjTD</p></td>
@@ -1148,12 +1148,12 @@ NiWv4favdMLRXVPrCWZwjs7/2eX3F70B/wN27TGv/ABMBwAAAABJRU5ErkJggg==" />
 <div class="olist arabic"><ol class="arabic">
 <li>
 <p>
-Rencontrez vous des difficultés pour ajouter des fonctions dans ce code qui devient "spaghetti" ?
+Rencontrez-vous des difficultés pour ajouter des fonctions dans ce code qui devient "spaghetti" ?
 </p>
 </li>
 <li>
 <p>
-Que pensez vous de la maintenance de ce code dans 4 ans par un autre programmeur et qui devra ajouter des cascades de menus et de fonctions ?
+Que pensez-vous de la maintenance de ce code dans 4 ans par un autre programmeur et qui devra ajouter des cascades de menus et de fonctions ?
 </p>
 </li>
 <li>
@@ -1256,7 +1256,7 @@ SUVORK5CYII=" />
 <div class="olist arabic"><ol class="arabic">
 <li>
 <p>
-Il y en a partout &#8230; ajout d&#8217;une fonction &#8658; la fonction + modif du menu complet (affichage, contrôles des saisies, &#8230;).
+Il y en a partout &#8230; ajout d&#8217;une fonction &#8658; la fonction + modification du menu complet (affichage, contrôles des saisies, &#8230;).
 </p>
 </li>
 <li>
@@ -1356,7 +1356,7 @@ une méthode pour exécuter cette option de menu.
 </li>
 <li>
 <p>
-Un menu pourrait être programmée séparément sous forme d&#8217;un objet que nous appellerons <tt>ActionList</tt> (liste d&#8217;actions de menus) possédant :
+Un menu pourrait être programmé séparément sous forme d&#8217;un objet que nous appellerons <tt>ActionList</tt> (liste d&#8217;actions de menus) possédant :
 </p>
 <div class="olist loweralpha"><ol class="loweralpha">
 <li>
@@ -1371,7 +1371,7 @@ des méthodes pour ajouter/retirer des options de menus dans ce menu,
 </li>
 <li>
 <p>
-une méthode pour exécuter cette ce menu (affichage et déclenchement des actions).
+une méthode pour exécuter ce menu (affichage et déclenchement des actions).
 </p>
 </li>
 </ol></div>
@@ -1557,7 +1557,7 @@ la méthode <tt>execute(AgenceBancaire)</tt> réalisera ce qui est défini dans 
 <div class="olist arabic"><ol class="arabic">
 <li>
 <p>
-Créer une classe contenant un main et permettant :
+Créer une classe contenant un main() et permettant :
 </p>
 <div class="olist loweralpha"><ol class="loweralpha">
 <li>
@@ -2111,7 +2111,7 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="sect2">
 <h3 id="_quid_d_tt_actionlist_tt">5.2. Quid d'<tt>ActionList</tt> ?</h3>
-<div class="paragraph"><p>La classe <tt>ActionListAgenceBancaire</tt> qui met en oeuvre un menu (qui implémente <tt>ActionList</tt>) est ici créée spécifiquement pour <tt>AgenceBancaire</tt>. Mais cela est il nécessaire dans chaque application ? (en supposant ne rien afficher de l'<tt>AgenceBancaire</tt>). On devrait pouvoir faire une classe "générique" de gestion de menus composés d&#8217;actions et réutilisable dans chaque application.</p></div>
+<div class="paragraph"><p>La classe <tt>ActionListAgenceBancaire</tt> qui met en œuvre un menu (qui implémente <tt>ActionList</tt>) est ici créée spécifiquement pour <tt>AgenceBancaire</tt>. Mais cela est il nécessaire dans chaque application ? (en supposant ne rien afficher de l'<tt>AgenceBancaire</tt>). On devrait pouvoir faire une classe "générique" de gestion de menus composés d&#8217;actions et réutilisable dans chaque application.</p></div>
 <div class="paragraph"><p>Alors essayons :</p></div>
 <div class="olist arabic"><ol class="arabic">
 <li>
@@ -2163,7 +2163,7 @@ Vous devriez arriver au bout &#8230;
 </li>
 <li>
 <p>
-Enfin dans le main il y aura quelques "klaxons warnings" sur la création d&#8217;objets de cette nouvelle classe car il faudra indiquer le type paramètre à la création.
+Enfin dans le main() il y aura quelques "klaxons warnings" sur la création d&#8217;objets de cette nouvelle classe car il faudra indiquer le type paramètre à la création.
 </p>
 <div class="admonitionblock">
 <table><tr>
@@ -2229,7 +2229,7 @@ NiWv4favdMLRXVPrCWZwjs7/2eX3F70B/wN27TGv/ABMBwAAAABJRU5ErkJggg==" />
 <div class="olist arabic"><ol class="arabic">
 <li>
 <p>
-Supposons que l&#8217;on veuille utiliser notre application dans une système différent où saisies et affichages ne se font pas sur le terminal d&#8217;exécution de l&#8217;application &#8230; Les instructions utilisant <tt>new Scanner (System.in)</tt> ou <tt>System.out.println &#8230;</tt> deviennent obsolètes.
+Supposons que l&#8217;on veuille utiliser notre application dans un système différent où saisies et affichages ne se font pas sur le terminal d&#8217;exécution de l&#8217;application &#8230; Les instructions utilisant <tt>new Scanner (System.in)</tt> ou <tt>System.out.println &#8230;</tt> deviennent obsolètes.
 </p>
 </li>
 <li>
@@ -2317,7 +2317,7 @@ Ca marche ??
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Dernière mise à jour 2014-12-05 03:03:51 CET
+Dernière mise à jour 2014-12-05 10:25:48 CET
 </div>
 </div>
 </body>
