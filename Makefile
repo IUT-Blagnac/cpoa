@@ -38,7 +38,7 @@ pattern/%.png: pattern/%.plantuml
 
 %.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a toc2 -b html5 -a numbered $<
+	$(DOCTOR) -a toc2 -b html5 -a numbered -a eleve $<
 
 %.full.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
@@ -69,7 +69,7 @@ roadmap.html: $(MAIN).$(EXT)
 
 %-sujet.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered \
+	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a eleve \
 	-a data-uri $< -o $@
 
 %-prof.html: %.$(EXT) $(DEP)
