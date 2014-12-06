@@ -2,7 +2,9 @@
 UML='model.uml'
 TYPE='PNG'
 DOCLETPATH='/Users/bruel/dev/teaching/dut/cpoa/doclet'
+PUMLPATH='/Users/bruel/dev/teaching/dut/cpoa/util'
 echo "Creating $UML..."
+
 javadoc \
 -private \
 -quiet \
@@ -17,7 +19,7 @@ echo "Done."
 
 TYPE='png'
 echo "Converting $UML to $TYPE..."
-java -jar bin/plantuml.jar \
-  -config "./config.cfg" \
+java -jar $PUMLPATH/plantuml.jar \
+  -config $PUMLPATH/config.cfg \
   -t $TYPE $UML
 echo "Done."

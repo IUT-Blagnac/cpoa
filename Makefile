@@ -73,7 +73,7 @@ TD3-sujet.html: TD1.$(EXT) $(DEP)
 
 %-prof.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a prof -a toc2 -a correction -a theme=compact -b html5 -a numbered -a data-uri $< -o $@
+	$(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered -a data-uri $< -o $@
 
 cours:
 	cp main.html index.html
