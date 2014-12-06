@@ -67,13 +67,15 @@ roadmap.html: $(MAIN).$(EXT)
 	@echo '==> Compiling asciidoc files to generate standalone file for Google Drive'
 	$(DOCTOR) -b html5 -a numbered -a data-uri $< -o $@
 
-TD3-sujet.html: TD1.$(EXT) $(DEP)
+%-sujet.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a data-uri -o TD3-sujet.html TD3.asc
+	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered \
+	-a data-uri $< -o $@
 
 %-prof.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered -a data-uri $< -o $@
+	$(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered \
+	-a data-uri $< -o $@
 
 cours:
 	cp main.html index.html

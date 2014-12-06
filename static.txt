@@ -1,0 +1,62 @@
+== Retour sur les Membres `static`
+
+[source,java]
+---------
+class VariableDemo
+{
+  static int count=0;
+  public void increment()
+  {
+    count++;
+  }
+  public static void main(String args[])
+  {
+    VariableDemo obj1=new VariableDemo();
+    VariableDemo obj2=new VariableDemo();
+    obj1.increment();
+    obj2.increment();
+    System.out.println("Obj1: count is="+obj1.count);
+    System.out.println("Obj2: count is="+obj2.count);
+  }
+}
+---------
+
+Output:
+
+..........
+Obj1: count is=2
+Obj2: count is=2
+..........
+
+ifdef::slides[:leveloffset: -1]
+
+=== Membres `static` (suite)
+
+Comment ça marche :
+
+[%step]
+- Les variables `static` sont initialisées au chargement de la classe.
+- Les variables `static` d'une classe sont
+initialisées avant que la moindre instance ne soit créée.
+- Les variables `static` sont initialisées avant que la moindre méthode `static` ne s'exécute.
+
+=== Méthodes `static`
+
+
+[source,java]
+---------
+import java.lang.Math;
+
+class Another {
+  public static void main(String[] args) {
+    int result;
+
+    result = Math.min(10, 20); //calling static method min by writing class name
+
+    System.out.println(result);
+    System.out.println(Math.max(100, 200));
+  }
+}
+---------
+
+ifdef::slides[:leveloffset: +1]
