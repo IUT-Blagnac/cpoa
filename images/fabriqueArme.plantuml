@@ -35,7 +35,8 @@ Personnage <|-- Chevalier
 Personnage o--> "1..*" ComportementArme
 
 ComportementArme <|.. ComportementEpee
-ComportementArme <-- SimpleFabriqueArme
+ComportementArme <.. SimpleFabriqueArme
 
+ComportementEpee <-- Chevalier
 
 @enduml
