@@ -6,6 +6,7 @@
 
 // raccourcis sites
 :aadl: http://www.aadl.info/[AADL]indexterm:[AADL]
+:ant: http://ant.apache.org/[ant]
 :artisan: http://www.artisansw.com/[Artisan]
 :asciidoc: http://www.methods.co.nz/asciidoc[AsciiDoc]indexterm:[AsciiDoc]
 :dasciidoc: http://www.methods.co.nz/asciidoc[d'AsciiDoc]indexterm:[AsciiDoc]
@@ -26,12 +27,15 @@
 :git: link:http://git-scm.com/[Git]
 :github: link:https://github.com/[GitHub]
 :gherkin: link:http://cukes.info/gherkin.html[Gherkin]
+:gradle: http://www.gradle.org/[Gradle]
 :grafcet: http://fr.wikipedia.org/wiki/Grafcet[Grafcet]
 :java: https://www.java.com/fr/[Java]
 :javadoc: link:http://fr.wikipedia.org/wiki/Javadoc[Javadoc]
+:ivi: http://ant.apache.org/ivy/[Ivy]
 :latex: http://fr.wikipedia.org/wiki/LaTeX[LaTeX]
 :magicDraw: http://www.nomagic.com/[MagicDraw]
 :marte: http://www.omgmarte.org/[MARTE]indexterm:[MARTE]
+:maven: http://maven.apache.org/[Maven]
 :mediawiki: https://www.mediawiki.org[MediaWiki]
 :mercurial: link:http://mercurial.selenic.com/[Mercurial]
 :modelica: https://www.modelica.org/[Modelica(R)]

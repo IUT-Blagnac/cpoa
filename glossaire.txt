@@ -28,6 +28,16 @@ include::pattern/fabrique-abstraite.txt[]
 
 === Patrons comportementaux
 
+[[Etat]] État (_State^uk^_)::
+include::pattern/etat.txt[]
+
+ifdef::slides[=== Patrons comportementaux (suite)]
+
+[[Itérateur]] Itérateur (_Iterator^uk^_)::
+include::pattern/iterateur.txt[]
+
+ifdef::slides[=== Patrons comportementaux (suite)]
+
 [[Observateur]] Observateur (_Observer^uk^_)::
 include::pattern/observer.txt[]
 
@@ -36,17 +46,18 @@ ifdef::slides[=== Patrons comportementaux (suite)]
 [[Stratégie]] Stratégie (_Strategy^uk^_)::
 include::pattern/strategy.txt[]
 
-ifdef::slides[=== Patrons comportementaux (suite)]
-
-[[Etat]] État (_State^uk^_)::
-include::pattern/etat.txt[]
 
 === Patrons structurels
 
 Adaptateur::
   TBD
-Composite::
-  TBD
+[[Composite]] Composite::
+include::pattern/composite.txt[]
+
+ifdef::slides[=== Patrons structurels (suite)]
+
+[[Proxy]] Procuration (_Proxy^uk^_)::
+include::pattern/proxy.txt[]
 
 ifdef::slides[:leveloffset: +1]
 

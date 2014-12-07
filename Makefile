@@ -42,7 +42,7 @@ pattern/%.png: pattern/%.plantuml
 
 %.full.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a toc2 -a data-uri -b html5 -a numbered -o $@ $<
+	$(DOCTOR) -a toc2 -a data-uri -b html5 -a numbered -a eleve -o $@ $<
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
