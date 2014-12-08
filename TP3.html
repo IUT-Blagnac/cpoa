@@ -454,6 +454,47 @@ Votre choix ?</pre>
 </li>
 <li>
 <p>lancer execute() sur l&#8217;instance de ActionListAgenceBancaire.</p>
+<div class="listingblock">
+<div class="title">Exemple d&#8217;une telle classe</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MainTest</span> <span class="tok-o">{</span>
+
+  <span class="tok-cm">/**</span>
+<span class="tok-cm">  * @param args</span>
+<span class="tok-cm">  * @throws Exception</span>
+<span class="tok-cm">  */</span>
+  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-kd">throws</span> <span class="tok-n">Exception</span> <span class="tok-o">{</span>
+
+    <span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span> <span class="tok-o">=</span> <span class="tok-n">AccesAgenceBancaire</span><span class="tok-o">.</span><span class="tok-na">getAgenceBancaire</span><span class="tok-o">();</span>
+
+    <span class="tok-n">Action</span> <span class="tok-n">a1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action1</span><span class="tok-o">(</span><span class="tok-s">&quot;Liste des comptes de l&#39;agence&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">Action</span> <span class="tok-n">a2</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action2</span><span class="tok-o">(</span><span class="tok-s">&quot;Voir un compte (par son numéro)&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">Action</span> <span class="tok-n">a3</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action3</span><span class="tok-o">(</span><span class="tok-s">&quot;Ajouter un compte&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">Action</span> <span class="tok-n">a4</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action4</span><span class="tok-o">(</span><span class="tok-s">&quot;Supprimer un compte&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">Action</span> <span class="tok-n">a5</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action5</span><span class="tok-o">(</span><span class="tok-s">&quot;Déposer de l&#39;argent sur un compte&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">Action</span> <span class="tok-n">a6</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action6</span><span class="tok-o">(</span><span class="tok-s">&quot;Retirer de l&#39;argent sur un compte&quot;</span><span class="tok-o">);</span>
+
+    <span class="tok-n">ActionList</span> <span class="tok-n">al1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ActionListAgenceBancaire</span><span class="tok-o">(</span><span class="tok-s">&quot;Menu Général&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">ActionList</span> <span class="tok-n">al2</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ActionListAgenceBancaire</span><span class="tok-o">(</span><span class="tok-s">&quot;Menu gestion des comptes&quot;</span><span class="tok-o">);</span>
+    <span class="tok-n">ActionList</span> <span class="tok-n">al3</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ActionListAgenceBancaire</span><span class="tok-o">(</span><span class="tok-s">&quot;Menu opérations sur comptes&quot;</span><span class="tok-o">);</span>
+
+    <span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a1</span><span class="tok-o">);</span>
+    <span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a2</span><span class="tok-o">);</span>
+    <span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">al3</span><span class="tok-o">);</span>
+    <span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">al2</span><span class="tok-o">);</span>
+
+    <span class="tok-n">al2</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a3</span><span class="tok-o">);</span>
+    <span class="tok-n">al2</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a4</span><span class="tok-o">);</span>
+
+    <span class="tok-n">al3</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a5</span><span class="tok-o">);</span>
+    <span class="tok-n">al3</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a6</span><span class="tok-o">);</span>
+
+    <span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">execute</span><span class="tok-o">(</span><span class="tok-n">ag</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -830,7 +871,7 @@ Votre choix ?</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-12-08 15:57:39 CET
+Last updated 2014-12-08 17:11:38 CET
 </div>
 </div>
 </body>
