@@ -1,0 +1,6 @@
+*Itérateur* (*_Iterator_*) fournit un moyen d'accès séquentiel aux éléments 
+d'un agrégat d'objets, sans mettre à découvert la représentation interne de
+celui-ci.
+
+ifndef::slides[.Modèle UML du patron Itérateur]
+image::iterateur.svg[]

@@ -1,0 +1,5 @@
+*Procuration* (*_Proxy_*) fournit à un tiers un mandataire ou un remplaçant, pour contrôler
+l'accès à cet objet.
+
+ifndef::slides[.Modèle UML du patron _Proxy_]
+image::proxy.png[]

@@ -1,0 +1,7 @@
+*Composite* permet de composer des objets en des structures arborescentes
+pour représenter des hiérarchies composant/composé.
+Permet au client de traiter d'une façon unique les objets et les combinaisons
+d'objets.
+
+ifndef::slides[.Modèle UML du patron Composite]
+image::composite.svg[]

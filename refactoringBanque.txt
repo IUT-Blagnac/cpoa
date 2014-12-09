@@ -1,0 +1,164 @@
+== Retour sur le refactoring Banque
+
+ifdef::slides[:leveloffset: -1]
+
+=== Le problème
+
+image::refactoring1.png[]
+
+ifdef::slides[=== Le problème (suite)]
+
+Remplacer tous ces `switch cases`
+
+[source,java]
+-----------
+continuer = true;
+while (continuer) {
+  AAB.afficherMenu(monAg);
+  choix = lect.next();
+  choix = choix.toLowerCase();
+  switch (choix) {
+    ...
+    case "p" :
+      System.out.print("Propriétaire -> ");
+      nom = lect.next();
+      AAB.comptesDUnPropretaire (monAg, nom);
+    break;
+    ...
+-----------
+
+ifdef::slides[=== Le problème (suite)]
+
+[%step]
+- Afficher une liste séparemment du switch
++
+[source,java]
+----
+//AAB.afficherMenu(monAg);
+  System.out.println("Menu de " + ag.getNomAgence() + " (" + ag.getLocAgence() + ")");
+  System.out.println("l - Liste des comptes de l'agence");
+  ...
+  System.out.println("p - voir les comptes d'un Propriétaire (par son nom)");
+  ...
+  System.out.print("Choix -> ");
+}
+----
+- Tester tous les choix pour actionner la bonne option
++
+[source,java]
+-----------
+  ...
+  case "p" :
+    System.out.print("Propriétaire -> ");
+    nom = lect.next();
+    AAB.comptesDUnPropretaire (monAg, nom);
+  break;
+  ...
+-----------
+
+=== Une solution
+
+[%step]
+- Des listes
+- Des options de menu qui encapsulent l'action à réaliser
+
+ifdef::slides[=== Une solution (suite)]
+
+[source,java]
+-----------
+public interface ActionList extends Action {
+
+  public String listTitle();
+  public int size();
+
+  public boolean addAction(Action ac);
+  public boolean removeAction(Action ac);
+
+  public String[] listOfActions() ;
+
+}
+-----------
+
+ifdef::slides[=== Une solution (suite)]
+
+.Une interface pour les options de menu
+[source,java]
+-----------
+public interface Action  {
+
+  public String actionMessage ();
+  public void execute(AgenceBancaire ag);
+}
+-----------
+
+
+ifdef::slides[=== Une solution (suite)]
+
+.Une classe concrète par option de menu
+[source,java]
+-----------
+public class Action1 implements Action {
+
+  private String lineMessage;
+
+  ...
+  public String actionMessage() {
+    return this.lineMessage;
+  }
+
+  public void execute(AgenceBancaire ab) {
+
+    ...
+    ab.afficher();
+  }
+}
+-----------
+
+.Utilisation de l'action
+[source,java]
+-----------
+  action.execute(ab);
+-----------
+
+ifdef::slides[=== Une solution (suite)]
+
+.Lien entre liste et action
+[source,java]
+----
+Action a1 = new Action1("Liste des comptes de l'agence");
+Action a2 = new Action2("Voir un compte (par son numéro)");
+Action a3 = new Action3(...);
+
+ActionList al1 = new ActionListAgenceBancaire("Menu Général");
+
+al1.addAction(a1);
+al1.addAction(a2);
+----
+
+ifdef::slides[=== Une solution (suite)]
+
+.Lien entre liste et action : choix dans la liste
+[source,java]
+----
+public void execute(AgenceBancaire ab) throws Exception {
+  ...
+  while (true) {
+    this.printMenu();
+
+    choice = this.readResponse();
+    ...
+    this.myMenu.get(choice).execute(ab);
+    ...
+----
+
+ifdef::slides[=== Une solution (suite)]
+
+.La liste peut elle-même être une option de menu (une action)!
+[source,java]
+-----------
+public interface ActionList extends Action {
+}
+-----------
+
+
+ifdef::slides[:leveloffset: +1]
