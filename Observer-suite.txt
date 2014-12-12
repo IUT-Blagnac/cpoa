@@ -1,0 +1,622 @@
+
+
+Java 1.1 introduced a new GUI event model based on the
+Observer Pattern
+GUI components which can generate GUI events are called event
+sources
+Objects that want to be notified of GUI events are called event
+listeners
+Event generation is also called firing the event
+Comparison to the Observer Pattern:
+ConcreteSubject => event source
+ConcreteObserver => event listener
+For an event listener to be notified of an event, it must first
+register with the event source
+
+Design Patterns In Java
+
+The Observer Pattern
+35
+
+Bob Tarr
+
+Java 1.1 Event Model (Continued)
+l
+
+l
+
+An event listener must implement an interface which provides the
+method to be called by the event source when the event occurs
+Unlike the Observer Pattern which defines just the one simple
+Observer interface, the Java 1.1 AWT event model has 11
+different listener interfaces, each tailored to a different type of
+GUI event:
+È
+
+Listeners For Semantic Events
+›
+›
+›
+›
+
+ActionListener
+AdjustmentListener
+ItemListener
+TextListener
+
+Design Patterns In Java
+
+The Observer Pattern
+36
+
+Bob Tarr
+
+Java 1.1 Event Model (Continued)
+È
+
+Listeners For Low-Level Events
+›
+›
+›
+›
+›
+›
+›
+
+l
+
+ComponentListener
+ContainerListener
+FocusListener
+KeyListener
+MouseListener
+MouseMotionListener
+WindowListener
+
+Some of these listener interfaces have several methods which
+must be implemented by an event listener. For example, the
+WindowListener interface has seven such methods. In many
+cases, an event listener is really only interested in one specific
+event, such as the Window Closing event.
+
+Design Patterns In Java
+
+The Observer Pattern
+37
+
+Bob Tarr
+
+Java 1.1 Event Model (Continued)
+l
+
+Java provides “adapter” classes as a convenience in this situation.
+For example, the WindowAdapter class implements the
+WindowListener interface, providing “do nothing”
+implementation of all seven required methods. An event listener
+class can extend WindowAdapter and override only those
+methods of interest.
+
+Design Patterns In Java
+
+The Observer Pattern
+38
+
+Bob Tarr
+
+AWT Example 1
+import java.awt.*;
+import java.awt.event.*;
+/**
+* An example of the Java 1.1 AWT event model.
+* This class not only builds the GUI, but it is the
+*
+listener for button events.
+*/
+public class ButtonExample1
+extends WindowAdapter
+implements ActionListener {
+Frame frame;
+Panel buttonPanel;
+Button redButton, greenButton;
+
+Design Patterns In Java
+
+The Observer Pattern
+39
+
+Bob Tarr
+
+AWT Example 1 (Continued)
+// Build the GUI and display it.
+public ButtonExample1(String title) {
+frame = new Frame(title);
+buttonPanel = new Panel(new FlowLayout());
+redButton = new Button("Red");
+redButton.setBackground(Color.red);
+redButton.setActionCommand("Change To Red");
+redButton.addActionListener(this);
+buttonPanel.add(redButton);
+greenButton = new Button("Green");
+greenButton.setBackground(Color.green);
+greenButton.setActionCommand("Change To Green");
+greenButton.addActionListener(this);
+buttonPanel.add(greenButton);
+
+Design Patterns In Java
+
+The Observer Pattern
+40
+
+Bob Tarr
+
+AWT Example 1 (Continued)
+frame.add("Center", buttonPanel);
+frame.addWindowListener(this);
+frame.pack();
+frame.setVisible(true);
+}
+// Since we are a WindowAdapter, we already implement the
+// WindowListener interface. So only override those methods
+// we are interested in.
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+
+Design Patterns In Java
+
+The Observer Pattern
+41
+
+Bob Tarr
+
+AWT Example 1 (Continued)
+// Since we handle the button events, we must implement
+// the ActionListener interface.
+public void actionPerformed(ActionEvent e) {
+String cmd = e.getActionCommand();
+if (cmd.equals("Change To Red")) {
+System.out.println("Red pressed");
+buttonPanel.setBackground(Color.red);
+}
+else if (cmd.equals("Change To Green")) {
+System.out.println("Green pressed");
+buttonPanel.setBackground(Color.green);
+}
+}
+public static void main(String args[]) {
+new ButtonExample1("Button Example");
+}
+}
+Design Patterns In Java
+
+The Observer Pattern
+42
+
+Bob Tarr
+
+AWT Example 2
+import java.awt.*;
+import java.awt.event.*;
+/**
+* An example of the Java 1.1 AWT event model.
+* This class uses anonymous inner classes as the
+*
+listeners for button events. As a result, we
+*
+do not need to implement ActionListener.
+*/
+public class ButtonExample2
+extends WindowAdapter {
+Frame frame;
+Panel buttonPanel;
+Button redButton, greenButton;
+
+Design Patterns In Java
+
+The Observer Pattern
+43
+
+Bob Tarr
+
+AWT Example 2 (Continued)
+// Build the GUI and display it.
+public ButtonExample2(String title) {
+frame = new Frame(title);
+buttonPanel = new Panel(new FlowLayout());
+redButton = new Button("Red");
+redButton.setBackground(Color.red);
+redButton.setActionCommand("Change To Red");
+redButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.out.println("Red pressed");
+buttonPanel.setBackground(Color.red);
+}
+} );
+buttonPanel.add(redButton);
+
+Design Patterns In Java
+
+The Observer Pattern
+44
+
+Bob Tarr
+
+AWT Example 2 (Continued)
+greenButton = new Button("Green");
+greenButton.setBackground(Color.green);
+greenButton.setActionCommand("Change To Green");
+greenButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.out.println("Green pressed");
+buttonPanel.setBackground(Color.green);
+}
+} );
+buttonPanel.add(greenButton);
+frame.add("Center", buttonPanel);
+frame.addWindowListener(this);
+frame.pack();
+frame.setVisible(true);
+}
+
+Design Patterns In Java
+
+The Observer Pattern
+45
+
+Bob Tarr
+
+AWT Example 2 (Continued)
+// Since we are a WindowAdapter, we already implement the
+// WindowListener interface. So only override those methods
+// we are interested in.
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+public static void main(String args[]) {
+new ButtonExample2("Button Example");
+}
+}
+
+Design Patterns In Java
+
+The Observer Pattern
+46
+
+Bob Tarr
+
+MVC Example 1
+l
+
+This example shows the model and the view in the same class
+/**
+* Class CounterGui demonstrates having the model and view
+*
+in the same class.
+*/
+public class CounterGui extends Frame {
+// The counter. (The model!)
+private int counter = 0;
+// The view.
+private TextField tf = new TextField(10);
+
+Design Patterns In Java
+
+The Observer Pattern
+47
+
+Bob Tarr
+
+MVC Example 1 (Continued)
+public CounterGui(String title) {
+super(title);
+Panel tfPanel = new Panel();
+tf.setText("0");
+tfPanel.add(tf);
+add("North", tfPanel);
+Panel buttonPanel = new Panel();
+Button incButton = new Button("Increment");
+incButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter++;
+tf.setText(counter + "");
+}
+} );
+buttonPanel.add(incButton);
+Design Patterns In Java
+
+The Observer Pattern
+48
+
+Bob Tarr
+
+MVC Example 1 (Continued)
+Button decButton = new Button("Decrement");
+decButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter--;
+tf.setText(counter + "");
+}
+} );
+buttonPanel.add(decButton);
+Button exitButton = new Button("Exit");
+exitButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.exit(0);
+}
+} );
+buttonPanel.add(exitButton);
+add("South", buttonPanel);
+The Observer Pattern
+Design Patterns In Java
+49
+
+Bob Tarr
+
+MVC Example 1 (Continued)
+addWindowListener(new WindowAdapter() {
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+} );
+}
+public static void main(String[] argv) {
+CounterGui cg = new CounterGui("CounterGui");
+cg.setSize(300, 100);
+cg.setVisible(true);
+}
+}
+l
+
+Where is the controller in this example?? The controllers are the
+instances of the anonymous classes which handle the button
+presses.
+
+Design Patterns In Java
+
+The Observer Pattern
+50
+
+Bob Tarr
+
+MVC Example 2
+l
+l
+
+This example shows the model and the view in separate classes
+First the view class:
+/**
+* Class CounterView demonstrates having the model and view
+*
+in the separate classes. This class is just the view.
+*/
+public class CounterView extends Frame {
+// The view.
+private TextField tf = new TextField(10);
+// A reference to our associated model.
+private Counter counter;
+
+Design Patterns In Java
+
+The Observer Pattern
+51
+
+Bob Tarr
+
+MVC Example 2 (Continued)
+public CounterView(String title, Counter c) {
+super(title);
+counter = c;
+Panel tfPanel = new Panel();
+tf.setText(counter.getCount()+ "");
+tfPanel.add(tf);
+add("North", tfPanel);
+Panel buttonPanel = new Panel();
+Button incButton = new Button("Increment");
+incButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter.incCount();
+tf.setText(counter.getCount() + "");
+}
+} );
+buttonPanel.add(incButton);
+The Observer Pattern
+Design Patterns In Java
+52
+
+Bob Tarr
+
+MVC Example 2 (Continued)
+Button decButton = new Button("Decrement");
+decButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter.decCount();
+tf.setText(counter.getCount()+ "");
+}
+} );
+buttonPanel.add(decButton);
+Button exitButton = new Button("Exit");
+exitButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.exit(0);
+}
+} );
+buttonPanel.add(exitButton);
+add("South", buttonPanel);
+The Observer Pattern
+Design Patterns In Java
+53
+
+Bob Tarr
+
+MVC Example 2 (Continued)
+addWindowListener(new WindowAdapter() {
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+} );
+}
+public static void main(String[] argv) {
+Counter counter = new Counter(0);
+CounterView cv1 = new CounterView("CounterView1", counter);
+cv1.setSize(300, 100);
+cv1.setVisible(true);
+CounterView cv2 = new CounterView("CounterView2", counter);
+cv2.setSize(300, 100);
+cv2.setVisible(true);
+}
+}
+Design Patterns In Java
+
+The Observer Pattern
+54
+
+Bob Tarr
+
+MVC Example 2 (Continued)
+l
+
+Next the model class:
+/**
+* Class Counter implements a simple counter model.
+*/
+public class Counter {
+// The model.
+private int count;
+public Counter(int count) { this.count = count; }
+public int getCount() { return count; }
+public void incCount() { count++; }
+public void decCount() { count--; }
+}
+
+Design Patterns In Java
+
+The Observer Pattern
+55
+
+Bob Tarr
+
+MVC Example 2 (Continued)
+l
+
+l
+
+l
+
+Note that we instantiated one model and two views in this
+example:
+
+But we have a problem! When the model changes state, only one
+view updates!
+We need the Observer Pattern here!
+
+Design Patterns In Java
+
+The Observer Pattern
+56
+
+Bob Tarr
+
+MVC Example 3
+l
+
+l
+
+This example shows the model and the view in separate classes
+with the model being observable
+First the model class:
+import java.util.Observable;
+/**
+* Class ObservableCounter implements a simple observable
+*
+counter model.
+*/
+public class ObservableCounter extends Observable {
+// The model.
+private int count;
+public ObservableCounter(int count) { this.count = count; }
+
+Design Patterns In Java
+
+The Observer Pattern
+57
+
+Bob Tarr
+
+MVC Example 3 (Continued)
+public int getCount() { return count; }
+public void incCount() {
+count++;
+setChanged();
+notifyObservers();
+}
+public void decCount() {
+count--;
+setChanged();
+notifyObservers();
+}
+}
+
+Design Patterns In Java
+
+The Observer Pattern
+58
+
+Bob Tarr
+
+MVC Example 3 (Continued)
+l
+
+Next the view class:
+/**
+* Class ObservableCounterView demonstrates having the model
+* and view in the separate classes. This class is just the
+* view.
+*/
+public class ObservableCounterView extends Frame {
+// The view.
+private TextField tf = new TextField(10);
+// A reference to our associated model.
+private ObservableCounter counter;
+
+Design Patterns In Java
+
+The Observer Pattern
+59
+
+Bob Tarr
+
+MVC Example 3 (Continued)
+public ObservableCounterView(String title,
+ObservableCounter c) {
+super(title);
+counter = c;
+// Add an anonymous observer to the ObservableCounter.
+counter.addObserver(new Observer() {
+public void update(Observable src, Object obj) {
+if (src == counter) {
+tf.setText(((ObservableCounter)src).getCount() + "");
+}
+}
+} );
+// Same GUI code as Example 2 not shown...
+
+Design Patterns In Java
+
+The Observer Pattern
+60
+
+Bob Tarr
+
+MVC Example 3 (Continued)
+public static void main(String[] argv) {
+ObservableCounter counter = new ObservableCounter(0);
+ObservableCounterView cv1 = new
+ObservableCounterView("ObservableCounterView1", counter);
+cv1.setSize(300, 100);
+cv1.setVisible(true);
+ObservableCounterView cv2 = new
+ObservableCounterView("ObservableCounterView2", counter);
+cv2.setSize(300, 100);
+cv2.setVisible(true);
+}
+}

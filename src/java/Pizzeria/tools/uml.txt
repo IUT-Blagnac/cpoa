@@ -1,0 +1,58 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "application"
+class AccesAgenceBancaire
+' end package
+
+' package "banque.exception"
+class CompteException
+class ABCompteNullException
+class ABCompteInexistantException
+class ABCompteDejaExistantException
+' end package
+
+' package "banque"
+class Compte
+class AgenceBancaire
+' end package
+
+' content
+' -------
+
+' Compte:
+Compte : double soldeCompte()
+Compte : String getProprietaire()
+Compte : String getNumCompte()
+Compte : void afficher()
+Compte : String toString()
+Compte : void retirer(double)
+Compte : void deposer(double)
+Compte : void setProprietaire(String)
+
+' ABCompteDejaExistantException:
+
+' AccesAgenceBancaire:
+AccesAgenceBancaire : AgenceBancaire getAgenceBancaire()
+AccesAgenceBancaire : void saveAgenceBancaire(AgenceBancaire)
+
+' CompteException:
+
+' ABCompteInexistantException:
+
+' ABCompteNullException:
+
+' AgenceBancaire:
+AgenceBancaire : String getNomAgence()
+AgenceBancaire : String getLocAgence()
+AgenceBancaire : int getNbComptes()
+AgenceBancaire : Compte getCompte(String)
+AgenceBancaire : Compte getComptesDe(String)
+AgenceBancaire : void afficher()
+AgenceBancaire : String toString()
+AgenceBancaire : void addCompte(Compte)
+AgenceBancaire : void removeCompte(String)
+
+@enduml

@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.2">
+<meta name="author" content="Dut/Info-S3/M3105 - Semaine 3 (49)">
+<meta name="copyright" content="{date=2014-12-12}, IUT Blagnac *** Dut/Info-S3/M3105 - Semaine 3 (49) *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<title>CPOA - Sujet TD 5</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="./pygments-manni.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>CPOA - Sujet TD 5</h1>
+<div class="details">
+<span id="author" class="author">Dut/Info-S3/M3105 - Semaine 3 (49)</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_rappel_du_cours">1. Rappel du cours</a></li>
+<li><a href="#_motivation">2. Motivation</a></li>
+<li><a href="#_the_observer_design_pattern">3. The Observer design pattern</a>
+<ul class="sectlevel2">
+<li><a href="#_definition_sorry_for_the_french">3.1. Definition (sorry for the French)</a></li>
+<li><a href="#_intent">3.2. Intent</a></li>
+<li><a href="#_applicability">3.3. Applicability</a></li>
+<li><a href="#_participants">3.4. Participants</a></li>
+<li><a href="#_scenario">3.5. Scenario</a></li>
+<li><a href="#_benefits">3.6. Benefits</a></li>
+<li><a href="#_liabilities">3.7. Liabilities</a></li>
+</ul>
+</li>
+<li><a href="#_implementation_issues">4. Implementation Issues</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<table id="cartouche" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PreReq</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1. Je sais programmer en <a href="https://www.java.com/fr/">Java</a>.
+2. J&#8217;ai conscience qu&#8217;il faut réfléchir avant de se lancer dans le codage.
+3. Je maîtrise quelques patrons de conception.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aborder le patron <strong>Observer</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong> TD et <strong>2</strong> TPs</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rappel_du_cours"><a class="link" href="#_rappel_du_cours">1. Rappel du cours</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://iut-blagnac.github.io/cpoa/">Support de Cours</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_motivation"><a class="link" href="#_motivation">2. Motivation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this exercice, we will explore the need to maintain consistency between related objects without making classes tightly coupled.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/observer-illustration.png" alt="observer illustration">
+</div>
+<div class="title">Figure 1. The classical Observer illustration</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_observer_design_pattern"><a class="link" href="#_the_observer_design_pattern">3. The Observer design pattern</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_definition_sorry_for_the_french"><a class="link" href="#_definition_sorry_for_the_french">3.1. Definition (sorry for the French)</a></h3>
+<div class="paragraph">
+<p><strong>Observateur</strong> définit une relation entre objets de type
+un-à-plusieurs, de façon que, lorsqu&#8217;un objet change d&#8217;état,
+tous ceux qui en dépendent en soient notifiés et soient mis à jour
+automatiquement.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/observateur.svg" alt="observateur">
+</div>
+<div class="title">Figure 2. Modèle UML du patron <em>Observer</em></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intent"><a class="link" href="#_intent">3.2. Intent</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_applicability"><a class="link" href="#_applicability">3.3. Applicability</a></h3>
+<div class="paragraph">
+<p>Use the Observer pattern in any of the following situations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When an abstraction has two aspects, one dependent on the other.
+Encapsulating these aspects in separate objects lets you vary and reuse
+them independently.</p>
+</li>
+<li>
+<p>When a change to one object requires changing others</p>
+</li>
+<li>
+<p>When an object should be able to notify other objects without making
+assumptions about those objects</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_participants"><a class="link" href="#_participants">3.4. Participants</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Subject</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Keeps track of its <code>observers</code></p>
+</li>
+<li>
+<p>Provides an interface for attaching and detaching <code>Observer</code> objects</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>Observer</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Defines an interface for update notification</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>ConcreteSubject</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The object being observed</p>
+</li>
+<li>
+<p>Stores state of interest to ConcreteObserver objects</p>
+</li>
+<li>
+<p>Sends a notification to its observers when its state changes</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>ConcreteObserver</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The observing object</p>
+</li>
+<li>
+<p>Stores state that should stay consistent with the subject&#8217;s</p>
+</li>
+<li>
+<p>Implements the Observer update interface to keep its state consistent with
+the subject&#8217;s</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scenario"><a class="link" href="#_scenario">3.5. Scenario</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>Pour vérifiez que vous avez compris son utilité, réalisez
+un diagramme de séquence illustrant l&#8217;utilisation du patron <em>Observer</em>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_benefits"><a class="link" href="#_benefits">3.6. Benefits</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Minimal coupling between the Subject and the Observer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Can reuse subjects without reusing their observers and vice versa</p>
+</li>
+<li>
+<p>Observers can be added without modifying the subject</p>
+</li>
+<li>
+<p>All subject knows is its list of observers</p>
+</li>
+<li>
+<p>Subject does not need to know the concrete class of an observer, just that
+each observer implements the update interface</p>
+</li>
+<li>
+<p>Subject and observer can belong to different abstraction layers</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Support for event broadcasting</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Subject sends notification to all subscribed observers</p>
+</li>
+<li>
+<p>Observers can be added/removed at any time</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_liabilities"><a class="link" href="#_liabilities">3.7. Liabilities</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Possible cascading of notifications</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Observers are not necessarily aware of each other and must be careful
+about triggering updates</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Simple update interface requires observers to deduce changed item</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_implementation_issues"><a class="link" href="#_implementation_issues">4. Implementation Issues</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s try to define an implementation.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/warning.png" alt="Warning">
+</td>
+<td class="content">
+If you already know or have used the <code>Observer</code><a href="https://www.java.com/fr/">Java</a> implementation,
+try to forget it!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here are a list of possible issues.</p>
+</div>
+<div class="paragraph">
+<p>How does the subject keep track of its observers?
+›</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>What if an observer wants to observe more than one subject?
+›</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>›
+›</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>Have the subject tell the observer who it is via the update interface</p>
+</div>
+<div class="paragraph">
+<p>Who triggers the update?
+›</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>Array, linked list</p>
+</div>
+<div class="paragraph">
+<p>The subject whenever its state changes
+The observers after they cause one or more state changes
+Some third party object(s)</p>
+</div>
+<div class="paragraph">
+<p>Make sure the subject updates its state before sending out notifications
+How much info about the change should the subject send to the observers?
+›
+›</p>
+</div>
+<div class="paragraph">
+<p>Push Model - Lots
+Pull Model - Very Little</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+10</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+l</p>
+</div>
+<div class="paragraph">
+<p>Implementation Issues
+È</p>
+</div>
+<div class="paragraph">
+<p>Can the observers subscribe to specific events of interest?
+›</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>Can an observer also be a subject?
+›</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>If so, it&#8217;s publish-subscribe
+Yes!</p>
+</div>
+<div class="paragraph">
+<p>What if an observer wants to be notified only after several subjects have
+changed state?
+›
+›</p>
+</div>
+<div class="paragraph">
+<p>Use an intermediary object which acts as a mediator
+Subjects send notifications to the mediator object which performs any
+necessary processing before notifying the observers</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+11</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+l</p>
+</div>
+<div class="paragraph">
+<p>Sample Code
+È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll see some Java soon!</p>
+</div>
+<div class="paragraph">
+<p>Known Uses
+È</p>
+</div>
+<div class="paragraph">
+<p>Smalltalk Model/View/Controller user interface framework
+›
+›
+›</p>
+</div>
+<div class="paragraph">
+<p>È
+l</p>
+</div>
+<div class="paragraph">
+<p>Model = Subject
+View = Observer
+Controller is whatever object changes the state of the subject</p>
+</div>
+<div class="paragraph">
+<p>Java 1.1 AWT/Swing Event Model</p>
+</div>
+<div class="paragraph">
+<p>Related Patterns
+È</p>
+</div>
+<div class="paragraph">
+<p>Mediator
+›</p>
+</div>
+<div class="paragraph">
+<p>To encapsulate complex update semantics</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+12</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Java Implementation Of Observer
+l
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>We could implement the Observer pattern “from scratch” in Java
+But Java provides the Observable/Observer classes as built-in
+support for the Observer pattern
+The java.util.Observable class is the base Subject class. Any
+class that wants to be observed extends this class.
+È
+È
+È</p>
+</div>
+<div class="paragraph">
+<p>È
+l</p>
+</div>
+<div class="paragraph">
+<p>Provides methods to add/delete observers
+Provides methods to notify all observers
+A subclass only needs to ensure that its observers are notified in the
+appropriate mutators
+Uses a Vector for storing the observer references</p>
+</div>
+<div class="paragraph">
+<p>The java.util.Observer interface is the Observer interface. It must
+be implemented by any observer class.</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+13</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>The java.util.Observable Class
+l</p>
+</div>
+<div class="paragraph">
+<p>public Observable()
+È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>public synchronized void addObserver(Observer o)
+È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>Deletes an observer from the set of observers of this object</p>
+</div>
+<div class="paragraph">
+<p>protected synchronized void setChanged()
+È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>Adds an observer to the set of observers of this object</p>
+</div>
+<div class="paragraph">
+<p>public synchronized void deleteObserver(Observer o)
+È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>Construct an Observable with zero Observers</p>
+</div>
+<div class="paragraph">
+<p>Indicates that this object has changed</p>
+</div>
+<div class="paragraph">
+<p>protected synchronized void clearChanged()
+È</p>
+</div>
+<div class="paragraph">
+<p>Indicates that this object has no longer changed, or that it has already
+notified all of its observers of its most recent change. This method is called
+automatically by notifyObservers().</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+14</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>The java.util.Observable Class
+l</p>
+</div>
+<div class="paragraph">
+<p>public synchronized boolean hasChanged()
+È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>public void notifyObservers(Object arg)
+È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>Tests if this object has changed. Returns true if setChanged() has been
+called more recently than clearChanged() on this object; false otherwise.
+If this object has changed, as indicated by the hasChanged() method, then
+notify all of its observers and then call the clearChanged() method to
+indicate that this object has no longer changed. Each observer has its
+update() method called with two arguments: this observable object and the
+arg argument. The arg argument can be used to indicate which attribute of
+the observable object has changed.</p>
+</div>
+<div class="paragraph">
+<p>public void notifyObservers()
+È</p>
+</div>
+<div class="paragraph">
+<p>Same as above, but the arg argument is set to null. That is, the observer is
+given no indication what attribute of the observable object has changed.</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+15</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>The java.util.Observer Interface
+l</p>
+</div>
+<div class="paragraph">
+<p>public abstract void update(Observable o, Object arg)
+È</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>This method is called whenever the observed object is changed. An
+application calls an observable object&#8217;s notifyObservers method to have all
+the object&#8217;s observers notified of the change.
+Parameters:
+›
+›</p>
+</div>
+<div class="paragraph">
+<p>o - the observable object
+arg - an argument passed to the notifyObservers method</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+16</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Observable/Observer Example
+/**
+* A subject to observe!
+*/
+public class ConcreteSubject extends Observable {
+private String name;
+private float price;
+public ConcreteSubject(String name, float price) {
+this.name = name;
+this.price = price;
+System.out.println("ConcreteSubject created: " + name + " at "
++ price);
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+17</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Observable/Observer Example (Continued)
+public String getName() {return name;}
+public float getPrice() {return price;}
+public void setName(String name) {
+this.name = name;
+setChanged();
+notifyObservers(name);
+}
+public void setPrice(float price) {
+this.price = price;
+setChanged();
+notifyObservers(new Float(price));
+}
+}
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+18</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Observable/Observer Example (Continued)
+public class NameObserver implements Observer {
+private String name;
+public NameObserver() {
+name = null;
+System.out.println("NameObserver created: Name is " + name);
+}
+public void update(Observable obj, Object arg) {
+if (arg instanceof String) {
+name = (String)arg;
+System.out.println("NameObserver: Name changed to " + name);
+} else {
+System.out.println("NameObserver: Some other change to
+subject!");
+}
+}
+}
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+19</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Observable/Observer Example (Continued)
+public class PriceObserver implements Observer {
+private float price;
+public PriceObserver() {
+price = 0;
+System.out.println("PriceObserver created: Price is " + price);
+}
+public void update(Observable obj, Object arg) {
+if (arg instanceof Float) {
+price = ((Float)arg).floatValue();
+System.out.println("PriceObserver: Price changed to "<br>
+price);
+} else {
+System.out.println(”PriceObserver: Some other change to
+subject!");
+}
+}
+The Observer Pattern
+}
+Design Patterns In Java
+Bob Tarr
+20</p>
+</div>
+<div class="paragraph">
+<p>Observable/Observer Example (Continued)
+public class TestObservers {
+public static void main(String args[]) {
+ConcreteSubject s = new ConcreteSubject("Corn Pops", 1.29f);
+NameObserver nameObs = new NameObserver();
+PriceObserver priceObs = new PriceObserver();
+s.addObserver(nameObs);
+s.addObserver(priceObs);
+s.setName("Frosted Flakes");
+s.setPrice(4.57f);
+s.setPrice(9.22f);
+s.setName("Sugar Crispies");
+}
+}
+The Observer Pattern
+Design Patterns In Java
+Bob Tarr
+21</p>
+</div>
+<div class="paragraph">
+<p>Observable/Observer Example (Continued)
+l</p>
+</div>
+<div class="paragraph">
+<p>Test program output
+ConcreteSubject created: Corn Pops at 1.29
+NameObserver created: Name is null
+PriceObserver created: Price is 0.0
+PriceObserver: Some other change to subject!
+NameObserver: Name changed to Frosted Flakes
+PriceObserver: Price changed to 4.57
+NameObserver: Some other change to subject!
+PriceObserver: Price changed to 9.22
+NameObserver: Some other change to subject!
+PriceObserver: Some other change to subject!
+NameObserver: Name changed to Sugar Crispies</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+22</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>A Problem With Observable/Observer
+l</p>
+</div>
+<div class="paragraph">
+<p>Problem:
+È</p>
+</div>
+<div class="paragraph">
+<p>Suppose the class which we want to be an observable is already part of an
+inheritance hierarchy:
+class SpecialSubject extends ParentClass</p>
+</div>
+<div class="paragraph">
+<p>È</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>Since Java does not support multiple inheritance, how can we have
+ConcreteSubject extend both Observable and ParentClass?</p>
+</div>
+<div class="paragraph">
+<p>Solution:
+È
+È
+È</p>
+</div>
+<div class="paragraph">
+<p>Use Delegation
+We will have SpecialSubject contain an Observable object
+We will delegate the observable behavior that SpecialSubject needs to this
+contained Observable object</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+23</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable
+/**
+* A subject to observe!
+* But this subject already extends another class.
+* So use a contained DelegatedObservable object.
+* Note that in this version of SpecialSubject we do
+*
+not duplicate any of the interface of Observable.
+*
+Clients must get a reference to our contained
+*
+Observable object using the getObservable() method.
+*/
+public class SpecialSubject extends ParentClass {
+private String name;
+private float price;
+private DelegatedObservable obs;</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+24</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+public SpecialSubject(String name, float price) {
+this.name = name;
+this.price = price;
+obs = new DelegatedObservable();
+}
+public String getName() {return name;}
+public float getPrice() {return price;}
+public Observable getObservable() {return obs;}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+25</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+public void setName(String name) {
+this.name = name;
+obs.setChanged();
+obs.notifyObservers(name);
+}
+public void setPrice(float price) {
+this.price = price;
+obs.setChanged();
+obs.notifyObservers(new Float(price));
+}
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+26</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+l
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>What&#8217;s this DelegatedObservable class?
+Two methods of java.util.Observable are protected methods:
+setChanged() and clearChanged()
+Apparently, the designers of Observable felt that only subclasses
+of Observable (that is, "true" observable subjects) should be able
+to modify the state-changed flag
+If SpecialSubject contains an Observable object, it could not
+invoke the setChanged() and clearChanged() methods on it
+So we have DelegatedObservable extend Observable and override
+these two methods making them have public visibility
+Java rule: An subclass can changed the visibility of an overridden
+method of its superclass, but only if it provides more access</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+27</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+public class DelegatedObservable extends Observable {
+public void clearChanged() {
+super.clearChanged();
+}
+public void setChanged() {
+super.setChanged();
+}
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+28</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+public class TestSpecial {
+public static void main(String args[]) {
+SpecialSubject s = new SpecialSubject("Corn Pops", 1.29f);
+NameObserver nameObs = new NameObserver();
+PriceObserver priceObs = new PriceObserver();
+s.getObservable().addObserver(nameObs);
+s.getObservable().addObserver(priceObs);
+s.setName("Frosted Flakes");
+s.setPrice(4.57f);
+s.setPrice(9.22f);
+s.setName("Sugar Crispies");
+}
+}
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+29</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>This version of SpecialSubject did not provide implementations
+of any of the methods of Observable. As a result, it had to allow
+its clients to get a reference to its contained Observable object
+using the getObservable() method. This may have dangerous
+consequences. A rogue client could, for example, call the
+deleteObservers() method on the Observable object, and delete all
+the observers!
+Let’s have SpecialSubject not expose its contained Observable
+object, but instead provide “wrapper” implementations of the
+addObserver() and deleteObserver() methods which simply pass
+on the request to the contained Observable object.</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+30</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+/**
+* A subject to observe!
+* But this subject already extends another class.
+* So use a contained DelegatedObservable object.
+* Note that in this version of SpecialSubject we
+*
+provide implementations of two of the methods
+*
+of Observable: addObserver() and deleteObserver().
+*
+These implementations simply pass the request on
+*
+to our contained DelegatedObservable reference.
+*
+Now clients can use the normal Observable semantics
+*
+to add themselves as observers of this object.
+*/
+public class SpecialSubject2 extends ParentClass {
+private String name;
+private float price;
+private DelegatedObservable obs;
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+31</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+public SpecialSubject2(String name, float price) {
+this.name = name;
+this.price = price;
+obs = new DelegatedObservable();
+}
+public String getName() {return name;}
+public float getPrice() {return price;}
+public void addObserver(Observer o) {
+obs.addObserver(o);
+}
+public void deleteObserver(Observer o) {
+obs.deleteObserver(o);
+}
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+32</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+public void setName(String name) {
+this.name = name;
+obs.setChanged();
+obs.notifyObservers(name);
+}
+public void setPrice(float price) {
+this.price = price;
+obs.setChanged();
+obs.notifyObservers(new Float(price));
+}
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+33</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Delegated Observable (Continued)
+public class TestSpecial2 {
+public static void main(String args[]) {
+SpecialSubject2 s = new SpecialSubject2("Corn Pops", 1.29f);
+NameObserver nameObs = new NameObserver();
+PriceObserver priceObs = new PriceObserver();
+s.addObserver(nameObs);
+s.addObserver(priceObs);
+s.setName("Frosted Flakes");
+s.setPrice(4.57f);
+s.setPrice(9.22f);
+s.setName("Sugar Crispies");
+}
+}
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+34</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Java 1.1 Event Model
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>l
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>Java 1.1 introduced a new GUI event model based on the
+Observer Pattern
+GUI components which can generate GUI events are called event
+sources
+Objects that want to be notified of GUI events are called event
+listeners
+Event generation is also called firing the event
+Comparison to the Observer Pattern:
+ConcreteSubject &#8658; event source
+ConcreteObserver &#8658; event listener
+For an event listener to be notified of an event, it must first
+register with the event source</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+35</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Java 1.1 Event Model (Continued)
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>An event listener must implement an interface which provides the
+method to be called by the event source when the event occurs
+Unlike the Observer Pattern which defines just the one simple
+Observer interface, the Java 1.1 AWT event model has 11
+different listener interfaces, each tailored to a different type of
+GUI event:
+È</p>
+</div>
+<div class="paragraph">
+<p>Listeners For Semantic Events
+›
+›
+›
+›</p>
+</div>
+<div class="paragraph">
+<p>ActionListener
+AdjustmentListener
+ItemListener
+TextListener</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+36</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Java 1.1 Event Model (Continued)
+È</p>
+</div>
+<div class="paragraph">
+<p>Listeners For Low-Level Events
+›
+›
+›
+›
+›
+›
+›</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>ComponentListener
+ContainerListener
+FocusListener
+KeyListener
+MouseListener
+MouseMotionListener
+WindowListener</p>
+</div>
+<div class="paragraph">
+<p>Some of these listener interfaces have several methods which
+must be implemented by an event listener. For example, the
+WindowListener interface has seven such methods. In many
+cases, an event listener is really only interested in one specific
+event, such as the Window Closing event.</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+37</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>Java 1.1 Event Model (Continued)
+l</p>
+</div>
+<div class="paragraph">
+<p>Java provides “adapter” classes as a convenience in this situation.
+For example, the WindowAdapter class implements the
+WindowListener interface, providing “do nothing”
+implementation of all seven required methods. An event listener
+class can extend WindowAdapter and override only those
+methods of interest.</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+38</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 1
+import java.awt.<strong>;
+import java.awt.event.</strong>;
+/**
+* An example of the Java 1.1 AWT event model.
+* This class not only builds the GUI, but it is the
+*
+listener for button events.
+*/
+public class ButtonExample1
+extends WindowAdapter
+implements ActionListener {
+Frame frame;
+Panel buttonPanel;
+Button redButton, greenButton;</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+39</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 1 (Continued)
+public ButtonExample1(String title) {
+frame = new Frame(title);
+buttonPanel = new Panel(new FlowLayout());
+redButton = new Button("Red");
+redButton.setBackground(Color.red);
+redButton.setActionCommand("Change To Red");
+redButton.addActionListener(this);
+buttonPanel.add(redButton);
+greenButton = new Button("Green");
+greenButton.setBackground(Color.green);
+greenButton.setActionCommand("Change To Green");
+greenButton.addActionListener(this);
+buttonPanel.add(greenButton);</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+40</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 1 (Continued)
+frame.add("Center", buttonPanel);
+frame.addWindowListener(this);
+frame.pack();
+frame.setVisible(true);
+}
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+41</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 1 (Continued)
+public void actionPerformed(ActionEvent e) {
+String cmd = e.getActionCommand();
+if (cmd.equals("Change To Red")) {
+System.out.println("Red pressed");
+buttonPanel.setBackground(Color.red);
+}
+else if (cmd.equals("Change To Green")) {
+System.out.println("Green pressed");
+buttonPanel.setBackground(Color.green);
+}
+}
+public static void main(String args[]) {
+new ButtonExample1("Button Example");
+}
+}
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+42</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 2
+import java.awt.<strong>;
+import java.awt.event.</strong>;
+/**
+* An example of the Java 1.1 AWT event model.
+* This class uses anonymous inner classes as the
+*
+listeners for button events. As a result, we
+*
+do not need to implement ActionListener.
+*/
+public class ButtonExample2
+extends WindowAdapter {
+Frame frame;
+Panel buttonPanel;
+Button redButton, greenButton;</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+43</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 2 (Continued)
+public ButtonExample2(String title) {
+frame = new Frame(title);
+buttonPanel = new Panel(new FlowLayout());
+redButton = new Button("Red");
+redButton.setBackground(Color.red);
+redButton.setActionCommand("Change To Red");
+redButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.out.println("Red pressed");
+buttonPanel.setBackground(Color.red);
+}
+} );
+buttonPanel.add(redButton);</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+44</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 2 (Continued)
+greenButton = new Button("Green");
+greenButton.setBackground(Color.green);
+greenButton.setActionCommand("Change To Green");
+greenButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.out.println("Green pressed");
+buttonPanel.setBackground(Color.green);
+}
+} );
+buttonPanel.add(greenButton);
+frame.add("Center", buttonPanel);
+frame.addWindowListener(this);
+frame.pack();
+frame.setVisible(true);
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+45</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>AWT Example 2 (Continued)
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+public static void main(String args[]) {
+new ButtonExample2("Button Example");
+}
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+46</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 1
+l</p>
+</div>
+<div class="paragraph">
+<p>This example shows the model and the view in the same class
+/**
+* Class CounterGui demonstrates having the model and view
+*
+in the same class.
+*/
+public class CounterGui extends Frame {
+private int counter = 0;
+private TextField tf = new TextField(10);</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+47</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 1 (Continued)
+public CounterGui(String title) {
+super(title);
+Panel tfPanel = new Panel();
+tf.setText("0");
+tfPanel.add(tf);
+add("North", tfPanel);
+Panel buttonPanel = new Panel();
+Button incButton = new Button("Increment");
+incButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter++;
+tf.setText(counter + "");
+}
+} );
+buttonPanel.add(incButton);
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+48</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 1 (Continued)
+Button decButton = new Button("Decrement");
+decButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter--;
+tf.setText(counter + "");
+}
+} );
+buttonPanel.add(decButton);
+Button exitButton = new Button("Exit");
+exitButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.exit(0);
+}
+} );
+buttonPanel.add(exitButton);
+add("South", buttonPanel);
+The Observer Pattern
+Design Patterns In Java
+49</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 1 (Continued)
+addWindowListener(new WindowAdapter() {
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+} );
+}
+public static void main(String[] argv) {
+CounterGui cg = new CounterGui("CounterGui");
+cg.setSize(300, 100);
+cg.setVisible(true);
+}
+}
+l</p>
+</div>
+<div class="paragraph">
+<p>Where is the controller in this example?? The controllers are the
+instances of the anonymous classes which handle the button
+presses.</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+50</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 2
+l
+l</p>
+</div>
+<div class="paragraph">
+<p>This example shows the model and the view in separate classes
+First the view class:
+/**
+* Class CounterView demonstrates having the model and view
+*
+in the separate classes. This class is just the view.
+*/
+public class CounterView extends Frame {
+private TextField tf = new TextField(10);
+private Counter counter;</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+51</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 2 (Continued)
+public CounterView(String title, Counter c) {
+super(title);
+counter = c;
+Panel tfPanel = new Panel();
+tf.setText(counter.getCount()+ "");
+tfPanel.add(tf);
+add("North", tfPanel);
+Panel buttonPanel = new Panel();
+Button incButton = new Button("Increment");
+incButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter.incCount();
+tf.setText(counter.getCount() + "");
+}
+} );
+buttonPanel.add(incButton);
+The Observer Pattern
+Design Patterns In Java
+52</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 2 (Continued)
+Button decButton = new Button("Decrement");
+decButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+counter.decCount();
+tf.setText(counter.getCount()+ "");
+}
+} );
+buttonPanel.add(decButton);
+Button exitButton = new Button("Exit");
+exitButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.exit(0);
+}
+} );
+buttonPanel.add(exitButton);
+add("South", buttonPanel);
+The Observer Pattern
+Design Patterns In Java
+53</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 2 (Continued)
+addWindowListener(new WindowAdapter() {
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+} );
+}
+public static void main(String[] argv) {
+Counter counter = new Counter(0);
+CounterView cv1 = new CounterView("CounterView1", counter);
+cv1.setSize(300, 100);
+cv1.setVisible(true);
+CounterView cv2 = new CounterView("CounterView2", counter);
+cv2.setSize(300, 100);
+cv2.setVisible(true);
+}
+}
+Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+54</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 2 (Continued)
+l</p>
+</div>
+<div class="paragraph">
+<p>Next the model class:
+/**
+* Class Counter implements a simple counter model.
+*/
+public class Counter {
+private int count;
+public Counter(int count) { this.count = count; }
+public int getCount() { return count; }
+public void incCount() { count++; }
+public void decCount() { count--; }
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+55</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 2 (Continued)
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>Note that we instantiated one model and two views in this
+example:</p>
+</div>
+<div class="paragraph">
+<p>But we have a problem! When the model changes state, only one
+view updates!
+We need the Observer Pattern here!</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+56</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 3
+l</p>
+</div>
+<div class="paragraph">
+<p>l</p>
+</div>
+<div class="paragraph">
+<p>This example shows the model and the view in separate classes
+with the model being observable
+First the model class:
+import java.util.Observable;
+/**
+* Class ObservableCounter implements a simple observable
+*
+counter model.
+*/
+public class ObservableCounter extends Observable {
+private int count;
+public ObservableCounter(int count) { this.count = count; }</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+57</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 3 (Continued)
+public int getCount() { return count; }
+public void incCount() {
+count++;
+setChanged();
+notifyObservers();
+}
+public void decCount() {
+count--;
+setChanged();
+notifyObservers();
+}
+}</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+58</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 3 (Continued)
+l</p>
+</div>
+<div class="paragraph">
+<p>Next the view class:
+/**
+* Class ObservableCounterView demonstrates having the model
+* and view in the separate classes. This class is just the
+* view.
+*/
+public class ObservableCounterView extends Frame {
+private TextField tf = new TextField(10);
+private ObservableCounter counter;</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+59</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 3 (Continued)
+public ObservableCounterView(String title,
+ObservableCounter c) {
+super(title);
+counter = c;
+counter.addObserver(new Observer() {
+public void update(Observable src, Object obj) {
+if (src == counter) {
+tf.setText(((ObservableCounter)src).getCount() + "");
+}
+}
+} );</p>
+</div>
+<div class="paragraph">
+<p>Design Patterns In Java</p>
+</div>
+<div class="paragraph">
+<p>The Observer Pattern
+60</p>
+</div>
+<div class="paragraph">
+<p>Bob Tarr</p>
+</div>
+<div class="paragraph">
+<p>MVC Example 3 (Continued)
+public static void main(String[] argv) {
+ObservableCounter counter = new ObservableCounter(0);
+ObservableCounterView cv1 = new
+ObservableCounterView("ObservableCounterView1", counter);
+cv1.setSize(300, 100);
+cv1.setVisible(true);
+ObservableCounterView cv2 = new
+ObservableCounterView("ObservableCounterView2", counter);
+cv2.setSize(300, 100);
+cv2.setVisible(true);
+}
+}</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-12-12 17:46:18 CET
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+@startuml
+
+' definitions
+' -----------
+
+' package ""
+class BouilleurSafeChocolat
+' end package
+
+' content
+' -------
+
+' Type:
+
+
+BouilleurSafeChocolat --> "1" BouilleurSafeChocolat
+BouilleurSafeChocolat : +BouilleurSafeChocolat getInstance()
+BouilleurSafeChocolat : -uniqueInstance
+
+
+@enduml

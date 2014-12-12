@@ -2,7 +2,7 @@
  * @author bruel (from O'Reilly Head-First series)
  *
  */
-public class Pizzeria {
+public class Pizzeria implements Interface {
 
 	public Pizza commanderPizza(String type) {
 

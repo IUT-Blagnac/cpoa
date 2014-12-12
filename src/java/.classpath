@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="CodingDojo/src"/>
+	<classpathentry kind="src" path="CPOA_1/src"/>
+	<classpathentry kind="src" path="Enum/src"/>
+	<classpathentry kind="src" path="Pizzeria"/>
+	<classpathentry kind="src" path="SuperCanardBof/src"/>
+	<classpathentry kind="src" path="TD1/src"/>
+	<classpathentry kind="src" path="TD2/Chocolat/src"/>
+	<classpathentry kind="src" path="TD2/src"/>
+	<classpathentry kind="src" path="TD3/src"/>
+	<classpathentry kind="src" path="testMenu/src"/>
+	<classpathentry kind="lib" path="TD1/bin/plantuml.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="testMenu/bin"/>
+</classpath>

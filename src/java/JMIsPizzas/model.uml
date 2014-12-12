@@ -1,0 +1,94 @@
+@startuml
+
+' definitions
+' -----------
+
+' package ""
+abstract Pizza
+class PizzaFromage
+class PizzaFromageStyleBrest
+class PizzaFromageStyleStrasbourg
+class PizzaFruitsDeMerStyleBrest
+class PizzaFruitsDeMerStyleStrasbourg
+class PizzaGrecque
+class PizzaPoivrons
+class PizzaPoivronsStyleBrest
+class PizzaPoivronsStyleStrasbourg
+class PizzaRoyale
+class PizzaSaumon
+class PizzaVegetarienne
+class PizzaVegetarienneStyleBrest
+class PizzaVegetarienneStyleStrasbourg
+class Pizzeria
+abstract Pizzeria2
+class PizzeriaDependante
+class SimpleFabriqueDePizzas
+' end package
+
+Pizzeria  ..>  Pizza:*
+Pizzeria2  ..>  Pizza:*
+SimpleFabriqueDePizzas  ..>  Pizza:new
+' content
+' -------
+
+' PizzaFruitsDeMerStyleStrasbourg:
+Pizza <|-- PizzaFruitsDeMerStyleStrasbourg
+
+' PizzaSaumon:
+Pizza <|-- PizzaSaumon
+
+' Pizzeria:
+Pizzeria --> "1" SimpleFabriqueDePizzas
+
+' Pizza:
+Pizza : void preparer()
+Pizza : void cuire()
+Pizza : void couper()
+Pizza : void emballer()
+
+' PizzaVegetarienneStyleStrasbourg:
+Pizza <|-- PizzaVegetarienneStyleStrasbourg
+
+' PizzaRoyale:
+Pizza <|-- PizzaRoyale
+
+' PizzaFromage:
+Pizza <|-- PizzaFromage
+
+' PizzaVegetarienne:
+Pizza <|-- PizzaVegetarienne
+
+' PizzaFromageStyleBrest:
+Pizza <|-- PizzaFromageStyleBrest
+
+' PizzaFruitsDeMerStyleBrest:
+Pizza <|-- PizzaFruitsDeMerStyleBrest
+
+' PizzaGrecque:
+Pizza <|-- PizzaGrecque
+
+' PizzaPoivronsStyleStrasbourg:
+Pizza <|-- PizzaPoivronsStyleStrasbourg
+
+' Pizzeria2:
+Pizzeria2 --> "1" SimpleFabriqueDePizzas
+
+' PizzaPoivrons:
+Pizza <|-- PizzaPoivrons
+
+' PizzeriaDependante:
+PizzeriaDependante : Pizza creerPizza(String, String)
+
+' PizzaFromageStyleStrasbourg:
+Pizza <|-- PizzaFromageStyleStrasbourg
+
+' PizzaPoivronsStyleBrest:
+Pizza <|-- PizzaPoivronsStyleBrest
+
+' SimpleFabriqueDePizzas:
+SimpleFabriqueDePizzas : Pizza creerPizza(String)
+
+' PizzaVegetarienneStyleBrest:
+Pizza <|-- PizzaVegetarienneStyleBrest
+
+@enduml

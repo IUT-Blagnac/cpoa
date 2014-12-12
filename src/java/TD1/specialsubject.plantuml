@@ -1,0 +1,17 @@
+@startuml
+
+class DelegatedObservable
+class ParentClass
+class SpecialSubject extends ParentClass {
+  private String name;
+  private float price;
+
+  public SpecialSubject(String name, float price);
+  public String getName();
+  public float getPrice();
+  public Observable getObservable();
+  public void setName(String name);
+  public void setPrice(float price);
+ }
+DelegatedObservable "1" <- SpecialSubject
+ @enduml
