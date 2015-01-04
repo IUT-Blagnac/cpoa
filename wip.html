@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
 <meta name="author" content="Jean-Michel Bruel">
-<title>CPOA - Cours 4</title>
+<title>CPOA - Cours 5 (Coding Dojo)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -477,522 +477,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>CPOA - Cours 4</h1>
+<h1>CPOA - Cours 5 (Coding Dojo)</h1>
 <div class="details">
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2014-12-10 - First draft</span>
+<span id="revdate">2014-12-15 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_retour_sur_la_machine_à_état_uml">1. Retour sur la machine à état UML</a>
+<li><a href="#_rappel_des_principes">1. Rappel des principes</a>
 <ul class="sectlevel2">
-<li><a href="#_implémentation_intuitive">1.1. Implémentation intuitive</a></li>
-<li><a href="#_erreur_d_implémentations">1.2. Erreur d&#8217;implémentations</a></li>
-<li><a href="#_une_meilleure_implémentation">1.3. Une meilleure implémentation</a></li>
-<li><a href="#_illutration">1.4. Illutration</a></li>
-<li><a href="#_le_patron_etat">1.5. Le patron Etat</a></li>
+<li><a href="#_le_principe">1.1. Le principe :</a></li>
+<li><a href="#_les_règles">1.2. Les règles</a></li>
 </ul>
 </li>
-<li><a href="#_construire_ses_applications">2. Construire ses applications</a>
-<ul class="sectlevel2">
-<li><a href="#_les_scripts">2.1. Les scripts</a></li>
-<li><a href="#make">2.2. make</a></li>
-<li><a href="#ant">2.3. ant</a></li>
-<li><a href="#maven">2.4. Maven</a></li>
-<li><a href="#Ivy">2.5. Ivy</a></li>
-<li><a href="#_graddle">2.6. Graddle</a></li>
-</ul>
-</li>
-<li><a href="#_le_patron_em_proxy_em">3. Le patron <em>proxy</em></a>
-<ul class="sectlevel2">
-<li><a href="#_le_problème">3.1. Le problème</a></li>
-<li><a href="#_le_patron_em_proxy_em_2">3.2. Le patron <em>Proxy</em></a></li>
-<li><a href="#_utilisations">3.3. Utilisations</a></li>
-<li><a href="#_exemple_concret_rmi">3.4. Exemple concret : RMI</a></li>
-</ul>
-</li>
-<li><a href="#_le_patron_itérateur">4. Le patron Itérateur</a>
-<ul class="sectlevel2">
-<li><a href="#_le_problème_2">4.1. Le problème</a></li>
-<li><a href="#_le_patron_itérateur_2">4.2. Le patron Itérateur</a></li>
-<li><a href="#_exemple_concret">4.3. Exemple concret</a></li>
-</ul>
-</li>
-<li><a href="#_le_patron_composite">5. Le patron Composite</a>
-<ul class="sectlevel2">
-<li><a href="#_le_problème_3">5.1. Le problème</a></li>
-<li><a href="#_le_patron_composite_2">5.2. Le patron Composite</a></li>
-<li><a href="#_exemple_concret_2">5.3. Exemple concret</a></li>
-<li><a href="#_un_anti_exemple">5.4. un "Anti" exemple</a></li>
-</ul>
-</li>
-<li><a href="#_retour_sur_le_refactoring_banque">6. Retour sur le refactoring Banque</a>
-<ul class="sectlevel2">
-<li><a href="#_le_problème_4">6.1. Le problème</a></li>
-<li><a href="#_une_solution">6.2. Une solution</a></li>
-</ul>
-</li>
+<li><a href="#_sujet_du_jour_type_abstrait_pile">2. Sujet du jour : Type Abstrait Pile</a></li>
+<li><a href="#_Étape_1_mise_en_place_d_un_enregistrement_de_type_pile">3. Étape 1 : Mise en place d&#8217;un enregistrement de type Pile</a></li>
+<li><a href="#_about">4. About&#8230;&#8203;</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_retour_sur_la_machine_à_état_uml"><a class="link" href="#_retour_sur_la_machine_à_état_uml">1. Retour sur la machine à état UML</a></h2>
+<h2 id="_rappel_des_principes"><a class="link" href="#_rappel_des_principes">1. Rappel des principes</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Soit la machine à état suivante :</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/bonbons.png" alt="bonbons">
-</div>
-<div class="title">Figure 1. Machine à état d&#8217;un distributeur simple</div>
-</div>
-<div class="sect2">
-<h3 id="_implémentation_intuitive"><a class="link" href="#_implémentation_intuitive">1.1. Implémentation intuitive</a></h3>
-<div class="listingblock">
-<div class="title">Implémentation sans switch case</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">insererPiece</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-  <span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">A_PIECE</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous ne pouvez plus insérer de pièces&quot;</span><span class="tok-o">);</span>
-  <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">EPUISE</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous ne pouvez pas insérer de pièce, nous sommes en rupture de stock&quot;</span><span class="tok-o">);</span>
-  <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">VENDU</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Veuillez patienter, le bonbon va tomber&quot;</span><span class="tok-o">);</span>
-  <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-nf">if</span> <span class="tok-o">(</span><span class="tok-n">etat</span> <span class="tok-o">==</span> <span class="tok-n">SANS_PIECE</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-n">etat</span> <span class="tok-o">=</span> <span class="tok-n">A_PIECE</span><span class="tok-o">;</span>
-    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous avez inséré une pièce&quot;</span><span class="tok-o">);</span>
-  <span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_erreur_d_implémentations"><a class="link" href="#_erreur_d_implémentations">1.2. Erreur d&#8217;implémentations</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Ce code n&#8217;adhère pas au principe Ouvert-Fermé.</p>
-</li>
-<li>
-<p>Cette conception n&#8217;est pas orientée objet.</p>
-</li>
-<li>
-<p>Les transitions ne sont pas explicites. Elles sont enfouies au
-milieu d&#8217;un tas d&#8217;instructions conditionnelles.</p>
-</li>
-<li>
-<p>Nous n&#8217;avons pas encapsulé ce qui varie.</p>
-</li>
-<li>
-<p>Les ajouts ultérieurs sont susceptibles de provoquer des bugs
-dans le code.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_une_meilleure_implémentation"><a class="link" href="#_une_meilleure_implémentation">1.3. Une meilleure implémentation</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Définir une nouvelle interface <code>Etat</code> qui contiendra une méthode pour
-chaque action</p>
-</li>
-<li>
-<p>Implémenter une classe pour chaque <code>Etat</code>. Elles seront responsable du comportement.</p>
-</li>
-<li>
-<p>Se débarrasser de toutes les instructions conditionnelles et les remplacer
-par une délégation à la classe adéquate.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_illutration"><a class="link" href="#_illutration">1.4. Illutration</a></h3>
-<div class="paragraph">
-<p>Etape 1 :</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/bonbons.png" alt="bonbons">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/bonbons-dc.png" alt="bonbons dc">
-</div>
-<div class="title">Figure 2. Inplémentation des états</div>
-</div>
-<div class="paragraph">
-<p>Etape 2</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">EtatSansPiece</span> <span class="tok-kd">implements</span> <span class="tok-n">Etat</span> <span class="tok-o">{</span>
-  <span class="tok-n">Distributeur</span> <span class="tok-n">distributeur</span><span class="tok-o">;</span>
-
-  <span class="tok-kd">public</span> <span class="tok-nf">EtatSansPiece</span><span class="tok-o">(</span><span class="tok-n">Distributeur</span> <span class="tok-n">distributeur</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">distributeur</span> <span class="tok-o">=</span> <span class="tok-n">distributeur</span><span class="tok-o">;</span>
-  <span class="tok-o">}</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">insererPiece</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Vous avez inséré une pièce&quot;</span><span class="tok-o">);</span>
-    <span class="tok-n">distributeur</span><span class="tok-o">.</span><span class="tok-na">setEtat</span><span class="tok-o">(</span><span class="tok-n">distributeur</span><span class="tok-o">.</span><span class="tok-na">getEtatAPiece</span><span class="tok-o">());</span>
-  <span class="tok-o">}</span>
-  <span class="tok-o">...</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Etape 3</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Distributeur</span> <span class="tok-o">{</span>
-  <span class="tok-n">Etat</span> <span class="tok-n">etatEpuise</span><span class="tok-o">;</span>
-  <span class="tok-n">Etat</span> <span class="tok-n">etatSansPiece</span><span class="tok-o">;</span>
-  <span class="tok-n">Etat</span> <span class="tok-n">etatAPiece</span><span class="tok-o">;</span>
-  <span class="tok-n">Etat</span> <span class="tok-n">etatVendu</span><span class="tok-o">;</span>
-
-  <span class="tok-n">Etat</span> <span class="tok-n">etat</span> <span class="tok-o">=</span> <span class="tok-n">etatSansPiece</span><span class="tok-o">;</span>
-  <span class="tok-o">...</span>
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">insererPiece</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-    <span class="tok-n">etat</span><span class="tok-o">.</span><span class="tok-na">insererPiece</span><span class="tok-o">();</span>
-  <span class="tok-o">}</span>
-<span class="tok-o">...</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_le_patron_etat"><a class="link" href="#_le_patron_etat">1.5. Le patron Etat</a></h3>
-<div class="paragraph">
-<p><strong>Etat</strong> permet à un objet de modifier son comportement,
-quand son état interne change.
-Tout se passe comme si l&#8217;objet changeait de classe.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/etat.png" alt="etat">
-</div>
-<div class="title">Figure 3. Modèle UML du patron Etat</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_construire_ses_applications"><a class="link" href="#_construire_ses_applications">2. Construire ses applications</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Pour générer un programme, une documentation, à partir des sources, on peut :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Soit utiliser un environnement intégré comme <a href="http://www.eclipse.org">eclipse</a></p>
-</li>
-<li>
-<p>Soit construire les sorties (on parle de <strong><em>Build</em></strong>) à partir des sources</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Nous nous intéressons dans cette section à cette deuxième catégorie.</p>
-</div>
-<div class="paragraph">
-<p>Il existe plusieurs outils :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>les scripts (shell Unix et .bat Windows)</p>
-</li>
-<li>
-<p><a href="#make">make</a></p>
-</li>
-<li>
-<p><a href="#ant">ant</a></p>
-</li>
-<li>
-<p><a href="#maven">Maven</a></p>
-</li>
-<li>
-<p><a href="#Ivy">Ivy</a></p>
-</li>
-<li>
-<p><a href="#_graddle">Graddle</a></p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_les_scripts"><a class="link" href="#_les_scripts">2.1. Les scripts</a></h3>
-<div class="listingblock">
-<div class="title">Un script shell</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="shell">#!/bin/sh
-UML=&#39;model.uml&#39;
-TYPE=&#39;PNG&#39;
-DOCLETPATH=&#39;/Users/bruel/dev/teaching/dut/cpoa/doclet&#39;
-PUMLPATH=&#39;/Users/bruel/dev/teaching/dut/cpoa/util&#39;
-echo &quot;Creating $UML...&quot;
-
-javadoc \
--private \
--quiet \
--J-DdestinationFile=$UML \
--J-DcreatePackages=false \
--J-DshowPublicMethods=true \
--J-DshowPublicConstructors=false \
--J-DshowPublicFields=true \
--doclet de.mallox.doclet.PlantUMLDoclet -docletpath $DOCLETPATH/plantUmlDoclet.jar \
--sourcepath src src/**
-echo &quot;Done.&quot;
-
-TYPE=&#39;png&#39;
-echo &quot;Converting $UML to $TYPE...&quot;
-java -jar $PUMLPATH/plantuml.jar \
-  -config $PUMLPATH/config.cfg \
-  -t $TYPE $UML
-echo &quot;Done.&quot;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Un script batch Windows</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="shell">set UML=TD1.uml
-set TYPE=&#39;PNG&#39;
-set DOCLETPATH=E:\IUT-S3\CPOA\TP1\SuperCanardBof
-echo &quot;Creating %UML%...&quot;
-rem javadoc -private -quiet -J-DdestinationFile=%UML% -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true -doclet de.mallox.doclet.PlantUMLDoclet -docletpath %DOCLETPATH%\plantUmlDoclet.jar src\canard\*.java
-echo &quot;Done.&quot;
-
-javadoc -J-DdestinationFile=%UML% -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true -doclet de.mallox.doclet.PlantUMLDoclet -docletpath plantUmlDoclet.jar src\appli\*.java src\armes\*.java src\armes\impl\*.java
-
-set TYPE=&#39;png&#39;
-echo &quot;Converting %UML% to $TYPE...&quot;
-java -jar %DOCLETPATH%\plantuml.jar -config &quot;%DOCLETPATH%\config.cfg&quot; -t %TYPE% %UML%
-echo &quot;Done.&quot;</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Avantages</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Faciles</p>
-</li>
-<li>
-<p>Rapides</p>
-</li>
-<li>
-<p>Beaucoup d&#8217;exemples</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">Inconvénients</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Pas portables sur d&#8217;autres systèmes (no comment ;-)</p>
-</li>
-<li>
-<p>Peu lisibles</p>
-</li>
-<li>
-<p>Peu évolutifs</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="make"><a class="link" href="#make">2.2. make</a></h3>
-<div class="listingblock">
-<div class="title">Un Makefile pour générer ces cours</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="shell"><span class="lineno"> 1</span> #-----------------------------------------------------
-<span class="lineno"> 2</span> ICONSDIR=images/icons
-<span class="lineno"> 3</span> IMAGESDIR=images
-<span class="lineno"> 4</span> STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
-<span class="lineno"> 5</span> DOCTOR=asciidoctor -a icons -a iconsdir=$(ICONSDIR) -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
-<span class="lineno"> 6</span> DECK=swiss
-<span class="lineno"> 7</span> EXT=asc
-<span class="lineno"> 8</span> PANDOC=pandoc
-<span class="lineno"> 9</span> OUTPUT=.
-<span class="lineno">10</span> DEP=definitions.txt glossaire.txt refs.txt
-<span class="lineno">11</span> #-----------------------------------------------------
-<span class="lineno">12</span> 
-<span class="lineno">13</span> all: $(OUTPUT)/*.html
-<span class="lineno">14</span> 
-<span class="lineno">15</span> images/%.png: images/%.plantuml
-<span class="lineno">16</span> @echo &#39;==&gt; Compiling plantUML files to generate PNG&#39;
-<span class="lineno">17</span> java -jar plantuml.jar $&lt;
-<span class="lineno">18</span> 
-<span class="lineno">19</span> %.html: %.$(EXT) $(DEP)
-<span class="lineno">20</span> @echo &#39;==&gt; Compiling asciidoc files with Asciidoctor to generate HTML&#39;
-<span class="lineno">21</span> $(DOCTOR) -a toc2 -b html5 -a numbered -a eleve $&lt;
-<span class="lineno">22</span> 
-<span class="lineno">23</span> %.deckjs.html: %.$(EXT)  $(DEP)
-<span class="lineno">24</span> @echo &#39;==&gt; Compiling asciidoc files to generate Deckjs&#39;
-<span class="lineno">25</span> $(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
-<span class="lineno">26</span> -a data-uri -a deckjs_theme=$(DECK) \
-<span class="lineno">27</span> -a icons -a iconsdir=$(ICONSDIR) \
-<span class="lineno">28</span> -a images=$(IMAGESDIR) -a prof -o $@ $&lt;
-<span class="lineno">29</span> 
-<span class="lineno">30</span> %-sujet.html: %.$(EXT) $(DEP)
-<span class="lineno">31</span> @echo &#39;==&gt; Compiling asciidoc files with Asciidoctor to generate HTML&#39;
-<span class="lineno">32</span> $(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a eleve \
-<span class="lineno">33</span> -a data-uri $&lt; -o $@
-<span class="lineno">34</span> 
-<span class="lineno">35</span> %-prof.html: %.$(EXT) $(DEP)
-<span class="lineno">36</span> @echo &#39;==&gt; Compiling asciidoc files with Asciidoctor to generate HTML&#39;
-<span class="lineno">37</span> $(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered \
-<span class="lineno">38</span> -a data-uri $&lt; -o $@</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="shell">%.html: %.$(EXT) $(DEP)
-@echo &#39;==&gt; Compiling asciidoc files with Asciidoctor to generate HTML&#39;
-$(DOCTOR) -a toc2 -b html5 -a numbered -a eleve $&lt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Exemple d&#8217;utilisation :</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ make wip.html
-==&gt; Compiling asciidoc files with Asciidoctor to generate HTML
-asciidoctor -a icons -a iconsdir=images/icons -a images=images -a source-highlighter=pygments -a toc2 -b html5 -a numbered -a eleve wip.asc
-...
-$ make wip.html
-make: 'wip.html' is up to date.</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="ant"><a class="link" href="#ant">2.3. ant</a></h3>
-<div class="listingblock">
-<div class="title">build.xml</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="xml"><span class="tok-cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;</span>
-<span class="tok-nt">&lt;project</span> <span class="tok-na">default=</span><span class="tok-s">&quot;main&quot;</span> <span class="tok-na">name=</span><span class="tok-s">&quot;EssaiBuild&quot;</span><span class="tok-nt">&gt;</span>
-  <span class="tok-nt">&lt;target</span> <span class="tok-na">name=</span><span class="tok-s">&quot;main&quot;</span><span class="tok-nt">&gt;</span>
-    <span class="tok-nt">&lt;echo</span> <span class="tok-na">message=</span><span class="tok-s">&quot;Version d&#39;Ant utilisée: ${ant.version}&quot;</span><span class="tok-nt">/&gt;</span>
-    <span class="tok-nt">&lt;javadoc</span> <span class="tok-na">doclet=</span><span class="tok-s">&quot;de.mallox.doclet.PlantUMLDoclet&quot;</span>
-    <span class="tok-na">docletpath=</span><span class="tok-s">&quot;plantUmlDoclet.jar&quot;</span>
-    <span class="tok-na">access=</span><span class="tok-s">&quot;private&quot;</span>
-    <span class="tok-na">additionalparam=</span>
-    <span class="tok-s">&quot;-encoding utf-8 -J-DdestinationFile=uml.txt -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true&quot;</span>
-    <span class="tok-nt">&gt;</span>
-      <span class="tok-nt">&lt;packageset</span> <span class="tok-na">dir=</span><span class="tok-s">&quot;../src&quot;</span><span class="tok-nt">&gt;</span>
-        <span class="tok-nt">&lt;include</span> <span class="tok-na">name=</span><span class="tok-s">&quot;**&quot;</span><span class="tok-nt">/&gt;</span>
-      <span class="tok-nt">&lt;/packageset&gt;</span>
-    <span class="tok-nt">&lt;/javadoc&gt;</span>
-
-    <span class="tok-nt">&lt;java</span> <span class="tok-na">jar=</span><span class="tok-s">&quot;plantuml.jar&quot;</span> <span class="tok-na">fork=</span><span class="tok-s">&quot;true&quot;</span> <span class="tok-na">maxmemory=</span><span class="tok-s">&quot;128m&quot;</span><span class="tok-nt">&gt;</span>
-      <span class="tok-nt">&lt;arg</span> <span class="tok-na">value=</span><span class="tok-s">&quot;uml.txt&quot;</span><span class="tok-nt">/&gt;</span>
-    <span class="tok-nt">&lt;/java&gt;</span>
-  <span class="tok-nt">&lt;/target&gt;</span>
-<span class="tok-nt">&lt;/project&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Exemple d&#8217;utilisation :</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ ant main
-Buildfile: build.xml
-main:
-[javadoc] Generating Javadoc
-[javadoc] Javadoc execution
-[javadoc] Loading source files for package pizzeriafactorysample...
-[javadoc] Constructing Javadoc information...
-[javadoc] PlantUMLDoclet.createPlantUml() -  start
-[javadoc] open outputfile: uml.txt
-[javadoc] write interfaces/ abstract classes...
-[javadoc] write content...
-...
-[javadoc] skip association for Pizza --&gt; java.lang.String
-[javadoc] skip association for Pizza --&gt; java.lang.String
-[javadoc] skip association for Pizza --&gt; java.lang.String
-[javadoc] skip association for Pizza --&gt; java.util.ArrayList
-[javadoc] PlantUMLDoclet.createPlantUml() -  end
-BUILD SUCCESSFUL
-Total time: 9 seconds</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Exemple d&#8217;tilisation dans <a href="http://www.eclipse.org">eclipse</a> pour la génération de fichier
-du type <code>TD.uml</code> :</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Créer un répertoire tools et mettre dedans :</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Plantuml.jar</code></p>
-</li>
-<li>
-<p><code>Plantumldoclet.jar</code></p>
-</li>
-<li>
-<p><code>build.xml</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Faire un <b class="button">Click_Droit</b> sur <code>build.xml</code> et chosir <span class="menuseq"><span class="menu">Run_As</span>&#160;&#9656; <span class="menuitem">Ant Build &#8230;&#8203;</span></span></p>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Bien choisir celui avec les points de suspensions.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/build.png" alt="build">
-</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Dans l&#8217;onglet <code>Environment</code> :</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Créer une nouvelle variable de nom <code>Path</code>
-et de valeur : le répertoire de la JDK (où se trouve <code>javadoc</code> ou <code>javadoc.exe</code>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Exécuter <b class="button">Run</b></p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -1000,116 +510,63 @@ et de valeur : le répertoire de la JDK (où se trouve <code>javadoc</code> ou <
 <img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
-Faire Refresh dans le navigateur pour voir les 2 fichiers générés
-(<code>uml.txt</code> et <code>uml.png</code>).
+Pour plus d&#8217;info sur le Coding Dojo : <a href="http://fr.wikipedia.org/wiki/Coding_Dojo" class="bare">http://fr.wikipedia.org/wiki/Coding_Dojo</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_le_principe"><a class="link" href="#_le_principe">1.1. Le principe :</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Le prof de TP (ou le/la gentil(le) étudiant(e) volontaire désintéressé(e)) initie l&#8217;exercice
+en ouvrant un <a href="http://www.eclipse.org">eclipse</a> et en commençant un test qui commence par échouer et qui "passera" quand
+la fonctionalité attendue sera implémentée et fonctionnelle.</p>
+</li>
+<li>
+<p>Il vérifie que son test échoue bien</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+On pourra avantageusement installer le plug-in eclipse
+<a href="http://infinitest.github.io/">InfiniTest</a> qui permet de runner les tests à
+chaque sauvegarde (cf. plus haut)
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Il suffit de faire un <b class="button">Click_Droit</b> sur <code>build.xml</code> et chosir <span class="menuseq"><span class="menu">Run_As</span>&#160;&#9656; <span class="menuitem">Ant Build &#8230;&#8203;</span></span>
-(<strong>SANS</strong> les 3 points de suspensions) pour relancer la génération du diagramme.</p>
+<p>Il fait en sorte que le test passe au vert  le plus vite possible</p>
+</li>
+<li>
+<p>Il "refactor" éventuellement (faire passer le test au vert mais de façon
+intelligente, éviter la duplication de code, réorganiser les classes, etc.)</p>
+</li>
+<li>
+<p>Quand tout est au vert on passe à une fonctionnalité suivante</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="maven"><a class="link" href="#maven">2.4. Maven</a></h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/warning.png" alt="Warning">
-</td>
-<td class="content">
-<a href="http://maven.apache.org/">Maven</a> est un outil <a href="https://www.java.com/fr/">Java</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>Convention over Configuration</p>
-</div>
-</blockquote>
-</div>
-<div class="paragraph">
-<p>Exemples de conventions :</p>
-</div>
+<h3 id="_les_règles"><a class="link" href="#_les_règles">1.2. Les règles</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>le code source est supposé se trouver dans <code>${basedir}/src/main/java</code></p>
+<p>Toutes les 5 minutes (timer sonore) on change de personne aux commandes
+(au clavier/souris en l&#8217;occurence)</p>
 </li>
 <li>
-<p>les différentes ressources dans <code>${basedir}/src/main/resources</code></p>
+<p>Il faut un "maître du temps"</p>
 </li>
 <li>
-<p>les tests dans <code>${basedir}/src/test</code></p>
-</li>
-<li>
-<p>un projet est supposé produire un fichier <code>JAR</code></p>
-</li>
-<li>
-<p><a href="http://maven.apache.org/">Maven</a> suppose que vous voulez compiler en bytecode dans <code>${basedir}/target/classes</code></p>
-</li>
-<li>
-<p>et ensuite créer votre fichier <code>JAR</code> distribuable dans <code>${basedir}/target</code></p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">pom.xml</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="xml"><span class="tok-nt">&lt;project&gt;</span>
-  <span class="tok-nt">&lt;modelVersion&gt;</span>4.0.0<span class="tok-nt">&lt;/modelVersion&gt;</span>
-  <span class="tok-nt">&lt;groupId&gt;</span>org.sonatype.mavenbook<span class="tok-nt">&lt;/groupId&gt;</span>
-  <span class="tok-nt">&lt;artifactId&gt;</span>my-project<span class="tok-nt">&lt;/artifactId&gt;</span>
-  <span class="tok-nt">&lt;version&gt;</span>1.0<span class="tok-nt">&lt;/version&gt;</span>
-<span class="tok-nt">&lt;/project&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>La commande :</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ mvn install</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>va traiter les ressources,</p>
-</li>
-<li>
-<p>compiler le source,</p>
-</li>
-<li>
-<p>exécuter les tests unitaires,</p>
-</li>
-<li>
-<p>créer un JAR, et</p>
-</li>
-<li>
-<p>installer ce JAR dans le dépôt local.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>La commande :</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ mvn site</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>va créer un fichier <code>index.html</code> dans <code>target/site</code> contenant des liens vers
-la JavaDoc et quelques rapports sur votre code source.</p>
-</div>
+<p>Tout le monde participe au codage (et ne fait pas du code de son côté)</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1117,379 +574,31 @@ la JavaDoc et quelques rapports sur votre code source.</p>
 <img src="images/icons/note.png" alt="Note">
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Pour comparer, voici l&#8217;équivalent <a href="http://ant.apache.org/">ant</a> :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="xml"><span class="tok-nt">&lt;project</span> <span class="tok-na">name=</span><span class="tok-s">&quot;my-project&quot;</span> <span class="tok-na">default=</span><span class="tok-s">&quot;dist&quot;</span> <span class="tok-na">basedir=</span><span class="tok-s">&quot;.&quot;</span><span class="tok-nt">&gt;</span>
-  <span class="tok-nt">&lt;description&gt;</span>
-    simple example build file
-  <span class="tok-nt">&lt;/description&gt;</span>
-  <span class="tok-c">&lt;!-- set global properties for this build --&gt;</span>
-  <span class="tok-nt">&lt;property</span> <span class="tok-na">name=</span><span class="tok-s">&quot;src&quot;</span> <span class="tok-na">location=</span><span class="tok-s">&quot;src/main/java&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;property</span> <span class="tok-na">name=</span><span class="tok-s">&quot;build&quot;</span> <span class="tok-na">location=</span><span class="tok-s">&quot;target/classes&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;property</span> <span class="tok-na">name=</span><span class="tok-s">&quot;dist&quot;</span>  <span class="tok-na">location=</span><span class="tok-s">&quot;target&quot;</span><span class="tok-nt">/&gt;</span>
-
-  <span class="tok-nt">&lt;target</span> <span class="tok-na">name=</span><span class="tok-s">&quot;init&quot;</span><span class="tok-nt">&gt;</span>
-    <span class="tok-c">&lt;!-- Create the time stamp --&gt;</span>
-    <span class="tok-nt">&lt;tstamp/&gt;</span>
-    <span class="tok-c">&lt;!-- Create the build directory structure used by compile --&gt;</span>
-    <span class="tok-nt">&lt;mkdir</span> <span class="tok-na">dir=</span><span class="tok-s">&quot;${build}&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;/target&gt;</span>
-
-  <span class="tok-nt">&lt;target</span> <span class="tok-na">name=</span><span class="tok-s">&quot;compile&quot;</span> <span class="tok-na">depends=</span><span class="tok-s">&quot;init&quot;</span>
-    <span class="tok-na">description=</span><span class="tok-s">&quot;compile the source &quot;</span> <span class="tok-nt">&gt;</span>
-    <span class="tok-c">&lt;!-- Compile the java code from ${src} into ${build} --&gt;</span>
-    <span class="tok-nt">&lt;javac</span> <span class="tok-na">srcdir=</span><span class="tok-s">&quot;${src}&quot;</span> <span class="tok-na">destdir=</span><span class="tok-s">&quot;${build}&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;/target&gt;</span>
-
-  <span class="tok-nt">&lt;target</span> <span class="tok-na">name=</span><span class="tok-s">&quot;dist&quot;</span> <span class="tok-na">depends=</span><span class="tok-s">&quot;compile&quot;</span>
-    <span class="tok-na">description=</span><span class="tok-s">&quot;generate the distribution&quot;</span> <span class="tok-nt">&gt;</span>
-    <span class="tok-c">&lt;!-- Create the distribution directory --&gt;</span>
-    <span class="tok-nt">&lt;mkdir</span> <span class="tok-na">dir=</span><span class="tok-s">&quot;${dist}/lib&quot;</span><span class="tok-nt">/&gt;</span>
-
-    <span class="tok-c">&lt;!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file --&gt;</span>
-    <span class="tok-nt">&lt;jar</span> <span class="tok-na">jarfile=</span><span class="tok-s">&quot;${dist}/lib/MyProject-${DSTAMP}.jar&quot;</span> <span class="tok-na">basedir=</span><span class="tok-s">&quot;${build}&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;/target&gt;</span>
-
-  <span class="tok-nt">&lt;target</span> <span class="tok-na">name=</span><span class="tok-s">&quot;clean&quot;</span>
-    <span class="tok-na">description=</span><span class="tok-s">&quot;clean up&quot;</span> <span class="tok-nt">&gt;</span>
-    <span class="tok-c">&lt;!-- Delete the ${build} and ${dist} directory trees --&gt;</span>
-    <span class="tok-nt">&lt;delete</span> <span class="tok-na">dir=</span><span class="tok-s">&quot;${build}&quot;</span><span class="tok-nt">/&gt;</span>
-    <span class="tok-nt">&lt;delete</span> <span class="tok-na">dir=</span><span class="tok-s">&quot;${dist}&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;/target&gt;</span>
-<span class="tok-nt">&lt;/project&gt;</span></code></pre>
-</div>
-</div>
+Les machines ne sont donc pas utiles pour cette partie! Seule la machine
+connectée au vidéoprojecteur est utilisée.
 </td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="Ivy"><a class="link" href="#Ivy">2.5. Ivy</a></h3>
-<div class="listingblock">
-<div class="title">ivy.xml</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="xml"><span class="tok-nt">&lt;ivy-module</span> <span class="tok-na">version=</span><span class="tok-s">&quot;2.0&quot;</span><span class="tok-nt">&gt;</span>
-  <span class="tok-nt">&lt;info</span> <span class="tok-na">organisation=</span><span class="tok-s">&quot;org.apache&quot;</span> <span class="tok-na">module=</span><span class="tok-s">&quot;hello-ivy&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;dependencies&gt;</span>
-    <span class="tok-nt">&lt;dependency</span> <span class="tok-na">org=</span><span class="tok-s">&quot;commons-lang&quot;</span> <span class="tok-na">name=</span><span class="tok-s">&quot;commons-lang&quot;</span> <span class="tok-na">rev=</span><span class="tok-s">&quot;2.0&quot;</span><span class="tok-nt">/&gt;</span>
-    <span class="tok-nt">&lt;dependency</span> <span class="tok-na">org=</span><span class="tok-s">&quot;commons-cli&quot;</span> <span class="tok-na">name=</span><span class="tok-s">&quot;commons-cli&quot;</span> <span class="tok-na">rev=</span><span class="tok-s">&quot;1.0&quot;</span><span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;/dependencies&gt;</span>
-<span class="tok-nt">&lt;/ivy-module&gt;</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">build.xml</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="xml"><span class="tok-nt">&lt;project</span> <span class="tok-na">xmlns:ivy=</span><span class="tok-s">&quot;antlib:org.apache.ivy.ant&quot;</span> <span class="tok-na">name=</span><span class="tok-s">&quot;hello-ivy&quot;</span> <span class="tok-na">default=</span><span class="tok-s">&quot;run&quot;</span><span class="tok-nt">&gt;</span>
-
-  ...
-
-  <span class="tok-c">&lt;!-- =================================</span>
-<span class="tok-c">  target: resolve</span>
-<span class="tok-c">  ================================= --&gt;</span>
-  <span class="tok-nt">&lt;target</span> <span class="tok-na">name=</span><span class="tok-s">&quot;resolve&quot;</span> <span class="tok-na">description=</span><span class="tok-s">&quot;--&gt; retrieve dependencies with ivy&quot;</span><span class="tok-nt">&gt;</span>
-    <span class="tok-nt">&lt;ivy:retrieve</span> <span class="tok-nt">/&gt;</span>
-  <span class="tok-nt">&lt;/target&gt;</span>
-<span class="tok-nt">&lt;/project&gt;</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_graddle"><a class="link" href="#_graddle">2.6. Graddle</a></h3>
-<div class="paragraph">
-<p><a href="http://www.gradle.org/">Gradle</a> combine la flexibilité de <a href="http://ant.apache.org/">ant</a> avec les conventions de <a href="http://maven.apache.org/">Maven</a> mais
-évite les inconvénients de <code>XML</code>.</p>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="gradle">task hello {
-  doLast {
-    println &#39;Hello world!&#39;
-  }
-}</code></pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ gradle hello
-:hello
-Hello world!
-
-BUILD SUCCESSFUL
-
-Total time: 3.486 secs</pre>
-</div>
+</li>
+<li>
+<p>Le volontariat c&#8217;est mieux, mais le prof est libre d&#8217;organiser le tour de rôle.</p>
+</li>
+<li>
+<p>En 90' de TP on peut faire passer 18 personnes, donc tout le monde y passe et
+le plus tôt est en général le moins compliqué.</p>
+</li>
+<li>
+<p>Merci à ceux qui ont déjà participé aux coding dojos de montrer l&#8217;exemple ;-)</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_le_patron_em_proxy_em"><a class="link" href="#_le_patron_em_proxy_em">3. Le patron <em>proxy</em></a></h2>
+<h2 id="_sujet_du_jour_type_abstrait_pile"><a class="link" href="#_sujet_du_jour_type_abstrait_pile">2. Sujet du jour : Type Abstrait Pile</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_le_problème"><a class="link" href="#_le_problème">3.1. Le problème</a></h3>
-<div class="paragraph">
-<p>On a besoin de références à un objet, qui soient plus <strong>créatives</strong> et plus
-<strong>sophistiquées</strong> qu&#8217;un simple pointeur.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_le_patron_em_proxy_em_2"><a class="link" href="#_le_patron_em_proxy_em_2">3.2. Le patron <em>Proxy</em></a></h3>
-<div class="paragraph">
-<p><strong>Procuration</strong> (<strong><em>Proxy</em></strong>) fournit à un tiers un mandataire ou un remplaçant, pour contrôler
-l&#8217;accès à cet objet.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/proxy.png" alt="proxy">
-</div>
-<div class="title">Figure 4. Modèle UML du patron <em>Proxy</em></div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/proxy-google.png" alt="proxy google">
-</div>
-<div class="title">Figure 5. Proxy sur Google</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_utilisations"><a class="link" href="#_utilisations">3.3. Utilisations</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Une <em>procuration à distance</em> fournit un représentant local d&#8217;un objet
-situé dans un espace adresse différent.</p>
-</li>
-<li>
-<p>Une <em>procuration virtuelle</em> crée des objets lourds à la demande.</p>
-</li>
-<li>
-<p>Une <em>procuration de protection</em> contrôle l&#8217;accès à l&#8217;objet original.
-Les procurations de protection sont utiles quand les objets doivent satisfaire
-différents droits d&#8217;accès.</p>
-</li>
-<li>
-<p>Une <em>référence intelligente</em> est le remplaçant d&#8217;un pointeur brut, qui
-réalise des opérations supplémentaires, lors de l&#8217;accès à l&#8217;objet. Quelques
-utilisations typiques sont :</p>
-<div class="ulist">
-<ul>
-<li>
-<p>décompte du nombre des références faites à un objet réel, de sorte que celui-ci puisse être libéré automatiquement, dés qu&#8217;il n&#8217;y a plus de références ;</p>
-</li>
-<li>
-<p>charger en mémoire un objet persistant quand il est référencé pour la première fois ;</p>
-</li>
-<li>
-<p>vérifier, avant d&#8217;y accéder, que l&#8217;objet réel est verrouillé, pour être sûr qu&#8217;aucun autre objet ne pourra le changer.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_exemple_concret_rmi"><a class="link" href="#_exemple_concret_rmi">3.4. Exemple concret : RMI</a></h3>
-<div class="paragraph">
-<p><strong>R</strong>emote <strong>M</strong>ethod <strong>I</strong>nvocation</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">import</span> <span class="tok-nn">java.rmi.*</span><span class="tok-o">;</span>
-<span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">MonService</span> <span class="tok-kd">extends</span> <span class="tok-n">Remote</span> <span class="tok-o">{</span>
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">direBonjour</span><span class="tok-o">()</span> <span class="tok-kd">throws</span> <span class="tok-n">RemoteException</span><span class="tok-o">;</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">import</span> <span class="tok-nn">java.rmi.*</span><span class="tok-o">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">java.rmi.server.*</span><span class="tok-o">;</span>
-
-<span class="tok-err">￼￼￼￼￼￼￼</span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MonServiceImpl</span> <span class="tok-kd">extends</span> <span class="tok-n">UnicastRemoteObject</span> <span class="tok-kd">implements</span> <span class="tok-n">MonService</span> <span class="tok-o">{</span>
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">direBonjour</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-    <span class="tok-k">return</span> <span class="tok-s">&quot;Le serveur dit &#39;Bonjour&#39;&quot;</span><span class="tok-o">;</span>
-  <span class="tok-o">}</span>
-  <span class="tok-kd">public</span> <span class="tok-nf">MonServiceImpl</span><span class="tok-o">()</span> <span class="tok-kd">throws</span> <span class="tok-n">RemoteException</span> <span class="tok-o">{}</span>
-  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span> <span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-k">try</span> <span class="tok-o">{</span>
-      <span class="tok-n">MonService</span> <span class="tok-n">service</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">MonServiceImpl</span><span class="tok-o">();</span>
-      <span class="tok-n">Naming</span><span class="tok-o">.</span><span class="tok-na">rebind</span><span class="tok-o">(</span><span class="tok-s">&quot;BonjourDistant&quot;</span><span class="tok-o">,</span> <span class="tok-n">service</span><span class="tok-o">);</span>
-    <span class="tok-o">}</span> <span class="tok-k">catch</span><span class="tok-o">(</span><span class="tok-n">Exception</span> <span class="tok-n">ex</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-      <span class="tok-n">ex</span><span class="tok-o">.</span><span class="tok-na">printStackTrace</span><span class="tok-o">();</span>
-    <span class="tok-o">}</span>
-  <span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">MonService</span> <span class="tok-n">service</span> <span class="tok-o">=</span>
-  <span class="tok-o">(</span><span class="tok-n">MonService</span><span class="tok-o">)</span> <span class="tok-n">Naming</span><span class="tok-o">.</span><span class="tok-na">lookup</span><span class="tok-o">(</span><span class="tok-s">&quot;rmi://127.0.0.1/BonjourDistant&quot;</span><span class="tok-o">);</span>
-<span class="tok-o">...</span>
-<span class="tok-n">service</span><span class="tok-o">.</span><span class="tok-na">direBonjour</span><span class="tok-o">();</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_le_patron_itérateur"><a class="link" href="#_le_patron_itérateur">4. Le patron Itérateur</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_le_problème_2"><a class="link" href="#_le_problème_2">4.1. Le problème</a></h3>
-<div class="paragraph">
-<p>On veut pouvoir :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>pour accéder au contenu d&#8217;un objet d&#8217;un agrégat sans en révéler la
-représentation interne ;</p>
-</li>
-<li>
-<p>pour gérer simultanément plusieurs parcours dans des agrégats d&#8217;objets ;</p>
-</li>
-<li>
-<p>pour offrir une interface uniforme pour les parcours au travers de
-diverses structures agrégats (c&#8217;est-à-dire, pour permettre l&#8217;itération
-polymorphe).</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_le_patron_itérateur_2"><a class="link" href="#_le_patron_itérateur_2">4.2. Le patron Itérateur</a></h3>
-<div class="paragraph">
-<p><strong>Itérateur</strong> (<strong><em>Iterator</em></strong>) fournit un moyen d&#8217;accès séquentiel aux éléments
-d&#8217;un agrégat d&#8217;objets, sans mettre à découvert la représentation interne de
-celui-ci.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/iterateur.svg" alt="iterateur">
-</div>
-<div class="title">Figure 6. Modèle UML du patron Itérateur</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/iterateur-google.png" alt="iterateur google">
-</div>
-<div class="title">Figure 7. Iterateur sur Google</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_exemple_concret"><a class="link" href="#_exemple_concret">4.3. Exemple concret</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="ruby"><span class="tok-c1"># Saluer tout le monde</span>
-<span class="tok-k">def</span> <span class="tok-nf">say_hi</span>
-  <span class="tok-k">if</span> <span class="tok-vi">@names</span><span class="tok-o">.</span><span class="tok-n">nil?</span>
-    <span class="tok-nb">puts</span> <span class="tok-s2">&quot;...&quot;</span>
-  <span class="tok-k">elsif</span> <span class="tok-vi">@names</span><span class="tok-o">.</span><span class="tok-n">respond_to?</span><span class="tok-p">(</span><span class="tok-s2">&quot;each&quot;</span><span class="tok-p">)</span>
-    <span class="tok-c1"># @names est une liste de noms : traitons-les uns par uns</span>
-    <span class="tok-vi">@names</span><span class="tok-o">.</span><span class="tok-n">each</span> <span class="tok-k">do</span> <span class="tok-o">|</span><span class="tok-nb">name</span><span class="tok-o">|</span>
-      <span class="tok-nb">puts</span> <span class="tok-s2">&quot;Hello </span><span class="tok-si">#{</span><span class="tok-nb">name</span><span class="tok-si">}</span><span class="tok-s2">!&quot;</span>
-    <span class="tok-k">end</span>
-  <span class="tok-k">else</span>
-    <span class="tok-nb">puts</span> <span class="tok-s2">&quot;Hello </span><span class="tok-si">#{</span><span class="tok-vi">@names</span><span class="tok-si">}</span><span class="tok-s2">!&quot;</span>
-  <span class="tok-k">end</span>
-<span class="tok-k">end</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_le_patron_composite"><a class="link" href="#_le_patron_composite">5. Le patron Composite</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_le_problème_3"><a class="link" href="#_le_problème_3">5.1. Le problème</a></h3>
-<div class="paragraph">
-<p>On veut pouvoir :</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>représenter des hiérarchies de l&#8217;individu.</p>
-</li>
-<li>
-<p>que le client n&#8217;ait pas à se préoccuper de la différence entre
-"combinaisons d&#8217;objets" et "objets individuels". Les clients pourront traiter
-de façon uniforme tous les objets de la structure composite.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_le_patron_composite_2"><a class="link" href="#_le_patron_composite_2">5.2. Le patron Composite</a></h3>
-<div class="paragraph">
-<p><strong>Composite</strong> permet de composer des objets en des structures arborescentes
-pour représenter des hiérarchies composant/composé.
-Permet au client de traiter d&#8217;une façon unique les objets et les combinaisons
-d&#8217;objets.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/composite.svg" alt="composite">
-</div>
-<div class="title">Figure 8. Modèle UML du patron Composite</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/composite-google.png" alt="composite google">
-</div>
-<div class="title">Figure 9. Composite sur Google</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_exemple_concret_2"><a class="link" href="#_exemple_concret_2">5.3. Exemple concret</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">import</span> <span class="tok-nn">java.util.ArrayList</span><span class="tok-o">;</span>
-
-<span class="tok-kd">interface</span> <span class="tok-nc">Graphic</span> <span class="tok-o">{</span>
-    <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">print</span><span class="tok-o">();</span>
-<span class="tok-o">}</span>
-
-<span class="tok-kd">class</span> <span class="tok-nc">CompositeGraphic</span> <span class="tok-kd">implements</span> <span class="tok-n">Graphic</span> <span class="tok-o">{</span>
-
-  <span class="tok-kd">private</span> <span class="tok-n">ArrayList</span><span class="tok-o">&lt;</span><span class="tok-n">Graphic</span><span class="tok-o">&gt;</span> <span class="tok-n">mChildGraphics</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ArrayList</span><span class="tok-o">&lt;</span><span class="tok-n">Graphic</span><span class="tok-o">&gt;();</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">print</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-    <span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-n">Graphic</span> <span class="tok-n">graphic</span> <span class="tok-o">:</span> <span class="tok-n">mChildGraphics</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-      <span class="tok-n">graphic</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">();</span>
-    <span class="tok-o">}</span>
-  <span class="tok-o">}</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">add</span><span class="tok-o">(</span><span class="tok-n">Graphic</span> <span class="tok-n">graphic</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-n">mChildGraphics</span><span class="tok-o">.</span><span class="tok-na">add</span><span class="tok-o">(</span><span class="tok-n">graphic</span><span class="tok-o">);</span>
-  <span class="tok-o">}</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remove</span><span class="tok-o">(</span><span class="tok-n">Graphic</span> <span class="tok-n">graphic</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-n">mChildGraphics</span><span class="tok-o">.</span><span class="tok-na">remove</span><span class="tok-o">(</span><span class="tok-n">graphic</span><span class="tok-o">);</span>
-  <span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_un_anti_exemple"><a class="link" href="#_un_anti_exemple">5.4. un "Anti" exemple</a></h3>
-<div class="paragraph">
-<p>Que pensez-vous de cette définition de Composite ?</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/anti-composite.png" alt="anti composite">
-</div>
-<div class="title">Figure 10. Patron abîmé composite</div>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -1497,173 +606,181 @@ d&#8217;objets.</p>
 <img src="images/icons/tip.png" alt="Tip">
 </td>
 <td class="content">
-On appelle ces modèles des "Patrons abîmés" (<em>anti-patterns</em>).
+<div class="title">Rappels</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Opérations</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>CréerPile :  -&gt; Pile
+estVide   :  Pile -&gt;  Booléen
+Empiler   :  Pile * Elément -&gt; Pile
+Dépiler   :  Pile -&gt; Pile
+Sommet	   :  Pile -&gt;  Elément</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Préconditions</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Sommet(p) valide Si et Seulement Si estVide(p) == FAUX
+Dépiler(p) valide Si et Seulement Si estVide(p) == FAUX</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Axiomes</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>(1) estVide(CréerPile())
+(2) estVide(Empiler(p,e)) == FAUX
+(3) estVide(Dépiler(Empiler(p,e))) Si et Seulement Si estVide(p)
+(4) Sommet(Empiler(p,e)) == e
+(5) estVide(p) -&gt; Sommet(Dépiler(Empiler(p,e))) == Sommet(p)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>L’axiome suivant résume à lui seul les axiomes (3) et (5) :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Dépiler(Empiler(p,e)) == p</pre>
+</div>
+</div>
 </td>
 </tr>
 </table>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/caution.png" alt="Caution">
+</td>
+<td class="content">
+<div class="title">Choix d&#8217;implémentation</div>
+<div class="paragraph">
+<p>Le type abstrait Pile sera implémenté en <strong>java</strong> en utilisant un
+tableau de chaines de caractères.</p>
+</div>
+<div class="paragraph">
+<p>Dans un premier temps, la taille du tableau sera de 100 éléments.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Conséquences</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>empiler() ajoutera une chaine en sommet de pile
+et sommet() retournera une chaine</p>
+</li>
+<li>
+<p>la pile pourra être pleine</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Pour l&#8217;architecture logicielle, le type abstrait Pile sera composé :</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>d&#8217;une classe Pile fournissant un enregistrement de type Pile</p>
+</li>
+<li>
+<p>d&#8217;une interface PileOperations fournissant toutes les opérations du type Abstrait Pile</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_retour_sur_le_refactoring_banque"><a class="link" href="#_retour_sur_le_refactoring_banque">6. Retour sur le refactoring Banque</a></h2>
+<h2 id="_Étape_1_mise_en_place_d_un_enregistrement_de_type_pile"><a class="link" href="#_Étape_1_mise_en_place_d_un_enregistrement_de_type_pile">3. Étape 1 : Mise en place d&#8217;un enregistrement de type Pile</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_le_problème_4"><a class="link" href="#_le_problème_4">6.1. Le problème</a></h3>
-<div class="imageblock">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Placer le code suivant dans un fichier de nom <strong>PileTest.java</strong></p>
+<div class="listingblock">
 <div class="content">
-<img src="images/refactoring1.png" alt="refactoring1">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">import</span> <span class="tok-nn">junit.textui.TestRunner</span><span class="tok-o">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">junit.framework.TestSuite</span><span class="tok-o">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">junit.framework.TestCase</span><span class="tok-o">;</span>
+
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">PileTest</span> <span class="tok-kd">extends</span> <span class="tok-n">TestCase</span> <span class="tok-o">{</span>
+	<span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">totalAssertions</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span>
+	<span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">bilanAssertions</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span>
+
+	<span class="tok-cm">/*</span>
+<span class="tok-cm">	Types des opérations du type Pile</span>
+<span class="tok-cm">	*/</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">test_type_new_Pile</span><span class="tok-o">()</span> <span class="tok-kd">throws</span> <span class="tok-n">Exception</span> <span class="tok-o">{</span>
+		<span class="tok-n">Pile</span> <span class="tok-n">pile</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Pile</span><span class="tok-o">()</span> <span class="tok-o">;</span>
+
+		<span class="tok-n">totalAssertions</span><span class="tok-o">++</span> <span class="tok-o">;</span>
+		<span class="tok-n">assertEquals</span><span class="tok-o">(</span><span class="tok-s">&quot;new Pile() retourne une Pile&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Pile&quot;</span><span class="tok-o">,</span> <span class="tok-n">pile</span><span class="tok-o">.</span><span class="tok-na">getClass</span><span class="tok-o">().</span><span class="tok-na">getName</span><span class="tok-o">());</span>
+		<span class="tok-n">bilanAssertions</span><span class="tok-o">++</span> <span class="tok-o">;</span>
+	<span class="tok-o">}</span>
+
+	<span class="tok-cm">/*</span>
+<span class="tok-cm">	Axiomes du type Pile</span>
+<span class="tok-cm">	*/</span>
+
+	<span class="tok-cm">/*</span>
+<span class="tok-cm">	Préconditions du type Pile</span>
+<span class="tok-cm">	*/</span>
+
+	<span class="tok-cm">/*</span>
+<span class="tok-cm">	main() de la classe de Test</span>
+<span class="tok-cm">	*/</span>
+	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-n">junit</span><span class="tok-o">.</span><span class="tok-na">textui</span><span class="tok-o">.</span><span class="tok-na">TestRunner</span><span class="tok-o">.</span><span class="tok-na">run</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">TestSuite</span><span class="tok-o">(</span><span class="tok-n">PileTest</span><span class="tok-o">.</span><span class="tok-na">class</span><span class="tok-o">));</span>
+		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">bilanAssertions</span> <span class="tok-o">==</span> <span class="tok-n">totalAssertions</span><span class="tok-o">)</span> <span class="tok-o">{</span> <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Bravo !&quot;</span><span class="tok-o">);</span> <span class="tok-o">}</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot; &quot;</span><span class="tok-o">+</span><span class="tok-n">bilanAssertions</span><span class="tok-o">+</span><span class="tok-s">&quot;/&quot;</span><span class="tok-o">+</span><span class="tok-n">totalAssertions</span><span class="tok-o">+</span><span class="tok-s">&quot; assertions verifiees&quot;</span><span class="tok-o">);</span>
+	<span class="tok-o">}</span> <span class="tok-c1">// fin main</span>
+
+<span class="tok-o">}</span> <span class="tok-c1">// fin PileTest</span></code></pre>
 </div>
 </div>
+</li>
+<li>
+<p>Pour compiler le programme de Test, n&#8217;oubliez pas de placer les fichiers <strong>SciTE.properties</strong> et <strong>junit.jar</strong> dans le répertoire de vos sources (avant d&#8217;ouvrir SciTE) ou bien exécutez ceci :</p>
+<div class="listingblock">
+<div class="content">
+<pre>javac -cp .;junit.jar PileTest.java</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about"><a class="link" href="#_about">4. About&#8230;&#8203;</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
-<p>Remplacer tous ces <code>switch cases</code></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">continuer</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>
-<span class="tok-k">while</span> <span class="tok-o">(</span><span class="tok-n">continuer</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-  <span class="tok-n">AAB</span><span class="tok-o">.</span><span class="tok-na">afficherMenu</span><span class="tok-o">(</span><span class="tok-n">monAg</span><span class="tok-o">);</span>
-  <span class="tok-n">choix</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-o">.</span><span class="tok-na">next</span><span class="tok-o">();</span>
-  <span class="tok-n">choix</span> <span class="tok-o">=</span> <span class="tok-n">choix</span><span class="tok-o">.</span><span class="tok-na">toLowerCase</span><span class="tok-o">();</span>
-  <span class="tok-k">switch</span> <span class="tok-o">(</span><span class="tok-n">choix</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-o">...</span>
-    <span class="tok-k">case</span> <span class="tok-s">&quot;p&quot;</span> <span class="tok-o">:</span>
-      <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Propriétaire -&gt; &quot;</span><span class="tok-o">);</span>
-      <span class="tok-n">nom</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-o">.</span><span class="tok-na">next</span><span class="tok-o">();</span>
-      <span class="tok-n">AAB</span><span class="tok-o">.</span><span class="tok-na">comptesDUnPropretaire</span> <span class="tok-o">(</span><span class="tok-n">monAg</span><span class="tok-o">,</span> <span class="tok-n">nom</span><span class="tok-o">);</span>
-    <span class="tok-k">break</span><span class="tok-o">;</span>
-    <span class="tok-o">...</span></code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Afficher une liste séparemment du switch</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-c1">//AAB.afficherMenu(monAg);</span>
-  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Menu de &quot;</span> <span class="tok-o">+</span> <span class="tok-n">ag</span><span class="tok-o">.</span><span class="tok-na">getNomAgence</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot; (&quot;</span> <span class="tok-o">+</span> <span class="tok-n">ag</span><span class="tok-o">.</span><span class="tok-na">getLocAgence</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;)&quot;</span><span class="tok-o">);</span>
-  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;l - Liste des comptes de l&#39;agence&quot;</span><span class="tok-o">);</span>
-  <span class="tok-o">...</span>
-  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;p - voir les comptes d&#39;un Propriétaire (par son nom)&quot;</span><span class="tok-o">);</span>
-  <span class="tok-o">...</span>
-  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Choix -&gt; &quot;</span><span class="tok-o">);</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Tester tous les choix pour actionner la bonne option</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java">  <span class="tok-o">...</span>
-  <span class="tok-k">case</span> <span class="tok-s">&quot;p&quot;</span> <span class="tok-o">:</span>
-    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Propriétaire -&gt; &quot;</span><span class="tok-o">);</span>
-    <span class="tok-n">nom</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-o">.</span><span class="tok-na">next</span><span class="tok-o">();</span>
-    <span class="tok-n">AAB</span><span class="tok-o">.</span><span class="tok-na">comptesDUnPropretaire</span> <span class="tok-o">(</span><span class="tok-n">monAg</span><span class="tok-o">,</span> <span class="tok-n">nom</span><span class="tok-o">);</span>
-  <span class="tok-k">break</span><span class="tok-o">;</span>
-  <span class="tok-o">...</span></code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_une_solution"><a class="link" href="#_une_solution">6.2. Une solution</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Des listes</p>
-</li>
-<li>
-<p>Des options de menu qui encapsulent l&#8217;action à réaliser</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span> <span class="tok-kd">extends</span> <span class="tok-n">Action</span> <span class="tok-o">{</span>
-
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">listTitle</span><span class="tok-o">();</span>
-  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">size</span><span class="tok-o">();</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">addAction</span><span class="tok-o">(</span><span class="tok-n">Action</span> <span class="tok-n">ac</span><span class="tok-o">);</span>
-  <span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">removeAction</span><span class="tok-o">(</span><span class="tok-n">Action</span> <span class="tok-n">ac</span><span class="tok-o">);</span>
-
-  <span class="tok-kd">public</span> <span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-nf">listOfActions</span><span class="tok-o">()</span> <span class="tok-o">;</span>
-
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Une interface pour les options de menu</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Action</span>  <span class="tok-o">{</span>
-
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionMessage</span> <span class="tok-o">();</span>
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-o">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span><span class="tok-o">);</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Une classe concrète par option de menu</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Action1</span> <span class="tok-kd">implements</span> <span class="tok-n">Action</span> <span class="tok-o">{</span>
-
-  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">lineMessage</span><span class="tok-o">;</span>
-
-  <span class="tok-o">...</span>
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionMessage</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-    <span class="tok-k">return</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">lineMessage</span><span class="tok-o">;</span>
-  <span class="tok-o">}</span>
-
-  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-o">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ab</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-
-    <span class="tok-o">...</span>
-    <span class="tok-n">ab</span><span class="tok-o">.</span><span class="tok-na">afficher</span><span class="tok-o">();</span>
-  <span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Utilisation de l&#8217;action</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java">  <span class="tok-n">action</span><span class="tok-o">.</span><span class="tok-na">execute</span><span class="tok-o">(</span><span class="tok-n">ab</span><span class="tok-o">);</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Lien entre liste et action</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">Action</span> <span class="tok-n">a1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action1</span><span class="tok-o">(</span><span class="tok-s">&quot;Liste des comptes de l&#39;agence&quot;</span><span class="tok-o">);</span>
-<span class="tok-n">Action</span> <span class="tok-n">a2</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action2</span><span class="tok-o">(</span><span class="tok-s">&quot;Voir un compte (par son numéro)&quot;</span><span class="tok-o">);</span>
-<span class="tok-n">Action</span> <span class="tok-n">a3</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Action3</span><span class="tok-o">(...);</span>
-
-<span class="tok-n">ActionList</span> <span class="tok-n">al1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ActionListAgenceBancaire</span><span class="tok-o">(</span><span class="tok-s">&quot;Menu Général&quot;</span><span class="tok-o">);</span>
-
-<span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a1</span><span class="tok-o">);</span>
-<span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a2</span><span class="tok-o">);</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Lien entre liste et action : choix dans la liste</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-o">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ab</span><span class="tok-o">)</span> <span class="tok-kd">throws</span> <span class="tok-n">Exception</span> <span class="tok-o">{</span>
-  <span class="tok-o">...</span>
-  <span class="tok-k">while</span> <span class="tok-o">(</span><span class="tok-kc">true</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">printMenu</span><span class="tok-o">();</span>
-
-    <span class="tok-n">choice</span> <span class="tok-o">=</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">readResponse</span><span class="tok-o">();</span>
-    <span class="tok-o">...</span>
-    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">myMenu</span><span class="tok-o">.</span><span class="tok-na">get</span><span class="tok-o">(</span><span class="tok-n">choice</span><span class="tok-o">).</span><span class="tok-na">execute</span><span class="tok-o">(</span><span class="tok-n">ab</span><span class="tok-o">);</span>
-    <span class="tok-o">...</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">La liste peut elle-même être une option de menu (une action)!</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span> <span class="tok-kd">extends</span> <span class="tok-n">Action</span> <span class="tok-o">{</span>
-<span class="tok-o">}</span></code></pre>
+<p>Document réalisé par <a href="mailto:jbruel@gmail.com">Jean-Michel Bruel</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.2</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
+Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
+<span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="images/88x31.png" alt="Licence Creative Commons"></a></span>
+<a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p>
 </div>
 </div>
 </div>
@@ -1673,7 +790,7 @@ On appelle ces modèles des "Patrons abîmés" (<em>anti-patterns</em>).
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2014-12-10 08:38:00 CET
+Last updated 2014-12-15 16:31:37 CET
 </div>
 </div>
 </body>
