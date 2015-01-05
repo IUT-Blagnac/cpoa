@@ -9,7 +9,7 @@ am -> am : find (row)
 am -> am : modify(row, stud)
 
 am -> am : fireTableDataChanged()
-note right: Un appel à fireTableRowsUpdated(row, row) eut été mieux ...
+note left: Un appel à fireTableRowsUpdated(row, row) eut été mieux ...
 
 am -> table : tableChanged (tableModelEvent)
 note right: Méthode de l'observateur pour être prévenu
