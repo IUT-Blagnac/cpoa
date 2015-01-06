@@ -5,13 +5,13 @@ participant "dataModel:SimpleTableModel" as dataModel
 participant ":ApplicationModel" as am
 
 am -> dataModel : modifyStudent(stud, row)
-am -> am : find (row)
-am -> am : modify(row, stud)
+dataModel -> dataModel : find (row)
+dataModel -> dataModel : modify(row, stud)
 
-am -> am : fireTableDataChanged()
-note right: Un appel à fireTableRowsUpdated(row, row) eut été mieux ...
+dataModel -> dataModel : fireTableDataChanged()
+note left: Un appel à fireTableRowsUpdated(row, row) eut été mieux ...
 
-am -> table : tableChanged (tableModelEvent)
+dataModel -> table : tableChanged (tableModelEvent)
 note right: Méthode de l'observateur pour être prévenu
 
 table -> dataModel : nr = getRowCount();
