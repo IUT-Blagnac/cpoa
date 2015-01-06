@@ -11,7 +11,11 @@ ifdef::slides[:leveloffset: -1]
 
 [glossary]
 
+
+
 === Patrons de création
+
+
 
 [[Singleton]] Singleton::
 include::pattern/singleton.txt[]
@@ -26,7 +30,11 @@ ifdef::slides[=== Patrons de création (suite)]
 [[FabriqueAbstraite]] Fabrique abstraite::
 include::pattern/fabrique-abstraite.txt[]
 
+
+
 === Patrons comportementaux
+
+
 
 [[Etat]] État (_State^uk^_)::
 include::pattern/etat.txt[]
@@ -46,11 +54,22 @@ ifdef::slides[=== Patrons comportementaux (suite)]
 [[Stratégie]] Stratégie (_Strategy^uk^_)::
 include::pattern/strategy.txt[]
 
+ifdef::slides[=== Patrons comportementaux (suite)]
+
+[[Stratégie]] Visiteur (_Visitor^uk^_)::
+include::pattern/visitor.txt[]
+
 
 === Patrons structurels
 
-Adaptateur::
-  TBD
+
+
+
+[[Adapteur]] Adaptateur (_Adaptor^uk^_)::
+include::pattern/adapteur.txt[]
+
+ifdef::slides[=== Patrons structurels (suite)]
+
 [[Composite]] Composite::
 include::pattern/composite.txt[]
 

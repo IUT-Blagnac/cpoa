@@ -1,0 +1,7 @@
+*Adaptateur* (*_Adaptor_*) permet de convertir l'interface d'une classe en une autre
+conformément à l'attente du client. L'Adaptateur permet à des classes de
+collaborer, alors qu’elles n'auraient pas pu le faire du fait d'interfaces
+incompatibles.
+
+ifndef::slides[.Modèle UML du patron Adaptateur]
+image::adapteur.svg[]

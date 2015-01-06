@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
 <meta name="author" content="Jean-Michel Bruel">
-<title>CPOA - Cours 5 (Coding Dojo)</title>
+<title>CPOA - Cours 6 (Suite Design Pattern)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -477,96 +477,234 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>CPOA - Cours 5 (Coding Dojo)</h1>
+<h1>CPOA - Cours 6 (Suite Design Pattern)</h1>
 <div class="details">
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2014-12-15 - First draft</span>
+<span id="revdate">2015-01-06 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_rappel_des_principes">1. Rappel des principes</a>
+<li><a href="#_le_patron_em_observer_em">1. Le patron <em>Observer</em></a>
 <ul class="sectlevel2">
-<li><a href="#_le_principe">1.1. Le principe :</a></li>
-<li><a href="#_les_règles">1.2. Les règles</a></li>
+<li><a href="#_motivation">1.1. Motivation</a></li>
+<li><a href="#_définition">1.2. Définition</a></li>
+<li><a href="#_application">1.3. Application</a></li>
+<li><a href="#__em_observer_em_en_java">1.4. <em>Observer</em> en Java</a></li>
 </ul>
 </li>
-<li><a href="#_sujet_du_jour_type_abstrait_pile">2. Sujet du jour : Type Abstrait Pile</a></li>
-<li><a href="#_Étape_1_mise_en_place_d_un_enregistrement_de_type_pile">3. Étape 1 : Mise en place d&#8217;un enregistrement de type Pile</a></li>
-<li><a href="#_about">4. About&#8230;&#8203;</a></li>
+<li><a href="#_une_implémentation_du_mvc_les_jtable_java">2. Une implémentation du MVC : les JTable java</a>
+<ul class="sectlevel2">
+<li><a href="#_le_principe">2.1. Le principe</a></li>
+<li><a href="#_l_architecture">2.2. L&#8217;architecture</a></li>
+</ul>
+</li>
+<li><a href="#_le_patron_adaptateur">3. Le patron Adaptateur</a>
+<ul class="sectlevel2">
+<li><a href="#_le_problème">3.1. Le problème</a></li>
+<li><a href="#_exemple_concret_le_retour_des_canards">3.2. Exemple concret : le retour des canards</a></li>
+<li><a href="#_le_patron_adaptateur_2">3.3. Le patron Adaptateur</a></li>
+</ul>
+</li>
+<li><a href="#_le_patron_visiteur">4. Le patron Visiteur</a>
+<ul class="sectlevel2">
+<li><a href="#_le_problème_2">4.1. Le problème</a></li>
+<li><a href="#_le_patron_visiteur_2">4.2. Le patron Visiteur</a></li>
+<li><a href="#_avantages_inconvénients">4.3. Avantages/Inconvénients</a></li>
+<li><a href="#_exemples_d_utilisation">4.4. Exemples d&#8217;utilisation</a></li>
+<li><a href="#_exemple_concret_d_utilisation_en_java">4.5. Exemple concret d&#8217;utilisation en Java</a></li>
+</ul>
+</li>
+<li><a href="#_pour_aller_plus_loin_avec_les_patrons">5. Pour aller plus loin avec les patrons&#8230;&#8203;</a>
+<ul class="sectlevel2">
+<li><a href="#_partagez_votre_vocabulaire">5.1. Partagez votre vocabulaire</a></li>
+<li><a href="#_ne_foncez_pas_tête_baissée">5.2. Ne foncez pas tête baissée</a></li>
+<li><a href="#_les_autres_types_de_patrons">5.3. Les autres types de patrons</a></li>
+<li><a href="#_les_anti_patrons">5.4. Les anti-patrons</a></li>
+<li><a href="#_tous_les_patrons_qu_on_a_pas_vu">5.5. Tous les patrons qu&#8217;on a pas vu</a></li>
+<li><a href="#_principale_utilisation_des_patrons_refactoring">5.6. Principale utilisation des patrons : refactoring!</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_rappel_des_principes"><a class="link" href="#_rappel_des_principes">1. Rappel des principes</a></h2>
+<h2 id="_le_patron_em_observer_em"><a class="link" href="#_le_patron_em_observer_em">1. Le patron <em>Observer</em></a></h2>
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
-</td>
-<td class="content">
-Pour plus d&#8217;info sur le Coding Dojo : <a href="http://fr.wikipedia.org/wiki/Coding_Dojo" class="bare">http://fr.wikipedia.org/wiki/Coding_Dojo</a>
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_le_principe"><a class="link" href="#_le_principe">1.1. Le principe :</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Le prof de TP (ou le/la gentil(le) étudiant(e) volontaire désintéressé(e)) initie l&#8217;exercice
-en ouvrant un <a href="http://www.eclipse.org">eclipse</a> et en commençant un test qui commence par échouer et qui "passera" quand
-la fonctionalité attendue sera implémentée et fonctionnelle.</p>
-</li>
-<li>
-<p>Il vérifie que son test échoue bien</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
-</td>
-<td class="content">
-On pourra avantageusement installer le plug-in eclipse
-<a href="http://infinitest.github.io/">InfiniTest</a> qui permet de runner les tests à
-chaque sauvegarde (cf. plus haut)
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Il fait en sorte que le test passe au vert  le plus vite possible</p>
-</li>
-<li>
-<p>Il "refactor" éventuellement (faire passer le test au vert mais de façon
-intelligente, éviter la duplication de code, réorganiser les classes, etc.)</p>
-</li>
-<li>
-<p>Quand tout est au vert on passe à une fonctionnalité suivante</p>
-</li>
-</ol>
+<div class="imageblock">
+<div class="content">
+<img src="images/observer.jpg" alt="observer">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_les_règles"><a class="link" href="#_les_règles">1.2. Les règles</a></h3>
+<h3 id="_motivation"><a class="link" href="#_motivation">1.1. Motivation</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/observer-illustration.png" alt="observer illustration">
+</div>
+<div class="title">Figure 1. L&#8217;illustration classique du patron Observer</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_définition"><a class="link" href="#_définition">1.2. Définition</a></h3>
+<div class="paragraph">
+<p><strong>Observateur</strong> définit une relation entre objets de type
+un-à-plusieurs, de façon que, lorsqu&#8217;un objet change d&#8217;état,
+tous ceux qui en dépendent en soient notifiés et soient mis à jour
+automatiquement.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/observateur.svg" alt="observateur">
+</div>
+<div class="title">Figure 2. Modèle UML du patron <em>Observer</em></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_application"><a class="link" href="#_application">1.3. Application</a></h3>
+<div class="paragraph">
+<p>Le patron <em>Observer</em> est utilisable dans de nombreuses situations :</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Toutes les 5 minutes (timer sonore) on change de personne aux commandes
-(au clavier/souris en l&#8217;occurence)</p>
+<p>Quand un concept a deux aspects, l&#8217;un dépendant de l&#8217;autre.
+Encapsuler ces aspects dans des objets séparés permet de les utiliser
+et les laisser évoluer de manière indépendante.</p>
 </li>
 <li>
-<p>Il faut un "maître du temps"</p>
+<p>Dès que le changement d&#8217;un objet entraîne le changement de plusieurs autres.</p>
 </li>
 <li>
-<p>Tout le monde participe au codage (et ne fait pas du code de son côté)</p>
+<p>Dès qu&#8217;un objet doit en notifier un certain nombre d&#8217;autres sans les connaitre.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__em_observer_em_en_java"><a class="link" href="#__em_observer_em_en_java">1.4. <em>Observer</em> en Java</a></h3>
+<div class="paragraph">
+<p><a href="https://www.java.com/fr/">Java</a> fournit des classes <em>Observable/Observer</em> pour le patron <em>Observer</em>.
+La classe <code>java.util.Observable</code> est la classe de base pour les sujets.
+Ainsi, toute classe qui veut être observée étant cette classe dont
+voici les caractéristiques :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>fournit des méthodes pour ajouter/enlever des  observateurs</p>
+</li>
+<li>
+<p>fournit des méthodes pour notifier les observateurs</p>
+</li>
+<li>
+<p>une sous-classe concrète doit seulement s&#8217;occuper de notifier à chque
+méthode modifiant l&#8217;état des objets (<em>mutators</em>)</p>
+</li>
+<li>
+<p>utilise un vecteur stoquant les références des observateurs</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>L&#8217;interface <code>java.util.Observer</code> correspond aux observateurs
+qui doivent implémenter cette interface.</p>
+</div>
+<div class="sect3">
+<h4 id="_la_classe_java_util_observable"><a class="link" href="#_la_classe_java_util_observable">1.4.1. La classe java.util.Observable</a></h4>
+<div class="paragraph">
+<p>Voici la liste des méthodes de <code>java.util.Observable</code> :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="lineno">1</span> <span class="tok-kd">public</span> <span class="tok-nf">Observable</span><span class="tok-o">()</span>
+<span class="lineno">2</span> <span class="tok-kd">public</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">addObserver</span><span class="tok-o">(</span><span class="tok-n">Observer</span> <span class="tok-n">o</span><span class="tok-o">)</span>
+<span class="lineno">3</span> <span class="tok-kd">protected</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">setChanged</span><span class="tok-o">()</span>
+<span class="lineno">4</span> <span class="tok-kd">public</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">deleteObserver</span><span class="tok-o">(</span><span class="tok-n">Observer</span> <span class="tok-n">o</span><span class="tok-o">)</span>
+<span class="lineno">5</span> <span class="tok-kd">protected</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">clearChanged</span><span class="tok-o">()</span>
+<span class="lineno">6</span> <span class="tok-kd">public</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">boolean</span> <span class="tok-nf">hasChanged</span><span class="tok-o">()</span>
+<span class="lineno">7</span> <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">notifyObservers</span><span class="tok-o">(</span><span class="tok-n">Object</span> <span class="tok-n">arg</span><span class="tok-o">)</span>
+<span class="lineno">8</span> <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">notifyObservers</span><span class="tok-o">()</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_l_interface_java_util_observer"><a class="link" href="#_l_interface_java_util_observer">1.4.2. L&#8217;interface java.util.Observer</a></h4>
+<div class="listingblock">
+<div class="title">java.util.Observer</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="lineno"> 1</span> <span class="tok-cm">/**</span>
+<span class="lineno"> 2</span> <span class="tok-cm">* This method is called whenever the observed object is changed. An</span>
+<span class="lineno"> 3</span> <span class="tok-cm">* application calls an observable object&#39;s notifyObservers method to have all</span>
+<span class="lineno"> 4</span> <span class="tok-cm">* the object&#39;s observers notified of the change.</span>
+<span class="lineno"> 5</span> <span class="tok-cm">*</span>
+<span class="lineno"> 6</span> <span class="tok-cm">* Parameters:</span>
+<span class="lineno"> 7</span> <span class="tok-cm">* o - the observable object</span>
+<span class="lineno"> 8</span> <span class="tok-cm">* arg - an argument passed to the notifyObservers method</span>
+<span class="lineno"> 9</span> <span class="tok-cm">*/</span>
+<span class="lineno">10</span> <span class="tok-kd">public</span> <span class="tok-kd">abstract</span> <span class="tok-kt">void</span> <span class="tok-nf">update</span><span class="tok-o">(</span><span class="tok-n">Observable</span> <span class="tok-n">o</span><span class="tok-o">,</span> <span class="tok-n">Object</span> <span class="tok-n">arg</span><span class="tok-o">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_une_implémentation_du_mvc_les_jtable_java"><a class="link" href="#_une_implémentation_du_mvc_les_jtable_java">2. Une implémentation du MVC : les JTable java</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/JTable.png" alt="JTable">
+</div>
+<div class="title">Figure 3. Ceci n&#8217;est pas une JTable</div>
+</div>
+<div class="sect2">
+<h3 id="_le_principe"><a class="link" href="#_le_principe">2.1. Le principe</a></h3>
+<div class="paragraph">
+<p><span class="image"><img src="images/TD6-MVC-1.png" alt="TD6-MVC-1"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_l_architecture"><a class="link" href="#_l_architecture">2.2. L&#8217;architecture</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/JTable.jpg" alt="JTable">
+</div>
+<div class="title">Figure 4. Architecture de JTable</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_le_patron_adaptateur"><a class="link" href="#_le_patron_adaptateur">3. Le patron Adaptateur</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/adaptateur.jpg" alt="adaptateur">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_problème"><a class="link" href="#_le_problème">3.1. Le problème</a></h3>
+<div class="paragraph">
+<p>On veut pouvoir :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>utiliser une classe existante, mais dont <strong>l&#8217;interface ne coïncide pas</strong> avec celle escomptée.</p>
+</li>
+<li>
+<p>créer une classe réutilisable qui collabore avec des classes sans relations
+avec elle et encore inconnues, c&#8217;est-à-dire avec des classes qui n&#8217;auront <strong>pas
+nécessairement des interfaces compatibles</strong>.</p>
+</li>
+<li>
+<p>vous avez besoin d&#8217;utiliser plusieurs sous-classes existantes, mais
+l'<strong>adaptation de leur interface</strong> par dérivation de chacune d&#8217;entre elles est
+impraticable. Un adaptateur objet peut adapter l&#8217;interface de sa classe parente.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -574,214 +712,575 @@ intelligente, éviter la duplication de code, réorganiser les classes, etc.)</p
 <img src="images/icons/note.png" alt="Note">
 </td>
 <td class="content">
-Les machines ne sont donc pas utiles pour cette partie! Seule la machine
-connectée au vidéoprojecteur est utilisée.
+Ce dernier cas ne concerne que le cas "adaptateur d&#8217;objet"
 </td>
 </tr>
 </table>
 </div>
-</li>
-<li>
-<p>Le volontariat c&#8217;est mieux, mais le prof est libre d&#8217;organiser le tour de rôle.</p>
-</li>
-<li>
-<p>En 90' de TP on peut faire passer 18 personnes, donc tout le monde y passe et
-le plus tôt est en général le moins compliqué.</p>
-</li>
-<li>
-<p>Merci à ceux qui ont déjà participé aux coding dojos de montrer l&#8217;exemple ;-)</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_sujet_du_jour_type_abstrait_pile"><a class="link" href="#_sujet_du_jour_type_abstrait_pile">2. Sujet du jour : Type Abstrait Pile</a></h2>
-<div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/tip.png" alt="Tip">
-</td>
-<td class="content">
-<div class="title">Rappels</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Opérations</dt>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>CréerPile :  -&gt; Pile
-estVide   :  Pile -&gt;  Booléen
-Empiler   :  Pile * Elément -&gt; Pile
-Dépiler   :  Pile -&gt; Pile
-Sommet	   :  Pile -&gt;  Elément</pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Préconditions</dt>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Sommet(p) valide Si et Seulement Si estVide(p) == FAUX
-Dépiler(p) valide Si et Seulement Si estVide(p) == FAUX</pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Axiomes</dt>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>(1) estVide(CréerPile())
-(2) estVide(Empiler(p,e)) == FAUX
-(3) estVide(Dépiler(Empiler(p,e))) Si et Seulement Si estVide(p)
-(4) Sommet(Empiler(p,e)) == e
-(5) estVide(p) -&gt; Sommet(Dépiler(Empiler(p,e))) == Sommet(p)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>L’axiome suivant résume à lui seul les axiomes (3) et (5) :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Dépiler(Empiler(p,e)) == p</pre>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<img src="images/icons/caution.png" alt="Caution">
-</td>
-<td class="content">
-<div class="title">Choix d&#8217;implémentation</div>
-<div class="paragraph">
-<p>Le type abstrait Pile sera implémenté en <strong>java</strong> en utilisant un
-tableau de chaines de caractères.</p>
-</div>
-<div class="paragraph">
-<p>Dans un premier temps, la taille du tableau sera de 100 éléments.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Conséquences</dt>
-<dd>
+<div class="sect2">
+<h3 id="_exemple_concret_le_retour_des_canards"><a class="link" href="#_exemple_concret_le_retour_des_canards">3.2. Exemple concret : le retour des canards</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>empiler() ajoutera une chaine en sommet de pile
-et sommet() retournera une chaine</p>
-</li>
-<li>
-<p>la pile pourra être pleine</p>
+<p>L&#8217;existant :</p>
 </li>
 </ul>
 </div>
-</dd>
-</dl>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Canard</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">();</span>
+<span class="tok-o">}</span>
+
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">implements</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Coincoin&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je vole&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Le "presque canard" :</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Dindon</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">glouglouter</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">();</span>
+<span class="tok-o">}</span>
+
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">DindonSauvage</span> <span class="tok-kd">implements</span> <span class="tok-n">Dindon</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">glouglouter</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Glouglou&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je ne vole pas loin&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vous êtes à court d&#8217;objets <code>Canard</code> et vous aimeriez utiliser des objets <code>Dindon</code> à la place!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">AdaptateurDindon</span> <span class="tok-kd">implements</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+  <span class="tok-n">Dindon</span> <span class="tok-n">dindon</span><span class="tok-o">;</span>
+
+  <span class="tok-o">...</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">dindon</span><span class="tok-o">.</span><span class="tok-na">glouglouter</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-c1">// Adaptation du vol</span>
+    <span class="tok-k">for</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-mi">5</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
+      <span class="tok-n">dindon</span><span class="tok-o">.</span><span class="tok-na">voler</span><span class="tok-o">();</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_patron_adaptateur_2"><a class="link" href="#_le_patron_adaptateur_2">3.3. Le patron Adaptateur</a></h3>
+<div class="paragraph">
+<p><strong>Adaptateur</strong> (<strong><em>Adaptor</em></strong>) permet de convertir l&#8217;interface d&#8217;une classe en une autre
+conformément à l&#8217;attente du client. L&#8217;Adaptateur permet à des classes de
+collaborer, alors qu’elles n&#8217;auraient pas pu le faire du fait d&#8217;interfaces
+incompatibles.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/adapteur.svg" alt="adapteur">
+</div>
+<div class="title">Figure 5. Modèle UML du patron Adaptateur</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/adaptor-google.png" alt="adaptor google">
+</div>
+<div class="title">Figure 6. Adaptateur sur Google</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_le_patron_visiteur"><a class="link" href="#_le_patron_visiteur">4. Le patron Visiteur</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/les-visiteurs.jpg" alt="les visiteurs">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_problème_2"><a class="link" href="#_le_problème_2">4.1. Le problème</a></h3>
+<div class="paragraph">
+<p>Quelques situations à problème :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Une <strong>structure</strong> d&#8217;objets contient beaucoup de classes différentes
+d&#8217;interfaces distinctes, et vous désirez réaliser des opérations sur ces objets
+qui dépendent de leurs classes concrètes.</p>
+</li>
+<li>
+<p>Il s&#8217;agit d&#8217;effectuer plusieurs opérations distinctes et sans relation entre
+elles, sur les objets d&#8217;une structure, et ceci en <strong>évitant de polluer leurs classes</strong> avec ces opérations.</p>
+</li>
+<li>
+<p>Les classes qui définissent la structure objet changent rarement, mais on doit
+souvent <strong>définir de nouvelles opérations</strong> sur cette structure.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_patron_visiteur_2"><a class="link" href="#_le_patron_visiteur_2">4.2. Le patron Visiteur</a></h3>
+<div class="paragraph">
+<p><strong>Visiteur</strong> (<strong><em>Visitor</em></strong>) permet la représentation d&#8217;une opération applicable
+aux éléments d&#8217;une structure d&#8217;objet.</p>
+</div>
+<div class="paragraph">
+<p>Il définit une nouvelle opération, <strong>sans qu&#8217;il soit nécessaire de modifier la classe</strong> des éléments sur lesquels
+elle agit.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/visitor-dc.svg" alt="visitor dc">
+</div>
+<div class="title">Figure 7. Patron Visiteur : structure</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/visitor-seq.png" alt="visitor seq">
+</div>
+<div class="title">Figure 8. Patron Visiteur : comportement</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/visitor-google.png" alt="visitor google">
+</div>
+<div class="title">Figure 9. Visiteur sur Google</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_avantages_inconvénients"><a class="link" href="#_avantages_inconvénients">4.3. Avantages/Inconvénients</a></h3>
+<div class="paragraph">
+<p>Avantages :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Permet d&#8217;ajouter des opérations à la structure d’un Composite <strong>sans modifier la structure elle-même</strong>.</p>
+</li>
+<li>
+<p>L'<strong>ajout de nouvelles opérations</strong> est relativement facile.</p>
+</li>
+<li>
+<p>Le code des opérations exécutées par le Visiteur est <strong>centralisé</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Inconvénients :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>L&#8217;encapsulation des classes du Composite est brisée.</p>
+</li>
+<li>
+<p>Comme une fonction de navigation est impliquée, les modifications de la structure du Composite sont plus difficiles.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exemples_d_utilisation"><a class="link" href="#_exemples_d_utilisation">4.4. Exemples d&#8217;utilisation</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>calcul sur un ensemble structuré d&#8217;éléments</p>
+</li>
+<li>
+<p>génération de rapports ou de code</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exemple_concret_d_utilisation_en_java"><a class="link" href="#_exemple_concret_d_utilisation_en_java">4.5. Exemple concret d&#8217;utilisation en Java</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Exemple tiré de <a href="http://www.journaldev.com/1769/visitor-design-pattern-in-java-example-tutorial">ce site</a>.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Pour l&#8217;architecture logicielle, le type abstrait Pile sera composé :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ItemElement</span> <span class="tok-o">{</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span><span class="tok-o">);</span>
+<span class="tok-o">}</span></code></pre>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>d&#8217;une classe Pile fournissant un enregistrement de type Pile</p>
-</li>
-<li>
-<p>d&#8217;une interface PileOperations fournissant toutes les opérations du type Abstrait Pile</p>
-</li>
-</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Book</span> <span class="tok-kd">implements</span> <span class="tok-n">ItemElement</span> <span class="tok-o">{</span>
+
+  <span class="tok-kd">private</span> <span class="tok-kt">int</span> <span class="tok-n">price</span><span class="tok-o">;</span>
+  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">isbnNumber</span><span class="tok-o">;</span>
+
+  <span class="tok-kd">public</span> <span class="tok-nf">Book</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">cost</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">isbn</span><span class="tok-o">){</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">price</span><span class="tok-o">=</span><span class="tok-n">cost</span><span class="tok-o">;</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">isbnNumber</span><span class="tok-o">=</span><span class="tok-n">isbn</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getPrice</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-n">price</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">getIsbnNumber</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-n">isbnNumber</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-nd">@Override</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-n">visitor</span><span class="tok-o">.</span><span class="tok-na">visit</span><span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Fruit</span> <span class="tok-kd">implements</span> <span class="tok-n">ItemElement</span> <span class="tok-o">{</span>
+
+  <span class="tok-kd">private</span> <span class="tok-kt">int</span> <span class="tok-n">pricePerKg</span><span class="tok-o">;</span>
+  <span class="tok-kd">private</span> <span class="tok-kt">int</span> <span class="tok-n">weight</span><span class="tok-o">;</span>
+  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-o">;</span>
+
+  <span class="tok-kd">public</span> <span class="tok-nf">Fruit</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">priceKg</span><span class="tok-o">,</span> <span class="tok-kt">int</span> <span class="tok-n">wt</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">nm</span><span class="tok-o">){</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">pricePerKg</span><span class="tok-o">=</span><span class="tok-n">priceKg</span><span class="tok-o">;</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">weight</span><span class="tok-o">=</span><span class="tok-n">wt</span><span class="tok-o">;</span>
+    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span> <span class="tok-o">=</span> <span class="tok-n">nm</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getPricePerKg</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-n">pricePerKg</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getWeight</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-n">weight</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">getName</span><span class="tok-o">(){</span>
+    <span class="tok-k">return</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-nd">@Override</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-k">return</span> <span class="tok-n">visitor</span><span class="tok-o">.</span><span class="tok-na">visit</span><span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ShoppingCartVisitor</span> <span class="tok-o">{</span>
+
+  <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Book</span> <span class="tok-n">book</span><span class="tok-o">);</span>
+  <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Fruit</span> <span class="tok-n">fruit</span><span class="tok-o">);</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ShoppingCartVisitorImpl</span> <span class="tok-kd">implements</span> <span class="tok-n">ShoppingCartVisitor</span> <span class="tok-o">{</span>
+
+  <span class="tok-nd">@Override</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Book</span> <span class="tok-n">book</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-kt">int</span> <span class="tok-n">cost</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span>
+    <span class="tok-c1">//apply 5$ discount if book price is greater than 50</span>
+    <span class="tok-k">if</span><span class="tok-o">(</span><span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getPrice</span><span class="tok-o">()</span> <span class="tok-o">&gt;</span> <span class="tok-mi">50</span><span class="tok-o">){</span>
+      <span class="tok-n">cost</span> <span class="tok-o">=</span> <span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getPrice</span><span class="tok-o">()-</span><span class="tok-mi">5</span><span class="tok-o">;</span>
+    <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-n">cost</span> <span class="tok-o">=</span> <span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getPrice</span><span class="tok-o">();</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Book ISBN::&quot;</span><span class="tok-o">+</span><span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getIsbnNumber</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot; cost =&quot;</span><span class="tok-o">+</span><span class="tok-n">cost</span><span class="tok-o">);</span>
+    <span class="tok-k">return</span> <span class="tok-n">cost</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-nd">@Override</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Fruit</span> <span class="tok-n">fruit</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-kt">int</span> <span class="tok-n">cost</span> <span class="tok-o">=</span> <span class="tok-n">fruit</span><span class="tok-o">.</span><span class="tok-na">getPricePerKg</span><span class="tok-o">()*</span><span class="tok-n">fruit</span><span class="tok-o">.</span><span class="tok-na">getWeight</span><span class="tok-o">();</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">fruit</span><span class="tok-o">.</span><span class="tok-na">getName</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot; cost = &quot;</span><span class="tok-o">+</span><span class="tok-n">cost</span><span class="tok-o">);</span>
+    <span class="tok-k">return</span> <span class="tok-n">cost</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ShoppingCartClient</span> <span class="tok-o">{</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-n">ItemElement</span><span class="tok-o">[]</span> <span class="tok-n">items</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ItemElement</span><span class="tok-o">[]{</span><span class="tok-k">new</span> <span class="tok-nf">Book</span><span class="tok-o">(</span><span class="tok-mi">20</span><span class="tok-o">,</span> <span class="tok-s">&quot;1234&quot;</span><span class="tok-o">),</span><span class="tok-k">new</span> <span class="tok-nf">Book</span><span class="tok-o">(</span><span class="tok-mi">100</span><span class="tok-o">,</span> <span class="tok-s">&quot;5678&quot;</span><span class="tok-o">),</span>
+    <span class="tok-k">new</span> <span class="tok-nf">Fruit</span><span class="tok-o">(</span><span class="tok-mi">10</span><span class="tok-o">,</span> <span class="tok-mi">2</span><span class="tok-o">,</span> <span class="tok-s">&quot;Banana&quot;</span><span class="tok-o">),</span> <span class="tok-k">new</span> <span class="tok-nf">Fruit</span><span class="tok-o">(</span><span class="tok-mi">5</span><span class="tok-o">,</span> <span class="tok-mi">5</span><span class="tok-o">,</span> <span class="tok-s">&quot;Apple&quot;</span><span class="tok-o">)};</span>
+
+    <span class="tok-kt">int</span> <span class="tok-n">total</span> <span class="tok-o">=</span> <span class="tok-n">calculatePrice</span><span class="tok-o">(</span><span class="tok-n">items</span><span class="tok-o">);</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Total Cost = &quot;</span><span class="tok-o">+</span><span class="tok-n">total</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-nf">calculatePrice</span><span class="tok-o">(</span><span class="tok-n">ItemElement</span><span class="tok-o">[]</span> <span class="tok-n">items</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+    <span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">ShoppingCartVisitorImpl</span><span class="tok-o">();</span>
+    <span class="tok-kt">int</span> <span class="tok-n">sum</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span>
+    <span class="tok-k">for</span><span class="tok-o">(</span><span class="tok-n">ItemElement</span> <span class="tok-n">item</span> <span class="tok-o">:</span> <span class="tok-n">items</span><span class="tok-o">){</span>
+      <span class="tok-n">sum</span> <span class="tok-o">=</span> <span class="tok-n">sum</span> <span class="tok-o">+</span> <span class="tok-n">item</span><span class="tok-o">.</span><span class="tok-na">accept</span><span class="tok-o">(</span><span class="tok-n">visitor</span><span class="tok-o">);</span>
+    <span class="tok-o">}</span>
+    <span class="tok-k">return</span> <span class="tok-n">sum</span><span class="tok-o">;</span>
+  <span class="tok-o">}</span>
+
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Book ISBN::1234 cost =20
+Book ISBN::5678 cost =95
+Banana cost = 20
+Apple cost = 25
+Total Cost = 160</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_Étape_1_mise_en_place_d_un_enregistrement_de_type_pile"><a class="link" href="#_Étape_1_mise_en_place_d_un_enregistrement_de_type_pile">3. Étape 1 : Mise en place d&#8217;un enregistrement de type Pile</a></h2>
+<h2 id="_pour_aller_plus_loin_avec_les_patrons"><a class="link" href="#_pour_aller_plus_loin_avec_les_patrons">5. Pour aller plus loin avec les patrons&#8230;&#8203;</a></h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Placer le code suivant dans un fichier de nom <strong>PileTest.java</strong></p>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kn">import</span> <span class="tok-nn">junit.textui.TestRunner</span><span class="tok-o">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">junit.framework.TestSuite</span><span class="tok-o">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">junit.framework.TestCase</span><span class="tok-o">;</span>
-
-<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">PileTest</span> <span class="tok-kd">extends</span> <span class="tok-n">TestCase</span> <span class="tok-o">{</span>
-	<span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">totalAssertions</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span>
-	<span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">bilanAssertions</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span>
-
-	<span class="tok-cm">/*</span>
-<span class="tok-cm">	Types des opérations du type Pile</span>
-<span class="tok-cm">	*/</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">test_type_new_Pile</span><span class="tok-o">()</span> <span class="tok-kd">throws</span> <span class="tok-n">Exception</span> <span class="tok-o">{</span>
-		<span class="tok-n">Pile</span> <span class="tok-n">pile</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Pile</span><span class="tok-o">()</span> <span class="tok-o">;</span>
-
-		<span class="tok-n">totalAssertions</span><span class="tok-o">++</span> <span class="tok-o">;</span>
-		<span class="tok-n">assertEquals</span><span class="tok-o">(</span><span class="tok-s">&quot;new Pile() retourne une Pile&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Pile&quot;</span><span class="tok-o">,</span> <span class="tok-n">pile</span><span class="tok-o">.</span><span class="tok-na">getClass</span><span class="tok-o">().</span><span class="tok-na">getName</span><span class="tok-o">());</span>
-		<span class="tok-n">bilanAssertions</span><span class="tok-o">++</span> <span class="tok-o">;</span>
-	<span class="tok-o">}</span>
-
-	<span class="tok-cm">/*</span>
-<span class="tok-cm">	Axiomes du type Pile</span>
-<span class="tok-cm">	*/</span>
-
-	<span class="tok-cm">/*</span>
-<span class="tok-cm">	Préconditions du type Pile</span>
-<span class="tok-cm">	*/</span>
-
-	<span class="tok-cm">/*</span>
-<span class="tok-cm">	main() de la classe de Test</span>
-<span class="tok-cm">	*/</span>
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-		<span class="tok-n">junit</span><span class="tok-o">.</span><span class="tok-na">textui</span><span class="tok-o">.</span><span class="tok-na">TestRunner</span><span class="tok-o">.</span><span class="tok-na">run</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-nf">TestSuite</span><span class="tok-o">(</span><span class="tok-n">PileTest</span><span class="tok-o">.</span><span class="tok-na">class</span><span class="tok-o">));</span>
-		<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">bilanAssertions</span> <span class="tok-o">==</span> <span class="tok-n">totalAssertions</span><span class="tok-o">)</span> <span class="tok-o">{</span> <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Bravo !&quot;</span><span class="tok-o">);</span> <span class="tok-o">}</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot; &quot;</span><span class="tok-o">+</span><span class="tok-n">bilanAssertions</span><span class="tok-o">+</span><span class="tok-s">&quot;/&quot;</span><span class="tok-o">+</span><span class="tok-n">totalAssertions</span><span class="tok-o">+</span><span class="tok-s">&quot; assertions verifiees&quot;</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span> <span class="tok-c1">// fin main</span>
-
-<span class="tok-o">}</span> <span class="tok-c1">// fin PileTest</span></code></pre>
+<a class="image" href="http://blogs.radiocanut.org/onestpasdescadeaux/2014/02/16/pour-aller-plus-loin-avec-les-non-mixites/"><img src="images/plusloin.jpg" alt="plusloin"></a>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_partagez_votre_vocabulaire"><a class="link" href="#_partagez_votre_vocabulaire">5.1. Partagez votre vocabulaire</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Dans les réunions de conception (pas nécessairement avec le client)</p>
 </li>
 <li>
-<p>Pour compiler le programme de Test, n&#8217;oubliez pas de placer les fichiers <strong>SciTE.properties</strong> et <strong>junit.jar</strong> dans le répertoire de vos sources (avant d&#8217;ouvrir SciTE) ou bien exécutez ceci :</p>
-<div class="listingblock">
-<div class="content">
-<pre>javac -cp .;junit.jar PileTest.java</pre>
-</div>
-</div>
+<p>Avec les autres développeurs</p>
 </li>
-</ol>
+<li>
+<p>Dans la documentation de votre architecture</p>
+</li>
+<li>
+<p>Dans les commentaires du code et les conventions de nommage</p>
+</li>
+<li>
+<p>Dans les groupes/blogs de développeurs</p>
+</li>
+<li>
+<p>(pas pendant les exams!)</p>
+</li>
+</ul>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_about"><a class="link" href="#_about">4. About&#8230;&#8203;</a></h2>
-<div class="sectionbody">
-<div class="sidebarblock">
-<div class="content">
+<div class="sect2">
+<h3 id="_ne_foncez_pas_tête_baissée"><a class="link" href="#_ne_foncez_pas_tête_baissée">5.2. Ne foncez pas tête baissée</a></h3>
 <div class="paragraph">
-<p>Document réalisé par <a href="mailto:jbruel@gmail.com">Jean-Michel Bruel</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.2</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
-Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
-<span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="images/88x31.png" alt="Licence Creative Commons"></a></span>
-<a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p>
+<p>Quelques conseils :</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les patterns sont des <strong>outils, non des règles</strong>.</p>
+<div class="paragraph">
+<p>&#8658; Rien n&#8217;empêche de les modifier et de les adapter à votre
+problème.</p>
+</div>
+</li>
+<li>
+<p>Ne visez l&#8217;extensibilité <strong>que si la question se pose réellement</strong> dans la pratique,
+pas si elle est uniquement hypothétique.</p>
+</li>
+<li>
+<p>Ne vous emballez pas et <strong>recherchez la simplicité</strong>.</p>
+<div class="paragraph">
+<p>&#8658; Si vous trouvez une solution plus simple que l&#8217;emploi d&#8217;un pattern, n&#8217;hésitez pas !</p>
+</div>
+</li>
+<li>
+<p>Éliminez ce qui n’est pas vraiment nécessaire.</p>
+<div class="paragraph">
+<p>&#8658; N’ayez pas peur de <strong>supprimer un design pattern inutile</strong> de votre conception.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_les_autres_types_de_patrons"><a class="link" href="#_les_autres_types_de_patrons">5.3. Les autres types de patrons</a></h3>
+<div class="paragraph">
+<p>Il n&#8217;y a pas que les 3 types de patrons que l&#8217;on a vu :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>De création</p>
+</li>
+<li>
+<p>Structurels</p>
+</li>
+<li>
+<p>Comportementaux</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Il y a par exemple :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les patrons d&#8217;architecture</p>
+</li>
+<li>
+<p>Les patrons d&#8217;application</p>
+</li>
+<li>
+<p>Les patrons de domaine</p>
+</li>
+<li>
+<p>Les patrons de processus</p>
+</li>
+<li>
+<p>Les patrons d&#8217;organisation</p>
+</li>
+<li>
+<p>Les patrons de conception d&#8217;interfaces utilisateur</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_les_anti_patrons"><a class="link" href="#_les_anti_patrons">5.4. Les anti-patrons</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/anti-patrons.jpg" alt="anti patrons">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Des solutions souvent <strong>appliquées à tort</strong> à des problèmes récurrents</p>
+</li>
+<li>
+<p>Décrit comment partir d&#8217;un problème pour arriver à une <strong>mauvaise solution</strong></p>
+</li>
+<li>
+<p>Vous dit <strong>pourquoi</strong> une mauvaise solution est attrayante</p>
+</li>
+<li>
+<p>Suggère d&#8217;autres patrons applicables pouvant fournir de meilleures solutions</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tous_les_patrons_qu_on_a_pas_vu"><a class="link" href="#_tous_les_patrons_qu_on_a_pas_vu">5.5. Tous les patrons qu&#8217;on a pas vu</a></h3>
+<div class="paragraph">
+<p>Il y en a beaucoup :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chaîne de responsabilité</p>
+</li>
+<li>
+<p>Commande</p>
+</li>
+<li>
+<p>Décorateur</p>
+</li>
+<li>
+<p>Façade</p>
+</li>
+<li>
+<p>Interprète</p>
+</li>
+<li>
+<p>Médiateur</p>
+</li>
+<li>
+<p>Mémento</p>
+</li>
+<li>
+<p>Monteur</p>
+</li>
+<li>
+<p>Patron de méthode</p>
+</li>
+<li>
+<p>Poids-mouche</p>
+</li>
+<li>
+<p>Pont</p>
+</li>
+<li>
+<p>Prototype</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_principale_utilisation_des_patrons_refactoring"><a class="link" href="#_principale_utilisation_des_patrons_refactoring">5.6. Principale utilisation des patrons : refactoring!</a></h3>
+<div class="paragraph">
+<p>&#8658; Les 2 prochaines semaines vous allez refactorer une application :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>en binôme</p>
+</li>
+<li>
+<p>en testant</p>
+</li>
+<li>
+<p>en documentant</p>
+</li>
+<li>
+<p>en justifiant</p>
+</li>
+<li>
+<p>en essayant pas à tout prix de caser le plus de patrons "au kilo"</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -790,7 +1289,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2014-12-15 16:31:37 CET
+Last updated 2015-01-06 10:23:18 CET
 </div>
 </div>
 </body>

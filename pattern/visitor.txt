@@ -1,0 +1,10 @@
+*Visiteur* (*_Visitor_*) permet la représentation d'une opération applicable
+aux éléments d'une structure d'objet. Il définit une nouvelle opération,
+sans qu'il soit nécessaire de modifier la classe des éléments sur lesquels
+elle agit.
+
+ifndef::slides[.Patron Visiteur : structure]
+image::visitor-dc.svg[]
+
+ifndef::slides[.Patron Visiteur : comportement]
+image::visitor-seq.png[]
