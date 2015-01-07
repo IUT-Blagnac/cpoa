@@ -482,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2014-12-11 - First draft</span>
+<span id="revdate">2015-01-06 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -607,6 +607,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_le_problème_4">16.1. Le problème</a></li>
 <li><a href="#_une_solution">16.2. Une solution</a></li>
+</ul>
+</li>
+<li><a href="#_le_patron_adaptateur">17. Le patron Adaptateur</a>
+<ul class="sectlevel2">
+<li><a href="#_le_problème_5">17.1. Le problème</a></li>
+<li><a href="#_exemple_concret_le_retour_des_canards">17.2. Exemple concret : le retour des canards</a></li>
+<li><a href="#_le_patron_adaptateur_2">17.3. Le patron Adaptateur</a></li>
+</ul>
+</li>
+<li><a href="#_pour_aller_plus_loin_avec_les_patrons">18. Pour aller plus loin avec les patrons&#8230;&#8203;</a>
+<ul class="sectlevel2">
+<li><a href="#_partagez_votre_vocabulaire">18.1. Partagez votre vocabulaire</a></li>
+<li><a href="#_ne_foncez_pas_tête_baissée">18.2. Ne foncez pas tête baissée</a></li>
+<li><a href="#_les_autres_types_de_patrons">18.3. Les autres types de patrons</a></li>
+<li><a href="#_les_anti_patrons">18.4. Les anti-patrons</a></li>
+<li><a href="#_tous_les_patrons_qu_on_a_pas_vu">18.5. Tous les patrons qu&#8217;on a pas vu</a></li>
+<li><a href="#_principale_utilisation_des_patrons_refactoring">18.6. Principale utilisation des patrons : refactoring!</a></li>
 </ul>
 </li>
 <li><a href="#_glossaire_et_définition">Glossaire et définition</a>
@@ -4456,6 +4473,353 @@ On appelle ces modèles des "Patrons abîmés" (<em>anti-patterns</em>).
 </div>
 </div>
 <div class="sect1">
+<h2 id="_le_patron_adaptateur"><a class="link" href="#_le_patron_adaptateur">17. Le patron Adaptateur</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/adaptateur.jpg" alt="adaptateur">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_problème_5"><a class="link" href="#_le_problème_5">17.1. Le problème</a></h3>
+<div class="paragraph">
+<p>On veut pouvoir :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>utiliser une classe existante, mais dont <strong>l&#8217;interface ne coïncide pas</strong> avec celle escomptée.</p>
+</li>
+<li>
+<p>créer une classe réutilisable qui collabore avec des classes sans relations
+avec elle et encore inconnues, c&#8217;est-à-dire avec des classes qui n&#8217;auront <strong>pas
+nécessairement des interfaces compatibles</strong>.</p>
+</li>
+<li>
+<p>vous avez besoin d&#8217;utiliser plusieurs sous-classes existantes, mais
+l'<strong>adaptation de leur interface</strong> par dérivation de chacune d&#8217;entre elles est
+impraticable. Un adaptateur objet peut adapter l&#8217;interface de sa classe parente.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Ce dernier cas ne concerne que le cas "adaptateur d&#8217;objet"
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exemple_concret_le_retour_des_canards"><a class="link" href="#_exemple_concret_le_retour_des_canards">17.2. Exemple concret : le retour des canards</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>L&#8217;existant :</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Canard</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">();</span>
+<span class="tok-o">}</span>
+
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">implements</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Coincoin&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je vole&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Le "presque canard" :</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Dindon</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">glouglouter</span><span class="tok-o">();</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">();</span>
+<span class="tok-o">}</span>
+
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">DindonSauvage</span> <span class="tok-kd">implements</span> <span class="tok-n">Dindon</span> <span class="tok-o">{</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">glouglouter</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Glouglou&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je ne vole pas loin&quot;</span><span class="tok-o">);</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vous êtes à court d&#8217;objets <code>Canard</code> et vous aimeriez utiliser des objets <code>Dindon</code> à la place!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">AdaptateurDindon</span> <span class="tok-kd">implements</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>
+  <span class="tok-n">Dindon</span> <span class="tok-n">dindon</span><span class="tok-o">;</span>
+
+  <span class="tok-o">...</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-n">dindon</span><span class="tok-o">.</span><span class="tok-na">glouglouter</span><span class="tok-o">();</span>
+  <span class="tok-o">}</span>
+
+  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>
+    <span class="tok-c1">// Adaptation du vol</span>
+    <span class="tok-k">for</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-mi">5</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
+      <span class="tok-n">dindon</span><span class="tok-o">.</span><span class="tok-na">voler</span><span class="tok-o">();</span>
+    <span class="tok-o">}</span>
+  <span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_patron_adaptateur_2"><a class="link" href="#_le_patron_adaptateur_2">17.3. Le patron Adaptateur</a></h3>
+<div class="paragraph">
+<p><strong>Adaptateur</strong> (<strong><em>Adaptor</em></strong>) permet de convertir l&#8217;interface d&#8217;une classe en une autre
+conformément à l&#8217;attente du client. L&#8217;Adaptateur permet à des classes de
+collaborer, alors qu’elles n&#8217;auraient pas pu le faire du fait d&#8217;interfaces
+incompatibles.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/adapteur.svg" alt="adapteur">
+</div>
+<div class="title">Figure 46. Modèle UML du patron Adaptateur</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/adaptor-google.png" alt="adaptor google">
+</div>
+<div class="title">Figure 47. Adaptateur sur Google</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pour_aller_plus_loin_avec_les_patrons"><a class="link" href="#_pour_aller_plus_loin_avec_les_patrons">18. Pour aller plus loin avec les patrons&#8230;&#8203;</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://blogs.radiocanut.org/onestpasdescadeaux/2014/02/16/pour-aller-plus-loin-avec-les-non-mixites/"><img src="images/plusloin.jpg" alt="plusloin"></a>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_partagez_votre_vocabulaire"><a class="link" href="#_partagez_votre_vocabulaire">18.1. Partagez votre vocabulaire</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Dans les réunions de conception (pas nécessairement avec le client)</p>
+</li>
+<li>
+<p>Avec les autres développeurs</p>
+</li>
+<li>
+<p>Dans la documentation de votre architecture</p>
+</li>
+<li>
+<p>Dans les commentaires du code et les conventions de nommage</p>
+</li>
+<li>
+<p>Dans les groupes/blogs de développeurs</p>
+</li>
+<li>
+<p>(pas pendant les exams!)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ne_foncez_pas_tête_baissée"><a class="link" href="#_ne_foncez_pas_tête_baissée">18.2. Ne foncez pas tête baissée</a></h3>
+<div class="paragraph">
+<p>Quelques conseils :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les patterns sont des <strong>outils, non des règles</strong>.</p>
+<div class="paragraph">
+<p>&#8658; Rien n&#8217;empêche de les modifier et de les adapter à votre
+problème.</p>
+</div>
+</li>
+<li>
+<p>Ne visez l&#8217;extensibilité <strong>que si la question se pose réellement</strong> dans la pratique,
+pas si elle est uniquement hypothétique.</p>
+</li>
+<li>
+<p>Ne vous emballez pas et <strong>recherchez la simplicité</strong>.</p>
+<div class="paragraph">
+<p>&#8658; Si vous trouvez une solution plus simple que l&#8217;emploi d&#8217;un pattern, n&#8217;hésitez pas !</p>
+</div>
+</li>
+<li>
+<p>Éliminez ce qui n’est pas vraiment nécessaire.</p>
+<div class="paragraph">
+<p>&#8658; N’ayez pas peur de <strong>supprimer un design pattern inutile</strong> de votre conception.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_les_autres_types_de_patrons"><a class="link" href="#_les_autres_types_de_patrons">18.3. Les autres types de patrons</a></h3>
+<div class="paragraph">
+<p>Il n&#8217;y a pas que les 3 types de patrons que l&#8217;on a vu :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>De création</p>
+</li>
+<li>
+<p>Structurels</p>
+</li>
+<li>
+<p>Comportementaux</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Il y a par exemple :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les patrons d&#8217;architecture</p>
+</li>
+<li>
+<p>Les patrons d&#8217;application</p>
+</li>
+<li>
+<p>Les patrons de domaine</p>
+</li>
+<li>
+<p>Les patrons de processus</p>
+</li>
+<li>
+<p>Les patrons d&#8217;organisation</p>
+</li>
+<li>
+<p>Les patrons de conception d&#8217;interfaces utilisateur</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_les_anti_patrons"><a class="link" href="#_les_anti_patrons">18.4. Les anti-patrons</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/anti-patrons.jpg" alt="anti patrons">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Des solutions souvent <strong>appliquées à tort</strong> à des problèmes récurrents</p>
+</li>
+<li>
+<p>Décrit comment partir d&#8217;un problème pour arriver à une <strong>mauvaise solution</strong></p>
+</li>
+<li>
+<p>Vous dit <strong>pourquoi</strong> une mauvaise solution est attrayante</p>
+</li>
+<li>
+<p>Suggère d&#8217;autres patrons applicables pouvant fournir de meilleures solutions</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tous_les_patrons_qu_on_a_pas_vu"><a class="link" href="#_tous_les_patrons_qu_on_a_pas_vu">18.5. Tous les patrons qu&#8217;on a pas vu</a></h3>
+<div class="paragraph">
+<p>Il y en a beaucoup :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chaîne de responsabilité</p>
+</li>
+<li>
+<p>Commande</p>
+</li>
+<li>
+<p>Décorateur</p>
+</li>
+<li>
+<p>Façade</p>
+</li>
+<li>
+<p>Interprète</p>
+</li>
+<li>
+<p>Médiateur</p>
+</li>
+<li>
+<p>Mémento</p>
+</li>
+<li>
+<p>Monteur</p>
+</li>
+<li>
+<p>Patron de méthode</p>
+</li>
+<li>
+<p>Poids-mouche</p>
+</li>
+<li>
+<p>Pont</p>
+</li>
+<li>
+<p>Prototype</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_principale_utilisation_des_patrons_refactoring"><a class="link" href="#_principale_utilisation_des_patrons_refactoring">18.6. Principale utilisation des patrons : refactoring!</a></h3>
+<div class="paragraph">
+<p>&#8658; Les 2 prochaines semaines vous allez refactorer une application :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>en binôme</p>
+</li>
+<li>
+<p>en testant</p>
+</li>
+<li>
+<p>en documentant</p>
+</li>
+<li>
+<p>en justifiant</p>
+</li>
+<li>
+<p>en essayant pas à tout prix de caser le plus de patrons "au kilo"</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_glossaire_et_définition"><a class="link" href="#_glossaire_et_définition">Glossaire et définition</a></h2>
 <div class="sectionbody">
 <div class="admonitionblock warning">
@@ -4486,7 +4850,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/singleton.png" alt="singleton">
 </div>
-<div class="title">Figure 46. Modèle UML du patron <em>Singleton</em></div>
+<div class="title">Figure 48. Modèle UML du patron <em>Singleton</em></div>
 </div>
 <div class="dlist">
 <dl>
@@ -4501,7 +4865,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 <div class="content">
 <img src="images/fabrique.png" alt="fabrique">
 </div>
-<div class="title">Figure 47. Modèle UML du patron Fabrique</div>
+<div class="title">Figure 49. Modèle UML du patron Fabrique</div>
 </div>
 <div class="dlist">
 <dl>
@@ -4517,7 +4881,7 @@ leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
 <div class="content">
 <img src="images/fabrique-abstraite.svg" alt="fabrique abstraite">
 </div>
-<div class="title">Figure 48. Modèle UML du patron Fabrique Abstraite</div>
+<div class="title">Figure 50. Modèle UML du patron Fabrique Abstraite</div>
 </div>
 </div>
 <div class="sect2">
@@ -4536,7 +4900,7 @@ Tout se passe comme si l&#8217;objet changeait de classe.</p>
 <div class="content">
 <img src="images/etat.png" alt="etat">
 </div>
-<div class="title">Figure 49. Modèle UML du patron Etat</div>
+<div class="title">Figure 51. Modèle UML du patron Etat</div>
 </div>
 <div class="dlist">
 <dl>
@@ -4552,7 +4916,7 @@ celui-ci.</p>
 <div class="content">
 <img src="images/iterateur.svg" alt="iterateur">
 </div>
-<div class="title">Figure 50. Modèle UML du patron Itérateur</div>
+<div class="title">Figure 52. Modèle UML du patron Itérateur</div>
 </div>
 <div class="dlist">
 <dl>
@@ -4569,7 +4933,7 @@ automatiquement.</p>
 <div class="content">
 <img src="images/observateur.svg" alt="observateur">
 </div>
-<div class="title">Figure 51. Modèle UML du patron <em>Observer</em></div>
+<div class="title">Figure 53. Modèle UML du patron <em>Observer</em></div>
 </div>
 <div class="dlist">
 <dl>
@@ -4585,17 +4949,53 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 <div class="content">
 <img src="images/strategy.png" alt="strategy">
 </div>
-<div class="title">Figure 52. Modèle UML du patron <em>Strategy</em></div>
+<div class="title">Figure 54. Modèle UML du patron <em>Strategy</em></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="Stratégie"></a> Visiteur (<em>Visitor<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Visiteur</strong> (<strong><em>Visitor</em></strong>) permet la représentation d&#8217;une opération applicable
+aux éléments d&#8217;une structure d&#8217;objet. Il définit une nouvelle opération,
+sans qu&#8217;il soit nécessaire de modifier la classe des éléments sur lesquels
+elle agit.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/visitor-dc.svg" alt="visitor dc">
+</div>
+<div class="title">Figure 55. Patron Visiteur : structure</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/visitor-seq.png" alt="visitor seq">
+</div>
+<div class="title">Figure 56. Patron Visiteur : comportement</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_patrons_structurels"><a class="link" href="#_patrons_structurels">Patrons structurels</a></h3>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Adaptateur</dt>
+<dt class="hdlist1"><a id="Adapteur"></a> Adaptateur (<em>Adaptor<sup>uk</sup></em>)</dt>
 <dd>
-<p>TBD</p>
+<p><strong>Adaptateur</strong> (<strong><em>Adaptor</em></strong>) permet de convertir l&#8217;interface d&#8217;une classe en une autre
+conformément à l&#8217;attente du client. L&#8217;Adaptateur permet à des classes de
+collaborer, alors qu’elles n&#8217;auraient pas pu le faire du fait d&#8217;interfaces
+incompatibles.</p>
 </dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/adapteur.svg" alt="adapteur">
+</div>
+<div class="title">Figure 57. Modèle UML du patron Adaptateur</div>
+</div>
+<div class="dlist">
+<dl>
 <dt class="hdlist1"><a id="Composite"></a> Composite</dt>
 <dd>
 <p><strong>Composite</strong> permet de composer des objets en des structures arborescentes
@@ -4609,7 +5009,7 @@ d&#8217;objets.</p>
 <div class="content">
 <img src="images/composite.svg" alt="composite">
 </div>
-<div class="title">Figure 53. Modèle UML du patron Composite</div>
+<div class="title">Figure 58. Modèle UML du patron Composite</div>
 </div>
 <div class="dlist">
 <dl>
@@ -4624,7 +5024,7 @@ l&#8217;accès à cet objet.</p>
 <div class="content">
 <img src="images/proxy.png" alt="proxy">
 </div>
-<div class="title">Figure 54. Modèle UML du patron <em>Proxy</em></div>
+<div class="title">Figure 59. Modèle UML du patron <em>Proxy</em></div>
 </div>
 </div>
 </div>
@@ -4641,10 +5041,10 @@ l&#8217;accès à cet objet.</p>
 <p><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First, O&#8217;Reilly, 09/2004.</p>
 </li>
 <li>
-<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2014-12-11).</p>
+<p><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2015-01-06).</p>
 </li>
 <li>
-<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2014-12-11).</p>
+<p>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2015-01-06).</p>
 </li>
 <li>
 <p><a id="Larman05"></a>[Larman05] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
@@ -4680,7 +5080,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.2<br>
-Last updated 2014-12-11 00:54:29 CET
+Last updated 2015-01-06 10:36:02 CET
 </div>
 </div>
 </body>
