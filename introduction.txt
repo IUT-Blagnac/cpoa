@@ -89,5 +89,4 @@ les étudiants auront :
 - une note de projet (TPs + projet final) => coef. 1
 - une note d'examen final (semaine 5) => coef. 2
 
-ifdef::slides[:leveloffset: +1]
- x
+ifdef::slides[:leveloffset: 0]

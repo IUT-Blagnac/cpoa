@@ -9,4 +9,5 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-expectations'
   gem 'link-checker'
+  gem 'haml'
 end
