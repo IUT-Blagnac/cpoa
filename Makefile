@@ -2,14 +2,17 @@
 MAIN=main
 ICONSDIR=images/icons
 IMAGESDIR=images
-STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
+#STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
 #STYLE=/Users/bruel/dev/asciidoctor/asciidoctor-stylesheet-factory/stylesheets/jmb.css
-ASCIIDOC=asciidoc -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a imagesdir=$(IMAGESDIR) -a data-uri
+#ASCIIDOC=asciidoc -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a imagesdir=$(IMAGESDIR) -a data-uri
 #HIGHLIGHT=coderay
 #HIGHLIGHT=highlightjs
 #HIGHLIGHT=prettify
 HIGHLIGHT=pygments
-DOCTOR=asciidoctor -a icons -a iconsdir=$(ICONSDIR) -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
+DOCTOR=asciidoctor -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
+BACKENDS=/Users/bruel/localdev/asciidoctor-backends
+#DECKJS=$(BACKENDS)/haml/deckjs/
+DECKJS=$(BACKENDS)/haml/
 #DECK=web-2.0
 DECK=swiss
 #DECK=neon
@@ -38,7 +41,7 @@ pattern/%.png: pattern/%.plantuml
 
 %.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a toc2 -b html5 -a numbered -a eleve $<
+	$(DOCTOR) -a toc2 -b html5 -a numbered -a eleve -a linkcss! $<
 
 %.full.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
@@ -46,14 +49,16 @@ pattern/%.png: pattern/%.plantuml
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
-	$(DOCTOR) -T /Users/bruel/dev/asciidoctor-backends/haml/deckjs/ -a slides \
+	$(DOCTOR) -T $(DECKJS) -a slides -a linkcss! \
 	-a data-uri -a deckjs_theme=$(DECK) \
-	-a icons -a iconsdir=$(ICONSDIR) \
+	-a icons=font \
 	-a images=$(IMAGESDIR) -a prof -o $@ $<
 
 %.reveal.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate reveal.js'
-	$(DOCTOR) -T ../asciidoctor-backends/haml/reveal/ -a slides -a data-uri -a deckjs_theme=$(DECK) -a icons -a iconsdir=$(ICONSDIR) -a stylesheet=$(STYLE) -a images=$(IMAGESDIR) -o $@ $<
+	$(DOCTOR) -T ../asciidoctor-backends/haml/reveal/ \
+	-a slides -a data-uri -a deckjs_theme=$(DECK) -a icons=font \
+	-a stylesheet=$(STYLE) -a images=$(IMAGESDIR) -o $@ $<
 
 %.xml: %.$(EXT)
 	@echo '==> Compiling asciidoc files to generate DocBook'

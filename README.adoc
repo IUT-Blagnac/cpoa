@@ -31,5 +31,5 @@ On immplémente en TP le pattern solution, pour se frotter aux problèmes concre
 Semaine N+2::
 On étudie en profondeur le patron en question (ses principes, ses implémentations
   dans d'autres langages, ses limitations, etc.) et on discute des difficultés rencontrées.
+
 NOTE: le cours peut avoir lieu en semaine N+1 si tous les TPs ont eu lieu.
-  
