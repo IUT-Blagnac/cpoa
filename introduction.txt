@@ -65,7 +65,7 @@ Semaine 1::
 Semaine 2::
 * <<Singleton>>
 Semaine 3::
-Patrons <<Fabrique>>, Proxy, <<Etat>>
+Patrons <<Fabrique>>, <<Proxy>>, <<Etat>>
 Semaine 4::
 * <<Observateur>>
 ** version intuitive (2 interfaces)

@@ -5,7 +5,8 @@ ifndef::references[]
 
 [bibliography]
 - [[[GoF]]] Design Patterns: Elements of reusable object oriented software. 1994.
-- [[[Freeman04]]] Design Pattren - Head First, O'Reilly, 09/2004.
+- [[[Freeman04]]] Design Pattren - Head First. Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. O'Reilly, 09/2004.
+- [[[Freeman05]]] Tête la première : Design Pattern. Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. Editions O'Reilly. 2005.
 - [[[Cysboy]]] Apprenez à programmer en Java. Par `cysboy`. Disponible https://app.box.com/shared/yrlj0takyhjeg1mefacy[ici] (le {localdate}).
 - GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible http://www.goprod.bouhours.net[ici] (le {localdate}).
 - [[[Larman05]]] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design

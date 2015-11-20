@@ -11,8 +11,8 @@ IMAGESDIR=images
 HIGHLIGHT=pygments
 DOCTOR=asciidoctor -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
 BACKENDS=/Users/bruel/localdev/asciidoctor-backends
-#DECKJS=$(BACKENDS)/haml/deckjs/
-DECKJS=$(BACKENDS)/haml/
+DECKJS=$(BACKENDS)/haml/deckjs/
+#DECKJS=$(BACKENDS)/haml/
 #DECK=web-2.0
 DECK=swiss
 #DECK=neon
@@ -82,8 +82,12 @@ roadmap.html: $(MAIN).$(EXT)
 	$(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered \
 	-a data-uri $< -o $@
 
-cours:
+deploy:
 	cp main.html index.html
+	git commit -am "maj du cours au fur et à mesure"
+	git co gh-pages
+	git co master index.html
+	git push
 
 cours2:
 	$(DOCTOR) -a toc2 -b html5 -a numbered -a stylesheet=$(STYLE) -a data-uri -o cours2.html wip.asc

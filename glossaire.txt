@@ -65,7 +65,7 @@ include::pattern/visitor.txt[]
 
 
 
-[[Adapteur]] Adaptateur (_Adaptor^uk^_)::
+[[Adaptateur]] Adaptateur (_Adaptor^uk^_)::
 include::pattern/adapteur.txt[]
 
 ifdef::slides[=== Patrons structurels (suite)]
