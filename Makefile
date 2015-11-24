@@ -10,8 +10,8 @@ IMAGESDIR=images
 #HIGHLIGHT=prettify
 HIGHLIGHT=pygments
 DOCTOR=asciidoctor -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
-BACKENDS=/Users/bruel/localdev/asciidoctor-backends
-DECKJS=$(BACKENDS)/haml/deckjs/
+BACKENDS=/Users/bruel/localdev/asciidoctor-deckjs
+DECKJS=$(BACKENDS)/templates/haml/
 #DECKJS=$(BACKENDS)/haml/
 #DECK=web-2.0
 DECK=swiss
@@ -49,7 +49,7 @@ pattern/%.png: pattern/%.plantuml
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
-	$(DOCTOR) -T $(DECKJS) -a slides -a linkcss! \
+	$(DOCTOR) -T ../asciidoctor-deck.js/templates/haml/ -a slides -a linkcss! \
 	-a data-uri -a deckjs_theme=$(DECK) \
 	-a icons=font \
 	-a images=$(IMAGESDIR) -a prof -o $@ $<
