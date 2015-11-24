@@ -1,0 +1,18 @@
+<project>
+<target name="main">
+<javadoc doclet="de.mallox.doclet.PlantUMLDoclet"
+   docletpath="plantUmlDoclet.jar"
+   access="private"
+   additionalparam=
+   "-J-DdestinationFile=uml.txt -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true"
+   >
+  <packageset dir="src">
+   <include name="**"/>
+  </packageset>
+</javadoc>
+
+<java jar="/Users/bruel/localdev/cpoa/util/plantuml.jar" fork="true" maxmemory="128m">
+ <arg value="uml.txt"/>
+</java>
+</target>
+</project>
