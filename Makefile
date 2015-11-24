@@ -56,11 +56,7 @@ pattern/%.png: pattern/%.plantuml
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
-<<<<<<< HEAD
 	$(DOCTOR) -T ../asciidoctor-deck.js/templates/haml/ -a slides -a linkcss! \
-=======
-	$(DOCTOR) -T $(DECKJS) -a slides -a linkcss! -b html5 \
->>>>>>> 28e45d40bcc5247ed243ba2cee43191921a42005
 	-a data-uri -a deckjs_theme=$(DECK) \
 	-a icons=font \
 	-a images=$(IMAGESDIR) -a prof -o $@ $<
