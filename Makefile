@@ -10,16 +10,10 @@ IMAGESDIR=images
 #HIGHLIGHT=prettify
 HIGHLIGHT=pygments
 DOCTOR=asciidoctor -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
-<<<<<<< HEAD
-BACKENDS=/Users/bruel/localdev/asciidoctor-deckjs
-DECKJS=$(BACKENDS)/templates/haml/
-#DECKJS=$(BACKENDS)/haml/
-=======
 #BACKENDS=asciidoctor-deck.js
 #DECKJS=$(BACKENDS)/templates/haml/
 BACKENDS=../asciidoctor-backends
 DECKJS=$(BACKENDS)/haml/
->>>>>>> 28e45d40bcc5247ed243ba2cee43191921a42005
 #DECK=web-2.0
 DECK=swiss
 #DECK=neon
