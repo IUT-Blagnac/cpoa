@@ -7,7 +7,7 @@
 # -------------------
 
 require "minitest/autorun"
-MODEL_NAME = ARGV[0] ? ARGV[0] : "model.uml"
+MODEL_NAME = ARGV[0] ? ARGV[0] : "TD1.uml"
 MAIN_CLASS = ARGV[1] ? ARGV[1] : "Personnage"
 INTERFACE = ARGV[2] ? ARGV[2] : "ComportementArme"
 
@@ -37,14 +37,10 @@ class TestGeneratedModel < MiniTest::Unit::TestCase
     assert_equal(true, File.readlines(MODEL_NAME).grep(/@enduml/).any?)
   end
 
-  def test_generated_model_exists
-    assert_equal(true, File.exists?(MODEL_NAME))
-  end
-
   #------------ Specific tests about STRATEGY implementation for MAIN_CLASS through the INTERFACE behavior
 
   def test_class_MainClass_is_abstract
-    assert_equal(true, File.readlines(MODEL_NAME).grep(/abstract #{MAIN_CLASS}/).any?)
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/abstract class #{MAIN_CLASS}/).any?)
   end
 
   def test_class_MAIN_CLASS_has_INTERFACE_behavior
