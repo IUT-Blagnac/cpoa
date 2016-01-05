@@ -1,0 +1,38 @@
+@startuml
+'with visitor
+class Main {
+	main()
+}
+Main ..> ComputerPart: <<uses>>
+Main ..> DisplayVisitor: <<uses>>
+class DisplayVisitor implements ComputerPartVisitor {
+	visit(Computer)
+	visit(Mouse)
+	visit(Keyboard)
+	visit(Monitor)
+} 
+interface ComputerPartVisitor {
+	visit(Computer)
+	visit(Mouse)
+	visit(Keyboard)
+	visit(Monitor)
+}
+
+Computer *-> ComputerPart
+interface ComputerPart {
+accept()
+}
+class Computer extends ComputerPart  {
+	accept()
+}
+class Keyboard implements ComputerPart {
+accept()
+}
+class Monitor implements ComputerPart {
+accept()
+}
+class Mouse implements ComputerPart {
+accept()
+}
+@enduml
+		
