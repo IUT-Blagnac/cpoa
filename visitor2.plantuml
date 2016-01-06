@@ -1,0 +1,11 @@
+@startuml
+'without visitor
+class Computer
+class Keyboard
+class Monitor
+class Mouse
+Computer *--> Keyboard
+Computer *--> Monitor
+Computer *--> Mouse
+@enduml
+		
