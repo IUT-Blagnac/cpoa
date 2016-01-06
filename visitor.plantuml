@@ -22,7 +22,7 @@ Computer *-> ComputerPart
 interface ComputerPart {
 accept()
 }
-class Computer extends ComputerPart  {
+class Computer implements ComputerPart  {
 	accept()
 }
 class Keyboard implements ComputerPart {
