@@ -1,6 +1,6 @@
 #-----------------------------------------------------
 MAIN=main
-ICONSDIR=images/icons
+ICONSDIR=.
 IMAGESDIR=images
 #STYLE=/Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
 #STYLE=/Users/bruel/dev/asciidoctor/asciidoctor-stylesheet-factory/stylesheets/jmb.css
