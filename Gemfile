@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 group :development, :test do
   gem 'asciidoctor'
+  gem 'asciidoctor-diagram'
   gem 'pygments.rb'
   gem 'guard'
   gem 'guard-shell'
@@ -9,5 +10,6 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-expectations'
   gem 'link-checker'
+  gem 'tilt'
   gem 'haml'
 end
