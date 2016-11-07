@@ -492,7 +492,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Jean-Michel Bruel</span><br>
 <span id="email" class="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span><br>
 <span id="revnumber">version 1.4,</span>
-<span id="revdate">2016-11-06 - First draft</span>
+<span id="revdate">2016-11-07 - First draft</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -550,19 +550,41 @@ de <strong>concepts objets</strong> :</p>
 <div class="sect3">
 <h4 id="_abstraction"><a class="link" href="#_abstraction">1.1.1. Abstraction</a></h4>
 <div class="paragraph">
-<p>Définition :</p>
+<p>Définition (restrictive) :</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+Une classe est une <strong>abstraction</strong> et une encapsulation des
+caractéristiques communes de cet ensemble d&#8217;objets.
+</blockquote>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_encapsulation"><a class="link" href="#_encapsulation">1.1.2. Encapsulation</a></h4>
 <div class="paragraph">
-<p>Définition :</p>
+<p>Définition (restrictive) :</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+Dans la description d&#8217;un objet, le but de l'<strong>encapsulation</strong> est de masquer
+les attributs et les méthodes, c&#8217;est à dire, la manière dont est réalisé le
+comportement de l&#8217;objet.
+</blockquote>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_héritage"><a class="link" href="#_héritage">1.1.3. Héritage</a></h4>
 <div class="paragraph">
-<p>Définition :</p>
+<p>Définition (simpliste) :</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+L&#8217;héritage est la transmission de caractéristiques à ses descendants.
+</blockquote>
+</div>
+<div class="paragraph">
+<p>La classe qui hérite dispose des méthodes et attributs de niveau <code>public</code> et
+<code>protected</code> de sa classe mère.</p>
 </div>
 </div>
 <div class="sect3">
@@ -575,8 +597,19 @@ de <strong>concepts objets</strong> :</p>
 qui peut prendre plusieurs formes
 </blockquote>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
 <div class="paragraph">
 <p>L&#8217;héritage concerne les classes, le polymorphisme concerne les objets.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>On distingue généralement trois types de polymorphisme :</p>
@@ -584,13 +617,13 @@ qui peut prendre plusieurs formes
 <div class="ulist">
 <ul>
 <li>
-<p>Le polymorphisme ad hoc (également surcharge ou en anglais overloading)</p>
+<p>Le polymorphisme <strong>ad hoc</strong> (également surcharge ou en anglais overloading)</p>
 </li>
 <li>
-<p>Le polymorphisme paramétrique (également généricité ou en anglais template)</p>
+<p>Le polymorphisme <strong>paramétrique</strong> (également généricité ou en anglais template)</p>
 </li>
 <li>
-<p>Le polymorphisme d&#8217;héritage (également redéfinition, spécialisation ou en anglais overriding)</p>
+<p>Le polymorphisme <strong>d&#8217;héritage</strong> (également redéfinition, spécialisation ou en anglais overriding)</p>
 </li>
 </ul>
 </div>
@@ -1453,7 +1486,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.4<br>
-Last updated 2016-11-06 23:05:59 CET
+Last updated 2016-11-07 12:15:13 CET
 </div>
 </div>
 </body>
