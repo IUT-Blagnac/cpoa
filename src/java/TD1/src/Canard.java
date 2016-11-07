@@ -24,6 +24,7 @@ abstract public class Canard {
 
 	abstract public void afficher();
 
+	//
 	public final void effectuerVol() {
 		comportementVol.voler();
 	}
