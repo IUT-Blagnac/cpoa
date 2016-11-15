@@ -80,7 +80,7 @@ roadmap.html: $(MAIN).$(EXT)
 
 %-prof.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
-	$(DOCTOR) -a prof -a correction -a theme=compact -b html5 -a numbered \
+	$(DOCTOR) -a prof -a correction -a compact -a theme=compact -b html5 -a numbered \
 	-a data-uri $< -o $@
 
 deploy:
