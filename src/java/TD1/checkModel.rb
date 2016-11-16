@@ -2,7 +2,7 @@
 # usage: ruby checkModel.rb
 # -------------------
 # Author::    Jean-Michel Bruel  (mailto:jbruel@gmail.com) improved by JMI
-# Copyright:: Copyright (c) 2014 JMB
+# Copyright:: Copyright (c) 2014--2016 JMB
 # License::   Distributes under the same terms as Ruby
 # -------------------
 
