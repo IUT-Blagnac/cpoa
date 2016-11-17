@@ -2,7 +2,6 @@
 Gemfile.lock
 asciidoclet/
 book/
-build.xml
 deck.js/
 doc/
 doclet/
