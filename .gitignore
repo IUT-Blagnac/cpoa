@@ -5,21 +5,10 @@ book/
 build.xml
 deck.js/
 doc/
-doclet/
+oclet/
 script.js
 src/java/.metadata/
 src/java/CodingDojo/
-<<<<<<< HEAD
-src/java/SuperCanardBof/
 stylesheet.css
 vendor/
-=======
-stylesheet.css
-vendor/
-*.deckjs.html
-<<<<<<< HEAD
->>>>>>> master
-=======
 images/.metadata
-
->>>>>>> 53ce4d8... dessins cours
