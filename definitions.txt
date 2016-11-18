@@ -3,7 +3,8 @@
 :standScreen: 500
 :standWidth: 250
 :definitions:
-:sitecours: http://iut-blagnac.github.io/cpoa/[Support de Cours]
+:urlcours: http://iut-blagnac.github.io/cpoa/
+:sitecours: {urlcours}[Support de Cours]
 
 // raccourcis sites
 :aadl: http://www.aadl.info/[AADL]indexterm:[AADL]
