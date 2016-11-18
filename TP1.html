@@ -5,8 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2016-11-16}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="author" content="Dut/Info-S3/M3105 - (Semaine 46)">
 <title>CPOA - Sujet TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -490,7 +489,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>CPOA - Sujet TP 1</h1>
 <div class="details">
-<span id="author" class="author">Dut/Info-S3/M3105</span><br>
+<span id="author" class="author">Dut/Info-S3/M3105 - (Semaine 46)</span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table des Matières</div>
@@ -507,7 +506,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#setArme">Appendix A: Exemple d&#8217;organisation en paquetages</a></li>
-<li><a href="#reverse">Appendix B: Modèles et tests d&#8217;architecture</a>
+<li><a href="#_modèles_et_tests_d_architecture">Appendix B: Modèles et tests d&#8217;architecture</a>
 <ul class="sectlevel2">
 <li><a href="#_principes_de_base">Principes de base</a></li>
 <li><a href="#_exemple">Exemple</a></li>
@@ -541,7 +540,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2</strong> TP de 1,5h (sur 2 semaines).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2</strong> TP de 1,5h (sur 1 semaine).</p></td>
 </tr>
 </tbody>
 </table>
@@ -556,7 +555,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>le <a href="util/plantuml.bat">plantuml.bat</a></p>
 </li>
 <li>
-<p>la <a href="util/plantUmlDoclet.jar">doclet pour javadoc</a></p>
+<p>la <a href="util/java8/plantUmlDoclet.jar">doclet pour javadoc</a> (version non officielle,
+mais compatible java <code>1.8</code>, si vous avez besoin de la version officielle : <a href="util/plantUmlDoclet.jar">doclet 1.7</a>)</p>
 </li>
 <li>
 <p>le <a href="util/plantuml.jar">jar plantuml</a></p>
@@ -591,6 +591,18 @@ Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#821
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+N&#8217;hésitez pas à (re)lire régulièrement le <a href="http://jmbruel.github.io/cpoa/">Support de Cours</a>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -614,7 +626,7 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Téléchargez le code de l&#8217;application <code>SuperCanardBof</code> existante <a href="TP1.zip" class="bare">TP1.zip</a>.</p>
+<p>Téléchargez le code de l&#8217;application <code>SuperCanardBof</code> existante <a href="TP1.zip">TP1.zip</a>.</p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -629,8 +641,7 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <ol class="arabic">
 <li>
 <p>Importer dans <a href="http://www.eclipse.org">eclipse</a> le projet (<span class="menuseq"><span class="menu">File</span>&#160;&#9656; <span class="submenu">Import&#8230;&#8203;</span>&#160;&#9656; <span class="menuitem">Existing Projects into Worspace</span></span>
- et choisir <code>TP1.zip</code> que vous venez de télécharger (après avoir sélectionné l&#8217;option
-<span class="menu">Select archive file</span>).</p>
+et choisir <code>TP1.zip</code> que vous venez de télécharger.</p>
 </li>
 <li>
 <p>Positionner <code>Junit</code> dans le <code>Classpath</code>(<b class="button">Clic Droit</b> sur votre projet
@@ -640,9 +651,8 @@ d&#8217;utiliser l&#8217;éditeur de votre choix.</p>
 <p>Si Windows, dans la ligne suivante de <code>SuperCanardTest</code>, il faut remplacer
 les deux points de l&#8217;option <code>-cp</code> par un point virgule :</p>
 <div class="listingblock">
-<div class="title">extrait de <a href="src/java/SuperCanardBof/src/SuperCanardTest.java">SuperCanardTest.java</a></div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java">          <span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-o">.</span><span class="tok-na">getRuntime</span><span class="tok-o">().</span><span class="tok-na">exec</span><span class="tok-o">(</span><span class="tok-s">&quot;java -cp .:./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-o">);</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-o">.</span><span class="tok-na">getRuntime</span><span class="tok-o">().</span><span class="tok-na">exec</span><span class="tok-o">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-o">);</span></code></pre>
 </div>
 </div>
 </li>
@@ -654,46 +664,23 @@ les deux points de l&#8217;option <code>-cp</code> par un point virgule :</p>
 </div>
 </li>
 <li>
-<p>Lancez l&#8217;application elle-même pour vérifier que tout fonctionne. Résultat escompté :</p>
-<div class="listingblock">
-<div class="content">
-<pre>Je cancane!
-Je nage comme un Canard!
-Je suis un Colvert
-Je vole avec des ailes!</pre>
-</div>
-</div>
+<p>Lancez l&#8217;application elle-même pour vérifier que tout fonctionne.</p>
 </li>
 <li>
-<p>Regardez le programme de test fonctionnel <code>SuperCanardTest.java</code> qui vérifie de
+<p>Regardez le programme de test fonctionnel <code>SuperCanardTest</code> qui vérifie de
 manière automatique que tout fonctionne comme on le faisait en MPA.</p>
 </li>
 <li>
-<p>Regardez le programme de test fonctionnel <code>SuperCanardTest2.java</code> qui vérifie de
+<p>Regardez le programme de test fonctionnel <code>SuperCanardTest2</code> qui vérifie de
 manière automatique que tout fonctionne, mais d&#8217;une manière plus proche des
 tests unitaires.</p>
-</li>
-<li>
-<p>Lancez les tests.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Prenez le temps de lire et de comprendre ces tests!
-</td>
-</tr>
-</table>
-</div>
 </li>
 <li>
 <p>Implémentez rapidement le patron <em>Strategy</em> comme préparé en TD en modifiant
 le code en conséquence.</p>
 </li>
 <li>
-<p>Rejouez les tests pour vérifier que tout fonctionne toujours (non régression).</p>
+<p>Rejouez les tests pour vérifier que tout fonctionne toujours.</p>
 </li>
 </ol>
 </div>
@@ -780,7 +767,7 @@ un personnage parmis les types possibles, et de lui affecter une arme.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Lire la section <a href="#reverse">Modèles et tests d&#8217;architecture</a> avant d&#8217;attaquer cette partie.
+Lire la section <a href="#reverse">[reverse]</a> avant d&#8217;attaquer cette partie.
 </td>
 </tr>
 </table>
@@ -828,8 +815,10 @@ suivantes (<strong><code>build.xml</code> recommandée</strong>) :</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Attention, le script ne fonctionne que avec java <code>1.7</code>, pas <code>1.8</code>.
-Pour que ça fonctionne, indépendamment du jre utilisé dans le projet <a href="http://www.eclipse.org">eclipse</a> (7 ou 8),
+<p>Attention, si le script ne fonctionne pas avec java <code>1.8</code>, c&#8217;est que
+vous avez la version officielle de la doclet plantuml et non la version
+patchée par Louis Chanouha ()
+Dans ce cas-là, pour que ça fonctionne, indépendamment du jre utilisé dans le projet <a href="http://www.eclipse.org">eclipse</a> (7 ou 8),
 on a deux solutions :</p>
 <div class="ulist">
 <ul>
@@ -1035,7 +1024,7 @@ aux implémentations (<code>impl</code>).</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="reverse"><a class="link" href="#reverse">Appendix B: Modèles et tests d&#8217;architecture</a></h2>
+<h2 id="_modèles_et_tests_d_architecture"><a class="link" href="#_modèles_et_tests_d_architecture">Appendix B: Modèles et tests d&#8217;architecture</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_principes_de_base"><a class="link" href="#_principes_de_base">Principes de base</a></h3>
@@ -1068,7 +1057,7 @@ Vous aurez également besoin du fichier <a href="util/config.cfg">config.cfg</a>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Vous ne devez pas générer de modèle pour vos canards, mais pour votre
+Vous ne devez pas générer de modèle pour vos cabards, mais pour votre
 jeux d&#8217;aventure. Ce qui suit est juste une illustration de ce que vous devez faire pour
 votre application de jeu.
 </td>
@@ -1079,7 +1068,7 @@ votre application de jeu.
 <p>On peut écrire le script suivant :</p>
 </div>
 <div class="listingblock">
-<div class="title">Exemple de génération automatique de diagramme PlantUML sous Windows (source <a href="src/java/SuperCanardBof/plantuml.bat">ici</a>)</div>
+<div class="title">Génération automatique de diagramme PlantUML (source <a href="src/java/SuperCanardBof/plantuml.bat">ici</a>)</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="shell">#---------------------
 # Génération par javadoc de modèles plantUML
@@ -1098,39 +1087,6 @@ set TYPE=&#39;png&#39;
 echo &quot;Converting %UML% to $TYPE...&quot;
 java -jar plantuml.jar -config &quot;config.cfg&quot; -t %TYPE% %UML%
 echo &quot;Done.&quot;</code></pre>
-</div>
-</div>
-<div id="plantumlShell" class="listingblock">
-<div class="title">Exemple de génération automatique de diagramme PlantUML sous Linuw (source <a href="src/java/SuperCanardBof/plantuml.sh">ici</a>)</div>
-<div class="content">
-<pre class="pygments highlight"><code data-lang="shell">#!/bin/sh
-UML=&#39;model.uml&#39;
-TYPE=&#39;PNG&#39;
-MAINPATH=&#39;/Users/bruel/localdev/cpoa&#39;
-DOCLETPATH=$MAINPATH/doclet
-PUMLPATH=$MAINPATH/util
-echo &quot;Creating $UML...&quot;
-echo $DOCLETPATH
-
-javadoc \
--private \
--quiet \
--J-DdestinationFile=$UML \
--J-DcreatePackages=false \
--J-DshowPublicMethods=true \
--J-DshowPublicConstructors=false \
--J-DshowPublicFields=true \
--doclet de.mallox.doclet.PlantUMLDoclet -docletpath $DOCLETPATH/plantUmlDoclet.jar \
--sourcepath . src/Canard.java src/Colvert.java
-
-echo &quot;Done creating plantUML model&quot;
-
-TYPE=&#39;png&#39;
-echo &quot;Converting $UML to $TYPE...&quot;
-java -jar $PUMLPATH/plantuml.jar \
-  -config $PUMLPATH/config.cfg \
-  -t $TYPE $UML
-echo &quot;Done generating PNG from model&quot;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1188,10 +1144,6 @@ l&#8217;architecture de l&#8217;application :</p>
 
   <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
     <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
-
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
   <span class="tok-k">end</span>
 
   <span class="tok-c1">#------------ Specific tests about expected content</span>
@@ -1397,8 +1349,8 @@ pour les versions avant Java 7, et <code>System.lineSeparator()</code> depuis Ja
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Document réalisé par <a href="mailto:{email}">Dut/Info-S3/M3105</a> via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.5</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
-Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
+<p>Document réalisé via  <a href="http://asciidoctor.org/">Asciidoctor</a> (version <code>1.5.5</code>) de 'Dan Allen', lui même basé sur <a href="http://www.methods.co.nz/asciidoc">AsciiDoc</a>.
+Libre d&#8217;utilisation et géré par la 'Licence Creative Commons'.
 <span class="image"><a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="data:image/png;base64,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" alt="Licence Creative Commons"></a></span>
 <a href="http://creativecommons.org/licenses/by-sa/3.0/">licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé</a>.</p>
 </div>
@@ -1409,7 +1361,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-16 18:22:45 CET
+Last updated 2016-11-18 07:12:43 CET
 </div>
 </div>
 </body>
