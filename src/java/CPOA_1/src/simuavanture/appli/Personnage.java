@@ -21,15 +21,15 @@ public abstract class Personnage {
 		setDeplacement(cd);
 	}
 
-	public void frapper() {
+	public final void frapper() {
 		this.comportementArme.attaque();
 	}
 
-	public void avancer() {
+	public final void avancer() {
 		this.comportemeDeplacement.avancer();
 	}
 
-	public void reculer() {
+	public final void reculer() {
 		this.comportemeDeplacement.reculer();
 		;
 	}

@@ -19,11 +19,11 @@ public abstract class Canard {
 
 	abstract public void afficher();
 
-	public void effectuerCancan() {
+	public final void effectuerCancan() {
 		comportementCancan.cancaner();
 	}
 
-	public void effectuerVol() {
+	public final void effectuerVol() {
 		comportementVol.voler();
 	}
 
