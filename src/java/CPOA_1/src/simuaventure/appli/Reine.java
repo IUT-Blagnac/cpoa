@@ -1,4 +1,4 @@
-package simuavanture.appli;
+package simuaventure.appli;
 
 import simuaventure.comportements.arme.impl.ComportementEpee;
 import simuaventure.comportements.deplacement.impl.ComportementCourir;
