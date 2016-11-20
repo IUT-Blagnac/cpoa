@@ -1,4 +1,4 @@
-package simuavanture.appli;
+package simuaventure.appli;
 
 public class Main {
 
