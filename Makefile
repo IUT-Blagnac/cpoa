@@ -9,7 +9,7 @@ IMAGESDIR=images
 #HIGHLIGHT=highlightjs
 #HIGHLIGHT=prettify
 HIGHLIGHT=pygments
-DOCTOR=asciidoctor -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
+DOCTOR=asciidoctor -b html5 -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
 #BACKENDS=asciidoctor-deck.js
 #DECKJS=$(BACKENDS)/templates/haml/
 BACKENDS=../asciidoctor-backends
@@ -48,12 +48,18 @@ pattern/%.png: pattern/%.plantuml
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a toc2 -a data-uri -b html5 -a numbered -a eleve -o $@ $<
 
+#%.deckjs.html: %.$(EXT)  $(DEP)
+#	@echo '==> Compiling asciidoc files to generate Deckjs'
+#	$(DOCTOR) -T ../asciidoctor-deck.js/templates/haml/ -a slides -a linkcss! \
+#	-a data-uri -a deckjs_theme=$(DECK) \
+#	-a icons=font \
+#	-a images=$(IMAGESDIR) -a prof -o $@ $<
+
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
-	$(DOCTOR) -T ../asciidoctor-deck.js/templates/haml/ -a slides -a linkcss! \
-	-a data-uri -a deckjs_theme=$(DECK) \
-	-a icons=font \
-	-a images=$(IMAGESDIR) -a prof -o $@ $<
+	$(DOCTOR) -T ../asciidoctor-deck.js/templates/haml/ -a slides \
+	-a deckjs_theme=$(DECK) \
+	-a prof -o $@ $<
 
 %.reveal.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate reveal.js'
