@@ -2,4 +2,4 @@
 l'accès à cet objet.
 
 ifndef::slides[.Modèle UML du patron _Proxy_]
-image::proxy.svg[width=60%]
+image::proxy.svg[width=60%,scaledwidth=60%]

@@ -4,7 +4,7 @@ ifdef::slides[:leveloffset: -1]
 
 === Le problème
 
-image::refactoring1.png[]
+image::refactoring1.png[scaledwidth=80%]
 
 ifdef::slides[=== Le problème (suite)]
 

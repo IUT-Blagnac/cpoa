@@ -5,6 +5,7 @@
 :definitions:
 :urlcours: http://iut-blagnac.github.io/cpoa/
 :sitecours: {urlcours}[Support de Cours]
+:siteurl: http://bit.ly/jmb-cpoa
 
 // raccourcis sites
 :aadl: http://www.aadl.info/[AADL]indexterm:[AADL]

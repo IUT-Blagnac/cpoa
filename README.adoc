@@ -5,6 +5,7 @@ v1.1, {localdate}: First draft
 
 //---------------- Définitions
 :m3105: http://webetud2.iut-blagnac.fr/course/view.php?id=30[M3105]
+:eue: https://www.editions-ue.com[Éditions  Universitaires Européennes]
 //------------------------------
 
 == Contexte
@@ -33,3 +34,10 @@ On étudie en profondeur le patron en question (ses principes, ses implémentati
   dans d'autres langages, ses limitations, etc.) et on discute des difficultés rencontrées.
 
 NOTE: le cours peut avoir lieu en semaine N+1 si tous les TPs ont eu lieu.
+
+== News!
+
+Un livre papier sera bientôt disponible aux {eue} (ISBN ISBN 978-3-639-54613-2).
+N'hésitez pas à l'acheter si vous en avez les moyens.
+
+image::images/couverture.png[width=60%]

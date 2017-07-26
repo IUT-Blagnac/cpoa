@@ -305,7 +305,7 @@ des pizzas aux fromages de Corse!</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="paragraph">
 <p>Proposez une solution où <code>SimpleFabriqueDePizzas</code> serait une
 classe abstraite.</p>
@@ -380,7 +380,7 @@ propose de revenir à la structure suivante :</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="paragraph">
 <p>Quelles sont les différences avec notre conception actuelle?</p>
 </div>
@@ -427,7 +427,7 @@ et non à un objet fabrique.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="paragraph">
 <p>Dans le schéma suivant, placez les méthodes au bon endroit de
 façon à ce que les procédures soient respectées tout en ayant des pizzas
@@ -500,7 +500,7 @@ nous sommes passés d&#8217;un objet gérant l&#8217;instanciation de nos classe
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="paragraph">
 <p>Quelle est la déclaration exacte de la méthode <code>creerPizza()</code>
 de la classe <code>Pizzeria</code> ?</p>
@@ -553,7 +553,7 @@ Produit concret qui est réellement créée.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="paragraph">
 <p>Donnez le diagramme de séquence d&#8217;une "commande de pizza au fromage
 de type Strasbourg".</p>
@@ -636,7 +636,7 @@ Vous implémenterez les classes manquantes en TP.
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="paragraph">
 <p>Proposez un diagramme de classe UML pour les pizzas (classes, attributs et méthodes).</p>
 </div>
@@ -669,8 +669,8 @@ Vous implémenterez les classes manquantes en TP.
 	<span class="tok-kd">private</span> <span class="tok-n">ArrayList</span> <span class="tok-o">&lt;</span><span class="tok-n">Ingredient</span><span class="tok-o">&gt;</span> <span class="tok-n">garnitures</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ArrayList</span><span class="tok-o">&lt;&gt;();</span>
 
 	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">preparer</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Préparation de &quot;</span> <span class="tok-o">+</span> <span class="tok-n">nom</span><span class="tok-o">);</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Étalage de la pâte...&quot;</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Préparation de &quot;</span> <span class="tok-o">+</span> <span class="tok-n">nom</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Étalage de la pâte...&quot;</span><span class="tok-o">);</span>
 		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Ajout de la sauce...&quot;</span><span class="tok-o">);</span>
 		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Ajout des garnitures: &quot;</span><span class="tok-o">);</span>
 		<span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">garnitures</span><span class="tok-o">.</span><span class="tok-na">size</span><span class="tok-o">();</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
@@ -678,13 +678,13 @@ Vous implémenterez les classes manquantes en TP.
 		<span class="tok-o">}</span>
 	<span class="tok-o">}</span>
 	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cuire</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Cuisson 25 minutes à 180°&quot;</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Cuisson 25 minutes à 180°&quot;</span><span class="tok-o">);</span>
 	<span class="tok-o">}</span>
 	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">couper</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Découpage en parts triangulaires&quot;</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Découpage en parts triangulaires&quot;</span><span class="tok-o">);</span>
 	<span class="tok-o">}</span>
 	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">emballer</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Emballage dans une boîte officielle&quot;</span><span class="tok-o">);</span>
+		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Emballage dans une boîte officielle&quot;</span><span class="tok-o">);</span>
 	<span class="tok-err">￼￼￼￼￼</span><span class="tok-o">}</span>
 	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">getNom</span><span class="tok-o">()</span> <span class="tok-o">{</span>
 		<span class="tok-k">return</span> <span class="tok-n">nom</span><span class="tok-o">;</span>
@@ -746,7 +746,7 @@ a réalisé le programme suivant :</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -841,7 +841,7 @@ une partie du code ressamblant à ceci :</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title"><strong>QUESTION(s)</strong></div>
+<div class="title"><strong><span class="icon"><i class="fa fa-graduation-cap"></i></span> QUESTION</strong></div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -931,7 +931,7 @@ adapté en fonction du paramètre reçu.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-20 14:54:00 CET
+Last updated 2017-01-08 16:45:24 CET
 </div>
 </div>
 </body>
