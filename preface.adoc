@@ -8,12 +8,16 @@ Ce livre *n'est pas* un livre :
 - de référence (pour cela, même s'il est en anglais, nous conseillons <<Meyer88>>)
 - sur les _design patterns_ (pour cela, même s'il est en anglais, nous conseillons <<GoF>>)
 
+NOTE: Nous considérons également que vous avez un bagage minimum en
+programmation objet. Notamment que vous avez suivi les modules de
+programmation et de conception (M2103 et M2104) si vous êtes en DUT Informatique.
+
 == Pourquoi lire ce livre ?
 
 Parce que vous êtes en DUT Informatique et que vous souhaitez préparer le module consacré aux
 _design patterns_ (CPOA ou M3105 dans le jargon du PPN2013);
 parce que vous aimez les livres reliés et que lire le support sur le site du livre vous barbe;
-parce que vous vous intéressé aux _design patterns_ et que vous souhaitez pratiquer de manière ludique.
+parce que vous vous intéressez aux _design patterns_ et que vous souhaitez pratiquer de manière ludique.
 
 == Comment lire ce livre ?
 
@@ -49,9 +53,13 @@ TIP: Ceci est un conseil ou une bonne pratique.
 
 == Remerciements
 
+Merci tout d'abord à ma famille pour sa patience vis-à-vis de
+ce métier qui ne se termine pas quand on quitte le bureau.
+
 Merci aux contributeurs et aux collègues qui ont, par leurs conseils, leurs discussions,
 leurs remarques, ont permis d'enrichir ce support.
-Et un merci tout particulier à celui qui m'a fait tant apporté à l'IUT et qui nous a quitté trop tôt,
+
+Et un merci tout particulier à celui qui m'a tant apporté à l'IUT et qui nous a quitté trop tôt,
 Jean-Michel Inglebert.
 
 == Matériel à disposition avec ce livre
@@ -60,16 +68,26 @@ Vous trouverez sur le dépôt lié à ce livre, {siteurl} :
 
 - une version web avec liens clickables
 +
-image::support-html.png[scaledwidth=85%]
+image::support-html.png[scaledwidth=50%]
 +
 - la version PDF téléchargeable
 +
-image::support-pdf.png[scaledwidth=85%]
+image::support-pdf.png[scaledwidth=50%]
 +
 - les exercices de TD, TP (version élève et profs) avec les corrections
 +
-image::support-td.png[scaledwidth=85%]
+image::support-td.png[scaledwidth=50%]
 +
 - le support de cours pour les enseignants (slides HTML)
 +
-image::support-slides.png[scaledwidth=85%]
+image::support-slides.png[scaledwidth=50%]
+
+== Style "télégraphique" de ce livre
+
+Vous pourrez être surpris du style "télégraphique" de la suite de
+ce livre (presque à l'opposé du livre de référence <<Meyer>>).
+Il faut réaliser qu'il ne s'agit que d'un support de cours,
+sensé être accompagné des exercices réalisés en travaux dirigés
+(que vous trouverez en <<TDs,Annexes>>), des travaux pratiques sur machine
+(disponibles {siteurl}[ici]),
+et des cours d'amphi qui vont avec (eux aussi bientôt disponibles). 

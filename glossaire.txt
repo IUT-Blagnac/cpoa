@@ -4,8 +4,9 @@ ifndef::glossaire[]
 [glossary]
 == Glossaire et définition
 
-WARNING: Ces définitions seront enrichies au fur et à mesure des patrons
-étudiés.
+WARNING: Ces définitions reprennent les définitions vues dans ce livre,
+en les organisant par grands types de patrons de conception :
+de création, comportementaux et structurels.
 
 ifdef::slides[:leveloffset: -1]
 
@@ -17,12 +18,12 @@ ifdef::slides[:leveloffset: -1]
 
 
 
-[[Singleton]] Singleton::
+Singleton::
 include::pattern/singleton.txt[]
 
 ifdef::slides[=== Patrons de création (suite)]
 
-[[Fabrique]] Fabrique::
+Fabrique::
 include::pattern/fabrique.txt[]
 
 ifdef::slides[=== Patrons de création (suite)]
@@ -36,27 +37,27 @@ include::pattern/fabrique-abstraite.txt[]
 
 
 
-[[Etat]] État (_State^uk^_)::
+État (_State^uk^_)::
 include::pattern/etat.txt[]
 
 ifdef::slides[=== Patrons comportementaux (suite)]
 
-[[Itérateur]] Itérateur (_Iterator^uk^_)::
+Itérateur (_Iterator^uk^_)::
 include::pattern/iterateur.txt[]
 
 ifdef::slides[=== Patrons comportementaux (suite)]
 
-[[Observateur]] Observateur (_Observer^uk^_)::
+Observateur (_Observer^uk^_)::
 include::pattern/observer.txt[]
 
 ifdef::slides[=== Patrons comportementaux (suite)]
 
-[[Stratégie]] Stratégie (_Strategy^uk^_)::
+Stratégie (_Strategy^uk^_)::
 include::pattern/strategy.txt[]
 
 ifdef::slides[=== Patrons comportementaux (suite)]
 
-[[Stratégie]] Visiteur (_Visitor^uk^_)::
+Visiteur (_Visitor^uk^_)::
 include::pattern/visitor.txt[]
 
 
@@ -65,17 +66,17 @@ include::pattern/visitor.txt[]
 
 
 
-[[Adaptateur]] Adaptateur (_Adaptor^uk^_)::
+Adaptateur (_Adaptor^uk^_)::
 include::pattern/adapteur.txt[]
 
 ifdef::slides[=== Patrons structurels (suite)]
 
-[[Composite]] Composite::
+Composite::
 include::pattern/composite.txt[]
 
 ifdef::slides[=== Patrons structurels (suite)]
 
-[[Proxy]] Procuration (_Proxy^uk^_)::
+Procuration (_Proxy^uk^_)::
 include::pattern/proxy.txt[]
 
 ifdef::slides[:leveloffset: +1]

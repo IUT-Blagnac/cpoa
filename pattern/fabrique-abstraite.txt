@@ -1,3 +1,4 @@
+
 *Fabrique* (abstraite) fournit une interface pour la création de familles
 d'objets apparentés ou interdépendants, sans qu'il soit nécessaire de spécifier
 leurs classes concrètes (voir aussi <<Fabrique,Fabrique>>).

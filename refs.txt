@@ -5,16 +5,15 @@ ifndef::references[]
 == Références
 
 [bibliography]
-- [[[GoF]]] Design Patterns: Elements of reusable object oriented software. 1994.
+- [[[Cysboy]]] Apprenez à programmer en Java. Par `cysboy`. Disponible https://app.box.com/shared/yrlj0takyhjeg1mefacy[ici] (le {localdate}).
 - [[[Freeman04]]] Design Pattren - Head First. Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. O'Reilly, 09/2004.
 - [[[Freeman05]]] Tête la première : Design Pattern. Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. Editions O'Reilly. 2005.
-- [[[Cysboy]]] Apprenez à programmer en Java. Par `cysboy`. Disponible https://app.box.com/shared/yrlj0takyhjeg1mefacy[ici] (le {localdate}).
+- [[[GoF]]] Design Patterns: Elements of reusable object oriented software. 1994.
 - GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible http://www.goprod.bouhours.net[ici] (le {localdate}).
 - [[[Larman05]]] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
 and Iterative Development (3rd ed.). Prentice Hall. 2005. ISBN 0-13-148906-2.
+- [[[Martin03]]] “Principles Of OOD”, Robert C. Martin (“Uncle BOB”), http://butunclebob.com.
 - [[[Meyer88]]] Meyer, Bertrand. Object-Oriented Software Construction. Prentice Hall. 1988. ISBN 0-13-629049-3.
-- [[[Martin03]]] “Principles Of OOD”, Robert C. Martin (“Uncle BOB”), http://butunclebob.com (Last verified 2014-07-17).
-Note the reference to “the first five principles”, though the acronym is not used in this article. Dates back to at least 2003.
 - [[[SOLID]]] https://blogs.msdn.microsoft.com/cdndevs/2009/07/15/the-solid-principles-explained-with-motivational-posters/
 
 endif::references[]

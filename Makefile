@@ -21,12 +21,13 @@ DECK=swiss
 EXT=asc
 PANDOC=pandoc
 OUTPUT=.
-DEP=definitions.txt glossaire.txt refs.txt
+DEP=definitions.txt glossaire.txt refs.txt preface.adoc introduction.asc
 SOURCEFILES = ./src/java/CodingDojo/src/*.java
 DOC = doc
 #-----------------------------------------------------
 
 all: $(OUTPUT)/*.html
+book: full.pdf
 
 images/%.png: images/%.plantuml
 	@echo '==> Compiling plantUML files to generate PNG'
@@ -47,6 +48,10 @@ pattern/%.png: pattern/%.plantuml
 %.full.html: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a toc2 -a data-uri -b html5 -a numbered -a eleve -o $@ $<
+
+full.pdf: full.$(EXT) $(DEP)
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
+	asciidoctor-pdf -a prof -a toc2 $<
 
 #%.deckjs.html: %.$(EXT)  $(DEP)
 #	@echo '==> Compiling asciidoc files to generate Deckjs'
