@@ -37,7 +37,7 @@ NOTE: le cours peut avoir lieu en semaine N+1 si tous les TPs ont eu lieu.
 
 == News!
 
-Un livre papier sera bientôt disponible aux {eue} (ISBN ISBN 978-3-639-54613-2).
+Un livre papier est disponible aux {eue} (ISBN ISBN 978-3-639-54613-2).
 N'hésitez pas à l'acheter si vous en avez les moyens.
 
 image::images/couverture.png[width=60%]
