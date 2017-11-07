@@ -18,6 +18,7 @@ DECKJS=$(BACKENDS)/haml/
 DECK=swiss
 #DECK=neon
 #DECK=beamer
+DZSLIDES=../asciidoctor-backends/slim/dzslides
 EXT=asc
 PANDOC=pandoc
 OUTPUT=.
@@ -66,11 +67,22 @@ full.pdf: full.$(EXT) $(DEP)
 	-a deckjs_theme=$(DECK) \
 	-a prof -o $@ $<
 
+%.dzslides.html: %.$(EXT)
+	@echo '==> Compiling asciidoc files to generate Dzslides'
+	$(DOCTOR) -b dzslides \
+	-T $(DZSLIDES) -E slim \
+	-a slides -a dzslides \
+	-r asciidoctor-diagram \
+	-a styledir=. \
+	-a stylesheet=$(STYLE) \
+	-a source-highlighter=$(HIGHLIGHT) \
+	-o $@ $<
+
 %.reveal.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate reveal.js'
 	$(DOCTOR) -T ../asciidoctor-backends/haml/reveal/ \
 	-a slides -a data-uri -a deckjs_theme=$(DECK) -a icons=font \
-	-a stylesheet=$(STYLE) -a images=$(IMAGESDIR) -o $@ $<
+	-a stylesheet=$(STYLE) -o $@ $<
 
 %.xml: %.$(EXT)
 	@echo '==> Compiling asciidoc files to generate DocBook'
