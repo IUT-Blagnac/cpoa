@@ -1,0 +1,21 @@
+@startuml
+
+actor " " as Main
+participant ":Artisan" as artisan
+participant "mesReal : Realiser" as mesreal
+participant "mesReal[i] : Realiser" as mesreali
+participant "maQualif : Qualifications" as maqualif
+Main -> artisan : getPayeArtisan(c)
+artisan -> mesreal : length
+'mesreal --> artisan : length
+loop mesReal.length 
+	artisan -> mesreali : getChantier()
+	artisan <-- mesreali : test
+	opt test == c
+		artisan -> mesreali : getDuree()
+	end
+end
+   
+artisan -> maqualif : getTauxHoraire()   
+artisan --> Main     
+@enduml
