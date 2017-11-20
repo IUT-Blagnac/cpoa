@@ -45,6 +45,8 @@ endif::todoprof[]
 :lien: Lien
 :img: img
 
+:pizzeriaSRC: src/java/PizzeriaJMB/src/appli
+
 //-------------------- Warning si correction -----------
 ifdef::prof[]
 [CAUTION]
@@ -143,11 +145,11 @@ include::pattern/fabrique.txt[]
 == Mise en oeuvre de Fabrique
 
 En reprenant le http://iut-blagnac.github.io/cpoa/TD3.html[TD3]
-et en utilisant le code de la classe link:src/java/Pizzeria/src/Pizza.java[Pizza.java] suivant :
+et en utilisant le code de la classe link:{pizzeriaSRC}/Pizza.java[Pizza.java] suivant :
 
 [source,java]
 -------
-include::src/java/Pizzeria/src/Pizza.java[lines:5..200]
+include::{pizzeriaSRC}/Pizza.java[lines:5..200]
 -------
 
 //----------------------------- Question ------------------
