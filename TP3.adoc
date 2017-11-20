@@ -1,6 +1,7 @@
 :moduleTitle: CPOA
 :authorDefault:  Dut/Info-S3/M3105
-:tdnum: TP 2
+:tdnum: TP 3
+
 
 :eleve:
 :sourcedir: src/java/TD2
