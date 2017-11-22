@@ -1,6 +1,7 @@
 ﻿:moduleTitle: CPOA
 :authorDefault:  Dut/Info-S3/M3105
-:tdnum: TP 3
+:tdnum: TP 4
+
 
 // eleve : sujet pour élèves
 // prof : support prof pour séance

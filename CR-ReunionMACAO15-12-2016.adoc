@@ -1,0 +1,41 @@
+= CR Séminaire MACAO du 15/12/2016
+Jean-Michel Bruel <bruel@irit.fr>
+{localdate}
+
+:emi: link:http://www.emi.ac.ma/[EMI]
+:ensias: link:http://www.ensias.ma/[ENSIAS]
+:ims: link:http://www.ensias.ma/index.php?option=com_content&task=view&id=232&Itemid=294[IMS]
+:casa: link:http://www.univh2m.ac.ma[]
+Présents :
+
+- Adil Anwar, {EMI}, Equipe Siweb
+- Mahmoud Nassar, {ENSIAS}, Equipe {IMS} footnote:[Ingénierie des Modèles et des Systèmes] Laboratoire SIME
+- Abdelaziz Marzak, Laboratoire LITIM, {casa}
+- Bernard
+- Ronan
+- JMB
+- Hajmoosaei Mojtaba
+- Stage 1 mois avec Bernard
+- Anas Motti
+- Alger, stage IRIT 7 mois avec Brahim
+- Mamadou Cisse, Co-tutelle
+- Iulian
+- Sophie
+- Christian
+- Ileana
+- Hervé
+- Amani
+- Florian
+
+Excusés : Robin, Meyer
+
+== Présentations des invités
+
+Présentation de l'{emi}, de l'{ensias} et du Laboratoire LTIM
+
+// Casablanca => Smart City
+
+== Ingénierie des exigences
+
+- Florian
+- Adil

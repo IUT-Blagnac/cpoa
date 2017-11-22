@@ -96,7 +96,7 @@ image::eclipse-plant.png[link="images/eclipse-plant.png",width=100%]
 == Rappel sur le patron Singleton
 
 [[Singleton]]
-[icon="{iconsdir}/pattern.jpeg"]
+[icon="pattern.jpeg"]
 [NOTE]
 .Design pattern : *Singleton*
 ====
