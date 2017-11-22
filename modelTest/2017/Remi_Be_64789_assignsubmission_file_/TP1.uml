@@ -1,0 +1,72 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "JeuAventure.Arme"
+class ComportementPoignard
+class ComportementEpee
+abstract ComportementArme
+class ComportementArc
+' end package
+
+' package "JeuAventure.Joueur"
+class Troll
+class Roi
+class Reine
+abstract Personnage
+class Chevalier
+' end package
+
+' package "JeuAventure"
+class MenuJeu
+' end package
+
+' content
+' -------
+
+' ComportementArc:
+ComportementArme <|-- ComportementArc
+ComportementArc : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void afficher()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+Personnage : void getArme()
+Personnage : void afficher()
+Personnage : void main(String)
+
+' ComportementPoignard:
+ComportementArme <|-- ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void afficher()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' Roi:
+Personnage <|-- Roi
+Roi : void afficher()
+
+' ComportementEpee:
+ComportementArme <|-- ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' MenuJeu:
+MenuJeu --> "1" Personnage
+MenuJeu : void runApplication()
+MenuJeu : void main(String)
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void afficher()
+
+@enduml

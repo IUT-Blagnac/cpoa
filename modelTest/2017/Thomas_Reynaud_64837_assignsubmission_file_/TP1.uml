@@ -1,0 +1,66 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "JeuAventure.comportements.impl"
+class ComportementPoignard
+class ComportementArc
+class ComportementEpee
+' end package
+
+' package "JeuAventure.joueurs"
+class Reine
+class Troll
+class Chevalier
+class Roi
+class Personnage
+' end package
+
+' package "JeuAventure.comportements"
+interface ComportementArme
+' end package
+
+' package "JeuAventure"
+class Appli
+' end package
+
+' content
+' -------
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Roi:
+Personnage <|-- Roi
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+
+' Appli:
+Appli : void main(String)
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+@enduml

@@ -1,0 +1,71 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "CPOA"
+class Troll
+class Roi
+class Reine
+abstract Personnage
+class JeuAventure
+class ComportementPoignard
+class ComportementEpee
+interface ComportementArme
+class ComportementArc
+class Chevalier
+' end package
+
+' content
+' -------
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void combattre()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc --> "1" ComportementArc
+ComportementArc : ComportementArc getInstance()
+ComportementArc : void utiliserArme()
+
+' Roi:
+Personnage <|-- Roi
+Roi : void combattre()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard --> "1" ComportementPoignard
+ComportementPoignard : ComportementPoignard getInstance()
+ComportementPoignard : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void combattre()
+
+' JeuAventure:
+JeuAventure --> "1" Personnage
+JeuAventure --> "1" Personnage
+JeuAventure : void main(String)
+JeuAventure : void modifArme(Personnage)
+JeuAventure : void creationPerso(Personnage)
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' Reine:
+Personnage <|-- Reine
+Reine : void combattre()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee --> "1" ComportementEpee
+ComportementEpee : ComportementEpee getInstance()
+ComportementEpee : void utiliserArme()
+
+@enduml

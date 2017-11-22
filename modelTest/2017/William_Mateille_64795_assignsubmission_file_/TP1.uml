@@ -1,0 +1,64 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "Aventure"
+class Troll
+class Roi
+class Reine
+abstract Personnage
+class ComportementPoignard
+class ComportementMassue
+class ComportementEpee
+interface ComportementArme
+class ComportementArc
+class Chevalier
+class Appli
+' end package
+
+' content
+' -------
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+Personnage : void parler()
+
+' Roi:
+Personnage <|-- Roi
+Roi : void parler()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void parler()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void parler()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementMassue:
+ComportementArme <|.. ComportementMassue
+ComportementMassue : void utiliserArme()
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void parler()
+
+@enduml

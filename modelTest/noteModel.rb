@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# usage: ruby noteModel.rb [directory]
+# usage: ruby noteModel.rb [directory] [file]
 
-MODEL_NAME = "model.uml"
+MODEL_NAME = ARGV[1] ? ARGV[1] : "TP1.uml"
 NOTES_FILE = "notes.csv"
 
 studentDirectory = ARGV[0] ? ARGV[0] : "."
@@ -11,13 +11,10 @@ puts "Checking " + studentModelFileName
 $assertFileContains = [
  /@startuml/m,
  /@enduml/m,
- /abstract Canard/m,
- /Canard\s+--> ".*" ComportementCancan/m,
- /Canard\s+--> ".*" ComportementVol/m,
- /interface\s+ComportementCancan/m,
- /interface\s+ComportementVol/m,
- /ComportementCancan\s+<\|\.\./m,
- /ComportementVol\s+<\|\.\./m
+ /abstract Personnage/m,
+ /Personnage\s+--> ".*" ComportementArme/m,
+ /interface\s+ComportementArme/m,
+ /ComportementArme\s+<\|\.\./m,
 ]
 
 
@@ -34,7 +31,8 @@ $assertFileContains.each {|re|
 
 # status
 result = notestr.gsub('F','').size.to_s+'/'+notestr.size.to_s+";\n"
-bilan = notestr+';'+result
+bilan = ARGV[0]+';'+notestr+';'+result
+print notestr
 print result
 
 destfile = File.new(NOTES_FILE,"a")

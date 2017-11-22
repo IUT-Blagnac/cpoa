@@ -1,0 +1,71 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "com.gaetan.Comportement.Attaquer"
+interface ComportementArme
+' end package
+
+' package "com.gaetan.Comportement.Attaquer.imp"
+class ComportementPoignard
+class ComportementEpee
+class ComportementArc
+' end package
+
+' package "com.gaetan.Appli"
+abstract Personnage
+class Main
+' end package
+
+' package "com.gaetan.Appli.Personnages"
+class Chevalier
+class Troll
+class Reine
+class Roi
+' end package
+
+' content
+' -------
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void combattre()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void combattre()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Main:
+Main --> "1" Personnage
+Main : void main(String)
+
+' Roi:
+Personnage <|-- Roi
+Roi : void combattre()
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void combattre()
+
+@enduml

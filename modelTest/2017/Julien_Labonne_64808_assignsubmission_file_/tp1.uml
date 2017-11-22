@@ -1,0 +1,72 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "tp1cpoaJDR"
+class ComportementHalberd
+class ComportementArc
+class Troll
+abstract Personnage
+interface ComportementArme
+class Chevalier
+class ComportementEpee
+class Roi
+class Reine
+class ComportementPoignard
+class Menu
+' end package
+
+' content
+' -------
+
+' Troll:
+Personnage <|-- Troll
+Troll : String toString()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+ComportementArc : String toString()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+ComportementPoignard : String toString()
+
+' Roi:
+Personnage <|-- Roi
+Roi : String toString()
+
+' ComportementHalberd:
+ComportementArme <|.. ComportementHalberd
+ComportementHalberd : void utiliserArme()
+ComportementHalberd : String toString()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+ComportementEpee : String toString()
+
+' Menu:
+Menu : void main(String)
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+Personnage : void changerArme()
+Personnage : void deplacer()
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : String toString()
+
+' Reine:
+Personnage <|-- Reine
+Reine : String toString()
+
+@enduml

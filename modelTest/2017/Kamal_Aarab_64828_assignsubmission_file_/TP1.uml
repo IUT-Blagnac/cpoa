@@ -1,0 +1,126 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "app"
+class CanardEnPlastique
+class Colvert
+abstract Canard
+' end package
+
+' package "imp"
+class PeuxCancaner
+class NePasCancaner
+interface ComportementCancaner
+class NePasVoler
+interface ComportementVol
+class VolerAvecDesAiles
+' end package
+
+' content
+' -------
+
+' NePasCancaner:
+NePasCancaner : void cancaner()
+
+' Colvert:
+Canard <|-- Colvert
+Colvert : void afficher()
+
+' VolerAvecDesAiles:
+ComportementVol <|.. VolerAvecDesAiles
+VolerAvecDesAiles : void voler()
+
+' ComportementCancaner:
+ComportementCancaner : void cancaner()
+
+' Canard:
+Canard --> "1" ComportementVol
+Canard --> "1" ComportementCancaner
+Canard : void voler()
+Canard : void cancaner()
+Canard : void nager()
+Canard : void afficher()
+
+' PeuxCancaner:
+ComportementCancaner <|.. PeuxCancaner
+PeuxCancaner : void cancaner()
+
+' CanardEnPlastique:
+Canard <|-- CanardEnPlastique
+CanardEnPlastique : void afficher()
+
+' NePasVoler:
+ComportementVol <|.. NePasVoler
+NePasVoler : void voler()
+
+' ComportementVol:
+ComportementVol : void voler()
+
+@enduml
+
+@startuml
+
+' definitions
+' -----------
+
+' package "Metier"
+class Menu
+class Chevalier
+class Troll
+class Roi
+class Reine
+abstract Personnages
+' end package
+
+' package "ComportementArme"
+class ComportementEpee
+class ComportementArc
+class ComportementPoignard
+' end package
+
+' package "Comportement"
+interface ComportementArme
+' end package
+
+' content
+' -------
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Troll:
+Personnages <|-- Troll
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Personnages:
+Personnages --> "1" ComportementArme
+Personnages : void Combattre()
+Personnages : void setArme(ComportementArme)
+
+' Menu:
+Menu : void main(String)
+
+' Roi:
+Personnages <|-- Roi
+
+' Reine:
+Personnages <|-- Reine
+
+' Chevalier:
+Personnages <|-- Chevalier
+
+@enduml
+

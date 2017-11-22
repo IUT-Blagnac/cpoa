@@ -1,0 +1,93 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "rpg.behaviours.weapon"
+class Weapon_Sword
+class Weapon_Fist
+class Weapon_Dagger
+class Weapon_Bow
+interface WeaponBehaviour
+' end package
+
+' package "rpg"
+class Launcher_CLI
+' end package
+
+' package "rpg.character.roles"
+class Troll
+class Queen
+class Knight
+class King
+' end package
+
+' package "rpg.weapon"
+enum Weapon
+' end package
+
+' package "rpg.character"
+abstract Character
+' end package
+
+' content
+' -------
+
+' Queen:
+Character <|-- Queen
+
+' Weapon_Sword:
+WeaponBehaviour <|.. Weapon_Sword
+Weapon_Sword : void use()
+
+' Weapon_Dagger:
+WeaponBehaviour <|.. Weapon_Dagger
+Weapon_Dagger : void use()
+
+' Troll:
+Character <|-- Troll
+
+' Knight:
+Character <|-- Knight
+
+' Character:
+Character --> "1" Weapon
+Character : void fight()
+Character : void setWeapon(Weapon)
+Character : String name()
+Character : Weapon weapon()
+
+' Weapon:
+WeaponBehaviour <|.. Weapon
+Weapon : Weapon BOW
+Weapon : Weapon LUMBOW
+Weapon : Weapon SWORD
+Weapon : Weapon LUMSWORD
+Weapon : Weapon DAGGER
+Weapon : Weapon LUMDAGGER
+Weapon : Weapon FIST
+Weapon : Weapon LUMGLOVE
+Weapon : Weapon NONE
+Weapon : Weapon values()
+Weapon : Weapon valueOf(String)
+Weapon : void use()
+Weapon : String toString()
+
+' Launcher_CLI:
+Launcher_CLI : void main(String)
+
+' King:
+Character <|-- King
+
+' WeaponBehaviour:
+WeaponBehaviour : void use()
+
+' Weapon_Fist:
+WeaponBehaviour <|.. Weapon_Fist
+Weapon_Fist : void use()
+
+' Weapon_Bow:
+WeaponBehaviour <|.. Weapon_Bow
+Weapon_Bow : void use()
+
+@enduml

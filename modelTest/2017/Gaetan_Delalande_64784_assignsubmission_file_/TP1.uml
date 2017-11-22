@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.gaetan.Appli.Personnages.Chevalier</OriginalElement>
+  <nodes>
+    <node x="0.0" y="225.0">com.gaetan.Appli.Personnages.Roi</node>
+    <node x="191.0" y="225.0">com.gaetan.Appli.Personnages.Troll</node>
+    <node x="377.0" y="0.0">com.gaetan.Comportement.Attaquer.ComportementArme</node>
+    <node x="382.0" y="225.0">com.gaetan.Appli.Personnages.Chevalier</node>
+    <node x="362.5" y="101.0">com.gaetan.Appli.Personnage</node>
+    <node x="349.4375" y="326.0">com.gaetan.Appli.Main</node>
+    <node x="573.0" y="225.0">com.gaetan.Appli.Personnages.Reine</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.gaetan.Appli.Personnages.Troll" target="com.gaetan.Appli.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="276.5" y="205.0" />
+      <point x="425.5" y="205.0" />
+      <point x="-42.0" y="37.0" />
+    </edge>
+    <edge source="com.gaetan.Appli.Main" target="com.gaetan.Appli.Personnages.Chevalier">
+      <point x="1.4210854715202004E-14" y="-47.5" />
+      <point x="473.4375" y="306.0" />
+      <point x="467.5" y="306.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="com.gaetan.Appli.Personnages.Chevalier" target="com.gaetan.Appli.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="com.gaetan.Appli.Main" target="com.gaetan.Appli.Personnage">
+      <point x="99.19999999999999" y="-47.5" />
+      <point x="572.6375" y="306.0" />
+      <point x="754.5" y="306.0" />
+      <point x="754.5" y="195.0" />
+      <point x="551.5" y="195.0" />
+      <point x="84.0" y="37.0" />
+    </edge>
+    <edge source="com.gaetan.Appli.Main" target="com.gaetan.Appli.Personnages.Troll">
+      <point x="-49.599999999999966" y="-47.5" />
+      <point x="423.83750000000003" y="296.0" />
+      <point x="276.5" y="296.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="com.gaetan.Appli.Personnages.Reine" target="com.gaetan.Appli.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="658.5" y="205.0" />
+      <point x="509.5" y="205.0" />
+      <point x="42.0" y="37.0" />
+    </edge>
+    <edge source="com.gaetan.Appli.Personnage" target="com.gaetan.Comportement.Attaquer.ComportementArme">
+      <point x="52.5" y="-37.0" />
+      <point x="520.0" y="76.0" />
+      <point x="512.75" y="76.0" />
+      <point x="45.25" y="25.5" />
+    </edge>
+    <edge source="com.gaetan.Appli.Main" target="com.gaetan.Appli.Personnages.Roi">
+      <point x="-99.19999999999996" y="-47.5" />
+      <point x="374.23750000000007" y="306.0" />
+      <point x="85.5" y="306.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="com.gaetan.Appli.Main" target="com.gaetan.Appli.Personnages.Reine">
+      <point x="49.60000000000002" y="-47.5" />
+      <point x="523.0375" y="296.0" />
+      <point x="658.5" y="296.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="com.gaetan.Appli.Personnages.Roi" target="com.gaetan.Appli.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="85.5" y="195.0" />
+      <point x="383.5" y="195.0" />
+      <point x="-84.0" y="37.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="377.5" y="210.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

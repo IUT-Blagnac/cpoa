@@ -1,0 +1,81 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "Comportements.impl"
+class ComportementArc
+class ComportementEpee
+class ComportementMassue
+class ComportementPoignard
+' end package
+
+' package "appli"
+class Arene
+class Menu
+' end package
+
+' package "Comportements"
+interface ComportementArme
+' end package
+
+' package "appli.personnage"
+class Chevalier
+class Personnage
+class Reine
+class Roi
+class Troll
+' end package
+
+' content
+' -------
+
+' Arene:
+Arene : void main(String)
+
+' Menu:
+Menu : void showPersonnages()
+Menu : void combatEpique()
+Menu : void CreerPersonnage()
+Menu : void changerDarme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void Utiliserarme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+Personnage : void effectuerAttaque()
+Personnage : String getName()
+Personnage : String getClassee()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void Utiliserarme()
+
+' Roi:
+Personnage <|-- Roi
+
+' Troll:
+Personnage <|-- Troll
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void Utiliserarme()
+
+' ComportementArme:
+ComportementArme : void Utiliserarme()
+
+' ComportementMassue:
+ComportementArme <|.. ComportementMassue
+ComportementMassue : void Utiliserarme()
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' Reine:
+Personnage <|-- Reine
+
+@enduml
