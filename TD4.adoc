@@ -1,0 +1,424 @@
+:moduleTitle: CPOA
+:authorDefault:  Dut/Info-S3/M3105
+:tdnum: TD 4
+
+:eleve:
+:sourcedir: src/java/TD3
+
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+ifndef::myasciidoconf[]
+include::asciidoc.conf[]
+endif::myasciidoconf[]
+
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+:icons: font
+
+= {doctitle}
+:Author:  {authorDefault} - (Semaine 48)
+:lang: fr
+:incremental:
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+//----------- définitions --------------
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+:principe: Principe de conception
+:allerPlusLoin: Pour aller plus loin
+:about: À propos
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[CAUTION]
+.Version corrigée image:icons/solution.png[]
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[align="left",cols="1,10a",width="100%"]
+|======================
+| {pre}		|
+1. Je sais programmer en {java}.
+2. J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
+3. Je maîtrise patrons de conception.
+4. Je maîtrise les diagrammes UML de classe, de séquence et d'états
+| {objtd}	| Aborder quelques subtilités *UML*.
+| {duree}	| *1* TD
+|======================
+
+ifndef::compact[]
+
+== Rappel du cours
+
+TIP: N'hésitez pas à (re)lire régulièrement le {sitecours}.
+
+endif::compact[]
+
+== Différences entre dépendance, association, composition, agrégation
+
+Soit le diagramme de classe partiel suivant :
+
+.Diagramme de classe partiel
+image::assoc1.png[]
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Complétez en ajoutant les relations (dépendance, association,
+	composition, agrégation) entre les classes.
+====
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+.Diagramme de classe avec relations
+image::assoc1-cor.png[]
+========
+endif::prof[]
+
+== Patrons
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Pour chacun des diagrammes de classe partiels suivants (représentant
+des patrons que vous connaissez), complétez :
+
+- le nom du patron dans la légende,
+- en ajoutant les relations.
+
+.Patron ...
+image::fabrique-c.png[]
+
+.Patron ...
+image::etat-c.png[]
+
+.Patron ...
+image::observateur-c.png[]
+
+.Patron ...
+image::strategy-c.png[]
+====
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+.Patron Fabrique (simple)
+image::fabrique.png[]
+
+[NOTE]
+====
+Notez l'équivalence {UML} (ici noté en {plantUML}) entre :
+
+- `+Produit "+produit" <- Createur+`
+- `+Produit "1" <- Createur {+Produit produit;}+`
+====
+
+.Patron Etat
+image::etat.png[]
+
+.Patron Observateur
+image::observateur.png[]
+
+.Patron Strategy
+image::strategy.png[]
+========
+endif::prof[]
+
+== Machines à état
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Dessinez le diagramme d’états correspondant aux feux tricolores (en France)
+classiques. Ajoutez la prise en compte de la panne dans un 2ème temps.
+. Dessinez le diagramme d’états correspondant au déroulement d’une partie
+d’échecs.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Feu tricolore
++
+.Diagramme d'état d'un feu tricolore classique
+image::feu1.png[]
++
+.Diagramme d'état d'un feu tricolore avec panne
+image::feu2.png[]
+. Echecs
++
+.Diagramme d'état d'une partie d'échec
+image::echec.png[]
++
+
+========
+endif::prof[]
+
+== Diagrammes de séquences
+
+Vous devez documenter, à partir des extraits de codes {java} suivants,
+l'application `ApplicationBanque`, développée en S2.
+
+
+NOTE: Vous refactorerez cette application en TP, l'objectif n'est donc pas
+pour l'instant de remédier aux problèmes de conception mais plutôt de les
+identifier.
+
+.Méthode statique `comptesDUnPropretaire` (`ApplicationAgenceBancaire.java`)
+[source,java]
+-------
+public static void comptesDUnPropretaire (AgenceBancaire ag, String nomProprietaire) {
+	Compte []  t;
+
+	t = ag.getComptesDe(nomProprietaire);
+	if (t.length == 0) {
+		System.out.println("pas de compte à ce nom ...");
+	} else {
+		System.out.println("  " + t.length + " comptes pour " + nomProprietaire);
+		for (int i=0; i<t.length; i++)
+			t[i].afficher();
+	}
+}
+-------
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Réalisez un diagramme de séquence illustrant le fonctionnement de cette
+méthode.
+====
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+.Diagramme de séquence de la méthode `comptesDUnPropretaire`
+image::banque-seq-methode.png[]
+========
+endif::prof[]
+
+.`ApplicationAgenceBancaire.java`
+[source,java]
+-------
+public class ApplicationAgenceBancaire {
+
+	public static void main(String argv[]) {
+
+		String choix;
+
+		boolean continuer ;
+		Scanner lect;
+		AgenceBancaire monAg ;
+
+		String nom, numero;
+		Compte c;
+		double montant;
+
+		lect = new Scanner ( System.in );
+		lect.useLocale(Locale.US);
+
+		monAg = AccesAgenceBancaire.getAgenceBancaire();
+
+		continuer = true;
+		while (continuer) {
+			...
+			choix = lect.next();
+			choix = choix.toLowerCase();
+			switch (choix) {
+				case "q" :
+				System.out.println("ByeBye");
+				continuer = false;
+				break;
+				case "l" :
+				monAg.afficher();
+				break;
+				case "v" :
+				System.out.print("Num compte -> ");
+				numero = lect.next();
+				c = monAg.getCompte(numero);
+				if (c==null) {
+					System.out.println("Compte inexistant ...");
+				} else {
+					c.afficher();
+				}
+				break;
+				case "p" :
+				System.out.print("Propriétaire -> ");
+				nom = lect.next();
+				ApplicationAgenceBancaire.comptesDUnPropretaire (monAg, nom);
+				break;
+				case "d" :
+				...
+				break;
+				case "r" :
+				...
+				break;
+				default :
+				...
+				break;
+			}
+		}
+	}
+
+	public static void comptesDUnPropretaire (AgenceBancaire ag,
+		String nomProprietaire) {...}
+
+	public static void deposerSurUnCompte (AgenceBancaire ag,
+		String numeroCompte, double montant) {...}
+
+	public static void retirerSurUnCompte (AgenceBancaire ag,
+		String numeroCompte, double montant) {...}
+}
+-------
+
+.Extrait de `AccesAgenceBancaire`
+[source,java]
+------
+public class AccesAgenceBancaire {
+
+	private AccesAgenceBancaire () {}
+	public static AgenceBancaire getAgenceBancaire () {
+
+		AgenceBancaire ag = new AgenceBancaire("CAISSE ECUREUIL", "PIBRAC");
+		...
+	}
+...
+}
+------
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Réalisez le diagramme de classe de l'application
+. Que vous rappelle la classe `AccesAgenceBancaire`?
+. Réalisez un diagramme de séquence illustrant le fonctionnement de cette
+application (`main`). On utilisera des blocs "ref" pour les appels aux méthodes
+statiques, et on ne s'occupera pas des scanners.
+====
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Diagramme de classe
++
+.Diagramme de classe
+image::banque.png[]
++
+NOTE: Les étudiants ne peuvent avoir tous ces détails, mais ça leur
+servira pour le TP.
++
+. Cette s'approche de deux patrons que vous avez étudiés:
+  - la structure du Singleton (getInstance() remplacé par getAgenceBancaire ()), sans la gestion de l'instance unique,
+  - le comportement du créateur concrêt de la Factory.
+
+. Diagramme de séquence
++
+.Diagramme de séquence de `ApplicationAgenceBancaire`
+image::banque-seq.png[]
+========
+endif::prof[]
+
+:numbered!:
+== Pour aller plus loin
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Peut-on, dans un code {java}, faire la différence entre
+agrégation `+1 <>-> *+` et association `+1 -> *+`?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. En Java, un objet est toujours une référence, il n'y aura pas de changement de comportement de la JVM pour l'agrégation et la composition. Cependant, le modèle des classes et leur cycle de vie ne sera pas le même dans les deux cas:
+  - Cas de la composition
++
+[source,java]
+-------
+public class Voiture {
+	ArrayList<ComposantVoiture> mesParts;
+	...
+	public Voiture (){
+		mesParts.add(new ComposantVoiture("essieu"));
+	}
+	public void afficher () {
+		mesParts.each...
+			...
+			afficher();
+	}
+	public void detruire(){
+		mesParts.each...
+			...
+			detruire();
+	}
+}
+-------
++
+  - Cas de l'agrégation
++
+[source,java]
+-------
+public class Voiture {
+	ArrayList<Passager> passagers;
+	public void ajouterPassager(Passager p) { passagers.add(p); }
+	public void detruire(){
+		...
+	}
+}
+-------
++
+
+========
+endif::prof[]
+
+ifndef::backend-pdf[]
+
+ifndef::compact[]
+== About...
+
+****************************************************************
+Document réalisé via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
+Libre d'utilisation et géré par la 'Licence Creative Commons'.
+image:88x31.png["Licence Creative
+Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+****************************************************************
+endif::compact[]
+
+endif::backend-pdf[]
