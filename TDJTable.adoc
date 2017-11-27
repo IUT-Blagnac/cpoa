@@ -46,7 +46,7 @@ endif::todoprof[]
 
 //-------------------- Warning si correction -----------
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [CAUTION]
 .Version corrigée
 =====
@@ -99,7 +99,7 @@ Avec ce que nous savons de Swing, quels composants graphiques utiliserions nous 
 -----
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
@@ -129,7 +129,7 @@ Quelles sont les limites de cette approche ? Imaginez l'UT2J => 25000 étudiants
 -----
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
@@ -268,7 +268,7 @@ Au plus simple, créer un TableModel revient donc à créer une classe :
 -----
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
@@ -326,7 +326,7 @@ image:images/td6.DSaffichageVide.png[]
 -----
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
@@ -376,7 +376,7 @@ Des méthodes peuvent être ajoutées au TableModel pour ajouter des lignes, sup
 Cependant, lorsqu'il est mis à jour en dehors du JTable, le modèle doit prévenir tous les JTable associés. Ca vous rappelle un design pattern ?
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====

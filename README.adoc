@@ -41,3 +41,25 @@ Un livre papier est disponible aux {eue} (ISBN ISBN 978-3-639-54613-2).
 N'hésitez pas à l'acheter si vous en avez les moyens.
 
 image::images/couverture.png[width=60%]
+
+== Liste des TD/TP 2017/2018
+
+=== Strategy
+
+TD1 (#45) et TP1 (#46)
+
+=== Singleton
+
+TD2 (#46) et TP2-Dojo (#47)
+
+=== Factory
+
+TD3 (#47) et TP3 (#48)
+
+=== Révisions UML
+
+TD4 (#48) et TP4-Objectivez (#49)
+
+=== Observer
+
+TD5 (#49) et TP5 (#50)
