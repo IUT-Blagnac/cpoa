@@ -1,0 +1,99 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "defense"
+interface ComportementDefense
+' end package
+
+' package "perso"
+class Reine
+abstract Personnage
+class Roi
+class Troll
+class Menu
+class Launcher
+class ComportementDefenseBouclier
+class ComportementDefenseEsquive
+class ComportementDefenseEpee
+class Chevalier
+' end package
+
+' package "arme"
+class ComportementPoignard
+interface ComportementArme
+class ComportementArc
+class ComportementEpee
+' end package
+
+' content
+' -------
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void Combattre()
+Chevalier : void Defendre()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void Combattre()
+Troll : void Defendre()
+
+' Menu:
+Menu : Personnage choixPersonnage()
+Menu : String choixClasse()
+Menu : ComportementArme choixArme()
+Menu : void main(String)
+
+' ComportementDefenseBouclier:
+ComportementDefense <|.. ComportementDefenseBouclier
+ComportementDefenseBouclier : void utiliserDefence()
+
+' ComportementDefenseEpee:
+ComportementDefense <|.. ComportementDefenseEpee
+ComportementDefenseEpee : void utiliserDefence()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage --> "1" ComportementDefense
+Personnage : void Combattre()
+Personnage : void setArme(ComportementArme)
+Personnage : void Defendre()
+
+' ComportementDefenseEsquive:
+ComportementDefense <|.. ComportementDefenseEsquive
+ComportementDefenseEsquive : void utiliserDefence()
+
+' ComportementDefense:
+ComportementDefense : void utiliserDefence()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void Combattre()
+Reine : void Defendre()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' Launcher:
+Launcher : void main(String)
+
+' Roi:
+Personnage <|-- Roi
+Roi : void Combattre()
+Roi : void Defendre()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+@enduml

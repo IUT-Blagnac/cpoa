@@ -1,0 +1,72 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "imp"
+class Epee
+class Poignard
+class Arc
+' end package
+
+' package "Appli"
+class Menu
+class PersonnageDisfonctionnel
+class WorldOfBlagnac
+class Chevalier
+class Troll
+class Roi
+class Reine
+abstract Personnage
+' end package
+
+' package "Comportement"
+interface ComportementArme
+' end package
+
+' content
+' -------
+
+' Menu:
+Menu : void ChoixPersonnage()
+Menu : void CreerPersonnage()
+
+' Poignard:
+ComportementArme <|.. Poignard
+Poignard : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' Epee:
+ComportementArme <|.. Epee
+Epee : void utiliserArme()
+
+' WorldOfBlagnac:
+WorldOfBlagnac : void main(String)
+
+' Troll:
+Personnage <|-- Troll
+
+' Arc:
+ComportementArme <|.. Arc
+Arc : void utiliserArme()
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' Reine:
+Personnage <|-- Reine
+
+' PersonnageDisfonctionnel:
+Personnage <|-- PersonnageDisfonctionnel
+
+' Roi:
+Personnage <|-- Roi
+
+@enduml

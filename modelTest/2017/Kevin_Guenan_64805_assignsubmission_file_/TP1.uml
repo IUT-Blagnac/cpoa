@@ -1,0 +1,58 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "rpg"
+class Troll
+interface ComportementArme
+class ComportementPoignard
+class ComportementEpee
+abstract Personnage
+class Chevalier
+class Roi
+class ComportementArc
+class Reine
+' end package
+
+' content
+' -------
+
+' Roi:
+Personnage <|-- Roi
+Roi : void afficher()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void afficher()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void afficher()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void afficher()
+
+@enduml

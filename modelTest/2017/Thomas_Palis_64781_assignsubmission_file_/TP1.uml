@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>appli_RPG</OriginalElement>
+  <nodes>
+    <node x="534.0" y="146.0">appli_RPG.Reine</node>
+    <node x="192.5" y="242.0">appli_RPG.ComportementArme</node>
+    <node x="306.0" y="0.0">appli_RPG.Personnage</node>
+    <node x="385.0" y="343.0">appli_RPG.ComportementEpee</node>
+    <node x="178.0" y="146.0">appli_RPG.Roi</node>
+    <node x="0.0" y="439.0">appli_RPG.CreationPerso</node>
+    <node x="187.0" y="343.0">appli_RPG.ComportementPoignard</node>
+    <node x="712.0" y="146.0">appli_RPG.Troll</node>
+    <node x="356.0" y="146.0">appli_RPG.Voleur</node>
+    <node x="0.0" y="146.0">appli_RPG.Chevalier</node>
+    <node x="0.0" y="343.0">appli_RPG.ComportementArc</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="appli_RPG.Chevalier" target="appli_RPG.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="79.0" y="116.0" />
+      <point x="331.8" y="116.0" />
+      <point x="-103.19999999999999" y="48.0" />
+    </edge>
+    <edge source="appli_RPG.ComportementPoignard" target="appli_RPG.ComportementArme">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="appli_RPG.Voleur" target="appli_RPG.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="appli_RPG.Roi" target="appli_RPG.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="257.0" y="126.0" />
+      <point x="383.4" y="126.0" />
+      <point x="-51.60000000000002" y="48.0" />
+    </edge>
+    <edge source="appli_RPG.ComportementArc" target="appli_RPG.ComportementArme">
+      <point x="0.0" y="-25.5" />
+      <point x="83.5" y="318.0" />
+      <point x="220.33333333333331" y="318.0" />
+      <point x="-55.666666666666686" y="25.5" />
+    </edge>
+    <edge source="appli_RPG.ComportementEpee" target="appli_RPG.ComportementArme">
+      <point x="0.0" y="-25.5" />
+      <point x="468.5" y="318.0" />
+      <point x="331.66666666666663" y="318.0" />
+      <point x="55.66666666666663" y="25.5" />
+    </edge>
+    <edge source="appli_RPG.Reine" target="appli_RPG.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="613.0" y="126.0" />
+      <point x="486.6" y="126.0" />
+      <point x="51.60000000000002" y="48.0" />
+    </edge>
+    <edge source="appli_RPG.Troll" target="appli_RPG.Personnage">
+      <point x="0.0" y="-25.5" />
+      <point x="791.0" y="116.0" />
+      <point x="538.1999999999999" y="116.0" />
+      <point x="103.19999999999993" y="48.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="435.0" y="245.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
