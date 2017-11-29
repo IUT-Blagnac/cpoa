@@ -189,7 +189,8 @@ public class PizzaTestDrive {
 .Résultat d'exécution
 ............
 $ java PizzaTestDrive
-Préparation de Pizza sauce style brest au fromage Étalage de la pâte...
+Préparation de Pizza sauce style brest au fromage
+Étalage de la pâte...
 Ajout de la sauce...
 Ajout des garnitures :
 Parmigiano reggiano râpé
@@ -197,7 +198,8 @@ Cuisson 25 minutes à 180°
 Découpage en parts triangulaires
 Emballage dans une boîte officielle
 JMB a commandé une Pizza sauce style brest et fromage
-Préparation de Pizza pâte Strasbourg et fromage Étalage de la pâte...
+Préparation de Pizza pâte Strasbourg et fromage
+Étalage de la pâte...
 Ajout de la sauce...
 Ajout des garnitures :
 Mozzarella en lamelles
@@ -214,7 +216,7 @@ JMI a commandé une Pizza pâte Strasbourg et fromage
 . Réalisez un test en Java de votre architecture, en vous inspirant du code de
 test qui vérifie quelques points simples de l'architecture de votre application.
 Vous pourrez vous inspirer du test du patron _Strategy_ en Ruby (source link:modelTest/checkModel.rb[ici])
-. Reprenez les section "pour aller plus loin" des TDs 1 et 2.
+. Reprenez les sections "pour aller plus loin" des TDs 1 et 2.
 
 ifndef::compact[]
 == About...
