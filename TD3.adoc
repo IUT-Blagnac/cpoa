@@ -491,6 +491,7 @@ Ce code est peu adaptatif et va soufrir des évolutions, par exemple :
 une méthode `creerComportementArme(String type)` qui retourne le comportement
 adapté en fonction du paramètre reçu.
 . Donnez le diagramme de classe {UML} de la nouvelle organisation.
+. Quelles différences a-t-on avec le patron Fabrique ? Donner quelques exemples d’extension du jeu d'aventure qui correspondraient à l'usage d'une Fabrique.
 . Donnez le diagramme de séquence du main. Par exemple avec le code de test suivant :
 +
 [source,java]
@@ -521,6 +522,7 @@ include::{sourcedir}/src/simuaventure/comportements/arme/impl/SimpleFabriqueArme
 +
 image::fabriqueArme.png[width=100%,scaledwidth=100%]
 +
+. Le créateur et le créateur concrêt sont dans une unique classe (SimpleFabriqueArme) car on a une seule fabrique unique pour le moment. On peut imaginer deux modes de jeu, avec des armes médiévales (épée en métal) ou modernes (épée sabre laser) qui seront traités dans deux fabriques concrètes différentes "FabriqueArmeMedievales" et "FabriqueArmeModernes".
 . Diagramme de séquence du `main`.
 
 image::fabriqueArme-seq.svg[width=100%,scaledwidth=100%]
