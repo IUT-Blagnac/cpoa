@@ -4,7 +4,7 @@
 // ------------------------------------------
 = DUT-Info/S3/M3105 (CPOA) : Projet refactoring
 Jean-Michel Bruel <jbruel@gmail.com>
-v1.2, {localdate}
+v1.7, {localdate}
 :status: bottom
 :inclusion:
 :experimental:
@@ -76,7 +76,7 @@ include::../task-list/java/src/main/java/com/codurance/training/tasks/TaskList.j
 
 == Refactoring
 
-Vous avez 7 séances de 1,5h (1 TD et 6 TPs) pour améliorer le plus possible
+Vous avez 5 séances de 1,5h (1 TD et 6 TPs en semaines 51 et 2) pour améliorer le plus possible
 cette application en (cf. détails juste après cette liste) :
 
 - y ajoutant de nouvelles fonctionnalités au passage (cf. ci-dessous).
