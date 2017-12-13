@@ -61,8 +61,29 @@ endif::slides[]
 == Plan
 
 [{incremental}]
-- Retour TP1
-- Premiers patrons
+- Événements de la semaine dernière
+- Patrons récents
+- Autres patrons intéressants
+
+[{intro}]
+== Semaine *riche*
+
+[{topic}]
+== Nuit de l'info
+
+image::event3.jpg[width=80%]
+
+[{topic}]
+== Nuit de l'info
+
+image::event2.jpg[width=80%]
+
+[{topic}]
+== Merci aux étudiants volontaires
+
+image::event4.png[width=60%]
+
+/////
 
 == Retour TP1
 
@@ -92,7 +113,6 @@ Exemple de noms : `TP1-Toto-G1A.uml`, `TP1.zip`, `tp1.uml`, `TP1.txt`, `TP1.png`
 Moy.:: 11/20
 
 
-/////
 
 == Introduction : importance des patrons
 
@@ -216,7 +236,6 @@ NOTE:  Les auteurs de ce livre sont connus comme les *Gof* pour « _Gang of Four
 2004::
   *Craig Larman* décrit des modèles de conception : les Patterns *GRASP* (cf. <<Larman05>>)
 
-/////
 
 == Exemples de bons principes
 
@@ -594,11 +613,12 @@ Exemple pour _Strategy_ :
 *Conséquences*::  Ce patron laisse les algorithmes changer indépendamment des
                 clients qui les emploient.
 
-ifdef::slides[:leveloffset: 0]
-
-include::singleton.adoc[]
-
 /////
+
+ifdef::slides[:leveloffset: -1]
+
+//include::singleton.adoc[]
+
 
 === Patrons abordés
 
@@ -643,7 +663,28 @@ endif::backend-pdf[]
 - Pont
 
 
+include::JTable.asc[leveloffset=+1]
 
+include::refactoringBanque.txt[leveloffset=+1]
+
+include::machine-a-etat.asc[leveloffset=+1]
+
+include::etat.adoc[leveloffset=+1]
+
+include::adapteur.asc[leveloffset=+1]
+
+include::visiteur.asc[leveloffset=+1]
+
+include::proxy.asc[leveloffset=+1]
+
+include::iterateur.asc[leveloffset=+1]
+
+include::composite.asc[leveloffset=+1]
+
+include::patterns4.asc[leveloffset=+1]
+
+
+/////
 
 ifndef::inclusion[]
 
@@ -665,7 +706,7 @@ ifdef::slides[:leveloffset: +1]
 
 endif::inclusion[]
 
-/////
+
 
 ifdef::slides[:leveloffset: 0]
 
@@ -733,3 +774,4 @@ image::quizz12.png[]
 == Quizz
 
 image::quizz13.png[]
+/////
