@@ -61,8 +61,12 @@ endif::slides[]
 == Plan
 
 [{incremental}]
-- Retour TP1
-- Premiers patrons
+- La Nuit de l'info
+- Le salon INFOSUP
+- Les Stages
+- Derniers patrons
+
+/////
 
 == Retour TP1
 
@@ -92,7 +96,6 @@ Exemple de noms : `TP1-Toto-G1A.uml`, `TP1.zip`, `tp1.uml`, `TP1.txt`, `TP1.png`
 Moy.:: 11/20
 
 
-/////
 
 == Introduction : importance des patrons
 
@@ -216,7 +219,6 @@ NOTE:  Les auteurs de ce livre sont connus comme les *Gof* pour « _Gang of Four
 2004::
   *Craig Larman* décrit des modèles de conception : les Patterns *GRASP* (cf. <<Larman05>>)
 
-/////
 
 == Exemples de bons principes
 

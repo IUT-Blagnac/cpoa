@@ -9,7 +9,8 @@ IMAGESDIR=images
 #HIGHLIGHT=highlightjs
 #HIGHLIGHT=prettify
 HIGHLIGHT=pygments
-DOCTOR=asciidoctor -b html5 -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
+#DOCTOR=asciidoctor -b html5 -a data-uri -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
+DOCTOR=asciidoctor -b html5 -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
 #BACKENDS=asciidoctor-deck.js
 #DECKJS=$(BACKENDS)/templates/haml/
 BACKENDS=../asciidoctor-backends
