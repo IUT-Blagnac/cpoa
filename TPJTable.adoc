@@ -225,7 +225,7 @@ endif::prof[]
 
 Vous allez compléter le fonctionnement du JTable/TableModel. On souhaite que :
 
-.	Les noms des colonnes soient remplacés par "Id", "Nom", "Prénom", "Groupe". Modifier donc la méthode getColumnName(). Dans quelle classe ?
+.	Les noms des colonnes soient remplacés par "Id", "Nom", "Prénom", "Groupe". Surcharger donc la méthode getColumnName(). Dans quelle classe ?
 .	On puisse modifier (entrer en modif) les colonnes nom, prénom, groupe directement sur chaque ligne du JTable. Mais pas la colonne Id. Modifier la méthode isCellEditable(). Dans quelle classe ?
 .	Modifier les valeurs des colonnes nom, prénom, groupe sur chaque ligne du JTable. Modifier la méthode setValueAt(). Dans quelle classe ? Avant modification, cette méthode vérifiera :
 ..	que les noms et prénoms ne soient pas vides
@@ -257,7 +257,8 @@ image::TP6fen3.PNG[]
 
 == Deux JTable encore ...
 
-On souhaite faire un début d'interface permettant de créer des étudiants à la volée et de mettre des étudiants dans des groupes (pjt par exemple ...). On souhaite donc modifier l'interface avec les deux boutons "gauche" et "droite", cf. image ci-dessous. Pour cela :
+On souhaite faire un début d'interface permettant de créer des étudiants à la volée et de mettre des étudiants dans des groupes (pjt par exemple ...). 
+On souhaite donc modifier l'interface avec les deux boutons "gauche" et "droite", cf. image ci-dessous. Pour cela :
 
 .	Copier le projet en jtable4
 .	Ajouter au Centre de la fenêtre les deux boutons "<=" et "=>".
