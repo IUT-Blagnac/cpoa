@@ -1,0 +1,44 @@
+// ------------------------------------------
+//  Created by Jean-Michel Bruel on 2014-11.
+//  Copyright (c) 2014-2015 IRIT/U. Toulouse. All rights reserved.
+// ------------------------------------------
+= Design patterns
+ifndef::myasciidoconf[]
+Jean-Michel Bruel (@jmbruel, jbruel@gmail.com)
+v1.0, {localdate} - First draft
+:experimental:
+:numbered!:
+:deckjs_theme: swiss
+:status: bottom
+
+include::asciidoc.conf[]
+
+endif::myasciidoconf[]
+
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+
+ifdef::inclusion[]
+ifdef::slides[:leveloffset: -1]
+endif::inclusion[]
+
+:pattern-list:
+
+//-------------- book
+ifdef::backend-pdf[]
+
+[IMPORTANT]
+====
+Ce chapitre présente les principes généraux des patrons de conception
+et les suivants détaillent quelques patrons importants à connaître en
+sortant d'un DUT Informatique.
+Néanmoins, si vous voulez les apprendre correctement à partir de ce
+livre, nous vous déconseillons de lire cette partie avant d'avoir réalisé
+les TDs/TPs qui leurs sont associés (cf. <<TDs,Annexes>>).
+
+====
+endif::backend-pdf[]
+//--------------------
+
+include::patterns-content.asc[]

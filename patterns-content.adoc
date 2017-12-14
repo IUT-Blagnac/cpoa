@@ -1,0 +1,569 @@
+
+
+== Introduction : importance des patrons
+
+ifndef::slides[.Les patrons : des réponses éprouvées à des problèmes récurrents]
+image::phdComics.png[]
+
+[quote,Donald Knuth]
+_______________________
+Science is what we understand well enough to explain to a computer.
+Art is everything else we do.
+_______________________
+
+//-------------- book
+ifdef::backend-pdf[]
+Nous allons illustrer les principes généraux au travers d'un premier exemple :
+le patron _Strategy_.
+endif::backend-pdf[]
+//--------------------
+
+ifndef::slides[]
+include::strategy.adoc[leveloffset=+1]
+endif::slides[]
+ifdef::slides[]
+include::strategy.asc[]
+endif::slides[]
+
+=== (non) Réutilisation
+
+WARNING: Les patrons *ne sont pas réutilisables*!
+
+Il faut implémeter la solution qu'il représente à chaque fois.
+
+ifdef::slides[=== Réutilisation (exception)]
+
+Exception : certains font l'objet d'une librairie (comme <<observerJava,_Observer_ de Java>>).
+
+Par exemple le patron Singleton existe dans la bibliothèque standard du
+langage  en {Ruby}.
+C'est un _mixin_ qu'il suffit d'inclure dans la classe qui doit être un singleton.
+
+[source,ruby]
+------
+class Klass
+   include Singleton
+   # ...
+end
+
+a,b  = Klass.instance, Klass.instance
+
+a == b
+# => true
+
+Klass.new
+# => NoMethodError - new is private ...
+------
+
+=== Association ou composition
+
+On trouve deux modèles {uml} :
+
+ifndef::slides[._Strategy_  et composition]
+image::strategy-compo.png[]
+
+ifndef::slides[._Strategy_  et association]
+image::strategy-assoc.png[]
+
+ifdef::slides[=== Association ou composition (suite)]
+
+Et donc deux implémentations :
+
+.Composition => le composé encapsule les composants
+[source,java]
+------
+public class Colvert extends Canard {
+
+	protected Colvert() {
+		this(new VolerAvecDesAiles(), new Cancan());
+	}
+...
+c1 = new Colvert();
+------
+
+.Association => le composant existe "en dehors"
+[source,java]
+------
+...
+vol = new VolerAvecDesAiles();
+cri = new Cancan();
+c1 = new Colvert(vol,cri);
+...
+------
+
+ifdef::slides[:leveloffset: +1]
+
+== Un peu d'histoire
+
+//-------------- book
+ifdef::backend-pdf[]
+Voici un bref point sur les moments clefs qui ont permis de définir
+les patrons de conceptions.
+endif::backend-pdf[]
+//--------------------
+
+1977::
+  *Alexander* : patterns pour les architectures (les vraies)
++
+image::Alexander.png[width=10%,scaledwidth=30%,link=images/Alexander.png]
+1987::
+  *Beck* et *Cunningham* : patterns pour des interfaces utilisateurs
+1988::
+  *Meyer* : livre sur l'orienté objet (langage {eiffel}), devenu la bible pour
+  beaucoup de programmeurs (cf. <<Meyer88>>)
+1990-1995::
+  *Gamma*, Helm, Johnson et Vlissides : LE livre de référence (cf. <<GoF>>)
++
+image::GoF.png[width=10%,scaledwidth=30%,link=images/GoF.png]
++
+NOTE:  Les auteurs de ce livre sont connus comme les *Gof* pour « _Gang of Four_ ».
+2003::
+  *Martin* : principes SOLID (cf. <<Martin03>>)
+2004::
+  *Craig Larman* décrit des modèles de conception : les Patterns *GRASP* (cf. <<Larman05>>)
+
+
+== Exemples de bons principes
+
+//-------------- book
+ifdef::backend-pdf[]
+Nous ne pouvons être exhaustifs sur la liste des bons principes objets
+ni sur de longues explications sur chacun d'eux (une fois encore nous
+renvoyons le lecteur à <<Meyer>> pour les fondements), mais nous
+examinons dans ce qui suit quelques exemples clefs.
+endif::backend-pdf[]
+//--------------------
+
+*SOLID*:
+
+- _**S**ingle Responsibility Principle_
+- _**O**pen-Closed Principle_
+- _**L**iskov Substitution Principle_
+- _**I**nterface Segregation Principle_
+- _**D**ependency Inversion Principle_
+
+ifdef::slides[:leveloffset: -1]
+
+=== _**S**ingle Responsibility Principle_
+
+ifndef::slides[._**S**ingle Responsibility Principle_ (source <<SOLID>>)]
+image::solid-s.jpg[scaledwidth="70%"]
+
+.......
+Responsabilité => Sujet à changement
+.......
+
+//-------------- book
+ifdef::backend-pdf[]
+Autrement dit, limitez le plus possible ce que doit réaliser une classe.
+Mieux vaut combiner plusieurs classes qui chacune fait bien ce qu'elle doit faire.
+endif::backend-pdf[]
+//--------------------
+
+=== _**O**pen-Closed Principle_
+
+ifndef::slides[._**O**pen-Closed Principle_ (source <<SOLID>>)]
+image::solid-o.jpg[scaledwidth="70%"]
+
+.......
+Ouvert à l'extension mais fermé à la modification
+.......
+
+ifdef::slides[=== _**O**pen-Closed Principle_ (suite)]
+
+Ainsi, une fois écrite et testée, une classe ne devrait être modifiée que pour
+être corrigée! Toute modification devrait être possible par extension.
+
+=== _**L**iskov Substitution Principle_
+
+ifndef::slides[]
+Barbara Liskov, pionnière en informatique et plus précisément en OO,
+a donné son nom à un principe important et bien connu : le principe default:
+  substitution de Liskov. Elle a reçu l'équivalent du prix Nobel d'Informatique
+(le _Turing Award_) en 2009.
+endif::slides[]
+
+ifndef::slides[.Barbara Liskov reçoit le _Turing Award_]
+image::liskov.jpg[scaledwidth="70%"]
+
+https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0
+
+ifdef::slides[=== LSP : le principe]
+
+ifdef::backend-pdf[._**L**iskov Substitution Principle_ (source <<SOLID>>)]
+image::solid-l.jpg[scaledwidth="70%"]
+
+.......
+Une classe doit pouvoir être remplacée par une instance d'un de ses
+sous-types, sans modifier la cohérence du programme
+.......
+
+ifdef::slides[=== LSP : un exemple]
+[quote]
+__________________
+Un carré est un rectangle a deux côtés égaux.
+__________________
+
+ifndef::slides[.Exemple classique de violation du principe de substitution de Liskov]
+image::carre.png[width=10%,scaledwidth=20%]
+
+.Question
+WARNING: Peut-on toujours substituer un `Carré` à la place d'un `Rectangle` ?
+
+ifdef::slides[=== Vraiment?]
+
+//-------------- book
+ifdef::backend-pdf[]
+Examinons avec un exemple concret pourquoi la réponse est non.
+endif::backend-pdf[]
+//--------------------
+
+.Réponse (`Rectangle.java`)
+[source,java]
+----
+class Rectangle
+{
+	protected int m_width;
+	protected int m_height;
+
+	public void setWidth(int width){
+		m_width = width;
+	}
+
+	public void setHeight(int height){
+		m_height = height;
+	}
+
+
+	public int getWidth(){
+		return m_width;
+	}
+
+	public int getHeight(){
+		return m_height;
+	}
+
+	public int getArea(){
+		return m_width * m_height;
+	}
+}
+----
+
+ifdef::slides[=== Vraiment?]
+
+.Réponse (`Square.java`)
+[source,java]
+----
+// Violation of Likov's Substitution Principle
+class Square extends Rectangle
+{
+	public void setWidth(int width){
+		m_width = width;
+		m_height = width;
+	}
+
+	public void setHeight(int height){
+		m_width = height;
+		m_height = height;
+	}
+
+}
+----
+
+ifdef::slides[=== Vraiment?]
+
+.Réponse (`Square.java` - suite)
+[source,java]
+----
+class LspTest
+{
+	private static Rectangle getNewRectangle()
+	{
+		// it can be an object returned by some factory ...
+		return new Square();
+	}
+
+	public static void main (String args[])
+	{
+		Rectangle r = LspTest.getNewRectangle();
+
+		r.setWidth(5);
+		r.setHeight(10);
+		// User knows that r is a rectangle.
+		// It assumes that he's able to set the width and height as for the base class
+
+		System.out.println(r.getArea());
+		// Now she's surprised to see that the area is 100 instead of 50.
+	}
+}
+----
+
+ifdef::slides[=== Et l'inverse?]
+
+ifndef::slides[.Et si on essaye l'inverse]
+image::rectangle.png[width=40%,scaledwidth=70%]
+
+ifdef::slides[=== Même problème]
+
+//-------------- book
+ifdef::backend-pdf[]
+Et bien non, ça ne fonctionne pas plus dans l'autre sens.
+endif::backend-pdf[]
+//--------------------
+
+.Réponse (`Rectangle.java`)
+[source,java]
+----
+class LspTest
+{
+	private static Square getNewSquare()
+	{
+		// it can be an object returned by some factory ...
+		return new Rectangle();
+	}
+
+	public static void main (String args[])
+	{
+		Square s = LspTest.getNewSquare();
+
+		s.setWidth(5);
+		// User knows that r is a rectangle.
+		// It assumes that he's able to set the width and height as for the base class
+
+		System.out.println(s.getArea());
+		// Now she's surprised to see that the area is 0 instead of 25.
+	}
+}
+----
+
+=== _**I**nterface Segregation Principle_
+
+ifdef::backend-pdf[._**I**nterface Segregation Principle_ (source <<SOLID>>)]
+image::solid-i.jpg[scaledwidth="70%"]
+
+.......
+Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une seule interface générale
+.......
+
+//-------------- book
+ifdef::backend-pdf[]
+C'est un peu le même principe que la _Single Responsibility_ des classes,
+mais appliqué aux interfaces.
+endif::backend-pdf[]
+//--------------------
+
+=== _**D**ependency Inversion Principle_
+
+ifdef::backend-pdf[._**I**nterface Segregation Principle_ (source <<SOLID>>)]
+image::solid-d.jpg[scaledwidth="90%"]
+
+.......
+Il faut dépendre des abstractions, pas des implémentations
+.......
+
+ifdef::slides[=== DIP : explications]
+
+Ce principe indique :
+
+- Les modules de haut niveau (abstraits) ne doivent pas dépendre des modules de bas niveau.
+Les deux doivent dépendre d'abstractions.
+- Les abstractions ne doivent pas dépendre des détails d'implémentation.
+C'est l'inverse : les détails doivent dépendre des abstractions.
+
+NOTE: Ainsi ce principe va à l'encontre de l'intuition classique.
+
+ifdef::slides[=== Exemple (bad)]
+
+.Exemple de code violant le principe d'inversion des dépendances
+image::dip-bad.png[width=70,scaledwidth="90%"]
+
+ifdef::slides[=== Exemple (good)]
+
+.Exemple de code ne violant plus le principe d'inversion des dépendances
+image::dip.png[width=80%,scaledwidth="90%"]
+
+=== SOLID et patrons
+
+.*QUESTION*
+[WARNING]
+====
+Lesquels des 5 principes SOLID s'appliquent bien à _Strategy_ ?
+====
+
+ifdef::slides[]
+
+[cols="20a,20a,20a,20a,20a"]
+|===
+| image:solid-s.jpg[]
+| image:solid-o.jpg[]
+| image:solid-l.jpg[]
+| image:solid-i.jpg[]
+| image:solid-d.jpg[]
+|===
+
+endif::slides[]
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::slides[=== SOLID et patrons (éléments de réponses)]
+ifdef::prof[]
+Quelques éléments de réponses :
+
+[%step]
+_**S**ingle Responsibility Principle_::
+  Bof
+_**O**pen-Closed Principle_::
+  => *Oui* : extension (du comportement) sans toucher au code!
+_**L**iskov Substitution Principle_::
+  Non
+_**I**nterface Segregation Principle_::
+  Oui, mais pas spécifiquement
+_**D**ependency Inversion Principle_::
+  => *Oui* : les algos dépendent des mêmes abstractions que les données (les interfaces)
+
+endif::prof[]
+//----------------------------------------------------- Correction -------------------------
+
+ifndef::slides[:leveloffset: +1]
+ifdef::slides[:leveloffset: +1]
+
+== GRASP
+
+[quote,Craig Larman,2005]
+________________
+The critical design tool for software development is *a mind well educated in
+design principles*. It is not the UML or any other technology.
+________________
+
+Il s'agit d'un ensemble de patrons, plutôt orientés conception (UML). Nous en
+aborderons certains au travers des exemples de ce module (cf. <<Larman05>>).
+
+ifndef::slides[:leveloffset: -1]
+
+== Les patrons : comment ça marche ?
+
+ifdef::slides[:leveloffset: -1]
+
+=== Intérêt
+
+- Réponses éprouvées à des problèmes récurrents
+- Vocabulaire commun
+
+//-------------- book
+ifdef::backend-pdf[]
+Exemple de phrase qu'on entend dans un _open space_ de programmeurs
+(et qui justifie qu'à défaut de les connaitre tous, il faut savoir
+rapidement se documenter et les comprendre) :
+endif::backend-pdf[]
+//--------------------
+
+[quote]
+___________________
+T'as qu'à utiliser une _factory_!
+___________________
+
+ifdef::slides[]
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Qui fait la nuit de l'info dans un groupe avec des Masters?
+
+image::N2I.png[width=30%]
+====
+
+endif::slides[]
+
+//-------------- book
+ifdef::backend-pdf[]
+Pour chaque patron étudié dans ce livre nous aurons les mêmes
+éléments de définition.
+
+endif::backend-pdf[]
+//--------------------
+
+/////
+=== Éléments de définition
+
+- Nom
+- Problème
+- Solution
+- Conséquences
+
+Exemple pour _Strategy_ :
+
+*Nom*:: _Strategy_
+*Problème*::  Situations où il est nécessaire de pouvoir définir dynamiquement les
+            algorithmes utilisés.
+*Solution*::  Définir une famille d'algorithmes, encapsuler chacun d'eux en tant
+            qu'objet, et les rendre interchangeables.
+*Conséquences*::  Ce patron laisse les algorithmes changer indépendamment des
+                clients qui les emploient.
+/////
+
+=== Patrons abordés
+
+//-------------- book
+ifdef::backend-pdf[]
+Voici la liste des patrons abordés dans ce cours.
+endif::backend-pdf[]
+//--------------------
+
+[%step]
+- <<Singleton>>
+- <<strategy,Stratégie>>
+- <<Fabrique>> (_factory_)
+- <<Observateur>>
+- <<Itérateur>>
+- <<Composite>>
+- <<Etat>>
+- <<Proxy>>
+- <<Adaptateur>>
+
+=== Patrons non abordés
+
+//-------------- book
+ifdef::backend-pdf[]
+Voici une liste (non-exhaustive) des patrons *non abordés* dans ce cours
+(pour donner une idée du chemin qu'il vous reste à parcourir).
+endif::backend-pdf[]
+//--------------------
+
+- Décorateur
+- Commande
+- Façade
+- Patron de méthode
+- Chaînes de responsabilité
+- Visiteur
+- Prototype
+- Mémento
+- Médiateur
+- Interprète
+- Poids-mouche
+- Monteur
+- Pont
+
+//////
+
+
+
+ifndef::inclusion[]
+
+[appendix]
+:numbered!:
+include::glossaire.txt[]
+
+include::refs.txt[]
+
+include::conventions.txt[]
+
+include::creditPhoto.txt[]
+
+endif::inclusion[]
+
+ifdef::inclusion[]
+
+ifdef::slides[:leveloffset: +1]
+
+endif::inclusion[]
+//////
