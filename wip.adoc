@@ -61,10 +61,12 @@ endif::slides[]
 == Plan
 
 [{incremental}]
-- Événements de la semaine dernière
-- Patrons récents
-- Autres patrons intéressants
+- Fin des patrons
+- Révisions
+- Projet en cours
+- Stages
 
+/////
 [{intro}]
 == Semaine *riche*
 
@@ -83,7 +85,6 @@ image::event2.jpg[width=80%]
 
 image::event4.png[width=60%]
 
-/////
 
 == Retour TP1
 
@@ -613,7 +614,6 @@ Exemple pour _Strategy_ :
 *Conséquences*::  Ce patron laisse les algorithmes changer indépendamment des
                 clients qui les emploient.
 
-/////
 
 ifdef::slides[:leveloffset: -1]
 
@@ -675,16 +675,17 @@ include::adapteur.asc[leveloffset=+1]
 
 include::visiteur.asc[leveloffset=+1]
 
-include::proxy.asc[leveloffset=+1]
-
-include::iterateur.asc[leveloffset=+1]
-
-include::composite.asc[leveloffset=+1]
-
-include::patterns4.asc[leveloffset=+1]
-
-
 /////
+
+//include::proxy.asc[]
+
+include::iterateur.asc[]
+
+include::composite.asc[]
+
+include::patterns4.asc[]
+
+
 
 ifndef::inclusion[]
 
@@ -723,6 +724,7 @@ ifdef::slides[:leveloffset: 0]
 
 image::socrative1.png[width=50%,link=http://www.socrative.com/]
 
+/////
 == Quizz
 
 image::quizz1.png[]
@@ -775,3 +777,67 @@ image::quizz12.png[]
 
 image::quizz13.png[]
 /////
+
+[{intro}]
+== Projet final
+
+[{topic}]
+== Attendus du projet
+
+[{topic}]
+== Modèles à réaliser
+
+On ne vous embête pas ce coup-ci avec les modèles mais n'hésitez pas à en utiliser
+(des cohérents avec votre code) pour vos documentations.
+
+Voici d'ailleurs le diagramme de classe minimaliste initial de l'application :
+
+image::taskList.png[]
+
+[{topic}]
+== _Delivrables_ attendus
+
+Vous déposerez avant le vendredi 20/01/2016 à minuit sur le dépôt moodle deux
+documents uniquement :
+
+- Un rapport au format `.pdf` contenant (outre les éléments habituels d'un rapport
+comme les noms et contact des binômes, une table des matières, ...)
+une courte explication par chaque fonctionnalité nouvelle ou refactoring précis
+avec des extraits de code illustratifs et une justification.
+
+
+[{topic}]
+== _Delivrables_ attendus
+
+- Un fichier `.zip` contenant un export de votre projet eclipse qui contiendra
+  à minima un répertoire `src` avec les sources et un répertoire `doc` avec la
+  javadoc.
+
+WARNING: Pour générer ce `.zip`, choisissez bien l'option menu:Export...[General>Archive File] après
+un click droit sur le projet en question.
+
+[{topic}]
+== Evaluation et critères
+
+[{incremental}]
+. démonstration que ça fonctionne pareil
+. pertinence des choix
+. qualité du rapport (illustration, explications)
+. qualité du code
+. extras (tests, modèles)
+
+TIP: Pensez à discord pour les questions!!
+
+[{intro}]
+== Stages
+
+- 16 étudiants placés (23%)
+- 12 stages à l'étranger (17%)
+- 6 conventions signées
+
+[{topic}]
+== Pour les retardataires
+
+http://bit.ly/jmb-suiviStage
+
+image::suiviStage.jpg[width=70%]
