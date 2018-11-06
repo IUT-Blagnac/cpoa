@@ -41,4 +41,4 @@ les TDs/TPs qui leurs sont associés (cf. <<TDs,Annexes>>).
 endif::backend-pdf[]
 //--------------------
 
-include::patterns-content.asc[]
+include::patterns-content.adoc[]

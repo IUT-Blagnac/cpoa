@@ -5,8 +5,7 @@ v1.7, {localdate} (started on 2015-10-05)
 :experimental:
 :status:
 :imagesdir: images
-//:siteurl: http://jmbruel.github.io/teaching/MobileModeling.html
-:siteurl: http://bit.ly/jmb-apsio
+:siteurl: http://bit.ly/jmb-cpoa
 //--------------------- slides
 ifdef::slides[]
 :dzslides-style: tomorrow
@@ -45,98 +44,54 @@ endif::definitions[]
 == Plan
 
 [{incremental}]
-- MPA: **M**PA **P**rojects **A**wards
+- Annonces
 - Révisions MPA
 - Stages : il est temps!
 - CPOA: let's start
 
+[{intro}]
+== *don* du sang
+
+[{topic}]
+== Don du sang à l'IUT mardi prochain 13/11
+
+image::don.png[width=50%]
+
+[{topic}]
+== Nuit de l'info
+
+http://nuitdelinfo.com
+
+image::nuit.png[width=80%]
 
 [{intro}]
-== **M**PA **P**roject **A**wards
+== Révisions *MPA*
 
 [{topic}]
-== **M**PA **P**roject **A**wards
+== Time for a quizz!
 
-[{incremental}]
-* Bon points :
-** Tous les projets *build* par *intégration continue*!!
-** Produits *satisfaisants* dans l'ensemble
-** Bonne application de *Scrum* dans l'ensemble
-* Mauvais points :
-** Trop peu de *tests*
-** Trop peu de *professionnalisme* dans les docs
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+- Connectez-vous sur : http://www.socrative.com/ (*student login*)
+- Ou téléchargez l'application pour étudiant image:socrative2.png[width=10%]
+- Choisissez la room *44918d67*
+====
 
-[{intro}]
-== Awards
-
-[{topic}]
-== Awards
-
-[{incremental}]
-* Prix du meilleur projet
-* Prix du meilleur logo
-* Prix des plus téméraires
-* Prix de la participation
-
-[{intro}]
-== #1
-
-[{topic}]
-== Meilleur projet
-
-And the winner is...
-
-[{incremental}]
-* G1B2 (Oriane/Laura/Axel/Loïc)
-* 16,9/20
-
-[{topic}]
-== Meilleur projet (suite)
-
-Et pourtant...
-
-image::moche.png[width=60%]
-
-[{topic}]
-== Meilleur projet (suite)
-
-Mais...
-
-image::coverage.png[width=90%]
-
-[{intro}]
-== Meilleur logo
-
-[{topic}]
-== Meilleur logo / acronyme
-
-G1A3 (Adrien/Robin/Samy/Thomas)
-
-image::JMB-MPA.png[width=60%]
-
-[{intro}]
-== Risk
-
-[{topic}]
-== Les plus téméraires
-
-G1A1 (Alexandre/Gaëtan/Nicolas)
-
-image::web2017.png[]
-
-[{intro}]
-== *Everybody* else
-
-[{topic}]
-== *Everybody* else
-
-image::goodies.jpg[align=text-center,width=60%]
-
-[{intro}]
-== Révisions MPA
+image::socrative1.png[width=50%,link=http://www.socrative.com/]
 
 [{intro}]
 == *Stages* : il est temps!
+
+[{topic}]
+== Liens et actions
+
+[{incremental}]
+- https://webetud.iut-blagnac.fr/course/view.php?id=59
+- Saisie de vos recherches
++
+image::stages.png[width=70%]
 
 [{intro}]
 == *CPOA*: let's start

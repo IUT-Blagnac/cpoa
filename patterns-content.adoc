@@ -22,7 +22,7 @@ ifndef::slides[]
 include::strategy.adoc[leveloffset=+1]
 endif::slides[]
 ifdef::slides[]
-include::strategy.asc[]
+include::strategy.adoc[]
 endif::slides[]
 
 === (non) Réutilisation

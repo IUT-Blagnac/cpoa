@@ -64,8 +64,14 @@ full.pdf: full.$(EXT) $(DEP)
 
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
-	$(DOCTOR) -T ../asciidoctor-deck.js/templates/haml/ -a slides \
+	$(DOCTOR) -b deckjs \
+	-T ../asciidoctor-deck.js/templates/haml/ -a slides \
 	-a deckjs_theme=$(DECK) \
+	-r asciidoctor-diagram \
+	-a styledir=. \
+	-a stylesheet=$(STYLE) \
+	-a imagesdir=$(IMAGESDIR) \
+	-a source-highlighter=$(HIGHLIGHT) \
 	-a prof -o $@ $<
 
 %.dzslides.html: %.$(EXT)
@@ -102,6 +108,10 @@ roadmap.html: $(MAIN).$(EXT)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
 	$(DOCTOR) -a compact -a theme=compact -b html5 -a numbered -a eleve \
 	-a data-uri $< -o $@
+
+%-sujet.pdf: %.$(EXT) $(DEP)
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate PDF subject'
+	asciidoctor-pdf  -a compact -a theme=compact  -a numbered -a eleve $< -o $@
 
 %-sujet.pdf: %.$(EXT) $(DEP)
 	@echo '==> Compiling asciidoc files with Asciidoctor to generate PDF subject'

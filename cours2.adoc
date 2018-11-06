@@ -6,9 +6,7 @@ v1.7, {localdate} (started on 2015-10-05)
 :status:
 :imagesdir: images
 :inclusion:
-
-//:siteurl: http://jmbruel.github.io/teaching/MobileModeling.html
-:siteurl: http://bit.ly/jmb-apsio
+:siteurl: http://bit.ly/jmb-cpoa
 //--------------------- slides
 ifdef::slides[]
 :dzslides-style: tomorrow
@@ -61,8 +59,11 @@ endif::slides[]
 == Plan
 
 [{incremental}]
+- Introduction
 - Rappels Java
 - Base des patrons
+
+include::introduction.asc[]
 
 == *Rappels* sur des éléments Java importants
 
@@ -103,7 +104,7 @@ include::enum.asc[leveloffset=+1]
 endif::slides[]
 
 
-include::patterns-content.asc[]
+include::patterns-content.adoc[]
 
 ifdef::slides[]
 
