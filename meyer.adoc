@@ -1,0 +1,440 @@
+= A *Software Architecture* Example
+Jean-Michel Bruel <jbruel@gmail.com>
+v1.0, {localdate}
+:icons: font
+:experimental:
+:status:
+:imagesdir: images
+:siteurl: http://bit.ly/jmb-cpoa
+//--------------------- slides
+ifdef::slides[]
+:dzslides-style: tomorrow
+//:dzslides-style: stormy, watermelon, tomorrow, truffle, statement, default
+:dzslides-transition: fade
+:dzslides-fonts: family=Yanone+Kaffeesatz:400,700,200,300&family=Cedarville+Cursive
+:dzslides-highlight: asciidoctor
+//:dzslides-highlight: monokai
+:source-highlighter: highlightjs
+:dzslides-status:
+:topic: .topic
+:intro: .topic.intro
+:statement: .topic.statement
+:incremental: .incremental
+:source: .topic.source
+endif::slides[]
+//--------------------- cours
+ifndef::slides[]
+:source-highlighter: highlight
+:topic:
+:intro:
+:statement:
+:incremental: %step
+:source:
+endif::slides[]
+
+
+// ------------------------------------------ definitions
+ifndef::definitions[]
+include::../definitions.txt[]
+endif::definitions[]
+:androidicon: Android icon:android[role=lime]
+:iosicon: http://www.apple.com/fr/ios/[iOS icon:apple[]]
+
+[{topic}]
+== About
+
+- Initial slides from Bertrand Meyer. 
+- IUT Blagnac Course given in 2017.
+Object
+‐ Oriented Software Construction, 2nd edition 
+- (En français: Conception et Programmation Orientées Objet,Eyrolles)
+
+http://www.eyrolles.com/Informatique/Livre/conception‐et‐programmation‐orientees‐objet‐9782212091113
+
+[{topic}]
+== Plan
+
+[{incremental}]
+- Description of the problem: an example
+- An unstructured solution
+- A top‐down, functional solution
+- An object‐oriented solution yielding a useful design pattern
+- Analysis of the solution and its benefits
+
+[{intro}]
+== Example
+
+[{topic}]
+== A reservation panel
+
+image::meyer1.png[width=80%]
+
+[{topic}]
+== A reservation panel (ctd.)
+
+image::meyer2.png[width=80%]
+
+[{topic}]
+== The transition diagram
+
+[plantuml,meyer-stm,svg]
+----
+include::meyer-stm.plantuml[]
+----
+
+[{topic}]
+== A first attempt
+
+[source,Eiffel]
+----
+P_Flight_query:
+
+display "enquiry on flights" screen
+repeat
+    Read user’s answers and his exit choice C
+    if Error_in_answer then output_message end
+until
+    not Error_in_answer
+end
+
+process answer
+
+inspect C
+    when 0 then goto P_Exit
+    when 1 then goto P_Help
+    ...
+    when n then goto P_Reservation
+end
+----
+
+[{topic}]
+== What’s wrong with the previous scheme?
+
+[{incremental}]
+- Complex *branching structure*
+- Dialogue structure *"wired"* into program structure
+
+
+[{topic}]
+== A functional, top‐down solution
+
+Represent the structure of the diagram by a function:
+
+_transition (i, k)_
+
+giving the state to go to from state _i_ for choice _k_.
+
+This describes the transitions of any particular application.
+
+Function transition may be implemented as a data structure, for example a two‐dimensional array.
+
+[{topic}]
+== A functional, top‐down solution
+
+image::meyer3.png[width=80%]
+
+[{topic}]
+== Top-down solution
+
+//[{incremental}]
+- Only defines graph traversal
+- Should be the same for all applications
+
+image::meyer4.png[width=70%]
+
+[{topic}]
+== New system architecture
+
+[plantuml,meyer-stm2,svg]
+----
+include::meyer-stm2.plantuml[]
+----
+
+[{topic}]
+== Implementation
+
+[{incremental}]
+- Provide `transition` function
+- Define `initial` state
+- Define `is_final` function
+
+image::meyer4.png[width=60%]
+
+[{topic}]
+== Action in a state
+
+image::meyer5.png[width=90%]
+
+
+[{topic}]
+== Going OO: the law of inversion
+
+What about changes & evolution:
+
+- new `transition`
+- new `state`
+- new `application`
+
+[{topic}]
+== Going OO: the law of inversion
+
+image::meyer6.png[width=90%]
+
+[{topic}]
+== Data transmission
+
+[source,java]
+----
+		switch (current_state) {
+		case state1:
+			...
+			break;
+
+		case state2:
+			...
+			break;
+
+		default:
+			break;
+		}
+----
+
+[{topic}]
+== Too much *data transmission*
+
+[plantuml,meyer-stm2,svg]
+----
+include::meyer-stm2.plantuml[]
+----
+
+[{topic}]
+== The law of *inversion*
+
+[quote]
+If your routines exchange too much data, put your routines into your data!
+
+[{topic}]
+== Going *OO*
+
+Grouping by *data abstraction*
+
+[plantuml,meyer3,svg]
+----
+@startuml
+hide circle
+hide empty members
+hide empty methods
+
+abstract class State {
+	execute_state()
+	display()
+	read()
+	...()
+}
+class Initial extends State
+class Flight_Query extends State
+class Reservation extends State
+class etc as "..." extends State
+
+@enduml
+----
+
+[{topic}]
+== Concrete example
+
+Let's consider the following state machine:
+
+ifndef::slides[.Machine à état d'un distributeur simple]
+image::bonbons.png[width=50%]
+
+ifdef::slides[:leveloffset: -1]
+
+[{topic}]
+=== Ugly implementation
+
+[source,java]
+-----------
+public void insererPiece() {
+  if (etat == A_PIECE) {
+    System.out.println("Vous ne pouvez plus insérer de pièces");
+  } else if (etat == EPUISE) {
+    System.out.println("Vous ne pouvez pas insérer de pièce, nous sommes en rupture de stock");
+  } else if (etat == VENDU) {
+    System.out.println("Veuillez patienter, le bonbon va tomber");
+  } else if (etat == SANS_PIECE) {
+    etat = A_PIECE;
+    System.out.println("Vous avez inséré une pièce");
+  }
+}
+-----------
+
+=== What's wrong ?
+
+[{incremental}]
+- not *Open-Close*
+- not *OO*
+- no *explicit* transitions
+- *evoution*!
+
+=== OO implementation
+
+[{incremental}]
+- New Abstract Class `Etat` (or Interface)
+- A method per action
+- Each `Etat` => a class (with a specific behavior)
+- no more conditions => delegation
+
+=== Illutration
+
+Step 1: states
+
+ifdef::slides[]
+
+|====
+| image:bonbons.png[width=100%] | image:bonbons-dc.png[width=100%]
+|====
+
+endif::slides[]
+ifndef::slides[]
+
+ifndef::backend-pdf[]
+image::bonbons.png[]
+endif::backend-pdf[]
+
+image::bonbons-dc.png[]
+
+endif::slides[]
+
+ifdef::slides[=== Illustration (suite)]
+
+Step 2: methods
+
+[source,java]
+-----------
+public class EtatSansPiece implements Etat {
+
+  // Va falloir remplir ici...
+
+  public void insererPiece() {
+    System.out.println("Vous avez inséré une pièce");
+    // changer d'état si besoin
+
+  }
+  ...
+}
+-----------
+
+ifdef::slides[=== Illustration (suite)]
+
+Step 3: let's go!
+
+/////
+[source,java]
+-----------
+public class Distributeur {
+  Etat etatEpuise;
+  Etat etatSansPiece;
+  Etat etatAPiece;
+  Etat etatVendu;
+
+  Etat etat = etatSansPiece; // état initial
+  ...
+  public void insererPiece() {
+    etat.insererPiece();
+  }
+...
+}
+-----------
+/////
+
+[source,java]
+-----------
+public class Distributeur {
+
+  Etat etat = new EtatSansPiece(); // état initial
+  ...
+  public void insererPiece() {
+    etat.insererPiece(); // on délègue à l'état le soin de réagir
+  }
+...
+}
+-----------
+
+ifdef::slides[=== Illustration (suite)]
+
+Step 4 (well, back to step 2): a possible solution...
+
+[source,java]
+-----------
+public class EtatSansPiece implements Etat {
+  Distributeur distributeur; // référence au distributeur qu'on gère
+
+  public EtatSansPiece(Distributeur distributeur) {
+    this.distributeur = distributeur;
+  }
+
+  public void insererPiece() {
+    System.out.println("Vous avez inséré une pièce");
+    distributeur.setEtat(distributeur.getEtatAPiece());
+  }
+  ...
+}
+-----------
+
+=== Le patron Etat
+
+include::pattern/etat.txt[]
+
+[{topic}]
+=== Le patron Etat
+
+[IMPORTANT]
+.*QUESTION*
+====
+Que pensez-vous de notre solution précédente par rapport à ce diagramme UML?
+====
+
+ifdef::slides[=== Solution]
+
+L'état possède une référence vers le contexte (`Distributeur` dans notre exemple).
+
+[plantuml,state4,svg]
+----
+@startuml
+hide circle
+hide empty members
+hide empty methods
+class Distributeur
+class EtatSansPiece [[java:EtatSansPiece]] {
+	+EtatSansPiece(Distributeur distributeur)
+	+void insererPiece()
+}
+interface Etat {
+}
+Etat <|.. EtatSansPiece
+EtatSansPiece -	 "1" Distributeur
+Etat "1" <-- Distributeur
+
+@enduml
+----
+
+ifdef::slides[=== Un autre exemple]
+
+image::State.png[link="https://sourcemaking.com/design_patterns/state",width=80%]
+[detail]#(source : https://sourcemaking.com/design_patterns/state)#
+
+ifdef::slides[:leveloffset: +1]
+
+== Time for a quizz!
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+- Connectez-vous sur : http://www.socrative.com/ (*student login*)
+- Ou téléchargez l'application pour étudiant image:socrative2.png[width=10%]
+- Choisissez la room *44918d67*
+====
+
+image::socrative1.png[width=50%,link=http://www.socrative.com/]
+

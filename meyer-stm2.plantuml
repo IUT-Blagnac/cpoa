@@ -1,0 +1,42 @@
+@startuml
+'------------------------- Fonts & Defs
+'skinparam backgroundColor LightYellow
+skinparam defaultFontName Monaco
+'center footer CC BY-SA 4.0 - http://jmbruel.github.io/smartjmb - 2018
+center footer (c) B. Meyer
+
+'skinparam backgroundColor LightBlue
+skinparam defaultFontName Monaco
+skinparam state {
+        'StartColor Green
+        'EndColor Red
+        ArrowColor Black
+        BackgroundColor Peru
+        'BackgroundColor<<NotVisible>> Olive
+        BorderColor Gray
+        BorderColor<<Running>> DarkGreen
+        'FontName Papyrus
+}
+'------------------------- Main components
+state exe as "execute_session"
+initial -[hidden]> transition
+transition -[hidden]> execute_state
+execute_state -[hidden]> is_final
+
+exe --> initial
+exe --> transition
+exe --> execute_state
+exe --> is_final
+
+display -[hidden]> read
+read -[hidden]> correct
+correct -[hidden]> message
+message -[hidden]> process
+
+execute_state --> display
+execute_state --> read
+execute_state --> correct
+execute_state --> message
+execute_state --> process
+
+@enduml

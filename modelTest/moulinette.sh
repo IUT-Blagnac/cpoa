@@ -1,5 +1,5 @@
 #!/bin/bash -x
-for i in $( ls -ld ./2017/* )
+for i in $( ls -ld ./2018/* )
   do
     echo $i
     if [ -d "$i" ]

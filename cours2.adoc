@@ -36,7 +36,7 @@ endif::slides[]
 
 // ------------------------------------------ definitions
 ifndef::definitions[]
-include::../definitions.txt[]
+include::definitions.txt[]
 endif::definitions[]
 :androidicon: Android icon:android[role=lime]
 :iosicon: http://www.apple.com/fr/ios/[iOS icon:apple[]]

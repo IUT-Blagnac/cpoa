@@ -2,7 +2,7 @@
 # usage: ruby noteModel.rb [directory] [file]
 
 MODEL_NAME = ARGV[1] ? ARGV[1] : "TP1.uml"
-NOTES_FILE = "notes.csv"
+NOTES_FILE = "notes2018.csv"
 
 studentDirectory = ARGV[0] ? ARGV[0] : "."
 studentModelFileName = studentDirectory+"/"+MODEL_NAME

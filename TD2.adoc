@@ -1,0 +1,634 @@
+:moduleTitle: CPOA
+:authorDefault:  Dut/Info-S3/M3105
+:tdnum: TD 2
+
+:eleve:
+//:prof:
+:sourcedir: src/java/TD2
+
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+ifndef::myasciidoconf[]
+include::asciidoc.conf[]
+endif::myasciidoconf[]
+
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+:icons: font
+:experimental:
+
+= {doctitle}
+:Author:  {authorDefault} - (Semaine 46)
+:lang: fr
+:incremental:
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+//----------- définitions --------------
+:sitecours: http://iut-blagnac.github.io/cpoa/[Support de Cours]
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+:principe: Principe de conception
+:allerPlusLoin: Pour aller plus loin
+:about: À propos
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[CAUTION]
+.Version corrigée image:icons/solution.png[]
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[align="left",cols="1,10a",width="100%"]
+|======================
+| {pre}		|
+1. Je sais programmer en {java}.
+2. J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
+3. Je maîtrise les concepts objet de base (héritage, polymorphisme, ...).
+4. J'ai compris ce qu'est un patron et j'ai grand soif d'en apprendre d'autres que
+_Strategy_
+| {objtd}	| Aborder le patron *singleton*
+| {duree}	| *1* TD et *2* TP de 1,5h (sur 2 semaines).
+|======================
+
+ifndef::compact[]
+
+== Rappel du cours
+
+TIP: N'hésitez pas à (re)lire régulièrement le {sitecours}.
+
+endif::compact[]
+
+== La fabrique de chocolat
+
+Vous participez au développement d'un simulateur de fabriques
+de chocolat modernes dont des bouilleurs sont assistés par ordinateur.
+
+La tâche du bouilleur consiste à contenir un mélange de chocolat et de lait,
+à le porter à ébullition puis à le transmettre à la phase suivante où il est
+transformé en plaquettes de chocolat.
+
+=== Problème initial
+
+Voici la classe contrôleur du bouilleur industriel de _Bonchoco, SA_.
+
+.Contrôleur du bouilleur en Java
+[source,java]
+------
+include::{sourcedir}/Chocolat/src/BouilleurChocolat.java[]
+------
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. À quoi servent les attributs `vide` et `bouilli`?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+====
+Si vous étudiez le code, vous constatez qu'ils ont essayé très soigneusement d'éviter
+les catastrophes, par exemple de vider deux mille litres de mélange qui n'a pas bouilli,
+de remplir un bouilleur déjà plein ou de faire bouillir un bouilleur vide !
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+Vous faîtes un cauchemar horrible (quoique) où vous vous noyez dans du chocolat.
+Vous vous réveillez en sursaut avec une crainte terrible.
+
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Que pourrait-il se passer avec plusieurs instances de contrôleurs
+(pour un seul et même bouilleur)?
+. De quoi faudrait-il s'assurer pour éviter ce problème?
+. Trouvez des exemples de situations où il est important de n'avoir
+qu'une seule instance d'une classe donnée.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+====
+. Que l'un remplisse alors que l'autre n'a pas vidé par exemple.
+. S'assurer de n'avoir qu'une seule instance de ce contrôleur.
+. Quelques exemples :
+- accès unique à une base de données (on vient de le voir)
+- objet "parent" d'une interface
+- ...
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+=== Amélioration 1
+
+Vous vous souvenez des premiers exercices {java}  sur les variables de classe
+et vous proposez d'utiliser un compteur d'instance pour solutionner le problème.
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Vous essayez de modifier le constructeur pour qu'il ne fonctionne que si le compteur d'instance est à 0.
+Qu'est-ce qui ne va pas dans le code suivant :
+[source,java]
+-----
+include::{sourcedir}/Chocolat/src/BouilleurCptChocolat.java[lines=5..19]
+-----
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+====
+Pas de return dans un constructeur.
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+
+=== Amélioration 2
+
+Vous changez de stratégie car vous vous souvenez avoir déjà vu ce type de code :
+
+.Idée!
+[source,java]
+------
+public class MaClasse {
+	private MaClasse() {...}
+}
+------
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Est-ce autorisé de rendre privé le constructeur?
+. Comment créer une instance dans ces conditions? N'a-t'on pas tout simplement une classe inutilisable?
+. Complétez le code suivant de façon à résoudre le problème :
++
+[source,java]
+-----
+public class BouilleurChocolat {
+	private boolean vide;
+	private boolean bouilli;
+	...
+	...
+
+	        BouilleurChocolat() {
+		...
+		...
+		}
+
+	...
+	...
+	...
+	...
+
+	public void remplir() {
+		if (estVide()) {
+			vide = false;
+			bouilli = false;
+			// remplir le bouilleur du mélange lait/chocolat }
+		}
+		// reste du code de BouilleurChocolat...
+}
+-----
++
+. Donnez un exemple d'utilisation de cette classe.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+====
+. Oui!
+. En implémentant une fonction qui s'en charge.
++
+.Extrait de la solution
+[source,java]
+-----
+include::{sourcedir}/Chocolat/src/BouilleurSafeChocolat.java[lines=5..20]
+-----
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+=== C'est pas fini!
+
+Vos cauchemars continuent! Mais cette fois ils sont en anglais! Vous voyez un
+grand gaillard irlandais vous menacer (en fait vous confondez _threat_ et _thread_...).
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. En quoi les _threads_ peuvent-ils poser des problèmes dans votre solution?
+. Recopiez sur des bouts de feuilles les fragments de code ci-dessous en les
+plaçant dans les colonnes du tableau suivant pour mettre en évidence le
+problème en reconstituant un enchaînement erroné possible avec deux threads.
+:
++
+[cols="3"]
+|===
+|*Thread 1*
+|*Thread 2*
+|*Valeur de `uniqueInstance`*
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|===
+====
+
+.Bloc 1
+[source,java]
+------
+public static BouilleurChocolat getInstance() {
+------
+
+.Bloc 2
+[source,java]
+------
+if (uniqueInstance == null) {
+------
+
+.Bloc 3
+[source,java]
+------
+uniqueInstance = new BouilleurSafeChocolat();
+------
+
+.Bloc 4
+[source,java]
+------
+		}
+------
+
+.Bloc 5
+[source,java]
+------
+		return uniqueInstance;
+------
+
+.Bloc 6
+[source,java]
+------
+	}
+------
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+====
+.Solution (source <<Freeman05>>)
+image::thread-sol.png[]
+
+[source,java,linenums]
+------
+public class BouilleurSafeChocolat {
+	private boolean vide;
+	private boolean bouilli;
+	private static BouilleurSafeChocolat uniqueInstance;
+
+	private BouilleurSafeChocolat() {
+	  vide = true;
+	  bouilli = false;
+	}
+
+	public static final BouilleurSafeChocolat getInstance() {
+	  if (uniqueInstance == null) {
+        uniqueInstance = new BouilleurSafeChocolat();
+	  }
+	  return uniqueInstance;
+	}
+------
+
+Explications :
+
+. Thread 1 appelle `getInstance()` et détermine que `uniqueInstance` est `null` en ligne 12
+. Thread 1 entre dans le bloc `if` puis est préempté par le thread 2 avant
+l'exécution de la ligne 13
+. Thread 2 appelle `getInstance()` et détermine que `uniqueInstance` est `null` en ligne  12
+. Thread 2 entre dans le bloc `if`, crée un nouveau `BouilleurSafeChocolat` et
+assigne ce nouvel objet à la variable `uniqueInstance` en ligne  13
+. Thread 2 retourne la référence au `BouilleurSafeChocolat` en ligne  15
+. Thread 2 est préempté par le Thread 1
+. Thread 1 reprend où il s'était arrêté et exécute la ligne 13 créant alors une autre instance de `BouilleurSafeChocolat`
+. Thread 1 retourne cette nouvelle instance en ligne  15
+
+====
+
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+=== Solution au multithreading
+
+Vous vous souvenez heureusement de vos cours de début d'année sur les _threads_ :
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Proposez une solution simple à ce problème.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+=====
+Il suffit de faire de `getInstance()` une méthode *synchronisée* :
+[source,java]
+------
+public class BouilleurSafeChocolat {
+  private boolean vide;
+  private boolean bouilli;
+  private static BouilleurSafeChocolat uniqueInstance;
+
+  private BouilleurSafeChocolat() {
+    vide = true;
+    bouilli = false;
+  }
+
+  public static synchronized BouilleurSafeChocolat getInstance() {
+    if (uniqueInstance == null) {
+      uniqueInstance = new BouilleurSafeChocolat();
+    }
+    return uniqueInstance;
+  }
+------
+=====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+=== Problème de la solution!!
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Combien de fois le mécanisme mis en place va-t'il être utile ?
+. Que pensez-vous alors de cette solution ?
+. Proposez une solution où l'instance est créé au démarrage plutôt qu'à la demande.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+=====
+. Une seule fois, lors du 1er passage dans la méthode!!
+. C'est bien trop consomateur en ressource! En pratique, il y a des copies de
+blocs de mémoire, ce qui prend du temps.
+
+. Voici un exemple :
++
+.Création de l'instance unique au démarrage
+[source,java]
+------
+public class Singleton {
+	private static final Singleton uniqueInstance = new Singleton();
+	private Singleton() {}
+	public static Singleton getInstance() { return uniqueInstance;}
+}
+------
++
+En adoptant cette approche, nous nous reposons sur la JVM pour créer
+l'unique instance du Singleton quand la classe est chargée.
+La JVM garantit que l'instance sera créée avant qu'un thread
+quelconque n'accède à la variable statique `uniqueInstance`.
+
+=====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+WARNING: Il peut y avoir des situations où le coût de la synchronisation est inférieur au coût de
+créer dès le départ une instance (par exemple gourmande en mémoire).
+
+[[Singleton]]
+== Singleton
+
+Félicitations, vous venez de mettre en oeuvre votre deuxième patron, le *Singleton*.
+
+[NOTE]
+.Design pattern : *Singleton*
+====
+include::pattern/singleton.txt[]
+====
+
+ifdef::prof[]
+.Quelques exemples de description du patron Singleton
+image::google-singleton.png[link="images/google-singleton.png"]
+endif::prof[]
+
+== Le singleton pour le jeu d'aventure
+
+=== Combiner plusieurs patrons?
+
+Peut-on combiner les deux derniers patrons vus en TD (_Strategy_ et Singleton)?
+En effet, les comportements sont portés par des objets pour l'aspect algorithme,
+mais il n'y a pas de raison de ne pas les partager entre tous les objets qui
+"utilisent" ce comportement?!
+
+ifndef::compact[]
+[NOTE]
+=======
+endif::compact[]
+Dans la plupart des cas ces deux patrons ne vont *pas du tout ensemble*.
+Cette stratégie n'est recommandée que dans un cas bien précis d'utilisation de
+_Strategy_ : celui où les comportements sont simples et "statiques" (pas de
+	consommation de ressources par exemple) et où l'on utilise une association :
+
+image::strategy-assoc.png[]
+
+Avec une implémentation du type :
+
+[source,java]
+------
+...
+vol = new VolerAvecDesAiles();
+cri = new Cancan();
+c1 = new Colvert(vol,cri);
+...
+------
+ifndef::compact[]
+=======
+endif::compact[]
+
+=== Et si on améliorait le jeu d'aventure avec Singleton?
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Faites en sorte que les instances d'objet affectées à chaque comportement
+d'un `Personnage` soient uniques pour chaque comportement distinct.
+. Pourquoi ne devrait-on pas utiliser `getInstance()` dans le cas
+d'une composition (dans le constructeur du composé) ?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+====
+. Extrait de solution (disponible sur le GitHub pour les profs)
++
+.Extrait de ComportemenEpee.java
+[source,java]
+-----
+include::src/java/TD3/src/simuaventure/comportements/arme/impl/ComportementEpee.java[lines=5..11]
+-----
++
+Qu'on pourra éventuellement enrichir pour être complet avec :
++
+[source,java]
+-----
+private ComportementEpee(){
+
+	}
+-----
++
+.Extrait de Chevalier.java
+[source,java]
+-----
+include::src/java/TD3/src/simuavanture/appli/Chevalier.java[lines=8..12]
+-----
++
+NOTE: Il faudra alors changer les appels comme `compAdequat = new ComportementEpee();`
+ en `compAdequat = ComportementEpee.getInstance();`
++
+. Car dans une composition les objets possèdent les instances de leur comportement.
+Elles sont donc uniques et leurs instances ne doivent pas être transmises, pour être sûr que la destruction du composite détruit les composés.
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+NOTE: On voit que ce n'est pas toujours évident de combiner les patrons entre eux.
+
+:numbered!:
+== Pour aller plus loin
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Quelle est la différence entre un singleton et une variable globale?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+====
+Quelques éléments de solution :
+
+- En {java} les variables globales sont des références statiques à des objets.
+- Problème déjà vu de l'instanciation à la demande vs. au démarrage.
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+ifndef::backend-pdf[]
+
+//----------------------------- Question ------------------
+.*icon:graduation-cap[] Mots-croisés*
+image::crossword2-defs.png[link="images/crossword2-defs.png",width=100%]
+image::crossword2-grille.png[link="images/crossword2-grille.png",width=100%]
+
+//.Spéciale dédicace à Alexa
+[WARNING]
+====
+Ce mots-croisés est tiré du livre cité en entête du TD1, et il comporte donc
+des définitions qu'il vous est impossible de trouver :
+
+* 18 => Voiture
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+====
+image::crossword2-sol.png[link="images/crossword2-sol.png",width=100%]
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+endif::backend-pdf[]
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Comment testeriez-vous la mise en oeuvre du patron <<Singleton,Singleton>>?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+====
+Exemples de test :
+
+- Tentative d'instanciation depuis l'extérieur de la classe
+- Tentative de construction de deux objets de type Singleton
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Il existe une autre façon de gérer le problème du multithreading. Cherchez sur Internet
+les articles sur le "verrouillage à double vérification" (qui ne fonctionne que depuis
+	Java `1.5`).
+====
+
+[TIP]
+====
+N'hésitez pas à consulter les liens suivants :
+
+- http://thecodersbreakfast.net/index.php?post/2008/02/25/26-de-la-bonne-implementation-du-singleton-en-java
+- http://christophej.developpez.com/tutoriel/java/singleton/multithread/
+====
+
+ifndef::backend-pdf[]
+
+ifndef::compact[]
+== {about}
+
+****************************************************************
+Document réalisé via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
+Libre d'utilisation et géré par la 'Licence Creative Commons'.
+image:88x31.png["Licence Creative
+Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+****************************************************************
+endif::compact[]
+
+endif::backend-pdf[]

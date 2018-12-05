@@ -184,9 +184,12 @@ a donné son nom à un principe important et bien connu : le principe default:
 endif::slides[]
 
 ifndef::slides[.Barbara Liskov reçoit le _Turing Award_]
-image::liskov.jpg[scaledwidth="70%"]
+image::liskov.jpg[scaledwidth="70%", link="https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0"]
 
-https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0
+ifdef::slides[=== Barbara Liskov est toujours active!]
+
+ifndef::slides[.Barbara Liskov est toujours active!]
+image::liskov2018.png[width=70%,scaledwidth="70%"]
 
 ifdef::slides[=== LSP : le principe]
 
@@ -375,7 +378,7 @@ NOTE: Ainsi ce principe va à l'encontre de l'intuition classique.
 ifdef::slides[=== Exemple (bad)]
 
 .Exemple de code violant le principe d'inversion des dépendances
-image::dip-bad.png[width=70,scaledwidth="90%"]
+image::dip-bad.png[width=70%,scaledwidth="90%"]
 
 ifdef::slides[=== Exemple (good)]
 

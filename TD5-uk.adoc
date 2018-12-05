@@ -139,7 +139,7 @@ the subject's
 .*QUESTION*
 [WARNING]
 ====
-Let's see if you have undestoodits utility.
+Let's see if you have undestood its utility.
 Make a sequence diagram that illustrate the use of the _Observer_ pattern.
 ====
 

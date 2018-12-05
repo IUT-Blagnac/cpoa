@@ -2,7 +2,6 @@
 :authorDefault:  Dut/Info-S3/M3105
 :tdnum: TP 4
 
-
 // eleve : sujet pour élèves
 // prof : support prof pour séance
 // todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
@@ -27,17 +26,19 @@ endif::todoprof[]
 :icons: font
 
 = {doctitle}
-:Author:  {authorDefault}  - (Semaine 48)
+:Author:  {authorDefault}
 :lang: fr
+:slideshowlocation: IUT Blagnac
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169;
 :incremental:
 :experimental:
-:date: {localdate}
 
 :cpte: Compte
 :ag: AgenceBancaire
 :app: ApplicationAgenceBancaire
 
 //----------- définitions --------------
+:sitecours: http://jmbruel.github.io/cpoa/[Support de Cours]
 :pre: PreReq
 :objtd: ObjTD
 :duree: Durée
@@ -47,7 +48,7 @@ endif::todoprof[]
 
 //-------------------- Warning si correction -----------
 ifdef::prof[]
-[CAUTION]
+[CAUTION,solution]
 .Version corrigée
 =====
 Cette version comporte des indications pour les
@@ -56,14 +57,13 @@ réponses aux exercices.
 endif::prof[]
 
 //-------------------- Cartouche d'en-tête -----------
-[[cartouche]]
-[align="left",cols="1,10a",width="90%"]
+[align="left",cols="1,10a",width="100%"]
 |======================
 | {pre}		|
-. Je sais programmer en Java.
-. J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
-. Je m'aperçois que un problème de fond est la gestion des changements.
-| {objtd}	| rendre "objet" du code a priori procédural/impératif.
+1. Je sais programmer en Java.
+2. J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
+3. Je m'aperçois que un problème de fond est la gestion des changements.
+| {objtd}	| rendre "objet" du code a priori fonctionnel.
 | {duree}	| *2* TP de 1,5h.
 |======================
 
@@ -85,7 +85,7 @@ Cette dernière classe ({app}) a été écrite dans une approche purement procé
 
 === Le but
 
-Le but de ce TP est de passer d'une approche impérative/procédurale du code applicatif à une approche objet. Nous allons réécrire et refactorer le code de l'application en plusieurs étapes pour obtenir un code :
+Le but de ce TP est de passer d'une approche fonctionnelle/procédurale du code applicatif à une approche objet. Nous allons réécrire et refactorer le code de l'application en plusieurs étapes pour obtenir un code :
 
 *	plus facile à maintenir car plus clair,
 *	plus facile à étendre,
@@ -105,7 +105,7 @@ Le but est surtout de faire le reste et non pas les fonctions.
 ====
 endif::prof[]
 
-.	Étudier le code proposé pour {app}.
+.	Etudier le code proposé pour {app}.
 .	Comprendre la structure des méthodes (menus, méthodes réalisant les opérations)
 .	Ajouter les fonctions et sous-menu correspondant à l'exécution suivante :
 
@@ -235,8 +235,7 @@ package action;
 import banque.AgenceBancaire;
 /**
  * An Action is an object that implements some action of a user's menu.<BR>
- * It is defined by a message, an execute method to "do" the action.
- * TODO: redefine equals()
+ * It is defined by a message, an optional code, an execute method to "do" the action.
  */
 public interface Action  {
 	/**
@@ -245,6 +244,13 @@ public interface Action  {
 	 * @return the message of the action
 	 */
 	public String actionMessage ();
+
+	/**
+	 * Code of the action (may be used to identify the action among other ones).
+	 *
+	 * @return the code of the action
+	 */
+	public String actionCode ();
 
 	/**
 	 * The method to call in order to "execute" the action on <code>ag</code>.
@@ -259,7 +265,7 @@ public interface Action  {
 .	Déclarer une classe par action (option de menu) à utiliser. Commencer par "Liste des comptes de l'agence" :
 ..	Créer une classe (le nom +ActionListeDesComptes+ paraît adapté) dans le package +application.action+,
 ..	qui implémente +Action+,
-..	dotée de l'attribut +message+)
+..	dotée de deux attributs (message, code)
 ..	écrire le code dont un constructeur correctement paramétré,
 ..	la méthode +execute(AgenceBancaire)+ réalisera l'affichage écran de la liste des comptes de l'agence bancaire en paramètre.
 .	De la même manière, déclarer une classe pour l'action "Voir un compte (par son numéro)" (classe +ActionVoirCompteNumero+) dans le package +application.action+.
@@ -309,15 +315,10 @@ public interface ActionList extends Action {
 +
 .	Déclarer une classe +ActionListAgenceBancaire+ dans le package +application.actionlist+,
 ..	qui implémente +ActionList+,
-..	dotée de deux attributs (message, liste des actions). La liste des actions sera les différentes options que l'action list (menu) devra afficher.
+..	dotée de quatre attributs (message, code, title, liste des actions). La liste des actions sera les différentes options que l'action list (menu) devra afficher.
 ..	écrire le code dont un constructeur correctement paramétré,
 ..	la méthode +execute(AgenceBancaire)+ réalisera ce qui est défini dans la documentation. Le menu affiché sera identique à celui de la version antérieure de l'application. Chaque option de menu sera numérotée par +execute()+ de 1 à n (nombre d'action) + 0 pour sortir du menu.
 
-Vous devez obtenir une architecture comme celle-ci (attention,
-  légèrement différente, avec un attribut code par exemple) :
-
-.Structure de l'application
-image::applicationBanqueAction.png[]
 
 === Et maintenant : go ! Maintenance et extension facilitées
 
@@ -325,47 +326,6 @@ image::applicationBanqueAction.png[]
 ..	de créer une instance de chaque classe +Action+ créée,
 ..	de créer une instance de +ActionListAgenceBancaire+,
 ..	lancer +execute()+ sur l'instance de +ActionListAgenceBancaire+.
-+
-.Exemple d'une telle classe
-[source,java]
----------
-public class MainTest {
-
-  /**
-  * @param args
-  * @throws Exception
-  */
-  public static void main(String[] args) throws Exception {
-
-    AgenceBancaire ag = AccesAgenceBancaire.getAgenceBancaire();
-
-    Action a1 = new Action1("Liste des comptes de l'agence");
-    Action a2 = new Action2("Voir un compte (par son numéro)");
-    Action a3 = new Action3("Ajouter un compte");
-    Action a4 = new Action4("Supprimer un compte");
-    Action a5 = new Action5("Déposer de l'argent sur un compte");
-    Action a6 = new Action6("Retirer de l'argent sur un compte");
-
-    ActionList al1 = new ActionListAgenceBancaire("Menu Général");
-    ActionList al2 = new ActionListAgenceBancaire("Menu gestion des comptes");
-    ActionList al3 = new ActionListAgenceBancaire("Menu opérations sur comptes");
-
-    al1.addAction(a1);
-    al1.addAction(a2);
-    al1.addAction(al3);
-    al1.addAction(al2);
-
-    al2.addAction(a3);
-    al2.addAction(a4);
-
-    al3.addAction(a5);
-    al3.addAction(a6);
-
-    al1.execute(ag);
-  }
-
-}
----------
 +
 [WARNING]
 ====
@@ -431,7 +391,7 @@ Compte tenu des observations de la section précédente, il faudrait des classes
 package action;
 /**
  * An Action is an object that implements some action of a user's menu.<BR>
- * It is defined by a message, an execute method to "do" the action.<BR>
+ * It is defined by a message, an optional code, an execute method to "do" the action.<BR>
  * It is parameterized by the  type of object on which the action may act on (execute on).
  *
  * @param <E> The type of object on which the action may act on.
@@ -443,6 +403,13 @@ public interface Action <E> {
 	 * @return the message of the action
 	 */
 	public String actionMessage ();
+
+	/**
+	 * Code of the action (may be used to identify the action among an action list).
+	 *
+	 * @return the code of the action
+	 */
+	public String actionCode ();
 
 	/**
 	 * The method to call in order to "execute" the action on <code>e</code>.
@@ -593,15 +560,3 @@ Allons-y !
 ..	Modifier les accès à l'entrée standard en utilisant +ApplicationContextAgenceBancaire+.
 ..	Modifier les accès à la sortie standard en utilisant +ApplicationContextAgenceBancaire+.
 .	Ca marche ??
-
-ifndef::compact[]
-== About...
-
-****************************************************************
-Document réalisé par mailto:{email}[{author}] via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
-Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
-image:88x31.png["Licence Creative
-Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
-http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
-****************************************************************
-endif::compact[]

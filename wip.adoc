@@ -22,7 +22,8 @@ ifdef::slides[]
 :topic: .topic
 :intro: .topic.intro
 :statement: .topic.statement
-:incremental: .incremental
+//:incremental: .incremental
+:incremental: %step
 :source: .topic.source
 endif::slides[]
 //--------------------- cours
@@ -61,10 +62,13 @@ endif::slides[]
 == Plan
 
 [{incremental}]
-- Fin des patrons
-- Révisions
-- Projet en cours
-- Stages
+- Retour sur Factory Method
+- Abstract Factory
+- Retour sur SOLID
+- Exemple complet (cours de B. Meyer)
+- Quizz
+
+include::fabrique.asc[]
 
 /////
 [{intro}]
@@ -94,25 +98,38 @@ image::event4.png[width=60%]
 include::modelTest/noteModel.rb[]
 ----
 
-NOTE: Moyenne: *[red]#11/20 !!#*
+ifdef::slides[== Retour TP1 (suite)]
+
+[{incremental}]
+- Attendus	{nbsp}92
+- Rendus	{nbsp}55	(59%) => 37 `0/20`
+- Nom NOK	{nbsp}23	(41% des rendus) => 23 `0/20` de plus
+- Exemple de rendus erronés : `TP1_uml.png`, `TP1.uml.txt`, `SuperCanardBof.rar`, `CPOA_TP1_John_Smith_2B.uml`, `TP1.txt`, `TP1.zip`, `uml.uml`
 
 ifdef::slides[== Retour TP1 (suite)]
 
-[horizontal,%step]
-Attendus::	70
-Rendus::	43	(61%) => 27 `0/20`
-Nom OK::	16	(37% des rendus) => 16 `0/20` de plus normalement
-+
-Exemple de noms : `TP1-Toto-G1A.uml`, `TP1.zip`, `tp1.uml`, `TP1.txt`, `TP1.png`, `TD1.uml`
-+
-20/20::	31
-17/20:: 5
-14/20::	2
-11/20:: 1
-09/20:: 2
-03/20::	2
-Moy.:: 11/20
+image::TP1-retours.png[width=60%]
 
+20/20::	25
+17/20:: 2
+14/20::	4
+11/20:: 1
+
+ifdef::slides[== Réunion de département]
+
+[incremental]
+- Process: TA -> Prof -> Chef -> Département
+- "Notes TP1 1/10 du TP" => ???
+- Rendu de TP dimanche soir : Non (en général)
+- Retard : Non (en général)
+- MPA : injustice du sujet de départ : Non
+
+ifdef::slides[== Discord IUT]
+
+[incremental]
+- Attention, on n'est pas connecté 7/24 !
+- J'ai corrigé tous les QCMs qui m'ont été envoyé...
+- ...sauf ceux à 23h30 la veille!
 
 
 == Introduction : importance des patrons
@@ -497,7 +514,9 @@ ifdef::slides[=== Exemple (good)]
 .Exemple de code ne violant plus le principe d'inversion des dépendances
 image::dip.png[width=80%,scaledwidth="90%"]
 
-=== SOLID et patrons
+/////
+
+== SOLID et patrons
 
 .*QUESTION*
 [WARNING]
@@ -519,7 +538,7 @@ ifdef::slides[]
 endif::slides[]
 
 //----------------------------------------------------- Correction -------------------------
-ifdef::slides[=== SOLID et patrons (éléments de réponses)]
+ifdef::slides[== SOLID et patrons (éléments de réponses)]
 ifdef::prof[]
 Quelques éléments de réponses :
 
@@ -537,6 +556,8 @@ _**D**ependency Inversion Principle_::
 
 endif::prof[]
 //----------------------------------------------------- Correction -------------------------
+
+/////
 
 ifndef::slides[:leveloffset: +1]
 ifdef::slides[:leveloffset: +1]
@@ -675,8 +696,6 @@ include::adapteur.asc[leveloffset=+1]
 
 include::visiteur.asc[leveloffset=+1]
 
-/////
-
 //include::proxy.asc[]
 
 include::iterateur.asc[]
@@ -707,8 +726,6 @@ ifdef::slides[:leveloffset: +1]
 
 endif::inclusion[]
 
-
-
 ifdef::slides[:leveloffset: 0]
 
 == Time for a quizz!
@@ -724,7 +741,6 @@ ifdef::slides[:leveloffset: 0]
 
 image::socrative1.png[width=50%,link=http://www.socrative.com/]
 
-/////
 == Quizz
 
 image::quizz1.png[]
@@ -776,7 +792,6 @@ image::quizz12.png[]
 == Quizz
 
 image::quizz13.png[]
-/////
 
 [{intro}]
 == Projet final
@@ -842,3 +857,5 @@ TIP: Pensez à discord pour les questions!!
 http://bit.ly/jmb-suiviStage
 
 image::suiviStage.jpg[width=70%]
+
+/////

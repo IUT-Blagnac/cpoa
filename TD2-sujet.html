@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.6">
+<meta name="generator" content="Asciidoctor 1.5.8">
 <meta name="author" content="Dut/Info-S3/M3105 - (Semaine 46)">
 <title>CPOA - Sujet TD 2</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./pygments-manni.css">
 </head>
 <body class="article">
@@ -22,7 +22,7 @@
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 9.0909%;">
 <col style="width: 90.9091%;">
@@ -30,7 +30,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PreReq</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Je sais programmer en <a href="https://www.java.com/fr/">Java</a>.</p>
@@ -50,13 +50,13 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Aborder le patron <strong>singleton</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><strong>1</strong> TD et <strong>2</strong> TP de 1,5h (sur 2 semaines).</p>
 </div></div></td>
 </tr>
@@ -84,7 +84,7 @@ transformé en plaquettes de chocolat.</p>
 <div class="listingblock">
 <div class="title">Contrôleur du bouilleur en Java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-cm">/**</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-cm">/**</span>
 <span class="tok-cm"> * @author bruel (taken from Design Pattern - Head First, O&#39;Reilly, 09/2004)</span>
 <span class="tok-cm"> *</span>
 <span class="tok-cm"> */</span>
@@ -196,7 +196,7 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurCptChocolat</span> <span class="tok-o">{</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurCptChocolat</span> <span class="tok-o">{</span>
 	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
 	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
 	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">nbInstance</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span>
@@ -226,7 +226,7 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 <div class="listingblock">
 <div class="title">Idée!</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MaClasse</span> <span class="tok-o">{</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MaClasse</span> <span class="tok-o">{</span>
 	<span class="tok-kd">private</span> <span class="tok-nf">MaClasse</span><span class="tok-o">()</span> <span class="tok-o">{...}</span>
 <span class="tok-o">}</span></code></pre>
 </div>
@@ -251,7 +251,7 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 <p>Complétez le code suivant de façon à résoudre le problème :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-o">{</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-o">{</span>
 	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-o">;</span>
 	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-o">;</span>
 	<span class="tok-o">...</span>
@@ -289,7 +289,7 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_est_pas_fini"><a class="link" href="#_c_est_pas_fini">1.4. C&#8217;est pas fini!</a></h3>
+<h3 id="_cest_pas_fini"><a class="link" href="#_cest_pas_fini">1.4. C&#8217;est pas fini!</a></h3>
 <div class="paragraph">
 <p>Vos cauchemars continuent! Mais cette fois ils sont en anglais! Vous voyez un
 grand gaillard irlandais vous menacer (en fait vous confondez <em>threat</em> et <em>thread</em>&#8230;&#8203;).</p>
@@ -312,7 +312,7 @@ grand gaillard irlandais vous menacer (en fait vous confondez <em>threat</em> et
 plaçant dans les colonnes du tableau suivant pour mettre en évidence le
 problème en reconstituant un enchaînement erroné possible avec deux threads.
 :</p>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -416,37 +416,37 @@ problème en reconstituant un enchaînement erroné possible avec deux threads.
 <div class="listingblock">
 <div class="title">Bloc 1</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-o">()</span> <span class="tok-o">{</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 2</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-o">)</span> <span class="tok-o">{</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-o">)</span> <span class="tok-o">{</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 3</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-o">();</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">BouilleurSafeChocolat</span><span class="tok-o">();</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 4</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java">		<span class="tok-o">}</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span>		<span class="tok-o">}</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 5</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java">		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span>		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-o">;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 6</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java">	<span class="tok-o">}</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span>	<span class="tok-o">}</span></code></pre>
 </div>
 </div>
 </div>
@@ -549,7 +549,7 @@ fournit un point d&#8217;accès global à cette instance.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_le_singleton_pour_le_jeu_d_aventure"><a class="link" href="#_le_singleton_pour_le_jeu_d_aventure">3. Le singleton pour le jeu d&#8217;aventure</a></h2>
+<h2 id="_le_singleton_pour_le_jeu_daventure"><a class="link" href="#_le_singleton_pour_le_jeu_daventure">3. Le singleton pour le jeu d&#8217;aventure</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_combiner_plusieurs_patrons"><a class="link" href="#_combiner_plusieurs_patrons">3.1. Combiner plusieurs patrons?</a></h3>
@@ -575,16 +575,16 @@ Cette stratégie n&#8217;est recommandée que dans un cas bien précis d&#8217;u
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span class="tok-o">...</span>
-<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">VolerAvecDesAiles</span><span class="tok-o">();</span>
-<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Cancan</span><span class="tok-o">();</span>
-<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-nf">Colvert</span><span class="tok-o">(</span><span class="tok-n">vol</span><span class="tok-o">,</span><span class="tok-n">cri</span><span class="tok-o">);</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-o">...</span>
+<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">VolerAvecDesAiles</span><span class="tok-o">();</span>
+<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Cancan</span><span class="tok-o">();</span>
+<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Colvert</span><span class="tok-o">(</span><span class="tok-n">vol</span><span class="tok-o">,</span><span class="tok-n">cri</span><span class="tok-o">);</span>
 <span class="tok-o">...</span></code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton"><a class="link" href="#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton">3.2. Et si on améliorait le jeu d&#8217;aventure avec Singleton?</a></h3>
+<h3 id="_et_si_on_améliorait_le_jeu_daventure_avec_singleton"><a class="link" href="#_et_si_on_améliorait_le_jeu_daventure_avec_singleton">3.2. Et si on améliorait le jeu d&#8217;aventure avec Singleton?</a></h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -736,7 +736,7 @@ les articles sur le "verrouillage à double vérification" (qui ne fonctionne qu
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-03 09:52:37 CET
+Last updated 2017-12-08 22:13:51 +0100
 </div>
 </div>
 </body>

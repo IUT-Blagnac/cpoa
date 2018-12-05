@@ -277,6 +277,13 @@ Ce qui donne pour l'application `SuperCanard` :
                     └── VolerAvecDesAiles.java
 -------
 
+[WARNING]
+====
+ Pour avoir une vue hiérarchique des packages dans eclipse, cf. https://stackoverflow.com/questions/3915961/how-to-view-hierarchical-package-structure-in-eclipse-package-explorer
+
+image::packagesHierarchy.png[width=50%]
+====
+
 [[reverse]]
 [appendix]
 == Modèles et tests d'architecture

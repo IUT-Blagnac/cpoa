@@ -1,0 +1,43 @@
+@startuml
+'------------------------- Fonts & Defs
+'skinparam backgroundColor LightYellow
+skinparam defaultFontName Monaco
+'center footer CC BY-SA 4.0 - http://jmbruel.github.io/smartjmb - 2018
+center footer (c) B. Meyer
+
+'skinparam backgroundColor LightBlue
+skinparam defaultFontName Monaco
+skinparam state {
+        'StartColor Green
+        'EndColor Red
+        ArrowColor Black
+        'BackgroundColor Peru
+        BackgroundColor<<NotVisible>> Olive
+        BorderColor Gray
+        BorderColor<<Running>> DarkGreen
+        'FontName Papyrus
+}
+'------------------------- Main components
+state help2 as "Help"
+state help3 as "Help"
+state help4 as "Help"
+[*] --> Initial
+Initial -l-> Help
+Help --> Initial
+Initial --> Confirmation
+Initial -> Flight_Query
+Flight_Query -> Initial
+Flight_Query -> help4
+help4 -> Flight_Query
+Confirmation --> Reservation
+Reservation --> Confirmation
+Confirmation --> Initial
+Seat_Query --> Flight_Query
+Flight_Query --> Seat_Query
+Seat_Query --> help3
+help3 --> Seat_Query
+Reservation -r-> Seat_Query
+Seat_Query -l-> Reservation
+Reservation --> help2
+help2 --> Reservation
+@enduml
