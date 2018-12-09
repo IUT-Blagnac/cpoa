@@ -1,0 +1,81 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "Comportements.impl"
+class ComportementArc
+class ComportementEpee
+class ComportementMassue
+class ComportementPoignard
+' end package
+
+' package "appli"
+class Jeu
+class Menu
+' end package
+
+' package "Comportements"
+interface ComportementArme
+' end package
+
+' package "appli.personnage"
+class Personnage
+class Chevalier
+class Reine
+class Roi
+class Troll
+' end package
+
+' content
+' -------
+
+' Jeu:
+Jeu : void main(String)
+
+' Menu:
+Menu : void showPersonnages()
+Menu : void combat()
+Menu : void creerPersonnage()
+Menu : void changerArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void UtiliserArme()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void UtiliserArme()
+
+' ComportementArme:
+ComportementArme : void UtiliserArme()
+
+' ComportementMassue:
+ComportementArme <|.. ComportementMassue
+ComportementMassue : void UtiliserArme()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void UtiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+Personnage : void effectuerAttaque()
+Personnage : String getName()
+Personnage : String getClasse()
+
+' Roi:
+Personnage <|-- Roi
+
+' Troll:
+Personnage <|-- Troll
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' Reine:
+Personnage <|-- Reine
+
+@enduml

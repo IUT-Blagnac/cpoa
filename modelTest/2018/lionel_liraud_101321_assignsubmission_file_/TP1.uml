@@ -1,0 +1,94 @@
+@startuml
+
+' definitions
+' -----------
+
+' package ""
+class Main
+' end package
+
+' package "PersonnaJ"
+class Chevalier
+abstract PersonnaJ
+class Plebeien
+class Reine
+class Roi
+class Troll
+' end package
+
+' package "Comportement"
+interface ComportementArme
+' end package
+
+' package "Arme"
+class ComportementArc
+class ComportementEpee
+class ComportementMassue
+class ComportementPasDArme
+class ComportementPoignard
+class ComportementRose
+' end package
+
+' content
+' -------
+
+' Chevalier:
+PersonnaJ <|-- Chevalier
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' ComportementRose:
+ComportementArme <|.. ComportementRose
+ComportementRose : void utiliserArme()
+
+' Plebeien:
+PersonnaJ <|-- Plebeien
+Plebeien : void combattre()
+Plebeien : void setArme(ComportementArme)
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' Main:
+Main : void main(String)
+
+' ComportementPasDArme:
+ComportementArme <|.. ComportementPasDArme
+ComportementPasDArme : void utiliserArme()
+
+' Troll:
+PersonnaJ <|-- Troll
+Troll : void combattre()
+Troll : void setArme(ComportementArme)
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Reine:
+PersonnaJ <|-- Reine
+Reine : void combattre()
+Reine : void setArme(ComportementArme)
+
+' ComportementMassue:
+ComportementArme <|.. ComportementMassue
+ComportementMassue : void utiliserArme()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' PersonnaJ:
+PersonnaJ --> "1" ComportementArme
+PersonnaJ : void combattre()
+PersonnaJ : void setArme()
+PersonnaJ : ComportementArme getArme()
+
+' Roi:
+PersonnaJ <|-- Roi
+Roi : void combattre()
+Roi : void setArme(ComportementArme)
+
+@enduml

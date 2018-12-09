@@ -1,0 +1,73 @@
+@startuml
+
+' definitions
+' -----------
+
+' package ""
+class Chevalier
+class ComportementArc
+interface ComportementArme
+class ComportementEpee
+class ComportementMainsNues
+class ComportementPoignard
+class Menu
+class Paysan
+abstract Personnage
+class Reine
+class Roi
+class Troll
+' end package
+
+' content
+' -------
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void combattre()
+
+' Menu:
+Menu : void main(String)
+Menu : Personnage menu()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' Roi:
+Personnage <|-- Roi
+Roi : void combattre()
+
+' Paysan:
+Personnage <|-- Paysan
+Paysan : void combattre()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void combattre()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' ComportementMainsNues:
+ComportementArme <|.. ComportementMainsNues
+ComportementMainsNues : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+Personnage : String toString()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void combattre()
+
+@enduml

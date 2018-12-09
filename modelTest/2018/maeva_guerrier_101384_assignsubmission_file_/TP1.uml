@@ -1,0 +1,70 @@
+@startuml
+
+' definitions
+' -----------
+
+' package ""
+class Chevalier
+class ComportementArc
+interface ComportementArme
+class ComportementEpee
+class ComportementPoignard
+abstract Personnage
+class Reine
+class Roi
+class SuperPersonnage
+class SuperPersonnageTest
+class Troll
+' end package
+
+' content
+' -------
+
+' SuperPersonnage:
+SuperPersonnage : void main(String)
+
+' Troll:
+Personnage <|-- Troll
+Troll : void combattre()
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void combattre()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' Roi:
+Personnage <|-- Roi
+Roi : void combattre()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void combattre()
+
+' SuperPersonnageTest:
+SuperPersonnageTest : void setUpStreams()
+SuperPersonnageTest : void cleanUpStreams()
+SuperPersonnageTest : void testComportementReine()
+SuperPersonnageTest : void testComportementRoi()
+SuperPersonnageTest : void testComportementChevalier()
+SuperPersonnageTest : void testComportementTroll()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+@enduml

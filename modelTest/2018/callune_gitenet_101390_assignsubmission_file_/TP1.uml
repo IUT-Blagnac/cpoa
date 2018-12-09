@@ -1,0 +1,90 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "Personnages"
+class Chevalier
+enum Classes
+class Gueux
+abstract Personnage
+class Reine
+class Roi
+class Troll
+' end package
+
+' package "packageParDefaut"
+class menu
+' end package
+
+' package "ComportementArme"
+class ComportementArc
+interface ComportementArme
+class ComportementEpee
+class ComportementMains
+class ComportementPoignard
+enum Weapons
+' end package
+
+' content
+' -------
+
+' ComportementArme:
+ComportementArme : void UtiliserArme()
+
+' Roi:
+Personnage <|-- Roi
+
+' Troll:
+Personnage <|-- Troll
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void UtiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' Gueux:
+Personnage <|-- Gueux
+
+' ComportementMains:
+ComportementArme <|.. ComportementMains
+ComportementMains : void UtiliserArme()
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' Classes:
+Classes : Classes Chevalier
+Classes : Classes Reine
+Classes : Classes Roi
+Classes : Classes Troll
+Classes : Classes values()
+Classes : Classes valueOf(String)
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void UtiliserArme()
+
+' menu:
+menu : void main(String)
+
+' Reine:
+Personnage <|-- Reine
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void UtiliserArme()
+
+' Weapons:
+Weapons : Weapons Main
+Weapons : Weapons Arc
+Weapons : Weapons Epee
+Weapons : Weapons Poignard
+Weapons : Weapons values()
+Weapons : Weapons valueOf(String)
+
+@enduml

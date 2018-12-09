@@ -1,0 +1,84 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "game"
+class skyrimLauncher
+' end package
+
+' package "game.personnages"
+class Reine
+class Gnome
+class Chevalier
+abstract Personnage
+class Roi
+class Troll
+' end package
+
+' package "game.armes.comportements"
+class ComportementEpeeSupreme
+class ComportementPoignard
+class ComportementArc
+interface ComportementArme
+class ComportementEpee
+' end package
+
+' package "game.ui"
+class MainUI
+' end package
+
+' content
+' -------
+
+' Gnome:
+Personnage <|-- Gnome
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' skyrimLauncher:
+skyrimLauncher : void main(String)
+
+' Troll:
+Personnage <|-- Troll
+Troll : void combattre()
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void combattre()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void combattre()
+
+' ComportementEpeeSupreme:
+ComportementArme <|.. ComportementEpeeSupreme
+ComportementEpeeSupreme --> "1" ComportementEpeeSupreme
+ComportementEpeeSupreme : ComportementEpeeSupreme getInstance()
+ComportementEpeeSupreme : void utiliserArme()
+
+' MainUI:
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Roi:
+Personnage <|-- Roi
+Roi : void combattre()
+
+@enduml

@@ -1,0 +1,64 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "adventure"
+class Main
+' end package
+
+' package "adventure.characters"
+class Chevalier
+abstract Personnage
+class Reine
+class Roi
+class Troll
+' end package
+
+' package "adventure.weapons"
+class Arc
+interface Arme
+class Epee
+class Poignard
+' end package
+
+' content
+' -------
+
+' Main:
+Main : void main(String)
+
+' Arme:
+Arme : void utiliserArme()
+
+' Poignard:
+Arme <|.. Poignard
+Poignard : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+
+' Epee:
+Arme <|.. Epee
+Epee : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+
+' Personnage:
+Personnage --> "1" Arme
+Personnage : void combattre()
+Personnage : void setArme(Arme)
+Personnage : void afficherArme()
+
+' Roi:
+Personnage <|-- Roi
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' Arc:
+Arme <|.. Arc
+Arc : void utiliserArme()
+
+@enduml

@@ -1,0 +1,59 @@
+@startuml
+
+class Chevalier [[java:personnage.Chevalier]] {
+    +Chevalier(ComportementArme arme)
+}
+Personnage <|-- Chevalier
+
+class Reine [[java:personnage.Reine]] {
+    +Reine(ComportementArme arme)
+}
+Personnage <|-- Reine
+
+class ComportementEpee [[java:comportementArme.ComportementEpee]] {
+    +void utiliserArme()
+}
+ComportementArme <|.. ComportementEpee
+
+interface ComportementArme [[java:arme.ComportementArme]] {
+    +void utiliserArme()
+}
+
+class ComportementArc [[java:comportementArme.ComportementArc]] {
+    +void utiliserArme()
+}
+
+ComportementArme <|.. ComportementArc
+
+class ComportementPoignard [[java:comportementArme.ComportementPoignard]] {
+    +void utiliserArme()
+}
+
+ComportementArme <|.. ComportementPoignard
+
+abstract class Personnage [[java:perso.Personnage]] {
+
+    +Personnage(ComportementArme arme)
+    +void combattre()
+    +void setArme(ComportementArme a)
+}
+
+class Roi [[java:personnage.Roi]] {
+    +Roi(ComportementArme arme)
+}
+
+Personnage <|-- Roi
+
+Personnage  o-down-> "1" ComportementArme
+
+class Troll [[java:personnage.Troll]] {
+    +Troll(ComportementArme arme)
+}
+
+Personnage <|-- Troll
+
+class Menu [[java:jeu.Menu]]{
+    + void main(String args)
+}
+
+@enduml

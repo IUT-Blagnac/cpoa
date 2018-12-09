@@ -1,0 +1,43 @@
+// ------------------------------------------
+//  Created by Jean-Michel Bruel on 2014-11.
+//  Copyright (c) 2014 IRIT/U. Toulouse. All rights reserved.
+// ------------------------------------------
+= CPOA - (Suite Design Pattern)
+Jean-Michel Bruel <jbruel@gmail.com>
+v1.0, {localdate} - First draft
+:status: bottom
+:inclusion:
+:icons: font
+
+// ------------------------------------------
+include::definitions.txt[]
+include::asciidoc.conf[]
+
+ifdef::slides[]
+
+== Suivre ces slides sur Internet...
+
+.........
+http://bit.ly/jmb-cpoa
+.........
+
+
+endif::slides[]
+
+include::patterns.asc[leveloffset=+1]
+
+== Ready for a quizz?
+
+//----------------------------- Question ------------------
+[icon="{iconsdir}/tuxteacher.png"]
+.*QUESTION*
+[WARNING]
+====
+
+- Connectez-vous sur : http://www.socrative.com/ (*student login*)
+- Ou téléchargez l'application pour étudiant image:socrative2.png[width=10%]
+- Choisissez la room *44918d67*
+====
+
+image::socrative1.png[width=50%,link=http://www.socrative.com/]
+
