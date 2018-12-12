@@ -118,7 +118,12 @@ ifdef::prof[]
 ..	Première ligne des JLabels
 ..	Lignes suivantes : un JTextField par cellule
 .	un JScrollPane qui contient le JPanel
+
+
 ====
+
+image:jtabletd.svg[]
+
 endif::prof[]
 
 Quelles sont les limites de cette approche ? Imaginez l'UT2J => 30.000 étudiants! ...

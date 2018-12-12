@@ -95,7 +95,7 @@ endif::prof[]
 Etendre le code `observer.nonpattern` pour présenter le vecteur de `CourseRecords` comme un camembert (_pie chart_), en plus de la forme actuelle (_bar chart_). 
 
 TIP: Allez à l'essentiel, le but n'est pas d'avoir un super code, mais de vous confronter à la difficulté d'évolution.
-Pour plus de détails sur les camembers en Swing, cf. <<section finale>>.
+Pour plus de détails sur les camembers en Swing, cf. <<sf,section finale>>.
 
 === Evolution du code `observer.pattern`
 
@@ -124,7 +124,7 @@ Vous aurez remarqué que `CourseController` n'est intéressé que par les change
 Etendre l'interface d'inscription de `Observable` (la méthode `attach`) pour que `CourseController` ne reçoivent plus les mises à jour des `updates` qui ne l'intéressent pas. 
 
 
-[section finale]
+[[sf]]
 == How to draw a pie chart ?
 
 
