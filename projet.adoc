@@ -10,6 +10,7 @@ v1.8, {localdate}
 :experimental:
 :bluff: https://en.wikipedia.org/wiki/Blind_man%27s_bluff_%28poker%29
 
+// Initial idea: https://www.usna.edu/Users/cs/wcbrown/courses/S15IC211/lec/l03/lec.html
 // ------------------------------------------
 include::definitions.txt[]
 include::asciidoc.conf[]
@@ -129,6 +130,17 @@ WARNING: Ce rapport devra s'appeler Nom1-Nom2.pdf, avec le nom des 2 membres du 
 
 WARNING: Pour générer ce `.zip`, choisissez bien l'option menu:Export...[General>Archive File] après
 un click droit sur le projet en question.
+
+[TIP]
+====
+
+* Pensez à conserver la version originale de vos fichiers pour y faire référence dans vos documentations.
+* Je vous conseille de travailler en utilisant les outils MPA (git, version, branche, README, build, CI etc.)
+* Pour faire référence à des lignes du code originales, vous pourrez utilisez les références :
+** https://gist.github.com/jmbruel/42bfdff35e4c0ff437d40dd16469e646#file-game-java-L21 (pour la ligne 21 du `Game.java` par exemple)
+** https://gist.github.com/jmbruel/846115f49df9714985fdb47b098cde3d#file-card-java-L27 (pour la ligne 27 du `Card.java` par exemple)
+** https://gist.github.com/jmbruel/0acb2b35dd01a850cac7bd02de51cec3#file-player-java-L3 (pour la ligne 3 du `Player.java` par exemple)
+====
 
 === Evaluation et critères
 
