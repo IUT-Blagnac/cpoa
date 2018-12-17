@@ -77,9 +77,16 @@ cette application en (cf. détails juste après cette liste) :
 
 Vous choisirez parmis les attentes clients suivantes (numérotées pour vos documentations et références, non pas pour les prioriser) :
 
-. Choisir au lancement le nombre de joueurs, le montant des pots, etc.
-. Prise en compte des phases de pari : actuellement le jeu ne permet que de gagner ou perdre, pas de faire monter les enchères comme au jeu de poker normal.
-Vous pourrez vous attaquer au problème du multi-joueur si vous trouver une idée pour gérer le fait que chaque joueur voit les cartes des autres, mais non la sienne!!
+. Eliminer les limites du jeu en permettant de choisir (au lancement par exemple) :
+.. le nombre de joueurs,
+.. le montant des pots (identique pour chaque joueurs quand même),
+.. la règle de fin de jeu (on s'arrête au premier joueur à 0 ou bien jusqu'au dernier?),
+.. intégrer le principe d'une _ante_ (somme versée par chaque joueur au début de chaque coup) qui s'incrémente avec le nombre de tour,
+.. gérer le 1er qui parle (chacun son tour),
+.. etc. (vous pouvez en proposer d'autres)
+. Prise en compte des phases de pari (_check_, _bet(x)_, _call_, _fold_): actuellement le jeu ne permet que de gagner ou perdre, pas de faire monter les enchères comme au jeu de poker normal : un joueur, à son tour de jeu peut passer (_check_) si personne n'a encore ouvert les paris, parier une somme (inférieure ou égale à son pot), égaliser (_call_), enchérir (_bet(x)_ avec x supérieur à la dernière enchère), ou se coucher (_fold_). 
+. Vous pourrez vous attaquer au problème du multi-joueur si vous trouver une idée pour gérer le fait que chaque joueur voit les cartes des autres, mais non la sienne!!
+. Vous pourrez vous attaquer au problème du multi-joueur en réseau!!
 
 
 === Bonnes pratiques
@@ -122,7 +129,7 @@ comme les noms et contact des binômes, une table des matières, ...)
 une courte explication par chaque fonctionnalité nouvelle ou refactoring précis
 avec des extraits de code illustratifs et une justification.
 
-WARNING: Ce rapport devra s'appeler Nom1-Nom2.pdf, avec le nom des 2 membres du binôme.
+WARNING: Ce rapport devra s'appeler `Nom1-Nom2.pdf`, avec le nom des 2 membres du binôme.
 
 - Un fichier `.zip` contenant un export de votre projet eclipse qui contiendra
   à minima un répertoire `src` avec les sources et un répertoire `doc` avec la
@@ -152,7 +159,8 @@ Les principaux critères qui guideront la notation seront :
 - pertinence des tests
 - qualité du code
 - qualité du rapport (illustration, explications)
-- extras (modèles, fonctionalités)
+- nombre et difficulté des fonctionalités ajoutées (pensez à utiliser les numéros de fonctionalités)
+- extras (modèles)
 
 En cas de besoin, n'hésitez pas à me contacter (jean-michel.bruel@univ-tlse2.fr).
 

@@ -764,11 +764,38 @@ cette application en (cf. détails juste après cette liste) :</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Choisir au lancement le nombre de joueurs, le montant des pots, etc.</p>
+<p>Eliminer les limites du jeu en permettant de choisir (au lancement par exemple) :</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>le nombre de joueurs,</p>
 </li>
 <li>
-<p>Prise en compte des phases de pari : actuellement le jeu ne permet que de gagner ou perdre, pas de faire monter les enchères comme au jeu de poker normal.
-Vous pourrez vous attaquer au problème du multi-joueur si vous trouver une idée pour gérer le fait que chaque joueur voit les cartes des autres, mais non la sienne!!</p>
+<p>le montant des pots (identique pour chaque joueurs quand même),</p>
+</li>
+<li>
+<p>la règle de fin de jeu (on s&#8217;arrête au premier joueur à 0 ou bien jusqu&#8217;au dernier?),</p>
+</li>
+<li>
+<p>intégrer le principe d&#8217;une <em>ante</em> (somme versée par chaque joueur au début de chaque coup) qui s&#8217;incrémente avec le nombre de tour,</p>
+</li>
+<li>
+<p>gérer le 1er qui parle (chacun son tour),</p>
+</li>
+<li>
+<p>etc. (vous pouvez en proposer d&#8217;autres)</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Prise en compte des phases de pari (<em>check</em>, <em>bet(x)</em>, <em>call</em>, <em>fold</em>): actuellement le jeu ne permet que de gagner ou perdre, pas de faire monter les enchères comme au jeu de poker normal : un joueur, à son tour de jeu peut passer (<em>check</em>) si personne n&#8217;a encore ouvert les paris, parier une somme (inférieure ou égale à son pot), égaliser (<em>call</em>), enchérir (<em>bet(x)</em> avec x supérieur à la dernière enchère), ou se coucher (<em>fold</em>).</p>
+</li>
+<li>
+<p>Vous pourrez vous attaquer au problème du multi-joueur si vous trouver une idée pour gérer le fait que chaque joueur voit les cartes des autres, mais non la sienne!!</p>
+</li>
+<li>
+<p>Vous pourrez vous attaquer au problème du multi-joueur en réseau!!</p>
 </li>
 </ol>
 </div>
@@ -860,7 +887,7 @@ avec des extraits de code illustratifs et une justification.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Ce rapport devra s&#8217;appeler Nom1-Nom2.pdf, avec le nom des 2 membres du binôme.
+Ce rapport devra s&#8217;appeler <code>Nom1-Nom2.pdf</code>, avec le nom des 2 membres du binôme.
 </td>
 </tr>
 </table>
@@ -948,7 +975,10 @@ un click droit sur le projet en question.
 <p>qualité du rapport (illustration, explications)</p>
 </li>
 <li>
-<p>extras (modèles, fonctionalités)</p>
+<p>nombre et difficulté des fonctionalités ajoutées (pensez à utiliser les numéros de fonctionalités)</p>
+</li>
+<li>
+<p>extras (modèles)</p>
 </li>
 </ul>
 </div>
@@ -972,7 +1002,7 @@ Pour l&#8217;instant ce document est libre d&#8217;utilisation et géré par la 
 <div id="footer">
 <div id="footer-text">
 Version 1.8<br>
-Last updated 2018-12-17 11:28:23 +0100
+Last updated 2018-12-17 16:50:10 +0100
 </div>
 </div>
 </body>
