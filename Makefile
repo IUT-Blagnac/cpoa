@@ -31,6 +31,14 @@ DOC = doc
 all: $(OUTPUT)/*.html
 book: full.pdf
 
+projet2018-1.html: projet2018.adoc projet2018-1.adoc
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
+	$(DOCTOR) -r asciidoctor-diagram -a projet1 -a toc2 -b html5 -a numbered -a eleve -a linkcss! -o projet2018-1.html projet2018.adoc
+
+projet2018-2.html: projet2018.adoc projet2018-2.adoc
+	@echo '==> Compiling asciidoc files with Asciidoctor to generate HTML'
+	$(DOCTOR) -r asciidoctor-diagram -a projet2 -a toc2 -b html5 -a numbered -a eleve -a linkcss! -o projet2018-2.html projet2018.adoc
+
 images/%.png: images/%.plantuml
 	@echo '==> Compiling plantUML files to generate PNG'
 	java -jar plantuml.jar $<

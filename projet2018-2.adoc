@@ -1,0 +1,112 @@
+:bluff: https://en.wikipedia.org/wiki/Blind_man%27s_bluff_%28poker%29
+// Initial idea: https://www.usna.edu/Users/cs/wcbrown/courses/S15IC211/lec/l03/lec.html
+
+.[Crédit photo: http://www.isn-marchal.com/site/archi.html]
+image::ordi.jpg[width=70%,link=http://www.isn-marchal.com/site/archi.html]
+
+== Contexte du projet 2
+
+Vous avez pris un stagiaire pour réaliser un petit exemple d'architecture d'ordinateur à partir de classes Java.
+Malheureusement l'étudiant, vexé par le peu de rémunération associé, à volontairement programmé avec les pieds.
+Vous trouverez l'état de développement du code ("qui tourne") ici :
+
+link:CPOA_2018_Projet_2.zip[CPOA_2018_Projet_2.zip]
+
+. Récupérez le zip du projet.
+. Importez le projet en tant qu'archive:
+- menu:File[Import...>General>Project from Folder or Archive]
+- sélectionnez le fichier `cpoa2018.zip`
+
+À partir de ce code, déterminez ce que fait l'application et comment elle fonctionne.
+
+.Main.java
+[source,java]
+------
+include::src/cpoa2018bis/Main.java[]
+------
+
+.Alimentation.java
+[source,java]
+------
+include::src/cpoa2018bis/Alimentation.java[]
+------
+
+.Processeur.java
+[source,java]
+------
+include::src/cpoa2018bis/Processeur.java[]
+------
+
+.CarteGraphique.java
+[source,java]
+------
+include::src/cpoa2018bis/CarteGraphique.java[]
+------
+
+.CableSata.java
+[source,java]
+------
+include::src/cpoa2018bis/CableSata.java[]
+------
+
+.CarteMere.java
+[source,java]
+------
+include::src/cpoa2018bis/CarteMere.java[]
+------
+
+.DELLX4000.java
+[source,java]
+------
+include::src/cpoa2018bis/DELLX4000.java[]
+------
+
+.DisqueDur.java
+[source,java]
+------
+include::src/cpoa2018bis/DisqueDur.java[]
+------
+
+.RAM.java
+[source,java]
+------
+include::src/cpoa2018bis/RAM.java[]
+------
+
+== Refactoring
+
+Vous avez 7 séances de 1,5h (semaines 51, 2 et 3) pour améliorer le plus possible
+cette application en (cf. détails juste après cette liste) :
+
+- y ajoutant des test fonctionnels pour vérifier que votre futur refactoring ne change rien aux fonctionnalités existantes;
+- mettant en oeuvre les bonnes pratiques objet;
+- y ajoutant éventuellement de nouvelles fonctionnalités au passage (cf. ci-dessous);
+- y ajoutant éventuellement une interface graphique (vraiment pas utile in nécessaire, mais c'est pour les frustrés du terminal ;-)
+
+=== Nouvelles fonctionnalités
+
+Vous choisirez parmis les attentes clients suivantes (numérotées pour vos documentations et références, non pas pour les prioriser) :
+
+. Gérer l'enlèvement d'un composant à chaud (éteindre, changer, rallumer) quand c'est possible.
+. Gérer le fait qu'une carte mère ait des contraintes en termes de caractéristiques
+(par exemple une RAM de telle type, pas plus de x disques durs, etc.).
+. Ajouter un câble d'alimentation à l'alimentation (de la même façon que les disques ont des câbles).
+. Ajouter une interface graphique minimaliste à l'application.
+. etc. (vous pouvez en inventer)
+
+=== Bonnes pratiques
+
+Pour n'en citer que quelques-unes vues en cours (SOLID) :
+
+- **S**ingle Responsibility Principle
+- **O**pen-Closed Principle
+- **L**iskov Substitution Principle
+- **I**nterface Segregation Principle
+- **D**ependency Inversion Principle
+
+TIP: Essayez d'identifier clairement dans votre documentation les principes mis en oeuvre
+
+=== Patrons de conception
+
+Tous les patrons vus en cours et qui peuvent améliorer le code sont à utiliser
+si vous le jugez pertinent. 

@@ -1,0 +1,104 @@
+:bluff: https://en.wikipedia.org/wiki/Blind_man%27s_bluff_%28poker%29
+// Initial idea: https://www.usna.edu/Users/cs/wcbrown/courses/S15IC211/lec/l03/lec.html
+
+.[Crédit photo: http://www.funcarddrinkinggames.com/]
+image::poker.jpg[width=70%,link=http://www.funcarddrinkinggames.com/]
+
+== Contexte du projet 1
+
+Vous êtes chargé de prendre la suite d'un développement d'un jeu de poker simplifié (la version
+link:{bluff}[Indian Poker]) pour laquelle la
+documentation est minimaliste et dont les sources sont disponibles ici :
+
+link:CPOA_2018_Projet_1.zip[CPOA_2018_Projet_1.zip]
+
+. Récupérez le zip du projet.
+. Importez le projet en tant qu'archive:
+- menu:File[Import...>General>Project from Folder or Archive]
+- sélectionnez le fichier `cpoa2018.zip`
++
+[WARNING]
+=====
+Le code contient 2 `main()`! Le principal est dans la classe `Game`.
+=====
+
+À partir de ce code, déterminez ce que fait l'application et comment elle fonctionne.
+
+.Game.java
+[source,java]
+------
+include::src/cpoa2018/Game.java[]
+------
+
+.Card.java
+[source,java]
+------
+include::src/cpoa2018/Card.java[]
+------
+
+.Player.java
+[source,java]
+------
+include::src/cpoa2018/Player.java[]
+------
+
+Pour les non-anglophones, quelques éléments :
+
+- Le code utilise des nombres pour repésenter les "couleurs" : 0 = ♣, 1 = ♦, 2 = ♥, 3 = ♠.
+- Sur un terminal Unix les caractères "UTF-8" s'affichent sans problèmen, mais voici les codes unicode au cas où : ♣ ← "\u2663", ♦ ← "\u2666", ♥ ← "\u2665", ♠ ← "\u2660".
+- Le code utilise des nombres pour repésenter les valeurs des cartes 2 = 2, 3 = 3, ..., 10 = 10, 11 = J(jack), 12 = Q(queen), 13 = K(king), 14 = A(ace).
+- En cas d'égalité, les règles du bridge s'appliquent : (♣ < ♦ < ♥ < ♠).
+
+== Refactoring
+
+Vous avez 7 séances de 1,5h (semaines 51, 2 et 3) pour améliorer le plus possible
+cette application en (cf. détails juste après cette liste) :
+
+- y ajoutant des test fonctionnels pour vérifier que votre futur refactoring ne change rien aux fonctionnalités existantes;
+- mettant en oeuvre les bonnes pratiques objet;
+- y ajoutant éventuellement de nouvelles fonctionnalités au passage (cf. ci-dessous);
+- y ajoutant éventuellement une interface graphique (vraiment pas utile in nécessaire, mais c'est pour les frustrés du terminal ;-)
+
+[TIP]
+====
+
+* Pensez à conserver la version originale de vos fichiers pour y faire référence dans vos documentations.
+* Je vous conseille de travailler en utilisant les outils MPA (git, version, branche, README, build, CI etc.)
+* Pour faire référence à des lignes du code originales, vous pourrez utilisez les références :
+** https://gist.github.com/jmbruel/42bfdff35e4c0ff437d40dd16469e646#file-game-java-L21 (pour la ligne 21 du `Game.java` par exemple)
+** https://gist.github.com/jmbruel/846115f49df9714985fdb47b098cde3d#file-card-java-L27 (pour la ligne 27 du `Card.java` par exemple)
+** https://gist.github.com/jmbruel/0acb2b35dd01a850cac7bd02de51cec3#file-player-java-L3 (pour la ligne 3 du `Player.java` par exemple)
+====
+
+=== Nouvelles fonctionnalités
+
+Vous choisirez parmis les attentes clients suivantes (numérotées pour vos documentations et références, non pas pour les prioriser) :
+
+. Eliminer les limites du jeu en permettant de choisir (au lancement par exemple) :
+.. le nombre de joueurs,
+.. le montant des pots (identique pour chaque joueurs quand même),
+.. la règle de fin de jeu (on s'arrête au premier joueur à 0 ou bien jusqu'au dernier?),
+.. intégrer le principe d'une _ante_ (somme versée par chaque joueur au début de chaque coup) qui s'incrémente avec le nombre de tour,
+.. gérer le 1er qui parle (chacun son tour),
+.. etc. (vous pouvez en proposer d'autres)
+. Prise en compte des phases de pari (_check_, _bet(x)_, _call_, _fold_): actuellement le jeu ne permet que de gagner ou perdre, pas de faire monter les enchères comme au jeu de poker normal : un joueur, à son tour de jeu peut passer (_check_) si personne n'a encore ouvert les paris, parier une somme (inférieure ou égale à son pot), égaliser (_call_), enchérir (_bet(x)_ avec x supérieur à la dernière enchère), ou se coucher (_fold_). 
+. Vous pourrez vous attaquer au problème du multi-joueur si vous trouver une idée pour gérer le fait que chaque joueur voit les cartes des autres, mais non la sienne!!
+. Vous pourrez vous attaquer au problème du multi-joueur en réseau!!
+
+=== Bonnes pratiques
+
+Pour n'en citer que quelques-unes vues en cours (SOLID) :
+
+- **S**ingle Responsibility Principle
+- **O**pen-Closed Principle
+- **L**iskov Substitution Principle
+- **I**nterface Segregation Principle
+- **D**ependency Inversion Principle
+
+TIP: Essayez d'identifier clairement dans votre documentation les principes mis en oeuvre
+
+
+=== Patrons de conception
+
+Tous les patrons vus en cours et qui peuvent améliorer le code sont à utiliser
+si vous le jugez pertinent. 
