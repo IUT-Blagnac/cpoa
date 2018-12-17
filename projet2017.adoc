@@ -1,0 +1,203 @@
+// ------------------------------------------
+//  Created by Jean-Michel Bruel on 2014-11.
+//  Copyright (c) 2014 IRIT/U. Toulouse. All rights reserved.
+// ------------------------------------------
+= DUT-Info/S3/M3105 (CPOA) : Projet refactoring
+Jean-Michel Bruel <jbruel@gmail.com>
+v1.8, {localdate}
+:status: bottom
+:inclusion:
+:experimental:
+:depot: https://github.com/codurance/task-list.git
+// ------------------------------------------
+include::definitions.txt[]
+include::asciidoc.conf[]
+
+image::todolist.jpg[link=http://www.keepandshare.com/htm/task-list-management-software.php]
+
+== Contexte
+
+Vous êtes chargé de prendre la suite d'un développement pour laquelle la
+documentation est minimaliste et dont les sources sont disponibles ici :
+
+https://github.com/codurance/task-list/tree/master/java
+
+. Récupérez les sources du projet :
+- soit en clonant le dépôt :
++
+..........
+git clone https://github.com/codurance/task-list.git
+..........
++
+- soit en téléchargeant directement le fichier https://github.com/codurance/task-list/archive/master.zip[.zip].
++
+WARNING: Attention de bien copier/cloner dans votre workspace, ou en tout cas
+sur un répertoire pérenne (conseil valables si vous utilisez les PC des salles machines).
++
+. Importez le projet en tant que projet {maven}:
+- menu:File[Import...>Maven>Existing Maven Project]
+- sélectionnez le fichier `pom.xml` du répertoire `java`
++
+[WARNING]
+=====
+Si vous n'avez pas Maven (ce qui est le cas des machines de l'IUT, désolé) :
+
+. Créez un projet java
+. Importez le répertoire `src` du répertoire `java` en cliquant droit sur votre
+paquetage `src` et en choisissant menu:Import[File System].
+. Fixez le problème des imports JUnit en ajoutant la librairie (par quickfix)
+. Changez la ligne dans `ApplicationTest` : `import org.hamcrest.Matchers.is` par
+`import static org.hamcrest.core.Is.*` (merci Hugues, Lino and others).
+=====
++
+NOTE: Seul le répertoire `java` nous intéresse. Mais n'hésitez pas à regarder
+les autres langages si ça vous aide.
++
+. Lancez les tests pour vérifier que tout est OK (`ApplicationTest.java`)
+. À partir de ce code de test (cf. ci-dessous), déterminez ce que fait
+l'application et comment elle fonctionne.
+
+.ApplicationTest.java
+[source,java]
+------
+include::../task-list/java/src/test/java/com/codurance/training/tasks/ApplicationTest.java[]
+------
+
+.Task.java
+[source,java]
+------
+include::../task-list/java/src/main/java/com/codurance/training/tasks/Task.java[]
+------
+
+.TaskList.java
+[source,java]
+------
+include::../task-list/java/src/main/java/com/codurance/training/tasks/TaskList.java[]
+------
+
+== Refactoring
+
+Vous avez 7 séances de 1,5h (semaines 51, 2 et 3) pour améliorer le plus possible
+cette application en (cf. détails juste après cette liste) :
+
+- y ajoutant de nouvelles fonctionnalités au passage (cf. ci-dessous).
+- s'attaquant aux types primitifs massivement utilisés
+- mettant en oeuvre les bonnes pratiques objet
+
+=== Nouvelles fonctionnalités
+
+Vous choisirez parmis les attentes clients suivantes (numérotées pour vos
+documentations, pas pour les prioriser) :
+
+. Deadlines
+.. Chaque tâche pourra disposer d'une "date limite" (exemple de commande : `deadline <ID> <date>`).
+.. La commande `today` permettra de voir toutes les tâches dont la deadline est
+aujourd'hui.
+. Suppression
+.. Autoriser l'utilisateur à supprimer des tâches (exemple de commande : `delete <ID>`).
+. Visualisations
+.. Visualiser les tâches par date (exemple de commande : `view by date`).
+.. Visualiser les tâches par deadline  (exemple de commande : `view by deadline`).
+.. Sans changer la fonctionnalités qui permet à un utilisateur de voir les tâches par projet,
+changer la commande en `view by project`.
+. Permettre qu'une tâche puisse « appartenir » à plusieurs projets en même temps
+(si cochée dans l’une, cochée dans toutes par exemple)
+. Faire en sorte que l’application maintienne en permanence 2 listes de tâches par projet : les "cochées" et les "non cochées"
+. (Attention celle-là est coton) Faire en sorte qu’une tâche puisse être elle-même une liste de tâche
+
+NOTE: On pourra faire des visualisations graphiques simples (genre post-its).
+
+WARNING: Attention, certaines fonctionnalités sont assez incompatibles entre elles, et certaines sont beaucoup
+plus complexes à mettre en oeuvre que d'autres.
+
+=== Types primitifs
+
+Si vous avez observé attentivement le code, vous vous êtes rendu compte qu'il utilise assez peu
+d'objets et par contre beaucoup de types primitifs (entiers, char, strings, collections, etc.).
+Les concepts métiers sont faiblement présent (`task`, `project`, etc.).
+
+Essayez, en implémentant vos nouvelles fonctionnalités, de vous débarrasser le plus possible des types
+primitifs.
+
+TIP: Un bon exemple pour voir si vous vous focalisez sur les concepts métiers est
+de vérifier que les types primitifs sont uniquement employés dans les paramètres des
+constructeurs, les variables locales ou les attributs privés.
+Ils ne devraient jamais être retournés ou être passés en paramètres à vos méthodes (exception faite des
+  lectures clavier, etc.).
+
+=== Bonnes pratiques
+
+Pour n'en citer que quelques-unes vues en cours (SOLID) :
+
+- **S**ingle Responsibility Principle
+- **O**pen-Closed Principle
+- **L**iskov Substitution Principle
+- **I**nterface Segregation Principle
+- **D**ependency Inversion Principle
+
+TIP: Essayez d'identifier clairement dans votre documentation les principes mis en oeuvre
+
+== À propos des tests
+
+Vous remarquerez que le seul test fournit est un test fonctionnel.
+Il pourra vous être utile pour vérifier que votre application respecte toujours
+bien le cahier des charges initial. Vous pourrez même l'enrichir pour tester
+que vos nouvelles commandes (du type `view by ...`) fonctionnent.
+
+
+Par contre il ne vous dispense pas du tout
+des tests unitaires classiques pour les classes que vous allez produire.
+
+== Attendus du projet
+
+ifdef::slides[:leveloffset: -1]
+
+=== Modèles à réaliser
+
+On ne vous embête pas ce coup-ci avec les modèles mais n'hésitez pas à en utiliser
+(des cohérents avec votre code) pour vos documentations.
+
+Voici d'ailleurs le diagramme de classe minimaliste initial de l'application :
+
+.Diagramme de classe initial de l'application
+image::taskList.png[]
+
+=== _Delivrables_ attendus
+
+Vous déposerez avant le dimanche 20/01/2018 à minuit sur le dépôt moodle (d'un des deux membre du binôme au moins)
+deux documents uniquement :
+
+- Un rapport au format `.pdf` contenant (outre les éléments habituels d'un rapport
+comme les noms et contact des binômes, une table des matières, ...)
+une courte explication par chaque fonctionnalité nouvelle ou refactoring précis
+avec des extraits de code illustratifs et une justification.
+
+WARNING: Ce rapport devra s'appeler Nom1-Nom2.pdf, avec le nom des 2 membres du binôme.
+
+- Un fichier `.zip` contenant un export de votre projet eclipse qui contiendra
+  à minima un répertoire `src` avec les sources et un répertoire `doc` avec la
+  javadoc.
+
+WARNING: Pour générer ce `.zip`, choisissez bien l'option menu:Export...[General>Archive File] après
+un click droit sur le projet en question.
+
+=== Evaluation et critères
+
+Vous pourrez travailler en groupe de 2 max.
+
+Les principaux critères qui guideront la notation seront :
+
+- pertinence des choix
+- qualité du code
+- qualité du rapport (illustration, explications)
+- extras (tests, modèles)
+
+En cas de besoin, n'hésitez pas à me contacter (jean-michel.bruel@univ-tlse2.fr).
+
+**********************************************************************
+Document généré par mailto:{email}[{author}] via {asciidoctorlink} (version `{asciidoctor-version}`).
+Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
+image:88x31.png["Licence Creative
+Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+**********************************************************************

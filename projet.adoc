@@ -4,125 +4,82 @@
 // ------------------------------------------
 = DUT-Info/S3/M3105 (CPOA) : Projet refactoring
 Jean-Michel Bruel <jbruel@gmail.com>
-v1.7, {localdate}
+v1.8, {localdate}
 :status: bottom
 :inclusion:
 :experimental:
+:bluff: https://en.wikipedia.org/wiki/Blind_man%27s_bluff_%28poker%29
+
 // ------------------------------------------
 include::definitions.txt[]
 include::asciidoc.conf[]
 
-image::todolist.jpg[link=http://www.keepandshare.com/htm/task-list-management-software.php]
+.[Crédit photo: http://www.funcarddrinkinggames.com/]
+image::poker.jpg[width=70%,link=http://www.funcarddrinkinggames.com/]
 
 == Contexte
 
-Vous êtes chargé de prendre la suite d'un développement pour laquelle la
+Vous êtes chargé de prendre la suite d'un développement d'un jeu de poker simplifié (la version
+link:{bluff}[Indian Poker]) pour laquelle la
 documentation est minimaliste et dont les sources sont disponibles ici :
 
-https://github.com/codurance/task-list/tree/master/java
+link:cpoa.zip[cpoa.zip]
 
-. Récupérez les sources du projet :
-- soit en clonant le dépôt :
-+
-..........
-git clone https://github.com/codurance/task-list.git
-..........
-+
-- soit en téléchargeant directement le fichier https://github.com/codurance/task-list/archive/master.zip[.zip].
-+
-WARNING: Attention de bien copier/cloner dans votre workspace, ou en tout cas
-sur un répertoire pérenne (conseil valables si vous utilisez les PC des salles machines).
-+
-. Importez le projet en tant que projet {maven}:
-- menu:File[Import...>Maven>Existing Maven Project]
-- sélectionnez le fichier `pom.xml` du répertoire `java`
+. Récupérez le zip du projet.
+. Importez le projet en tant qu'archive:
+- menu:File[Import...>General>Project from Folder or Archive]
+- sélectionnez le fichier `cpoa2018.zip`
 +
 [WARNING]
 =====
-Si vous n'avez pas Maven (ce qui est le cas des machines de l'IUT, désolé) :
-
-. Créez un projet java
-. Importez le répertoire `src` du répertoire `java` en cliquant droit sur votre
-paquetage `src` et en choisissant menu:Import[File System].
-. Fixez le problème des imports JUnit en ajoutant la librairie (par quickfix)
-. Changez la ligne dans `ApplicationTest` : `import org.hamcrest.Matchers.is` par
-`import static org.hamcrest.core.Is.*` (merci Hugues, Lino and others).
+Le code contient 2 `main()`! Le principal est dans la classe `Game`.
 =====
-+
-NOTE: Seul le répertoire `java` nous intéresse. Mais n'hésitez pas à regarder
-les autres langages si ça vous aide.
-+
-. Lancez les tests pour vérifier que tout est OK (`ApplicationTest.java`)
-. À partir de ce code de test (cf. ci-dessous), déterminez ce que fait
-l'application et comment elle fonctionne.
 
-.ApplicationTest.java
+À partir de ce code, déterminez ce que fait l'application et comment elle fonctionne.
+
+.Game.java
 [source,java]
 ------
-include::../task-list/java/src/test/java/com/codurance/training/tasks/ApplicationTest.java[]
+include::src/cpoa2018/Game.java[]
 ------
 
-.Task.java
+.Card.java
 [source,java]
 ------
-include::../task-list/java/src/main/java/com/codurance/training/tasks/Task.java[]
+include::src/cpoa2018/Card.java[]
 ------
 
-.TaskList.java
+.Player.java
 [source,java]
 ------
-include::../task-list/java/src/main/java/com/codurance/training/tasks/TaskList.java[]
+include::src/cpoa2018/Player.java[]
 ------
+
+Pour les non-anglophones, quelques éléments :
+
+- Le code utilise des nombres pour repésenter les "couleurs" : 0 = ♣, 1 = ♦, 2 = ♥, 3 = ♠.
+- Sur un terminal Unix les caractères "UTF-8" s'affichent sans problèmen, mais voici les codes unicode au cas où : ♣ ← "\u2663", ♦ ← "\u2666", ♥ ← "\u2665", ♠ ← "\u2660".
+- Le code utilise des nombres pour repésenter les valeurs des cartes 2 = 2, 3 = 3, ..., 10 = 10, 11 = J(jack), 12 = Q(queen), 13 = K(king), 14 = A(ace).
+- En cas d'égalité, les règles du bridge s'appliquent : (♣ < ♦ < ♥ < ♠).
 
 == Refactoring
 
-Vous avez 5 séances de 1,5h (1 TD et 6 TPs en semaines 51 et 2) pour améliorer le plus possible
+Vous avez 7 séances de 1,5h (semaines 51, 2 et 3) pour améliorer le plus possible
 cette application en (cf. détails juste après cette liste) :
 
-- y ajoutant de nouvelles fonctionnalités au passage (cf. ci-dessous).
-- s'attaquant aux types primitifs massivement utilisés
-- mettant en oeuvre les bonnes pratiques objet
+- y ajoutant des test fonctionnels pour vérifier que votre futur refactoring ne change rien aux fonctionnalités existantes;
+- mettant en oeuvre les bonnes pratiques objet;
+- y ajoutant éventuellement de nouvelles fonctionnalités au passage (cf. ci-dessous);
+- y ajoutant éventuellement une interface graphique (vraiment pas utile in nécessaire, mais c'est pour les frustrés du terminal ;-)
 
 === Nouvelles fonctionnalités
 
-Vous choisirez parmis les attentes clients suivantes (numérotées pour vos
-documentations, pas pour les prioriser) :
+Vous choisirez parmis les attentes clients suivantes (numérotées pour vos documentations et références, non pas pour les prioriser) :
 
-. Deadlines
-.. Chaque tâche pourra disposer d'une "date limite" (exemple de commande : `deadline <ID> <date>`).
-.. La commande `today` permettra de voir toutes les tâches dont la deadline est
-aujourd'hui.
-. Suppression
-.. Autoriser l'utilisateur à supprimer des tâches (exemple de commande : `delete <ID>`).
-. Visualisations
-.. Visualiser les tâches par date (exemple de commande : `view by date`).
-.. Visualiser les tâches par deadline  (exemple de commande : `view by deadline`).
-.. Sans changer la fonctionnalités qui permet à un utilisateur de voir les tâches par projet,
-changer la commande en `view by project`.
-. Permettre qu'une tâche puisse « appartenir » à plusieurs projets en même temps
-(si cochée dans l’une, cochée dans toutes par exemple)
-. Faire en sorte que l’application maintienne en permanence 2 listes de tâches par projet : les "cochées" et les "non cochées"
-. (Attention celle-là est coton) Faire en sorte qu’une tâche puisse être elle-même une liste de tâche
+. Choisir au lancement le nombre de joueurs, le montant des pots, etc.
+. Prise en compte des phases de pari : actuellement le jeu ne permet que de gagner ou perdre, pas de faire monter les enchères comme au jeu de poker normal.
+Vous pourrez vous attaquer au problème du multi-joueur si vous trouver une idée pour gérer le fait que chaque joueur voit les cartes des autres, mais non la sienne!!
 
-NOTE: On pourra faire des visualisations graphiques simples (genre post-its).
-
-WARNING: Attention, certaines fonctionnalités sont assez incompatibles entre elles, et certaines sont beaucoup
-plus complexes à mettre en oeuvre que d'autres.
-
-=== Types primitifs
-
-Si vous avez observé attentivement le code, vous vous êtes rendu compte qu'il utilise assez peu
-d'objets et par contre beaucoup de types primitifs (entiers, char, strings, collections, etc.).
-Les concepts métiers sont faiblement présent (`task`, `project`, etc.).
-
-Essayez, en implémentant vos nouvelles fonctionnalités, de vous débarrasser le plus possible des types
-primitifs.
-
-TIP: Un bon exemple pour voir si vous vous focalisez sur les concepts métiers est
-de vérifier que les types primitifs sont uniquement employés dans les paramètres des
-constructeurs, les variables locales ou les attributs privés.
-Ils ne devraient jamais être retournés ou être passés en paramètres à vos méthodes (exception faite des
-  lectures clavier, etc.).
 
 === Bonnes pratiques
 
@@ -138,14 +95,12 @@ TIP: Essayez d'identifier clairement dans votre documentation les principes mis 
 
 == À propos des tests
 
-Vous remarquerez que le seul test fournit est un test fonctionnel.
-Il pourra vous être utile pour vérifier que votre application respecte toujours
-bien le cahier des charges initial. Vous pourrez même l'enrichir pour tester
-que vos nouvelles commandes (du type `view by ...`) fonctionnent.
+Vous pourrez vous inspirer des tests fonctionnels déjà vu en S2 ou S3, ou encore sur ceux fournis avec
+l'application de l'an dernier et disponibles ici (dans le répertoire `java`):
 
+https://github.com/codurance/task-list.git
 
-Par contre il ne vous dispense pas du tout
-des tests unitaires classiques pour les classes que vous allez produire.
+Par contre il ne vous dispense pas du tout des tests unitaires classiques pour les classes que vous allez produire.
 
 == Attendus du projet
 
@@ -156,20 +111,17 @@ ifdef::slides[:leveloffset: -1]
 On ne vous embête pas ce coup-ci avec les modèles mais n'hésitez pas à en utiliser
 (des cohérents avec votre code) pour vos documentations.
 
-Voici d'ailleurs le diagramme de classe minimaliste initial de l'application :
-
-.Diagramme de classe initial de l'application
-image::taskList.png[]
-
 === _Delivrables_ attendus
 
-Vous déposerez avant le vendredi 20/01/2016 à minuit sur le dépôt moodle deux
-documents uniquement :
+Vous déposerez avant le dimanche 20/01/2018 à minuit sur le dépôt moodle (d'un des deux membre du binôme au moins)
+deux documents uniquement :
 
 - Un rapport au format `.pdf` contenant (outre les éléments habituels d'un rapport
 comme les noms et contact des binômes, une table des matières, ...)
 une courte explication par chaque fonctionnalité nouvelle ou refactoring précis
 avec des extraits de code illustratifs et une justification.
+
+WARNING: Ce rapport devra s'appeler Nom1-Nom2.pdf, avec le nom des 2 membres du binôme.
 
 - Un fichier `.zip` contenant un export de votre projet eclipse qui contiendra
   à minima un répertoire `src` avec les sources et un répertoire `doc` avec la
@@ -185,9 +137,10 @@ Vous pourrez travailler en groupe de 2 max.
 Les principaux critères qui guideront la notation seront :
 
 - pertinence des choix
+- pertinence des tests
 - qualité du code
 - qualité du rapport (illustration, explications)
-- extras (tests, modèles)
+- extras (modèles, fonctionalités)
 
 En cas de besoin, n'hésitez pas à me contacter (jean-michel.bruel@univ-tlse2.fr).
 
