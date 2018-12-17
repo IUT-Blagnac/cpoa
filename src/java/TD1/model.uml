@@ -6,6 +6,7 @@
 ' package ""
 abstract Canard
 class CanardEnPlastique
+class CanardEnPlastique
 class Cancan
 class Colvert
 interface ComportementCancan
@@ -22,36 +23,17 @@ Canard  --> "comportementCancan" ComportementCancan
 ' content
 ' -------
 
-' ComportementVol:
-ComportementVol : void voler()
-
-' CanardEnPlastique:
-Canard <|-- CanardEnPlastique
-CanardEnPlastique : void afficher()
-
 ' Canard:
 Canard : void effectuerCancan()
 Canard : void nager()
 Canard : void afficher()
 Canard : void effectuerVol()
 
-' SuperCanard:
-SuperCanard : void main(String)
-
-' ComportementCancan:
-ComportementCancan : void cancaner()
-
 ' Colvert:
 Canard <|-- Colvert
 Colvert : void afficher()
 
-' Cancan:
-ComportementCancan <|.. Cancan
-Cancan : void cancaner()
-
-' VolerAvecDesAiles:
-ComportementVol <|.. VolerAvecDesAiles
-VolerAvecDesAiles : void voler()
+' CanardEnPlastique:
 
 ' SuperCanardTest:
 SuperCanardTest : void main(String)
@@ -66,8 +48,32 @@ SuperCanardTest2 : void cleanUpStreams()
 SuperCanardTest2 : void testComportementColvert()
 SuperCanardTest2 : void testComportementCanardEnPlastique()
 
+' ComportementCancan:
+ComportementCancan : void cancaner()
+
 ' NePasVoler:
 ComportementVol <|.. NePasVoler
 NePasVoler : void voler()
+
+' VolerAvecDesAiles:
+ComportementVol <|.. VolerAvecDesAiles
+VolerAvecDesAiles : void voler()
+
+' ComportementVol:
+ComportementVol : void voler()
+
+' Cancan:
+ComportementCancan <|.. Cancan
+Cancan : void cancaner()
+
+' SuperCanard:
+SuperCanard : void main(String)
+
+' CanardEnPlastique:
+Canard <|-- CanardEnPlastique
+CanardEnPlastique : void cancaner()
+CanardEnPlastique : void nager()
+CanardEnPlastique : void voler()
+CanardEnPlastique : void afficher()
 
 @enduml

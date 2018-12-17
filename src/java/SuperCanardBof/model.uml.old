@@ -1,0 +1,54 @@
+@startuml
+
+' definitions
+' -----------
+
+' package ""
+abstract Canard
+class CanardEnPlastique
+class Colvert
+class SuperCanard
+note "Main de test simple" as Note1
+SuperCanard .. Note1
+class SuperCanardTest
+class SuperCanardTest2
+note "Tests JUnit 4 by vferries" as Note2
+SuperCanardTest2 .. Note2
+' end package
+
+SuperCanard  --> "1" Canard
+' content
+' -------
+
+' SuperCanard:
+SuperCanard : void main(String)
+
+' Colvert:
+Canard <|-- Colvert
+Colvert : void afficher()
+
+' SuperCanardTest:
+SuperCanardTest : void main(String)
+SuperCanardTest : void test_ligne1()
+SuperCanardTest : void test_ligne2()
+SuperCanardTest : void test_ligne3()
+SuperCanardTest : void test_ligne4()
+
+' Canard:
+Canard : void cancaner()
+Canard : void nager()
+Canard : void voler()
+Canard : void afficher()
+
+' SuperCanardTest2:
+SuperCanardTest2 : void setUpStreams()
+SuperCanardTest2 : void cleanUpStreams()
+SuperCanardTest2 : void testComportementColvert()
+SuperCanardTest2 : void testComportementCanardEnPlastique()
+
+' CanardEnPlastique:
+Canard <|-- CanardEnPlastique
+CanardEnPlastique : void afficher()
+CanardEnPlastique : void voler()
+
+@enduml

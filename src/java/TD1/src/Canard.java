@@ -14,7 +14,7 @@ abstract public class Canard {
 	 */
 	protected ComportementCancan comportementCancan;
 
-	public void effectuerCancan() {
+	public final void effectuerCancan() {
 		comportementCancan.cancaner();
 	}
 
@@ -24,7 +24,8 @@ abstract public class Canard {
 
 	abstract public void afficher();
 
-	public void effectuerVol() {
+	//
+	public final void effectuerVol() {
 		comportementVol.voler();
 	}
 

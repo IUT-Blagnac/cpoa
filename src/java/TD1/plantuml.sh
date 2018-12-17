@@ -1,7 +1,7 @@
 #!/bin/sh
 UML='model.uml'
 TYPE='PNG'
-DOCLETPATH='/Users/bruel/dev/teaching/dut/cpoa/doclet'
+DOCLETPATH='/Users/jmb/localdev/cpoa/doclet'
 echo "Creating $UML..."
 javadoc \
 -private \

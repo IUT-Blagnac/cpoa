@@ -10,7 +10,7 @@ hide empty members
 hide empty methods
 
 
-class Canard {
+abstract class Canard {
 cancaner()
 nager()
 afficher()

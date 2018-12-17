@@ -34,9 +34,9 @@ cancaner() {// ne rien faire}
 
 abstract class Canard {
 nager()
-afficher()
-effectuerCancan()
-effectuerVol()
+  abstract afficher()
+  abstract effectuerCancan()
+  abstract effectuerVol()
 }
 class Colvert {
 afficher()

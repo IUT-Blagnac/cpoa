@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package simuaventure.comportements.arme.impl;
 
@@ -11,13 +11,14 @@ import simuaventure.comportements.arme.ComportementArme;
  */
 public class SimpleFabriqueArme {
 	public ComportementArme creerComportementArme(String type) {
-		ComportementArme cpt = null;
-		if (type.equals("Epee")) { 
-			cpt = new ComportementEpee();
-		} 
-		else if (type.equals("Arc")) { 
-			cpt = new ComportementArc();
-		} 
-		return cpt; 
+		ComportementArme compAdequat = null;
+		if (type.equals("Epee")) {
+			compAdequat = new ComportementEpee();
+		}
+		else if (type.equals("Arc")) {
+			compAdequat = new ComportementArc();
+		}
+		else compAdequat = new ComportementArmeless();
+		return compAdequat;
 	}
 }

@@ -11,6 +11,7 @@
 hide circle
 hide empty members
 hide methods
+hide footbox
 
 ' Attribute and name values (for translation purpose). Add anything you need, but don't modify!
 '-----------------------------------

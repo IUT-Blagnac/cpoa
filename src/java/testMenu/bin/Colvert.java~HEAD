@@ -1,0 +1,19 @@
+/**
+ * @author bruel
+ *
+ */
+public class Colvert extends Canard {
+
+<<<<<<< HEAD:src/java/TD1/src/Colvert.java:src/java/TD1/src/Colvert.java
+	public Colvert() {
+		comportementCancan = new Cancan();
+		comportementVol = new VolerAvecDesAiles();
+	}
+=======
+>>>>>>> master:src/java/SuperCanardBof/src/Colvert.java:src/java/SuperCanardBof/src/Colvert.java
+	@Override
+	public void afficher() {
+		System.out.println("Je suis un Colvert");
+	}
+
+}
