@@ -5,10 +5,17 @@ Presenter Name
 
 == Title of Slide One
 
-ceci est un essai éàè
 
-[canvas-image=images/example.jpg]
+[canvas-image=images/sni-exp.png]
 == Slide Two's Title will not be displayed
 
 [.canvas-caption, position=center-up]
 This text is displayed on top of the example.jpg image.
+
+== Test PlantUML
+
+.A reservation panel
+[plantuml, diagram-classes, svg, width=80%]     
+....
+include::reservationPanel.plantuml[]
+....
