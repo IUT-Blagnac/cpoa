@@ -1,0 +1,80 @@
+@startuml
+
+'-----------------------------------
+' UML concepts illustrated
+' JMB 2014
+'-----------------------------------
+
+@startuml
+
+'-----------------------------------
+' Standards Taxonomy (taken from Friedenthal 2016)
+' JMB 2018
+'-----------------------------------
+
+' Default settings
+'-----------------------------------
+' left to right direction 'does not work for sequence diagrams :-(
+'hide circle
+hide empty members
+hide methods
+' Colors & Fonts
+'-----------------------------------
+'Colors => see http://plantuml.com/color
+'skinparam monochrome true
+'skinparam monochrome reverse
+'skinparam handwritten true
+skinparam package {
+	BackgroundColor empty
+	BorderColor DarkSlateGray
+	ArrowColor Black
+	FontColor Black
+	FontSize 12
+	FontName TrebuchetMS
+}
+skinparam roundcorner 10
+
+skinparam class {
+	BackgroundColor AliceBlue
+	BorderColor DarkSlateGray
+	ArrowColor Black
+	FontColor Black
+	FontSize 12
+	FontName TrebuchetMS
+}
+skinparam arrow {
+    MessageAlign center
+}
+
+' Attribute and name values (for translation purpose).
+'-----------------------------------
+
+' Usefull functions
+'-----------------------------------
+!define objet(nom,type) class "<u>nom : type"
+
+hide circle
+hide empty members
+hide empty methods
+
+
+package "Level 3" {
+	class execute_session
+}
+package "Level 2" {
+execute_session -- initial
+initial -[hidden] transition
+execute_session -- transition
+execute_session -- execute_state
+execute_session -- is_final
+}
+
+
+package "Level 1" {
+execute_state -- display
+execute_state -- read
+execute_state -- correct
+execute_state -- message
+execute_state -- process
+}
+@enduml

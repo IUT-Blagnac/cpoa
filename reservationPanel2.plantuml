@@ -1,0 +1,21 @@
+@startuml
+'-----------------------------------
+' Interface graphique cours de Meyer
+' JMB 2019
+'-----------------------------------
+
+@startsalt
+{^"Flight Reservation"
+  From: | ^Toulouse^ | [<b>H</b>elp<&info>]
+  To:   | ^Paris   ^
+  No earlier than: | "18/02/2020 <&calendar>"
+  No later than: | "19/02/2020 <&calendar>"
+AVAILABLE FLIGHTS: <b>2</b> 
+--- | Flt# AF 425 Dep 8:25 Arr 9:45
+--- | Flt# EY 082 Dep 7:40 Arr 9:15
+[<b>R</b>eset] | [<b>B</b>ook a Seat <&account-login>] | [<b>C</b>ancel <&circle-x>]
+}
+@endsalt
+
+@enduml
+'-----------------------------------

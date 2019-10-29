@@ -1,0 +1,49 @@
+@startuml
+'-----------------------------------
+' Interface graphique cours de Meyer
+' JMB 2019
+'-----------------------------------
+
+skinparam roundcorner 10
+
+skinparam state {
+	BackgroundColor AliceBlue
+	BorderColor DarkSlateGray
+	ArrowColor Black
+	FontColor Black
+	FontSize 12
+	FontName TrebuchetMS
+}
+
+state H1 as "Help"
+'state H2 as "Help"
+'state H3 as "Help"
+'state H4 as "Help"
+
+!define Help1 <b>H</b>elp
+!define Further2 <b>F</b>urther Enquiry
+!define Book3 <b>B</b>ook
+!define Cancel0 <b>C</b>ancel
+
+[*] --> Initial
+H1 -> Initial : Cancel0
+Initial -> H1 : Help1
+Initial --> Confirmation : Further2
+Initial --> FlightQuery : Book3
+Confirmation --> Reservation : Further2
+'Reservation -up-> Confirmation : Book3
+'Confirmation -[hidden]> FlightQuery
+FlightQuery --> SeatQuery : Book3
+SeatQuery --> FlightQuery : Further2
+Reservation -> SeatQuery : Further2
+SeatQuery -> Reservation : Book3
+
+'FlightQuery --> H1 : Help1
+'Reservation --> H2 : Help1
+'H2 --> Reservation : Cancel0
+'SeatQuery --> H3 : Help1
+'H3 --> SeatQuery : Cancel0
+
+center footer Extract of the State Machine
+@enduml
+'-----------------------------------
