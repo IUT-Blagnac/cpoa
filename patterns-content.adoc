@@ -442,6 +442,8 @@ aborderons certains au travers des exemples de ce module (cf. <<Larman05>>).
 
 ifndef::slides[:leveloffset: -1]
 
+TIP: Notez que les principes SOLID ne s'appliquent pas qu'à la programmation objet. Pour une discussion sur leur application avec React (language fonctionnel), cf. https://dev.to/shadid12/can-you-apply-solid-principles-to-your-react-applications-46il.
+
 == Les patrons : comment ça marche ?
 
 ifdef::slides[:leveloffset: -1]

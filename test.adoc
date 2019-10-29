@@ -1,21 +1,152 @@
-= Title of Presentation
-Presenter Name
+= A Software Architecture Example
+Jean-Michel Bruel <jbruel@gmail.com>
+v1.0, {localdate}
+:icons: font
+:experimental:
 :deckjs_transition: fade
 :navigation:
+:imagesdir: images
+//--------------------- slides
+ifdef::slides[]
+:dzslides-style: tomorrow
+//:dzslides-style: stormy, watermelon, tomorrow, truffle, statement, default
+:dzslides-transition: fade
+:dzslides-fonts: family=Yanone+Kaffeesatz:400,700,200,300&family=Cedarville+Cursive
+//:dzslides-highlight: asciidoctor
+:dzslides-highlight: monokai
+:source-highlighter: highlightjs
+:dzslides-status:
+:topic: .topic
+:intro: .topic.intro
+:statement: .topic.statement
+:incremental: .incremental
+:source: .topic.source
+endif::slides[]
 
-== Title of Slide One
+[{topic}]
+== Overview
 
+[{incremental}]
+- Description of the problem: an example
+- An unstructured solution
+- A top‐down, functional solution
+- An object‐oriented solution yielding a useful design
+pattern
+- Analysis of the solution and its benefits
 
-[canvas-image=images/sni-exp.png]
-== Slide Two's Title will not be displayed
+[{intro}]
+== Disclaimer
 
-[.canvas-caption, position=center-up]
-This text is displayed on top of the example.jpg image.
+[{topic}]
+== Credits
 
-== Test PlantUML
+Credit B. Meyer!
 
-.A reservation panel
-[plantuml, diagram-classes, svg, width=80%]     
+image::bertrand.jpg[]
+
+[{topic}]
+== Reference
+
+http://www.eyrolles.com/Informatique/Livre/conception‐et‐programmation‐orientees‐objet‐9782212091113[Object‐Oriented Software Construction, 2nd edition]
+
+image::oosc.jpg[width=30%]
+
+[detail]#(En français: Conception et Programmation Orientées Objet,
+Eyrolles)#
+
+[{intro}]
+== An example
+
+[{topic}]
+== A reservation panel
+
+[plantuml, diagram-panel1, svg, width=80%]     
 ....
 include::reservationPanel.plantuml[]
+....
+
+[{topic}]
+== A reservation panel
+
+[plantuml, diagram-panel2, svg, width=80%]     
+....
+include::reservationPanel2.plantuml[]
+....
+
+[{topic}]
+== The transition diagram (part only)
+
+[plantuml, diagram-transition, svg, width=60%]  
+....
+include::transition.plantuml[]
+....
+
+[{intro}]
+== First attempt
+
+[{topic}]
+== A program block for each state
+
+....
+PFlight_query:
+    display ‘‘enquiry on flights’’ screen
+    repeat
+        Read user’s answers and his exit choice C
+        if Error_in_answer then output_message end
+    until
+        not Error_in_answer
+    end
+    
+    process answer
+    
+    inspect C
+        when 0 then goto PExit 
+        when 1 then goto PHelp
+        ...
+        when n then goto PReservation 
+    end
+....
+
+
+[{topic}]
+== A program block for each state
+
+....
+PFlight_query:
+    display ‘‘enquiry on flights’’ screen
+    repeat
+        Read user’s answers and his exit choice C
+        if Error_in_answer then output_message end
+    until
+        not Error_in_answer
+    end
+    
+    process answer
+    
+    inspect C
+        when 0 then goto PExit 
+        when 1 then goto PHelp
+        ...
+        when n then goto PReservation 
+    end
+....
+
+
+icon:warning[] What’s wrong ?
+
+[{topic}]
+== What’s wrong ?
+
+[{incremental}]
+* Intricate branching structure 
+** => _spaghetti bowl_
+* Extendibility problems
+** => dialogue structure *wired* into program structure
+
+[{topic}]
+== New system architecture
+
+[plantuml, diagram-archi, svg, width=80%]  
+....
+include::archi.plantuml[]
 ....

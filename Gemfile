@@ -12,4 +12,6 @@ group :development, :test do
   gem 'link-checker'
   gem 'tilt'
   gem 'haml'
+  gem 'thread_safe'
+  gem 'slim'
 end

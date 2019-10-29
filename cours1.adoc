@@ -45,17 +45,8 @@ endif::definitions[]
 
 [{incremental}]
 - Annonces
-- Révisions MPA
 - Stages : il est temps!
 - CPOA: let's start
-
-[{intro}]
-== *don* du sang
-
-[{topic}]
-== Don du sang à l'IUT mardi prochain 13/11
-
-image::don.png[width=50%]
 
 [{topic}]
 == Nuit de l'info
@@ -63,23 +54,6 @@ image::don.png[width=50%]
 http://nuitdelinfo.com
 
 image::nuit.png[width=80%]
-
-[{intro}]
-== Révisions *MPA*
-
-[{topic}]
-== Time for a quizz!
-
-//----------------------------- Question ------------------
-.*QUESTION*
-[WARNING]
-====
-- Connectez-vous sur : http://www.socrative.com/ (*student login*)
-- Ou téléchargez l'application pour étudiant image:socrative2.png[width=10%]
-- Choisissez la room *44918d67*
-====
-
-image::socrative1.png[width=50%,link=http://www.socrative.com/]
 
 [{intro}]
 == *Stages* : il est temps!
