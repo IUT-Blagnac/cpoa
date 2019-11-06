@@ -1,4 +1,4 @@
-= A Software Architecture Example
+= A Software *Architecture* Example
 Jean-Michel Bruel <jbruel@gmail.com>
 v1.0, {localdate}
 :icons: font
@@ -60,7 +60,7 @@ Eyrolles)#
 [{topic}]
 == A reservation panel
 
-[plantuml, diagram-panel1, svg, width=80%]     
+[plantuml, diagram-panel1, svg, width=80%]
 ....
 include::reservationPanel.plantuml[]
 ....
@@ -68,7 +68,7 @@ include::reservationPanel.plantuml[]
 [{topic}]
 == A reservation panel
 
-[plantuml, diagram-panel2, svg, width=80%]     
+[plantuml, diagram-panel2, svg, width=80%]  
 ....
 include::reservationPanel2.plantuml[]
 ....
@@ -87,6 +87,7 @@ include::transition.plantuml[]
 [{topic}]
 == A program block for each state
 
+[source]
 ....
 PFlight_query:
     display ‘‘enquiry on flights’’ screen
@@ -143,10 +144,541 @@ icon:warning[] What’s wrong ?
 * Extendibility problems
 ** => dialogue structure *wired* into program structure
 
+
+[{topic}]
+== A functional, top‐down solution
+
+Represent the structure of the diagram by a *function*
+
+`transition (i, k)`
+
+giving the state to go to from state `i` for choice `k`
+
+icon:comment[] This describes the transitions of any particular application.
+
+Function `transition` may be implemented as a *data structure*, for example a two‐dimensional array
+
+[{topic}]
+== The transition function
+
+[cols="3,1,1,1,1"]
+|===
+|                   | 0 | 1 | 2 | 3
+| 0 (Initial)       |  |  | 2 | 
+| 1 (Help)          | Exit | Return |  | 
+| 2 (Confirmation)  | Exit | 3 | 0 |
+| 3 (Reservation)   | Exit | 4 | 2 |
+| 4 (Seats)         | Exit | 5 | 3 |
+| 5 (Flights)       | Exit | 0 | 4 |
+|===
+
+[{topic}]
+== The transition diagram (part only)
+
+[plantuml, diagram-transition, svg, width=60%]  
+....
+include::transition.plantuml[]
+....
+
 [{topic}]
 == New system architecture
 
-[plantuml, diagram-archi, svg, width=80%]  
+image::archiMeyer.svg[width=100%]
+
+[{topic}]
+== New system architecture
+
+Procedure `execute_session` only defines graph traversal.
+
+It knows nothing about particular screens of a given application.
+
+It should be the same for all applications.
+
+[{topic}]
+== New system architecture
+
+[source]
 ....
-include::archi.plantuml[]
+execute_session
+        ‐‐ Execute full session.
+    local
+    current_state, choice : INTEGER
+    do
+        current_state := initial
+        repeat
+            choice := execute_state (current_state)
+            current_state := transition (current_state, choice)
+        until
+            is_final (current_state)
+        end
+    end
 ....
+
+[{topic}]
+== To describe an application
+
+Provide `transition` *function*
+
+Define `initial` *state*
+
+Define `is_final` *function*
+
+[{topic}]
+== Actions in a state
+
+[source]
+....
+execute_state (current_state : INTEGER ): INTEGER
+    ‐‐ Execute actions for current_state ; return user’s exit choice.
+local
+    answer : ANSWER
+    good : BOOLEAN
+    choice : INTEGER
+do
+    repeat
+        display (current_state)
+        [answer, choice] := read (current_state )
+        good := correct (current_state, answer )
+        if not good then message (current_state, answer ) end
+    until
+        good
+    end
+    process (current_state, answer )
+    Result := choice
+end
+....
+
+[{topic}]
+== Specification of the remaining routines
+
+`display(s)` outputs the screen associated with state s.
+
+`[a, e] := read(s)` reads into a the user’s answer to the display
+screen of state `s`, and into `e` the user’s exit choice.
+
+`correct(s, a)` returns true if and only if `a` is a correct answer for the question asked in state `s`.
+
+If so, `process(s, a)` processes answer `a`.
+
+If not, `message(s, a)` outputs the relevant error message.
+
+[{topic}]
+== Going object‐oriented: The law of *inversion*
+
+How amenable is this solution to *change* and *adaptation* ?
+
+[{incremental}]
+- New transition?
+- New state?
+- New application?
+
+[{topic}]
+== Routine Signature:
+
+image::archiMeyer2.png[width=100%]
+
+
+[{topic}]
+== Data transmission
+
+All routines share the state as input argument. They must discriminate on
+it, e.g. :
+
+[source]
+....
+display (current_state : INTEGER)
+    do
+        inspect current_state
+        when state1 then...
+        when state2 then...
+        when staten then... 
+        end 
+    end
+....
+
+
+[{topic}]
+== Consequences:
+
+[{incremental}]
+- Long and complicated routines.
+- Must know about one possibly complex application.
+- To change one transition, or add a state, need to change all.
+
+[{topic}]
+== The flow of control
+
+Underlying reason why structure is so inflexible:
+
+- Too much DATA TRANSMISSION.
+
+`current_state` is passed from `execute_session` (level 3) to all
+routines on level 2 and on to level 1
+
+[{topic}]
+== The flow of control
+
+Worse: there’s another implicit argument to all routines –
+application. Can’t define
+
+`execute_session, display, execute_state,...``
+
+as library components, since each must know about all interactive applications that may use it.
+
+[{topic}]
+== The visible architecture
+
+image::archiMeyer2.svg[width=100%]
+
+[{topic}]
+== The real story
+
+image::archiMeyer3.svg[width=100%]
+
+[{topic}]
+== The law of inversion
+
+If your routines exchange too much data, ...
+
+put your routines into your data.
+
+In this example: the *state* is everywhere!
+
+[{topic}]
+== Going O‐O
+
+Use `STATE` as the *basic abstract data type* (and class).
+
+Among features of every state:
+
+The routiness of level 1 (deferred in class `STATE`)
+
+`execute_state`, as above but without the argument `current_state`
+
+[{topic}]
+== Grouping by data abstractions
+
+image::archiMeyer4.svg[width=100%]
+
+[{topic}]
+== Class `STATE`
+
+[source]
+....
+deferred class
+    STATE
+feature
+    choice : INTEGER ‐‐ User’s selection for next step
+    input : ANSWER ‐‐ User’s answer for this step
+    display
+        ‐‐ Show screen for this state.
+        deferred
+        end
+    read 
+        ‐‐ Get user’s answer and exit choice,
+        ‐‐ recording them into input and choice.
+        deferred
+        ensure
+            input /= Void
+        end
+....
+
+
+[{topic}]
+== Class `STATE`
+
+[source]
+....
+correct: BOOLEAN
+    ‐‐ Is input acceptable?
+    deferred
+    end
+
+message
+    ‐‐ Display message for erroneous input.
+    require
+        not correct
+    deferred
+    end
+
+process
+    ‐‐ Process correct input.
+    require
+        correct
+    deferred
+    end
+....
+
+[{topic}]
+== Class `STATE`
+
+[source]
+....
+execute_state
+    local
+        good : BOOLEAN
+    do
+        from
+        until
+            good
+        loop
+            display
+            read
+            good := correct
+            if not good then message end
+        end
+        process
+        choice := input.choice
+    end
+end
+....
+
+[{topic}]
+== Class structure
+
+[plantuml, State_structure, svg, width=80%]
+....
+include::state_structure.plantuml[]
+....
+
+[{topic}]
+== To describe a state of an application
+
+Write a descendant of `STATE`:
+
+[source]
+....
+class FLIGHT_QUERY inherit 
+    STATE
+feature
+    display do ... end
+    read do ... end
+    correct : BOOLEAN do ... end
+    message do ... end
+    process do ... end
+end
+....
+
+[{topic}]
+== Rearranging the modules
+
+image::archiMeyer5.svg[width=100%]
+
+[{topic}]
+== Describing a complete application
+
+No ‘‘main program’’ but class representing a system.
+
+Describe application by remaining features at levels 1 and 2:
+
+- Function `transition`.
+- State `initial`.
+- Boolean function `is_final`.
+- Procedure `execute_session`.
+
+[{topic}]
+== Implementation decisions
+
+Represent transition by an array `transition`: `n` rows (number
+of states), `m` columns (number of choices), given at creation
+
+States numbered from `1` to `n`; array states yields the state associated with each index
+
+(Reverse not needed: why?)
+
+No deferred boolean function `is_final`, but convention: a transition to state `0` denotes termination.
+
+No such convention for initial state (too constraining).
+Attribute `initial_number`.
+
+[{topic}]
+== Describing an application
+
+[source]
+....
+class
+    APPLICATION
+create
+    make
+feature
+    initial : INTEGER
+    make (n, m : INTEGER) 
+        ‐‐ Allocate with n states and m possible choices.
+    do
+        create transition.make (1, n, 1, m)
+        create states.make (1, n )
+    end
+feature {NONE } ‐‐ Representation of transition diagram
+    transition: ARRAY2 [STATE ] 
+        ‐‐ State transitions
+    states : ARRAY [STATE ] 
+        ‐‐ State for each index
+....
+
+[{topic}]
+== The array of states
+
+A polymorphic data structure:
+
+image::archiMeyer6.svg[eight=100%]
+
+[{topic}]
+== Executing a session
+
+[source]
+....
+execute_session 
+        ‐‐ Run one session of application 
+    local
+        current_state : STATE ‐‐ Polymorphic!
+        index : INTEGER
+    do
+        from
+            index := initial
+        until
+            index = 0
+        loop
+        current_state := states [index ]
+        current_state.execute_state
+        index :=transition [index, current_state.choice] 
+        end
+    end
+....
+
+[{topic}]
+== Class structure
+
+[plantuml, State_structure, svg, width=80%]
+....
+include::state_structure.plantuml[]
+....
+
+
+[{topic}]
+== Other features of `APPLICATION`
+
+[source]
+....
+put_state (s : STATE; number: INTEGER)
+        ‐‐ Enter state s with index number
+    require
+        1 <= number
+        number <= states.upper 
+    do
+        states [number] := s
+    end
+
+choose_initial (number: INTEGER)
+        ‐‐ Define state number number as the initial state.
+    require
+        1 <= number
+        number <= states.upper
+    do
+        first_number := number
+    end
+....
+
+[{topic}]
+== More features of `APPLICATION`
+
+[source]
+....
+put_transition (source, target, label : INTEGER )
+        ‐‐ Add transition labeled label from state
+        ‐‐ number source to state number target.
+    require
+        1 <= source; source <= states.upper
+        0 <= target; target <= states.upper
+        1 <= label; label <= transition.upper2 
+    do
+        transition.put (source, label, target )
+    end
+invariant
+    0 <= st_number
+    st_number <= n
+    transition.upper1 = states.upper 
+end
+....
+
+[{topic}]
+== To build an application
+
+Necessary states — instances of `STATE` — should be available.
+
+Initialize application:
+
+`create a.make(state_count, choice_count)``
+
+Assign a number to every relevant state `s` :
+
+`a [n] := s`
+
+ifdef::slides[== !]
+
+Choose initial state `no` :
+
+`a.choose_initial(no)`
+
+Enter transitions:
+
+`a.put_transition(source, target, label)`
+
+May now run:
+
+`a.execute_session()`
+
+[{topic}]
+== Open architecture
+
+During system evolution you may at any time:
+
+[{incremental}] 
+- Add a new transition `(put_transition)`.
+- Add a new state `(put_state)`.
+- Delete a state (not shown, but easy to add).
+- Change the actions performed in a given state.
+- ...
+
+[{topic}]
+== Note on the architecture
+
+Procedure `execute_session` is not ‘‘the function of the system” but just one routine of `APPLICATION`.
+
+Other uses of an application:
+
+Build and modify: add or delete state, transition, etc.
+
+Simulate, e.g. in batch (replaying a previous session’s
+script), or on a line‐oriented terminal.
+
+ifdef::slides[== !]
+
+Collect statistics, a log, a script of an execution.
+
+Store into a file or data base, and retrieve.
+
+Each such extension only requires incremental addition of routines. 
+Doesn’t affect structure of `APPLICATION` and clients.
+
+[{topic}]
+== The system is open
+
+Key to openness: architecture based on types of the problem’s objects (state, transition graph, application).
+
+Basing it on “the” apparent purpose of the system would have closed it for evolution.
+
+- Real systems have no top
+
+[{topic}]
+== Software architecture: the basic issue
+
+- Finding the right data abstraction
+
+include::about.adoc[]
+
+ifdef::slides[]
+// ------------------------------------------ Brainstorm => up
+[{intro}]
+== *The End* {nbsp} {nbsp} {nbsp} [detail]#(for me!)#
+
+endif::slides[]

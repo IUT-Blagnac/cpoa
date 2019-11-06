@@ -1,0 +1,10 @@
+[{topic}]
+== About...
+
+This web site has been developped by mailto:jbruel@gmail.com[JMB] using the following (open and free) tools:
+
+//- https://jekyllrb.com/[Jekyll]
+- http://asciidoctor.org[Asciidoctor], v.`{asciidoctor-version}`
+- The http://git-scm.com/[git] version control system
+//- The http://foundation.zurb.com/[Foundation] framework
+- The https://travis-ci.org/[Travis] Continuous Integration tool
