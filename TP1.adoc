@@ -232,12 +232,14 @@ echo "Done."
 ----
 +
 - Utilisation d'un script shell équivalent au précédent (cf. <<plantumlShell,plantuml.sh>>)
+- Utilisation de la nouvelle doclet : https://github.com/gboersma/uml-java-doclet
 - Si vous n'avez pas le temps ou si aucune méthode ne fonctionne, obtenez votre
 diagramme de classe à partir d'eclipse avec le plugin plantUML (attention, choisir
 menu:Window[Show View > Other... > PlantUML > PlantUML Source]).
 
 WARNING: Seul le fichier `TP1.uml` est à rendre (pas le `PNG`) sur le dépôt
 Moodle avant vendredi 18/11 à minuit.
+
 
 :numbered!:
 [appendix]
