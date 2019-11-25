@@ -3,4 +3,4 @@ rend interchangeables.
 Il permet à l'algorithme de varier indépendamment des clients qui l'utilisent.
 
 ifndef::slides[.Modèle UML du patron _Strategy_]
-image::strategy.png[]
+image::strategy.svg[]

@@ -186,14 +186,6 @@ ifndef::slides[]
 include::enum.asc[leveloffset=+1]
 endif::slides[]
 
-
-include::patterns-content.adoc[]
-
-ifdef::slides[]
-
-ifdef::slides[:leveloffset: +1]
-
-/////
 == Retour TP1
 
 .Moulinette (Ruby) de note automatique
@@ -214,22 +206,32 @@ Dir.foreach("...") do |file_name|
   ...
 ----
 
-NOTE: Moyenne: *[red]#7,9/20 !!#*
+NOTE: Moyenne: *[red]#6,4/20 !!#* (7,9 en 2018)
 
 ifdef::slides[== Retour TP1 (suite)]
 
 [horizontal,%step]
-Attendus::	72
-Rendus::	46	(64%) => 26 `0/20`
-Nom OK::	29	(plus que 40%) => 17 `0/20` de plus
+Attendus::	90
+Rendus::	40	(44%) => 50 `0/20`
+Nom OK::	16	(plus que 26%) => 16 `0/20` de plus
 +
-Exemple de noms : `TP1-Toto-G1A.uml`, `toto.rar`, `toto.zip`, `TP1.uml.txt`, `TP1.UML`
+Exemple de noms : `TP1-Toto-G1A.uml`, `toto.rar`, `toto.zip`, `uml.txt`, `TP1.UML`
 +
-20/20::	27
+20/20::	12
+17/20:: 8
 14/20::	2
-0/20::	43
-Moy.:: 7,9/20
-/////
+11/20::	1
+08/20::	1
+Moy.:: 17,7/20
+
+
+include::patterns-content.adoc[]
+
+ifdef::slides[]
+
+ifdef::slides[:leveloffset: +1]
+
+
 
 == Time for a quizz!
 
