@@ -89,10 +89,10 @@ image::observer-illustration.png[]
 
 include::pattern/observer.txt[]
 
-Quelques précisions :
+Principe:
 
-- les observateurs doivent être enregistrés
-- le sujet est chargé de prévenir les observateurs (d'un changement).
+- les observateurs s'enregistrent auprès d'un sujet
+- ce sujet est chargé de prévenir les observateurs (d'un changement).
 
 .Exemple d'utilisation
 image::observer-scenario2.png[]
@@ -100,8 +100,8 @@ image::observer-scenario2.png[]
 On peut réaliser de plusieurs façon le `attacher`, mais
 il doit être fait pour que ca marche :
 
-- par un objet extérieur,
-- par le `concreteObserver` lui-même.
+- par un objet extérieur (ici le main de l'application),
+- par le `concreteObserver` lui-même. Cela reste rare, car le principe est que le sujet n'a pas connaissance de ses observateurs.
 
 === Objectif
 
@@ -142,7 +142,7 @@ et les laisser évoluer de manière indépendante.
 [WARNING]
 ====
 Pour vérifiez que vous avez compris son utilité, réalisez
-un diagramme de séquence illustrant l'utilisation du patron _Observer_.
+un diagramme de séquence illustrant l'utilisation du patron _Observer_. Commencez par l'appel d'une méthode _setState()_ sur l'observé (le sujet).
 ====
 
 //----------------------------------------------------- Correction -------------------------
@@ -194,6 +194,7 @@ essayez de l'oublier!
 Voici une liste des éléments, liés à l'implémentation, à résoudre.
 Pour chacune, essayez de fournir des éléments de réponse :
 
+. L'un est une interface, l'autre une classe. Serez-vous retrouver la nature de Observer et Observable ? Pourquoi ?
 . Comment le sujet garde la trace de ses observateurs?
 . Et si un observateur veut observer plus d'un sujet?
 . Qui déclence les `update`?
@@ -213,18 +214,25 @@ ifdef::prof[]
 .Solution
 ========
 
-. Array, liste chaînée, ...
-. Le subject peut s'identifier auprès des observateurs via l'interface `update`
+. Association:
+ * java.util.Observer est une interface qui déclare uniquement la méthode update(...) 
+ * java.util.Observable est une classe qui implémente:
+- addObserver / delObserver
+- notifyObserver / setChanged
+- ...
+. Dans un attribut de type Array, liste chaînée (ArrayList), ...
+. Le sujet peut s'identifier auprès des observateurs via l'interface `update`
 . Par exemple :
 - Le subjet quand il change d'état
 - Les observateurs après qu'ils ait provoqué un ou plusieurs changements
 - Des objets quelconques!
-. Difficile autrement que par checking/testing
+. En Java, seul l'objet lui-même peut "initier" une notification à ses observateurs grâce à une variable d'état à visibilité "protected".
+Il faudra s'assurer au sein de la classe concrête Observable que la séquence est respectée sous peine de ne pas avoir de notification. 
 . Par exemple :
 - Push Model => Beaucoup
 - Pull Model => Le moins possible
 . On parle alors de _publish-subscribe_
-. Yes!
+. Oui ! Il héritera de Observable et implémentera Observer.
 . Par exemple :
 - Utiliser un objet intermédiaire qui agit comme médiateur
 ========
@@ -326,6 +334,22 @@ is given no indication what attribute of the observable object has changed. */
 ========
 endif::prof[]
 
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Que doit-on rajouter pour adapter le diagramme de classe fait précédement à l'implémentation Java de Observer/Observable ?
+====
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+========
+- appeler la méthode _hasChanged()_ dans _setState()_
+- + renommer _notify_ en _notifyObserver_
+========
+endif::prof[]
 
 ==== L'interface java.util.Observer
 
