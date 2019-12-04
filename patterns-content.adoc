@@ -468,6 +468,7 @@ ___________________
 
 ifdef::slides[]
 
+////
 //----------------------------- Question ------------------
 .*QUESTION*
 [WARNING]
@@ -476,6 +477,7 @@ Qui fait la nuit de l'info dans un groupe avec des Masters?
 
 image::N2I.png[width=30%]
 ====
+////
 
 endif::slides[]
 

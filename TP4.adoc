@@ -319,6 +319,10 @@ public interface ActionList extends Action {
 ..	écrire le code dont un constructeur correctement paramétré,
 ..	la méthode +execute(AgenceBancaire)+ réalisera ce qui est défini dans la documentation. Le menu affiché sera identique à celui de la version antérieure de l'application. Chaque option de menu sera numérotée par +execute()+ de 1 à n (nombre d'action) + 0 pour sortir du menu.
 
+Vous devez obtenir une architecture comme celle-ci (attention, légèrement différente, avec un attribut code par exemple) :
+
+.Structure de l'application
+image:applicationbanque.svg[]
 
 === Et maintenant : go ! Maintenance et extension facilitées
 

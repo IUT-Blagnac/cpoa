@@ -23,15 +23,15 @@ public class MainTest {
 		AgenceBancaire ag = AccesAgenceBancaire.getAgenceBancaire();
 		
 		Action<AgenceBancaire> a1 = new Action1("Liste des comptes de l'agence", "L1");
-		Action<AgenceBancaire> a2 = new Action2("Voir un compte (par son numéro)", "V2");
+		Action<AgenceBancaire> a2 = new Action2("Voir un compte (par son numï¿½ro)", "V2");
 		Action<AgenceBancaire>  a3 = new Action3("Ajouter un compte", "");
 		Action<AgenceBancaire>  a4 = new Action4("Supprimer un compte", "");
-		Action<AgenceBancaire>  a5 = new Action5("Déposer de l'argent sur un compte", "");
+		Action<AgenceBancaire>  a5 = new Action5("Dï¿½poser de l'argent sur un compte", "");
 		Action<AgenceBancaire>  a6 = new Action6("Retirer de l'argent sur un compte", "");
 		
-		ActionList<AgenceBancaire> al1 = new ActionListAgenceBancaire("Menu Général", "1", "Menu Général");
+		ActionList<AgenceBancaire> al1 = new ActionListAgenceBancaire("Menu Gï¿½nï¿½ral", "1", "Menu Gï¿½nï¿½ral");
 		ActionList<AgenceBancaire> al2 = new ActionListAgenceBancaire("Menu gestion des comptes", "2", "Menu gestion des comptes");
-		ActionList<AgenceBancaire> al3 = new ActionListAgenceBancaire("Menu opérations sur comptes", "3", "Menu opérations sur comptes");
+		ActionList<AgenceBancaire> al3 = new ActionListAgenceBancaire("Menu opï¿½rations sur comptes", "3", "Menu opï¿½rations sur comptes");
 		
 		al1.addAction(a1);
 		al1.addAction(a2);
@@ -44,6 +44,7 @@ public class MainTest {
 		al3.addAction(a5);
 		al3.addAction(a6);
 
+		System.out.println("coucou!\n");
 		al1.execute(ag);
 	}
 
