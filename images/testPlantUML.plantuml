@@ -5,19 +5,13 @@
 ' JMB 2014
 '-----------------------------------
 
-@startuml
-
-'-----------------------------------
-' Standards Taxonomy (taken from Friedenthal 2016)
-' JMB 2018
-'-----------------------------------
-
 ' Default settings
 '-----------------------------------
 ' left to right direction 'does not work for sequence diagrams :-(
 'hide circle
 hide empty members
-hide methods
+hide methods	
+
 ' Colors & Fonts
 '-----------------------------------
 'Colors => see http://plantuml.com/color
@@ -46,24 +40,36 @@ skinparam arrow {
     MessageAlign center
 }
 
+' PlantUML stdlib now includes Icon-Font Sprites! See https://github.com/tupadr3/plantuml-icon-font-sprites
+' see also https://tupadr3.de/plantuml-icon-font-sprites/
+!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v1.0.0
+
+'!include ../Defs.txt
+
+!includeurl ICONURL/common.puml
+!includeurl ICONURL/font-awesome/server.puml
+!includeurl ICONURL/font-awesome/database.puml
+
+title Styling example
+
 ' Attribute and name values (for translation purpose).
 '-----------------------------------
+!define RECT "Rectangle"
+!define SQUARE "Carré"
+'!define RECT "Rectangle"
+'!define SQUARE "Square"
 
 ' Usefull functions
 '-----------------------------------
 !define objet(nom,type) class "<u>nom : type"
 
-'hide circle
-hide empty members
-hide empty methods
 
-
-class Rectangle {
+class RECT {
 }
 
-class Carré {
+class SQUARE {
 }
 
-Rectangle <|-- Carré
+RECT <|-- SQUARE
 
 @enduml
