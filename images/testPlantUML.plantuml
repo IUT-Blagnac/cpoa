@@ -8,7 +8,7 @@
 ' Default settings
 '-----------------------------------
 ' left to right direction 'does not work for sequence diagrams :-(
-'hide circle
+hide circle
 hide empty members
 hide methods	
 
@@ -50,7 +50,7 @@ skinparam arrow {
 !includeurl ICONURL/font-awesome/server.puml
 !includeurl ICONURL/font-awesome/database.puml
 
-title Styling example
+'title Styling example
 
 ' Attribute and name values (for translation purpose).
 '-----------------------------------
@@ -64,12 +64,9 @@ title Styling example
 !define objet(nom,type) class "<u>nom : type"
 
 
-class RECT {
+class Duck{
+	name
 }
-
-class SQUARE {
-}
-
-RECT <|-- SQUARE
-
+class Animal
+Animal <|-- Duck
 @enduml

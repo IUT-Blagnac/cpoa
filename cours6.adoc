@@ -4,14 +4,45 @@
 // ------------------------------------------
 = CPOA - Cours 6 (Suite Design Pattern)
 Jean-Michel Bruel <jbruel@gmail.com>
-v1.0, {localdate} - First draft
-:status: bottom
-:inclusion:
+v1.9, {localdate} (started on 2015-10-05)
 :icons: font
+:experimental:
+:status:
+:imagesdir: images
+:inclusion:
+:siteurl: http://bit.ly/jmb-cpoa
+//--------------------- slides
+ifdef::slides[]
+:dzslides-style: tomorrow
+//:dzslides-style: stormy, watermelon, tomorrow, truffle, statement, default
+:dzslides-transition: fade
+:dzslides-fonts: family=Yanone+Kaffeesatz:400,700,200,300&family=Cedarville+Cursive
+//:dzslides-highlight: asciidoctor
+:dzslides-highlight: monokai
+:source-highlighter: highlightjs
+:dzslides-status:
+:topic: .topic
+:intro: .topic.intro
+:statement: .topic.statement
+:incremental: .incremental
+:source: .topic.source
+endif::slides[]
+//--------------------- cours
+ifndef::slides[]
+:source-highlighter: highlight
+:topic:
+:intro:
+:statement:
+:incremental: %step
+:source:
+endif::slides[]
 
-// ------------------------------------------
+// ------------------------------------------ definitions
+ifndef::definitions[]
 include::definitions.txt[]
-include::asciidoc.conf[]
+endif::definitions[]
+:androidicon: Android icon:android[role=lime]
+:iosicon: http://www.apple.com/fr/ios/[iOS icon:apple[]]
 
 ifdef::slides[]
 

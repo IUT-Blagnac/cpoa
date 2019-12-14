@@ -78,10 +78,11 @@ endif::compact[]
 
 La bibliothèque java Swing (disponible depuis la version 2 de Java (java 1.5)) définit des composants graphiques pour construire des interfaces utilisateurs indépendantes des plateformes d'exécution (cf. http://docs.oracle.com/javase/tutorial/uiswing/).
 
-Le but de ce TD et du prochaine TP est de manipuler un composant Swing complexe : le JTable. Nous verrons :
+Le but de ce TD et du prochain TP est de manipuler un composant Swing complexe : `JTable`. 
+Nous verrons :
 
 .	En TD : les principes du composant et la séparation MV/C.
-.	En TP : la mise en oeuvre de ce composant.
+.	En TP : la mise en œuvre de ce composant.
 
 //== Pour commencer : une démo de ce qu'on va faire
 
@@ -158,17 +159,17 @@ ifdef::prof[]
 ====
 endif::prof[]
 
-== Présentation JTable : mise en oeuvre
+== Présentation JTable : mise en œuvre
 
 La bibliothèque java Swing propose une gestion graphique de tableaux dans une architecture MVC, ou plutôt M-VC. Il s'appuie sur 2 composants :
 
-*	*+JTable+* qui affiche des données dans un tableau
+*	*`JTable`* qui affiche des données dans un tableau
 ** 	Il est à la fois Vue et Contrôleur.
 **	Rôle : afficher les quelques lignes visibles et gérer les mises à jour à l'écran de ces lignes
 **	Il est composé lui-même d'un UIDelegate qui est la Vue mais rarement utilisé
 **	Un tableau est généralement entouré d’ascenseurs => le JTable ne demande au modèle QUE les données nécessaires à l’affichage, pas toutes
 **	Programmé pour utiliser le minimum de composants graphiques possibles (habituellement 1 seul et même composant par type de données affichée)
-*	*+TableModel+* qui régit la gestion des données (les stocke)
+*	*`TableModel`* qui régit la gestion des données (les stocke)
 **	Il est le Modèle
 **	Rôle : contient et stocke toutes les données potentiellement affichables
 
@@ -193,7 +194,7 @@ image:TD6-MVC-3.png[]
 
 === Composant graphique
 
-Côté graphique : un JScrollPane qui contient un JTable et une méthode *+setModel()+* pour associer un modèle.
+Côté graphique : un `JScrollPane` qui contient un JTable et une méthode *`setModel()`* pour associer un modèle.
 
 [source,java]
 ----
@@ -209,15 +210,15 @@ jsp.setViewportView (jta);
 
 === TableModel : accès aux données
 
-Les données sont accessible par un modèle. Elles peuvent être stockées ou calculées, de façon transparente.
+Les données sont accessibles par un modèle. Elles peuvent être stockées ou calculées, de façon transparente.
 
-Un modèle doit implémenter l'interface +TableModel+ définissant 9 méthodes utilisées pour beaucoup par le composant JTable.
+Un modèle doit implémenter l'interface `TableModel` définissant 9 méthodes utilisées pour beaucoup par le composant JTable.
 
-La classe AbstractTableModel propose des services complémentaires pour les modèles de table et implémente par défaut les méthodes du modèle de table TableModel, sauf :
+La classe `AbstractTableModel` propose des services complémentaires pour les modèles de table et implémente par défaut les méthodes du modèle de table TableModel, sauf :
 
-*	+public int getRowCount()+ : nombre de lignes affichables
-*	+public int getColumnCount()+ : nombre de colonnes affichables
-*	+public Object getValueAt(int ligne, int colonne)+ : l’objet à afficher dans la ligne et la colonne indiquées (sa méthode toString est utilisée).
+*	`public int getRowCount()` : nombre de lignes affichables
+*	`public int getColumnCount()` : nombre de colonnes affichables
+*	`public Object getValueAt(int ligne, int colonne)` : l’objet à afficher dans la ligne et la colonne indiquées (sa méthode toString est utilisée).
 
 Les numérotations de lignes et colonnes commencent à 0.
 
@@ -251,10 +252,10 @@ image:TD6fenExemple1.png[]
 Au plus simple, créer un TableModel revient donc à créer une classe :
 
 *	qui hérite de AbstractTableModel
-*	qui, a minima, redéfinit +getRowCount(), getColumnCount()+ et +getValueAt()+
-*	redéfinit aussi +public String getColumnName(int colonne+ qui donne les en-têtes de colonne (sinon "A", "B", ... par défaut).
+*	qui, a minima, redéfinit `getRowCount(), getColumnCount()` et `getValueAt()`
+*	redéfinit aussi `public String getColumnName(int colonne` qui donne les en-têtes de colonne (sinon "A", "B", ... par défaut).
 
-*Question* : En supposant que le table ci-dessus reçoive le message paint() pour s'afficher, donner le pseudo algorithme java exécuté par table pour s'afficher.
+*Question* : En supposant que le table ci-dessus reçoive le message `paint()` pour s'afficher, donner le pseudo algorithme java exécuté par table pour s'afficher.
 
 -----
 // On suppose démarrer en ligne 0 et colonne 0 !!
@@ -358,8 +359,8 @@ Pour la mise à jour (update) :
 
 Méthodes de TableModel utilisées par JTable :
 
-*	+boolean isCellEditable(int l, int c)+ : renvoie true si la cellule peut être modifiée (par défaut false)
-*	+void setValueAt(Object val, int l, int c)+ : modifie une donnée du modèle (par défaut aucune modification)
+*	`boolean isCellEditable(int l, int c)` : renvoie true si la cellule peut être modifiée (par défaut false)
+*	`void setValueAt(Object val, int l, int c)` : modifie une donnée du modèle (par défaut aucune modification)
 
 Elles sont donc à rédéfinir selon les besoins :
 
@@ -404,13 +405,13 @@ endif::prof[]
 
 Pour prévenir les JTable => il faut une méthode pour les notifier => pré-programmé dans AbstractTableModel :
 
-*	+void fireTableDataChanged()+
-*	+void fireTableStructureChanged()+
-*	+void fireTableRowsInserted(int first, int last)+
-*	+void fireTableRowsUpdated(int first, int last)+
-*	+void fireTableRowsDeleted(int first, int last)+
-*	+void fireTableCellUpdated(int row, int col)+
-*	+void fireTableChangedEvent(TableModelEvent e)+
+*	`void fireTableDataChanged()`
+*	`void fireTableStructureChanged()`
+*	`void fireTableRowsInserted(int first, int last)`
+*	`void fireTableRowsUpdated(int first, int last)`
+*	`void fireTableRowsDeleted(int first, int last)`
+*	`void fireTableCellUpdated(int row, int col)`
+*	`void fireTableChangedEvent(TableModelEvent e)`
 
 Exemple d'appel :
 
@@ -433,7 +434,7 @@ Et le reste du JTable (affichage d'images, de nombre, saisies avec listes dérou
 
 image:td6.conclu.JTable.png[]
 
-On peut ainsi définir un composant +Renderer+ pour redéfinir comment afficher une colonne, définir un composant +Editor+ pour redéfinir comment saisir une valeur de colonne, ...
+On peut ainsi définir un composant `Renderer` pour redéfinir comment afficher une colonne, définir un composant `Editor` pour redéfinir comment saisir une valeur de colonne, ...
 
 image:td6.conclu.exemples.png[]
 
