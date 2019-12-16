@@ -204,7 +204,7 @@ sous-types, sans modifier la cohérence du programme
 ifdef::slides[=== LSP : un exemple]
 [quote]
 __________________
-Un carré est un rectangle a deux côtés égaux.
+Un carré est un rectangle particulier.
 __________________
 
 ifndef::slides[.Exemple classique de violation du principe de substitution de Liskov]
