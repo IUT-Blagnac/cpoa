@@ -1,0 +1,102 @@
+// ------------------------------------------
+//  Created by Jean-Michel Bruel on 2019-12.
+//  Copyright (c) 2019 IRIT/U. Toulouse. All rights reserved.
+// Thanks to Louis Chanoua for code & idea
+// ------------------------------------------
+= DUT-Info/S3/M3105 (CPOA) : Projet refactoring
+Jean-Michel Bruel et Louis Chanouha
+v1.9, {localdate}
+:mailto: jbruel@gmail.com
+:status: bottom
+:inclusion:
+:experimental:
+
+// ------------------------------------------
+include::definitions.txt[]
+include::asciidoc.conf[]
+
+== _Refactoring_ d'un code existant
+
+image::belote2019.png[]
+
+Vous trouverez link:Belote2019.zip[ici] le lien vers un projet écrit par un ancien étudiant de l'IUT de Blagnac (à l'époque ou le module CPOA n'existait pas). 
+L'application permet de gérer un tournoi de Belote: saisie des participants, des scores, génération des matchs et visualisation des résultats. Elle a été codée avec Java + Swing que vous avez étudié en cours + un stockage au format SQL.
+
+Ce projet est un projet {Eclipse}. 
+Pour l'importer, cliquez sur menu:File[Import...>General>Existing Projects into Workspace>Next>Select archive file>Finish].
+
+Commencez par étudier l'application, sans vous précipiter :
+
+- Analysez en détails les fonctionnalités du logiciel, les différentes étapes d'un tournoi. Vous pouvez vous aider d'un SNI ou un diagramme de séquence système.
+- Que pensez-vous de l'organisation et la visibilité du code ? Peut-on facilement le faire évoluer pour ajouter par exemple une deuxième fenêtre plein écran pour affichage sur un projecteur ?
+- Que améliorations proposez-vous ?
+
+== Travail à effectuer
+
+Vous avez 6 séances de 1,5h en semaines 51 et 2 pour améliorer le plus possible le code de cette application, en y intégrant vos acquis de l'IUT:
+
+- du module CPOA: intégration de patrons de conception. Cela peut être ceux vus en cours, ou d'autres (il y en a plein sur Internet !),
+- du module COO: bonnes pratiques de la conceptions orientée objet. Pensez à SOLID, l'encapsulation, votre expérience en développement Java !
+
+WARNING: Commencez d'abord par établir un objectif et vous répartir les tâches ! Vous perdrez énormément de temps si vos changements s'avèrent non adaptés à l'application ! Validez-le ensuite avec votre intervenant.
+
+TIP: Commencez par le plus simple. Le patron le plus complexe n'est pas toujours le plus adapté !
+
+TIP: Dans votre étude, anticipez de possibles futures évolutions de l'application. Ex: affichage déporté, configuration de plusieurs algorithmes, types de stockages des données... (l'objectif de ce projet est de refactorer le code, pas d'ajouter de nouvelles fonctionnalités).
+
+== Attendus du projet
+
+ifdef::slides[:leveloffset: -1]
+
+=== Dépôt Gitlab
+
+Vous travaillerez sur un projet Gitlab créé pour l'occasion sur le serveur de l'IUT de Blagnac (https://gitlab.iut-blagnac.fr/) et qui devra s'appeler : `CPOA2019-xyz` où `xyz` sera remplacé par le nom que vous voulez. 
+Vous penserez à ajouter `jmbruel` ainsi que votre prof de TD/TP comme contributeur.
+La branche `master` sera celle où nous évaluerons votre `README` (en markdown ou asciidoc et contenant votre "rapport" avec entre autre le nom des 2 binômes), vos codes (répértoire `src`), vos documentations (répétoire `doc`).
+
+=== Modèles à réaliser
+
+On ne vous embête pas ce coup-ci avec les modèles mais n'hésitez pas à en utiliser
+(des cohérents avec votre code) pour vos documentations.
+
+=== _Delivrables_ attendus
+
+Votre projet sera constitué du contenu de la branche master de votre dépôt créé pour l'occasion sur gitlab
+à la date du *dimanche 19/01/2019* à minuit.
+
+Votre rapport sera votre `README`, contenant (outre les éléments habituels d'un rapport
+comme les noms et contact des binômes, une table des matières, ...)
+une courte explication par chaque fonctionnalité nouvelle ou refactoring précis
+avec des extraits de code illustratifs et une justification.
+
+=== Evaluation et critères
+
+Vous pourrez travailler en groupe de 2 max.
+
+Les principaux critères qui guideront la notation seront :
+
+- pertinence des choix
+- pertinence des tests
+- qualité du code
+- qualité du rapport (illustration, explications)
+- nombre et difficulté des fonctionalités ajoutées (pensez à utiliser les numéros de fonctionalités)
+- extras (modèles)
+
+En cas de besoin, n'hésitez pas à me contacter (jean-michel.bruel@univ-tlse2.fr) ou à poser des questions sur le channel `#projet-cpoa` du Discord de l'IUT.
+
+== À propos des tests
+
+Vous pourrez vous inspirer des tests fonctionnels déjà vu en S2 ou S3, ou encore sur ceux fournis avec
+l'application de l'an dernier et disponibles ici (dans le répertoire `java`):
+
+https://github.com/codurance/task-list.git
+
+Par contre il ne vous dispense pas du tout des tests unitaires classiques pour les classes que vous allez produire.
+
+**********************************************************************
+Document généré par mailto:{email}[{author}] via {asciidoctorlink} (version `{asciidoctor-version}`).
+Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
+image:88x31.png["Licence Creative
+Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+**********************************************************************
