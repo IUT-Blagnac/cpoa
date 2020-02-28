@@ -1,0 +1,61 @@
+@startuml
+class ComportementArc [[java:appli.comportement.arme.impl.ComportementArc]] {
+	+String utiliserArme()
+}
+interface ComportementArme [[java:appli.comportement.arme.ComportementArme]] {
+}
+ComportementArme <|.. ComportementArc
+class ComportementEpee [[java:appli.comportement.arme.impl.ComportementEpee]] {
+	+String utiliserArme()
+}
+interface ComportementArme [[java:appli.comportement.arme.ComportementArme]] {
+}
+ComportementArme <|.. ComportementEpee
+class ComportementPoignard [[java:appli.comportement.arme.impl.ComportementPoignard]] {
+	+String utiliserArme()
+}
+interface ComportementArme [[java:appli.comportement.arme.ComportementArme]] {
+}
+ComportementArme <|.. ComportementPoignard
+interface ComportementArme [[java:appli.comportement.arme.ComportementArme]] {
+	String utiliser Arme()
+}
+abstract class Personnage [[java:appli.personnages.Personnage]] {
+	+void combattre()
+	+void setArme(ComportementArme a)
+}
+class ComportementArme [[java:appli.comportement.arme.ComportementArme]] {
+}
+Personnage --> "1" ComportementArme : arme
+class Reine [[java:appli.personnages.Reine]] {
+	+Reine(ComportementArme cmpt)
+	+void combattre()
+}
+class Personnage [[java:appli.personnages.Personnage]] {
+}
+Personnage <|-- Reine
+class Chevalier [[java:appli.personnages.Chevalier]] {
+	+Chevalier(ComportementArme cmpt)
+	+void combattre()
+}
+class Personnage [[java:appli.personnages.Personnage]] {
+}
+Personnage <|-- Chevalier
+class Roi [[java:appli.personnages.Roi]] {
+	+Roi(ComportementArme cmpt)
+	+void combattre()
+}
+class Personnage [[java:appli.personnages.Personnage]] {
+}
+Personnage <|-- Roi
+class Troll [[java:appli.personnages.Troll]] {
+	+ Troll(ComportementArme cmpt)
+	+void combattre()
+}
+class Personnage [[java:appli.personnages.Personnage]] {
+}
+Personnage <|-- Troll
+
+
+
+@enduml

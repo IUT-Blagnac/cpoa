@@ -1,0 +1,59 @@
+@startuml
+class Chevalier [[java:app.Chevalier]] {
+	+Chevalier(Arme a)
+	+void combattre()
+}
+class Personnage [[java:app.Personnage]] {
+}
+Personnage <|-- Chevalier
+abstract class Personnage [[java:app.Personnage]] {
+	+Personnage(Arme a)
+	+void combattre()
+	+void setArme(Arme a)
+}
+class Arme [[java:com.arme.Arme]] {
+}
+Personnage --> "1" Arme : arme
+class Reine [[java:app.Reine]] {
+	+Reine(Arme a)
+	+void combattre()
+}
+class Personnage [[java:app.Personnage]] {
+}
+Personnage <|-- Reine
+class Roi [[java:app.Roi]] {
+	+Roi(Arme a)
+	+void combattre()
+}
+class Personnage [[java:app.Personnage]] {
+}
+Personnage <|-- Roi
+class Troll [[java:app.Troll]] {
+	+Troll(Arme a)
+	+void combattre()
+}
+class Personnage [[java:app.Personnage]] {
+}
+Personnage <|-- Troll
+class Arc [[java:com.arme.impl.Arc]] {
+	+void utiliserArme()
+}
+interface Arme [[java:com.arme.Arme]] {
+}
+Arme <|.. Arc
+class Epee [[java:com.arme.impl.Epee]] {
+	+void utiliserArme()
+}
+interface Arme [[java:com.arme.Arme]] {
+}
+Arme <|.. Epee
+class Poignard [[java:com.arme.impl.Poignard]] {
+	+void utiliserArme()
+}
+interface Arme [[java:com.arme.Arme]] {
+}
+Arme <|.. Poignard
+interface Arme [[java:com.arme.Arme]] {
+	void utiliserArme()
+}
+@enduml

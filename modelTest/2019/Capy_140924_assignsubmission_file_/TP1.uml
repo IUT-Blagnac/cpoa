@@ -1,0 +1,63 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "comportements"
+interface ComportementArme
+' end package
+
+' package "comportements.implementation"
+class ComportementArc
+class ComportementEpee
+class ComportementPoignard
+' end package
+
+' package "application"
+class Chevalier
+abstract Personnage
+class Reine
+class Roi
+class Troll
+' end package
+
+' content
+' -------
+
+' Reine:
+Personnage <|-- Reine
+Reine : void combattre()
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void combattre()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' ComportementPoignard:
+ComportementArme <|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void combattre()
+
+' ComportementEpee:
+ComportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' Roi:
+Personnage <|-- Roi
+Roi : void combattre()
+
+' ComportementArc:
+ComportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+@enduml

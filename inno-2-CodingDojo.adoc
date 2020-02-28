@@ -1,0 +1,77 @@
+//---------------------------------
+// Design Patterns - version UK
+// (c) JMB - 2019-2020
+//---------------------------------
+= Coding Dojo
+J.-M. Bruel <jbruel@gmail.com>
+v20.1 {localdate}
+:imagesdir: images
+//------------------------------------ variables de configuration
+// only used when master document
+:icons: font
+:experimental:
+:toc: left
+:numbered:
+:status:
+:base: http://jmbruel.github.io/cpoa
+:siteurl: {base}/Innopolis2020.html
+:bitlysiteurl: http://bit.ly/innopolis-patterns
+:incremental: %step
+
+include::definitions.txt[]
+
+== Some principles...
+
+[{incremental}]
+- Only one computer (screen on board)
+- Only one programmer at a time typing
+- Collaborative work
+- Time keeper
+- No order 
+
+== Basic tooling
+
+[{incremental}]
+- A java IDE ({eclipse} ?)
+- A testing plu-in such as http://infinitest.github.io/[InfiniTest]
+
+== Useful plugins for this course
+
+image::market.png[link="images/market.png",width=30%]
+
+== Useful plugins for this course
+image::plugin.png[link="images/plugin.png",width=50%]
+
+== Useful plugins for this course
+image::eclipse-plant.png[link="images/eclipse-plant.png",width=100%]
+
+== Useful plugins for this course
+
+- link:util/plantUmlDoclet.jar[doclet for javadoc]
+- link:util/plantuml.jar[plantuml jar file]
+- link:util/plantuml.bat[plantuml.bat file]
+
+== Let's start
+
+[{incremental}]
+. Reuse the collaborative course example
+. Start a new Java project
+. Write issues as specs
+. Start a first issue (branch etc.)
+
+== For each "round"
+
+Test-Driven Development
+
+[{incremental}]
+. Start an issue/branch
+. Write a failing test
+. Write the corresponding code
+. Make the test pass
+. Make sure javadoc is OK
+. Merge
+
+
+== Who want to start ?
+
+image::ineedyou.jpg[width=70%]

@@ -1,0 +1,67 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "app"
+class Application
+' end package
+
+' package "strategy"
+interface WeaponStrategy
+' end package
+
+' package "models"
+abstract Personnage
+class Chevalier
+class Troll
+class Reine
+class Roi
+' end package
+
+' package "strategy.impl"
+class ArcStrategy
+class PoignardStrategy
+class EpeeStrategy
+' end package
+
+' content
+' -------
+
+' Application:
+Application : void main(String)
+Application : WeaponStrategy getStrategy(int)
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' PoignardStrategy:
+WeaponStrategy <|.. PoignardStrategy
+PoignardStrategy : void utiliserArme()
+
+' WeaponStrategy:
+WeaponStrategy : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+
+' ArcStrategy:
+WeaponStrategy <|.. ArcStrategy
+ArcStrategy : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" WeaponStrategy
+Personnage : void combattre()
+Personnage : void setArme(WeaponStrategy)
+
+' EpeeStrategy:
+WeaponStrategy <|.. EpeeStrategy
+EpeeStrategy : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+
+' Roi:
+Personnage <|-- Roi
+
+@enduml

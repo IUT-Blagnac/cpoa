@@ -1,0 +1,92 @@
+@startuml
+enum UserChoices [[java:UserChoices]] {
+	CREATE_PERSONNAGE
+	SWITCH_WEAPON
+	SHOW_PERSONNAGES
+	QUIT_APPLICATION
+	INVALID_CHOICE
+}
+class app [[java:app]] {
+	~{static}Scanner sc
+	~{static}List<Personnage> availablePersonnages
+	~{static}List<String> weaponList
+	~{static}List<String> personnageList
+	~{static}List<String> possibilitiesList
+	+{static}void main(String[] args)
+	+{static}UserChoices getChoice(int answer)
+	+{static}boolean answerToUser(UserChoices answer)
+	+{static}void createNewPersonnageForPlayer(int numPers)
+	+{static}void setWeaponToPersonnage(int weaponNum, int persNum)
+	+{static}void showPlayerPersonnages()
+	+{static}void showWeaponsAvailable()
+	+{static}void showPersonnagesAvailable()
+	+{static}void showPossibilitiesAvailable()
+	+{static}int saisieC(int borneInf, int borneSup, String errorMessage)
+}
+class Chevalier [[java:appli.Chevalier]] {
+	+Chevalier()
+}
+class Personnage [[java:appli.Personnage]] {
+}
+Personnage <|-- Chevalier
+class Troll [[java:appli.Troll]] {
+	+Troll()
+}
+class Personnage [[java:appli.Personnage]] {
+}
+Personnage <|-- Troll
+abstract class Personnage [[java:appli.Personnage]] {
+	+Personnage(ComportementArme cptA)
+	+void combattre()
+	+void setArme(ComportementArme a)
+	+String toString()
+}
+class ComportementArme [[java:comportements.arme.ComportementArme]] {
+}
+Personnage --> "1" ComportementArme : arme
+class Reine [[java:appli.Reine]] {
+	+Reine()
+}
+class Personnage [[java:appli.Personnage]] {
+}
+Personnage <|-- Reine
+class Roi [[java:appli.Roi]] {
+	+Roi()
+}
+class Personnage [[java:appli.Personnage]] {
+}
+Personnage <|-- Roi
+class PasDeCompilation [[java:appli.PasDeCompilation]] {
+	+PasDeCompilation()
+}
+class Personnage [[java:appli.Personnage]] {
+}
+Personnage <|-- PasDeCompilation
+interface ComportementArme [[java:comportements.arme.ComportementArme]] {
+	void utiliserArme()
+}
+class ComportementDefault [[java:comportements.arme.impl.ComportementDefault]] {
+	+void utiliserArme()
+}
+interface ComportementArme [[java:comportements.arme.ComportementArme]] {
+}
+ComportementArme <|.. ComportementDefault
+class ComportementArc [[java:comportements.arme.impl.ComportementArc]] {
+	+void utiliserArme()
+}
+interface ComportementArme [[java:comportements.arme.ComportementArme]] {
+}
+ComportementArme <|.. ComportementArc
+class ComportementEpee [[java:comportements.arme.impl.ComportementEpee]] {
+	+void utiliserArme()
+}
+interface ComportementArme [[java:comportements.arme.ComportementArme]] {
+}
+ComportementArme <|.. ComportementEpee
+class ComportementPoignard [[java:comportements.arme.impl.ComportementPoignard]] {
+	+void utiliserArme()
+}
+interface ComportementArme [[java:comportements.arme.ComportementArme]] {
+}
+ComportementArme <|.. ComportementPoignard
+@enduml

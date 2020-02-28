@@ -1,0 +1,174 @@
+//---------------------------------
+// Design Patterns - version UK
+// (c) JMB - 2019-2020
+//---------------------------------
+= Design patterns basics
+J.-M. Bruel <jbruel@gmail.com>
+v20.1 {localdate}
+:imagesdir: images
+//------------------------------------ variables de configuration
+// only used when master document
+:icons: font
+:experimental:
+:toc: left
+:numbered:
+:status:
+:base: http://jmbruel.github.io/cpoa
+:siteurl: {base}/Innopolis2020.html
+:bitlysiteurl: http://bit.ly/innopolis-patterns
+:incremental: %step
+
+include::definitions.txt[]
+
+== Any question so far ?
+
+[{topic}]
+== What's wrong (non Java example)?
+
+image::featureEnvy.png[link="https://codeburst.io/write-clean-code-and-get-rid-of-code-smells-aea271f30318",width=80%]
+
+[{topic}]
+== What's wrong (Java example) ?
+
+[source,java]
+----
+public class Phone {
+  private final String unformattedNumber;
+  public Phone(String unformattedNumber) {
+    this.unformattedNumber = unformattedNumber;
+  }
+ 
+ public String getAreaCode() {
+  return unformattedNumber.substring(0,3);
+ }
+
+ public String getPrefix() {
+  return unformattedNumber.substring(3,6);
+ }
+
+ public String getNumber() {
+  return unformattedNumber.substring(6,10);
+ }
+}
+
+public class Customer {
+  
+  public String getMobilePhoneNumber() {
+    Phone m_Phone = new Phone("111-123-2345");
+    return "(" + m_Phone.getAreaCode() + ") "
+      + m_Phone.getPrefix() + "-"
+      + m_Phone.getNumber();
+  }
+}
+----
+
+[{topic}]
+== What's wrong (solution) ?
+
+//[source,ruby,linenums]
+[source,java]
+----
+public class Phone {
+  private final String unformattedNumber;
+  
+  public Phone(String unformattedNumber) {
+    this.unformattedNumber = unformattedNumber;
+  }
+ 
+ public String getAreaCode() {
+  return unformattedNumber.substring(0,3);
+ }
+
+ public String getPrefix() {
+  return unformattedNumber.substring(3,6);
+ }
+
+ public String getNumber() {
+  return unformattedNumber.substring(6,10);
+ }
+
+ public String toString() {
+  return "(" + this.getAreaCode() + ") "
+      + this.getPrefix() + "-"
+      + this.getNumber();
+  }
+}
+
+public class Customer {
+  
+  public String getMobilePhoneNumber() {
+    Phone m_Phone = new Phone("111-123-2345");
+    return m_Phone;
+  }
+}
+----
+
+include::introduction-uk.asc[]
+
+== Time for a quizz!
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+- Connect on: http://www.socrative.com/ (*student login*)
+- Or download the student app image:socrative2.png[width=10%]
+- Choose room *44918d67*
+====
+
+image::socrative1.png[width=50%,link=http://www.socrative.com/]
+
+
+[{topic}]
+== Important Java concepts
+
+//-------------- book
+ifdef::backend-pdf[]
+Ces rappels ont été introduits dans mon cours au fur et à mesure
+des constats de manques et de difficultés des étudiants pour aborder
+correctement la programmation des patrons.
+endif::backend-pdf[]
+//--------------------
+
+ifdef::slides[]
+include::typage-uk.asc[]
+endif::slides[]
+ifndef::slides[]
+include::typage-uk.asc[leveloffset=+1]
+endif::slides[]
+
+ifdef::slides[]
+include::visibilite-uk.asc[]
+endif::slides[]
+ifndef::slides[]
+include::visibilite-uk.asc[leveloffset=+1]
+endif::slides[]
+
+ifdef::slides[]
+include::static-uk.asc[]
+endif::slides[]
+ifndef::slides[]
+include::static-uk.asc[leveloffset=+1]
+endif::slides[]
+
+ifdef::slides[]
+include::enum-uk.asc[]
+endif::slides[]
+ifndef::slides[]
+include::enum-uk.asc[leveloffset=+1]
+endif::slides[]
+
+
+== Time for a quizz!
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+- Connect on: http://www.socrative.com/ (*student login*)
+- Or download the student app image:socrative2.png[width=10%]
+- Choose room *44918d67*
+====
+
+image::socrative1.png[width=50%,link=http://www.socrative.com/]
+

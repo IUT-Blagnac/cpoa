@@ -1,0 +1,111 @@
+//---------------------------------
+// Design Patterns - version UK
+// (c) JMB - 2019-2020
+//---------------------------------
+= Design Patterns
+J.-M. Bruel <jbruel@gmail.com>
+v20.1 {localdate}
+:imagesdir: images
+//------------------------------------ variables de configuration
+// only used when master document
+:icons: font
+:experimental:
+:toc: left
+:numbered:
+:status:
+:base: http://jmbruel.github.io/cpoa
+:siteurl: {base}/Innopolis2020.html
+:bitlysiteurl: http://bit.ly/innopolis-patterns
+:incremental: %step
+
+include::definitions.txt[]
+
+== Before we start...
+
+[{incremental}]
+- icon:laptop[] Laptops welcome!
+- Discussions welcome... but with me!
+
+== Sorry...
+
+[{incremental}]
+- For travelling by night (and day) just before class!!
+- For not speaking a single word of Russian!
+- First time (and in English) for this course!
+- Second time for me teaching at Innopolis!
+
+include::whoAmI.asc[]
+
+NOTE: I am here thanks to Pr. {bm}
+
+== Let's talk about you...
+
+https://docs.google.com/spreadsheets/d/1XSAVB8a0ZljweZB5R3J9F3XvB3o6HyXfqA6mLbDwKRY/edit?usp=sharing
+
+image::whoAreU.jpg[width=70%]
+
+== Looking for...
+
+- Is there any French speaking student ?
+- Who is also registered in MPA ?
+
+== Materials in live... icon:mobile[] icon:tablet[] icon:laptop[]
+
+{bitlysiteurl}
+
+== icon:home[] Principles
+
+[{incremental}]
+**O**bject **O**riented Programming::
+  => pre-requisite
+Good *practices*::
+  => e.g., SOLID
+Design *Patterns*::
+  Learn through practice
+Teaching *principles*::
+  Practice on paper, then on Computer, then on class
+
+== Organization
+
+[{incremental}]
+* Revise good OO practices
+* Study classical and illustrative patterns
+* Learn good OO principles
+* Teaching pattern:
+[{incremental}]
+. Practice on board/paper concept X
+. Practice on computer concept X
+. Lecture on concept X
+
+== Time schedule (approx.)
+
+// 3 séances * 2 1/2 journées * 5 visites = 30 séances de 1h30?!
+// 45h
+[cols="1,2,4"]
+|===
+| # | Date | Topic
+
+| 1-3 | Feb. 27th | link:{base}/inno-1-Intro.html[Introduction], Organization & Coding Dojo
+| 4-6 | Feb. 28th | First pattern: link:{base}/.html[Strategy]
+| 7-9 | March. 13th | link:{base}/.html[Singleton] pattern
+| 10-12 | March. 14th | link:{base}/.html[Factory] pattern
+| 13-15 | March. 27th | link:{base}/.html[Principles] in OO
+| 16-18 | March. 28th | link:{base}/.html[Observer] pattern
+| 19-21 | Apr. 10th | link:{base}/.html[JTable] example
+| 22-24 | Apr. 11th | Refactoring project
+| 24-27 | Apr. 24th | Refactoring project
+| 28 | Apr. 25th | Extra patterns presentations
+| 29-30 | Apr. 25th | Final Exam
+|===
+
+NOTE: The evaluation plan is explained link:{base}/inno-Evaluation.html[here].
+
+== Between my venues
+
+[detail]#Let's decide!#
+
+[{incremental}]
+- Contribution to the github version of the course ?
+- Self-practice on an existing dedicated Project ?
+- x minute presentation to the group of a particular pattern
+- Provide Socrative Quizzes ?

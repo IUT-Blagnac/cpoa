@@ -1,0 +1,84 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "appli"
+class application
+class Gobelin
+class Archer
+class Chevalier
+class Troll
+class Roi
+class Reine
+abstract Personnage
+' end package
+
+' package "comportement.arme"
+class ComportementEpee
+class ComportementGourdin
+class ComportementArc
+class comportementArbalete
+class ComportementSceptre
+interface comportementArme
+' end package
+
+' content
+' -------
+
+' Roi:
+Personnage <|-- Roi
+Roi : void combattre()
+
+' comportementArbalete:
+comportementArme <|.. comportementArbalete
+comportementArbalete : void utiliserArme()
+
+' Archer:
+Personnage <|-- Archer
+Archer : void combattre()
+
+' Troll:
+Personnage <|-- Troll
+Troll : void combattre()
+
+' application:
+application : void main(String)
+
+' Chevalier:
+Personnage <|-- Chevalier
+Chevalier : void combattre()
+
+' Reine:
+Personnage <|-- Reine
+Reine : void combattre()
+
+' ComportementGourdin:
+comportementArme <|.. ComportementGourdin
+ComportementGourdin : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" comportementArme
+Personnage : void combattre()
+Personnage : void setArme(comportementArme)
+
+' Gobelin:
+Personnage <|-- Gobelin
+Gobelin : void combattre()
+
+' comportementArme:
+comportementArme : void utiliserArme()
+
+' ComportementSceptre:
+comportementArme <|.. ComportementSceptre
+ComportementSceptre : void utiliserArme()
+
+' ComportementArc:
+comportementArme <|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' ComportementEpee:
+comportementArme <|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+@enduml

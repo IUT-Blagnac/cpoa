@@ -1,0 +1,89 @@
+@startuml
+
+' definitions
+' -----------
+
+' package "app"
+class Application
+' end package
+
+' package "strategy"
+interface WeaponStrategy
+' end package
+
+' package "models"
+abstract Personnage
+class Chevalier
+class Troll
+class Reine
+class Roi
+' end package
+
+' package "strategy.impl"
+class ArcStrategy
+class PoignardStrategy
+class EpeeStrategy
+@startuml
+' definitions
+' -----------
+
+' package "app"
+class Application
+' end package
+
+' package "strategy"
+interface ComportementArme
+' end package
+
+' package "models"
+abstract Personnage
+class Chevalier
+class Troll
+class Reine
+class Roi
+' end package
+
+' package "comportement.impl"
+class ComportementArc
+class ComportementPoignard
+class ComportementEpee
+' end package
+
+' content
+' -------
+
+' Application:
+Application : void main(String)
+
+' Chevalier:
+Personnage <|-- Chevalier
+
+' ComportementPoignard:
+ComportementArme<|.. ComportementPoignard
+ComportementPoignard : void utiliserArme()
+
+' ComportementArme:
+ComportementArme : void utiliserArme()
+
+' Troll:
+Personnage <|-- Troll
+
+' ComportementArc:
+ComportementArme<|.. ComportementArc
+ComportementArc : void utiliserArme()
+
+' Personnage:
+Personnage --> "1" ComportementArme
+Personnage : void combattre()
+Personnage : void setArme(ComportementArme)
+
+' ComportementEpee:
+ComportementArme<|.. ComportementEpee
+ComportementEpee : void utiliserArme()
+
+' Reine:
+Personnage <|-- Reine
+
+' Roi:
+Personnage <|-- Roi
+@enduml
