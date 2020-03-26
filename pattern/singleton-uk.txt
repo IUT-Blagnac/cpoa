@@ -1,0 +1,4 @@
+*Singleton* garanties that a class as a unique instance and hence provides a global access to this unique instance.
+
+ifndef::slides[.UML model of the _Singleton_ pattern]
+image::singleton.png[]

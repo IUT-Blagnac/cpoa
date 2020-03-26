@@ -36,7 +36,7 @@ endif::todoprof[]
 // todoprof : support AVEC EXPLICATIONS DEROULEMENT pour profs
 
 //----------- définitions --------------
-:sitecours: http://iut-blagnac.github.io/cpoa/[Course Material]
+:sitecours: https://github.com/jmbruel/InnopolisDesignPatterns[Course Material]
 :pre: PreReq
 :objtd: ObjTD
 :duree: Duration

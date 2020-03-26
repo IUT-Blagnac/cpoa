@@ -1,0 +1,239 @@
+
+[[strategy]]
+== Strategy
+
+ifdef::slides[:leveloffset: -1]
+
+//-------------- book
+ifdef::backend-pdf[]
+WARNING: Remember to first try the <<TD-strategy,TD in appendix>>.
+endif::backend-pdf[]
+//--------------------
+
+=== Design Principles
+
+//-------------- book
+ifdef::backend-pdf[]
+Here are the good design principles that are used in this pattern.
+endif::backend-pdf[]
+//--------------------
+
+[NOTE]
+.Design principles
+====
+[quote]
+____________________________________________________________________
+Identify in your code what varies and separate it from what doesn't.
+____________________________________________________________________
+====
+
+ifdef::slides[=== Design principles (ctd.)]
+
+[NOTE]
+.Design principles
+====
+[quote]
+____________________________________________________________________
+Programmer une interface, non une implémentation.
+____________________________________________________________________
+====
+
+ifdef::slides[=== Design principles (ctd.)]
+
+[NOTE]
+.Design principles
+====
+[quote]
+____________________________________________________________________
+Prefer composition than inheritance.
+____________________________________________________________________
+====
+
+=== Definition of the pattern
+
+[NOTE]
+.Design pattern: *Strategy*
+====
+include::pattern/strategy-uk.txt[]
+====
+
+=== Usage example
+
+ifndef::slides[.Premier exemple d'utilisation de patron (1er comportement)]
+image::superCanardFinal-a.png[link="images/superCanardFinal-a.png",scaledwidth=70%]
+
+ifndef::slides[.Premier exemple d'utilisation de patron (2ème comportement)]
+image::superCanardFinal-b.png[link="images/superCanardFinal-b.png"]
+
+ifndef::slides[.Premier exemple d'utilisation de patron (hiérarchie des classes)]
+image::superCanardFinal-c.png[link="images/superCanardFinal-c.png"]
+
+.Question
+WARNING: Why not using _Strategy_ for `afficher()` or `nager()`?
+// réponse : car on considère que tous les canards ont le même comportement pour ces méthodes.
+
+=== Another usage example
+
+NOTE: This usage example is taken from
+http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns[ce cours].
+
+*The problem*
+
+Vous avez une classe `FileWriter` qui a pour rôle d'écrire dans un fichier
+ainsi qu'une classe `DBWriter`. Dans un premier temps, ces classes ne
+contiennent qu'une méthode `write()` qui n'écrira que le texte passé
+en paramètre.
+
+Au fil du temps, vous vous rendez compte que c'est dommage qu'elles ne
+fassent que ça et vous aimeriez bien qu'elles puissent écrire en différents
+formats (HTML, XML, etc.) : les classes doivent donc formater puis écrire.
+
+You have a `FileWriter` class which has the role of writing to a file
+as well as a `DBWriter` class. At first, these classes
+contain only a `write ()` method which will only write the text parameter.
+
+Over time, you realize that it's too bad they do only that and you wish they could write in different
+formats (HTML, XML, etc.): classes must therefore format and then write.
+
+ifdef::slides[=== Another concrete example (ctd.)]
+
+*The solution*
+
+ifndef::slides[.Application du pattern <<strategy>> (http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns[source])]
+image::strategyWriter.png[link="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns"]
+
+ifdef::slides[=== Another concrete example (ctd.)]
+
+[NOTE,formater-icon.png]
+====
+.The interface in `PHP` (code source link:src/php/Formater.php[ici])
+[source,php]
+------
+include::src/php/Formater.php[]
+------
+====
+
+ifdef::slides[=== Another concrete example (ctd.)]
+
+[NOTE,formater-icon.png]
+====
+.The `Writer` abstract class (code source link:src/php/Writer.php[ici])
+[source,php]
+------
+include::src/php/Writer.php[]
+------
+====
+
+ifdef::slides[=== Another concrete example (ctd.)]
+
+[NOTE,filewriter-icon.png]
+====
+.The `FileWriter` class (code source link:src/php/FileWriter.php[ici])
+[source,php]
+------
+include::src/php/FileWriter.php[]
+------
+====
+
+ifdef::slides[=== Another concrete example (ctd.)]
+
+[NOTE,dbwriter-icon.png]
+====
+.The `DBWriter` class (code source link:src/php/DBWriter.php[ici])
+[source,php]
+------
+include::src/php/DBWriter.php[]
+------
+====
+
+ifdef::slides[=== Another concrete example (ctd.)]
+
+Enfin, nous avons nos trois formateurs.
+L'un ne fait rien de particulier (`TextFormater`),
+et les deux autres formatent le texte en deux langages
+différents (`HTMLFormater` et `XMLFormater`).
+
+Finally, we have our three formaters.
+One does nothing special (`TextFormater`),
+and the other two format the text in two 
+different  languages (`HTMLFormater` and` XMLFormater`).
+
+ifdef::slides[=== Another concrete example (ctd.)]
+
+[NOTE,formaters-icon.png]
+====
+.The `TextFormater` class (code source link:src/php/TextFormater.php[ici])
+[source,php]
+------
+include::src/php/TextFormater.php[]
+------
+
+ifdef::slides[]
+====
+
+=== Another concrete example (ctd.)
+
+[NOTE,formaters-icon.png]
+====
+
+endif::slides[]
+
+.The `HTMLFormater` class (code source link:src/php/HTMLFormater.php[ici])
+[source,php]
+------
+include::src/php/HTMLFormater.php[]
+------
+
+ifdef::slides[]
+====
+
+=== Another concrete example (ctd.)
+
+[NOTE,formaters-icon.png]
+====
+
+endif::slides[]
+
+.The `XMLFormater` class (code source link:src/php/XMLFormater.php[ici])
+[source,php]
+------
+include::src/php/XMLFormater.php[]
+------
+====
+
+=== More examples
+
+[%step]
+- The standard `sort()`  python function
++
+[source,python]
+-------------
+>>> sorted("This is a test string from Andrew".split(), key=str.lower)
+['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']
+-------------
++
+- Crypting strategies varying according to file size
++
+[source,java]
+-------------
+File file = getFile();
+ Cipher c = CipherFactory.getCipher( file.size() );
+ c.performAction();
+
+// implementations:
+interface  Cipher  {
+     public void performAction();
+}
+class InMemoryCipherStrategy implements Cipher {
+         public void performAction() {
+             // load in byte[] ....
+         }
+}
+class SwaptToDiskCipher implements Cipher {
+         public void performAction() {
+             // swapt partial results to file.
+         }
+}
+-------------
+
+TIP: More details http://stackoverflow.com/questions/370258/real-world-example-of-the-strategy-pattern[ici]
