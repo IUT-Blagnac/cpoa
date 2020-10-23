@@ -259,7 +259,7 @@ You know try the use of _interfaces_ to improve the code.
 .*QUESTION*
 [WARNING]
 ====
-. On the following diagram, place the inheritance relations (jave `extends`) and the implementation relations (java `implements`):
+. On the following diagram, place the inheritance relations (java `extends`) and the implementation relations (java `implements`):
 +
 image::superCanardInterfaces.png[]
 +
