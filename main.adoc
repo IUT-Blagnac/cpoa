@@ -1,10 +1,10 @@
 // ------------------------------------------
 //  Created by Jean-Michel Bruel on 2014-11.
-//  Copyright (c) 2014 IRIT/U. Toulouse. All rights reserved.
+//  Copyright (c) 2014-2020 IRIT/U. Toulouse. All rights reserved.
 // ------------------------------------------
 = DUT-Info/S3/M3105 (CPOA)
 Jean-Michel Bruel <jbruel@gmail.com>
-v1.6, {localdate}
+v2.0, {localdate}
 
 // ------------------------------------------
 include::definitions.txt[]
@@ -45,16 +45,16 @@ include::definitions.txt[]
 :icons: font
 :toc-title: Table des Matières
 :toc: left
-
+:slides:
 ifdef::slides[]
 
-== Points divers
+== Points divers...
 
 - Nuit de l'info
 - PTut et Cahier d'Analyse et de Conception
 - Stages
 
-== Suivre ces slides sur Internet...
+== Suivre ces slides icon:mobile[] icon:tablet[] icon:laptop[]...
 
 image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
 

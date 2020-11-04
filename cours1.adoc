@@ -1,6 +1,6 @@
 = From *MPA* to *CPOA*
 Jean-Michel Bruel <jbruel@gmail.com>
-v1.7, {localdate} (started on 2015-10-05)
+v2.0, {localdate}
 :icons: font
 :experimental:
 :status:
@@ -41,7 +41,7 @@ endif::definitions[]
 :iosicon: http://www.apple.com/fr/ios/[iOS icon:apple[]]
 
 [{topic}]
-== Plan
+== icon:book[] Plan
 
 [{incremental}]
 - Annonces
@@ -53,7 +53,7 @@ endif::definitions[]
 
 http://nuitdelinfo.com
 
-image::nuit.png[width=80%]
+image::nuit.png[width=100%]
 
 [{intro}]
 == *Stages* : il est temps!

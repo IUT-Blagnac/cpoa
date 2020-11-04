@@ -1,6 +1,6 @@
 = CPOA : les premiers *patrons*
 Jean-Michel Bruel <jbruel@gmail.com>
-v1.9, {localdate} (started on 2015-10-05)
+v2.0, {localdate}
 :icons: font
 :experimental:
 :status:
@@ -44,7 +44,7 @@ endif::definitions[]
 ifdef::slides[]
 
 [{topic}]
-== Suivre ces slides sur Internet...
+== Suivre ces slides icon:mobile[] icon:tablet[] icon:laptop[]...
 
 image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
 
@@ -55,8 +55,9 @@ http://iut-blagnac.github.io/cpoa/
 
 endif::slides[]
 
+
 [{topic}]
-== Plan
+== icon:book[] Plan
 
 [{incremental}]
 - Introduction
