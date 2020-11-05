@@ -220,6 +220,7 @@ public class BouilleurChocolat {
 +
 . Donnez un exemple d'utilisation de cette classe.
 ====
+:prof:
 //----------------------------------------------------- Correction -------------------------
 ifdef::prof[]
 [CAUTION]
