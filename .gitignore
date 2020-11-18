@@ -19,3 +19,4 @@ images/.metadata
 *.pdf
 .asciidoctor
 modelTest
+reveal.js
