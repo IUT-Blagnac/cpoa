@@ -13,13 +13,13 @@ HIGHLIGHT=pygments
 DOCTOR=asciidoctor -b html5 -a icons=font -a images=$(IMAGESDIR) -a source-highlighter=$(HIGHLIGHT)
 #BACKENDS=asciidoctor-deck.js
 #DECKJS=$(BACKENDS)/templates/haml/
-BACKENDS=../asciidoctor-backends
+BACKENDS=../../lib/asciidoctor-backends
 DECKJS=$(BACKENDS)/haml/
 #DECK=web-2.0
 DECK=swiss
 #DECK=neon
 #DECK=beamer
-DZSLIDES=../asciidoctor-backends/slim/dzslides
+DZSLIDES=../../lib/asciidoctor-backends/slim/dzslides
 EXT=adoc
 PANDOC=pandoc
 OUTPUT=.
