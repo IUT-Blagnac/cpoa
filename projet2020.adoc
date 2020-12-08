@@ -19,12 +19,13 @@ include::asciidoc.conf[]
 
 == Refactoring of an existing code
 
-You are asked to refactor one of the following codes:
+You are asked to refactor the application you will find on this repo:
 
-- 
-- 
+https://github.com/codurance/task-list 
 
-Here are your tasks for this project:
+TIP: This one you can do in `python` or some other language than Java!
+
+Here are your initial tasks for this project:
 
 [%interactive]
 * [ ] Replace this README.adoc so that it contains your report on what you've done to refactor.
