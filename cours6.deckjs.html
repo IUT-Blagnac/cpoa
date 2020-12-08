@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=" http-equiv="Content-Type" />
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+<meta content="Asciidoctor 1.5.6.1" name="generator" />
+<meta content="Jean-Michel Bruel" name="author" />
+<title>CPOA - Cours 6 (Suite Design Pattern)</title>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+.conum { display: inline-block; color: white !important; background-color: #222222; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 1.2em; height: 1.2em; font-size: 0.9em; font-weight: bold; line-height: 1.2; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -0.1em; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+.colist table td:first-of-type { padding-right: 0.25em; }
+</style>
+<style>
+.listingblock .pygments .hll { background-color: #ffffcc }
+.listingblock .pygments, .listingblock .pygments code { background: #f8f8f8; }
+.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-o { color: #666666 } /* Operator */
+.listingblock .pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+.listingblock .pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<link href="deck.js/core/deck.core.css" rel="stylesheet" />
+<link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet" />
+<link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/style/swiss.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/transition/fade.css" media="screen" rel="stylesheet" />
+<link href="deck.js/core/print.css" media="print" rel="stylesheet" />
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="article">
+<div class="deck-container">
+<section class="slide" id="title-slide">
+<h1>CPOA - Cours 6 (Suite Design Pattern)</h1>
+<span id="author">Jean-Michel Bruel</span>
+<br />
+<span id="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span>
+<br />
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2019-12-16 (started on 2015-10-05)</span>
+</section>
+<section class="slide" id="_suivre_ces_slides_sur_internet">
+<h2>Suivre ces slides sur Internet&#8230;&#8203;</h2>
+<div class="literalblock">
+<div class="content">
+<pre>http://iut-blagnac.github.io/cpoa/cours6.html</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_plan">
+<h2>Plan</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Retour sur les patron <strong>Observer</strong></li>
+<li class="slide">Retour sur les <code>JTable</code></li>
+<li class="slide">De nouveaux patrons : <a href="#Adaptateur">Adaptateur</a>, <a href="#Visiteur">[Visiteur]</a>, <a href="#Proxy">Proxy</a>, &#8230;&#8203;</li>
+<li class="slide">Comment utiliser les patrons "au quotidien"</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="Observateur">
+<h2>Observateur</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="observer" src="images/observer.jpg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_motivation">
+<h2>Motivation</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="observer illustration" src="images/observer-illustration.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_définition">
+<h2>Définition</h2>
+<div class="paragraph"><p><strong>Observateur</strong> définit une relation entre objets de type
+un-à-plusieurs, de façon que, lorsqu&#8217;un objet change d&#8217;état,
+tous ceux qui en dépendent en soient notifiés et soient mis à jour
+automatiquement.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="observateur" src="images/observateur.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_application">
+<h2>Application</h2>
+<div class="paragraph"><p>Le patron <em>Observer</em> est utilisable dans de nombreuses situations :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Quand un concept a deux aspects, l&#8217;un dépendant de l&#8217;autre.
+Encapsuler ces aspects dans des objets séparés permet de les utiliser
+et les laisser évoluer de manière indépendante.</li>
+<li class="slide">Dès que le changement d&#8217;un objet entraîne le changement de plusieurs autres.</li>
+<li class="slide">Dès qu&#8217;un objet doit en notifier un certain nombre d&#8217;autres sans les connaitre.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="observerJava">
+<h2><em>Observer</em> en Java</h2>
+<div class="paragraph"><p><a href="https://www.java.com/fr/">Java</a> fournit des classes <em>Observable/Observer</em> pour le patron <em>Observer</em>.
+La classe <code>java.util.Observable</code> est la classe de base pour les sujets.
+Ainsi, toute classe qui veut être observée étant cette classe dont
+voici les caractéristiques :</p></div>
+<div class="ulist">
+<ul>
+<li>fournit des méthodes pour ajouter/enlever des  observateurs</li>
+<li>fournit des méthodes pour notifier les observateurs</li>
+<li>une sous-classe concrète doit seulement s&#8217;occuper de notifier à chque
+méthode modifiant l&#8217;état des objets (<em>mutators</em>)</li>
+<li>utilise un vecteur stoquant les références des observateurs</li>
+</ul>
+</div>
+<div class="paragraph"><p>L&#8217;interface <code>java.util.Observer</code> correspond aux observateurs
+qui doivent implémenter cette interface.</p></div>
+</section>
+<section class="slide" id="_la_classe_java_util_observable">
+<h2>La classe java.util.Observable</h2>
+<div class="paragraph"><p>Voici la liste des méthodes de <code>java.util.Observable</code> :</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">1&#x000A;2&#x000A;3&#x000A;4&#x000A;5&#x000A;6&#x000A;7&#x000A;8</div></td><td class="code"><span></span><span class="tok-kd">public</span> <span class="tok-nf">Observable</span><span class="tok-o">()</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">addObserver</span><span class="tok-o">(</span><span class="tok-n">Observer</span> <span class="tok-n">o</span><span class="tok-o">)</span>&#x000A;<span class="tok-kd">protected</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">setChanged</span><span class="tok-o">()</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">deleteObserver</span><span class="tok-o">(</span><span class="tok-n">Observer</span> <span class="tok-n">o</span><span class="tok-o">)</span>&#x000A;<span class="tok-kd">protected</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">void</span> <span class="tok-nf">clearChanged</span><span class="tok-o">()</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">synchronized</span> <span class="tok-kt">boolean</span> <span class="tok-nf">hasChanged</span><span class="tok-o">()</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">notifyObservers</span><span class="tok-o">(</span><span class="tok-n">Object</span> <span class="tok-n">arg</span><span class="tok-o">)</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">notifyObservers</span><span class="tok-o">()</span>&#x000A;</td></tr></table></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_l_interface_java_util_observer">
+<h2>L&#8217;interface java.util.Observer</h2>
+<div class="listingblock">
+<div class="title">java.util.Observer</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1&#x000A; 2&#x000A; 3&#x000A; 4&#x000A; 5&#x000A; 6&#x000A; 7&#x000A; 8&#x000A; 9&#x000A;10</div></td><td class="code"><span></span><span class="tok-cm">/**</span>&#x000A;<span class="tok-cm">* This method is called whenever the observed object is changed. An</span>&#x000A;<span class="tok-cm">* application calls an observable object&#39;s notifyObservers method to have all</span>&#x000A;<span class="tok-cm">* the object&#39;s observers notified of the change.</span>&#x000A;<span class="tok-cm">*</span>&#x000A;<span class="tok-cm">* Parameters:</span>&#x000A;<span class="tok-cm">* o - the observable object</span>&#x000A;<span class="tok-cm">* arg - an argument passed to the notifyObservers method</span>&#x000A;<span class="tok-cm">*/</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">abstract</span> <span class="tok-kt">void</span> <span class="tok-nf">update</span><span class="tok-o">(</span><span class="tok-n">Observable</span> <span class="tok-n">o</span><span class="tok-o">,</span> <span class="tok-n">Object</span> <span class="tok-n">arg</span><span class="tok-o">)</span>&#x000A;</td></tr></table></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_une_implémentation_du_mvc_les_jtable_java">
+<h2>Une implémentation du MVC : les JTable java</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="JTable" src="images/JTable.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_principe">
+<h2>Le principe</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="TD6 MVC 1" src="images/TD6-MVC-1.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_l_architecture">
+<h2>L&#8217;architecture</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="JTable" src="images/JTable.jpg" />
+</div>
+</div>
+</section>
+<section class="slide" id="Adaptateur">
+<h2>Adaptateur</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="adaptateur" src="images/adaptateur.jpg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_problème">
+<h2>Le problème</h2>
+<div class="paragraph"><p>On veut pouvoir :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">utiliser une classe existante, mais dont <strong>l&#8217;interface ne coïncide pas</strong> avec celle escomptée.</li>
+<li class="slide">créer une classe réutilisable qui collabore avec des classes sans relations
+avec elle et encore inconnues, c&#8217;est-à-dire avec des classes qui n&#8217;auront <strong>pas
+nécessairement des interfaces compatibles</strong>.</li>
+<li class="slide"><p>
+vous avez besoin d&#8217;utiliser plusieurs sous-classes existantes, mais
+l'<strong>adaptation de leur interface</strong> par dérivation de chacune d&#8217;entre elles est
+impraticable. Un adaptateur objet peut adapter l&#8217;interface de sa classe parente.<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Ce dernier cas ne concerne que le cas "adaptateur d&#8217;objet"
+</td>
+</tr>
+</table>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_le_retour_des_canards">
+<h2>Exemple concret : le retour des canards</h2>
+<div class="ulist">
+<ul>
+<li>L&#8217;existant :</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Le Canard</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Canard</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">();</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">();</span>&#x000A;<span class="tok-o">}</span>&#x000A;&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">implements</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Coincoin&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je vole&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_le_retour_des_canards_2">
+<h2>Exemple concret : le retour des canards</h2>
+<div class="ulist">
+<ul>
+<li>Le "presque canard" :</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Le Presque Canard</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Dindon</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">glouglouter</span><span class="tok-o">();</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">();</span>&#x000A;<span class="tok-o">}</span>&#x000A;&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">DindonSauvage</span> <span class="tok-kd">implements</span> <span class="tok-n">Dindon</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">glouglouter</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Glouglou&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Je ne vole pas loin&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_le_problème">
+<h2>Exemple concret : le problème</h2>
+<div class="paragraph"><p>Vous êtes à court d&#8217;objets <code>Canard</code> et vous aimeriez utiliser des objets <code>Dindon</code> à la place!</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="TurkeyToDuck" src="images/TurkeyToDuck.png" />
+</div>
+</div>
+<div class="paragraph"><p>[detail]#Un "presqueCanard" (Crédit Dessin C. Aribaud, 2A 2016-2017)</p></div>
+</section>
+<section class="slide" id="_exemple_concret_la_solution">
+<h2>Exemple concret : la solution</h2>
+<div class="listingblock">
+<div class="title">Mise en oeuvre du patron Adaptateur</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">AdaptateurDindon</span> <span class="tok-kd">implements</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-n">Dindon</span> <span class="tok-n">dindon</span><span class="tok-o">;</span>&#x000A;&#x000A;  <span class="tok-o">...</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">cancaner</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">dindon</span><span class="tok-o">.</span><span class="tok-na">glouglouter</span><span class="tok-o">();</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">voler</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-c1">// Adaptation du vol</span>&#x000A;    <span class="tok-k">for</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-mi">5</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">dindon</span><span class="tok-o">.</span><span class="tok-na">voler</span><span class="tok-o">();</span>&#x000A;    <span class="tok-o">}</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_adaptateur">
+<h2>Le patron Adaptateur</h2>
+<div class="paragraph"><p><strong>Adaptateur</strong> (<strong><em>Adaptor</em></strong>) permet de convertir l&#8217;interface d&#8217;une classe en une autre
+conformément à l&#8217;attente du client. L&#8217;Adaptateur permet à des classes de
+collaborer, alors qu’elles n&#8217;auraient pas pu le faire du fait d&#8217;interfaces
+incompatibles.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="adapteur" src="images/adapteur.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_adaptateur_2">
+<h2>Le patron Adaptateur</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="adaptor google" src="images/adaptor-google.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_visiteur">
+<h2>Le patron Visiteur</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="les visiteurs" src="images/les-visiteurs.jpg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_problème_2">
+<h2>Le problème</h2>
+<div class="paragraph"><p>Quelques situations à problème :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Une <strong>structure</strong> d&#8217;objets contient beaucoup de classes différentes
+d&#8217;interfaces distinctes, et vous désirez réaliser des opérations sur ces objets
+qui dépendent de leurs classes concrètes.</li>
+<li class="slide">Il s&#8217;agit d&#8217;effectuer plusieurs opérations distinctes et sans relation entre
+elles, sur les objets d&#8217;une structure, et ceci en <strong>évitant de polluer leurs classes</strong> avec ces opérations.</li>
+<li class="slide">Les classes qui définissent la structure objet changent rarement, mais on doit
+souvent <strong>définir de nouvelles opérations</strong> sur cette structure.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_illustration">
+<h2>Illustration</h2>
+<div class="paragraph"><p>Adapté d&#8217;un exemple tiré de <a class="bare" href="http://www.tutorialspoint.com/design_pattern/visitor_pattern.htm">http://www.tutorialspoint.com/design_pattern/visitor_pattern.htm</a></p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor1" src="images/visitor1.svg" width="100%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_step_1">
+<h2>Step 1</h2>
+<div class="paragraph"><p>Définir une interface pour représenter les éléments de la structure.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor2" src="images/visitor2.svg" width="100%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_step_1_suite">
+<h2>Step 1 (suite)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor3" src="images/visitor3.svg" width="100%" />
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ComputerPart</span> <span class="tok-o">{</span>&#x000A;   <span class="tok-o">...</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_step_2">
+<h2>Step 2</h2>
+<div class="paragraph"><p>Anticiper l&#8217;utilisation du visiteur.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ComputerPartVisitor</span> <span class="tok-o">{</span>&#x000A;	<span class="tok-o">...</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ComputerPart</span> <span class="tok-o">{</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ComputerPartVisitor</span> <span class="tok-n">computerPartVisitor</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_step_3">
+<h2>Step 3</h2>
+<div class="paragraph"><p>Créer les classes concrètes qui implémentent l&#8217;interface.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Keyboard</span> <span class="tok-kd">implements</span> <span class="tok-n">ComputerPart</span> <span class="tok-o">{</span>&#x000A;&#x000A;   <span class="tok-nd">@Override</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ComputerPartVisitor</span> <span class="tok-n">computerPartVisitor</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">computerPartVisitor</span><span class="tok-o">.</span><span class="tok-na">visit</span><span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">);</span>&#x000A;   <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph"><p>&#8230;&#8203;</p></div>
+</section>
+<section class="slide" id="_step_3_suite">
+<h2>Step 3 (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Computer</span> <span class="tok-kd">implements</span> <span class="tok-n">ComputerPart</span> <span class="tok-o">{</span>&#x000A;&#x000A;   <span class="tok-n">ComputerPart</span><span class="tok-o">[]</span> <span class="tok-n">parts</span><span class="tok-o">;</span>&#x000A;&#x000A;   <span class="tok-kd">public</span> <span class="tok-nf">Computer</span><span class="tok-o">(){</span>&#x000A;      <span class="tok-n">parts</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ComputerPart</span><span class="tok-o">[]</span> <span class="tok-o">{</span><span class="tok-k">new</span> <span class="tok-n">Mouse</span><span class="tok-o">(),</span> <span class="tok-k">new</span> <span class="tok-n">Keyboard</span><span class="tok-o">(),</span> <span class="tok-k">new</span> <span class="tok-n">Monitor</span><span class="tok-o">()};</span>&#x000A;   <span class="tok-o">}</span>&#x000A;&#x000A;&#x000A;   <span class="tok-nd">@Override</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ComputerPartVisitor</span> <span class="tok-n">computerPartVisitor</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">parts</span><span class="tok-o">.</span><span class="tok-na">length</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>&#x000A;         <span class="tok-n">parts</span><span class="tok-o">[</span><span class="tok-n">i</span><span class="tok-o">].</span><span class="tok-na">accept</span><span class="tok-o">(</span><span class="tok-n">computerPartVisitor</span><span class="tok-o">);</span>&#x000A;      <span class="tok-o">}</span>&#x000A;      <span class="tok-n">computerPartVisitor</span><span class="tok-o">.</span><span class="tok-na">visit</span><span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">);</span>&#x000A;   <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_step_4">
+<h2>Step 4</h2>
+<div class="paragraph"><p>Définir l&#8217;interface pour représenter le visiteur.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ComputerPartVisitor</span> <span class="tok-o">{</span>&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Computer</span> <span class="tok-n">computer</span><span class="tok-o">);</span>&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Mouse</span> <span class="tok-n">mouse</span><span class="tok-o">);</span>&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Keyboard</span> <span class="tok-n">keyboard</span><span class="tok-o">);</span>&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Monitor</span> <span class="tok-n">monitor</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_step_5">
+<h2>Step 5</h2>
+<div class="paragraph"><p>Créer des visiteurs concrets.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor4" src="images/visitor4.svg" width="100%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_step_5_suite">
+<h2>Step 5 (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">DisplayVisitor</span> <span class="tok-kd">implements</span> <span class="tok-n">ComputerPartVisitor</span> <span class="tok-o">{</span>&#x000A;&#x000A;   <span class="tok-nd">@Override</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Computer</span> <span class="tok-n">computer</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Displaying Computer.&quot;</span><span class="tok-o">);</span>&#x000A;   <span class="tok-o">}</span>&#x000A;&#x000A;   <span class="tok-nd">@Override</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Mouse</span> <span class="tok-n">mouse</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Displaying Mouse.&quot;</span><span class="tok-o">);</span>&#x000A;   <span class="tok-o">}</span>&#x000A;&#x000A;   <span class="tok-nd">@Override</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Keyboard</span> <span class="tok-n">keyboard</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Displaying Keyboard.&quot;</span><span class="tok-o">);</span>&#x000A;   <span class="tok-o">}</span>&#x000A;&#x000A;   <span class="tok-nd">@Override</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Monitor</span> <span class="tok-n">monitor</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Displaying Monitor.&quot;</span><span class="tok-o">);</span>&#x000A;   <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_step_6">
+<h2>Step 6</h2>
+<div class="paragraph"><p>Utiliser le visiteur <code>DisplayVisitor</code>.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">VisitorPatternDemo</span> <span class="tok-o">{</span>&#x000A;   <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;&#x000A;      <span class="tok-n">ComputerPart</span> <span class="tok-n">computer</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Computer</span><span class="tok-o">();</span>&#x000A;      <span class="tok-n">computer</span><span class="tok-o">.</span><span class="tok-na">accept</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-n">DisplayVisitor</span><span class="tok-o">());</span>&#x000A;   <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_step_7_final">
+<h2>Step 7 (final)</h2>
+<div class="paragraph"><p>Verify the output.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code>Displaying Mouse.&#x000A;Displaying Keyboard.&#x000A;Displaying Monitor.&#x000A;Displaying Computer.</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_visiteur_2">
+<h2>Le patron Visiteur</h2>
+<div class="paragraph"><p><strong>Visiteur</strong> (<strong><em>Visitor</em></strong>) permet la représentation d&#8217;une opération applicable
+aux éléments d&#8217;une structure d&#8217;objet.</p></div>
+<div class="paragraph"><p>Il définit une nouvelle opération, <strong>sans qu&#8217;il soit nécessaire de modifier la classe</strong> des éléments sur lesquels
+elle agit.</p></div>
+</section>
+<section class="slide" id="_le_patron_visiteur_structure">
+<h2>Le patron Visiteur (structure)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor dc" src="images/visitor-dc.svg" width="100%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_visiteur_comportement">
+<h2>Le patron Visiteur (comportement)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor seq" src="images/visitor-seq.png" width="100%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_visiteur_google">
+<h2>Le patron Visiteur (Google)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor google" src="images/visitor-google.png" width="100%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_avantages_inconvénients">
+<h2>Avantages/Inconvénients</h2>
+<div class="paragraph"><p>Avantages :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Permet d&#8217;ajouter des opérations à la structure d’un Composite <strong>sans modifier la structure elle-même</strong>.</li>
+<li class="slide">L'<strong>ajout de nouvelles opérations</strong> est relativement facile.</li>
+<li class="slide">Le code des opérations exécutées par le Visiteur est <strong>centralisé</strong>.</li>
+</ul>
+</div>
+<div class="paragraph"><p>Inconvénients :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">L&#8217;encapsulation des classes du Composite est brisée.</li>
+<li class="slide">Comme une fonction de navigation est impliquée, les modifications de la structure du Composite sont plus difficiles.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_exemples_d_utilisation">
+<h2>Exemples d&#8217;utilisation</h2>
+<div class="ulist">
+<ul>
+<li>calcul sur un ensemble structuré d&#8217;éléments</li>
+<li>génération de rapports ou de code</li>
+<li>&#8230;&#8203;</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_d_utilisation_en_java">
+<h2>Exemple concret d&#8217;utilisation en Java</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Exemple tiré de <a href="http://www.journaldev.com/1769/visitor-design-pattern-in-java-example-tutorial">ce site</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ItemElement</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_suite">
+<h2>Exemple concret (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Book</span> <span class="tok-kd">implements</span> <span class="tok-n">ItemElement</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">private</span> <span class="tok-kt">int</span> <span class="tok-n">price</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">isbnNumber</span><span class="tok-o">;</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-nf">Book</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">cost</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">isbn</span><span class="tok-o">){</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">price</span><span class="tok-o">=</span><span class="tok-n">cost</span><span class="tok-o">;</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">isbnNumber</span><span class="tok-o">=</span><span class="tok-n">isbn</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getPrice</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">price</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">getIsbnNumber</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">isbnNumber</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-nd">@Override</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">visitor</span><span class="tok-o">.</span><span class="tok-na">visit</span><span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_suite_2">
+<h2>Exemple concret (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Fruit</span> <span class="tok-kd">implements</span> <span class="tok-n">ItemElement</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">private</span> <span class="tok-kt">int</span> <span class="tok-n">pricePerKg</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">private</span> <span class="tok-kt">int</span> <span class="tok-n">weight</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-o">;</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-nf">Fruit</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">priceKg</span><span class="tok-o">,</span> <span class="tok-kt">int</span> <span class="tok-n">wt</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">nm</span><span class="tok-o">){</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">pricePerKg</span><span class="tok-o">=</span><span class="tok-n">priceKg</span><span class="tok-o">;</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">weight</span><span class="tok-o">=</span><span class="tok-n">wt</span><span class="tok-o">;</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span> <span class="tok-o">=</span> <span class="tok-n">nm</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getPricePerKg</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">pricePerKg</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getWeight</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">weight</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">getName</span><span class="tok-o">(){</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-nd">@Override</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">accept</span><span class="tok-o">(</span><span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">visitor</span><span class="tok-o">.</span><span class="tok-na">visit</span><span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_suite_3">
+<h2>Exemple concret (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ShoppingCartVisitor</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Book</span> <span class="tok-n">book</span><span class="tok-o">);</span>&#x000A;  <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Fruit</span> <span class="tok-n">fruit</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_suite_4">
+<h2>Exemple concret (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ShoppingCartVisitorImpl</span> <span class="tok-kd">implements</span> <span class="tok-n">ShoppingCartVisitor</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-nd">@Override</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Book</span> <span class="tok-n">book</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-kt">int</span> <span class="tok-n">cost</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span>&#x000A;    <span class="tok-c1">//apply 5$ discount if book price is greater than 50</span>&#x000A;    <span class="tok-k">if</span><span class="tok-o">(</span><span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getPrice</span><span class="tok-o">()</span> <span class="tok-o">&gt;</span> <span class="tok-mi">50</span><span class="tok-o">){</span>&#x000A;      <span class="tok-n">cost</span> <span class="tok-o">=</span> <span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getPrice</span><span class="tok-o">()-</span><span class="tok-mi">5</span><span class="tok-o">;</span>&#x000A;    <span class="tok-o">}</span> <span class="tok-k">else</span> <span class="tok-n">cost</span> <span class="tok-o">=</span> <span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getPrice</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Book ISBN::&quot;</span><span class="tok-o">+</span><span class="tok-n">book</span><span class="tok-o">.</span><span class="tok-na">getIsbnNumber</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot; cost =&quot;</span><span class="tok-o">+</span><span class="tok-n">cost</span><span class="tok-o">);</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">cost</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-nd">@Override</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">visit</span><span class="tok-o">(</span><span class="tok-n">Fruit</span> <span class="tok-n">fruit</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-kt">int</span> <span class="tok-n">cost</span> <span class="tok-o">=</span> <span class="tok-n">fruit</span><span class="tok-o">.</span><span class="tok-na">getPricePerKg</span><span class="tok-o">()*</span><span class="tok-n">fruit</span><span class="tok-o">.</span><span class="tok-na">getWeight</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">fruit</span><span class="tok-o">.</span><span class="tok-na">getName</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot; cost = &quot;</span><span class="tok-o">+</span><span class="tok-n">cost</span><span class="tok-o">);</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">cost</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_suite_5">
+<h2>Exemple concret (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ShoppingCartClient</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">ItemElement</span><span class="tok-o">[]</span> <span class="tok-n">items</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ItemElement</span><span class="tok-o">[]{</span><span class="tok-k">new</span> <span class="tok-n">Book</span><span class="tok-o">(</span><span class="tok-mi">20</span><span class="tok-o">,</span> <span class="tok-s">&quot;1234&quot;</span><span class="tok-o">),</span><span class="tok-k">new</span> <span class="tok-n">Book</span><span class="tok-o">(</span><span class="tok-mi">100</span><span class="tok-o">,</span> <span class="tok-s">&quot;5678&quot;</span><span class="tok-o">),</span>&#x000A;    <span class="tok-k">new</span> <span class="tok-n">Fruit</span><span class="tok-o">(</span><span class="tok-mi">10</span><span class="tok-o">,</span> <span class="tok-mi">2</span><span class="tok-o">,</span> <span class="tok-s">&quot;Banana&quot;</span><span class="tok-o">),</span> <span class="tok-k">new</span> <span class="tok-n">Fruit</span><span class="tok-o">(</span><span class="tok-mi">5</span><span class="tok-o">,</span> <span class="tok-mi">5</span><span class="tok-o">,</span> <span class="tok-s">&quot;Apple&quot;</span><span class="tok-o">)};</span>&#x000A;&#x000A;    <span class="tok-kt">int</span> <span class="tok-n">total</span> <span class="tok-o">=</span> <span class="tok-n">calculatePrice</span><span class="tok-o">(</span><span class="tok-n">items</span><span class="tok-o">);</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Total Cost = &quot;</span><span class="tok-o">+</span><span class="tok-n">total</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-nf">calculatePrice</span><span class="tok-o">(</span><span class="tok-n">ItemElement</span><span class="tok-o">[]</span> <span class="tok-n">items</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">ShoppingCartVisitor</span> <span class="tok-n">visitor</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ShoppingCartVisitorImpl</span><span class="tok-o">();</span>&#x000A;    <span class="tok-kt">int</span> <span class="tok-n">sum</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span>&#x000A;    <span class="tok-k">for</span><span class="tok-o">(</span><span class="tok-n">ItemElement</span> <span class="tok-n">item</span> <span class="tok-o">:</span> <span class="tok-n">items</span><span class="tok-o">){</span>&#x000A;      <span class="tok-n">sum</span> <span class="tok-o">=</span> <span class="tok-n">sum</span> <span class="tok-o">+</span> <span class="tok-n">item</span><span class="tok-o">.</span><span class="tok-na">accept</span><span class="tok-o">(</span><span class="tok-n">visitor</span><span class="tok-o">);</span>&#x000A;    <span class="tok-o">}</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">sum</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_suite_6">
+<h2>Exemple concret (suite)</h2>
+<div class="literalblock">
+<div class="content">
+<pre>Book ISBN::1234 cost =20&#x000A;Book ISBN::5678 cost =95&#x000A;Banana cost = 20&#x000A;Apple cost = 25&#x000A;Total Cost = 160</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="Proxy">
+<h2>Proxy</h2>
+
+</section>
+<section class="slide" id="_le_problème_3">
+<h2>Le problème</h2>
+<div class="paragraph"><p>On a besoin de références à un objet, qui soient plus <strong>créatives</strong> et plus
+<strong>sophistiquées</strong> qu&#8217;un simple pointeur.</p></div>
+</section>
+<section class="slide" id="_le_patron_em_proxy_em">
+<h2>Le patron <em>Proxy</em></h2>
+<div class="paragraph"><p><strong>Procuration</strong> (<strong><em>Proxy</em></strong>) fournit à un tiers un mandataire ou un remplaçant, pour contrôler
+l&#8217;accès à cet objet.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="proxy" src="images/proxy.svg" width="60%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_em_proxy_em_2">
+<h2>Le patron <em>Proxy</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="proxy google" src="images/proxy-google.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_utilisations">
+<h2>Utilisations</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Une <em>procuration à distance</em> fournit un représentant local d&#8217;un objet
+situé dans un espace adresse différent.</li>
+<li class="slide">Une <em>procuration virtuelle</em> crée des objets lourds à la demande.</li>
+<li class="slide">Une <em>procuration de protection</em> contrôle l&#8217;accès à l&#8217;objet original.
+Les procurations de protection sont utiles quand les objets doivent satisfaire
+différents droits d&#8217;accès.</li>
+<li class="slide"><p>
+Une <em>référence intelligente</em> est le remplaçant d&#8217;un pointeur brut, qui
+réalise des opérations supplémentaires, lors de l&#8217;accès à l&#8217;objet. Quelques
+utilisations typiques sont :<div class="ulist">
+<ul>
+<li>décompte du nombre des références faites à un objet réel, de sorte que celui-ci puisse être libéré automatiquement, dés qu&#8217;il n&#8217;y a plus de références ;</li>
+<li>charger en mémoire un objet persistant quand il est référencé pour la première fois ;</li>
+<li>vérifier, avant d&#8217;y accéder, que l&#8217;objet réel est verrouillé, pour être sûr qu&#8217;aucun autre objet ne pourra le changer.</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_rmi">
+<h2>Exemple concret : RMI</h2>
+<div class="paragraph"><p><strong>R</strong>emote <strong>M</strong>ethod <strong>I</strong>nvocation est une méthode d&#8217;accès à un service à distance.</p></div>
+<div class="listingblock">
+<div class="title">Interface distante</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kn">import</span> <span class="tok-nn">java.rmi.*</span><span class="tok-o">;</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">MonService</span> <span class="tok-kd">extends</span> <span class="tok-n">Remote</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">direBonjour</span><span class="tok-o">()</span> <span class="tok-kd">throws</span> <span class="tok-n">RemoteException</span><span class="tok-o">;</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_rmi_suite">
+<h2>Exemple concret : RMI (suite)</h2>
+<div class="listingblock">
+<div class="title">Le service distant (l&#8217;implémentation)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kn">import</span> <span class="tok-nn">java.rmi.*</span><span class="tok-o">;</span>&#x000A;<span class="tok-kn">import</span> <span class="tok-nn">java.rmi.server.*</span><span class="tok-o">;</span>&#x000A;&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MonServiceImpl</span> <span class="tok-kd">extends</span> <span class="tok-n">UnicastRemoteObject</span> <span class="tok-kd">implements</span> <span class="tok-n">MonService</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">direBonjour</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-s">&quot;Le serveur dit &#39;Bonjour&#39;&quot;</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-nf">MonServiceImpl</span><span class="tok-o">()</span> <span class="tok-kd">throws</span> <span class="tok-n">RemoteException</span> <span class="tok-o">{}</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span> <span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">try</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">MonService</span> <span class="tok-n">service</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">MonServiceImpl</span><span class="tok-o">();</span>&#x000A;      <span class="tok-n">Naming</span><span class="tok-o">.</span><span class="tok-na">rebind</span><span class="tok-o">(</span><span class="tok-s">&quot;BonjourDistant&quot;</span><span class="tok-o">,</span> <span class="tok-n">service</span><span class="tok-o">);</span>&#x000A;    <span class="tok-o">}</span> <span class="tok-k">catch</span><span class="tok-o">(</span><span class="tok-n">Exception</span> <span class="tok-n">ex</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">ex</span><span class="tok-o">.</span><span class="tok-na">printStackTrace</span><span class="tok-o">();</span>&#x000A;    <span class="tok-o">}</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_rmi_suite_2">
+<h2>Exemple concret : RMI (suite)</h2>
+<div class="listingblock">
+<div class="title">Utilisation</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">MonService</span> <span class="tok-n">service</span> <span class="tok-o">=</span>&#x000A;  <span class="tok-o">(</span><span class="tok-n">MonService</span><span class="tok-o">)</span> <span class="tok-n">Naming</span><span class="tok-o">.</span><span class="tok-na">lookup</span><span class="tok-o">(</span><span class="tok-s">&quot;rmi://127.0.0.1/BonjourDistant&quot;</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">...</span>&#x000A;<span class="tok-n">service</span><span class="tok-o">.</span><span class="tok-na">direBonjour</span><span class="tok-o">();</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="Itérateur">
+<h2>Itérateur</h2>
+
+</section>
+<section class="slide" id="_le_problème_4">
+<h2>Le problème</h2>
+<div class="paragraph"><p>On veut pouvoir :</p></div>
+<div class="ulist">
+<ul>
+<li>pour accéder au contenu d&#8217;un objet d&#8217;un agrégat sans en révéler la
+représentation interne ;</li>
+<li>pour gérer simultanément plusieurs parcours dans des agrégats d&#8217;objets ;</li>
+<li>pour offrir une interface uniforme pour les parcours au travers de
+diverses structures agrégats (c&#8217;est-à-dire, pour permettre l&#8217;itération
+polymorphe).</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_le_patron_itérateur">
+<h2>Le patron Itérateur</h2>
+<div class="paragraph"><p><strong>Itérateur</strong> (<strong><em>Iterator</em></strong>) fournit un moyen d&#8217;accès séquentiel aux éléments
+d&#8217;un agrégat d&#8217;objets, sans mettre à découvert la représentation interne de
+celui-ci.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="iterateur" src="images/iterateur.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_itérateur_2">
+<h2>Le patron Itérateur</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="iterateur google" src="images/iterateur-google.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret">
+<h2>Exemple concret</h2>
+<div class="paragraph"><p>Voici un exemple en Ruby :</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="ruby language-ruby"><span></span><span class="tok-c1"># Saluer tout le monde</span>&#x000A;<span class="tok-k">def</span> <span class="tok-nf">say_hi</span>&#x000A;  <span class="tok-k">if</span> <span class="tok-vi">@names</span><span class="tok-o">.</span><span class="tok-n">nil?</span>&#x000A;    <span class="tok-nb">puts</span> <span class="tok-s2">&quot;...&quot;</span>&#x000A;  <span class="tok-k">elsif</span> <span class="tok-vi">@names</span><span class="tok-o">.</span><span class="tok-n">respond_to?</span><span class="tok-p">(</span><span class="tok-s2">&quot;each&quot;</span><span class="tok-p">)</span>&#x000A;    <span class="tok-c1"># @names est une liste de noms : traitons-les uns par uns</span>&#x000A;    <span class="tok-vi">@names</span><span class="tok-o">.</span><span class="tok-n">each</span> <span class="tok-k">do</span> <span class="tok-o">|</span><span class="tok-nb">name</span><span class="tok-o">|</span>&#x000A;      <span class="tok-nb">puts</span> <span class="tok-s2">&quot;Hello </span><span class="tok-si">#{</span><span class="tok-nb">name</span><span class="tok-si">}</span><span class="tok-s2">!&quot;</span>&#x000A;    <span class="tok-k">end</span>&#x000A;  <span class="tok-k">else</span>&#x000A;    <span class="tok-nb">puts</span> <span class="tok-s2">&quot;Hello </span><span class="tok-si">#{</span><span class="tok-vi">@names</span><span class="tok-si">}</span><span class="tok-s2">!&quot;</span>&#x000A;  <span class="tok-k">end</span>&#x000A;<span class="tok-k">end</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="Composite">
+<h2>Le patron Composite</h2>
+
+</section>
+<section class="slide" id="_le_problème_5">
+<h2>Le problème</h2>
+<div class="paragraph"><p>On veut pouvoir :</p></div>
+<div class="ulist">
+<ul>
+<li>représenter des hiérarchies de l&#8217;individu.</li>
+<li>que le client n&#8217;ait pas à se préoccuper de la différence entre
+"combinaisons d&#8217;objets" et "objets individuels". Les clients pourront traiter
+de façon uniforme tous les objets de la structure composite.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_le_patron_composite">
+<h2>Le patron Composite</h2>
+<div class="paragraph"><p><strong>Composite</strong> permet de composer des objets en des structures arborescentes
+pour représenter des hiérarchies composant/composé.
+Permet au client de traiter d&#8217;une façon unique les objets et les combinaisons
+d&#8217;objets.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="composite" src="images/composite.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_patron_composite_2">
+<h2>Le patron Composite</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="composite google" src="images/composite-google.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_exemple_concret_2">
+<h2>Exemple concret</h2>
+<div class="listingblock">
+<div class="title">Exemple de Composite Java</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kn">import</span> <span class="tok-nn">java.util.ArrayList</span><span class="tok-o">;</span>&#x000A;&#x000A;<span class="tok-kd">interface</span> <span class="tok-nc">Graphic</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">print</span><span class="tok-o">();</span>&#x000A;<span class="tok-o">}</span>&#x000A;&#x000A;<span class="tok-kd">class</span> <span class="tok-nc">CompositeGraphic</span> <span class="tok-kd">implements</span> <span class="tok-n">Graphic</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">private</span> <span class="tok-n">ArrayList</span><span class="tok-o">&lt;</span><span class="tok-n">Graphic</span><span class="tok-o">&gt;</span> <span class="tok-n">mChildGraphics</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ArrayList</span><span class="tok-o">&lt;</span><span class="tok-n">Graphic</span><span class="tok-o">&gt;();</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">print</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-n">Graphic</span> <span class="tok-n">graphic</span> <span class="tok-o">:</span> <span class="tok-n">mChildGraphics</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-n">graphic</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">();</span>&#x000A;    <span class="tok-o">}</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">add</span><span class="tok-o">(</span><span class="tok-n">Graphic</span> <span class="tok-n">graphic</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">mChildGraphics</span><span class="tok-o">.</span><span class="tok-na">add</span><span class="tok-o">(</span><span class="tok-n">graphic</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remove</span><span class="tok-o">(</span><span class="tok-n">Graphic</span> <span class="tok-n">graphic</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">mChildGraphics</span><span class="tok-o">.</span><span class="tok-na">remove</span><span class="tok-o">(</span><span class="tok-n">graphic</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_un_anti_exemple">
+<h2>un "Anti" exemple</h2>
+<div class="paragraph"><p>Que pensez-vous de cette définition de Composite ?</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="anti composite" src="images/anti-composite.png" />
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-tip"></i>
+</td>
+<td class="content">
+On appelle ces modèles des "Patrons abîmés" (<em>anti-patterns</em>).
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_retour_sur_le_refactoring_banque">
+<h2>Retour sur le refactoring Banque</h2>
+
+</section>
+<section class="slide" id="_le_problème_6">
+<h2>Le problème</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="refactoring1" src="images/refactoring1.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_le_problème_suite">
+<h2>Le problème (suite)</h2>
+<div class="paragraph"><p>Remplacer tous ces <code>switch cases</code></p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">continuer</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-o">;</span>&#x000A;<span class="tok-k">while</span> <span class="tok-o">(</span><span class="tok-n">continuer</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-n">AAB</span><span class="tok-o">.</span><span class="tok-na">afficherMenu</span><span class="tok-o">(</span><span class="tok-n">monAg</span><span class="tok-o">);</span>&#x000A;  <span class="tok-n">choix</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-o">.</span><span class="tok-na">next</span><span class="tok-o">();</span>&#x000A;  <span class="tok-n">choix</span> <span class="tok-o">=</span> <span class="tok-n">choix</span><span class="tok-o">.</span><span class="tok-na">toLowerCase</span><span class="tok-o">();</span>&#x000A;  <span class="tok-k">switch</span> <span class="tok-o">(</span><span class="tok-n">choix</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-o">...</span>&#x000A;    <span class="tok-k">case</span> <span class="tok-s">&quot;p&quot;</span> <span class="tok-o">:</span>&#x000A;      <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Propriétaire -&gt; &quot;</span><span class="tok-o">);</span>&#x000A;      <span class="tok-n">nom</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-o">.</span><span class="tok-na">next</span><span class="tok-o">();</span>&#x000A;      <span class="tok-n">AAB</span><span class="tok-o">.</span><span class="tok-na">comptesDUnPropretaire</span> <span class="tok-o">(</span><span class="tok-n">monAg</span><span class="tok-o">,</span> <span class="tok-n">nom</span><span class="tok-o">);</span>&#x000A;    <span class="tok-k">break</span><span class="tok-o">;</span>&#x000A;    <span class="tok-o">...</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_le_problème_suite_2">
+<h2>Le problème (suite)</h2>
+<div class="ulist">
+<ul>
+<li class="slide"><p>
+Afficher une liste séparemment du switch<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-c1">//AAB.afficherMenu(monAg);</span>&#x000A;  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Menu de &quot;</span> <span class="tok-o">+</span> <span class="tok-n">ag</span><span class="tok-o">.</span><span class="tok-na">getNomAgence</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot; (&quot;</span> <span class="tok-o">+</span> <span class="tok-n">ag</span><span class="tok-o">.</span><span class="tok-na">getLocAgence</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;)&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;l - Liste des comptes de l&#39;agence&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">...</span>&#x000A;  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;p - voir les comptes d&#39;un Propriétaire (par son nom)&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">...</span>&#x000A;  <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Choix -&gt; &quot;</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div></p></li>
+<li class="slide"><p>
+Tester tous les choix pour actionner la bonne option<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span>  <span class="tok-o">...</span>&#x000A;  <span class="tok-k">case</span> <span class="tok-s">&quot;p&quot;</span> <span class="tok-o">:</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;Propriétaire -&gt; &quot;</span><span class="tok-o">);</span>&#x000A;    <span class="tok-n">nom</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-o">.</span><span class="tok-na">next</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">AAB</span><span class="tok-o">.</span><span class="tok-na">comptesDUnPropretaire</span> <span class="tok-o">(</span><span class="tok-n">monAg</span><span class="tok-o">,</span> <span class="tok-n">nom</span><span class="tok-o">);</span>&#x000A;  <span class="tok-k">break</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">...</span></code></pre>
+</div>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_une_solution">
+<h2>Une solution</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Des listes</li>
+<li class="slide">Des options de menu qui encapsulent l&#8217;action à réaliser</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_une_solution_suite">
+<h2>Une solution (suite)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span> <span class="tok-kd">extends</span> <span class="tok-n">Action</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">listTitle</span><span class="tok-o">();</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">size</span><span class="tok-o">();</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">addAction</span><span class="tok-o">(</span><span class="tok-n">Action</span> <span class="tok-n">ac</span><span class="tok-o">);</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">removeAction</span><span class="tok-o">(</span><span class="tok-n">Action</span> <span class="tok-n">ac</span><span class="tok-o">);</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-nf">listOfActions</span><span class="tok-o">()</span> <span class="tok-o">;</span>&#x000A;&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_une_solution_suite_2">
+<h2>Une solution (suite)</h2>
+<div class="listingblock">
+<div class="title">Une interface pour les options de menu</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Action</span>  <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionMessage</span> <span class="tok-o">();</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-o">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_une_solution_suite_3">
+<h2>Une solution (suite)</h2>
+<div class="listingblock">
+<div class="title">Une classe concrète par option de menu</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Action1</span> <span class="tok-kd">implements</span> <span class="tok-n">Action</span> <span class="tok-o">{</span>&#x000A;&#x000A;  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">lineMessage</span><span class="tok-o">;</span>&#x000A;&#x000A;  <span class="tok-o">...</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionMessage</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">lineMessage</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-o">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ab</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;&#x000A;    <span class="tok-o">...</span>&#x000A;    <span class="tok-n">ab</span><span class="tok-o">.</span><span class="tok-na">afficher</span><span class="tok-o">();</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Utilisation de l&#8217;action</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span>  <span class="tok-n">action</span><span class="tok-o">.</span><span class="tok-na">execute</span><span class="tok-o">(</span><span class="tok-n">ab</span><span class="tok-o">);</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_une_solution_suite_4">
+<h2>Une solution (suite)</h2>
+<div class="listingblock">
+<div class="title">Lien entre liste et action</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">Action</span> <span class="tok-n">a1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Action1</span><span class="tok-o">(</span><span class="tok-s">&quot;Liste des comptes de l&#39;agence&quot;</span><span class="tok-o">);</span>&#x000A;<span class="tok-n">Action</span> <span class="tok-n">a2</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Action2</span><span class="tok-o">(</span><span class="tok-s">&quot;Voir un compte (par son numéro)&quot;</span><span class="tok-o">);</span>&#x000A;<span class="tok-n">Action</span> <span class="tok-n">a3</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Action3</span><span class="tok-o">(...);</span>&#x000A;&#x000A;<span class="tok-n">ActionList</span> <span class="tok-n">al1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ActionListAgenceBancaire</span><span class="tok-o">(</span><span class="tok-s">&quot;Menu Général&quot;</span><span class="tok-o">);</span>&#x000A;&#x000A;<span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a1</span><span class="tok-o">);</span>&#x000A;<span class="tok-n">al1</span><span class="tok-o">.</span><span class="tok-na">addAction</span><span class="tok-o">(</span><span class="tok-n">a2</span><span class="tok-o">);</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_une_solution_suite_5">
+<h2>Une solution (suite)</h2>
+<div class="listingblock">
+<div class="title">Lien entre liste et action : choix dans la liste</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-o">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ab</span><span class="tok-o">)</span> <span class="tok-kd">throws</span> <span class="tok-n">Exception</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-o">...</span>&#x000A;  <span class="tok-k">while</span> <span class="tok-o">(</span><span class="tok-kc">true</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">printMenu</span><span class="tok-o">();</span>&#x000A;&#x000A;    <span class="tok-n">choice</span> <span class="tok-o">=</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">readResponse</span><span class="tok-o">();</span>&#x000A;    <span class="tok-o">...</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">myMenu</span><span class="tok-o">.</span><span class="tok-na">get</span><span class="tok-o">(</span><span class="tok-n">choice</span><span class="tok-o">).</span><span class="tok-na">execute</span><span class="tok-o">(</span><span class="tok-n">ab</span><span class="tok-o">);</span>&#x000A;    <span class="tok-o">...</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_une_solution_suite_6">
+<h2>Une solution (suite)</h2>
+<div class="listingblock">
+<div class="title">La liste peut elle-même être une option de menu (une action)!</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span> <span class="tok-kd">extends</span> <span class="tok-n">Action</span> <span class="tok-o">{</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_pour_aller_plus_loin_avec_les_patrons">
+<h2>Pour aller plus loin avec les patrons&#8230;&#8203;</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="plusloin" src="images/plusloin.jpg" />
+</div>
+<div class="title">Figure 1. Crédit photo : <a class="bare" href="http://blogs.radiocanut.org/">http://blogs.radiocanut.org/</a></div>
+</div>
+</section>
+<section class="slide" id="_partagez_votre_vocabulaire">
+<h2>Partagez votre vocabulaire</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Dans les réunions de conception (pas nécessairement avec le client)</li>
+<li class="slide">Avec les autres développeurs</li>
+<li class="slide">Dans la documentation de votre architecture</li>
+<li class="slide">Dans les commentaires du code et les conventions de nommage</li>
+<li class="slide">Dans les groupes/blogs de développeurs</li>
+<li class="slide">(pas pendant les exams!)</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_ne_foncez_pas_tête_baissée">
+<h2>Ne foncez pas tête baissée</h2>
+<div class="paragraph"><p>Quelques conseils :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide"><p>
+Les patterns sont des <strong>outils, non des règles</strong>.<div class="paragraph"><p>&#8658; Rien n&#8217;empêche de les modifier et de les adapter à votre
+problème.</p></div></p></li>
+<li class="slide">Ne visez l&#8217;extensibilité <strong>que si la question se pose réellement</strong> dans la pratique,
+pas si elle est uniquement hypothétique.</li>
+<li class="slide"><p>
+Ne vous emballez pas et <strong>recherchez la simplicité</strong>.<div class="paragraph"><p>&#8658; Si vous trouvez une solution plus simple que l&#8217;emploi d&#8217;un pattern, n&#8217;hésitez pas !</p></div></p></li>
+<li class="slide"><p>
+éliminez ce qui n’est pas vraiment nécessaire.<div class="paragraph"><p>&#8658; N’ayez pas peur de <strong>supprimer un design pattern inutile</strong> de votre conception.</p></div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_les_autres_types_de_patrons">
+<h2>Les autres types de patrons</h2>
+<div class="paragraph"><p>Il n&#8217;y a pas que les 3 types de patrons que l&#8217;on a vu :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">De création</li>
+<li class="slide">Structurels</li>
+<li class="slide">Comportementaux</li>
+<li class="slide"><p>
+des exemples?<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph"><p>Un ou deux exemples de chaque?</p></div>
+</td>
+</tr>
+</table>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_les_autres_types_de_patrons_suite">
+<h2>Les autres types de patrons (suite)</h2>
+<div class="paragraph"><p>Il y a par exemple :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Les patrons d&#8217;architecture</li>
+<li class="slide">Les patrons d&#8217;application</li>
+<li class="slide">Les patrons de domaine</li>
+<li class="slide">Les patrons de processus</li>
+<li class="slide">Les patrons d&#8217;organisation</li>
+<li class="slide">Les patrons de conception d&#8217;interfaces utilisateur</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_les_anti_patrons">
+<h2>Les anti-patrons</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="anti patrons" src="images/anti-patrons.jpg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_les_anti_patrons_2">
+<h2>Les anti-patrons</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Des solutions souvent <strong>appliquées à tort</strong> à des problèmes récurrents</li>
+<li class="slide">Décrit comment partir d&#8217;un problème pour arriver à une <strong>mauvaise solution</strong></li>
+<li class="slide">Vous dit <strong>pourquoi</strong> une mauvaise solution est attrayante</li>
+<li class="slide">Suggère d&#8217;autres patrons applicables pouvant fournir de meilleures solutions</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_tous_les_patrons_qu_on_a_pas_vu">
+<h2>Tous les patrons qu&#8217;on a pas vu</h2>
+<div class="paragraph"><p>Il y en a beaucoup :</p></div>
+<div class="ulist">
+<ul>
+<li>Chaîne de responsabilité</li>
+<li>Commande</li>
+<li>Décorateur</li>
+<li>Façade</li>
+<li>Interprète</li>
+<li>Médiateur</li>
+<li>Mémento</li>
+<li>Monteur</li>
+<li>Patron de méthode</li>
+<li>Poids-mouche</li>
+<li>Pont</li>
+<li>Prototype</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_injection_de_dépendances">
+<h2>Injection de dépendances</h2>
+<div class="paragraph"><p>Nous n&#8217;avons pas le temps de traiter ce point, mais cf. par exemple <a class="bare" href="https://blog.angularindepth.com/why-do-we-have-dependency-injection-in-web-development-f8815e593b38">https://blog.angularindepth.com/why-do-we-have-dependency-injection-in-web-development-f8815e593b38</a>.</p></div>
+</section>
+<section class="slide" id="_glossaire_et_définition">
+<h2>Glossaire et définition</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+Ces définitions reprennent les définitions vues dans ce livre,
+en les organisant par grands types de patrons de conception :
+de création, comportementaux et structurels.
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_patrons_de_création">
+<h2>Patrons de création</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Singleton</dt>
+<dd>
+<p><strong>Singleton</strong> garantit qu&#8217;une classe n&#8217;a qu&#8217;une seule instance et
+fournit un point d&#8217;accès global à cette instance.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="singleton" src="images/singleton.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_de_création_suite">
+<h2>Patrons de création (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Fabrique</dt>
+<dd>
+<p><strong>Fabrique</strong> (simple) définit une interface pour la création d&#8217;un objet, mais en laissant
+à des sous-classes le choix des classes à instancier (voir aussi <a href="#FabriqueAbstraite">Fabrique abstraite</a>).</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="fabrique" src="images/fabrique.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_de_création_suite_2">
+<h2>Patrons de création (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="FabriqueAbstraite"></a> Fabrique abstraite</dt>
+<dd>
+<p><strong>Fabrique</strong> (abstraite) fournit une interface pour la création de familles
+d&#8217;objets apparentés ou interdépendants, sans qu&#8217;il soit nécessaire de spécifier
+leurs classes concrètes (voir aussi <a href="#Fabrique">Fabrique</a>).</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="fabrique abstraite" src="images/fabrique-abstraite.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_comportementaux">
+<h2>Patrons comportementaux</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">État (<em>State<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Etat</strong> permet à un objet de modifier son comportement,
+quand son état interne change.
+Tout se passe comme si l&#8217;objet changeait de classe.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="etat" src="images/etat.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_comportementaux_suite">
+<h2>Patrons comportementaux (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Itérateur (<em>Iterator<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Itérateur</strong> (<strong><em>Iterator</em></strong>) fournit un moyen d&#8217;accès séquentiel aux éléments
+d&#8217;un agrégat d&#8217;objets, sans mettre à découvert la représentation interne de
+celui-ci.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="iterateur" src="images/iterateur.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_comportementaux_suite_2">
+<h2>Patrons comportementaux (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Observateur (<em>Observer<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Observateur</strong> définit une relation entre objets de type
+un-à-plusieurs, de façon que, lorsqu&#8217;un objet change d&#8217;état,
+tous ceux qui en dépendent en soient notifiés et soient mis à jour
+automatiquement.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="observateur" src="images/observateur.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_comportementaux_suite_3">
+<h2>Patrons comportementaux (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Stratégie (<em>Strategy<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Stratégie</strong> définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les
+rend interchangeables.
+Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#8217;utilisent.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="strategy" src="images/strategy.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_comportementaux_suite_4">
+<h2>Patrons comportementaux (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Visiteur (<em>Visitor<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Visiteur</strong> (<strong><em>Visitor</em></strong>) permet la représentation d&#8217;une opération applicable
+aux éléments d&#8217;une structure d&#8217;objet. Il définit une nouvelle opération,
+sans qu&#8217;il soit nécessaire de modifier la classe des éléments sur lesquels
+elle agit.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor dc" src="images/visitor-dc.svg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="visitor seq" src="images/visitor-seq.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_structurels">
+<h2>Patrons structurels</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Adaptateur (<em>Adaptor<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Adaptateur</strong> (<strong><em>Adaptor</em></strong>) permet de convertir l&#8217;interface d&#8217;une classe en une autre
+conformément à l&#8217;attente du client. L&#8217;Adaptateur permet à des classes de
+collaborer, alors qu’elles n&#8217;auraient pas pu le faire du fait d&#8217;interfaces
+incompatibles.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="adapteur" src="images/adapteur.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_structurels_suite">
+<h2>Patrons structurels (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Composite</dt>
+<dd>
+<p><strong>Composite</strong> permet de composer des objets en des structures arborescentes
+pour représenter des hiérarchies composant/composé.
+Permet au client de traiter d&#8217;une façon unique les objets et les combinaisons
+d&#8217;objets.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="composite" src="images/composite.svg" />
+</div>
+</div>
+</section>
+<section class="slide" id="_patrons_structurels_suite_2">
+<h2>Patrons structurels (suite)</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Procuration (<em>Proxy<sup>uk</sup></em>)</dt>
+<dd>
+<p><strong>Procuration</strong> (<strong><em>Proxy</em></strong>) fournit à un tiers un mandataire ou un remplaçant, pour contrôler
+l&#8217;accès à cet objet.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="proxy" src="images/proxy.svg" width="60%" />
+</div>
+</div>
+</section>
+<section class="slide" id="refs">
+<h2>Références</h2>
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li><a id="Cysboy"></a>[Cysboy] Apprenez à programmer en Java. Par <code>cysboy</code>. Disponible <a href="https://app.box.com/shared/yrlj0takyhjeg1mefacy">ici</a> (le 2019-12-16).</li>
+<li><a id="Freeman04"></a>[Freeman04] Design Pattren - Head First. Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. O&#8217;Reilly, 09/2004.</li>
+<li><a id="Freeman05"></a>[Freeman05] Tête la première : Design Pattern. Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. Editions O&#8217;Reilly. 2005.</li>
+<li><a id="GoF"></a>[GoF] Design Patterns: Elements of reusable object oriented software. 1994.</li>
+<li>GOPROD - De bonnes pratiques au service de la conception orientée objets. Disponible <a href="http://www.goprod.bouhours.net">ici</a> (le 2019-12-16).</li>
+<li><a id="Larman05"></a>[Larman05] Larman, Craig. Applying UML and Patterns – An Introduction to Object-Oriented Analysis and Design
+and Iterative Development (3rd ed.). Prentice Hall. 2005. ISBN 0-13-148906-2.</li>
+<li><a id="Martin03"></a>[Martin03] “Principles Of OOD”, Robert C. Martin (“Uncle BOB”), <a class="bare" href="http://butunclebob.com">http://butunclebob.com</a>.</li>
+<li><a id="Meyer88"></a>[Meyer88] Meyer, Bertrand. Object-Oriented Software Construction. Prentice Hall. 1988. ISBN 0-13-629049-3.</li>
+<li><a id="SOLID"></a>[SOLID] <a class="bare" href="https://blogs.msdn.microsoft.com/cdndevs/2009/07/15/the-solid-principles-explained-with-motivational-posters/">https://blogs.msdn.microsoft.com/cdndevs/2009/07/15/the-solid-principles-explained-with-motivational-posters/</a></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_ready_for_a_quizz">
+<h2>Ready for a quizz?</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="ulist">
+<ul>
+<li>Connectez-vous sur : <a class="bare" href="http://www.socrative.com/">http://www.socrative.com/</a> (<strong>student login</strong>)</li>
+<li>Ou téléchargez l&#8217;application pour étudiant <span class="image"><img alt="socrative2" src="images/socrative2.png" width="10%" /></span></li>
+<li>Choisissez la room <strong>44918d67</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://www.socrative.com/">
+<img alt="socrative1" src="images/socrative1.png" width="50%" />
+</a>
+</div>
+</div>
+</section>
+<p aria-role="status" class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+</div>
+<script src="deck.js/jquery.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+    (function($, deck, undefined) {
+      $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+      $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+    
+      $.extend(true, $[deck].defaults, {
+          countNested: false
+      });
+    
+      $.deck('.slide');
+    })(jQuery, 'deck');
+  //]]>
+</script>
+<style type="text/css">
+  /*<![CDATA[*/
+    .slide.canvas-image {
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+    -moz-box-align: start;
+    -webkit-box-align: start;
+    -ms-box-align: start;
+    box-align: start;
+    -moz-box-pack: start;
+    -webkit-box-pack: start;
+    -ms-box-pack: start;
+    box-pack: start;}
+    
+    .bottom-left {
+      left: 1%;
+      bottom: 20%; }
+    
+    .top-left {
+      left: 1%;
+      top: 20%; }
+    
+    .bottom-right {
+      right: 1%;
+      bottom: 20%; }
+    
+    .top-right {
+      right: 1%;
+      top: 20%; }
+    
+    .center-up {
+      right: 50%;
+      top: 1%;
+    }
+    
+    .center-down {
+      right: 50%;
+      bottom: 1%;
+    }
+    .canvas-image .canvas-caption p {
+      text-align: center;
+      padding-top: 0;
+      padding: 0;
+      -moz-transform: none;
+      -webkit-transform: none;
+      -o-transform: none;
+      -ms-transform: none;
+      transform: none;
+      display: inline;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-weight: bold;
+      font-size: 58px;
+      -webkit-box-shadow: 2px 2px 2px #000;
+      -moz-box-shadow: 2px 2px 2px #000;
+      box-shadow: 2px 2px 2px #000;
+      padding: 1rem;
+      color: white; }
+    kbd.keyseq { color: #555555; }
+    kbd:not(.keyseq) {
+      display: inline-block;
+      color: #222222;
+      font-size: 0.7em;
+      line-height: 1.4;
+      background-color: #F7F7F7;
+      border: 1px solid #ccc;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      margin: -0.15em 0.15em 0 0.15em;
+      padding: 0.2em 0.6em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    kbd kbd:first-child { margin-left: 0; }
+    kbd kbd:last-child { margin-right: 0; }
+  /*]]>*/
+</style>
+</body>
+</html>
