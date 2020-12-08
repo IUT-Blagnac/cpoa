@@ -10,6 +10,7 @@
 // raccourcis sites
 :aadl: link:http://www.aadl.info/[AADL]indexterm:[AADL]
 :ant: link:http://ant.apache.org/[ant]
+:androidicon: Android icon:android[role=lime]
 :artisan: link:http://www.artisansw.com/[Artisan]
 :asciidoc: link:http://www.methods.co.nz/asciidoc[AsciiDoc]indexterm:[AsciiDoc]
 :dasciidoc: link:http://www.methods.co.nz/asciidoc[d'AsciiDoc]indexterm:[AsciiDoc]
@@ -35,6 +36,7 @@
 :java: https://www.java.com/fr/[Java]
 :javadoc: link:http://fr.wikipedia.org/wiki/Javadoc[Javadoc]
 :ivi: link:http://ant.apache.org/ivy/[Ivy]
+:iosicon: http://www.apple.com/fr/ios/[iOS icon:apple[]]
 :latex: link:http://fr.wikipedia.org/wiki/LaTeX[LaTeX]
 :magicDraw: link:http://www.nomagic.com/[MagicDraw]
 :marte: link:http://www.omgmarte.org/[MARTE]indexterm:[MARTE]

@@ -1,0 +1,84 @@
+= CPOA - (Suite Design Pattern)
+Jean-Michel Bruel <jbruel@gmail.com>
+v1.9, {localdate} (started on 2015-10-05)
+:icons: font
+:experimental:
+:status:
+:imagesdir: images
+:inclusion:
+:myasciidoconf:
+:siteurl: http://bit.ly/jmb-cpoa
+//--------------------- slides
+ifdef::slides[]
+:dzslides-style: tomorrow
+//:dzslides-style: stormy, watermelon, tomorrow, truffle, statement, default
+:dzslides-transition: fade
+:dzslides-fonts: family=Yanone+Kaffeesatz:400,700,200,300&family=Cedarville+Cursive
+//:dzslides-highlight: asciidoctor
+:dzslides-highlight: monokai
+:source-highlighter: highlightjs
+:dzslides-status:
+:topic: .topic
+:intro: .topic.intro
+:statement: .topic.statement
+:incremental: .incremental
+:source: .topic.source
+endif::slides[]
+//--------------------- cours
+ifndef::slides[]
+:source-highlighter: highlight
+:topic:
+:intro:
+:statement:
+:incremental: %step
+:source:
+endif::slides[]
+
+
+// ------------------------------------------ definitions
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+:androidicon: Android icon:android[role=lime]
+:iosicon: http://www.apple.com/fr/ios/[iOS icon:apple[]]
+
+ifdef::slides[]
+
+[{topic}]
+== Suivre ces slides sur Internet...
+
+image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
+
+.........
+http://bit.ly/jmb-cpoa
+http://iut-blagnac.github.io/cpoa/
+.........
+
+endif::slides[]
+
+[{topic}]
+== Plan
+
+[{incremental}]
+- Introduction
+- Rappels Java
+- Base des patrons
+
+include::patterns-2020.adoc[leveloffset=+1]
+
+[{topic}]
+== Ready for a quiz?
+
+//----------------------------- Question ------------------
+[icon="tuxteacher.png"]
+.*QUESTION*
+[WARNING]
+====
+
+- Connectez-vous sur : http://www.socrative.com/ (*student login*)
+- Ou téléchargez l'application pour étudiant image:socrative2.png[width=10%]
+- Choisissez la room *44918d67*
+====
+
+image::socrative1.png[width=50%,link=http://www.socrative.com/]
+

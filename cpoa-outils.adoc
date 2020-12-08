@@ -1,0 +1,210 @@
+:toc:
+
+= Outils CPOA
+
+== Eclipse
+
+=== Téléchargement
+
+https://www.eclipse.org/downloads/
+
+=== Installation et paramétrage
+
+Dézipper le fichier ZIP téléchargé dans un répertoire dédié, que nous appellerons ici `C:\dev\tools\eclipse`.
+
+==== JREs / JDKs
+
+La JRE (Java Runtime Environment) présente dans le système d'exploitation ne suffit pas toujours à travailler avec les outils nécessaires (notamment Maven) pour développer en Java.
+
+Il est donc nécessaire d'avoir préalablement téléchargé une (ou plusieurs) JDK(s) (Java Development Kit).
+
+[NOTE]
+====
+Une JDK peut être considérée comme une JRE (puisqu'elle contient un environnement d'exécution Java) mais à laquelle on a ajouté certains outils, notamment 
+le compilateur `javac`.
+====
+
+Les versions couramment utilisées en ce moment sont la 8 et la 11.
+
+Voici la procédure pour gérer les JDKs dans Eclipse :
+
+----
+Menu Window > Preferences
+Java > Installed JREs
+----
+
+Pour en ajouter une :
+
+----
+Add > Standard JVM > Directory (choisir le répertoire source d'une JDK) > Finish
+
+La cocher si ce doit être la JRE par défaut du workspace
+----
+
+==== Maven
+
+Voir plus bas
+
+=== Utilisation
+
+==== Raccourcis claviers
+
+===== Auto-complétion
+
+Pendant la saisie d'un nom de classe, de méthode ou de variable, faire ce raccourci proposera tout ce qui est disponible et qui correspond au début de la saisie.
+
+----
+CTRL + Espace
+----
+
+===== Renommer une classe / méthode / variable
+
+Placer le curseur de saisie sur le nom de la classe, méthode ou de variable, faire ce raccourci, et effectuer le renommage. Il sera automatiquement répercuté partout ou c'est nécessaire.
+
+----
+Alt + Shift + r
+----
+
+===== Rechercher une classe
+
+----
+Ctrl + Shift + t
+----
+
+===== Rechercher un fichier
+
+----
+Ctrl + Shift + r
+----
+
+===== Décaler une ligne
+
+Placer le curseur de saisie sur la ligne souhaitée, ou sélectionner un ensemble de lignes : faire ce raccourci décalera le bloc en question en prenant en compte les autres lignes.
+
+----
+Alt + fléche haut ou bas
+----
+
+===== Formater un fichier
+
+Régulièrement (comme pour une sauvegarder), il peut être intéressant de faire ce raccourci pour redonner un formatage "propre" au fichier en cours d'édition.
+
+----
+Ctrl + Shift + f
+----
+
+===== Organiser les imports
+
+Ce raccourci permet d'organiser l'ensemble des imports Java d'un seul coup (ajout des imports nécessaires, suppression des inutilisés...).
+
+----
+Ctrl + Shift + o
+----
+
+== Maven
+
+=== Téléchargement
+
+https://maven.apache.org/download.cgi (binary ZIP archive)
+
+=== Installation et paramétrage
+
+* Dézipper le fichier ZIP téléchargé dans un répertoire dédié, que nous appellerons ici `C:\dev\tools\maven`
+* Créer un répertoire `C:\dev\tools\maven\repo` dédié au *repository* : le dépôt en local de l'ensemble dépendances (= bibliothèques externes) téléchargées et gérées par Maven
+* Ouvrir le fichier `C:\dev\tools\maven\conf\settings.xml` et y ajouter / modifier une ligne mentionnant `<localRepository>...</localRepository>`
+
+----
+<localRepository>C:\dev\tools\maven\repo</localRepository>
+----
+
+=== Structure d'un projet
+
+Voici l'arborescence minimale *obligatoire* d'un projet Java qui utilise Maven :
+
+* Dossier *src* 
+** Dossier *src/main*
+*** Dossier *src/main/java* : code source Java (packages et classes) pour l'exécution de l'application
+*** Dossier *src/main/resources* : fichiers externes (non Java) utilisés pour l'exécution de l'application (ex : fichiers de configuration...)
+** Dossier *src/test*
+*** Dossier *src/test/java* : code source Java (package et classes) utilisé uniquement pour les tests
+*** Dossier *src/test/resources* : fichiers externes (non Java) utilisés pour les tests (ex : fichiers Cucumber...)
+* Fichier *pom.xml* : fichier "Project Object Model" servant à :
+** donner les informations principales du projet (nom, description, version, etc...)
+** lister les dépendances nécessaires, que Maven doit importer (ex : JUnit, Cucumber, drivers de connexion aux bases de données, frameworks...)
+** configurer les plugins exécutés par Maven (ex : compilation en fichier JAR, WAR, etc..., production de rapports de tests...)
+
+[NOTE]
+====
+Utiliser Maven implique de *ne plus utiliser* l'import manuel de bibliothèques externes.
+====
+
+=== Utilisation
+
+==== Avec Eclipse
+
+===== Configuration
+
+----
+Menu Window > Preferences
+Maven > Installations
+----
+
+Pour utiliser le même Maven que celui précédemment installé (et non pas le Maven embarqué par Eclipse) :
+
+----
+Add > Directory (choisir `C:\dev\tools\maven`) > Finish
+
+Le cocher
+----
+
+Ensuite, vérifier que le fichier `settings.xml` utilisé est le bon :
+
+----
+Maven > User settings
+----
+
+Si le fichier indiqué sous *User settings* n'est pas `C:\dev\tools\maven\conf\settings.xml` :
+
+----
+> Browse (choisir le fichier `C:\dev\tools\maven\conf\settings.xml`)
+> Update settings
+----
+
+===== Lancement
+
+----
+Run configurations > Maven build > Clic droit > New configuration
+
+Base directory : le projet Maven concerné
+
+Goals : le "goal" Maven (`package`, `test`...)
+
+Run
+----
+
+==== En ligne de commandes
+
+Pour utiliser Maven en ligne de commandes, deux possibilités :
+
+===== La commande `mvn` 
+
+Cette solution implique  :
+
+* la déclaration d'une variable d'environnement `JAVA_HOME` avec comme valeur le répertoire source d'une JDK
+* l'ajout de `C:\dev\tools\maven\bin` dans la variable d'environnement `PATH`
+
+===== Un script "batch" personnel
+
+Cette solution fait exactement la même chose que la précédente, mais à travers un script (*".cmd"* sur Windows) qui doit être placé à la racine du projet.
+
+C'est le programme Maven qui est appelé directement, par son chemin d'accès (`C:\dev\tools\maven\bin\mvn`).
+
+----
+set JAVA_HOME=<le répertoire source d'une JDK>
+start C:\dev\tools\maven\bin\mvn clean test
+----
+
+[NOTE]
+====
+La déclaration de `JAVA_HOME` n'est effective que dans le contexte du script. Une fois celui-ci terminé, le `JAVA_HOME` n'aura plus cette valeur.
+====

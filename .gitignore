@@ -20,3 +20,5 @@ images/.metadata
 .asciidoctor
 modelTest
 reveal.js
+.gradle
+.class
