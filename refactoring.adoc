@@ -11,6 +11,14 @@ v20.1, {localdate} (started on 2020-12-08)
 :status:
 :imagesdir: images
 :siteurl: http://bit.ly/jmb-cpoa
+//:revealjs_theme: beige, black, league, night, serif, simple, sky, solarized, white
+:revealjs_theme: night
+:revealjs_slideNumber: true
+:revealjs_showSlideNumber: all
+//:revealjs_transition: none, fade, slide, convex, concave, zoom
+:revealjs_transition: slide
+:customcss: jmb.css
+
 // ------------------------------------------ definitions
 ifndef::definitions[]
 include::definitions.txt[]
@@ -21,6 +29,7 @@ endif::definitions[]
 [%step]
 - Fin du semestre
 - Projet refactoring
+- Derniers patrons
 
 == Fin du semestre
 
@@ -265,11 +274,12 @@ public double getMonthlySalary(Employee employee) {
 - https://refactoring.guru/fr/refactoring
 - https://codegym.cc/groups/posts/196-how-refactoring-works-in-java
 
+//[background-color="yellow"]
 == Ready for a quiz?
 
 //----------------------------- Question ------------------
-- http://www.socrative.com/ (*student* login)
-- Room *JMB42*
+// - http://www.socrative.com/ (*student* login)
+// - Room *JMB42*
 
-image::socrative1.png[width=60%,link=http://www.socrative.com/]
+// image::socrative1.png[width=60%,link=http://www.socrative.com/]
 
