@@ -264,10 +264,23 @@ public double getMonthlySalary(Employee employee) {
 -----
 
 
+== Advice for the project
 
+=== Issues to list the ideas
 
+image::issues.png[width=80%]
 
+=== Describe / Explain each idea
 
+image::issueExample.png[width=50%]
+
+=== 1 refactoring = 1 branch
+
+image::git-flow-jmb.svg[width=50%]
+
+=== Professional `README`
+
+link:exempleProjet2020.pdf[]
 
 == Ressources
 

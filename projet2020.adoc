@@ -1,7 +1,7 @@
 // ------------------------------------------
 //  Created by Jean-Michel Bruel on 2019-12.
 //  Copyright (c) 2019 IRIT/U. Toulouse. All rights reserved.
-// Thanks to Louis Chanoua for code & idea
+// Thanks to Louis Chanoua for the code & idea
 // ------------------------------------------
 = DUT-Info/S3/M3105 (CPOA) : Projet refactoring
 Jean-Michel Bruel
@@ -50,7 +50,7 @@ endif::[]
 ifdef::uk[]
 == Expected activity
 
-You have up to December 17th, 2020 to improve as much as possible the code of your choosen application :
+You have up to December 17th, 2020 to improve as much as possible the code of your chosen application:
 
 - New design patterns
 - Good practices (e.g., SOLID)
@@ -144,7 +144,7 @@ The main criteria for grading will be the following:
 - pertinence of the choices
 - pertinence of the tests
 - overall code quality
-- documentation quality (illustration, explainations)
+- documentation quality (illustration, explanations)
 - number and difficulty of the refactoring elements
 
 endif::[]
