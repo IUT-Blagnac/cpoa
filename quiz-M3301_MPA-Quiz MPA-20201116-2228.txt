@@ -1,0 +1,59 @@
+// question: 0  name: Switch category to $course$/top/Quiz MPA
+$CATEGORY: $course$/top/Quiz MPA
+
+
+// question: 0  name: Switch category to $course$/top/Quiz MPA/Humour
+$CATEGORY: $course$/top/Quiz MPA/Humour
+
+
+// question: 47170  name: Humour
+::Humour::[html]Que signifient les initiales JMB ?{
+	=[moodle]Jean-Michel Bruel
+	~[moodle]James (Mickael) Bond
+	~[moodle]Jason (Mickael) Bourne
+	~[moodle]Jack (Mickael) Bauer
+}
+
+
+// question: 47183  name: Humour
+::Humour::[html]Vous avez eu un cours de MPA, mais au fait, MPA ça veut dire ?{
+	=[moodle]Méthodologie de la Production d'Applications
+	~[moodle]Méthode de Programmation Agile
+	~[moodle]Méthodes de Programmation Artisanales
+	~[moodle]Méthodologie de Programmation Améliorée
+}
+
+
+// question: 0  name: Switch category to $course$/top/Quiz MPA/Scrum
+$CATEGORY: $course$/top/Quiz MPA/Scrum
+
+
+// question: 47187  name: Scrum
+::Scrum::[html]Pour la méthode SCRUM, un SPRINT...{
+	~%50%[moodle]est un temps de réalisation d'un sous ensemble d'exigences
+	~%-25%[moodle]est un temps de réalisation de l'application
+	~%-25%[moodle]est un temps de réalisation d'un sous ensemble de tâches
+	~%-10%[moodle]est indépendant du SPRINT précédent
+	~%50%[moodle]a une durée fixe
+	~%-50%[moodle]Aucune de ces réponses
+}
+
+
+// question: 47186  name: Scrum
+::Scrum::[html]<p dir\="ltr" style\="text-align\: left;"><div><div>Le Product Backlog est la somme des Sprints Backlog...</div></div><br></p>{FALSE}
+
+
+// question: 0  name: Switch category to $course$/top/Quiz MPA/UML
+$CATEGORY: $course$/top/Quiz MPA/UML
+
+
+// question: 47172  name: UML
+::UML::[html]Les liens de dépendance entre classes ou entre classes et exigences permettent de \:{
+	~%50%[moodle]propager les impacts d'un changement
+	~%-50%[moodle]tester les exigences
+	~%-50%[moodle]générer des tests automatiques
+	~%50%[moodle]ne tester que ce qui est nécessaire
+	~[moodle]Aucune de ces réponses
+}
+
+
