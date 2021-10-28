@@ -53,7 +53,7 @@ endif::definitions[]
 
 http://nuitdelinfo.com
 
-image::nuit.png[width=100%]
+image::nuit2021.png[width=100%]
 
 [{intro}]
 == *Stages* : il est temps!

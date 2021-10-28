@@ -73,7 +73,7 @@ full.pdf: full.$(EXT) $(DEP)
 %.deckjs.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate Deckjs'
 	$(DOCTOR) -b deckjs \
-	-T ../asciidoctor-deck.js/templates/haml/ -a slides \
+	-T ../../lib/asciidoctor-deck.js/templates/haml/ -a slides \
 	-a deckjs_theme=$(DECK) \
 	-r asciidoctor-diagram \
 	-a styledir=. \
@@ -85,7 +85,7 @@ full.pdf: full.$(EXT) $(DEP)
 %.dzslides.html: %.$(EXT)
 	@echo '==> Compiling asciidoc files to generate Dzslides'
 	$(DOCTOR) -b dzslides \
-	-T $(DZSLIDES) -E slim \
+	-T $(DZSLIDES) \
 	-a slides -a dzslides \
 	-r asciidoctor-diagram \
 	-a styledir=. \
