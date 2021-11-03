@@ -1,4 +1,4 @@
-= CPOA : les premiers *patrons*
+= CPOA : Objectifs du module
 Jean-Michel Bruel <jbruel@gmail.com>
 v2.0, {localdate}
 :icons: font
