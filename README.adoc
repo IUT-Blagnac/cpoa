@@ -42,7 +42,7 @@ N'hésitez pas à l'acheter si vous en avez les moyens.
 
 image::images/couverture.png[width=60%]
 
-== Liste des TD/TP 2017/2018
+== Liste des TD/TP 2017-2022
 
 === Strategy
 
