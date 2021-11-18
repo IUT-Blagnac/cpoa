@@ -8,13 +8,7 @@ WARNING: Ces définitions reprennent les définitions vues dans ce livre,
 en les organisant par grands types de patrons de conception :
 de création, comportementaux et structurels.
 
-ifdef::slides[:leveloffset: -1]
-
-[glossary]
-
-
-
-=== Patrons de création
+== Patrons de création
 
 
 
