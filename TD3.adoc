@@ -358,7 +358,6 @@ NOTE: Vous implémenterez les classes manquantes en TP.
 
 Nous y sommes, vous venez de décortiquer le patron Fabrique Simple
 
-[[Fabrique]]
 [NOTE]
 .Design pattern : *Fabrique (simple)*
 ====
