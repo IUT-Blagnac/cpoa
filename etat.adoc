@@ -5,7 +5,7 @@
 Soit la machine à état suivante :
 
 ifndef::slides[.Machine à état d'un distributeur simple]
-image::bonbons.png[scaledwidth=60%]
+image::bonbons.png[scaledwidth=60%,width=50%]
 
 ifdef::slides[:leveloffset: -1]
 
