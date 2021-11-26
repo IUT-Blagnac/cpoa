@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="234px" preserveAspectRatio="none" style="width:187px;height:234px;background:#FFFFFF;" version="1.1" viewBox="0 0 187 234" width="187px" zoomAndPan="magnify"><defs><filter height="300%" id="f1lsmhy3urdnfc" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[62de4d85d0b55a4e8e648601354b601c]
+class Xorg--><rect codeLine="12" fill="#FEFECE" filter="url(#f1lsmhy3urdnfc)" height="86.8652" id="Xorg" style="stroke:#A80036;stroke-width:1.5;" width="131" x="13" y="7"/><ellipse cx="60.75" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M63.2231,29.1431 Q62.6421,29.4419 62.0029,29.5913 Q61.3638,29.7407 60.6582,29.7407 Q58.1514,29.7407 56.8315,28.0889 Q55.5117,26.437 55.5117,23.3159 Q55.5117,20.1865 56.8315,18.5347 Q58.1514,16.8828 60.6582,16.8828 Q61.3638,16.8828 62.0112,17.0322 Q62.6587,17.1816 63.2231,17.4805 L63.2231,20.2031 Q62.5923,19.6221 61.9988,19.3523 Q61.4053,19.0825 60.7744,19.0825 Q59.4297,19.0825 58.7449,20.1492 Q58.0601,21.2158 58.0601,23.3159 Q58.0601,25.4077 58.7449,26.4744 Q59.4297,27.541 60.7744,27.541 Q61.4053,27.541 61.9988,27.2712 Q62.5923,27.0015 63.2231,26.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="81.25" y="27.5352">Xorg</text><line style="stroke:#A80036;stroke-width:1.5;" x1="14" x2="143" y1="39" y2="39"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="59" x="19" y="53.6348">blob : Xorg</text><line style="stroke:#A80036;stroke-width:1.5;" x1="14" x2="143" y1="59.9551" y2="59.9551"/><polygon fill="#FFFF44" points="24,65.9551,28,69.9551,24,73.9551,20,69.9551" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="34" x="33" y="74.5898">Xorg()</text><ellipse cx="24" cy="83.9102" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="105" x="33" y="87.5449">getInstance() : Xorg</text><path d="M6,154 L6,225.2422 A0,0 0 0 0 6,225.2422 L151,225.2422 A0,0 0 0 0 151,225.2422 L151,164 L141,154 L82.5,154 L78.5,94.1 L74.5,154 L6,154 A0,0 0 0 0 6,154 " fill="#FBFB77" filter="url(#f1lsmhy3urdnfc)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M141,154 L141,164 L151,164 L141,154 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="101" x="12" y="171.5684">if blob == null {</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="20" y="186.8789">blob = new Xorg();</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="12" y="202.1895">}</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="12" y="217.5">return blob;</text><!--MD5=[5f64e627f0393dc4229e4178d5c6b0ed]
+link Xorg to Xorg--><path codeLine="18" d="M144.23,24.68 C163.78,25.45 179,34.06 179,50.5 C179,65.4 166.5,73.86 149.6,75.89 " fill="none" id="Xorg-to-Xorg" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="144.23,76.32,153.5117,79.6139,149.2151,75.9343,152.8947,71.6377,144.23,76.32" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="152.0784" y="75.7137">blob</text><!--MD5=[d33ff4184ee01174087776540775db1c]
+@startuml
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' UML concepts illustrated
+' JMB 2014
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+'hide circle
+hide empty members
+hide empty methods
+'skinparam classAttributeIconSize 0
+
+class Xorg {
+{static} blob : Xorg
+# Xorg()
+{static} + getInstance() : Xorg
+}
+
+Xorg - -> "blob" Xorg
+note "if blob == null {\n  blob = new Xorg();\n}\nreturn blob;" as N
+Xorg .. N
+
+@enduml
+
+@startuml
+
+
+hide empty members
+hide empty methods
+
+class Xorg {
+{static} blob : Xorg
+# Xorg()
+{static} + getInstance() : Xorg
+}
+
+Xorg - -> "blob" Xorg
+note "if blob == null {\n  blob = new Xorg();\n}\nreturn blob;" as N
+Xorg .. N
+
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 17:46:50 CET 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: fr
+Country: FR
+--></g></svg>

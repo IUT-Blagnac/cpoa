@@ -271,7 +271,7 @@ ifdef::prof[]
 [CAUTION]
 ========
 
-image::Pizzeria3-sol.png[width=60%]
+image::Pizzeria3-sol.svg[width=60%]
 
 Chaque sous-classe redéfinit la méthode `creerPizza()`,
 tandis que toutes les sous-classes utilisent la méthode `commanderPizza()`

@@ -1,0 +1,11 @@
+@startuml
+
+skinparam style strictuml
+
+actor Main as ":Main"
+participant pizzeria as ":Pizzeria"
+
+Main->pizzeria: ??()
+
+
+@enduml

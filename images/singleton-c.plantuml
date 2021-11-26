@@ -10,14 +10,14 @@ hide empty members
 hide empty methods
 'skinparam classAttributeIconSize 0
 
-class Singleton {
-{static} uniqueInstance : Singleton
-# Singleton()
-{static} + getInstance() : Singleton
+class Xorg {
+{static} blob : Xorg
+# Xorg()
+{static} + getInstance() : Xorg
 }
 
-Singleton --> "uniqueInstance" Singleton
-note "if uniqueInstance == null {\n  uniqueInstance = new Singleton();\n}\nreturn uniqueInstance;" as N
-Singleton .. N
+Xorg --> "blob" Xorg
+note "if blob == null {\n  blob = new Xorg();\n}\nreturn blob;" as N
+Xorg .. N
 
 @enduml

@@ -11,7 +11,7 @@ hide empty methods
 
 abstract class p as "Pizzeria" {
   {abstract} creerPizza()
-  {abstract} commanderPizza()
+  commanderPizza()
 }
 
 class PizzeriaStyleStrasbourg extends p {

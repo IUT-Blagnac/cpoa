@@ -115,10 +115,7 @@ des patrons que vous connaissez), complétez :
 image::fabrique-c.png[]
 
 .Patron ...
-image::etat-c.png[]
-
-.Patron ...
-image::observateur-c.png[]
+image::singleton-c.svg[]
 
 .Patron ...
 image::strategy-c.png[]
@@ -140,46 +137,11 @@ Notez l'équivalence {UML} (ici noté en {plantUML}) entre :
 - `+Produit "1" <- Createur {+Produit produit;}+`
 ====
 
-.Patron Etat
-image::etat.png[]
-
-.Patron Observateur
-image::observateur.png[]
+.Patron Singleton 
+image::singleton.png[]
 
 .Patron Strategy
 image::strategy.png[]
-========
-endif::prof[]
-
-== Machines à état
-
-//----------------------------- Question ------------------
-.*QUESTION*
-[WARNING]
-====
-. Dessinez le diagramme d’états correspondant aux feux tricolores (en France)
-classiques. Ajoutez la prise en compte de la panne dans un 2ème temps.
-. Dessinez le diagramme d’états correspondant au déroulement d’une partie
-d’échecs.
-====
-//----------------------------------------------------- Correction -------------------------
-ifdef::prof[]
-.Solution image:icons/solution.png[]
-[CAUTION]
-========
-. Feu tricolore
-+
-.Diagramme d'état d'un feu tricolore classique
-image::feu1.png[]
-+
-.Diagramme d'état d'un feu tricolore avec panne
-image::feu2.png[]
-. Echecs
-+
-.Diagramme d'état d'une partie d'échec
-image::echec.png[]
-+
-
 ========
 endif::prof[]
 
@@ -350,6 +312,39 @@ servira pour le TP.
 image::banque-seq.png[]
 ========
 endif::prof[]
+
+== Machines à état
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Dessinez le diagramme d’états correspondant aux feux tricolores (en France)
+classiques. Ajoutez la prise en compte de la panne dans un 2ème temps.
+. Dessinez le diagramme d’états correspondant au déroulement d’une partie
+d’échecs.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Feu tricolore
++
+.Diagramme d'état d'un feu tricolore classique
+image::feu1.png[]
++
+.Diagramme d'état d'un feu tricolore avec panne
+image::feu2.png[]
+. Echecs
++
+.Diagramme d'état d'une partie d'échec
+image::echec.png[]
++
+
+========
+endif::prof[]
+
 
 :numbered!:
 == Pour aller plus loin
