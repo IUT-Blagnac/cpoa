@@ -29,7 +29,7 @@ participant agence as "ApplicationAgenceBancaire"
 '  t = ag.getComptesDe(nomProprietaire);
 participant ag as "ag : AgenceBancaire"
 agence -> ag : getComptesDe(nomProprietaire)
-ag --> agence : Comptes [] t
+ag --> agence : Compte [] t
 
 '  if (t.length == 0) {
 alt t.length() == 0
@@ -43,7 +43,7 @@ else else
 
 <-- agence : '... comptes pour ...'
 loop i<t.length
-participant cpt as "t[i] : Comptes"
+participant cpt as "t[i] : Compte"
 agence -> cpt : afficher()
 end
 
