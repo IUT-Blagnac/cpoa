@@ -54,26 +54,7 @@ NOTE: Seul le répertoire `java` nous intéresse. Mais n'hésitez pas à regarde
 les autres langages si ça vous aide.
 +
 . Lancez les tests pour vérifier que tout est OK (`ApplicationTest.java`)
-. À partir de ce code de test (cf. ci-dessous), déterminez ce que fait
-l'application et comment elle fonctionne.
-
-.ApplicationTest.java
-[source,java]
-------
-include::../task-list/java/src/test/java/com/codurance/training/tasks/ApplicationTest.java[]
-------
-
-.Task.java
-[source,java]
-------
-include::../task-list/java/src/main/java/com/codurance/training/tasks/Task.java[]
-------
-
-.TaskList.java
-[source,java]
-------
-include::../task-list/java/src/main/java/com/codurance/training/tasks/TaskList.java[]
-------
+. À partir du code de test et des sources, déterminez ce que fait l'application et comment elle fonctionne.
 
 == Refactoring
 

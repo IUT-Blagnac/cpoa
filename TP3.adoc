@@ -135,7 +135,6 @@ http://iut-blagnac.github.io/cpoa/TD2.html#_et_si_on_améliorait_le_jeu_d_aventu
 
 Vous avez décortiqué en TD 3 le patron Fabrique.
 
-[[Fabrique]]
 [NOTE]
 .Design pattern : *Fabrique (_Factoty_)*
 ====
