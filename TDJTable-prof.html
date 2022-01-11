@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.6.1">
+<meta name="generator" content="Asciidoctor 2.0.16">
 <meta name="author" content="Dut/Info-S3/M3105 - (Semaine 50)">
 <title>CPOA - Support TD 6</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./pygments-manni.css">
 </head>
 <body class="article">
@@ -46,7 +46,7 @@ réponses aux exercices.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PreReq</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Je sais programmer en Java.</p>
@@ -59,13 +59,13 @@ réponses aux exercices.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Le but de ce TD est de comprendre un composant Swing complexe : le JTable.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><strong>1</strong> TD de 1,5h.</p>
 </div></div></td>
 </tr>
@@ -96,7 +96,7 @@ Nous verrons :</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_présentation_jtable_ce_qu_il_n_est_pas"><a class="link" href="#_présentation_jtable_ce_qu_il_n_est_pas">2. Présentation JTable : ce qu&#8217;il n&#8217;est pas</a></h2>
+<h2 id="_présentation_jtable_ce_quil_nest_pas"><a class="link" href="#_présentation_jtable_ce_quil_nest_pas">2. Présentation JTable : ce qu&#8217;il n&#8217;est pas</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Imaginons que nous voulions programmer cette interface en java :</p>
@@ -302,7 +302,7 @@ Nous verrons :</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_utilisation_d_un_tablemodel"><a class="link" href="#_utilisation_d_un_tablemodel">4. Utilisation d&#8217;un TableModel</a></h2>
+<h2 id="_utilisation_dun_tablemodel"><a class="link" href="#_utilisation_dun_tablemodel">4. Utilisation d&#8217;un TableModel</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_composant_graphique"><a class="link" href="#_composant_graphique">4.1. Composant graphique</a></h3>
@@ -312,13 +312,13 @@ Nous verrons :</p>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-c1">// Partie composants : un JTable et son TableModel</span>
-<span class="tok-n">JTable</span> <span class="tok-n">jta</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">JTable</span> <span class="tok-o">();</span>
-<span class="tok-n">MonTableModel</span> <span class="tok-n">mm</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">MonTableModel</span><span class="tok-o">();</span>
-<span class="tok-n">jta</span><span class="tok-o">.</span><span class="tok-na">setModel</span> <span class="tok-o">(</span><span class="tok-n">mm</span><span class="tok-o">);</span>
+<span class="tok-n">JTable</span> <span class="tok-n">jta</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">JTable</span> <span class="tok-p">();</span>
+<span class="tok-n">MonTableModel</span> <span class="tok-n">mm</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">MonTableModel</span><span class="tok-p">();</span>
+<span class="tok-n">jta</span><span class="tok-p">.</span><span class="tok-na">setModel</span> <span class="tok-p">(</span><span class="tok-n">mm</span><span class="tok-p">);</span>
 
 <span class="tok-c1">// Partie graphique : le JTable est mis dans un JScrollPane</span>
-<span class="tok-n">JScrollPane</span> <span class="tok-n">jsp</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">JScrollPane</span><span class="tok-o">();</span>
-<span class="tok-n">jsp</span><span class="tok-o">.</span><span class="tok-na">setViewportView</span> <span class="tok-o">(</span><span class="tok-n">jta</span><span class="tok-o">);</span></code></pre>
+<span class="tok-n">JScrollPane</span> <span class="tok-n">jsp</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">JScrollPane</span><span class="tok-p">();</span>
+<span class="tok-n">jsp</span><span class="tok-p">.</span><span class="tok-na">setViewportView</span> <span class="tok-p">(</span><span class="tok-n">jta</span><span class="tok-p">);</span></code></pre>
 </div>
 </div>
 </div>
@@ -354,23 +354,23 @@ Nous verrons :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">class</span> <span class="tok-nc">SimpleTableModel</span> <span class="tok-kd">extends</span> <span class="tok-n">AbstractTableModel</span> <span class="tok-o">{</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getColumnCount</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-mi">30</span><span class="tok-o">;</span> <span class="tok-o">}</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getRowCount</span><span class="tok-o">()</span> <span class="tok-o">{</span> <span class="tok-k">return</span> <span class="tok-mi">2000</span><span class="tok-o">;}</span>
-	<span class="tok-kd">public</span> <span class="tok-n">Object</span> <span class="tok-nf">getValueAt</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">row</span><span class="tok-o">,</span> <span class="tok-kt">int</span> <span class="tok-n">col</span><span class="tok-o">)</span> <span class="tok-o">{</span>
-		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-n">Integer</span><span class="tok-o">((</span><span class="tok-mi">1</span><span class="tok-o">+</span><span class="tok-n">row</span><span class="tok-o">)*(</span><span class="tok-mi">1</span><span class="tok-o">+</span><span class="tok-n">col</span><span class="tok-o">));</span>
-	<span class="tok-o">}</span>
-<span class="tok-o">}</span>
-<span class="tok-kd">class</span> <span class="tok-nc">SimpleJPanelTable</span> <span class="tok-kd">extends</span> <span class="tok-n">JPanel</span> <span class="tok-o">{</span>
-	<span class="tok-kd">public</span> <span class="tok-nf">SimpleJPanelTable</span><span class="tok-o">()</span> <span class="tok-o">{</span>
-		<span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">setLayout</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-n">BorderLayout</span><span class="tok-o">());</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">class</span> <span class="tok-nc">SimpleTableModel</span> <span class="tok-kd">extends</span> <span class="tok-n">AbstractTableModel</span> <span class="tok-p">{</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getColumnCount</span><span class="tok-p">()</span> <span class="tok-p">{</span> <span class="tok-k">return</span> <span class="tok-mi">30</span><span class="tok-p">;</span> <span class="tok-p">}</span>
+	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getRowCount</span><span class="tok-p">()</span> <span class="tok-p">{</span> <span class="tok-k">return</span> <span class="tok-mi">2000</span><span class="tok-p">;}</span>
+	<span class="tok-kd">public</span> <span class="tok-n">Object</span> <span class="tok-nf">getValueAt</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">row</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">col</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-n">Integer</span><span class="tok-p">((</span><span class="tok-mi">1</span><span class="tok-o">+</span><span class="tok-n">row</span><span class="tok-p">)</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-o">+</span><span class="tok-n">col</span><span class="tok-p">));</span>
+	<span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-kd">class</span> <span class="tok-nc">SimpleJPanelTable</span> <span class="tok-kd">extends</span> <span class="tok-n">JPanel</span> <span class="tok-p">{</span>
+	<span class="tok-kd">public</span> <span class="tok-nf">SimpleJPanelTable</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">setLayout</span><span class="tok-p">(</span><span class="tok-k">new</span> <span class="tok-n">BorderLayout</span><span class="tok-p">());</span>
 
-		<span class="tok-n">TableModel</span> <span class="tok-n">dataModel</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">SimpleTableModel</span><span class="tok-o">()</span> <span class="tok-o">;</span>
-		<span class="tok-n">JTable</span> <span class="tok-n">table</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">JTable</span><span class="tok-o">();</span>
-		<span class="tok-n">table</span><span class="tok-o">.</span><span class="tok-na">setModel</span> <span class="tok-o">(</span><span class="tok-n">dataModel</span><span class="tok-o">);</span>
-		<span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">add</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-n">JScrollPane</span><span class="tok-o">(</span><span class="tok-n">table</span><span class="tok-o">));</span>
-	<span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
+		<span class="tok-n">TableModel</span> <span class="tok-n">dataModel</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">SimpleTableModel</span><span class="tok-p">()</span> <span class="tok-p">;</span>
+		<span class="tok-n">JTable</span> <span class="tok-n">table</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">JTable</span><span class="tok-p">();</span>
+		<span class="tok-n">table</span><span class="tok-p">.</span><span class="tok-na">setModel</span> <span class="tok-p">(</span><span class="tok-n">dataModel</span><span class="tok-p">);</span>
+		<span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">add</span><span class="tok-p">(</span><span class="tok-k">new</span> <span class="tok-n">JScrollPane</span><span class="tok-p">(</span><span class="tok-n">table</span><span class="tok-p">));</span>
+	<span class="tok-p">}</span>
+<span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -439,19 +439,19 @@ Nous verrons :</p>
 <span class="tok-c1">// Le JTable et le JScrollPane gèrent les scrolls correctement ...</span>
 <span class="tok-c1">// L&#39;algorithme réel est plus complexe ...</span>
 
-<span class="tok-kt">int</span> <span class="tok-n">nvc</span> <span class="tok-o">=</span> <span class="tok-n">min</span> <span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">dataModel</span><span class="tok-o">.</span><span class="tok-na">getColumnCount</span><span class="tok-o">(),</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">maxViewableCols</span><span class="tok-o">()</span> <span class="tok-o">);</span>
-<span class="tok-kt">int</span> <span class="tok-n">nvr</span> <span class="tok-o">=</span> <span class="tok-n">min</span> <span class="tok-o">(</span><span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">dataModel</span><span class="tok-o">.</span><span class="tok-na">getRowCount</span><span class="tok-o">(),</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">maxViewableRows</span><span class="tok-o">()</span> <span class="tok-o">);</span>
+<span class="tok-kt">int</span> <span class="tok-n">nvc</span> <span class="tok-o">=</span> <span class="tok-n">min</span> <span class="tok-p">(</span><span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">dataModel</span><span class="tok-p">.</span><span class="tok-na">getColumnCount</span><span class="tok-p">(),</span> <span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">maxViewableCols</span><span class="tok-p">()</span> <span class="tok-p">);</span>
+<span class="tok-kt">int</span> <span class="tok-n">nvr</span> <span class="tok-o">=</span> <span class="tok-n">min</span> <span class="tok-p">(</span><span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">dataModel</span><span class="tok-p">.</span><span class="tok-na">getRowCount</span><span class="tok-p">(),</span> <span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">maxViewableRows</span><span class="tok-p">()</span> <span class="tok-p">);</span>
 
-<span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">nvc</span><span class="tok-o">;</span> <span class="tok-n">j</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
-	<span class="tok-n">String</span> <span class="tok-n">titreCol</span> <span class="tok-o">=</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">dataModel</span><span class="tok-o">.</span><span class="tok-na">getColumnName</span><span class="tok-o">(</span><span class="tok-n">j</span><span class="tok-o">);</span>
-	<span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">drawAtScreen</span> <span class="tok-o">(</span><span class="tok-n">titreCol</span><span class="tok-o">);</span>
-<span class="tok-o">}</span>
-<span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">nvr</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
-	<span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">nvc</span><span class="tok-o">;</span> <span class="tok-n">j</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
-		<span class="tok-n">Object</span> <span class="tok-n">o</span> <span class="tok-o">=</span> <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">dataModel</span><span class="tok-o">.</span><span class="tok-na">getValueAt</span><span class="tok-o">(</span><span class="tok-n">i</span><span class="tok-o">,</span> <span class="tok-n">j</span><span class="tok-o">);</span>
-		<span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">drawAtScreen</span> <span class="tok-o">(</span><span class="tok-n">o</span><span class="tok-o">);</span>
-	<span class="tok-o">}</span>
-<span class="tok-o">}</span></code></pre>
+<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">nvc</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-n">String</span> <span class="tok-n">titreCol</span> <span class="tok-o">=</span> <span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">dataModel</span><span class="tok-p">.</span><span class="tok-na">getColumnName</span><span class="tok-p">(</span><span class="tok-n">j</span><span class="tok-p">);</span>
+	<span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">drawAtScreen</span> <span class="tok-p">(</span><span class="tok-n">titreCol</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
+<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">nvr</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">nvc</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+		<span class="tok-n">Object</span> <span class="tok-n">o</span> <span class="tok-o">=</span> <span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">dataModel</span><span class="tok-p">.</span><span class="tok-na">getValueAt</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span> <span class="tok-n">j</span><span class="tok-p">);</span>
+		<span class="tok-k">this</span><span class="tok-p">.</span><span class="tok-na">drawAtScreen</span> <span class="tok-p">(</span><span class="tok-n">o</span><span class="tok-p">);</span>
+	<span class="tok-p">}</span>
+<span class="tok-p">}</span></code></pre>
 </div>
 </div>
 </td>
@@ -723,7 +723,7 @@ Nous verrons :</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-16 10:16:12 CET
+Last updated 2020-10-23 11:57:26 +0200
 </div>
 </div>
 </body>

@@ -524,6 +524,7 @@ endif::backend-pdf[]
 - <<Itérateur>>
 - <<Composite>>
 - <<Etat>>
+- <<Visiteur>>
 - <<Proxy>>
 - <<Adaptateur>>
 
@@ -541,7 +542,6 @@ endif::backend-pdf[]
 - Façade
 - Patron de méthode
 - Chaînes de responsabilité
-- Visiteur
 - Prototype
 - Mémento
 - Médiateur

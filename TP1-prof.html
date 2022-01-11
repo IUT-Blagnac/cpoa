@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.6.1">
+<meta name="generator" content="Asciidoctor 2.0.16">
 <meta name="author" content="Dut/Info-S3/M3105 - (Semaine 46)">
 <title>CPOA - Support TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./pygments-manni.css">
 </head>
 <body class="article">
@@ -46,7 +46,7 @@ réponses aux exercices.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PreReq</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Je sais programmer en <a href="https://www.java.com/fr/">Java</a>.</p>
@@ -65,13 +65,13 @@ réponses aux exercices.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Comprendre ce qu&#8217;est une <strong>conception</strong> et implémenter mon premier patron.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><strong>2</strong> TP de 1,5h (sur 1 semaine).</p>
 </div></div></td>
 </tr>
@@ -185,7 +185,7 @@ et choisir <code>TP1.zip</code> que vous venez de télécharger.</p>
 les deux points de l&#8217;option <code>-cp</code> par un point virgule :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-o">.</span><span class="tok-na">getRuntime</span><span class="tok-o">().</span><span class="tok-na">exec</span><span class="tok-o">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-o">);</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-p">.</span><span class="tok-na">getRuntime</span><span class="tok-p">().</span><span class="tok-na">exec</span><span class="tok-p">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-p">);</span></code></pre>
 </div>
 </div>
 </li>
@@ -220,7 +220,7 @@ le code en conséquence.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_jeu_d_aventure"><a class="link" href="#_jeu_d_aventure">4. Jeu d&#8217;aventure</a></h2>
+<h2 id="_jeu_daventure"><a class="link" href="#_jeu_daventure">4. Jeu d&#8217;aventure</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_bases"><a class="link" href="#_bases">4.1. Bases</a></h3>
@@ -292,7 +292,7 @@ un personnage parmis les types possibles, et de lui affecter une arme.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_em_reverse_engineering_em_du_code"><a class="link" href="#_em_reverse_engineering_em_du_code">4.4. <em>Reverse engineering</em> du code</a></h3>
+<h3 id="_reverse_engineering_du_code"><a class="link" href="#_reverse_engineering_du_code">4.4. <em>Reverse engineering</em> du code</a></h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -321,18 +321,18 @@ suivantes (<strong><code>build.xml</code> recommandée</strong>) :</p>
 <pre class="pygments highlight"><code data-lang="ant"><span></span>&lt;project default=&quot;main&quot;&gt;
 &lt;target name=&quot;main&quot;&gt;
 &lt;javadoc doclet=&quot;de.mallox.doclet.PlantUMLDoclet&quot;
-   docletpath=&quot;plantUmlDoclet.jar&quot;
-   access=&quot;private&quot;
+   docletpath=&quot;plantUmlDoclet.jar&quot; 
+   access=&quot;private&quot; 
    additionalparam=
    &quot;-encoding utf-8 -J-DdestinationFile=uml.txt -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true&quot;
-   &gt;
-  &lt;packageset dir=&quot;../src&quot;&gt;
-   &lt;include name=&quot;**&quot;/&gt;
-  &lt;/packageset&gt;
-&lt;/javadoc&gt;
+   &gt; 
+  &lt;packageset dir=&quot;../src&quot;&gt; 
+   &lt;include name=&quot;**&quot;/&gt; 
+  &lt;/packageset&gt; 
+&lt;/javadoc&gt; 
 
 &lt;java jar=&quot;plantuml.jar&quot; fork=&quot;true&quot; maxmemory=&quot;128m&quot;&gt;
- &lt;arg value=&quot;uml.txt&quot;/&gt;
+ &lt;arg value=&quot;uml.txt&quot;/&gt; 
 &lt;/java&gt;
 &lt;/target&gt;
 &lt;/project&gt;</code></pre>
@@ -819,14 +819,14 @@ les associations (ni les dépendances). Plutôt que d&#8217;aller les rajouter
 <span class="tok-cm">* @navassoc - - 1..* PowerManager</span>
 <span class="tok-cm">* @note this is a note</span>
 <span class="tok-cm">*/</span>
-<span class="tok-kd">class</span> <span class="tok-nc">SetTopController</span> <span class="tok-kd">implements</span> <span class="tok-n">URLStreamHandler</span> <span class="tok-o">{</span>
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-o">;</span>
+<span class="tok-kd">class</span> <span class="tok-nc">SetTopController</span> <span class="tok-kd">implements</span> <span class="tok-n">URLStreamHandler</span> <span class="tok-p">{</span>
+  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-p">;</span>
 
-  <span class="tok-kt">int</span> <span class="tok-n">authorizationLevel</span><span class="tok-o">;</span>
-  <span class="tok-kt">void</span> <span class="tok-nf">startUp</span><span class="tok-o">()</span> <span class="tok-o">{}</span>
-    <span class="tok-kt">void</span> <span class="tok-nf">shutDown</span><span class="tok-o">()</span> <span class="tok-o">{}</span>
-      <span class="tok-kt">void</span> <span class="tok-nf">connect</span><span class="tok-o">()</span> <span class="tok-o">{}</span>
-      <span class="tok-o">}</span></code></pre>
+  <span class="tok-kt">int</span> <span class="tok-n">authorizationLevel</span><span class="tok-p">;</span>
+  <span class="tok-kt">void</span> <span class="tok-nf">startUp</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
+    <span class="tok-kt">void</span> <span class="tok-nf">shutDown</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
+      <span class="tok-kt">void</span> <span class="tok-nf">connect</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
+      <span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -904,7 +904,7 @@ pour les versions avant Java 7, et <code>System.lineSeparator()</code> depuis Ja
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-16 10:16:12 CET
+Last updated 2020-10-23 11:57:26 +0200
 </div>
 </div>
 </body>
