@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=" http-equiv="Content-Type" />
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+<meta content="Asciidoctor 2.0.16" name="generator" />
+<meta content="J.-M. Bruel" name="author" />
+<title>Design patterns basics</title>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+.conum { display: inline-block; color: white !important; background-color: #222222; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 1.2em; height: 1.2em; font-size: 0.9em; font-weight: bold; line-height: 1.2; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -0.1em; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+.colist table td:first-of-type { padding-right: 0.25em; }
+</style>
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f8f8f8; }
+pre.pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #666666 } /* Operator */
+pre.pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #888888 } /* Generic.Output */
+pre.pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+pre.pygments .tok-m { color: #666666 } /* Literal.Number */
+pre.pygments .tok-s { color: #BA2121 } /* Literal.String */
+pre.pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #008000 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #880000 } /* Name.Constant */
+pre.pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #0000FF } /* Name.Function */
+pre.pygments .tok-nl { color: #A0A000 } /* Name.Label */
+pre.pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #19177C } /* Name.Variable */
+pre.pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<link href="deck.js/core/deck.core.css" rel="stylesheet" />
+<link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet" />
+<link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet" />
+<link href="deck.js/extensions/toc/deck.toc.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/style/swiss.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/transition/fade.css" media="screen" rel="stylesheet" />
+<link href="deck.js/core/print.css" media="print" rel="stylesheet" />
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="article">
+<div class="deck-container">
+<section class="slide" id="title-slide">
+<h1>Design patterns basics</h1>
+<span id="author">J.-M. Bruel</span>
+<br />
+<span id="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span>
+<br />
+<span id="revnumber">version 20.1 2022-01-11</span>
+</section>
+<section class="slide" id="_any_question_so_far">
+<h2>Any question so far ?</h2>
+
+</section>
+<section class="slide" id="_whats_wrong_non_java_example">
+<h2>What&#8217;s wrong (non Java example)?</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://codeburst.io/write-clean-code-and-get-rid-of-code-smells-aea271f30318">
+<img alt="featureEnvy" src="images/featureEnvy.png" width="80%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_whats_wrong_java_example">
+<h2>What&#8217;s wrong (Java example) ?</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">public class Phone {&#x000A;  private final String unformattedNumber;&#x000A;  public Phone(String unformattedNumber) {&#x000A;    this.unformattedNumber = unformattedNumber;&#x000A;  }&#x000A;&#x000A; public String getAreaCode() {&#x000A;  return unformattedNumber.substring(0,3);&#x000A; }&#x000A;&#x000A; public String getPrefix() {&#x000A;  return unformattedNumber.substring(3,6);&#x000A; }&#x000A;&#x000A; public String getNumber() {&#x000A;  return unformattedNumber.substring(6,10);&#x000A; }&#x000A;}&#x000A;&#x000A;public class Customer {&#x000A;&#x000A;  public String getMobilePhoneNumber() {&#x000A;    Phone m_Phone = new Phone("111-123-2345");&#x000A;    return "(" + m_Phone.getAreaCode() + ") "&#x000A;      + m_Phone.getPrefix() + "-"&#x000A;      + m_Phone.getNumber();&#x000A;  }&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_whats_wrong_solution">
+<h2>What&#8217;s wrong (solution) ?</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">public class Phone {&#x000A;  private final String unformattedNumber;&#x000A;&#x000A;  public Phone(String unformattedNumber) {&#x000A;    this.unformattedNumber = unformattedNumber;&#x000A;  }&#x000A;&#x000A; public String getAreaCode() {&#x000A;  return unformattedNumber.substring(0,3);&#x000A; }&#x000A;&#x000A; public String getPrefix() {&#x000A;  return unformattedNumber.substring(3,6);&#x000A; }&#x000A;&#x000A; public String getNumber() {&#x000A;  return unformattedNumber.substring(6,10);&#x000A; }&#x000A;&#x000A; public String toString() {&#x000A;  return "(" + this.getAreaCode() + ") "&#x000A;      + this.getPrefix() + "-"&#x000A;      + this.getNumber();&#x000A;  }&#x000A;}&#x000A;&#x000A;public class Customer {&#x000A;&#x000A;  public String getMobilePhoneNumber() {&#x000A;    Phone m_Phone = new Phone("111-123-2345");&#x000A;    return m_Phone;&#x000A;  }&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_introduction">
+<h2>Introduction</h2>
+<div class="paragraph"><p>This course is one advanced OO programming.</p></div>
+</section>
+<section class="slide" id="_objects">
+<h2>Objects</h2>
+<div class="paragraph"><p>You already know those <strong>objects concepts</strong> :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Abstraction</li>
+<li class="slide">Encapsulation</li>
+<li class="slide">Inhéritance</li>
+<li class="slide">Polymorphisme</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_abstraction">
+<h2>Abstraction</h2>
+<div class="paragraph"><p>Definition:</p></div>
+</section>
+<section class="slide" id="_abstraction_2">
+<h2>Abstraction</h2>
+<div class="paragraph"><p>Definition (restrictive):</p></div>
+<div class="quoteblock">
+<blockquote>
+A class is an <strong>abstraction</strong> of the common characteristics of a set of objects.
+</blockquote>
+</div>
+</section>
+<section class="slide" id="_encapsulation">
+<h2>Encapsulation</h2>
+<div class="paragraph"><p>Definition:</p></div>
+</section>
+<section class="slide" id="_encapsulation_2">
+<h2>Encapsulation</h2>
+<div class="paragraph"><p>Definition (restrictive):</p></div>
+<div class="quoteblock">
+<blockquote>
+In an object description, the goal of <strong>encapsulation</strong> is to hide how the object behavior is implemented
+(attributes, methods).
+</blockquote>
+</div>
+</section>
+<section class="slide" id="_inheritance">
+<h2>Inheritance</h2>
+<div class="paragraph"><p>Definition:</p></div>
+</section>
+<section class="slide" id="_inheritance_2">
+<h2>Inheritance</h2>
+<div class="paragraph"><p>Definition (simplistic) :</p></div>
+<div class="quoteblock">
+<blockquote>
+Inheritance is the transmission of some characteristics to its descendants.
+</blockquote>
+</div>
+<div class="paragraph"><p>The inheriting class possesses the methods and attributes of the <code>public</code> and
+<code>protected</code> levels of its superclass.</p></div>
+</section>
+<section class="slide" id="_polymorphisme">
+<h2>Polymorphisme</h2>
+<div class="paragraph"><p>Coming from the Greek:</p></div>
+</section>
+<section class="slide" id="_polymorphisme_2">
+<h2>Polymorphisme</h2>
+<div class="paragraph"><p>Coming from the Greek:</p></div>
+<div class="quoteblock">
+<blockquote>
+Who can take several forms
+</blockquote>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-important"></i>
+</td>
+<td class="content">
+<div class="paragraph"><p>Inheritance concerns are classes while polymorphism concerns are objects.</p></div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_polymorphism_ctd">
+<h2>Polymorphism (ctd.)</h2>
+<div class="paragraph"><p>There are 3 main kind of polymorphism:</p></div>
+<div class="ulist">
+<ul>
+<li class="slide"><strong>ad hoc</strong> polymorphism (overloading)</li>
+<li class="slide"><strong>parametric</strong> polymorphism (template)</li>
+<li class="slide"><strong>inheritance</strong> polymorphism (overriding)</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_ad_hoc_polymorphism">
+<h2>ad hoc polymorphism</h2>
+<div class="ulist">
+<ul>
+<li>Also called <strong>overloading</strong>.</li>
+<li>Permits to have methods in a class with identical names but with different behavior.</li>
+<li>Permits to define different usage of the same function according to its parameters.</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="C language-C">int method(int,int);&#x000A;int method(int);&#x000A;int method(float,float);</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_parametric_polymorphism">
+<h2>Parametric polymorphism</h2>
+<div class="paragraph"><p>Also called <strong>template</strong>.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="Java language-Java">interface Iterator&lt;E&gt; {&#x000A;    boolean hasNext();&#x000A;    E next();&#x000A;}&#x000A;&#x000A;public &lt;T&gt; static void copy(Collection&lt;? extends T&gt; source, Collection&lt;? super T&gt; dest) {&#x000A;    for (T t : source) {&#x000A;         dest.add(t);&#x000A;    }&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_inheritance_polymorphism">
+<h2>Inheritance polymorphism</h2>
+<div class="ulist">
+<ul>
+<li>Also called <strong>specialization</strong> (or redefinition).</li>
+<li>Related to the overriding of the inherited methods.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_objectives_of_oo_design">
+<h2>Objectives of OO Design</h2>
+<div class="paragraph"><p>We try to avoid 3 big problems faced in Software Development:</p></div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Rigidity</dt>
+<dd>
+<p>Anticipate the evolutions that will impact the application.</p>
+</dd>
+<dt class="hdlist1">Fragility</dt>
+<dd>
+<p>Avoid that some modification on one part of the code breaks the whole software.</p>
+</dd>
+<dt class="hdlist1">Immobility</dt>
+<dd>
+<p>Allow for easier code extraction.</p>
+</dd>
+</dl>
+</div>
+</section>
+<section class="slide" id="_good_practices_and_patterns">
+<h2>Good practices and patterns</h2>
+<div class="paragraph"><p>To tackle the aformentioned problems, one solution consists in reducing
+<strong>dependances</strong> and avoid the "spaghetti" effect.</p></div>
+<div class="paragraph"><p>The expected values are:</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Robustesness: changes do not introduce regressions.</li>
+<li class="slide">Extensibility: it is easy to add new functionalities</li>
+<li class="slide">Reusability: it is possible to reuse some  parts of the code to build other applications.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_good_practices_and_patterns_ctd">
+<h2>Good practices and patterns (ctd.)</h2>
+<div class="paragraph"><p>We are going to learn <strong>good practices</strong>:</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Identify those aspects that change and separate them from constant ones</li>
+<li class="slide">Program an interface, not an implementation</li>
+<li class="slide">Prefer composition than inheritance</li>
+<li class="slide">Classes must be open to extension, but closed to modification</li>
+<li class="slide">Depend on abstractions not on concrete classes (dependency inversion)</li>
+<li class="slide">Don&#8217;t talk to strangers</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_good_practices_and_patterns_ctd_2">
+<h2>Good practices and patterns (ctd.)</h2>
+<div class="paragraph"><p>The next step will be to lear existing good solutions to classical design problems:  <strong>design patterns</strong>.</p></div>
+</section>
+<section class="slide" id="_time_for_a_quizz">
+<h2>Time for a quizz!</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="ulist">
+<ul>
+<li>Connect on: <a class="bare" href="http://www.socrative.com/">http://www.socrative.com/</a> (<strong>student login</strong>)</li>
+<li>Or download the student app <span class="image"><img alt="socrative2" src="images/socrative2.png" width="10%" /></span></li>
+<li>Choose room <strong>44918d67</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://www.socrative.com/">
+<img alt="socrative1" src="images/socrative1.png" width="50%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_important_java_concepts">
+<h2>Important Java concepts</h2>
+
+</section>
+<section class="slide" id="_importance_of_typing">
+<h2>Importance of typing</h2>
+
+</section>
+<section class="slide" id="_different_kinds_of_typing">
+<h2>Different kinds of typing</h2>
+<div class="paragraph"><p>Typing = attach a type to a variable.</p></div>
+<div class="paragraph"><p>2 possible ways:</p></div>
+<div class="ulist">
+<ul>
+<li>statically</li>
+<li>dynamically</li>
+<li><em>duck typing</em></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_statically">
+<h2>Statically</h2>
+<div class="paragraph"><p>Typing is node at <strong>compilation</strong> time.</p></div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="C language-C">int i = 0;  // cette déclaration indique explicitement que&#x000A;            // la variable i est de type entier</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_dynamically">
+<h2>Dynamically</h2>
+<div class="paragraph"><p>Typing is node at <strong>execution</strong> time.</p></div>
+</section>
+<section class="slide" id="_dynamic_typing_example">
+<h2>Dynamic typing (example)</h2>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">/**&#x000A; * @author André Peninou&#x000A; */&#x000A;public class Type {&#x000A;  void m() {&#x000A;    System.out.println ("Type");&#x000A;    }&#x000A;}&#x000A;public class SousType extends Type {&#x000A;  void m() {&#x000A;    System.out.println ("SousType");&#x000A;  }&#x000A;  void autreM(){&#x000A;    System.out.println ("Spécifique SousType");&#x000A;  }&#x000A;}&#x000A;...&#x000A;    Type a = new Type();&#x000A;    a.m(); // "Type"&#x000A;&#x000A;    a = new SousType();&#x000A;    a.m(); // "SousType"&#x000A;    // Statique : a est un Type (à la compil)&#x000A;    // Dynamique : a est un SousType au runtime.&#x000A;&#x000A;    // D'où :&#x000A;    a = new SousType();&#x000A;    a.autreM();&#x000A;    // NOK car type statique == A =&gt; autreM() n'existe pas à la compilation&#x000A;...</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_duck_typing">
+<h2><em>Duck typing</em></h2>
+<div class="paragraph"><p>Sort of <strong>typage dynamique</strong> where the <strong>semantics</strong> of an object (its type)
+is determind by the set of its <strong>methods</strong> ande <strong>attributes</strong>.</p></div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="paragraph"><p>The origin of this expression is attributed James Whitcomb Riley:</p></div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>If I see an animal that flies like a duck, sing like a  duck, and swim like a duck, hence it must be a duck.</p></div>
+<div class="attribution">
+<cite>James Whitcomb Riley</cite>
+</div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_duck_typing_example">
+<h2><em>Duck typing</em> (example)</h2>
+<div class="listingblock">
+<div class="title">Example of <em>duck typing</em>  (in Ruby)</div>
+<div class="content">
+<pre class="highlight"><code class="ruby language-ruby">def calcule(a, b, c)&#x000A;  return a*b+c&#x000A;end&#x000A;&#x000A;$a = calcule(6, 3, 2)&#x000A;$b = calcule('6', 3, ', the number of the beast')&#x000A;&#x000A;puts $a.to_s&#x000A;puts $b.to_s</code></pre>
+</div>
+</div>
+<div class="paragraph"><p>WHich results in:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre>20&#x000A;666, the number of the beast</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-tip"></i>
+</td>
+<td class="content">
+To go further : <a class="bare" href="http://fr.wikipedia.org/wiki/Duck_typing">http://fr.wikipedia.org/wiki/Duck_typing</a>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_visibility_matters">
+<h2>Visibility matters</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">package UN;&#x000A;public class A {&#x000A;  protected String attrprotected;&#x000A;  String attrfriend; // friend&#x000A;}</code></pre>
+</div>
+</div>
+<div class="paragraph"><p>If there is a second class in the same <em>package</em>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">package UN;&#x000A;  class B {&#x000A;    ...&#x000A;    {&#x000A;        A a = new A ();&#x000A;        a.attrprotected// OK : même si bizarre&#x000A;        a.attrfriend  // OK : visible package&#x000A;    }&#x000A;  }&#x000A;&#x000A;package UN;&#x000A;  class C extends A {&#x000A;    ...&#x000A;    {&#x000A;        this.attrprotected// OK : normal&#x000A;        this.attrfriend // OK : visible package&#x000A;    }&#x000A;  }</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_visibility_matters_ctd">
+<h2>Visibility matters (ctd.)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">package DEUX;&#x000A;  class B {&#x000A;      ...&#x000A;    {&#x000A;        A a = new A ();&#x000A;        a.attrprotected// NON OK : normal&#x000A;        a.attrfriend  // NON OK : normal, proche de "private"&#x000A;    }&#x000A;  }&#x000A;&#x000A;  class C extends A {&#x000A;      ...&#x000A;    {&#x000A;        this.attrprotected// OK : normal car protected et héritage&#x000A;        this.attrfriend // NON OK : normal, proche de "private"&#x000A;    }&#x000A;  }</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_private_ou_protected">
+<h2>Private ou protected ?</h2>
+<div class="paragraph"><p>What&#8217;s the best for attributes ?</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Question of <strong>style</strong> !</li>
+<li class="slide">Purists (cf. <a href="#Meyer">[Meyer]</a>) &#8658; <code>private</code></li>
+<li class="slide">Sometimes useful: cf. <a href="#strategy"><em>Strategy</em></a>, avoid getters/setters</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_static_members">
+<h2><code>static</code> Members</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">class VariableDemo&#x000A;{&#x000A;  static int count=0;&#x000A;  public void increment()&#x000A;  {&#x000A;    count++;&#x000A;  }&#x000A;  public static void main(String args[])&#x000A;  {&#x000A;    VariableDemo obj1=new VariableDemo();&#x000A;    VariableDemo obj2=new VariableDemo();&#x000A;    obj1.increment();&#x000A;    obj2.increment();&#x000A;    System.out.println("Obj1: count is="+obj1.count);&#x000A;    System.out.println("Obj2: count is="+obj2.count);&#x000A;  }&#x000A;}</code></pre>
+</div>
+</div>
+<div class="paragraph"><p>Output:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre>Obj1: count is=2&#x000A;Obj2: count is=2</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_static_members_ctd">
+<h2><code>static</code> Members (ctd.)</h2>
+<div class="paragraph"><p>How does it work:</p></div>
+<div class="ulist">
+<ul>
+<li class="slide"><code>static</code> variables are initialized at the loading of the class.</li>
+<li class="slide"><code>static</code> variables are initialized before any instance is created.</li>
+<li class="slide"><code>static</code> variables are initialized before any `static' method is executed.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_static_methods">
+<h2><code>static</code> methods</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">import java.lang.Math;&#x000A;&#x000A;class Another {&#x000A;  public static void main(String[] args) {&#x000A;    int result;&#x000A;&#x000A;    result = Math.min(10, 20); //calling static method min by writing class name&#x000A;&#x000A;    System.out.println(result);&#x000A;    System.out.println(Math.max(100, 200));&#x000A;  }&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_static_methods_and_non_static_calls">
+<h2><code>static</code> methods and non-static calls</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">public class Main {&#x000A;    public static void main(String[] args) {&#x000A;        Main p = new Main();&#x000A;        k();&#x000A;    }&#x000A;&#x000A;    protected Main() {&#x000A;        System.out.print("1234");&#x000A;    }&#x000A;&#x000A;    protected void k() {&#x000A;    }&#x000A;}</code></pre>
+</div>
+</div>
+<div class="paragraph"><p>At run-time:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">Main p = new Main();  // =&gt; prints 1234&#x000A;k()                   // =&gt; raises error</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_static_methods_and_non_static_calls_ctd">
+<h2><code>static</code> methods and non-static calls (ctd.)</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Static method cannot call non-static methods</p></div>
+</blockquote>
+</div>
+<div class="paragraph"><p>In fact <strong>they do</strong>!!
+They only have to be called on an <strong>instance</strong> of the class.</p></div>
+</section>
+<section class="slide" id="_static_methods_and_non_static_calls_ctd_2">
+<h2><code>static</code> methods and non-static calls (ctd.)</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Constructors are kind of a method with no return type.</p></div>
+</blockquote>
+</div>
+<div class="paragraph"><p>In fact it&#8217;s better to consider them as a kind of static method.
+Indeed they do not require any object to be called!</p></div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+cf. interesting discussion <a class="bare" href="http://stackoverflow.com/questions/10513633/static-method-access-to-non-static-constructor">http://stackoverflow.com/questions/10513633/static-method-access-to-non-static-constructor</a>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="enum">
+<h2>General use of <code>enum</code></h2>
+
+</section>
+<section class="slide" id="_modeling">
+<h2>Modeling</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/enum.png">
+<img alt="enum" src="images/enum.png" width="50%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_propriétés">
+<h2>Propriétés</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">public enum Civilite {&#x000A;  MADAME, MONSIEUR&#x000A;}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>Each element of an enum is an object</li>
+<li><code>enum</code> inherits from <code>java.lang.Enum</code></li>
+<li>Methods can be added</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_basic_methods">
+<h2>Basic methods</h2>
+<div class="ulist">
+<ul>
+<li><p>
+<code>toString()</code><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">System.out.println(Civilite.MADAME); //MADAME</code></pre>
+</div>
+</div></p></li>
+<li><p>
+<code>valueOf()</code><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">Civilite civilite = Civilite.valueOf("MONSIEUR") ;</code></pre>
+</div>
+</div></p></li>
+<li><p>
+<code>values()</code><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">Civilite[] civilites = Civilite.values() ;</code></pre>
+</div>
+</div></p></li>
+<li><p>
+<code>ordinal()</code><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">Civilite civilite = Civilite.MONSIEUR ;&#x000A;System.out.println("Civilite : " + civilite + " [" + civilite.ordinal() + "]") ;&#x000A;// Civilite : MONSIEUR [1]</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+First number is 0.
+</td>
+</tr>
+</table>
+</div></p></li>
+<li><p>
+<code>compareTo()</code><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">System.out.println(Civilite.MADAME.compareTo(Civilite.MONSIEUR)) ;&#x000A;// -1</code></pre>
+</div>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_more_complex_example">
+<h2>More complex example</h2>
+<div class="listingblock">
+<div class="title">(source : <a class="bare" href="http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1">http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">public enum Langage {&#x000A;  //Objets directement construits&#x000A;  JAVA("Langage JAVA", "Eclipse"),&#x000A;  C ("Lanage C", "Code Block"),&#x000A;  CPlus ("Langage C++", "Visual studio"),&#x000A;  PHP ("Langage PHP", "PS Pad");&#x000A;&#x000A;  private String name = "";&#x000A;  private String editor = "";&#x000A;&#x000A;  //Constructeur&#x000A;  Langage(String name, String editor){&#x000A;    this.name = name;&#x000A;    this.editor = editor;&#x000A;  }&#x000A;&#x000A;  public void getEditor(){&#x000A;    System.out.println("Editeur : " + editor);&#x000A;  }&#x000A;&#x000A;  public String toString(){&#x000A;    return name;&#x000A;  }&#x000A;&#x000A;  public static void main(String args[]){&#x000A;    Langage l1 = Langage.JAVA;&#x000A;    Langage l2 = Langage.PHP;&#x000A;&#x000A;    l1.getEditor();&#x000A;    l2.getEditor();&#x000A;  }&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_questions">
+<h2>Questions?</h2>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-important"></i>
+</td>
+<td class="content">
+
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_time_for_a_quizz_2">
+<h2>Time for a quizz!</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="ulist">
+<ul>
+<li>Connect on: <a class="bare" href="http://www.socrative.com/">http://www.socrative.com/</a> (<strong>student login</strong>)</li>
+<li>Or download the student app <span class="image"><img alt="socrative2" src="images/socrative2.png" width="10%" /></span></li>
+<li>Choose room <strong>44918d67</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://www.socrative.com/">
+<img alt="socrative1" src="images/socrative1.png" width="50%" />
+</a>
+</div>
+</div>
+</section>
+<p aria-role="status" class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+</div>
+<script src="deck.js/jquery.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script src="deck.js/extensions/toc/deck.toc.js"></script>
+<div class="deck-toc"></div>
+<script type="text/javascript">
+  //<![CDATA[
+    (function($, deck, undefined) {
+      $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+      $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+    
+      $.extend(true, $[deck].defaults, {
+          countNested: false
+      });
+    
+      $.deck('.slide');
+    })(jQuery, 'deck');
+  //]]>
+</script>
+<style type="text/css">
+  /*<![CDATA[*/
+    .slide.canvas-image {
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+    -moz-box-align: start;
+    -webkit-box-align: start;
+    -ms-box-align: start;
+    box-align: start;
+    -moz-box-pack: start;
+    -webkit-box-pack: start;
+    -ms-box-pack: start;
+    box-pack: start;}
+    
+    .bottom-left {
+      left: 1%;
+      bottom: 20%; }
+    
+    .top-left {
+      left: 1%;
+      top: 20%; }
+    
+    .bottom-right {
+      right: 1%;
+      bottom: 20%; }
+    
+    .top-right {
+      right: 1%;
+      top: 20%; }
+    
+    .center-up {
+      right: 50%;
+      top: 1%;
+    }
+    
+    .center-down {
+      right: 50%;
+      bottom: 1%;
+    }
+    .canvas-image .canvas-caption p {
+      text-align: center;
+      padding-top: 0;
+      padding: 0;
+      -moz-transform: none;
+      -webkit-transform: none;
+      -o-transform: none;
+      -ms-transform: none;
+      transform: none;
+      display: inline;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-weight: bold;
+      font-size: 58px;
+      -webkit-box-shadow: 2px 2px 2px #000;
+      -moz-box-shadow: 2px 2px 2px #000;
+      box-shadow: 2px 2px 2px #000;
+      padding: 1rem;
+      color: white; }
+    kbd.keyseq { color: #555555; }
+    kbd:not(.keyseq) {
+      display: inline-block;
+      color: #222222;
+      font-size: 0.7em;
+      line-height: 1.4;
+      background-color: #F7F7F7;
+      border: 1px solid #ccc;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      margin: -0.15em 0.15em 0 0.15em;
+      padding: 0.2em 0.6em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    kbd kbd:first-child { margin-left: 0; }
+    kbd kbd:last-child { margin-right: 0; }
+  /*]]>*/
+</style>
+</body>
+</html>

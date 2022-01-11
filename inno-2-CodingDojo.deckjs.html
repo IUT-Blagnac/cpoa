@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=" http-equiv="Content-Type" />
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+<meta content="Asciidoctor 2.0.16" name="generator" />
+<meta content="J.-M. Bruel" name="author" />
+<title>Coding Dojo</title>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+.conum { display: inline-block; color: white !important; background-color: #222222; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 1.2em; height: 1.2em; font-size: 0.9em; font-weight: bold; line-height: 1.2; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -0.1em; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+.colist table td:first-of-type { padding-right: 0.25em; }
+</style>
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f8f8f8; }
+pre.pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #666666 } /* Operator */
+pre.pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #888888 } /* Generic.Output */
+pre.pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+pre.pygments .tok-m { color: #666666 } /* Literal.Number */
+pre.pygments .tok-s { color: #BA2121 } /* Literal.String */
+pre.pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #008000 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #880000 } /* Name.Constant */
+pre.pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #0000FF } /* Name.Function */
+pre.pygments .tok-nl { color: #A0A000 } /* Name.Label */
+pre.pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #19177C } /* Name.Variable */
+pre.pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<link href="deck.js/core/deck.core.css" rel="stylesheet" />
+<link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet" />
+<link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet" />
+<link href="deck.js/extensions/toc/deck.toc.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/style/swiss.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/transition/fade.css" media="screen" rel="stylesheet" />
+<link href="deck.js/core/print.css" media="print" rel="stylesheet" />
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="article">
+<div class="deck-container">
+<section class="slide" id="title-slide">
+<h1>Coding Dojo</h1>
+<span id="author">J.-M. Bruel</span>
+<br />
+<span id="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span>
+<br />
+<span id="revnumber">version 20.1 2022-01-11</span>
+</section>
+<section class="slide" id="_some_principles">
+<h2>Some principles&#8230;&#8203;</h2>
+<div class="ulist">
+<ul>
+<li class="slide">Only one computer (screen on board)</li>
+<li class="slide">Only one programmer at a time typing</li>
+<li class="slide">Collaborative work</li>
+<li class="slide">Time keeper</li>
+<li class="slide">No order</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_basic_tooling">
+<h2>Basic tooling</h2>
+<div class="ulist">
+<ul>
+<li class="slide">A java IDE (<a href="http://www.eclipse.org">eclipse</a> ?)</li>
+<li class="slide">A testing plu-in such as <a href="http://infinitest.github.io/">InfiniTest</a></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_useful_plugins_for_this_course">
+<h2>Useful plugins for this course</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/market.png">
+<img alt="market" src="images/market.png" width="30%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_useful_plugins_for_this_course_2">
+<h2>Useful plugins for this course</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/plugin.png">
+<img alt="plugin" src="images/plugin.png" width="50%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_useful_plugins_for_this_course_3">
+<h2>Useful plugins for this course</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/eclipse-plant.png">
+<img alt="eclipse plant" src="images/eclipse-plant.png" width="100%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_useful_plugins_for_this_course_4">
+<h2>Useful plugins for this course</h2>
+<div class="ulist">
+<ul>
+<li><a href="util/plantUmlDoclet.jar">doclet for javadoc</a></li>
+<li><a href="util/plantuml.jar">plantuml jar file</a></li>
+<li><a href="util/plantuml.bat">plantuml.bat file</a></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_lets_start">
+<h2>Let&#8217;s start</h2>
+<div class="olist arabic">
+<ol class="arabic">
+<li class="slide">
+Reuse the collaborative course example
+</li>
+<li class="slide">
+Start a new Java project
+</li>
+<li class="slide">
+Write issues as specs
+</li>
+<li class="slide">
+Start a first issue (branch etc.)
+</li>
+</ol>
+</div>
+</section>
+<section class="slide" id="_for_each_round">
+<h2>For each "round"</h2>
+<div class="paragraph"><p>Test-Driven Development</p></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li class="slide">
+Start an issue/branch
+</li>
+<li class="slide">
+Write a failing test
+</li>
+<li class="slide">
+Write the corresponding code
+</li>
+<li class="slide">
+Make the test pass
+</li>
+<li class="slide">
+Make sure javadoc is OK
+</li>
+<li class="slide">
+Merge
+</li>
+</ol>
+</div>
+</section>
+<section class="slide" id="_who_want_to_start">
+<h2>Who want to start ?</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="ineedyou" src="images/ineedyou.jpg" width="70%" />
+</div>
+</div>
+</section>
+<p aria-role="status" class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+</div>
+<script src="deck.js/jquery.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script src="deck.js/extensions/toc/deck.toc.js"></script>
+<div class="deck-toc"></div>
+<script type="text/javascript">
+  //<![CDATA[
+    (function($, deck, undefined) {
+      $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+      $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+    
+      $.extend(true, $[deck].defaults, {
+          countNested: false
+      });
+    
+      $.deck('.slide');
+    })(jQuery, 'deck');
+  //]]>
+</script>
+<style type="text/css">
+  /*<![CDATA[*/
+    .slide.canvas-image {
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+    -moz-box-align: start;
+    -webkit-box-align: start;
+    -ms-box-align: start;
+    box-align: start;
+    -moz-box-pack: start;
+    -webkit-box-pack: start;
+    -ms-box-pack: start;
+    box-pack: start;}
+    
+    .bottom-left {
+      left: 1%;
+      bottom: 20%; }
+    
+    .top-left {
+      left: 1%;
+      top: 20%; }
+    
+    .bottom-right {
+      right: 1%;
+      bottom: 20%; }
+    
+    .top-right {
+      right: 1%;
+      top: 20%; }
+    
+    .center-up {
+      right: 50%;
+      top: 1%;
+    }
+    
+    .center-down {
+      right: 50%;
+      bottom: 1%;
+    }
+    .canvas-image .canvas-caption p {
+      text-align: center;
+      padding-top: 0;
+      padding: 0;
+      -moz-transform: none;
+      -webkit-transform: none;
+      -o-transform: none;
+      -ms-transform: none;
+      transform: none;
+      display: inline;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-weight: bold;
+      font-size: 58px;
+      -webkit-box-shadow: 2px 2px 2px #000;
+      -moz-box-shadow: 2px 2px 2px #000;
+      box-shadow: 2px 2px 2px #000;
+      padding: 1rem;
+      color: white; }
+    kbd.keyseq { color: #555555; }
+    kbd:not(.keyseq) {
+      display: inline-block;
+      color: #222222;
+      font-size: 0.7em;
+      line-height: 1.4;
+      background-color: #F7F7F7;
+      border: 1px solid #ccc;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      margin: -0.15em 0.15em 0 0.15em;
+      padding: 0.2em 0.6em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    kbd kbd:first-child { margin-left: 0; }
+    kbd kbd:last-child { margin-right: 0; }
+  /*]]>*/
+</style>
+</body>
+</html>

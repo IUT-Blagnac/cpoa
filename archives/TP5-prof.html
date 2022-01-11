@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<title>CPOA - Support TP 5</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./pygments-manni.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>CPOA - Support TP 5</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">Version corrigée <span class="image"><img src="data:image/png;base64,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" alt="solution"></span></div>
+<div class="paragraph">
+<p>Cette version comporte des indications pour les
+réponses aux exercices.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table id="cartouche" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 90.9091%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PreReq</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Je sais programmer en Java.</p>
+</li>
+<li>
+<p>J&#8217;ai compris le patron Observateur.</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Le but de ce TP est de manipuler le patron Observateur.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Durée</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>2</strong> TP de 1,5h.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code_de_départ"><a class="link" href="#_code_de_départ">1. Code de départ</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">Recommandation</div>
+<div class="paragraph">
+<p>Cet exercice est tiré d&#8217;ici : <a href="http://csserver.ucd.ie/~meloc/DesignPatternJavaExercises/Observer/Observer.htm" class="bare">http://csserver.ucd.ie/~meloc/DesignPatternJavaExercises/Observer/Observer.htm</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Récupérer l&#8217;archive de projet Eclipse <a href="ObserverInitialCode.zip">ObserverInitialCode.zip</a>. L&#8217;importer dans un workspace Eclipse.</p>
+</li>
+<li>
+<p>Lire rapidement les et comparer les applications <code>observer.nonpattern</code> et <code>observer.pattern</code>.</p>
+</li>
+<li>
+<p>Lancer l&#8217;application (<code>Main.main()</code>) et observer ce quelle affiche (un tableau de valeurs numériques).</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercices"><a class="link" href="#_exercices">2. Exercices</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_reverse_engineering"><a class="link" href="#_reverse_engineering">2.1. Reverse Engineering</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Obtenez et comparez les 2 diagrammes de classes des deux</p>
+</li>
+<li>
+<p>Pourquoi <code>CourseController</code> est-elle aussi un <em>Observer</em> ?</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_evolution_du_code_observer_nonpattern"><a class="link" href="#_evolution_du_code_observer_nonpattern">2.2. Evolution du code <code>observer.nonpattern</code></a></h3>
+<div class="paragraph">
+<p>Etendre le code <code>observer.nonpattern</code> pour présenter le vecteur de <code>CourseRecords</code> comme un camembert (<em>pie chart</em>), en plus de la forme actuelle (<em>bar chart</em>).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Allez à l&#8217;essentiel, le but n&#8217;est pas d&#8217;avoir un super code, mais de vous confronter à la difficulté d&#8217;évolution.
+Pour plus de détails sur les camembers en Swing, cf. <a href="#section finale">[section finale]</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_evolution_du_code_observer_pattern"><a class="link" href="#_evolution_du_code_observer_pattern">2.3. Evolution du code <code>observer.pattern</code></a></h3>
+<div class="paragraph">
+<p>Faites la même chose avec le code <code>observer.pattern</code></p>
+</div>
+<div class="paragraph">
+<p>Que pensez-vous de la différence (en terme d&#8217;effort de codeage et de résultat)?</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_push_vs_pull"><a class="link" href="#_push_vs_pull">2.4. Push vs. Pull</a></h3>
+<div class="paragraph">
+<p>Vous avez pu observer que la version du patron <em>Observer</em> utilisait un modèle <em>pull</em> (<code>notifyObservers()</code> n&#8217;envoie aucune information).</p>
+</div>
+<div class="paragraph">
+<p>Réalisez une version <code>push</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inconvénent_du_push"><a class="link" href="#_inconvénent_du_push">2.5. Inconvénent du <em>push</em></a></h3>
+<div class="paragraph">
+<p>Dans cette nouvelle version, si les programmes ont plus de 1000 cours, et si l&#8217;un seulement évolue, <code>notifyObservers()</code>
+pousse toutes les informations sur tous les observateurs!</p>
+</div>
+<div class="paragraph">
+<p>Améliorez votre modèle <em>push</em> pour qu&#8217;il ne pousse que les données pertinentes.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Pour cet exercice, vous pourrez ignorer les changement de <code>New Course</code> et continuer à utiliser le modèle <em>pull</em> pour ce type de changement.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sélection_des_updates"><a class="link" href="#_sélection_des_updates">2.6. Sélection des <em>updates</em></a></h3>
+<div class="paragraph">
+<p>Vous aurez remarqué que <code>CourseController</code> n&#8217;est intéressé que par les changements de <code>New Course</code>, alors que <code>BarChart</code> et <code>PieChart</code> ont besoin de connaitre les changements de valeurs de <code>JSlider</code>.
+Etendre l&#8217;interface d&#8217;inscription de <code>Observable</code> (la méthode <code>attach</code>) pour que <code>CourseController</code> ne reçoivent plus les mises à jour des <code>updates</code> qui ne l&#8217;intéressent pas.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_draw_a_pie_chart"><a class="link" href="#_how_to_draw_a_pie_chart">How to draw a pie chart ?</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here is a code segment that draws a pie chart given a Graphics object and
+an Array containing Integers to be represented in the pie chart.
+It is drawn at location (xOffset, yOffset) and with the radius specified to be of size 100.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">paint</span><span class="tok-o">(</span><span class="tok-n">Graphics</span> <span class="tok-n">g</span><span class="tok-o">,</span> <span class="tok-n">Integer</span><span class="tok-o">[]</span> <span class="tok-n">data</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+	<span class="tok-kd">super</span><span class="tok-o">.</span><span class="tok-na">paint</span><span class="tok-o">(</span><span class="tok-n">g</span><span class="tok-o">);</span>
+	<span class="tok-kt">int</span> <span class="tok-n">radius</span> <span class="tok-o">=</span> <span class="tok-mi">100</span><span class="tok-o">;</span>
+
+	<span class="tok-c1">//first compute the total number of students</span>
+	<span class="tok-kt">double</span> <span class="tok-n">total</span> <span class="tok-o">=</span> <span class="tok-mf">0.0</span><span class="tok-o">;</span>
+	<span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">data</span><span class="tok-o">.</span><span class="tok-na">length</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
+		<span class="tok-n">total</span> <span class="tok-o">+=</span> <span class="tok-n">data</span><span class="tok-o">[</span><span class="tok-n">i</span><span class="tok-o">];</span>
+	<span class="tok-o">}</span>
+	<span class="tok-c1">//if total == 0 nothing to draw</span>
+	<span class="tok-k">if</span> <span class="tok-o">(</span><span class="tok-n">total</span> <span class="tok-o">!=</span> <span class="tok-mi">0</span><span class="tok-o">)</span> <span class="tok-o">{</span>
+		<span class="tok-kt">double</span> <span class="tok-n">startAngle</span> <span class="tok-o">=</span> <span class="tok-mf">0.0</span><span class="tok-o">;</span>
+		<span class="tok-k">for</span> <span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-o">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">data</span><span class="tok-o">.</span><span class="tok-na">length</span><span class="tok-o">;</span> <span class="tok-n">i</span><span class="tok-o">++)</span> <span class="tok-o">{</span>
+			<span class="tok-kt">double</span> <span class="tok-n">ratio</span> <span class="tok-o">=</span> <span class="tok-o">(</span><span class="tok-n">data</span><span class="tok-o">[</span><span class="tok-n">i</span><span class="tok-o">]</span> <span class="tok-o">/</span> <span class="tok-n">total</span><span class="tok-o">)</span> <span class="tok-o">*</span> <span class="tok-mf">360.0</span><span class="tok-o">;</span>
+			<span class="tok-c1">//draw the arc</span>
+			<span class="tok-n">g</span><span class="tok-o">.</span><span class="tok-na">setColor</span><span class="tok-o">(</span><span class="tok-n">LayoutConstants</span><span class="tok-o">.</span><span class="tok-na">subjectColors</span><span class="tok-o">[</span><span class="tok-n">i</span><span class="tok-o">%</span><span class="tok-n">LayoutConstants</span><span class="tok-o">.</span><span class="tok-na">subjectColors</span><span class="tok-o">.</span><span class="tok-na">length</span><span class="tok-o">]);</span>
+			<span class="tok-n">g</span><span class="tok-o">.</span><span class="tok-na">fillArc</span><span class="tok-o">(</span><span class="tok-n">LayoutConstants</span><span class="tok-o">.</span><span class="tok-na">xOffset</span><span class="tok-o">,</span> <span class="tok-n">LayoutConstants</span><span class="tok-o">.</span><span class="tok-na">yOffset</span> <span class="tok-o">+</span> <span class="tok-mi">300</span><span class="tok-o">,</span> <span class="tok-mi">2</span> <span class="tok-o">*</span> <span class="tok-n">radius</span><span class="tok-o">,</span> <span class="tok-mi">2</span> <span class="tok-o">*</span> <span class="tok-n">radius</span><span class="tok-o">,</span> <span class="tok-o">(</span><span class="tok-kt">int</span><span class="tok-o">)</span> <span class="tok-n">startAngle</span><span class="tok-o">,</span> <span class="tok-o">(</span><span class="tok-kt">int</span><span class="tok-o">)</span> <span class="tok-n">ratio</span><span class="tok-o">);</span>
+			<span class="tok-n">startAngle</span> <span class="tok-o">+=</span> <span class="tok-n">ratio</span><span class="tok-o">;</span>
+		<span class="tok-o">}</span>
+	<span class="tok-o">}</span>
+<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-12-09 21:16:53 +0100
+</div>
+</div>
+</body>
+</html>

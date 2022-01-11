@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta content="text/html; charset=" http-equiv="Content-Type" />
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+<meta content="Asciidoctor 1.5.8" name="generator" />
+<meta content="Jean-Michel Bruel" name="author" />
+<title>CPOA : les premiers patrons</title>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+.conum { display: inline-block; color: white !important; background-color: #222222; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 1.2em; height: 1.2em; font-size: 0.9em; font-weight: bold; line-height: 1.2; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -0.1em; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+.colist table td:first-of-type { padding-right: 0.25em; }
+</style>
+<style>
+.listingblock .pygments .hll { background-color: #ffffcc }
+.listingblock .pygments, .listingblock .pygments code { background: #f8f8f8; }
+.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-o { color: #666666 } /* Operator */
+.listingblock .pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+.listingblock .pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<link href="deck.js/core/deck.core.css" rel="stylesheet" />
+<link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet" />
+<link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/style/swiss.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/transition/fade.css" media="screen" rel="stylesheet" />
+<link href="deck.js/core/print.css" media="print" rel="stylesheet" />
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="article">
+<div class="deck-container">
+<section class="slide" id="title-slide">
+<h1>CPOA : les premiers <strong>patrons</strong></h1>
+<span id="author">Jean-Michel Bruel</span>
+<br />
+<span id="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span>
+<br />
+<span id="revnumber">version 1.7,</span>
+<span id="revdate">2018-11-12 (started on 2015-10-05)</span>
+</section>
+<section class="slide topic" id="_suivre_ces_slides_sur_internet">
+<h2>Suivre ces slides sur Internet&#8230;&#8203;</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="qrcode.png">
+<img alt="http://bit.ly/jmb-cpoa" src="images/qrcode.png" width="40%" />
+</a>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>http://bit.ly/jmb-cpoa&#x000A;http://iut-blagnac.github.io/cpoa/</pre>
+</div>
+</div>
+</section>
+<section class="slide topic" id="_plan">
+<h2>Plan</h2>
+<div class="ulist incremental">
+<ul>
+<li>Introduction</li>
+<li>Rappels Java</li>
+<li>Base des patrons</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_introduction">
+<h2>Introduction</h2>
+<div class="paragraph"><p>Ce cours porte sur la <strong>C</strong>onception et <strong>P</strong>rogrammation <strong>O</strong>bjet <strong>A</strong>vancée.</p></div>
+</section>
+<section class="slide" id="_concepts_objets">
+<h2>Concepts objets</h2>
+<div class="paragraph"><p>Vous avez appris (cf. M2103 et M2104) un certain nombre
+de <strong>concepts objets</strong> :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Abstraction</li>
+<li class="slide">Encapsulation</li>
+<li class="slide">Héritage</li>
+<li class="slide">Polymorphisme</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_abstraction">
+<h2>Abstraction</h2>
+<div class="paragraph"><p>Définition :</p></div>
+</section>
+<section class="slide" id="_abstraction_2">
+<h2>Abstraction</h2>
+<div class="paragraph"><p>Définition (restrictive) :</p></div>
+<div class="quoteblock">
+<blockquote>
+Une classe est une <strong>abstraction</strong> des
+caractéristiques communes d&#8217;un ensemble d&#8217;objets.
+</blockquote>
+</div>
+</section>
+<section class="slide" id="_encapsulation">
+<h2>Encapsulation</h2>
+<div class="paragraph"><p>Définition :</p></div>
+</section>
+<section class="slide" id="_encapsulation_2">
+<h2>Encapsulation</h2>
+<div class="paragraph"><p>Définition (restrictive) :</p></div>
+<div class="quoteblock">
+<blockquote>
+Dans la description d&#8217;un objet, le but de l'<strong>encapsulation</strong> est de masquer
+les attributs et les méthodes, c’est-à-dire, la manière dont est réalisé le
+comportement de l&#8217;objet.
+</blockquote>
+</div>
+</section>
+<section class="slide" id="_héritage">
+<h2>Héritage</h2>
+<div class="paragraph"><p>Définition :</p></div>
+</section>
+<section class="slide" id="_héritage_2">
+<h2>Héritage</h2>
+<div class="paragraph"><p>Définition (simpliste) :</p></div>
+<div class="quoteblock">
+<blockquote>
+L&#8217;héritage est la transmission de caractéristiques à ses descendants.
+</blockquote>
+</div>
+<div class="paragraph"><p>La classe qui hérite dispose des méthodes et attributs de niveau <code>public</code> et
+<code>protected</code> de sa classe mère.</p></div>
+</section>
+<section class="slide" id="_polymorphisme">
+<h2>Polymorphisme</h2>
+<div class="paragraph"><p>Le nom de polymorphisme vient du grec :</p></div>
+</section>
+<section class="slide" id="_polymorphisme_2">
+<h2>Polymorphisme</h2>
+<div class="paragraph"><p>Le nom de polymorphisme vient du grec :</p></div>
+<div class="quoteblock">
+<blockquote>
+qui peut prendre plusieurs formes
+</blockquote>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-important"></i>
+</td>
+<td class="content">
+<div class="paragraph"><p>L&#8217;héritage concerne les classes, le polymorphisme concerne les objets.</p></div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_polymorphisme_suite">
+<h2>Polymorphisme (suite)</h2>
+<div class="paragraph"><p>On distingue généralement trois types de polymorphisme :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Le polymorphisme <strong>ad hoc</strong> (également surcharge ou en anglais overloading)</li>
+<li class="slide">Le polymorphisme <strong>paramétrique</strong> (également généricité ou en anglais template)</li>
+<li class="slide">Le polymorphisme <strong>d&#8217;héritage</strong> (également redéfinition, spécialisation ou en anglais overriding)</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_polymorphisme_ad_hoc">
+<h2>Polymorphisme ad hoc</h2>
+<div class="ulist">
+<ul>
+<li>Appelé aussi <strong>surcharge</strong>.</li>
+<li>Permet d&#8217;avoir des fonctions de même nom dans des classes sans aucun rapport entre elles.</li>
+<li>Permet de définir des opérateurs d&#8217;utilisation différente en fonction des paramètres.</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="C language-C"><span></span>int method(int,int);&#x000A;int method(int);&#x000A;int method(float,float);</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_le_polymorphisme_paramétrique">
+<h2>Le polymorphisme paramétrique</h2>
+<div class="paragraph"><p>Appelé aussi <strong>généricité</strong>.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="Java language-Java"><span></span>interface Iterator&lt;E&gt; {&#x000A;    boolean hasNext();&#x000A;    E next();&#x000A;}&#x000A;&#x000A;public &lt;T&gt; static void copy(Collection&lt;? extends T&gt; source, Collection&lt;? super T&gt; dest) {&#x000A;    for (T t : source) {&#x000A;         dest.add(t);&#x000A;    }&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_le_polymorphisme_dhéritage">
+<h2>Le polymorphisme d&#8217;héritage</h2>
+<div class="ulist">
+<ul>
+<li>Appelé aussi <strong>spécialisation</strong> (ou redéfinition).</li>
+<li>Lié à la redéfinition des méthodes héritées.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_objectifs_de_la_conception_objet">
+<h2>Objectifs de la conception objet</h2>
+<div class="paragraph"><p>On essaye d&#8217;éviter trois problèmes principaux du développement :</p></div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">La rigidité</dt>
+<dd>
+<p>Anticiper les évolutions susceptibles d&#8217;impacter l&#8217;application.</p>
+</dd>
+<dt class="hdlist1">La fragilité</dt>
+<dd>
+<p>Eviter les erreurs provoquées par la modification d&#8217;une partie du code.</p>
+</dd>
+<dt class="hdlist1">L&#8217;immobilité</dt>
+<dd>
+<p>Rendre moins difficile l&#8217;extraction d&#8217;une partie du code.</p>
+</dd>
+</dl>
+</div>
+</section>
+<section class="slide" id="_bonnes_pratiques_et_patrons">
+<h2>Bonnes pratiques et patrons</h2>
+<div class="paragraph"><p>Pour répondre aux problèmes ci-dessus, on va s&#8217;attaquer à diminuer les
+<strong>dépendances</strong> et éviter l'"effet spaghetti".</p></div>
+<div class="paragraph"><p>Les qualités recherchées sont :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Robustesse : les changements n&#8217;introduisent pas de régressions.</li>
+<li class="slide">Extensibilité : il est facile d&#8217;ajouter de nouvelles fonctionnalités.</li>
+<li class="slide">Réutilisabilité : il est possible de réutiliser certaines parties de code pour construire d&#8217;autres applications.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_bonnes_pratiques_et_patrons_suite">
+<h2>Bonnes pratiques et patrons (suite)</h2>
+<div class="paragraph"><p>Nous allons apprendre des <strong>bonnes pratiques</strong> :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Identifier les aspects qui varient et les séparer des aspects constants</li>
+<li class="slide">Programmer une interface, non une implémentation</li>
+<li class="slide">Préférer la composition à l&#8217;héritage</li>
+<li class="slide">Les classes doivent être ouvertes à l&#8217;extension, mais fermées à la modification</li>
+<li class="slide">Dépendez d&#8217;abstractions. Ne dépendez pas de classes concrètes (inversion des dépendances)</li>
+<li class="slide">Ne parlez pas aux inconnus</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_bonnes_pratiques_et_patrons_suite_2">
+<h2>Bonnes pratiques et patrons (suite)</h2>
+<div class="paragraph"><p>L&#8217;étape suivante consiste à apprendre les bonnes solutions de
+conception, ce qu&#8217;on appelle les <strong>patrons de conception</strong>
+(ou <em>design patterns</em> en anglais).</p></div>
+</section>
+<section class="slide" id="_organisation_du_cours">
+<h2>Organisation du cours</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="paragraph"><p>Rappel du rythme : 1 cours, 1 TD et 2 TPs par semaine. Pendant 8 semaines.</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li class="slide">La première semaine est consacrée aux principes généraux des patrons
+de conception, en partant d&#8217;un exemple (cours en fin de semaine).</li>
+<li class="slide"><p>
+Les 5 ou 6 suivantes sont consacrées à l&#8217;étude de certains patrons classiques.
+Mise en pratique sur des exercices en TP.<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="paragraph"><p>Le cours est inversé par rapport aux habitudes :
+Conception et étude d&#8217;un ou plusieurs patrons semaine <code>N</code>;
+mise en oeuvre en TP semaine <code>N+1</code>; puis
+cours en amphi (détails, discussions) en semaine <code>N+2</code>.</p></div>
+</td>
+</tr>
+</table>
+</div></p></li>
+<li class="slide">Les 2 ou 3 dernières semaines, les étudiants sont en mode projet pour faire du
+<em>refactoring</em> d&#8217;applications réelles (conception aidée en TD sur
+les modèles <a href="http://www.uml.org/">UML&#8482;</a>, mise en oeuvre en TP).</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_organisation_suite">
+<h2>Organisation (suite)</h2>
+<div class="paragraph"><p>Voici une proposition de déroulement des semaines :</p></div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Semaine 1</dt>
+<dd>
+<p>SuperCanard, le grand classique, <a href="#strategy"><em>Strategy</em></a></p>
+</dd>
+<dt class="hdlist1">Semaine 2</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li><a href="#Singleton">[Singleton]</a></li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Semaine 3</dt>
+<dd>
+<p>Patrons <a href="#Fabrique">[Fabrique]</a>, <a href="#Proxy">[Proxy]</a>, <a href="#Etat">[Etat]</a></p>
+</dd>
+<dt class="hdlist1">Semaine 4</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li><p>
+<a href="#Observateur">[Observateur]</a><div class="ulist">
+<ul>
+<li>version intuitive (2 interfaces)</li>
+<li>version Java (classe <code>Observable</code>)</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Semaine 5</dt>
+<dd>
+<p>L&#8217;exemple de Meyer : menus en objet</p>
+</dd>
+<dt class="hdlist1">Semaine 6</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>Patrons Décorateur, Façade, Visiteur</li>
+<li>MVC avec l&#8217;exemple <code>JTable</code> de <a href="https://www.java.com/fr/">Java</a></li>
+<li>Patrons Chaîne de responsabilité (juste en cours)</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Semaines 7 et 8</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li><p>
+Quelques idées de projet final :<div class="ulist">
+<ul>
+<li>Refactorer un code généré par <a href="http://cruise.eecs.uottawa.ca/umple/">Umple</a>.</li>
+<li>Refactorer le code de MPA (mais pas le leur, celui d&#8217;un autre groupe)</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</section>
+<section class="slide" id="_evaluation_et_notation">
+<h2>Evaluation et notation</h2>
+<div class="paragraph"><p>Comme prévu par le <a href="http://webetud2.iut-blagnac.fr/pluginfile.php/1653/mod_resource/content/4/Contr%C3%B4les-2014-2015_S3.pdf">planning des contrôles</a>,
+les étudiants auront :</p></div>
+<div class="ulist">
+<ul>
+<li>une note de projet (TPs + projet final) &#8658; coef. 1</li>
+<li>une note d&#8217;examen final (semaine 5) &#8658; coef. 2</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_rappels_sur_des_éléments_java_importants">
+<h2><strong>Rappels</strong> sur des éléments Java importants</h2>
+
+</section>
+<section class="slide" id="_importance_du_typage">
+<h2>Importance du typage</h2>
+
+</section>
+<section class="slide" id="_différents_types_de_typage">
+<h2>Différents types de typage</h2>
+<div class="paragraph"><p>Le fait d&#8217;attribuer un type (une classe) à une variable (un objet)
+peut se faire de plusieurs façons :</p></div>
+<div class="ulist">
+<ul>
+<li>statique</li>
+<li>dynamique</li>
+<li><em>duck typing</em></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_typage_statique">
+<h2>Typage statique</h2>
+<div class="paragraph"><p>On parle de <strong>typage statique</strong> quand la majorité des vérifications de type
+sont effectuées au moment de la <strong>compilation</strong>.</p></div>
+<div class="listingblock">
+<div class="title">Exemple de typage statique</div>
+<div class="content">
+<pre class="pygments highlight"><code class="C language-C"><span></span>int i = 0;  // cette déclaration indique explicitement que&#x000A;            // la variable i est de type entier</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_typage_dynamique">
+<h2>Typage dynamique</h2>
+<div class="paragraph"><p>Le <strong>typage dynamique</strong> consiste à laisser l&#8217;ordinateur réaliser
+l&#8217;opération de typage <em>à la volée</em>, <strong>lors de l&#8217;exécution du code</strong>.</p></div>
+</section>
+<section class="slide" id="_typage_dynamique_exemple">
+<h2>Typage dynamique (exemple)</h2>
+<div class="listingblock">
+<div class="title">Exemple de typage dynamique</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-cm">/**</span>&#x000A;<span class="tok-cm"> * @author André Peninou</span>&#x000A;<span class="tok-cm"> */</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Type</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kt">void</span> <span class="tok-nf">m</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span> <span class="tok-o">(</span><span class="tok-s">&quot;Type&quot;</span><span class="tok-o">);</span>&#x000A;    <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">SousType</span> <span class="tok-kd">extends</span> <span class="tok-n">Type</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kt">void</span> <span class="tok-nf">m</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span> <span class="tok-o">(</span><span class="tok-s">&quot;SousType&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;  <span class="tok-kt">void</span> <span class="tok-nf">autreM</span><span class="tok-o">(){</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span> <span class="tok-o">(</span><span class="tok-s">&quot;Spécifique SousType&quot;</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span>&#x000A;<span class="tok-o">...</span>&#x000A;    <span class="tok-n">Type</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Type</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">m</span><span class="tok-o">();</span> <span class="tok-c1">// &quot;Type&quot;</span>&#x000A;&#x000A;    <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">SousType</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">m</span><span class="tok-o">();</span> <span class="tok-c1">// &quot;SousType&quot;</span>&#x000A;    <span class="tok-c1">// Statique : a est un Type (à la compil)</span>&#x000A;    <span class="tok-c1">// Dynamique : a est un SousType au runtime.</span>&#x000A;&#x000A;    <span class="tok-c1">// D&#39;où :</span>&#x000A;    <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">SousType</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">autreM</span><span class="tok-o">();</span>&#x000A;    <span class="tok-c1">// NOK car type statique == A =&gt; autreM() n&#39;existe pas à la compilation</span>&#x000A;<span class="tok-o">...</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_duck_typing">
+<h2><em>Duck typing</em></h2>
+<div class="paragraph"><p>Style de <strong>typage dynamique</strong> où la <strong>sémantique</strong> d&#8217;un objet (c&#8217;est-à-dire son type)
+est déterminée par l&#8217;ensemble de ses <strong>méthodes</strong> et de ses <strong>attributs</strong>,
+et non par un type défini et nommé explicitement par le programmeur.</p></div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="paragraph"><p>L&#8217;origine de cette expression est liée à cette citation :</p></div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Si je vois un animal qui vole comme un canard, cancane comme un canard,
+et nage comme un canard, alors j&#8217;appelle cet oiseau un canard.</p></div>
+<div class="attribution">
+<cite>James Whitcomb Riley</cite>
+</div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_duck_typing_exemple">
+<h2><em>Duck typing</em> (exemple)</h2>
+<div class="listingblock">
+<div class="title">Exemple de <em>duck typing</em> en Ruby</div>
+<div class="content">
+<pre class="pygments highlight"><code class="ruby language-ruby"><span></span><span class="tok-k">def</span> <span class="tok-nf">calcule</span><span class="tok-p">(</span><span class="tok-n">a</span><span class="tok-p">,</span> <span class="tok-n">b</span><span class="tok-p">,</span> <span class="tok-n">c</span><span class="tok-p">)</span>&#x000A;  <span class="tok-k">return</span> <span class="tok-n">a</span><span class="tok-o">*</span><span class="tok-n">b</span><span class="tok-o">+</span><span class="tok-n">c</span>&#x000A;<span class="tok-k">end</span>&#x000A;&#x000A;<span class="tok-vg">$a</span> <span class="tok-o">=</span> <span class="tok-n">calcule</span><span class="tok-p">(</span><span class="tok-mi">6</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">2</span><span class="tok-p">)</span>&#x000A;<span class="tok-vg">$b</span> <span class="tok-o">=</span> <span class="tok-n">calcule</span><span class="tok-p">(</span><span class="tok-s1">&#39;6&#39;</span><span class="tok-p">,</span> <span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-s1">&#39;, the number of the beast&#39;</span><span class="tok-p">)</span>&#x000A;&#x000A;<span class="tok-nb">puts</span> <span class="tok-vg">$a</span><span class="tok-o">.</span><span class="tok-n">to_s</span>&#x000A;<span class="tok-nb">puts</span> <span class="tok-vg">$b</span><span class="tok-o">.</span><span class="tok-n">to_s</span></code></pre>
+</div>
+</div>
+<div class="paragraph"><p>Ce qui donne :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre>20&#x000A;666, the number of the beast</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-tip"></i>
+</td>
+<td class="content">
+Pour aller plus loin : <a class="bare" href="http://fr.wikipedia.org/wiki/Duck_typing">http://fr.wikipedia.org/wiki/Duck_typing</a>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_importance_de_la_visibilité">
+<h2>Importance de la visibilité</h2>
+<div class="paragraph"><p>Dès que l&#8217;on commence à avoir une application conséquente, l&#8217;organisation
+en <em>package</em> devient obligatoire. Revenons donc sur les questions de
+<strong>visibilité</strong> des propriétés et méthodes, qui seront importants dans la plupart
+des aspects de ce module.</p></div>
+<div class="paragraph"><p>Si un champ d&#8217;une classe <code>A</code> :</p></div>
+<div class="ulist">
+<ul>
+<li>est <em>private</em>, il est accessible uniquement depuis sa propre classe ;</li>
+<li>a la visibilité <em>package</em> (visibilité par défaut, pas de mot-clef), il est accessible de partout dans
+le paquetage de <code>A</code> mais de nulle part ailleurs ;</li>
+<li>est <em>protected</em>, il est accessible de partout dans le paquetage de <code>A</code> et,
+si <code>A</code> est publique, grosso modo dans les classes héritant de <code>A</code> dans d&#8217;autres
+paquetages ;</li>
+<li>est <em>public</em>, il est accessible de partout dans le paquetage de <code>A</code> et,
+si <code>A</code> est publique, de partout ailleurs.</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Ci-dessus, les niveaux de visibilité sont rangés par visibilité croissante.
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_importance_de_la_visibilité_exemple">
+<h2>Importance de la visibilité (exemple)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">UN</span><span class="tok-o">;</span>&#x000A;<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">A</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">protected</span> <span class="tok-n">String</span> <span class="tok-n">attrprotected</span><span class="tok-o">;</span>&#x000A;  <span class="tok-n">String</span> <span class="tok-n">attrfriend</span><span class="tok-o">;</span> <span class="tok-c1">// friend</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph"><p>Si on définit une deuxième classe dans le même <em>package</em> :</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">UN</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-o">...</span>&#x000A;    <span class="tok-o">{</span>&#x000A;        <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">A</span> <span class="tok-o">();</span>&#x000A;        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : même si bizarre</span>&#x000A;        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// OK : visible package</span>&#x000A;    <span class="tok-o">}</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;<span class="tok-kn">package</span> <span class="tok-nn">UN</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-o">...</span>&#x000A;    <span class="tok-o">{</span>&#x000A;        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal</span>&#x000A;        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// OK : visible package</span>&#x000A;    <span class="tok-o">}</span>&#x000A;  <span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_importance_de_la_visibilité_suite_de_lexemple">
+<h2>Importance de la visibilité (suite de l&#8217;exemple)</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">DEUX</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">class</span> <span class="tok-nc">B</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-o">...</span>&#x000A;    <span class="tok-o">{</span>&#x000A;        <span class="tok-n">A</span> <span class="tok-n">a</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">A</span> <span class="tok-o">();</span>&#x000A;        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// NON OK : normal</span>&#x000A;        <span class="tok-n">a</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span>  <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>&#x000A;    <span class="tok-o">}</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">class</span> <span class="tok-nc">C</span> <span class="tok-kd">extends</span> <span class="tok-n">A</span> <span class="tok-o">{</span>&#x000A;      <span class="tok-o">...</span>&#x000A;    <span class="tok-o">{</span>&#x000A;        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrprotected</span><span class="tok-c1">// OK : normal car protected et héritage</span>&#x000A;        <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">attrfriend</span> <span class="tok-c1">// NON OK : normal, proche de &quot;private&quot;</span>&#x000A;    <span class="tok-o">}</span>&#x000A;  <span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_alors_private_ou_protected">
+<h2>Alors private ou protected ?</h2>
+<div class="paragraph"><p>À la question <code>private</code> ou <code>protected</code> ? Quel est le mieux pour les attributs ?</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">C&#8217;est une question de <strong>style de programmation</strong> !</li>
+<li class="slide">Puristes (cf. <a href="#Meyer">[Meyer]</a>) &#8658; <code>private</code></li>
+<li class="slide">Parfois utile : cf. <a href="#strategy"><em>Strategy</em></a>, évite les getters/setters</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_visibilité_et_uml">
+<h2>Visibilité et UML</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Il n&#8217;y a pas de visibilité par défaut en <a href="http://www.uml.org/">UML&#8482;</a>.
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_retour_sur_les_membres_static">
+<h2>Retour sur les Membres <code>static</code></h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">class</span> <span class="tok-nc">VariableDemo</span>&#x000A;<span class="tok-o">{</span>&#x000A;  <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">count</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">increment</span><span class="tok-o">()</span>&#x000A;  <span class="tok-o">{</span>&#x000A;    <span class="tok-n">count</span><span class="tok-o">++;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[])</span>&#x000A;  <span class="tok-o">{</span>&#x000A;    <span class="tok-n">VariableDemo</span> <span class="tok-n">obj1</span><span class="tok-o">=</span><span class="tok-k">new</span> <span class="tok-n">VariableDemo</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">VariableDemo</span> <span class="tok-n">obj2</span><span class="tok-o">=</span><span class="tok-k">new</span> <span class="tok-n">VariableDemo</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">obj1</span><span class="tok-o">.</span><span class="tok-na">increment</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">obj2</span><span class="tok-o">.</span><span class="tok-na">increment</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Obj1: count is=&quot;</span><span class="tok-o">+</span><span class="tok-n">obj1</span><span class="tok-o">.</span><span class="tok-na">count</span><span class="tok-o">);</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Obj2: count is=&quot;</span><span class="tok-o">+</span><span class="tok-n">obj2</span><span class="tok-o">.</span><span class="tok-na">count</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph"><p>Output:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre>Obj1: count is=2&#x000A;Obj2: count is=2</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_membres_static_suite">
+<h2>Membres <code>static</code> (suite)</h2>
+<div class="paragraph"><p>Comment ça marche :</p></div>
+<div class="ulist">
+<ul>
+<li class="slide">Les variables <code>static</code> sont initialisées au chargement de la classe.</li>
+<li class="slide">Les variables <code>static</code> d&#8217;une classe sont
+initialisées avant que la moindre instance ne soit créée.</li>
+<li class="slide">Les variables <code>static</code> sont initialisées avant que la moindre méthode <code>static</code> ne s&#8217;exécute.</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_méthodes_static">
+<h2>Méthodes <code>static</code></h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kn">import</span> <span class="tok-nn">java.lang.Math</span><span class="tok-o">;</span>&#x000A;&#x000A;<span class="tok-kd">class</span> <span class="tok-nc">Another</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-kt">int</span> <span class="tok-n">result</span><span class="tok-o">;</span>&#x000A;&#x000A;    <span class="tok-n">result</span> <span class="tok-o">=</span> <span class="tok-n">Math</span><span class="tok-o">.</span><span class="tok-na">min</span><span class="tok-o">(</span><span class="tok-mi">10</span><span class="tok-o">,</span> <span class="tok-mi">20</span><span class="tok-o">);</span> <span class="tok-c1">//calling static method min by writing class name</span>&#x000A;&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">result</span><span class="tok-o">);</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Math</span><span class="tok-o">.</span><span class="tok-na">max</span><span class="tok-o">(</span><span class="tok-mi">100</span><span class="tok-o">,</span> <span class="tok-mi">200</span><span class="tok-o">));</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_méthodes_static_et_appel_aux_méthodes_non_statiques">
+<h2>Méthodes <code>static</code> et appel aux méthodes non-statiques</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Main</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-o">)</span> <span class="tok-o">{</span>&#x000A;        <span class="tok-n">Main</span> <span class="tok-n">p</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Main</span><span class="tok-o">();</span>&#x000A;        <span class="tok-n">k</span><span class="tok-o">();</span>&#x000A;    <span class="tok-o">}</span>&#x000A;&#x000A;    <span class="tok-kd">protected</span> <span class="tok-nf">Main</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;        <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">print</span><span class="tok-o">(</span><span class="tok-s">&quot;1234&quot;</span><span class="tok-o">);</span>&#x000A;    <span class="tok-o">}</span>&#x000A;&#x000A;    <span class="tok-kd">protected</span> <span class="tok-kt">void</span> <span class="tok-nf">k</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;    <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph"><p>À l&#8217;exécution :</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">Main</span> <span class="tok-n">p</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Main</span><span class="tok-o">();</span>  <span class="tok-c1">// =&gt; prints 1234</span>&#x000A;<span class="tok-n">k</span><span class="tok-o">()</span>                   <span class="tok-c1">// =&gt; raises error</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_méthodes_static_et_appel_aux_méthodes_non_statiques_suite">
+<h2>Méthodes <code>static</code> et appel aux méthodes non-statiques (suite)</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Static method cannot call non-static methods</p></div>
+</blockquote>
+</div>
+<div class="paragraph"><p>Bien sûr que si, sauf qu&#8217;il faut que cette dernière <strong>porte sur une instance</strong> de la classe.</p></div>
+</section>
+<section class="slide" id="_méthodes_static_et_appel_aux_méthodes_non_statiques_suite_2">
+<h2>Méthodes <code>static</code> et appel aux méthodes non-statiques (suite)</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Constructors are kind of a method with no return type.</p></div>
+</blockquote>
+</div>
+<div class="paragraph"><p>En fait il vaudrait mieux les considérer comme une sorte de méthode statique.
+En effet elle ne requièrent pas de porter sur un objet!</p></div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+cf. la discussion <a class="bare" href="http://stackoverflow.com/questions/10513633/static-method-access-to-non-static-constructor">http://stackoverflow.com/questions/10513633/static-method-access-to-non-static-constructor</a>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="enum">
+<h2>Utilité générale des <code>enum</code></h2>
+
+</section>
+<section class="slide" id="_modélisation">
+<h2>Modélisation</h2>
+<div class="paragraph"><p>Le type enumération est souvent utilisé en modélisation :</p></div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/enum.png">
+<img alt="enum" src="images/enum.png" width="70%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_propriétés">
+<h2>Propriétés</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Civilite</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-n">MADAME</span><span class="tok-o">,</span> <span class="tok-n">MONSIEUR</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>Chaque élément d&#8217;une énumération est un objet à part entière</li>
+<li>Les objets <code>enum</code> héritent de <code>java.lang.Enum</code></li>
+<li>On peut compléter les comportements des objets en ajoutant des méthodes</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_méthodes_de_base">
+<h2>Méthodes de base</h2>
+<div class="ulist">
+<ul>
+<li><p>
+<code>toString()</code><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">);</span> <span class="tok-c1">//MADAME</span></code></pre>
+</div>
+</div></p></li>
+<li><p>
+<code>valueOf()</code><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">valueOf</span><span class="tok-o">(</span><span class="tok-s">&quot;MONSIEUR&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span></code></pre>
+</div>
+</div></p></li>
+<li><p>
+<code>values()</code><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">Civilite</span><span class="tok-o">[]</span> <span class="tok-n">civilites</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">values</span><span class="tok-o">()</span> <span class="tok-o">;</span></code></pre>
+</div>
+</div></p></li>
+<li><p>
+<code>ordinal()</code><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">Civilite</span> <span class="tok-n">civilite</span> <span class="tok-o">=</span> <span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span> <span class="tok-o">;</span>&#x000A;<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Civilite : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span> <span class="tok-o">+</span> <span class="tok-s">&quot; [&quot;</span> <span class="tok-o">+</span> <span class="tok-n">civilite</span><span class="tok-o">.</span><span class="tok-na">ordinal</span><span class="tok-o">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot;]&quot;</span><span class="tok-o">)</span> <span class="tok-o">;</span>&#x000A;<span class="tok-c1">// Civilite : MONSIEUR [1]</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Le 1er numéro d&#8217;ordre est 0.
+</td>
+</tr>
+</table>
+</div></p></li>
+<li><p>
+<code>compareTo()</code><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MADAME</span><span class="tok-o">.</span><span class="tok-na">compareTo</span><span class="tok-o">(</span><span class="tok-n">Civilite</span><span class="tok-o">.</span><span class="tok-na">MONSIEUR</span><span class="tok-o">))</span> <span class="tok-o">;</span>&#x000A;<span class="tok-c1">// -1</span></code></pre>
+</div>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_exemple_plus_complexe">
+<h2>Exemple plus complexe</h2>
+<div class="listingblock">
+<div class="title">(source : <a class="bare" href="http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1">http://openclassrooms.com/courses/apprenez-a-programmer-en-java/les-enumerations-1</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">enum</span> <span class="tok-n">Langage</span> <span class="tok-o">{</span>&#x000A;  <span class="tok-c1">//Objets directement construits</span>&#x000A;  <span class="tok-n">JAVA</span><span class="tok-o">(</span><span class="tok-s">&quot;Langage JAVA&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Eclipse&quot;</span><span class="tok-o">),</span>&#x000A;  <span class="tok-n">C</span> <span class="tok-o">(</span><span class="tok-s">&quot;Lanage C&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Code Block&quot;</span><span class="tok-o">),</span>&#x000A;  <span class="tok-n">CPlus</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage C++&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;Visual studio&quot;</span><span class="tok-o">),</span>&#x000A;  <span class="tok-n">PHP</span> <span class="tok-o">(</span><span class="tok-s">&quot;Langage PHP&quot;</span><span class="tok-o">,</span> <span class="tok-s">&quot;PS Pad&quot;</span><span class="tok-o">);</span>&#x000A;&#x000A;  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">name</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>&#x000A;  <span class="tok-kd">private</span> <span class="tok-n">String</span> <span class="tok-n">editor</span> <span class="tok-o">=</span> <span class="tok-s">&quot;&quot;</span><span class="tok-o">;</span>&#x000A;&#x000A;  <span class="tok-c1">//Constructeur</span>&#x000A;  <span class="tok-n">Langage</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-o">,</span> <span class="tok-n">String</span> <span class="tok-n">editor</span><span class="tok-o">){</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">name</span> <span class="tok-o">=</span> <span class="tok-n">name</span><span class="tok-o">;</span>&#x000A;    <span class="tok-k">this</span><span class="tok-o">.</span><span class="tok-na">editor</span> <span class="tok-o">=</span> <span class="tok-n">editor</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">getEditor</span><span class="tok-o">(){</span>&#x000A;    <span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-s">&quot;Editeur : &quot;</span> <span class="tok-o">+</span> <span class="tok-n">editor</span><span class="tok-o">);</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">toString</span><span class="tok-o">(){</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-n">name</span><span class="tok-o">;</span>&#x000A;  <span class="tok-o">}</span>&#x000A;&#x000A;  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[]){</span>&#x000A;    <span class="tok-n">Langage</span> <span class="tok-n">l1</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">JAVA</span><span class="tok-o">;</span>&#x000A;    <span class="tok-n">Langage</span> <span class="tok-n">l2</span> <span class="tok-o">=</span> <span class="tok-n">Langage</span><span class="tok-o">.</span><span class="tok-na">PHP</span><span class="tok-o">;</span>&#x000A;&#x000A;    <span class="tok-n">l1</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>&#x000A;    <span class="tok-n">l2</span><span class="tok-o">.</span><span class="tok-na">getEditor</span><span class="tok-o">();</span>&#x000A;  <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_questions">
+<h2>Questions?</h2>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-important"></i>
+</td>
+<td class="content">
+
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_introduction_importance_des_patrons">
+<h2>Introduction : importance des patrons</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="phdComics" src="images/phdComics.png" />
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Science is what we understand well enough to explain to a computer.
+Art is everything else we do.</p></div>
+<div class="attribution">
+<cite>Donald Knuth</cite>
+</div>
+</blockquote>
+</div>
+</section>
+<section class="slide" id="strategy">
+<h2><em>Strategy</em></h2>
+
+</section>
+<section class="slide" id="_principes_de_conception">
+<h2>Principes de conception</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Identifiez les aspects de votre code qui varient et
+séparez-les de ceux qui demeurent constant.</p></div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_principes_de_conception_suite">
+<h2>Principes de conception (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Programmer une interface, non une implémentation.</p></div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_principes_de_conception_suite_2">
+<h2>Principes de conception (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Préférez la composition à l&#8217;héritage.</p></div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_définition_du_patron">
+<h2>Définition du patron</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
+<div class="paragraph"><p><strong>Stratégie</strong> définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les
+rend interchangeables.
+Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#8217;utilisent.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="strategy" src="images/strategy.png" />
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_premier_exemple_dutilisation">
+<h2>Premier exemple d&#8217;utilisation</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/superCanardFinal-a.png">
+<img alt="superCanardFinal a" src="images/superCanardFinal-a.png" />
+</a>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/superCanardFinal-b.png">
+<img alt="superCanardFinal b" src="images/superCanardFinal-b.png" />
+</a>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/superCanardFinal-c.png">
+<img alt="superCanardFinal c" src="images/superCanardFinal-c.png" />
+</a>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title">Question</div>
+Pourquoi n&#8217;a-t&#8217;on pas utilisé <em>Strategy</em> pour <code>afficher()</code> ou <code>nager()</code>?
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret">
+<h2>Autre exemple concret</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+L&#8217;exemple qui suit est tiré de
+<a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">ce cours</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph"><p><strong>Le problème</strong></p></div>
+<div class="paragraph"><p>Vous avez une classe <code>FileWriter</code> qui a pour rôle d&#8217;écrire dans un fichier
+ainsi qu&#8217;une classe <code>DBWriter</code>. Dans un premier temps, ces classes ne
+contiennent qu&#8217;une méthode <code>write()</code> qui n&#8217;écrira que le texte passé
+en paramètre.</p></div>
+<div class="paragraph"><p>Au fil du temps, vous vous rendez compte que c&#8217;est dommage qu&#8217;elles ne
+fassent que ça et vous aimeriez bien qu&#8217;elles puissent écrire en différents
+formats (HTML, XML, etc.) : les classes doivent donc formater puis écrire.</p></div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite">
+<h2>Autre exemple concret (suite)</h2>
+<div class="paragraph"><p><strong>La solution</strong></p></div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">
+<img alt="strategyWriter" src="images/strategyWriter.png" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_2">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">L&#8217;interface en <code>PHP</code> (code source <a href="src/php/Formater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="php language-php"><span></span><span class="tok-o">&lt;?</span><span class="tok-nx">php</span>&#x000A;<span class="tok-k">interface</span> <span class="tok-nx">Formater</span>&#x000A;<span class="tok-p">{</span>&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">);</span>&#x000A;<span class="tok-p">}</span>&#x000A;<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_3">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe abstraite <code>Writer</code> (code source <a href="src/php/Writer.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="php language-php"><span></span><span class="tok-o">&lt;?</span><span class="tok-nx">php</span>&#x000A;<span class="tok-k">abstract</span> <span class="tok-k">class</span> <span class="tok-nc">Writer</span>&#x000A;<span class="tok-p">{</span>&#x000A;  <span class="tok-c1">// Attribut contenant l&#39;instance du formateur que l&#39;on veut utiliser.</span>&#x000A;  <span class="tok-k">protected</span> <span class="tok-nv">$formater</span><span class="tok-p">;</span>&#x000A;&#x000A;  <span class="tok-k">abstract</span> <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">write</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">);</span>&#x000A;&#x000A;  <span class="tok-c1">// Nous voulons une instance d&#39;une classe implémentant Formater en paramètre.</span>&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-fm">__construct</span><span class="tok-p">(</span><span class="tok-nx">Formater</span> <span class="tok-nv">$formater</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">formater</span> <span class="tok-o">=</span> <span class="tok-nv">$formater</span><span class="tok-p">;</span>&#x000A;  <span class="tok-p">}</span>&#x000A;<span class="tok-p">}</span>&#x000A;<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_4">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>FileWriter</code> (code source <a href="src/php/FileWriter.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="php language-php"><span></span><span class="tok-o">&lt;?</span><span class="tok-nx">php</span>&#x000A;<span class="tok-k">class</span> <span class="tok-nc">FileWriter</span> <span class="tok-k">extends</span> <span class="tok-nx">Writer</span>&#x000A;<span class="tok-p">{</span>&#x000A;  <span class="tok-c1">// Attribut stockant le chemin du fichier.</span>&#x000A;  <span class="tok-k">protected</span> <span class="tok-nv">$file</span><span class="tok-p">;</span>&#x000A;&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-fm">__construct</span><span class="tok-p">(</span><span class="tok-nx">Formater</span> <span class="tok-nv">$formater</span><span class="tok-p">,</span> <span class="tok-nv">$file</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-k">parent</span><span class="tok-o">::</span><span class="tok-na">__construct</span><span class="tok-p">(</span><span class="tok-nv">$formater</span><span class="tok-p">);</span>&#x000A;    <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">file</span> <span class="tok-o">=</span> <span class="tok-nv">$file</span><span class="tok-p">;</span>&#x000A;  <span class="tok-p">}</span>&#x000A;&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">write</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-nv">$f</span> <span class="tok-o">=</span> <span class="tok-nb">fopen</span><span class="tok-p">(</span><span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">file</span><span class="tok-p">,</span> <span class="tok-s1">&#39;w&#39;</span><span class="tok-p">);</span>&#x000A;    <span class="tok-nb">fwrite</span><span class="tok-p">(</span><span class="tok-nv">$f</span><span class="tok-p">,</span> <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">formater</span><span class="tok-o">-&gt;</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">));</span>&#x000A;    <span class="tok-nb">fclose</span><span class="tok-p">(</span><span class="tok-nv">$f</span><span class="tok-p">);</span>&#x000A;  <span class="tok-p">}</span>&#x000A;<span class="tok-p">}</span>&#x000A;<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_5">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>DBWriter</code> (code source <a href="src/php/DBWriter.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="php language-php"><span></span><span class="tok-o">&lt;?</span><span class="tok-nx">php</span>&#x000A;<span class="tok-k">class</span> <span class="tok-nc">DBWriter</span> <span class="tok-k">extends</span> <span class="tok-nx">Writer</span>&#x000A;<span class="tok-p">{</span>&#x000A;  <span class="tok-k">protected</span> <span class="tok-nv">$db</span><span class="tok-p">;</span>&#x000A;&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-fm">__construct</span><span class="tok-p">(</span><span class="tok-nx">Formater</span> <span class="tok-nv">$formater</span><span class="tok-p">,</span> <span class="tok-nx">PDO</span> <span class="tok-nv">$db</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-k">parent</span><span class="tok-o">::</span><span class="tok-na">__construct</span><span class="tok-p">(</span><span class="tok-nv">$formater</span><span class="tok-p">);</span>&#x000A;    <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">db</span> <span class="tok-o">=</span> <span class="tok-nv">$db</span><span class="tok-p">;</span>&#x000A;  <span class="tok-p">}</span>&#x000A;&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">write</span> <span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-nv">$q</span> <span class="tok-o">=</span> <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">db</span><span class="tok-o">-&gt;</span><span class="tok-na">prepare</span><span class="tok-p">(</span><span class="tok-s1">&#39;INSERT INTO lorem_ipsum SET text = :text&#39;</span><span class="tok-p">);</span>&#x000A;    <span class="tok-nv">$q</span><span class="tok-o">-&gt;</span><span class="tok-na">bindValue</span><span class="tok-p">(</span><span class="tok-s1">&#39;:text&#39;</span><span class="tok-p">,</span> <span class="tok-nv">$this</span><span class="tok-o">-&gt;</span><span class="tok-na">formater</span><span class="tok-o">-&gt;</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">));</span>&#x000A;    <span class="tok-nv">$q</span><span class="tok-o">-&gt;</span><span class="tok-na">execute</span><span class="tok-p">();</span>&#x000A;  <span class="tok-p">}</span>&#x000A;<span class="tok-p">}</span>&#x000A;<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_6">
+<h2>Autre exemple concret (suite)</h2>
+<div class="paragraph"><p>Enfin, nous avons nos trois formateurs.
+L&#8217;un ne fait rien de particulier (<code>TextFormater</code>),
+et les deux autres formatent le texte en deux langages
+différents (<code>HTMLFormater</code> et <code>XMLFormater</code>).</p></div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_7">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>TextFormater</code> (code source <a href="src/php/TextFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="php language-php"><span></span><span class="tok-o">&lt;?</span><span class="tok-nx">php</span>&#x000A;<span class="tok-k">class</span> <span class="tok-nc">TextFormater</span> <span class="tok-k">implements</span> <span class="tok-nx">Formater</span>&#x000A;<span class="tok-p">{</span>&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-s1">&#39;Date : &#39;</span> <span class="tok-o">.</span> <span class="tok-nb">time</span><span class="tok-p">()</span> <span class="tok-o">.</span> <span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;Texte : &#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$text</span><span class="tok-p">;</span>&#x000A;  <span class="tok-p">}</span>&#x000A;<span class="tok-p">}</span>&#x000A;<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_8">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>HTMLFormater</code> (code source <a href="src/php/HTMLFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="php language-php"><span></span><span class="tok-o">&lt;?</span><span class="tok-nx">php</span>&#x000A;<span class="tok-k">class</span> <span class="tok-nc">HTMLFormater</span> <span class="tok-k">implements</span> <span class="tok-nx">Formater</span>&#x000A;<span class="tok-p">{</span>&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-s1">&#39;&lt;p&gt;Date : &#39;</span> <span class="tok-o">.</span> <span class="tok-nb">time</span><span class="tok-p">()</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;br /&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span> <span class="tok-s1">&#39;Texte : &#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$text</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;/p&gt;&#39;</span><span class="tok-p">;</span>&#x000A;  <span class="tok-p">}</span>&#x000A;<span class="tok-p">}</span>&#x000A;<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_9">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>XMLFormater</code> (code source <a href="src/php/XMLFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="php language-php"><span></span><span class="tok-o">&lt;?</span><span class="tok-nx">php</span>&#x000A;<span class="tok-k">class</span> <span class="tok-nc">XMLFormater</span> <span class="tok-k">implements</span> <span class="tok-nx">Formater</span>&#x000A;<span class="tok-p">{</span>&#x000A;  <span class="tok-k">public</span> <span class="tok-k">function</span> <span class="tok-nf">format</span><span class="tok-p">(</span><span class="tok-nv">$text</span><span class="tok-p">)</span>&#x000A;  <span class="tok-p">{</span>&#x000A;    <span class="tok-k">return</span> <span class="tok-s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>&#x000A;           <span class="tok-s1">&#39;&lt;message&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>&#x000A;           <span class="tok-s2">&quot;</span><span class="tok-se">\t</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;date&gt;&#39;</span> <span class="tok-o">.</span> <span class="tok-nb">time</span><span class="tok-p">()</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;/date&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>&#x000A;           <span class="tok-s2">&quot;</span><span class="tok-se">\t</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;texte&gt;&#39;</span> <span class="tok-o">.</span> <span class="tok-nv">$text</span> <span class="tok-o">.</span> <span class="tok-s1">&#39;&lt;/texte&gt;&#39;</span> <span class="tok-o">.</span><span class="tok-s2">&quot;</span><span class="tok-se">\n</span><span class="tok-s2">&quot;</span><span class="tok-o">.</span>&#x000A;           <span class="tok-s1">&#39;&lt;/message&gt;&#39;</span><span class="tok-p">;</span>&#x000A;  <span class="tok-p">}</span>&#x000A;<span class="tok-p">}</span>&#x000A;<span class="tok-cp">?&gt;</span><span class="tok-x"></span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_dautres_exemples">
+<h2>D&#8217;autres exemples</h2>
+<div class="ulist">
+<ul>
+<li class="slide"><p>
+La fonction standard <code>sort()</code> de python<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="python language-python"><span></span><span class="tok-o">&gt;&gt;&gt;</span> <span class="tok-nb">sorted</span><span class="tok-p">(</span><span class="tok-s2">&quot;This is a test string from Andrew&quot;</span><span class="tok-o">.</span><span class="tok-n">split</span><span class="tok-p">(),</span> <span class="tok-n">key</span><span class="tok-o">=</span><span class="tok-nb">str</span><span class="tok-o">.</span><span class="tok-n">lower</span><span class="tok-p">)</span>&#x000A;<span class="tok-p">[</span><span class="tok-s1">&#39;a&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;Andrew&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;from&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;is&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;string&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;test&#39;</span><span class="tok-p">,</span> <span class="tok-s1">&#39;This&#39;</span><span class="tok-p">]</span></code></pre>
+</div>
+</div></p></li>
+<li class="slide"><p>
+Stratégie de cryptage en fonction de la taille d&#8217;un fichier<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-n">File</span> <span class="tok-n">file</span> <span class="tok-o">=</span> <span class="tok-n">getFile</span><span class="tok-o">();</span>&#x000A; <span class="tok-n">Cipher</span> <span class="tok-n">c</span> <span class="tok-o">=</span> <span class="tok-n">CipherFactory</span><span class="tok-o">.</span><span class="tok-na">getCipher</span><span class="tok-o">(</span> <span class="tok-n">file</span><span class="tok-o">.</span><span class="tok-na">size</span><span class="tok-o">()</span> <span class="tok-o">);</span>&#x000A; <span class="tok-n">c</span><span class="tok-o">.</span><span class="tok-na">performAction</span><span class="tok-o">();</span>&#x000A;&#x000A;<span class="tok-c1">// implementations:</span>&#x000A;<span class="tok-kd">interface</span>  <span class="tok-nc">Cipher</span>  <span class="tok-o">{</span>&#x000A;     <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">();</span>&#x000A;<span class="tok-o">}</span>&#x000A;<span class="tok-kd">class</span> <span class="tok-nc">InMemoryCipherStrategy</span> <span class="tok-kd">implements</span> <span class="tok-n">Cipher</span> <span class="tok-o">{</span>&#x000A;         <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;             <span class="tok-c1">// load in byte[] ....</span>&#x000A;         <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span>&#x000A;<span class="tok-kd">class</span> <span class="tok-nc">SwaptToDiskCipher</span> <span class="tok-kd">implements</span> <span class="tok-n">Cipher</span> <span class="tok-o">{</span>&#x000A;         <span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">performAction</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;             <span class="tok-c1">// swapt partial results to file.</span>&#x000A;         <span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div></p></li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-tip"></i>
+</td>
+<td class="content">
+Plus de détails <a href="http://stackoverflow.com/questions/370258/real-world-example-of-the-strategy-pattern">ici</a>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_non_réutilisation">
+<h2>(non) Réutilisation</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+Les patrons <strong>ne sont pas réutilisables</strong>!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph"><p>Il faut implémeter la solution qu&#8217;il représente à chaque fois.</p></div>
+</section>
+<section class="slide" id="_réutilisation_exception">
+<h2>Réutilisation (exception)</h2>
+<div class="paragraph"><p>Exception : certains font l&#8217;objet d&#8217;une librairie (comme <a href="#observerJava"><em>Observer</em> de Java</a>).</p></div>
+<div class="paragraph"><p>Par exemple le patron Singleton existe dans la bibliothèque standard du
+langage  en <a href="https://www.ruby-lang.org">Ruby</a>.
+C&#8217;est un <em>mixin</em> qu&#8217;il suffit d&#8217;inclure dans la classe qui doit être un singleton.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code class="ruby language-ruby"><span></span><span class="tok-k">class</span> <span class="tok-nc">Klass</span>&#x000A;   <span class="tok-kp">include</span> <span class="tok-no">Singleton</span>&#x000A;   <span class="tok-c1"># ...</span>&#x000A;<span class="tok-k">end</span>&#x000A;&#x000A;<span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-n">b</span>  <span class="tok-o">=</span> <span class="tok-no">Klass</span><span class="tok-o">.</span><span class="tok-n">instance</span><span class="tok-p">,</span> <span class="tok-no">Klass</span><span class="tok-o">.</span><span class="tok-n">instance</span>&#x000A;&#x000A;<span class="tok-n">a</span> <span class="tok-o">==</span> <span class="tok-n">b</span>&#x000A;<span class="tok-c1"># =&gt; true</span>&#x000A;&#x000A;<span class="tok-no">Klass</span><span class="tok-o">.</span><span class="tok-n">new</span>&#x000A;<span class="tok-c1"># =&gt; NoMethodError - new is private ...</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_association_ou_composition">
+<h2>Association ou composition</h2>
+<div class="paragraph"><p>On trouve deux modèles <a href="http://www.uml.org/">UML&#8482;</a> :</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="strategy compo" src="images/strategy-compo.png" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="strategy assoc" src="images/strategy-assoc.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_association_ou_composition_suite">
+<h2>Association ou composition (suite)</h2>
+<div class="paragraph"><p>Et donc deux implémentations :</p></div>
+<div class="listingblock">
+<div class="title">Composition &#8658; le composé encapsule les composants</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Colvert</span> <span class="tok-kd">extends</span> <span class="tok-n">Canard</span> <span class="tok-o">{</span>&#x000A;&#x000A;	<span class="tok-kd">protected</span> <span class="tok-nf">Colvert</span><span class="tok-o">()</span> <span class="tok-o">{</span>&#x000A;		<span class="tok-k">this</span><span class="tok-o">(</span><span class="tok-k">new</span> <span class="tok-n">VolerAvecDesAiles</span><span class="tok-o">(),</span> <span class="tok-k">new</span> <span class="tok-n">Cancan</span><span class="tok-o">());</span>&#x000A;	<span class="tok-o">}</span>&#x000A;<span class="tok-o">...</span>&#x000A;<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Colvert</span><span class="tok-o">();</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Association &#8658; le composant existe "en dehors"</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-o">...</span>&#x000A;<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">VolerAvecDesAiles</span><span class="tok-o">();</span>&#x000A;<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Cancan</span><span class="tok-o">();</span>&#x000A;<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Colvert</span><span class="tok-o">(</span><span class="tok-n">vol</span><span class="tok-o">,</span><span class="tok-n">cri</span><span class="tok-o">);</span>&#x000A;<span class="tok-o">...</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_un_peu_dhistoire">
+<h2>Un peu d&#8217;histoire</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">1977</dt>
+<dd>
+<p><strong>Alexander</strong> : patterns pour les architectures (les vraies)</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/Alexander.png">
+<img alt="Alexander" src="images/Alexander.png" width="10%" />
+</a>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">1987</dt>
+<dd>
+<p><strong>Beck</strong> et <strong>Cunningham</strong> : patterns pour des interfaces utilisateurs</p>
+</dd>
+<dt class="hdlist1">1988</dt>
+<dd>
+<p><strong>Meyer</strong> : livre sur l&#8217;orienté objet (langage <a href="http://fr.wikipedia.org/wiki/Eiffel_(langage)">Eiffel</a>), devenu la bible pour
+beaucoup de programmeurs (cf. <a href="#Meyer88">[Meyer88]</a>)</p>
+</dd>
+<dt class="hdlist1">1990-1995</dt>
+<dd>
+<p><strong>Gamma</strong>, Helm, Johnson et Vlissides : LE livre de référence (cf. <a href="#GoF">[GoF]</a>)</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/GoF.png">
+<img alt="GoF" src="images/GoF.png" width="10%" />
+</a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Les auteurs de ce livre sont connus comme les <strong>Gof</strong> pour « <em>Gang of Four</em> ».
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">2003</dt>
+<dd>
+<p><strong>Martin</strong> : principes SOLID (cf. <a href="#Martin03">[Martin03]</a>)</p>
+</dd>
+<dt class="hdlist1">2004</dt>
+<dd>
+<p><strong>Craig Larman</strong> décrit des modèles de conception : les Patterns <strong>GRASP</strong> (cf. <a href="#Larman05">[Larman05]</a>)</p>
+</dd>
+</dl>
+</div>
+</section>
+<section class="slide" id="_exemples_de_bons_principes">
+<h2>Exemples de bons principes</h2>
+<div class="paragraph"><p><strong>SOLID</strong>:</p></div>
+<div class="ulist">
+<ul>
+<li><em><strong>S</strong>ingle Responsibility Principle</em></li>
+<li><em><strong>O</strong>pen-Closed Principle</em></li>
+<li><em><strong>L</strong>iskov Substitution Principle</em></li>
+<li><em><strong>I</strong>nterface Segregation Principle</em></li>
+<li><em><strong>D</strong>ependency Inversion Principle</em></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_single_responsibility_principle">
+<h2><em><strong>S</strong>ingle Responsibility Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid s" src="images/solid-s.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Responsabilité =&gt; Sujet à changement</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_open_closed_principle">
+<h2><em><strong>O</strong>pen-Closed Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid o" src="images/solid-o.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Ouvert à l'extension mais fermé à la modification</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_open_closed_principle_suite">
+<h2><em><strong>O</strong>pen-Closed Principle</em> (suite)</h2>
+<div class="paragraph"><p>Ainsi, une fois écrite et testée, une classe ne devrait être modifiée que pour
+être corrigée! Toute modification devrait être possible par extension.</p></div>
+</section>
+<section class="slide" id="_liskov_substitution_principle">
+<h2><em><strong>L</strong>iskov Substitution Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0">
+<img alt="liskov" src="images/liskov.jpg" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_barbara_liskov_est_toujours_active">
+<h2>Barbara Liskov est toujours active!</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="liskov2018" src="images/liskov2018.png" width="70%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_lsp_le_principe">
+<h2>LSP : le principe</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid l" src="images/solid-l.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Une classe doit pouvoir être remplacée par une instance d'un de ses&#x000A;sous-types, sans modifier la cohérence du programme</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_lsp_un_exemple">
+<h2>LSP : un exemple</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Un carré est un rectangle a deux côtés égaux.</p></div>
+</blockquote>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="carre" src="images/carre.png" width="10%" />
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title">Question</div>
+Peut-on toujours substituer un <code>Carré</code> à la place d&#8217;un <code>Rectangle</code> ?
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_vraiment">
+<h2>Vraiment?</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Rectangle.java</code>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">class</span> <span class="tok-nc">Rectangle</span>&#x000A;<span class="tok-o">{</span>&#x000A;	<span class="tok-kd">protected</span> <span class="tok-kt">int</span> <span class="tok-n">m_width</span><span class="tok-o">;</span>&#x000A;	<span class="tok-kd">protected</span> <span class="tok-kt">int</span> <span class="tok-n">m_height</span><span class="tok-o">;</span>&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">setWidth</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">width</span><span class="tok-o">){</span>&#x000A;		<span class="tok-n">m_width</span> <span class="tok-o">=</span> <span class="tok-n">width</span><span class="tok-o">;</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">setHeight</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">height</span><span class="tok-o">){</span>&#x000A;		<span class="tok-n">m_height</span> <span class="tok-o">=</span> <span class="tok-n">height</span><span class="tok-o">;</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getWidth</span><span class="tok-o">(){</span>&#x000A;		<span class="tok-k">return</span> <span class="tok-n">m_width</span><span class="tok-o">;</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getHeight</span><span class="tok-o">(){</span>&#x000A;		<span class="tok-k">return</span> <span class="tok-n">m_height</span><span class="tok-o">;</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">getArea</span><span class="tok-o">(){</span>&#x000A;		<span class="tok-k">return</span> <span class="tok-n">m_width</span> <span class="tok-o">*</span> <span class="tok-n">m_height</span><span class="tok-o">;</span>&#x000A;	<span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_vraiment_2">
+<h2>Vraiment?</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Square.java</code>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-c1">// Violation of Likov&#39;s Substitution Principle</span>&#x000A;<span class="tok-kd">class</span> <span class="tok-nc">Square</span> <span class="tok-kd">extends</span> <span class="tok-n">Rectangle</span>&#x000A;<span class="tok-o">{</span>&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">setWidth</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">width</span><span class="tok-o">){</span>&#x000A;		<span class="tok-n">m_width</span> <span class="tok-o">=</span> <span class="tok-n">width</span><span class="tok-o">;</span>&#x000A;		<span class="tok-n">m_height</span> <span class="tok-o">=</span> <span class="tok-n">width</span><span class="tok-o">;</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">setHeight</span><span class="tok-o">(</span><span class="tok-kt">int</span> <span class="tok-n">height</span><span class="tok-o">){</span>&#x000A;		<span class="tok-n">m_width</span> <span class="tok-o">=</span> <span class="tok-n">height</span><span class="tok-o">;</span>&#x000A;		<span class="tok-n">m_height</span> <span class="tok-o">=</span> <span class="tok-n">height</span><span class="tok-o">;</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_vraiment_3">
+<h2>Vraiment?</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Square.java</code> - suite)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">class</span> <span class="tok-nc">LspTest</span>&#x000A;<span class="tok-o">{</span>&#x000A;	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">Rectangle</span> <span class="tok-nf">getNewRectangle</span><span class="tok-o">()</span>&#x000A;	<span class="tok-o">{</span>&#x000A;		<span class="tok-c1">// it can be an object returned by some factory ...</span>&#x000A;		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-n">Square</span><span class="tok-o">();</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span> <span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[])</span>&#x000A;	<span class="tok-o">{</span>&#x000A;		<span class="tok-n">Rectangle</span> <span class="tok-n">r</span> <span class="tok-o">=</span> <span class="tok-n">LspTest</span><span class="tok-o">.</span><span class="tok-na">getNewRectangle</span><span class="tok-o">();</span>&#x000A;&#x000A;		<span class="tok-n">r</span><span class="tok-o">.</span><span class="tok-na">setWidth</span><span class="tok-o">(</span><span class="tok-mi">5</span><span class="tok-o">);</span>&#x000A;		<span class="tok-n">r</span><span class="tok-o">.</span><span class="tok-na">setHeight</span><span class="tok-o">(</span><span class="tok-mi">10</span><span class="tok-o">);</span>&#x000A;		<span class="tok-c1">// User knows that r is a rectangle.</span>&#x000A;		<span class="tok-c1">// It assumes that he&#39;s able to set the width and height as for the base class</span>&#x000A;&#x000A;		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">r</span><span class="tok-o">.</span><span class="tok-na">getArea</span><span class="tok-o">());</span>&#x000A;		<span class="tok-c1">// Now she&#39;s surprised to see that the area is 100 instead of 50.</span>&#x000A;	<span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_et_linverse">
+<h2>Et l&#8217;inverse?</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rectangle" src="images/rectangle.png" width="40%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_même_problème">
+<h2>Même problème</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Rectangle.java</code>)</div>
+<div class="content">
+<pre class="pygments highlight"><code class="java language-java"><span></span><span class="tok-kd">class</span> <span class="tok-nc">LspTest</span>&#x000A;<span class="tok-o">{</span>&#x000A;	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">Square</span> <span class="tok-nf">getNewSquare</span><span class="tok-o">()</span>&#x000A;	<span class="tok-o">{</span>&#x000A;		<span class="tok-c1">// it can be an object returned by some factory ...</span>&#x000A;		<span class="tok-k">return</span> <span class="tok-k">new</span> <span class="tok-n">Rectangle</span><span class="tok-o">();</span>&#x000A;	<span class="tok-o">}</span>&#x000A;&#x000A;	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span> <span class="tok-o">(</span><span class="tok-n">String</span> <span class="tok-n">args</span><span class="tok-o">[])</span>&#x000A;	<span class="tok-o">{</span>&#x000A;		<span class="tok-n">Square</span> <span class="tok-n">s</span> <span class="tok-o">=</span> <span class="tok-n">LspTest</span><span class="tok-o">.</span><span class="tok-na">getNewSquare</span><span class="tok-o">();</span>&#x000A;&#x000A;		<span class="tok-n">s</span><span class="tok-o">.</span><span class="tok-na">setWidth</span><span class="tok-o">(</span><span class="tok-mi">5</span><span class="tok-o">);</span>&#x000A;		<span class="tok-c1">// User knows that r is a rectangle.</span>&#x000A;		<span class="tok-c1">// It assumes that he&#39;s able to set the width and height as for the base class</span>&#x000A;&#x000A;		<span class="tok-n">System</span><span class="tok-o">.</span><span class="tok-na">out</span><span class="tok-o">.</span><span class="tok-na">println</span><span class="tok-o">(</span><span class="tok-n">s</span><span class="tok-o">.</span><span class="tok-na">getArea</span><span class="tok-o">());</span>&#x000A;		<span class="tok-c1">// Now she&#39;s surprised to see that the area is 0 instead of 25.</span>&#x000A;	<span class="tok-o">}</span>&#x000A;<span class="tok-o">}</span></code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_interface_segregation_principle">
+<h2><em><strong>I</strong>nterface Segregation Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid i" src="images/solid-i.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une seule interface générale</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_dependency_inversion_principle">
+<h2><em><strong>D</strong>ependency Inversion Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid d" src="images/solid-d.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Il faut dépendre des abstractions, pas des implémentations</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_dip_explications">
+<h2>DIP : explications</h2>
+<div class="paragraph"><p>Ce principe indique :</p></div>
+<div class="ulist">
+<ul>
+<li>Les modules de haut niveau (abstraits) ne doivent pas dépendre des modules de bas niveau.
+Les deux doivent dépendre d&#8217;abstractions.</li>
+<li>Les abstractions ne doivent pas dépendre des détails d&#8217;implémentation.
+C&#8217;est l&#8217;inverse : les détails doivent dépendre des abstractions.</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Ainsi ce principe va à l&#8217;encontre de l&#8217;intuition classique.
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_exemple_bad">
+<h2>Exemple (bad)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="dip bad" src="images/dip-bad.png" width="70%" />
+</div>
+<div class="title">Figure 1. Exemple de code violant le principe d&#8217;inversion des dépendances</div>
+</div>
+</section>
+<section class="slide" id="_exemple_good">
+<h2>Exemple (good)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="dip" src="images/dip.png" width="80%" />
+</div>
+<div class="title">Figure 2. Exemple de code ne violant plus le principe d&#8217;inversion des dépendances</div>
+</div>
+</section>
+<section class="slide" id="_solid_et_patrons">
+<h2>SOLID et patrons</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph"><p>Lesquels des 5 principes SOLID s&#8217;appliquent bien à <em>Strategy</em> ?</p></div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width:100%">
+<colgroup>
+<col style="width:20%" />
+<col style="width:20%" />
+<col style="width:20%" />
+<col style="width:20%" />
+<col style="width:20%" />
+</colgroup>
+<tbody>
+<tr>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid s" src="images/solid-s.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid o" src="images/solid-o.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid l" src="images/solid-l.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid i" src="images/solid-i.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid d" src="images/solid-d.jpg" /></span></p></div></div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide" id="_solid_et_patrons_éléments_de_réponses">
+<h2>SOLID et patrons (éléments de réponses)</h2>
+<div class="paragraph"><p>Quelques éléments de réponses :</p></div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><em><strong>S</strong>ingle Responsibility Principle</em></dt>
+<dd>
+<p>Bof</p>
+</dd>
+<dt class="hdlist1"><em><strong>O</strong>pen-Closed Principle</em></dt>
+<dd>
+<p>&#8658; <strong>Oui</strong> : extension (du comportement) sans toucher au code!</p>
+</dd>
+<dt class="hdlist1"><em><strong>L</strong>iskov Substitution Principle</em></dt>
+<dd>
+<p>Non</p>
+</dd>
+<dt class="hdlist1"><em><strong>I</strong>nterface Segregation Principle</em></dt>
+<dd>
+<p>Oui, mais pas spécifiquement</p>
+</dd>
+<dt class="hdlist1"><em><strong>D</strong>ependency Inversion Principle</em></dt>
+<dd>
+<p>&#8658; <strong>Oui</strong> : les algos dépendent des mêmes abstractions que les données (les interfaces)</p>
+</dd>
+</dl>
+</div>
+</section>
+<section class="slide" id="_grasp">
+<h2>GRASP</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>The critical design tool for software development is <strong>a mind well educated in
+design principles</strong>. It is not the UML or any other technology.</p></div>
+<div class="attribution">
+<cite>Craig Larman, 2005</cite>
+</div>
+</blockquote>
+</div>
+<div class="paragraph"><p>Il s&#8217;agit d&#8217;un ensemble de patrons, plutôt orientés conception (UML). Nous en
+aborderons certains au travers des exemples de ce module (cf. <a href="#Larman05">[Larman05]</a>).</p></div>
+</section>
+<section class="slide" id="_les_patrons_comment_ça_marche">
+<h2>Les patrons : comment ça marche ?</h2>
+
+</section>
+<section class="slide" id="_intérêt">
+<h2>Intérêt</h2>
+<div class="ulist">
+<ul>
+<li>Réponses éprouvées à des problèmes récurrents</li>
+<li>Vocabulaire commun</li>
+</ul>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>T&#8217;as qu&#8217;à utiliser une <em>factory</em>!</p></div>
+</blockquote>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph"><p>Qui fait la nuit de l&#8217;info dans un groupe avec des Masters?</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="N2I" src="images/N2I.png" width="30%" />
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_patrons_abordés">
+<h2>Patrons abordés</h2>
+<div class="ulist">
+<ul>
+<li class="slide"><a href="#Singleton">[Singleton]</a></li>
+<li class="slide"><a href="#strategy">Stratégie</a></li>
+<li class="slide"><a href="#Fabrique">[Fabrique]</a> (<em>factory</em>)</li>
+<li class="slide"><a href="#Observateur">[Observateur]</a></li>
+<li class="slide"><a href="#Itérateur">[Itérateur]</a></li>
+<li class="slide"><a href="#Composite">[Composite]</a></li>
+<li class="slide"><a href="#Etat">[Etat]</a></li>
+<li class="slide"><a href="#Proxy">[Proxy]</a></li>
+<li class="slide"><a href="#Adaptateur">[Adaptateur]</a></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_patrons_non_abordés">
+<h2>Patrons non abordés</h2>
+<div class="ulist">
+<ul>
+<li>Décorateur</li>
+<li>Commande</li>
+<li>Façade</li>
+<li>Patron de méthode</li>
+<li>Chaînes de responsabilité</li>
+<li>Visiteur</li>
+<li>Prototype</li>
+<li>Mémento</li>
+<li>Médiateur</li>
+<li>Interprète</li>
+<li>Poids-mouche</li>
+<li>Monteur</li>
+<li>Pont</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_time_for_a_quizz">
+<h2>Time for a quizz!</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="ulist">
+<ul>
+<li>Connectez-vous sur : <a class="bare" href="http://www.socrative.com/">http://www.socrative.com/</a> (<strong>student login</strong>)</li>
+<li>Ou téléchargez l&#8217;application pour étudiant <span class="image"><img alt="socrative2" src="images/socrative2.png" width="10%" /></span></li>
+<li>Choisissez la room <strong>44918d67</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://www.socrative.com/">
+<img alt="socrative1" src="images/socrative1.png" width="50%" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz1" src="images/quizz1.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_2">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz2" src="images/quizz2.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_3">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz3" src="images/quizz3.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_4">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz4" src="images/quizz4.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_5">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz5" src="images/quizz5.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_6">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz6" src="images/quizz6.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_7">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz7" src="images/quizz7.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_8">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz8" src="images/quizz8.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_9">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz9" src="images/quizz9.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_10">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz10" src="images/quizz10.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_11">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz11" src="images/quizz11.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_12">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz12" src="images/quizz12.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_quizz_13">
+<h2>Quizz</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="quizz13" src="images/quizz13.png" />
+</div>
+</div>
+</section>
+<p aria-role="status" class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+</div>
+<script src="deck.js/jquery.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+    (function($, deck, undefined) {
+      $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+      $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+    
+      $.extend(true, $[deck].defaults, {
+          countNested: false
+      });
+    
+      $.deck('.slide');
+    })(jQuery, 'deck');
+  //]]>
+</script>
+<style type="text/css">
+  /*<![CDATA[*/
+    .slide.canvas-image {
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+    -moz-box-align: start;
+    -webkit-box-align: start;
+    -ms-box-align: start;
+    box-align: start;
+    -moz-box-pack: start;
+    -webkit-box-pack: start;
+    -ms-box-pack: start;
+    box-pack: start;}
+    
+    .bottom-left {
+      left: 1%;
+      bottom: 20%; }
+    
+    .top-left {
+      left: 1%;
+      top: 20%; }
+    
+    .bottom-right {
+      right: 1%;
+      bottom: 20%; }
+    
+    .top-right {
+      right: 1%;
+      top: 20%; }
+    
+    .center-up {
+      right: 50%;
+      top: 1%;
+    }
+    
+    .center-down {
+      right: 50%;
+      bottom: 1%;
+    }
+    .canvas-image .canvas-caption p {
+      text-align: center;
+      padding-top: 0;
+      padding: 0;
+      -moz-transform: none;
+      -webkit-transform: none;
+      -o-transform: none;
+      -ms-transform: none;
+      transform: none;
+      display: inline;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-weight: bold;
+      font-size: 58px;
+      -webkit-box-shadow: 2px 2px 2px #000;
+      -moz-box-shadow: 2px 2px 2px #000;
+      box-shadow: 2px 2px 2px #000;
+      padding: 1rem;
+      color: white; }
+    kbd.keyseq { color: #555555; }
+    kbd:not(.keyseq) {
+      display: inline-block;
+      color: #222222;
+      font-size: 0.7em;
+      line-height: 1.4;
+      background-color: #F7F7F7;
+      border: 1px solid #ccc;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      margin: -0.15em 0.15em 0 0.15em;
+      padding: 0.2em 0.6em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    kbd kbd:first-child { margin-left: 0; }
+    kbd kbd:last-child { margin-right: 0; }
+  /*]]>*/
+</style>
+</body>
+</html>

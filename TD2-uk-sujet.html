@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="author" content="Dut/Info-S3/M3105 - (Semaine 46)">
+<title>CPOA - Sujet TD 2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./pygments-manni.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>CPOA - Sujet TD 2</h1>
+<div class="details">
+<span id="author" class="author">Dut/Info-S3/M3105 - (Semaine 46)</span><br>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<table id="cartouche" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 90.9091%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PreReq</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>I know how to code in <a href="https://www.java.com/fr/">Java</a>.</p>
+</li>
+<li>
+<p>I know I need to think before I start coding.</p>
+</li>
+<li>
+<p>I know basic OO concepts (inheritance, polyporphism, &#8230;&#8203;).</p>
+</li>
+<li>
+<p>I have understood what a pattern is and I am hungry to learn more than <em>Strategy</em></p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ObjTD</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Study the <strong>singleton</strong> pattern.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>1</strong> TD and <strong>2</strong> TPs</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_chocolate_factory"><a class="link" href="#_the_chocolate_factory">1. The chocolate factory</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You participate in the development of a factory simulator of modern chocolate with boilers assisted by computer.</p>
+</div>
+<div class="paragraph">
+<p>The task of the boiler is to maintain a mixture of chocolate and milk,
+bring it to a boil point and then pass it on to the next phase where it is
+transformed into chocolate bars.</p>
+</div>
+<div class="sect2">
+<h3 id="_initial_problem"><a class="link" href="#_initial_problem">1.1. Initial problem</a></h3>
+<div class="paragraph">
+<p>Here is the controller class of the boiler of <em>Bonchoco, SA</em>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Java class of the boiler controller</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-cm">/**</span>
+<span class="tok-cm"> * @author bruel (taken from Design Pattern - Head First, O&#39;Reilly, 09/2004)</span>
+<span class="tok-cm"> *</span>
+<span class="tok-cm"> */</span>
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-p">{</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span>
+
+	<span class="tok-kd">public</span> <span class="tok-nf">BouilleurChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
+		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
+	<span class="tok-p">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remplir</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">estVide</span><span class="tok-p">())</span> <span class="tok-p">{</span>
+			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
+			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
+			<span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">vider</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">estVide</span><span class="tok-p">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">estBouilli</span><span class="tok-p">())</span> <span class="tok-p">{</span>
+			<span class="tok-c1">// vider le mélange</span>
+			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">bouillir</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">estVide</span><span class="tok-p">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-o">!</span><span class="tok-n">estBouilli</span><span class="tok-p">())</span> <span class="tok-p">{</span>
+			<span class="tok-c1">// porter le contenu à ébullition</span>
+			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">estVide</span><span class="tok-p">()</span> <span class="tok-p">{</span> <span class="tok-k">return</span> <span class="tok-n">vide</span><span class="tok-p">;}</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">estBouilli</span><span class="tok-p">()</span> <span class="tok-p">{</span> <span class="tok-k">return</span> <span class="tok-n">bouilli</span><span class="tok-p">;}</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>What are the attributes <code>vide</code> and <code>bouilli</code> used for (empty and boiled) ?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You have a horrible nightmare (well, mau be not so bad after all) where you drown in chocolate.
+You wake up startled with terrible fear.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTIONS</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>What could happen with several instances of controllers
+(for the same boiler)?</p>
+</li>
+<li>
+<p>What should be ensured to avoid this problem?</p>
+</li>
+<li>
+<p>Find examples of situations where it is important to have
+only one instance of a given class.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_improvement_1"><a class="link" href="#_improvement_1">1.2. Improvement 1</a></h3>
+<div class="paragraph">
+<p>Vous vous souvenez des premiers exercices <a href="https://www.java.com/fr/">Java</a>  sur les variables de classe
+et vous proposez d&#8217;utiliser un compteur d&#8217;instance pour solutionner le problème.</p>
+</div>
+<div class="paragraph">
+<p>You remember your first <a href="https://www.java.com/fr/">Java</a> exercises on class variables
+and you propose to use an instance counter to solve the problem.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>You try to change the constructor to work only if the instance counter is 0.
+What&#8217;s wrong with the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurCptChocolat</span> <span class="tok-p">{</span> 
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span> 
+	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">nbInstance</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+
+	<span class="tok-kd">public</span> <span class="tok-nf">BouilleurCptChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
+		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
+		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">nbInstance</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-n">nbInstance</span> <span class="tok-o">=</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+			<span class="tok-k">return</span> <span class="tok-k">this</span><span class="tok-p">;</span>
+		<span class="tok-p">}</span>
+		<span class="tok-k">else</span> <span class="tok-p">{</span>
+			<span class="tok-k">return</span> <span class="tok-kc">null</span><span class="tok-p">;</span>
+		<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_improvement_2"><a class="link" href="#_improvement_2">1.3. Improvement 2</a></h3>
+<div class="paragraph">
+<p>You change strategy because you remember having already seen this type of code:
+.Idée!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MaClasse</span> <span class="tok-p">{</span>
+	<span class="tok-kd">private</span> <span class="tok-nf">MaClasse</span><span class="tok-p">()</span> <span class="tok-p">{...}</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Is it ok to make a constructor private?</p>
+</li>
+<li>
+<p>How to create an instance under these conditions? Don&#8217;t we just have an unusable class?</p>
+</li>
+<li>
+<p>Complete the following code to resolve the problem:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-p">{</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
+	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span>
+	<span class="tok-p">...</span>
+	<span class="tok-p">...</span>
+
+	        <span class="tok-n">BouilleurChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-p">...</span>
+		<span class="tok-p">...</span>
+		<span class="tok-p">}</span>
+
+	<span class="tok-p">...</span>
+	<span class="tok-p">...</span>
+	<span class="tok-p">...</span>
+	<span class="tok-p">...</span>
+
+	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remplir</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">estVide</span><span class="tok-p">())</span> <span class="tok-p">{</span>
+			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
+			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
+			<span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat }</span>
+		<span class="tok-p">}</span>
+		<span class="tok-c1">// reste du code de BouilleurChocolat...</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Give an exemple of usage of this class.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_you_are_not_done_yet"><a class="link" href="#_you_are_not_done_yet">1.4. You are not done yet!</a></h3>
+<div class="paragraph">
+<p>Vos cauchemars continuent! Mais cette fois ils sont en anglais! Vous voyez un
+grand gaillard irlandais vous menacer (en fait vous confondez <em>threat</em> et <em>thread</em>&#8230;&#8203;).</p>
+</div>
+<div class="paragraph">
+<p>Your nightmares continue! But this time they are in English! You see a
+big guy threatening you (in fact you confuse <em>threat</em> and <em>thread</em>&#8230;&#8203;).</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>How can <em>threads</em> cause problems in your solution?</p>
+</li>
+<li>
+<p>Copy the fragments of code below onto pieces of sheets,
+placing in the columns of the following table to highlight the
+problem by reconstructing a possible wrong sequence with two threads:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Thread 1</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Thread 2</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Valeur de <code>uniqueInstance</code></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Bloc 1</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-p">()</span> <span class="tok-p">{</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Bloc 2</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-p">)</span> <span class="tok-p">{</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Bloc 3</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Bloc 4</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span>		<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Bloc 5</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span>		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Bloc 6</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span>	<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_solution_to_the_multithreading_problem"><a class="link" href="#_solution_to_the_multithreading_problem">1.5. Solution to the multithreading problem</a></h3>
+<div class="paragraph">
+<p>You happily remember your early lessons on <em>threads</em>:</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Propose a simple solution to this problem.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_damned_the_solution_has_a_problem"><a class="link" href="#_damned_the_solution_has_a_problem">1.6. Damned, the solution has a problem!!</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>How often will the mechanism put in place be useful?</p>
+</li>
+<li>
+<p>What do you think of this solution?</p>
+</li>
+<li>
+<p>Suggest a solution where the instance is created at startup rather than on demand.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+There may be situations where the cost of synchronization is lower than the cost of creating an instance from the start (for example, memory-intensive).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Singleton"><a class="link" href="#Singleton">2. Singleton</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Congratulations, you just practiced your second design pattern: <strong>Singleton</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Singleton</strong></div>
+<div class="paragraph">
+<p><strong>Singleton</strong> garanties that a class as a unique instance and hence provides a global access to this unique instance.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAADuCAIAAADHk0nXAAAANXRFWHRjb3B5bGVmdABHZW5lcmF0ZWQgYnkgaHR0cDovL3BsYW50dW1sLnNvdXJjZWZvcmdlLm5ldDpnVRsAAAF/elRYdHBsYW50dW1sAAB4nI1RTU/cQAy9j5T/YG0PJKoSJSikUEQFSIgPkRY1BXFYqZpNDIyYOMuMZxFd7X/vJAh2WQ4wp7Hfs9+zvW9ZGnatDkQgNuKPn2fBZXkOdUc1TtmC0tpZNpKx6bGz8hA20yz/bDfPu1MNQq1MrTEQQ4DtlJ+gxXaCxq7l+K5rfG7D3iuaSiNbqLW09oDZqIljPPXOKvUPIe2bDxhUim41ckcwD8Tcj8yqXoAj9eDwlHzsZ4HvS1ogviyDMFqp+Qq3yC8lYfS2aNErLrXi+AeM3oqMVunUMcJI3awb2dsDclrDfEzwDgPCx1Vvu2NajMkgO0Nr5N0RSAs/Vy0lSR8HYh+pGY4uLrQk7g8686tWnrKdpjsTZJmFr79IhMcX52A7Z7yFRtnnVXt2JM7kTIZ/ygiqI/jtiFWLcEQzZTpqkXjA4aTjatrxwCvy+FAxVGi8IlyVIkuKJP1bbMWTLI/zokiyOMvK/FtWiFLW8KuC6/9FPtCcE07HHwAAJwtJREFUeNrtnQlcT9n7x0NG9mQpJNEiNIqkEBXZErKMNctQQ2PPvmaLMWTfDZVIpZSyZCkSjcoS2UVGsoUko5SZ+X+aM//7+/pufUv43vt9ntfz6nW733vPOfec877Pc+69zzlq/5CQkPBW1KgKSEgIYBISEgKYhISEACYhIYBJSEgIYBISEpUCOD/r7fPTl0gFpvlvcog3lQAYjR2o1oZUYPrizCXiTYUAvr129fPTgaQC0NtrVhPAKgcwGv7vvy+TCkCfxQQSwAQwKb8BjlqzMz4+/sqVK3fv3s3IyMjOzib8CGBS3gAcvMg7IiIiOjo6MTERDGdmZhJ+BPAX0b/yLz49sS9p/MyjrQYEV2jHnsEcMuoV/+MU7MevxGQJAPafszwgICAsLAwMww7DCBN+BHDp68OAHREGPQ82dw6ZMCPEd3No4sHQqxGhl8NDArYHe8wNMesX1sgRxxCWxQV4z2wvX19fMAw7DF86LS2N8COAS1ML3ifGD5sYZugUsnVtIbQyNGT7+gNGTjEDxuJ4glNxgIM8VwNgPz+/4OBgGGF40YQfAVya9Mb2HBPefmhIbKAcev/T30ODbYdF2Q0nhglgAlgpAIbtBb0gs2h6mV4OB8PR/ccSnwQwAfyNAcaYNtzISSHbK2aHjZzu791OiBLABPA3A/iv/IuRBj3Dtq2TBeqOE7u9/FbuPOmDbe/g9SHJh0THwwcb9VDkuXReXsLt22EfPpTc5V65cvL16yEEMAkB/Ik+PbEv3NRZKrqLf/OqU6+O2v+LTgMd/F0TslH0mGCzfo8O+8nPYv5816ZNG9naWmhqVo2MXI89TZroh4evLVY5S3AKAUwACx/gSxNmHp4yR5LeORvmlylbBsQaNDPs5OzQ0Kghw3iZ7y+fAOwx9/SISXLSh9msWbN6Ts55bOfnJ717F4+Nly9PwyaXIsAdOrTcu9eLACaAVQ7g4xY/hPptFqN3f2IIs70de9oxnznkyiGD5oaFAPus+OStUsD2MEMnOelfvRpctmzZhAR/0Z3du7c7dWo72zh0aN2QId3r1NGaPHko+xXOdrt2Zlpa1UeMcHJ2tg8MXCkK8L17ETY25tWrV+nXr9Pbt+ewZ+HCnypU+K5u3VrGxg1xj0hLO9KtW1tYexMTfXaurIwIYAKY9wAHqVv/97WGiC7Z5cXs7fwti7idy/1+bWJmsitmj9jjaJRWfhZDh/bQ0Phu7drpf/11ScycYqNBA+2tW+eBcEDIRrmdO7cZM8b59evYmJgdwHjbtvmipwDO1as9YMOx4eOzGHuys+NatDDavHnO06cnkYW5eRNX177Pn0cHBa2sVEnj4sUAWRkRwAQw7wFGXpL+s9vccaBXvbx6wIXgIh9HFwkwdPnyid99V75//87MhRYFeNWqqewYQOjvv+zNm7jy5dVhRTnfePv2/wEMVqtUqZScHHTnTrin59hRo3qzwywsmjIXGrii5A8eHGb7MfCeNGmI1IwIYAJYsBb4p3nuwKCcerl9vwcX+UJYEYChFy7s0dGpOWPGSDGAuZFt69bNwFVU1Ga4x6KDW1GAjxzZCPtpadmcKVxiMYAPHvQWPR3eMpxwqRkRwASwYMfAi3/7z4Wes3GBfICLHAOLKmwmSJMPMNzgMmXK4C/2fPx4EdZSFGA4wOXKlX38+LhYykiWMXn+vC+KDf+Z7e/Ro/3Ysf2/LcD/TcpRp8u+VoP2dXMLGj0nas1vNxMoPJgA/mJPoQMSDtTUrgUS2nW1Cbny34vfVYFrO/ftsnzPr8V6Cn3jRig8Xkajk1OHQYO6ygcYGy1bmvTta4/9OLhu3Vo7dy7kjszPT2ratBG84j///B07MU5m5/br12nu3DHYyM29gLEuBskYDN+8eRDW+PDhDUphgd0X+E/y3Dt4amAXt9BWQ4MrdYjU7xPnPOPG0l2vkm5+zP1ANBLApfkeeIb3bFhCMNzQqKGtk32d+trMJv80371Y74H37FmG0a++fj1Dwwa9e9s+fHi0SICvXQuG5bSzax0a6g3Tum/fctEjU1IOmJkZa2pWNTLSc3S0YecePbqpTh0tZt7j4nbr6ekgx4oVKyxY4Cb5FkpJXOice+mPw85cmrDqlI3bAQ0bwJy6NTQvM4uwJIBL50ushduWcB9yqJdXN27RZPQstxJ8iQWzeevWQfb4qlgKTxgO8+XL+yV/evEihhlhTj98SMzMPM39++TJSeTLl/fAf6Y/v78zPH7wvLBaXU87THjof/Tvgo/EJwFcCt9C74r2+3X/msCk0K/2LbSra183t37z57vCbA4Y4KBS30LnZ70FyWA4XKdHiueOd2lPiFICmGfRSHfuhB84sGrz5jnsYw/VDGbIvpUG7zqkim2iq1fu05fEKgGsUDxw6LlgigdWntdIGBInT18fqtn55gpfetBFANOMHLz8FjrnXnps98lHTQaibxC0BDDNicXLYIaMyLgIXScYZDLFBLCis1IGqluz7xDAbfyPUzKO+tOslN/wS6z8rLcnrUefdphQkPOe6CWASfn3KeXfBR8vT1kTZe5Cb4wJYFK+fgsNRxpD4j/TnxPABDApL4MZUjx3wJ1W8fGw8gJ8Z+1qNDypAJStTvglopHinGecHzCbAFZGgEkFpl8CYJjfE61HPvCJJICVzwKvW0Ur6wpD76xd9eXigV8l3Qyr1VVlP9WiMTAp7wP6k6evTxi1hAAmgEl5CXB+1lsYYdV8Ik0AkwphSp3LU9akeO4ggAlgUl4CnHMv/bBhPxUMISaA+a2vX8emp0d9TgqLFo3LyjorgEntjpkOeZV0kwAWAsDVqlX+449jn9ntypdXv3MnvHgfUf//tM9fR4cP79mmjam19ffNmxuU+MLln1IqV/R1AL46e/ONpbsIYCEADJPy+T2vuAA3bFj35s2DX43euLjdLVuasG1usp4SXLgcgEvrir4OwI8ORJ918iCAlRRg9MtGjeqzFYaio7cPHNiFm6M8LGxNq1YmRkZ6J05s5XZmZJzARkTE+saN6zdr1vjnnwfa2lrISefw4Q2wY+3amQUErBADWGoWq1d7WFmZmpjoR0VtZvPF4nikMG3acPw7cmQv/GpqashWTpCVyMmT28zMjFHCJk302QRXksXgtE8fO0D7vylE4v20tKqnpBwQPYa7cKnZhYevRV5NmzbiakMUYLGsxa7o+PEtuByc3qmTZWpqpJyL+lYAv0lJPWoykABWXoDV1NSys+OwHRm53sbGnOt/jo42z59Hb9s2v1u3tmKdsn79OgkJ/nl5CV5eE9D5ZKXDqH78+Pjbt+caNNBmy45xAEtmAdiqVKn04kUMmyyWZVq3bi3OXl27Fow0kTV6tpxy6uvX27hxNlIoKLgoqxicInFWbE4XLHCrVEkDl8aVgbtwyexwjI5OzbNnd3/4kLh8+URWG9wpUrMWvSJYY5yLw1asmOTi4ijnor4VwHmZWWG1uhLA/AOYGQRYJ5gI0U555UqggYEu23PxYoAcgM+d86lTR2vSpCFQMB8Ts0MMYMksunSxtrBoihO5Eop2d0ACetHXNTS+k1VOmNDq1auIrhgstRjyFU4E7gLdu7djtwBRgMWywwZ3N+FqgztFatbcFV24sIerSVh4nJKbe0FWzXzDlRmQCwHMP4BZl0UXFAP44EFvbpQoH+ADB1bB/qAXMmXLGogCLJkFgNm6dR4367pod09LO6Krq7158xx4yKIAiyUSG7urdu0anPGUVYwi9dWrM0j8zJnfxAAWyw6FgfMsC2CpWXNXhNsE95wsM/M0zD5bFVFqzRDABLD0h1g1alRjbmT79uaKAPz6dSz4AU6AdtasUVyXlUznyZOTcInPn/eV+hBLMgt4mO/fF5qgLVvmDh3agx2PLs4Ml6/vks6dC1dLghFWVy8nZhu5RFAqOKv79//C/Fuo1GJwCmZE53nGwWzYjL/a2jXZfPFyAIaph8FHdsnJQRhOi/r2OFJq1twV4RKQBVtvDVfXt6+9nMongAlg6QB7eo6FTWjWrDFGfYoAjI2VKyfjFHTWxYvdOYClphMevhZ9tG3bFnCM2XMpOQA/eHBYT0/H3t7Syso0KWkfS2HTptnIAjnCRhkbN0TvB9utWpl4eLjIKmdoqLemZlX8CweVLYYkWQxOLS2biz4ogoWvWrUy7hStWzdbtmy85BhYMjs47c7O9k5OHXx8FrdpYyp2imTW3BUxbmvV0sRZMNSJiXuVEOA/05+H6/QggJX6NZLYUxxFFAYKhkvUaZSVDkzis2enFH8NI7oMAmckmWWGvnkTx+wee+ItS2F4xVxlxYuBgejdu4dEnXDFP97gljWUn7XoFcEOK+jVfxOAXyXdjDJ3IYCF8B5YUsUAVk3t2LHVgAEOjo42Dg5WYu+fBPAl1kP/o4muXgSwkgKsRsIT+YZfYt3dGEwAC9MCkwo7mAFy2LBf9q00ApgAJuUfwFlX7qjgZ1j/0KR2pLye1I6TpHG/qKD//A9NakfK60ntmOQ+fRmh65Sf9ZYAViYLTJPa0aR2ikny9PWqOR0HjYFJeT8GfpV087BhP5Wd3p0AJuUxwHCbj5oMzIiM+0dVhQAm5SvAfxd8PO0w4dr8bf+osBDApDwD+PDhw5cuXQK9ia5eZ508Pn8iu7CwsISEBAL4qwL8ITeOj7O9vXsXn5l5mkUOEcAl6x6DBw9e4+0dP3jeKRu3UllhtHXr1jNnzizBienp6Q8fPiSAiw3wi4fekd6Nn6bu5Ndsbx8/Xhwzxhl3lu3b5x85spEALln3KMh5D3phe0trfeASA9yrVy8PDw8CuHgAg96oTUbXT1tGbWoulWGlne1twQK3HTsWsLAeW1uLe/ciCGCIk5OTv78/28YBffr0YdvDhw/fsGHD0qVL9fT02rVrx7zcNympnao3nGX/3xTQmZmZOF5LS6tly5aLFi2ytLSUn+aLFy/69etXo0YNExOTmJgYSYClZgo5f/58ly5dcCL2P39euASEl5dX5cqVscfY2DgiIgJ7cGKHDh1q1arl4ODAnSgrwZcvX44ePbp+/fpVq1ZF4eUUT1AAM3qf3W/3zz8OmX/YS2VYaWd7a9JEnwX3QzdunO3tPY0Ahpiamm7cuJFtr1271tzcnG3b2dnVrVt34sSJ169fR7d27t0nxXNHpH6fts3NPD092THdu3fv1q0b/NjHjx8DWnR9+WkCLVdX1+zs7C1btnz//feSAItl2rdvX7Yf7K1bt+7vv/9OS0v78KHwlVVOTk7Xrl3d3d1BXV5eHvaEhoYmJydje9iwYYMGDZKfIEpiYGBw5MgRpHbjxg05xRMOwKL0MpXFsBLO9obbh6FhA66ER49u6t+/MwH8MfeDkY7uGq9fpAI8ZMgQtv2r+/Ta5SvBc859+hL7GcCPHj1SU1MDA+yYkJAQ+QDfv38fx4eFhd28efPSpUvlypV7+vSpJMBcpr/99luDBg3YdseOHdmdQhEXeuvWrY0aNZKTICsJCiZ6lqziCQTgD7lxGPdeO2nO0cv0Vlwn7Jd8pqVss70dO7aZs+3Qq1eDRXlWRYBv3b42fxv2NzU0lmWBAeqjA9ExduNmNepQr4626H5snDlzBj3+yZMnCgIMpxTHt23btv3/S1xcnCTAnHmHE66rq8u2gS5caHV1dRyZm5srFeBDhw5ZWVm1+lf09fXlJMhKcvnyZdFuL6t4QrLA26M2GX9qgXtHbTKV9TRLqWZ7w7/Gxg25ssHx7tPHTmUBPvbL1lDtbth523sfYIN3ypp+3rx5DLY/05+3aWwyrI5pbPfJGZFxe3z9OJY4JGCgypQpEx8fLxVgyTRTU1NByPHjx+U8xJIFMJPY2NjatWtv2rRJEmA4FMD7xIkT2Pbx8ZEPMCsJDLVo4rKKJ7Ax8P8YlkWv0s72hpQ5l37LlrlsrilVA9h/qXeQ2cBgnW5B6u2uzduC5u7fvz+cTAwd8Wv1atWaNWwMaCN0nSzqG8x2nyTJkigSFhYWw4cPf/36dVJSkpmZGQfwJ2lWr85Z9c6dO9vb2zNP+N27d2/fvlUQ4LNnzxYUFGAMDBu7YcMGtnPq1KlIjXvKBYAfPHiA24qLiwtXElkJ4kSMci9evIjtO3fu/PXXX7KKJ7yn0IUMXz9tI8v2Ku1sb9OmDd+714u9gkLxbtwIVSmAA6cu3Wc7an9th8Aa9kHlrI9Yj2JPkk+fPl23tvZ36uU76hi6VDYyqqH9OOwMxsayur7ofgyAq1WrhuEiYIDPzGGDNOvXr1+hQoW+ffsuX76cAxh0OTo64ngDAwNtbW1YVAUBNkK5atTAyNbJyen9+/dsZ0pKCvbr6ekxw4u8NDQ06tWrt3Pnzpo1a7LnWLISzMjIwE8wuVpaWhgYs8dgUosnyPfA2+W/B1bO2d7y85NcXByzs+NwmwgMXKk674GfRO0rBLi63f763VloYXCNTr+v3JXiueOUjVtIFdsjzQfHunuh3UsQEgjD+OzZMzEXuvDx2MePWVnSXxTn5OSwU4olb/8Vyf1AkdlP9nKIbb/7V4pM89WrV5KFLFbxBPsllnLO9paVdRY3gtu3w1TtK45CLWf9v9jgih2OtP3x5gpfjG9zn74slW4jBjB9C61C30JjGHz9egh7UUxa6poe5lPIrXaXwLJWgWWsCgFWbxum1yszLrkUu82NGzdWrFhBAKsiwKRf6SHWrt3+7vOCTAcEadgwUwz/Oede+j8kBLBgtAQBD8oZuSH/PfCVkGPnB8xmGN9atVdlI/IJ4M9S7rlUcZfzLq3V6z8/4EE5IzcU/5SyIOf9s5MJKZ47Xv6eQkASwMVQ0ZiE4gJcWqvXf2bAg9JGbpQsGunzg3sJYCEALDU4QX5MAgew1DiE1as9rKxMTUz02XtgsXNHjuyFX01NDX18FssJZjh5cpuZmTEK1qSJPvvURKxIigQ89OljB2iVP3Ljm6xOSAALAWCpwQlFxiSIrkUoFocA2KpUqfTiRQxLXHI572vXgpF+QoK/6FdckkvX6+vXA5NIgSEqWSRFAh7YwqhKHrlBABPAJQdYanCC/JgEMYAlV53v0sXawqIpEuFyET0XMIBe9GnR5bzFEoGprF69Co7kUpAsUokDHpQtcoMAJoBLDrDU4AT5MQnyVwNmI9KtW+fh+J07F4oBnJZ2RFdXe/PmOchXFGCxRGJjd9WuXUP04zDJIn1OwINSRW4QwARwyQGWGpwgPyZBPsDwJNlXk1u2zB06tIfYub6+Szp3boMNGGF19XJiNpBLBG4nnFKUivmxUKlFKjLgAczk5ycpf+QGAUwAl/whltTgBPkxCXIAfvDgsJ6ejr29pZWVaVLSPpYady5sEcwmejnYbtXKxMPDRVafDg311tSsin/hiD59elJqkYoMeLC0bC76oEhpIzcIYAK4FF4jiQUnyI9JkK8AVdIYcue+eRPH7FtOznn5D9jEwh7EilSCgAfljNwggAngkgP8rZai50XAw9evHAKYAC6GqpEogRDABDAFM9C80CQEMCkBTAB/fYBvr1lNa9sLQ9GUBLDKAUwqMCWAVQXg/Dc5L85cYhq1ZmfwIm//Ocv3zPZCDxCUTltW2K2nLRPadclSnz0EsEoALCrx8fEREREBAQG+ghO/1RsBMP76qpKgKdGgaNa0tDTCT/gAX7lyBXfrsLAwNLyfsMR/4a8AGH/9VEbQiGjKwuk4rlzJyMgg/IQPMBytxMRENDlu28HCkiBP78IJVhesClYZQSOiKdGgaNbMzEzCT/gA4z6NxsYNG05XtLDkxKJCC3x0zupolRE0IpoSDYpmzc7OJvyEDzCaGbdqtDeGTHeFJQm/bgLAv3vtuKsygkZEU6JB0axsLQISgQMsYLmxfB0AvrF0F1UFCQHMP0mevjBcxzZ5+nqqChICmH9yYeTkaFvHhFFLqCpICGD+ybn+bucHOZ8fMJuqgoQA5p9E2w66umBgjN04qgoSAph/cqK1873tw6PMh1JVkBDA/JNIfYcnp8ZG6veiqiAhgPknoZodslMnh2raU1WQEMD8k0C1NgUFs4LUrWlBIBICmGeSn/U2VNMGAEfq93iX9oQqhIQA5pMA2kh9OwB82LAnrXBNQgDzTDLjkk+27wKAo20HPT99iSqEhADmkwDaaNuuADim85BnJxOoQkgIYD7JQ/+Q+GG9AfCFkaMf+ERShZAQwHyS1B17L4x2BsCJY11Tt4ZShZAQwHyS60u8k+cOBMDXFo5N8dxBFUJCAPNJrs1fnrJ4EAC+7jXu6uzNVCEkBDCfJNHV49724QA4dZc7RRSSEMA8k9ieox6FuwLgR+Hjzjp5UIWQEMB8kmjbQU9OjQXA+EsRhSQEMM/kmKnTq+TxABh/j5kOogohIYD5JJH6DtmpkwEw/lJEIQkBzDM5oNE2L2cGAMbfAxrtqUJICGA+CYslZIptqhASApg3kvv0ZbhORw7gcJ0u2EPVQkIA80O4WEKmFFFIQgDzSV7+nnLCqgsH8CmbHzLjkqlaSAhgfggXS8iUIgpJCGA+CRdLyJQiCkkIYD4JF0vIlCIKSQhgPgkXS8iUIgpJCGA+ydXZS697DeYAvrHSndYoJCGAeSMXRk5O3TWCA5giCkkIYB4DfN/X/XcXT6oWEgKYHxLTeWhGlBsHMEUUkhDAfJJTNj88OzOOA/j5OfeT1j9StZAQwPyQw4Zd39yexAFMEYUkBDCfJFzHPid9Kgfwu6ceYbUcqFpICGB+iGgsIUUUkhDAvAc4VNMuP+st1QwJAazs8mf68whdWzGAaZFREgKYH5JzLz3SwF4M4KMmvbJvpVHlkBDAyi5isYRMaZFREgKYH/LkWNyZbj3EAI7t6ZIRGUeVQ0IAK7vc3x34+4g+YgBTSDAJAcwPub1m28VJ/cQAvjTZ7c7a/VQ5JASwskuK58qrCwaKAUwhwSQEMD+EW1hUVGmRURICmB8iFktIIcEkBDCf5Fx/t7TA0WIApwW6nx8wmyqHhABWduEWFhVVCgkmIYD5IVHmvV9eHC8GMPZEmQ+lyiEhgJVduIVFRZVCgkkIYH5ISJX2uVnTxQDGnpAqHalySEoB4EC1NqRfVMXo5UKCST9fUxbtJICl9zBSUiXXQobLWacs3E4AU28g5SXAfxx0LWRYZewwAUwqKIDx91+GrWLcl6WlpWVmZubl5RHApKS8ARj68F+Gj/+06O7du8JmmAAmFSDAHMPHXBcKm2ECmFSYAP/rS48JLNvm2OgFAma45ABnZEx88WIydRreaW7ujA8fZkpuCw9gaPoh1yDYYeEyrCjAhw4NSEwcxbb//HN6ly6NGjfW1NWtev266+fUuGiypaIhIf3i40cQpXLU1lZvwYL2ktufTDBw6cdu3RoHBjrzHWDoo0NuQeqCZVhRgAcNaurt3ZltHzs2qGHDaqVS46LJlopaWOhMn25VghPT0n5OTXUngJk6Ohr4+/cSgAX+hGEhjodL4kKjye3s9JSzCUsMsJOT4ZQplgQw0yZNaoaHD+DlhxxyNT4+XmAMKwqwi0vz9eu7YGPjxq5aWhqVKpU3MtLavr272GE9exr4+jqx7V27evbubcSdvm6dw+LFHfT0qrVtW5/zcrlkoU+fTsLxSNzcXHvhQpvWrevKT/PJk4l9+xrXqKGB3nby5BBJgGVlevasi4ODPk7EfozksWfp0o6VK5fHHlxUWFh/7MGJNja6tWpV7NxZX7S0UhN89mzSqFEt6tevWrXqdyi8nOJ9CZVVKln1pgjAOBgNLbxHXBEREQJjWFGAuZbOzvaYPNmyfXtddNC3b6eJHda8eW0OSPjGZmZ1uNPr1q0yfrzF1atj0K2dnY0lOxAGXV27NoIf+/Dhz+h86Pry0wRao0ebvXo1ZdOmrqamtSUBlpUpevmaNZ3z82elpo7DeB57srKmYlQ/dmxLXNS7d4V7goP7YhyI7aFDmw0c2FR+gihJ48aaEREDkNq1a2PkFE9Uz58fvnt3TzENCOijyK9iTSO1VHLaokiAR4z4ft++3sIDeO/evQJjuNgAQ+fObWdv31BqHcnpNIMHN2PbO3b0aNCgmliyDx64q6mpgQG2PyjIWT7Ad++OxfEhIf1SUlwTE0eVK1cmPX2CJMBSM+3QoQG7UyjiQm/e3FVfv7qcBFlJxEbysoonqvv395k4sbWYzp7dVpFfxZpG6mWWGOAlSzriHvfmjYfwAPbx8QkICDh69GhiYmJaWlp2djYBrCjA3Onw63R1q4rtj44eih7/6NF4BQGGU4rjra3rt2uny/TMmWGSAEvNFOjChVZXL4sjc3KmSQX44MH+bdrUa9lSG9qwYXU5CbKSJCV98ixdVvFE9f37GXBhxJQrj/xfZTWN6GWWGOCtW7tZWtYV3jtCdGxfX18/P7/g4ODo6Ojr16/DCBPA4gDDO2Xbc+a0VRxgGKgyZdTi4lykAiyZ5p07hSbu6NGBch5iycqUaUzM0Nq1K23Y0EUS4Fu3fgLex44N+nf06CgfYFYSGGrRxGUVT1RnzrSuV6+KmDZrVkuRXxUEuMi2kOVC//hjCz+/XoJ0oWGEmSMNI5yRkUEAf6L9+jWBO4eh465dPatXr6A4wNBWrXRcXJrjxn/hwsgWLepwAMtKs1OnhnZ2eswThr/3+vVUBQE+fXpYbu4MjIFhY9etc2A7MbDnHq2fPesCgO/dG4fbyrBhzbmSyEoQJ2KUm5AwEts3b7qxTyOkFu9LP1UWLZUibSHnNZLYLUkgwYaBgQB4z549oaGhsbGx8KIJ4E/01Kkh9etXrVChnLOz8bJltsUCGAPgatUqYLgIGOD7cdjIShN09ehhgOMbN9bU1q4Mi6ogwIaGNZA4RrY9expwz+GSk0djv55eNWZ4kZeGhjqM3vbt3WvWrMieY8lK8I8/xuMnmFwtLQ0MQdljMKnF+5oAK9IWsgBGVRw+/IPwAA4KChL1ou/evUvfQotrXt7MzMwpJf7K7/HjCWIutPw0s7KmslOKpbCHUk0iUOQ+LXz2bBLbhv1U5InO8+eTJQtZsuKVlpa4LYYMafbLL3bsTkQAUzBDsVUMYNKvrPD8x4+3YK/ECWACuNh67doYLy9bAomUAKZwQlJSApiUVG5kIgGsEgBT/OC35S0y8ocJEyyWL7c9dWrI57eIrIfYpaj5+YXfpe/e3bPET0YJ4NJUih/8huroaNCmTb1ff7UfPty0f/8mn98iRQL8+ZU8c6a1j4/T9euu3bo1xg2IABaaC03xgwrq7ds/lS1bhvtYtdRfQX+JSg4Kcm7fXpdtT5tm9ZntRQBLUYof/BLxg7LylczC2dmY++Zx3LiWffoYcV+bcTaWM4Zlyqjt3NlDVqConHwfP57AtZSn5/9aShRgybJJVjLqDVloa1fW0ak8YoQp97m1rHxBL5xn7gZUpcp32dmFL+Rx5M8/tyKASwFgih8srfhBRSIEJbOYMcOaQYuS1KxZsVy5MowKXBp6uViys2ZZg+ERI77HrVNWfL+sVrOz0wNCuP0hO6nflkqWTbKS8W+nTg1TUlyh9vYNu3dvLCff16+nqqmpxcYO4wbwuDr2eTnuyOyDOQL4CwJM8YPFih8sMkJQahbR0UPhBbx/P+PIkYHgoUWLOqjJDx9mwsRJna4sNLQffoLvwIEhBrBkvuAW+XITdIi2FHeurMsXreR798bhGO7jEJQE/96/7y4rX9wZcYDod2yNGmlu29adXOivBDDFDxYrfrDIz5ulZgG7VL16BfwEQ7dlSzcMFN3czOE/S41bYgoT7ehoULGiOiyknE+juXyRmqyW4o6XdfmilcyO4dKB24V/2SfiUvPFDQgH4DCu5HCwJYcABPDnAkzxg6USP1gkwLKywFjXw6MNrBbYOH58MMwUDLv8Z0uwe0iKhSsUCTDuMqCdc1lx4ZIAyyqbaCUzIFFC9i9cBvwL8y4rXwx3y5YtwwWBYIyAf0+cGEwAlybAFD/4JeIHZeUrNYvffnNELVlZ1cM2Kq1SpfL4Nzl5tFiacG7h9cALYKfgeuH3KgIw4xCt4OfXa/789ri91qpVUfJ4qWUTrWTUElp86NBm+Ckzc8oPP5i0bl0XjSInX4yZ4VFz5dfS0mCPMHC/4B49EMCfBTDFD36J+EFZ+UrNAoYXvgz36ThGwsbGWlJHv2AbA2ZctaVlXW7WWEUARr641eIeMWuWNZxYVJrk8VLLJlbJ8HQALe4vVap8h9SY+ZWTb1TUIHNzbfb6d/RosyVLOrL948db4C5PAJfOe2CKH/zK8YMlzgJXB9v1ma+Chwxp1rVro2KVTbSSWT0r3mFwZ1+9utO5c8NhukVjXUrw8p8ApvhBFdUVK+wAzJ49vX78sUXlyuW5cexX+oY50DksrL9ocDJKcvnyaAJYiQCm+EFlVgyeFy/uMHLk93ChxR6/UzQSAUxKSgATwKSkBDABTEoACw3g1FR3S8u6wcF9qROQEsC8tMCpqeN0dCoLbJpCUgJYVQB+8WKympras2eTqB+QEsD8A/jy5dE1a1akTkBKAPMS4IcPfzYwqEGdgJQA5utT6GHDmo8Y8T2bEoGUlADmGcA9exrMnt1WavwqKSkBrORPod2lxriQkhLAPAA4OXm0pmYF6gSkBDAvAWYzjLEpHUlJCWA+Afzhw8yTJ4c0bqyZlzeT+gEpAcwzgB88cB80qCk3fxUpKQFMwQykpAQwAUxKSgATwKQEMAGsLEqLmJISwMVW5VmwkxYxJSWAi60CXrCTFjElgPkNsItL8zVrOv/0U8saNTRevZqiyFqSclYeFU1K1tKSYp9h0yKmcopXsuU2CWAVAtjWVq927UrLl9veuvXThw8zFVlLUs66Z6JJyVrSUlRpEVP5i5iWbLlNAli1AHZ1NWfbiqwlKZ86LqkC2WuCKggwLWJKZBLACgHM2TRF1pIsUGzl0YKilhRUPClaxJSUAFYIYEXWkixQbOVRxQGmRUwLFFvElJQALgLgAgXWkixQbOVRBQGmRUzlL2JasuU2CWDVBViRtSQVWXlUQYBpEVP5i5iWbLlNAljV3wMXuZbk56w8Kqa0iKmc4pVsuU0CmD7k4JkKdRHTki23SQATwDxTWsSUACaASUkJYAKYlJQAJoBJSQlgApiUABYQwKSkglSVAJgTXCGuE1eLaw4iIRGEEMAkJAQwHwCOj4+PiIgICAjwJSERkKBLo2Oje6elpQkZ4CtXruAuFRYWhgv2IyERhKAzo0ujY6N7Z2RkCBlgOBiJiYm4VNyugklIBCHozOjS6Njo3pmZmUIGGPcnXCRuVHA2oklIBCHozOjS6Njo3tnZ2UIGGJeHWxSuE0OFuyQkghB0ZnRpdGx077y8PCEDTEJCQgCTkJAQwCQkJBLyf487JETJe81zAAAAAElFTkSuQmCC" alt="singleton">
+</div>
+<div class="title">Figure 1. UML model of the <em>Singleton</em> pattern</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_singleton_for_the_adventure_game"><a class="link" href="#_singleton_for_the_adventure_game">3. Singleton for the adventure game</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_could_we_combine_patterns"><a class="link" href="#_could_we_combine_patterns">3.1. Could we combine patterns?</a></h3>
+<div class="paragraph">
+<p>Can we combine the last two patterns seen in TD (Strategy and Singleton)?
+In fact, behaviors are carried by objects for the algorithm aspect,
+but there is no reason not to share them among all the objects that
+"use" this behavior ?!</p>
+</div>
+<div class="paragraph">
+<p>In most cases these two patterns do <strong>not go together at all</strong>.
+This strategy is only recommended in a specific case of use of
+<em>Strategy</em>: one where behaviors are simple and "static" (no
+resource consumption for example) and where an association is used:
+image::strategy-assoc.png[]</p>
+</div>
+<div class="paragraph">
+<p>With an implementation like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-p">...</span>
+<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">VolerAvecDesAiles</span><span class="tok-p">();</span>
+<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Cancan</span><span class="tok-p">();</span>
+<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Colvert</span><span class="tok-p">(</span><span class="tok-n">vol</span><span class="tok-p">,</span><span class="tok-n">cri</span><span class="tok-p">);</span>
+<span class="tok-p">...</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lets_apply_singleton_on_the_adventure_game"><a class="link" href="#_lets_apply_singleton_on_the_adventure_game">3.2. Let&#8217;s apply Singleton on the adventure game?</a></h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Faites en sorte que les instances d&#8217;objet affectées à chaque comportement
+d&#8217;un <code>Personnage</code> soient uniques pour chaque comportement distinct.</p>
+</li>
+<li>
+<p>Pourquoi ne devrait-on pas utiliser <code>getInstance()</code> dans le cas
+d&#8217;une composition (dans le constructeur du composé) ?</p>
+</li>
+<li>
+<p>Make the object instances assigned to each behavior
+of a <code>Character</code> are unique for each distinct behavior.</p>
+</li>
+<li>
+<p>Why shouldn&#8217;t we use <code>getInstance ()</code> in the case
+of a UML composition (in the constructor of the compound)?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_still_hungry"><a class="link" href="#_still_hungry">Still hungry?</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>WHat is the difference between singleton and a global variable?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph">
+<p>How would you test <a href="#Singleton">Singleton</a>?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2020-11-18 19:19:37 +0100
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=" http-equiv="Content-Type" />
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+<meta content="Asciidoctor 2.0.16" name="generator" />
+<meta content="Jean-Michel Bruel" name="author" />
+<title>CPOA - (Design Pattern)</title>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+.conum { display: inline-block; color: white !important; background-color: #222222; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 1.2em; height: 1.2em; font-size: 0.9em; font-weight: bold; line-height: 1.2; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -0.1em; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+.colist table td:first-of-type { padding-right: 0.25em; }
+</style>
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f8f8f8; }
+pre.pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #666666 } /* Operator */
+pre.pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #888888 } /* Generic.Output */
+pre.pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+pre.pygments .tok-m { color: #666666 } /* Literal.Number */
+pre.pygments .tok-s { color: #BA2121 } /* Literal.String */
+pre.pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #008000 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #880000 } /* Name.Constant */
+pre.pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #0000FF } /* Name.Function */
+pre.pygments .tok-nl { color: #A0A000 } /* Name.Label */
+pre.pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #19177C } /* Name.Variable */
+pre.pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<link href="deck.js/core/deck.core.css" rel="stylesheet" />
+<link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet" />
+<link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/style/swiss.css" media="screen" rel="stylesheet" />
+<link href="deck.js/themes/transition/fade.css" media="screen" rel="stylesheet" />
+<link href="deck.js/core/print.css" media="print" rel="stylesheet" />
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="article">
+<div class="deck-container">
+<section class="slide" id="title-slide">
+<h1>CPOA - (Design Pattern)</h1>
+<span id="author">Jean-Michel Bruel</span>
+<br />
+<span id="email"><a href="mailto:jbruel@gmail.com">jbruel@gmail.com</a></span>
+<br />
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2022-01-11 (started on 2015-10-05)</span>
+</section>
+<section class="slide topic" id="_this_slides_on_the_internet">
+<h2>This slides on the Internet&#8230;&#8203;</h2>
+<div class="literalblock">
+<div class="content">
+<pre>https://github.com/jmbruel/InnopolisDesignPatterns</pre>
+</div>
+</div>
+</section>
+<section class="slide topic" id="_plan">
+<h2>Plan</h2>
+<div class="ulist incremental">
+<ul>
+<li>Last week pattern</li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_design_patterns">
+<h2>Design patterns</h2>
+
+</section>
+<section class="slide" id="_introduction_importance_des_patrons">
+<h2>Introduction : importance des patrons</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="phdComics" src="images/phdComics.png" />
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Science is what we understand well enough to explain to a computer.
+Art is everything else we do.</p></div>
+<div class="attribution">
+<cite>Donald Knuth</cite>
+</div>
+</blockquote>
+</div>
+</section>
+<section class="slide" id="strategy">
+<h2><em>Strategy</em></h2>
+
+</section>
+<section class="slide" id="_principes_de_conception">
+<h2>Principes de conception</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Identifiez les aspects de votre code qui varient et
+séparez-les de ceux qui demeurent constant.</p></div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_principes_de_conception_suite">
+<h2>Principes de conception (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Programmer une interface, non une implémentation.</p></div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_principes_de_conception_suite_2">
+<h2>Principes de conception (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Principe de conception</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Préférez la composition à l&#8217;héritage.</p></div>
+</blockquote>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_définition_du_patron">
+<h2>Définition du patron</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="title">Design pattern : <strong>Stratégie</strong> (<em>Strategy</em>)</div>
+<div class="paragraph"><p><strong>Stratégie</strong> définit une famille d&#8217;algorithmes, encapsule chacun d&#8217;eux et les
+rend interchangeables.
+Il permet à l&#8217;algorithme de varier indépendamment des clients qui l&#8217;utilisent.</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="strategy" src="images/strategy.svg" />
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_premier_exemple_dutilisation">
+<h2>Premier exemple d&#8217;utilisation</h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/superCanardFinal-a.png">
+<img alt="superCanardFinal a" src="images/superCanardFinal-a.png" />
+</a>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/superCanardFinal-b.png">
+<img alt="superCanardFinal b" src="images/superCanardFinal-b.png" />
+</a>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/superCanardFinal-c.png">
+<img alt="superCanardFinal c" src="images/superCanardFinal-c.png" />
+</a>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title">Question</div>
+Pourquoi n&#8217;a-t&#8217;on pas utilisé <em>Strategy</em> pour <code>afficher()</code> ou <code>nager()</code>?
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret">
+<h2>Autre exemple concret</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+L&#8217;exemple qui suit est tiré de
+<a href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">ce cours</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph"><p><strong>Le problème</strong></p></div>
+<div class="paragraph"><p>Vous avez une classe <code>FileWriter</code> qui a pour rôle d&#8217;écrire dans un fichier
+ainsi qu&#8217;une classe <code>DBWriter</code>. Dans un premier temps, ces classes ne
+contiennent qu&#8217;une méthode <code>write()</code> qui n&#8217;écrira que le texte passé
+en paramètre.</p></div>
+<div class="paragraph"><p>Au fil du temps, vous vous rendez compte que c&#8217;est dommage qu&#8217;elles ne
+fassent que ça et vous aimeriez bien qu&#8217;elles puissent écrire en différents
+formats (HTML, XML, etc.) : les classes doivent donc formater puis écrire.</p></div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite">
+<h2>Autre exemple concret (suite)</h2>
+<div class="paragraph"><p><strong>La solution</strong></p></div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns">
+<img alt="strategyWriter" src="images/strategyWriter.png" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_2">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">L&#8217;interface en <code>PHP</code> (code source <a href="src/php/Formater.php">ici</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="php language-php">&lt;?php&#x000A;interface Formater&#x000A;{&#x000A;  public function format($text);&#x000A;}&#x000A;?&gt;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_3">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe abstraite <code>Writer</code> (code source <a href="src/php/Writer.php">ici</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="php language-php">&lt;?php&#x000A;abstract class Writer&#x000A;{&#x000A;  // Attribut contenant l'instance du formateur que l'on veut utiliser.&#x000A;  protected $formater;&#x000A;&#x000A;  abstract public function write($text);&#x000A;&#x000A;  // Nous voulons une instance d'une classe implémentant Formater en paramètre.&#x000A;  public function __construct(Formater $formater)&#x000A;  {&#x000A;    $this-&gt;formater = $formater;&#x000A;  }&#x000A;}&#x000A;?&gt;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_4">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>FileWriter</code> (code source <a href="src/php/FileWriter.php">ici</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="php language-php">&lt;?php&#x000A;class FileWriter extends Writer&#x000A;{&#x000A;  // Attribut stockant le chemin du fichier.&#x000A;  protected $file;&#x000A;&#x000A;  public function __construct(Formater $formater, $file)&#x000A;  {&#x000A;    parent::__construct($formater);&#x000A;    $this-&gt;file = $file;&#x000A;  }&#x000A;&#x000A;  public function write($text)&#x000A;  {&#x000A;    $f = fopen($this-&gt;file, 'w');&#x000A;    fwrite($f, $this-&gt;formater-&gt;format($text));&#x000A;    fclose($f);&#x000A;  }&#x000A;}&#x000A;?&gt;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_5">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>DBWriter</code> (code source <a href="src/php/DBWriter.php">ici</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="php language-php">&lt;?php&#x000A;class DBWriter extends Writer&#x000A;{&#x000A;  protected $db;&#x000A;&#x000A;  public function __construct(Formater $formater, PDO $db)&#x000A;  {&#x000A;    parent::__construct($formater);&#x000A;    $this-&gt;db = $db;&#x000A;  }&#x000A;&#x000A;  public function write ($text)&#x000A;  {&#x000A;    $q = $this-&gt;db-&gt;prepare('INSERT INTO lorem_ipsum SET text = :text');&#x000A;    $q-&gt;bindValue(':text', $this-&gt;formater-&gt;format($text));&#x000A;    $q-&gt;execute();&#x000A;  }&#x000A;}&#x000A;?&gt;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_6">
+<h2>Autre exemple concret (suite)</h2>
+<div class="paragraph"><p>Enfin, nous avons nos trois formateurs.
+L&#8217;un ne fait rien de particulier (<code>TextFormater</code>),
+et les deux autres formatent le texte en deux langages
+différents (<code>HTMLFormater</code> et <code>XMLFormater</code>).</p></div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_7">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>TextFormater</code> (code source <a href="src/php/TextFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="php language-php">&lt;?php&#x000A;class TextFormater implements Formater&#x000A;{&#x000A;  public function format($text)&#x000A;  {&#x000A;    return 'Date : ' . time() . "\n" . 'Texte : ' . $text;&#x000A;  }&#x000A;}&#x000A;?&gt;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_8">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>HTMLFormater</code> (code source <a href="src/php/HTMLFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="php language-php">&lt;?php&#x000A;class HTMLFormater implements Formater&#x000A;{&#x000A;  public function format($text)&#x000A;  {&#x000A;    return '&lt;p&gt;Date : ' . time() . '&lt;br /&gt;' ."\n". 'Texte : ' . $text . '&lt;/p&gt;';&#x000A;  }&#x000A;}&#x000A;?&gt;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_autre_exemple_concret_suite_9">
+<h2>Autre exemple concret (suite)</h2>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+<div class="listingblock">
+<div class="title">La classe <code>XMLFormater</code> (code source <a href="src/php/XMLFormater.php">ici</a>)</div>
+<div class="content">
+<pre class="highlight"><code class="php language-php">&lt;?php&#x000A;class XMLFormater implements Formater&#x000A;{&#x000A;  public function format($text)&#x000A;  {&#x000A;    return '&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;' ."\n".&#x000A;           '&lt;message&gt;' ."\n".&#x000A;           "\t". '&lt;date&gt;' . time() . '&lt;/date&gt;' ."\n".&#x000A;           "\t". '&lt;texte&gt;' . $text . '&lt;/texte&gt;' ."\n".&#x000A;           '&lt;/message&gt;';&#x000A;  }&#x000A;}&#x000A;?&gt;</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_dautres_exemples">
+<h2>D&#8217;autres exemples</h2>
+<div class="ulist">
+<ul>
+<li class="slide"><p>
+La fonction standard <code>sort()</code> de python<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="python language-python">&gt;&gt;&gt; sorted("This is a test string from Andrew".split(), key=str.lower)&#x000A;['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']</code></pre>
+</div>
+</div></p></li>
+<li class="slide"><p>
+Stratégie de cryptage en fonction de la taille d&#8217;un fichier<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">File file = getFile();&#x000A; Cipher c = CipherFactory.getCipher( file.size() );&#x000A; c.performAction();&#x000A;&#x000A;// implementations:&#x000A;interface  Cipher  {&#x000A;     public void performAction();&#x000A;}&#x000A;class InMemoryCipherStrategy implements Cipher {&#x000A;         public void performAction() {&#x000A;             // load in byte[] ....&#x000A;         }&#x000A;}&#x000A;class SwaptToDiskCipher implements Cipher {&#x000A;         public void performAction() {&#x000A;             // swapt partial results to file.&#x000A;         }&#x000A;}</code></pre>
+</div>
+</div></p></li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-tip"></i>
+</td>
+<td class="content">
+Plus de détails <a href="http://stackoverflow.com/questions/370258/real-world-example-of-the-strategy-pattern">ici</a>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_non_réutilisation">
+<h2>(non) Réutilisation</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+Les patrons <strong>ne sont pas réutilisables</strong>!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph"><p>Il faut implémeter la solution qu&#8217;il représente à chaque fois.</p></div>
+</section>
+<section class="slide" id="_réutilisation_exception">
+<h2>Réutilisation (exception)</h2>
+<div class="paragraph"><p>Exception : certains font l&#8217;objet d&#8217;une librairie (comme <a href="#observerJava"><em>Observer</em> de Java</a>).</p></div>
+<div class="paragraph"><p>Par exemple le patron Singleton existe dans la bibliothèque standard du
+langage  en <a href="https://www.ruby-lang.org">Ruby</a>.
+C&#8217;est un <em>mixin</em> qu&#8217;il suffit d&#8217;inclure dans la classe qui doit être un singleton.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="ruby language-ruby">class Klass&#x000A;   include Singleton&#x000A;   # ...&#x000A;end&#x000A;&#x000A;a,b  = Klass.instance, Klass.instance&#x000A;&#x000A;a == b&#x000A;# =&gt; true&#x000A;&#x000A;Klass.new&#x000A;# =&gt; NoMethodError - new is private ...</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_association_ou_composition">
+<h2>Association ou composition</h2>
+<div class="paragraph"><p>On trouve deux modèles <a href="http://www.uml.org/">UML&#8482;</a> :</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="strategy compo" src="images/strategy-compo.png" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="strategy assoc" src="images/strategy-assoc.png" />
+</div>
+</div>
+</section>
+<section class="slide" id="_association_ou_composition_suite">
+<h2>Association ou composition (suite)</h2>
+<div class="paragraph"><p>Et donc deux implémentations :</p></div>
+<div class="listingblock">
+<div class="title">Composition &#8658; le composé encapsule les composants</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">public class Colvert extends Canard {&#x000A;&#x000A;	protected Colvert() {&#x000A;		this(new VolerAvecDesAiles(), new Cancan());&#x000A;	}&#x000A;...&#x000A;c1 = new Colvert();</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Association &#8658; le composant existe "en dehors"</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">...&#x000A;vol = new VolerAvecDesAiles();&#x000A;cri = new Cancan();&#x000A;c1 = new Colvert(vol,cri);&#x000A;...</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_un_peu_dhistoire">
+<h2>Un peu d&#8217;histoire</h2>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">1977</dt>
+<dd>
+<p><strong>Alexander</strong> : patterns pour les architectures (les vraies)</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/Alexander.png">
+<img alt="Alexander" src="images/Alexander.png" width="10%" />
+</a>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">1987</dt>
+<dd>
+<p><strong>Beck</strong> et <strong>Cunningham</strong> : patterns pour des interfaces utilisateurs</p>
+</dd>
+<dt class="hdlist1">1988</dt>
+<dd>
+<p><strong>Meyer</strong> : livre sur l&#8217;orienté objet (langage <a href="http://fr.wikipedia.org/wiki/Eiffel_(langage)">Eiffel</a>), devenu la bible pour
+beaucoup de programmeurs (cf. <a href="#Meyer88">[Meyer88]</a>)</p>
+</dd>
+<dt class="hdlist1">1990-1995</dt>
+<dd>
+<p><strong>Gamma</strong>, Helm, Johnson et Vlissides : LE livre de référence (cf. <a href="#GoF">[GoF]</a>)</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/GoF.png">
+<img alt="GoF" src="images/GoF.png" width="10%" />
+</a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Les auteurs de ce livre sont connus comme les <strong>Gof</strong> pour « <em>Gang of Four</em> ».
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">2003</dt>
+<dd>
+<p><strong>Martin</strong> : principes SOLID (cf. <a href="#Martin03">[Martin03]</a>)</p>
+</dd>
+<dt class="hdlist1">2004</dt>
+<dd>
+<p><strong>Craig Larman</strong> décrit des modèles de conception : les Patterns <strong>GRASP</strong> (cf. <a href="#Larman05">[Larman05]</a>)</p>
+</dd>
+</dl>
+</div>
+</section>
+<section class="slide" id="_exemples_de_bons_principes">
+<h2>Exemples de bons principes</h2>
+<div class="paragraph"><p><strong>SOLID</strong>:</p></div>
+<div class="ulist">
+<ul>
+<li><em><strong>S</strong>ingle Responsibility Principle</em></li>
+<li><em><strong>O</strong>pen-Closed Principle</em></li>
+<li><em><strong>L</strong>iskov Substitution Principle</em></li>
+<li><em><strong>I</strong>nterface Segregation Principle</em></li>
+<li><em><strong>D</strong>ependency Inversion Principle</em></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_single_responsibility_principle">
+<h2><em><strong>S</strong>ingle Responsibility Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid s" src="images/solid-s.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Responsabilité =&gt; Sujet à changement</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_open_closed_principle">
+<h2><em><strong>O</strong>pen-Closed Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid o" src="images/solid-o.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Ouvert à l'extension mais fermé à la modification</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_open_closed_principle_suite">
+<h2><em><strong>O</strong>pen-Closed Principle</em> (suite)</h2>
+<div class="paragraph"><p>Ainsi, une fois écrite et testée, une classe ne devrait être modifiée que pour
+être corrigée! Toute modification devrait être possible par extension.</p></div>
+</section>
+<section class="slide" id="_liskov_substitution_principle">
+<h2><em><strong>L</strong>iskov Substitution Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0">
+<img alt="liskov" src="images/liskov.jpg" />
+</a>
+</div>
+</div>
+</section>
+<section class="slide" id="_barbara_liskov_est_toujours_active">
+<h2>Barbara Liskov est toujours active!</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="liskov2018" src="images/liskov2018.png" width="70%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_lsp_le_principe">
+<h2>LSP : le principe</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid l" src="images/solid-l.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Une classe doit pouvoir être remplacée par une instance d'un de ses&#x000A;sous-types, sans modifier la cohérence du programme</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_lsp_un_exemple">
+<h2>LSP : un exemple</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>Un carré est un rectangle particulier.</p></div>
+</blockquote>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="carre" src="images/carre.png" width="10%" />
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title">Question</div>
+Peut-on toujours substituer un <code>Carré</code> à la place d&#8217;un <code>Rectangle</code> ?
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_vraiment">
+<h2>Vraiment?</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Rectangle.java</code>)</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">class Rectangle&#x000A;{&#x000A;	protected int m_width;&#x000A;	protected int m_height;&#x000A;&#x000A;	public void setWidth(int width){&#x000A;		m_width = width;&#x000A;	}&#x000A;&#x000A;	public void setHeight(int height){&#x000A;		m_height = height;&#x000A;	}&#x000A;&#x000A;&#x000A;	public int getWidth(){&#x000A;		return m_width;&#x000A;	}&#x000A;&#x000A;	public int getHeight(){&#x000A;		return m_height;&#x000A;	}&#x000A;&#x000A;	public int getArea(){&#x000A;		return m_width * m_height;&#x000A;	}&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_vraiment_2">
+<h2>Vraiment?</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Square.java</code>)</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">// Violation of Likov's Substitution Principle&#x000A;class Square extends Rectangle&#x000A;{&#x000A;	public void setWidth(int width){&#x000A;		m_width = width;&#x000A;		m_height = width;&#x000A;	}&#x000A;&#x000A;	public void setHeight(int height){&#x000A;		m_width = height;&#x000A;		m_height = height;&#x000A;	}&#x000A;&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_vraiment_3">
+<h2>Vraiment?</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Square.java</code> - suite)</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">class LspTest&#x000A;{&#x000A;	private static Rectangle getNewRectangle()&#x000A;	{&#x000A;		// it can be an object returned by some factory ...&#x000A;		return new Square();&#x000A;	}&#x000A;&#x000A;	public static void main (String args[])&#x000A;	{&#x000A;		Rectangle r = LspTest.getNewRectangle();&#x000A;&#x000A;		r.setWidth(5);&#x000A;		r.setHeight(10);&#x000A;		// User knows that r is a rectangle.&#x000A;		// It assumes that he's able to set the width and height as for the base class&#x000A;&#x000A;		System.out.println(r.getArea());&#x000A;		// Now she's surprised to see that the area is 100 instead of 50.&#x000A;	}&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_et_linverse">
+<h2>Et l&#8217;inverse?</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="rectangle" src="images/rectangle.png" width="40%" />
+</div>
+</div>
+</section>
+<section class="slide" id="_même_problème">
+<h2>Même problème</h2>
+<div class="listingblock">
+<div class="title">Réponse (<code>Rectangle.java</code>)</div>
+<div class="content">
+<pre class="highlight"><code class="java language-java">class LspTest&#x000A;{&#x000A;	private static Square getNewSquare()&#x000A;	{&#x000A;		// it can be an object returned by some factory ...&#x000A;		return new Rectangle();&#x000A;	}&#x000A;&#x000A;	public static void main (String args[])&#x000A;	{&#x000A;		Square s = LspTest.getNewSquare();&#x000A;&#x000A;		s.setWidth(5);&#x000A;		// User knows that r is a rectangle.&#x000A;		// It assumes that he's able to set the width and height as for the base class&#x000A;&#x000A;		System.out.println(s.getArea());&#x000A;		// Now she's surprised to see that the area is 0 instead of 25.&#x000A;	}&#x000A;}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_interface_segregation_principle">
+<h2><em><strong>I</strong>nterface Segregation Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid i" src="images/solid-i.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une seule interface générale</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_dependency_inversion_principle">
+<h2><em><strong>D</strong>ependency Inversion Principle</em></h2>
+<div class="imageblock">
+<div class="content">
+<img alt="solid d" src="images/solid-d.jpg" />
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Il faut dépendre des abstractions, pas des implémentations</pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_dip_explications">
+<h2>DIP : explications</h2>
+<div class="paragraph"><p>Ce principe indique :</p></div>
+<div class="ulist">
+<ul>
+<li>Les modules de haut niveau (abstraits) ne doivent pas dépendre des modules de bas niveau.
+Les deux doivent dépendre d&#8217;abstractions.</li>
+<li>Les abstractions ne doivent pas dépendre des détails d&#8217;implémentation.
+C&#8217;est l&#8217;inverse : les détails doivent dépendre des abstractions.</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note"></i>
+</td>
+<td class="content">
+Ainsi ce principe va à l&#8217;encontre de l&#8217;intuition classique.
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_exemple_bad">
+<h2>Exemple (bad)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="dip bad" src="images/dip-bad.png" width="70%" />
+</div>
+<div class="title">Figure 1. Exemple de code violant le principe d&#8217;inversion des dépendances</div>
+</div>
+</section>
+<section class="slide" id="_exemple_good">
+<h2>Exemple (good)</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="dip" src="images/dip.png" width="80%" />
+</div>
+<div class="title">Figure 2. Exemple de code ne violant plus le principe d&#8217;inversion des dépendances</div>
+</div>
+</section>
+<section class="slide" id="_solid_et_patrons">
+<h2>SOLID et patrons</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="paragraph"><p>Lesquels des 5 principes SOLID s&#8217;appliquent bien à <em>Strategy</em> ?</p></div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all" style="width:100%">
+<colgroup>
+<col style="width:20%" />
+<col style="width:20%" />
+<col style="width:20%" />
+<col style="width:20%" />
+<col style="width:20%" />
+</colgroup>
+<tbody>
+<tr>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid s" src="images/solid-s.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid o" src="images/solid-o.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid l" src="images/solid-l.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid i" src="images/solid-i.jpg" /></span></p></div></div></td>
+  <td class="tableblock halign-left valign-top"><div><div class="paragraph"><p><span class="image"><img alt="solid d" src="images/solid-d.jpg" /></span></p></div></div></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide" id="_solid_et_patrons_éléments_de_réponses">
+<h2>SOLID et patrons (éléments de réponses)</h2>
+<div class="paragraph"><p>Quelques éléments de réponses :</p></div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><em><strong>S</strong>ingle Responsibility Principle</em></dt>
+<dd>
+<p>Bof</p>
+</dd>
+<dt class="hdlist1"><em><strong>O</strong>pen-Closed Principle</em></dt>
+<dd>
+<p>&#8658; <strong>Oui</strong> : extension (du comportement) sans toucher au code!</p>
+</dd>
+<dt class="hdlist1"><em><strong>L</strong>iskov Substitution Principle</em></dt>
+<dd>
+<p>Non</p>
+</dd>
+<dt class="hdlist1"><em><strong>I</strong>nterface Segregation Principle</em></dt>
+<dd>
+<p>Oui, mais pas spécifiquement</p>
+</dd>
+<dt class="hdlist1"><em><strong>D</strong>ependency Inversion Principle</em></dt>
+<dd>
+<p>&#8658; <strong>Oui</strong> : les algos dépendent des mêmes abstractions que les données (les interfaces)</p>
+</dd>
+</dl>
+</div>
+</section>
+<section class="slide" id="_grasp">
+<h2>GRASP</h2>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>The critical design tool for software development is <strong>a mind well educated in
+design principles</strong>. It is not the UML or any other technology.</p></div>
+<div class="attribution">
+<cite>Craig Larman, 2005</cite>
+</div>
+</blockquote>
+</div>
+<div class="paragraph"><p>Il s&#8217;agit d&#8217;un ensemble de patrons, plutôt orientés conception (UML). Nous en
+aborderons certains au travers des exemples de ce module (cf. <a href="#Larman05">[Larman05]</a>).</p></div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-tip"></i>
+</td>
+<td class="content">
+Notez que les principes SOLID ne s&#8217;appliquent pas qu&#8217;à la programmation objet. Pour une discussion sur leur application avec React (language fonctionnel), cf. <a class="bare" href="https://dev.to/shadid12/can-you-apply-solid-principles-to-your-react-applications-46il">https://dev.to/shadid12/can-you-apply-solid-principles-to-your-react-applications-46il</a>.
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="slide" id="_les_patrons_comment_ça_marche">
+<h2>Les patrons : comment ça marche ?</h2>
+
+</section>
+<section class="slide" id="_intérêt">
+<h2>Intérêt</h2>
+<div class="ulist">
+<ul>
+<li>Réponses éprouvées à des problèmes récurrents</li>
+<li>Vocabulaire commun</li>
+</ul>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph"><p>T&#8217;as qu&#8217;à utiliser une <em>factory</em>!</p></div>
+</blockquote>
+</div>
+</section>
+<section class="slide" id="_patrons_abordés">
+<h2>Patrons abordés</h2>
+<div class="ulist">
+<ul>
+<li class="slide"><a href="#Singleton">[Singleton]</a></li>
+<li class="slide"><a href="#strategy">Stratégie</a></li>
+<li class="slide"><a href="#Fabrique">[Fabrique]</a> (<em>factory</em>)</li>
+<li class="slide"><a href="#Observateur">[Observateur]</a></li>
+<li class="slide"><a href="#Itérateur">[Itérateur]</a></li>
+<li class="slide"><a href="#Composite">[Composite]</a></li>
+<li class="slide"><a href="#Etat">[Etat]</a></li>
+<li class="slide"><a href="#Visiteur">[Visiteur]</a></li>
+<li class="slide"><a href="#Proxy">[Proxy]</a></li>
+<li class="slide"><a href="#Adaptateur">[Adaptateur]</a></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_patrons_non_abordés">
+<h2>Patrons non abordés</h2>
+<div class="ulist">
+<ul>
+<li>Décorateur</li>
+<li>Commande</li>
+<li>Façade</li>
+<li>Patron de méthode</li>
+<li>Chaînes de responsabilité</li>
+<li>Prototype</li>
+<li>Mémento</li>
+<li>Médiateur</li>
+<li>Interprète</li>
+<li>Poids-mouche</li>
+<li>Monteur</li>
+<li>Pont</li>
+</ul>
+</div>
+</section>
+<section class="slide topic" id="_ready_for_a_quizz">
+<h2>Ready for a quizz?</h2>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning"></i>
+</td>
+<td class="content">
+<div class="title"><strong>QUESTION</strong></div>
+<div class="ulist">
+<ul>
+<li>Connect to: <a class="bare" href="http://www.socrative.com/">http://www.socrative.com/</a> (<strong>student login</strong>)</li>
+<li>Or download the student app <span class="image"><img alt="socrative2" src="images/socrative2.png" width="10%" /></span></li>
+<li>Choose room <strong>44918d67</strong></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="http://www.socrative.com/">
+<img alt="socrative1" src="images/socrative1.png" width="50%" />
+</a>
+</div>
+</div>
+</section>
+<p aria-role="status" class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+</div>
+<script src="deck.js/jquery.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+    (function($, deck, undefined) {
+      $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+      $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+    
+      $.extend(true, $[deck].defaults, {
+          countNested: false
+      });
+    
+      $.deck('.slide');
+    })(jQuery, 'deck');
+  //]]>
+</script>
+<style type="text/css">
+  /*<![CDATA[*/
+    .slide.canvas-image {
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+    -moz-box-align: start;
+    -webkit-box-align: start;
+    -ms-box-align: start;
+    box-align: start;
+    -moz-box-pack: start;
+    -webkit-box-pack: start;
+    -ms-box-pack: start;
+    box-pack: start;}
+    
+    .bottom-left {
+      left: 1%;
+      bottom: 20%; }
+    
+    .top-left {
+      left: 1%;
+      top: 20%; }
+    
+    .bottom-right {
+      right: 1%;
+      bottom: 20%; }
+    
+    .top-right {
+      right: 1%;
+      top: 20%; }
+    
+    .center-up {
+      right: 50%;
+      top: 1%;
+    }
+    
+    .center-down {
+      right: 50%;
+      bottom: 1%;
+    }
+    .canvas-image .canvas-caption p {
+      text-align: center;
+      padding-top: 0;
+      padding: 0;
+      -moz-transform: none;
+      -webkit-transform: none;
+      -o-transform: none;
+      -ms-transform: none;
+      transform: none;
+      display: inline;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-weight: bold;
+      font-size: 58px;
+      -webkit-box-shadow: 2px 2px 2px #000;
+      -moz-box-shadow: 2px 2px 2px #000;
+      box-shadow: 2px 2px 2px #000;
+      padding: 1rem;
+      color: white; }
+    kbd.keyseq { color: #555555; }
+    kbd:not(.keyseq) {
+      display: inline-block;
+      color: #222222;
+      font-size: 0.7em;
+      line-height: 1.4;
+      background-color: #F7F7F7;
+      border: 1px solid #ccc;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+      margin: -0.15em 0.15em 0 0.15em;
+      padding: 0.2em 0.6em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    kbd kbd:first-child { margin-left: 0; }
+    kbd kbd:last-child { margin-right: 0; }
+  /*]]>*/
+</style>
+</body>
+</html>
