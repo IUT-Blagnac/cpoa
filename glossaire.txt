@@ -11,7 +11,7 @@ de création, comportementaux et structurels.
 == Patrons de création
 
 
-
+[[Singleton]]
 Singleton::
 include::pattern/singleton.txt[]
 

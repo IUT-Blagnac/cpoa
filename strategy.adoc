@@ -76,7 +76,7 @@ WARNING: Pourquoi n'a-t'on pas utilisé _Strategy_ pour `afficher()` ou `nager()
 === Autre exemple concret
 
 NOTE: L'exemple qui suit est tiré de
-http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns[ce cours].
+https://openclassrooms.com/fr/courses/1665806-programmez-en-oriente-objet-en-php[ce cours].
 
 *Le problème*
 
