@@ -1,0 +1,71 @@
+== Introduction aux Design patterns
+
+
+ifdef::slides[:leveloffset: -1]
+
+=== Principe
+
+En quelques mots :
+
+* Moyen d’accomplir quelque chose
+* Une méthode **éprouvée**, réutilisable
+* Un code simple, « propre et peu perfectible »
+* Un jargon pour discuter du savoir faire
+* Quelque soit le langage à Objet
+
+Le nombre d'applications développées avec des technologies orientées objets augmentent :
+
+*   Complexité croissante du code (effet spaghetti)
+*   Idée de réutiliser des techniques pour solutionner des problèmes courants
+*   => Recensement de modèles connus sous le nom de motifs de conception (design patterns).
+
+Ces modèles sont définis pour pouvoir être utilisés avec un maximum de langages orientés objets.
+
+=== C'est quoi ?
+
+Les design patterns ou modèles de conception :
+
+*   Décrivent des *organisations* pratiques de *classes* objets.
+*   Forme d'organisation *transposable* à plusieurs applications. 
+*   Définissent le type de problèmes qu'elles résolvent.
+*   Définissent des conditions pour pouvoir être appliquées.
+
+Au départ : Peut paraître *complexe* voire inutile.
+*   Pourtant important d'en connaître plusieurs et de les appliquer systématiquement (dans les cas reconnus comme pouvant évoluer). 
+*   Donne une architecture au code et simplifie cette architecture.
+
+
+Il est habituel de regrouper ces modèles communs dans *trois* grandes catégories :
+
+* les modèles de création (creational patterns)
+* les modèles de structuration (structural patterns)
+* les modèles de comportement (behavioral patterns)
+
+=== On en a déjà vu ?
+
+Exemples de Patterns déjà utilisés :
+
+*   `Observer` : listeners d'événements en javaFX (si on le fait en mode programmation)
++
+[source, java]
+----
+Button button2 = new Button("Accept");
+button2.setOnAction(new EventHandler<ActionEvent>() {
+    @Override public void handle(ActionEvent e) {
+        label.setText("Accepted");
+    }
+});
+----
++
+image:eventhandler.png[]
+
+*   `Singleton` : implcite en SAE de second semestre : `LogToDatabase` 
++
+Une seul objet `Connection` d'accès à la base de données.
+
+Le motif de conception le plus connu est sûrement le modèle MVC (Model View Controller) mis en oeuvre en premier avec SmallTalk.
+
+Le MVC de la SAE de S2 => découpage de l'application
+*   Plutôt un style d'architecture du code
+*   Pas vraiment un pattern
+

@@ -1,0 +1,340 @@
+// ------------------------------------------
+//  Created by Jean-Michel Bruel on 2014-11.
+//  Copyright (c) 2014-2020 IRIT/U. Toulouse. All rights reserved.
+// ------------------------------------------
+
+
+// ------------------------------------------
+include::definitions.txt[]
+:myasciidoconf:
+//-------- directories -----------
+//:icons:
+:icons: font
+:iconsdir: images/icons
+:imagesdir: images
+:images: images
+:src: src
+:sectlinks:
+//:stylesheet: /Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
+//--------------------------------
+:coderay-css: style
+:data-uri:
+:numbered:
+//coderay highlightjs prettify pygments
+:pygments:
+:source-highlighter: pygments
+//:pygments_style: native
+:pygments-style: manni
+:pygments-linenums-mode: inline
+:scrollable:
+
+// Enlevé linkcss car car génére les css à côté du fichier html
+// :linkcss:
+//----------- deck.js --------------
+//:navigation:
+// swiss, neon, beamer, web-2.0
+:deckjs_theme: swiss
+//fade, horizontal-slide, vertical-slide
+//:deckjs_transition: fade
+:deckjs_transition: horizontal
+:status: bottom
+//----------- general --------------
+:status: bottom
+:inclusion:
+:experimental:
+:icons: font
+:toc-title: Table des Matières
+:toc: left
+
+
+
+
+= R3.04 Qualité - CM2 - Introduction aux Pattrons
+Jean-Michel Bruel - André Péninou
+
+include::introduction.asc[]
+
+
+include::typage.asc[]
+
+
+//////////
+
+A VOIR ????????????????????????
+
+ifdef::slides[]
+include::visibilite.asc[]
+endif::slides[]
+ifndef::slides[]
+include::visibilite.asc[leveloffset=+1]
+endif::slides[]
+
+//////////
+
+
+include::static.asc[]
+
+
+
+include::enum.asc[]
+
+
+include::patterns-intro.adoc[]
+
+
+// A ISOLER
+
+
+[[strategy]]
+== Un exemple : Strategy
+
+ifdef::slides[:leveloffset: -1]
+
+//-------------- book
+ifdef::backend-pdf[]
+WARNING: Pensez à d'abord réaliser le <<TD-strategy,TD en annexe>>.
+endif::backend-pdf[]
+//--------------------
+
+=== Principes de conception
+
+//-------------- book
+ifdef::backend-pdf[]
+Les bons principes de conception qui sont mis en oeuvre dans ce patron sont les suivants.
+endif::backend-pdf[]
+//--------------------
+
+[NOTE]
+.Principe de conception
+====
+[quote]
+____________________________________________________________________
+Identifiez les aspects de votre code qui varient et
+séparez-les de ceux qui demeurent constant.
+____________________________________________________________________
+====
+
+ifdef::slides[=== Principes de conception (suite)]
+
+[NOTE]
+.Principe de conception
+====
+[quote]
+____________________________________________________________________
+Programmer une interface, non une implémentation.
+____________________________________________________________________
+====
+
+ifdef::slides[=== Principes de conception (suite)]
+
+[NOTE]
+.Principe de conception
+====
+[quote]
+____________________________________________________________________
+Préférez la composition à l'héritage.
+____________________________________________________________________
+====
+
+=== Définition du patron
+
+[NOTE]
+.Design pattern : *Stratégie* (_Strategy_)
+====
+include::pattern/strategy.txt[]
+====
+
+=== Premier exemple d'utilisation
+
+ifndef::slides[.Premier exemple d'utilisation de patron (1er comportement)]
+image::superCanardFinal-a.png[link="images/superCanardFinal-a.png",scaledwidth=70%]
+
+ifndef::slides[.Premier exemple d'utilisation de patron (2ème comportement)]
+image::superCanardFinal-b.png[link="images/superCanardFinal-b.png"]
+
+ifndef::slides[.Premier exemple d'utilisation de patron (hiérarchie des classes)]
+image::superCanardFinal-c.png[link="images/superCanardFinal-c.png"]
+
+.Question
+WARNING: Pourquoi n'a-t'on pas utilisé _Strategy_ pour `afficher()` ou `nager()`?
+// réponse : car on considère que tous les canards ont le même comportement pour ces méthodes.
+
+=== Autre exemple concret
+
+NOTE: L'exemple qui suit est tiré de
+https://openclassrooms.com/fr/courses/1665806-programmez-en-oriente-objet-en-php[ce cours].
+
+*Le problème*
+
+Vous avez une classe `FileWriter` qui a pour rôle d'écrire dans un fichier
+ainsi qu'une classe `DBWriter`. Dans un premier temps, ces classes ne
+contiennent qu'une méthode `write()` qui n'écrira que le texte passé
+en paramètre.
+
+Au fil du temps, vous vous rendez compte que c'est dommage qu'elles ne
+fassent que ça et vous aimeriez bien qu'elles puissent écrire en différents
+formats (HTML, XML, etc.) : les classes doivent donc formater puis écrire.
+
+ifdef::slides[=== Autre exemple concret (suite)]
+
+*La solution*
+
+ifndef::slides[.Application du pattern <<strategy>> (http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns[source])]
+image::strategyWriter.png[link="http://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/les-design-patterns"]
+
+ifdef::slides[=== Autre exemple concret (suite)]
+
+[NOTE,formater-icon.png]
+====
+.L'interface en `PHP` (code source link:src/php/Formater.php[ici])
+[source,php]
+------
+include::src/php/Formater.php[]
+------
+====
+
+ifdef::slides[=== Autre exemple concret (suite)]
+
+[NOTE,formater-icon.png]
+====
+.La classe abstraite `Writer` (code source link:src/php/Writer.php[ici])
+[source,php]
+------
+include::src/php/Writer.php[]
+------
+====
+
+ifdef::slides[=== Autre exemple concret (suite)]
+
+[NOTE,filewriter-icon.png]
+====
+.La classe `FileWriter` (code source link:src/php/FileWriter.php[ici])
+[source,php]
+------
+include::src/php/FileWriter.php[]
+------
+====
+
+ifdef::slides[=== Autre exemple concret (suite)]
+
+[NOTE,dbwriter-icon.png]
+====
+.La classe `DBWriter` (code source link:src/php/DBWriter.php[ici])
+[source,php]
+------
+include::src/php/DBWriter.php[]
+------
+====
+
+ifdef::slides[=== Autre exemple concret (suite)]
+
+Enfin, nous avons nos trois formateurs.
+L'un ne fait rien de particulier (`TextFormater`),
+et les deux autres formatent le texte en deux langages
+différents (`HTMLFormater` et `XMLFormater`).
+
+ifdef::slides[=== Autre exemple concret (suite)]
+
+[NOTE,formaters-icon.png]
+====
+.La classe `TextFormater` (code source link:src/php/TextFormater.php[ici])
+[source,php]
+------
+include::src/php/TextFormater.php[]
+------
+
+ifdef::slides[]
+====
+
+=== Autre exemple concret (suite)
+
+[NOTE,formaters-icon.png]
+====
+
+endif::slides[]
+
+.La classe `HTMLFormater` (code source link:src/php/HTMLFormater.php[ici])
+[source,php]
+------
+include::src/php/HTMLFormater.php[]
+------
+
+ifdef::slides[]
+====
+
+=== Autre exemple concret (suite)
+
+[NOTE,formaters-icon.png]
+====
+
+endif::slides[]
+
+.La classe `XMLFormater` (code source link:src/php/XMLFormater.php[ici])
+[source,php]
+------
+include::src/php/XMLFormater.php[]
+------
+====
+
+
+
+
+//////////
+
+// include::build.asc[]
+
+//////////
+
+//////////
+//----------------
+include::patterns.asc[leveloffset=+1]
+
+include::fabrique.asc[]
+
+include::machine-a-etat.asc[]
+
+include::etat.adoc[]
+
+include::retourProjet.asc[]
+
+//include::sonar.asc[]
+
+//include::codingDojo.asc[]
+
+include::observer.asc[]
+
+include::JTable.asc[]
+
+include::adapteur.asc[]
+
+include::visiteur.asc[]
+
+include::proxy.asc[]
+
+include::iterateur.asc[]
+
+include::composite.asc[]
+
+include::refactoringBanque.txt[]
+
+include::patterns4.asc[]
+
+:numbered!:
+include::glossaire.txt[]
+
+include::refs.txt[]
+//////////
+
+:numbered!:
+
+//////////
+== About...
+
+****************************************************************
+Document réalisé par mailto:{email}[{author}] via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
+Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
+image:88x31.png["Licence Creative
+Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+****************************************************************
+//////////
