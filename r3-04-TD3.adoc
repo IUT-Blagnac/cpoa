@@ -1,0 +1,677 @@
+:moduleTitle: R3.04 Qualité
+:authorDefault:  BUT/Info/S3/R3.04
+
+:tdnum: TD 2 - Patron Stratégie
+
+:sourcedir: src/java/TD1
+
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+ifndef::myasciidoconf[]
+include::asciidoc.conf[]
+endif::myasciidoconf[]
+
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+:icons: font
+
+// TESTS
+
+
+
+:Author:  {authorDefault}
+:lang: fr
+:slideshowlocation: Your computer
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169; 
+:toc-title: Table des Matières
+:toc: left
+:incremental!:
+:source-highlighter: pygments
+:numbered:
+:iconsdir: icons/
+:icons: true
+
+:eclipse: http://www.eclipse.org/[eclipse]
+:eclipseversion: 2022
+:eclipsedownload: https://www.eclipse.org/downloads/packages/release/2019-12[Eclipse Oxygen]
+
+//----------- définitions --------------
+:sitecours: http://webetud.iut-blagnac.fr/[Support de Cours]
+:pre: PreReq
+:objtd: ObjTP
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+
+= {doctitle}
+:Author:  {authorDefault} - (Semaine 45)
+:lang: fr
+:slideshowlocation: IUT Blagnac
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169;
+:incremental:
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+//----------- définitions --------------
+:sitecours: http://iut-blagnac.github.io/cpoa/[site du cours]
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+:principe: Principe de conception
+:allerPlusLoin: Pour aller plus loin
+:about: À propos
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[CAUTION]
+.Version corrigée  image:icons/solution.png[]
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[[cartouche]]
+[align="left",cols="1,10a",width="100%"]
+|======================
+| {pre}		|
+1. Je sais programmer en {java}.
+2. J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
+3. Je maîtrise les concepts objet de base (héritage, polymorphisme, ...).
+| {objtd}	| Comprendre ce qu'est une *conception*.
+| {duree}	| *1* TD et *2* TP de 1,5h (sur 2 semaines différentes).
+|======================
+
+
+ifndef::compact[]
+
+== Rappel du cours
+
+Ce TD étant le premier de l'année, aucune référence au cours de cette année
+n'est requise. Le cours du semestre 2 (R2.01 Dév Objet et R2.03 Qualité) est considéré comme acquis!
+
+TIP: Mais pour les prochains, n'hésitez pas à (re)lire régulièrement le cours.
+
+endif::compact[]
+
+== L'application SuperCanard
+
+NOTE: Les exercices de ce TD sont tirés de l'excellent livre "Tête la première : Design Pattern".
+Bert Bates, Eric Freeman, Elisabeth Freeman, Kathy Sierra. Editions O'Reilly. 2005.
+
+=== Application existante
+
+Soit l'application (un jeu de simulation de mare aux canards) `SuperCanard` dont le modèle est
+décrit ci-dessous :
+
+.Extrait d'une application existante (source plantUML link:images/superCanard.plantuml[ici])
+image::superCanard.png[]
+
+NOTE: De nombreuses autres classes héritent de `Canard`.
+
+Voici un exemple de code :
+
+.Première version de Canard.java
+[source,java]
+--------
+abstract public class Canard {
+
+	public void cancaner() {
+		System.out.println("Je cancane comme un Canard!");
+	}
+
+	public void nager() {
+		System.out.println("Je nage comme un Canard!");
+	}
+
+	abstract public void afficher();
+}
+--------
+
+.Première version de Colvert.java
+[source,java]
+--------
+public class Colvert extends Canard {
+
+	public void afficher() {
+		System.out.println("Je suis un Colvert");
+	}
+
+}
+--------
+
+=== Modification/Amélioration
+
+Votre hiérarchie vous demande maintenant d'améliorer l'application
+pour être plus proche de la réalité.
+
+Vous décidez d'ajouter une méthode `voler()` à vos canards :
+
+.Nouvelle fonctionnalité
+image::superCanard2-note.png[]
+
+.Deuxième version de Canard.java
+[source,java]
+--------
+abstract public class Canard {
+
+	public void cancaner() {
+		System.out.println("Je cancane comme un Canard!");
+	}
+
+	public void nager() {
+		System.out.println("Je nage comme un Canard!");
+	}
+
+	abstract public void afficher();
+
+	public void voler() {
+		System.out.println("Je vole comme un Canard!");
+	};
+}
+--------
+
+=== Catastrophe!
+
+La hiérarchie vous appelle en urgence : des canards en plastiques se mettent
+à voler dans l'application! En plus, certains canards malades, qui ne devraient
+pas voler, volent!
+
+TIP: Vous avez oublié que certains canards ne volaient pas!
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Complétez la phrase suivante : L'*héritage* c'est super pour faire
+de la ............. mais c'est plus problématique pour les aspects .............
+====
+
+//----------------------------------------------------- Correction -------------------------
+
+ifdef::prof[]
+
+[CAUTION]
+.Solution
+====
+L'*héritage* c'est super pour faire
+de la *réutilisation* mais c'est plus problématique pour les aspects *maintenance*
+(ou *évolution*).
+====
+
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+=== Solution 1 : redéfinition de méthodes
+
+Vous songez à une première solution simple : redéfinir la méthode `voler()`
+dans les canards qui ne volent pas.
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Complétez le code java suivant pour réaliser cette solution :
+
+[source,java]
+--------
+public class CanardEnPlastique extends Canard {
+
+	@Override
+	public void afficher() {
+		System.out.println("Je suis un CanardEnPlastique!");
+	}
+
+
+
+
+
+
+}
+--------
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+[source,java]
+--------
+include::src/java/TD1/src/CanardEnPlastique-old.java[]
+--------
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Dans la liste ci-après, quels sont les inconvénients à utiliser l’héritage pour
+définir le comportement de `Canard` ? (Plusieurs choix possibles.) :
+
+[options=interactive]
+- [ ] Le même code pourrait être dupliqué (réécrit) entre les sous-classes.
+- [ ] Les changements de méthodes de comportements au moment de l'exécution sont difficiles.
+- [ ] Nous ne pouvons pas avoir de canards qui dansent.
+- [ ] Il est difficile de connaître tous les comportements des canards
+- [ ] Les canards ne peuvent pas voler et cancaner en même temps.
+- [ ] Les modifications peuvent affecter involontairement d'autres canards.
+====
+
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+- [*] Le même code pourrait être dupliqué (réécrit) entre les sous-classes : ex. si plusieurs canards ne volent pas comme le canard en plastique sans en hériter
+- [*] Les changements de méthodes de comportements au moment de l'exécution sont difficiles : code défini dans la classe pour toutes les instances.
+- [ ] Nous ne pouvons pas avoir de canards qui dansent.
+- [*] Il est difficile de connaître tous les comportements des canards (à l'avance)
+- [ ] Les canards ne peuvent pas voler et cancaner en même temps.
+- [*] Les modifications peuvent affecter involontairement d'autres canards : par héritage
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+
+=== Solution 2 : utilisation des interfaces
+
+Vous songez à utiliser les interfaces pour améliorer le code.
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Sur le diagramme suivant indiquez les relations d'héritage (`extends` de java)
+et d'implémentation (`implements` de java) :
++
+image::superCanardInterfaces.png[]
++
+. Que pensez-vous de la conception obtenue ?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+image::superCanardInterfacesSolution.png[]
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+=== Solution 3 : isoler ce qui varie
+
+Vous êtes confrontés au même problème "classique" que l'on retrouve souvent : *LE CHANGEMENT*!
+
+Nous allons donc appliquer un bon {principe} :
+
+[NOTE]
+.{principe}
+====
+Identifiez les aspects de votre code qui varient et
+séparez-les de ceux qui demeurent constants.
+====
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Quels sont les deux principales choses qui varient dans votre code?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+`voler()` et `cancaner()` : des comportements.
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+==== Implémentation des comportements
+
+Commençons par implémenter les comportements de manière séparée.
+Pour cela nous rappelons un bon principe que vous avez déjà utilisé :
+
+[NOTE]
+.{principe}
+====
+Programmer une interface, non une implémentation.
+====
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+En appliquant le principe ci-dessus, proposez une conception (diagramme de classe uniquement)
+avec les classes et/ou interfaces (à vous de juger) suivantes : `ComportementVol`,
+`VolerAvecDesAiles`, `NePasVoler`.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+Nous avons ajouté à la solution la version pour `ComportementCancan`.
+
+image::comportement.png[]
+
+Question : quelle est la différence avec une classe abstraite au lieu d'une interface pour les comportements?
+
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+==== Intégration du comportement
+
+Il nous faut maintenant relier les classes de canards à leur comportement.
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Ajouter à la classe `Canard` deux attributs pour référencer les comportements.
+. Enlevez les méthodes devenues inutiles.
+. Remplacez-les (donnez les implémentations) par les méthodes
+`effectuerVol()` et `effectuerCancan()` (qui utilisent les attributs précédents).
+. Modifiez les constructeurs de `Colvert` (par exemple) pour indiquer
+comment vos attributs sont initialisés.
+// from André 2016 :
+. Ajouter à la classe `Colvert` la méthode `setMalade()` et `setGueri()`
+qui permettent au run-time de modifier le comportement de vol.
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+// .Nouvelle version de link:src/java/TD1/src/Canard.java[Canard.java]
+[source,java]
+--------
+include::src/java/TD1/src/Canard.java[]
+--------
+// .Nouvelle version de
+
+// link:src/java/TD1/src/Colvert.java[Colvert.java]
+[source,java]
+--------
+include::src/java/TD1/src/Colvert.java[]
+--------
+
+Pour le dernière question :
+
+[source,java]
+--------
+public void setMalade () { this.comportementVol = new NePasVoler(); }
+public void setGueri () { this.comportementVol = new VolerAvecDesAiles(); }
+--------
+
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+==== Résumé et mise en oeuvre
+
+Il est temps maintenant de prendre du recul et d'expérimenter les
+avantages de notre nouvelle conception.
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Réalisez le diagramme de classe complet de l'application.
+. Que feriez-vous pour ajouter la propulsion à réaction à l'application?
+. Voyez-vous une classe qui pourrait utiliser le comportement de `Cancan`
+et qui n'est pas un `Canard`?
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+. Réalisez le diagramme de classe complet de l'application.
++
+image::superCanardFinal.png[link="images/superCanardFinal.png"]
++
+. Que feriez-vous pour ajouter la propulsion à réaction à l'application?
++
+Tout simplement créer une classe `VolAReaction` qui implémente l'interface
+`ComportementVol`.
++
+. Voyez-vous une classe qui pourrait utiliser le comportement de `Cancan`
+et qui n'est pas un `Canard`?
++
+Par exemple un appeau!
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+=== Votre premier _Design Pattern_
+
+==== La pattern Stratégie
+
+En fait vous venez de mettre en oeuvre votre premier _Design Pattern_ :
+le patron _Strategy_ (*Stratégie* en français).
+
+[NOTE]
+.Design pattern : *Stratégie* (_Strategy_)
+====
+include::pattern/strategy.txt[]
+====
+
+==== Mise en oeuvre et révision
+
+//----------------------------- Question ------------------
+[WARNING]
+====
+On vous demande de reprendre un jeu d'aventure dont
+seul le modèle ci-dessous est fourni.
+
+image::aventure-sujet.png[link="images/aventure-sujet.png"]
+
+. Réorganiser les classes
+. Identifier les classes abstraites, les interfaces et les classes ordinaires.
+. Tracer les liens entre les classes ("est un", implémentation, "a un")
+. Placer la méthode `setArme()` ci-dessous :
++
+[source,java]
+-----
+setArme(ComportementArme a) {
+  this.arme = a;
+}
+-----
+====
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+image::aventure.png[link="images/aventure.png"]
+====
+
+[CAUTION]
+.Le modèle de Sylvain Frappez (2015)
+====
+Certains étudiants font même du zèle quand ils sont motivés :
+
+image::TD1-frappez.png[link="images/TD1-frappez.png"]
+====
+
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+
+:numbered!:
+== {allerPlusLoin}
+
+
+.Quelques exemples de description du patron _Strategy_
+image::google-strategy.png[link="images/google-strategy.png"]
+
+
+
+
+Nous avons utilisé sans le nommer un troisième bon principe :
+
+[NOTE]
+.{principe}
+====
+Préférez la composition à l'héritage.
+====
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Quelle différence entre notre conception finale
+et une implémentation du type :
+
+[source,java]
+-----
+abstract public class Canard implements ComportementVol {...}
+-----
+====
+
+ifndef::backend-pdf[]
+//----------------------------- Question ------------------
+.*Mots-croisés*
+image::crossword1.png[link="images/crossword1.png"]
+
+WARNING: Ce mots-croisés est tiré du livre cité en entête, et il comporte donc
+des définitions qu'il vous est impossible de trouver :
+
+* 7 => Baleares
+* 11 => Observateur
+* 12 => DK
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Solution
+====
+image::crossword1-sol.png[link="images/crossword1-sol.png"]
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
+endif::backend-pdf[]
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+Comment testeriez-vous la mise en oeuvre du patron <<strategy,Strategy>>?
+====
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+[CAUTION]
+.Exemple de solution possible
+====
+[source,ruby]
+----
+require "minitest/autorun"
+MODEL_NAME = "model.uml"
+
+module MiniTest
+  class Unit
+    class TestCase
+      #Define new assertion
+      def assert_contains(string_to_test, substring_to_verify)
+        assert_match( string_to_test, substring_to_verify)
+      end
+      def assert_not_contains(string_to_test, substring_to_verify)
+        assert_not_match( string_to_test, substring_to_verify)
+      end
+    end
+  end
+end
+MiniTest::Unit.after_tests { p @_assertions }
+
+class TestGeneratedModel < MiniTest::Unit::TestCase
+  #------------ General tests about plantUML
+  def test_generated_model_exists
+    print assert_equal(true, File.exists?(MODEL_NAME))
+  end
+
+  def test_generated_model_is_plantuml
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/@startuml/).any?)
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/@enduml/).any?)
+  end
+
+  def test_generated_model_exists
+    assert_equal(true, File.exists?(MODEL_NAME))
+  end
+
+  #------------ Specific tests about expected content
+  def test_class_Canard_is_abstract
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/abstract Canard/).any?)
+  end
+
+  def test_class_Canard_has_ComportementCancan_behavior
+    assert_contains(/Canard\s+--> ".*" ComportementCancan/, File.readlines(MODEL_NAME).join)
+  end
+
+  def test_class_Canard_has_ComportementVol_behavior
+    assert_contains(/Canard\s+--> ".*" ComportementVol/, File.readlines(MODEL_NAME).join)
+  end
+
+  def test_ComportementCancan_is_an_Interface
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/interface\s+ComportementCancan/).any?)
+  end
+
+  def test_ComportementVol_is_an_Interface
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/interface\s+ComportementVol/).any?)
+  end
+
+  def test_ComportementCancan_Interface_has_concrete_implementation
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/ComportementCancan\s+<\|\.\./).any?)
+  end
+
+  def test_ComportementVol_Interface_has_concrete_implementation
+    assert_equal(true, File.readlines(MODEL_NAME).grep(/ComportementVol\s+<\|\.\./).any?)
+  end
+
+end
+----
+====
+endif::prof[]
+
+TIP: N'hésitez pas à consulter un autre exemple, orienté "jeux de rôle",
+https://app.box.com/shared/yrlj0takyhjeg1mefacy[ici (p. 116)].
+
+//////
+ifndef::backend-pdf[]
+
+ifndef::compact[]
+== {about}...
+
+****************************************************************
+Document réalisé par mailto:{email}[{author}] via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
+Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
+image:88x31.png["Licence Creative
+Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+****************************************************************
+endif::compact[]
+
+endif::backend-pdf[]
+//////
