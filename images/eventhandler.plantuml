@@ -1,0 +1,17 @@
+@startuml
+
+
+
+class Button {
+- observers : List<ActionListener>
+--
++ setOnAction(EventHandler<ActionEvent>) : void
+}
+
+interface EH  as "EventHandler<T extends Event>" {
++ handle(T event) : void
+}
+
+Button *--> EH
+
+@enduml

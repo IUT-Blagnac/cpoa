@@ -22,3 +22,7 @@ modelTest
 reveal.js
 .gradle
 .class
+
+# Repertoires de travail
+/htmlGenerated
+/genImages
