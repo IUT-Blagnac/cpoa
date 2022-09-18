@@ -28,7 +28,6 @@ endif::todoprof[]
 // TESTS
 
 
-
 :Author:  {authorDefault}
 :lang: fr
 :slideshowlocation: Your computer
@@ -476,7 +475,7 @@ le patron _Strategy_ (*Stratégie* en français).
 [NOTE]
 .Design pattern : *Stratégie* (_Strategy_)
 ====
-include::pattern/strategy.txt[]
+image::strategyAvecAttribut.svg[]
 ====
 
 ==== Mise en oeuvre et révision
