@@ -1,0 +1,159 @@
+:moduleTitle: R3.03-Analyse
+:authorDefault:  Dut/Info-S3/R3.03
+:tdnum: TP 3
+
+
+:eleve:
+:sourcedir: src/java/TD1
+
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+ifndef::myasciidoconf[]
+include::asciidoc.conf[]
+endif::myasciidoconf[]
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+
+= {doctitle}
+
+:Author:  {authorDefault}
+:lang: fr
+:slideshowlocation: IUT Blagnac
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169;
+:incremental:
+:experimental:
+
+//----------- définitions --------------
+:sitecours: http://jmbruel.github.io/cpoa/[Support de Cours]
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[CAUTION]
+.Version corrigée image:icons/solution.png[]
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[[cartouche]]
+[align="left",cols="1,10a",width="90%"]
+|======================
+| {pre}		|
+.	Je sais programmer en Java.
+.	J'ai compris le patron Observateur.
+| {objtd}	| Le but de ce TP est de manipuler le patron Observateur.
+| {duree}	| *1 ou 2* TP de 1,5h.
+|======================
+
+== Code de départ
+
+ifdef::prof[]
+[CAUTION]
+.Recommandation
+=====
+Cet exercice est tiré d'ici : http://csserver.ucd.ie/~meloc/DesignPatternJavaExercises/Observer/Observer.htm
+=====
+endif::prof[]
+
+.	Récupérer l'archive de projet Eclipse `ObserverInitialCode.zip` sur moodle. 
+L'importer dans un workspace Eclipse.
+.	Lire rapidement les et comparer les applications `observer.nonpattern` et `observer.pattern`.
+.	Lancer l'application (`Main.main()`) et observer ce quelle affiche (un tableau de valeurs numériques).
+
+== Exercices
+
+=== Reverse Engineering
+
+.	Obtenez et comparez les 2 diagrammes de classes des deux 
+.   Pourquoi `CourseController` est-elle aussi un _Observer_ ?
+
+=== Evolution du code `observer.nonpattern`
+
+Etendre le code `observer.nonpattern` pour présenter le vecteur de `CourseRecords` comme un camembert (_pie chart_), en plus de la forme actuelle (_bar chart_). 
+
+TIP: Allez à l'essentiel, le but n'est pas d'avoir un super code, mais de vous confronter à la difficulté d'évolution.
+Pour plus de détails sur les camembers en Swing, cf. <<sf,section finale>>.
+
+=== Evolution du code `observer.pattern`
+
+Faites la même chose avec le code `observer.pattern` 
+
+Que pensez-vous de la différence (en terme d'effort de codeage et de résultat)?
+
+=== Push vs. Pull
+
+Vous avez pu observer que la version du patron _Observer_ utilisait un modèle _pull_ (`notifyObservers()` n'envoie aucune information).
+
+Réalisez une version `push`.
+
+=== Inconvénent du _push_
+
+Dans cette nouvelle version, si les programmes ont plus de 1000 cours, et si l'un seulement évolue, `notifyObservers()` 
+pousse toutes les informations sur tous les observateurs! 
+
+Améliorez votre modèle _push_ pour qu'il ne pousse que les données pertinentes. 
+
+TIP: Pour cet exercice, vous pourrez ignorer les changement de `New Course` et continuer à utiliser le modèle _pull_ pour ce type de changement. 
+
+=== Sélection des _updates_
+
+Vous aurez remarqué que `CourseController` n'est intéressé que par les changements de `New Course`, alors que `BarChart` et `PieChart` ont besoin de connaitre les changements de valeurs de `JSlider`. 
+Etendre l'interface d'inscription de `Observable` (la méthode `attach`) pour que `CourseController` ne reçoivent plus les mises à jour des `updates` qui ne l'intéressent pas. 
+
+
+[[sf]]
+== How to draw a pie chart ?
+
+
+Here is a code segment that draws a pie chart given a Graphics object and 
+an Array containing Integers to be represented in the pie chart. 
+It is drawn at location (xOffset, yOffset) and with the radius specified to be of size 100.
+
+[source,java]
+-----
+public void paint(Graphics g, Integer[] data) {
+	super.paint(g);
+	int radius = 100;
+	
+	//first compute the total number of students
+	double total = 0.0;
+	for (int i = 0; i < data.length; i++) {
+		total += data[i];
+	}
+	//if total == 0 nothing to draw
+	if (total != 0) {
+		double startAngle = 0.0;
+		for (int i = 0; i < data.length; i++) {
+			double ratio = (data[i] / total) * 360.0;
+			//draw the arc
+			g.setColor(LayoutConstants.subjectColors[i%LayoutConstants.subjectColors.length]);
+			g.fillArc(LayoutConstants.xOffset, LayoutConstants.yOffset + 300, 2 * radius, 2 * radius, (int) startAngle, (int) ratio);
+			startAngle += ratio;
+		}
+	}
+}
+-----
