@@ -9,6 +9,9 @@
 // Enlevé linkcss car car génére les css à côté du fichier html
 // :linkcss:
 
+// L'enlève au besoin (! undefines the variable)
+:!linkcss:
+
 :doctitle:  {moduleTitle} - Sujet {tdnum}
 ifdef::eleve[]
 :doctitle:  {moduleTitle} - Sujet {tdnum}
