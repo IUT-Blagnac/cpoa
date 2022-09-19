@@ -5,12 +5,9 @@
 
 :sourcedir: src/java/TD1
 
-ifndef::definitions[]
-include::definitions.txt[]
-endif::definitions[]
-ifndef::myasciidoconf[]
-include::asciidoc.conf[]
-endif::myasciidoconf[]
+// ATTENTION !
+// Enlevé linkcss car car génére les css à côté du fichier html
+// :linkcss:
 
 :doctitle:  {moduleTitle} - Sujet {tdnum}
 ifdef::eleve[]
@@ -39,6 +36,10 @@ endif::todoprof[]
 :numbered:
 :iconsdir: icons/
 :icons: true
+
+:iconsdir: images/icons
+:imagesdir: images
+:images: images
 
 :eclipse: http://www.eclipse.org/[eclipse]
 :eclipseversion: 2022
