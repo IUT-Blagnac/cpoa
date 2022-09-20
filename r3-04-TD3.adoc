@@ -1,7 +1,7 @@
 :moduleTitle: R3.04 Qualité
 :authorDefault:  BUT/Info/S3/R3.04
 
-:tdnum: TD 2 - Patron Stratégie
+:tdnum: TD 3 - Patron Stratégie
 
 :sourcedir: src/java/TD1
 

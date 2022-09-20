@@ -1,9 +1,11 @@
 :moduleTitle: R3.04 Qualité
 :authorDefault:  BUT/Info/S3/R3.04
 
-:tdnum: TD 2 - Patron Stratégie
+:tdnum: TP3 - Patron Stratégie
 
 :sourcedir: src/java/TD1
+
+include::definitions.txt[]
 
 // ATTENTION !
 // Enlevé linkcss car car génére les css à côté du fichier html
@@ -37,6 +39,8 @@ endif::todoprof[]
 :numbered:
 :iconsdir: icons/
 :icons: true
+:imagesdir: images
+
 
 :eclipse: http://www.eclipse.org/[eclipse]
 :eclipseversion: 2022
@@ -75,45 +79,181 @@ endif::prof[]
 . Je maîtrise les concepts objet de base (héritage, polymorphisme, ...).
 . J'ai réalisé le TD `SuperCanard` et donc connait le patron _Strategy_!
 | {objtd}	| Comprendre ce qu'est une *conception* et implémenter mon premier patron.
-| {duree}	| *2* TP de 1,5h (sur 1 semaine).
+| {duree}	| *2* TP de 1,5h.
+| {depot} | *Les répertoires src des codes produits (3 projets a priori) + fichiers .uml (ou .txt) des codes plantuml produits durant le TPs*
 |======================
 
 [[utils]]
 == Fichiers utiles
 
-- le link:util/plantuml.bat[plantuml.bat]
+Récupérer le fichier zip depuis le serveur.
+
+Il contient :
+
+- le code source de démarrage TP3_SuperCanardBof.zip
+- le plantuml.bat nécessaire plus tard
+- la doclet pour javadoc (version non officielle,
+mais compatible java `1.8`, si vous avez besoin de la version officielle : link:util/plantUmlDoclet.jar[doclet 1.7])
+- le jar plantuml
+- divers fichiers utilisés dans le TP
+
+//////
+- le link:util/plantuml.bat[plantuml.bat] nécessaire plus tard
 - la link:util/java8/plantUmlDoclet.jar[doclet pour javadoc] (version non officielle,
 mais compatible java `1.8`, si vous avez besoin de la version officielle : link:util/plantUmlDoclet.jar[doclet 1.7])
 - le link:util/plantuml.jar[jar plantuml]
+//////
 
+[[patstrat]] 
 == Rappel sur le patron Stratégie
 
 [[strategy]]
 [NOTE]
 .Design pattern : *Stratégie* (_Strategy_)
 ====
-include::pattern/strategy.txt[]
+image::strategyAvecAttribut.svg[]
 ====
 
 TIP: N'hésitez pas à (re)lire régulièrement le {sitecours}.
+
+== Stratégie dans `java.util` : méthode `sort()`
+
+=== La situation
+
+. Etudiez et comprenez la documentation de la méthode `sort()` de la classe `List` : link:https://docs.oracle.com/javase/8/docs/api/java/util/List.html[Documentation de `List`] et link:https://docs.oracle.com/javase/8/docs/api/java/util/List.html#sort-java.util.Comparator-[Documentation de `sort()`]
+
+. Cette méthode permet de trier la liste à laquelle elle est appliquée. Pour comprendre `sort(Comparator<? super E> c)` :
+..  Rappelez-vous les algorithmes de tris : à un moment donné il faut comparer deux éléments pour trouver le plus grand/plus petit des deux.
+..  Ainsi `sort()` applique un algorithme de tri (double parcours, ...) et utilise son paramètre `Comparator c` en paramètre pour comparer deux éléments et décider de les permuter (ou pas).
+..  Le paramètre `Comparator c` est lui chargé de comparer deux éléments de la liste lors du tri.
+. Etudiez et comprenez le documentation de l'interface link:https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html[`Comparator`] : en particulier la méthode `int compare(T o1, T o2)`. 
+..  Remarquez que la documentation de `sort()` indique qu'elle utilise cette méthode.
+..  C'est cette méthode qu'il nous faudra implémenter.
++
+[NOTE]
+.Remarque
+====
+Ne prenez pas en compte les autres méthodes de `Comparator` (à regarder plus tard si vous le souhaitez).
+====
+
+
+=== Mise en oeuvre
+
+Nous allons faire des tris de listes de chaînes de caractères (`List<String>`) en utilisant `sort()`.
+
+`Comparator` étant une interface, il va nous falloir implémenter `Comparator<String>`...
+
+Pour commencer, *reprenez* dans un projet {eclipse} le code suivant. Il vous faudra compléter la méthode `test()` pour trier la variable `li`.
+
+[source,java]
+.Code à reprendre
+-------
+import java.util.Arrays;
+import java.util.List;
+
+public class TestSort {
+	public static void main(String[] args) {	
+		TestSort ts = new TestSort();
+		ts.test();
+	}
+
+	private void test() {
+		List<String> li = Arrays.asList("aaa", "b", "AAA", "eee", "ffff", "g", "h", "i", "FF", "j", "k", "K");
+	
+		// Faire ici li.sort(...) comme demandé
+		
+		printList(li);
+	}
+	private void printList (List<String> l) {
+		for (String s : l) {
+			System.out.println(s);
+		}
+	}
+}
+-------
+
+==== Première version simple
+
+Puisqu'il nous faut implémenter une interface : créons une classe !
+
+. Créez dans le projet une classe (`ComparaisonStringSurLongueur`) qui implémente `Comparator<String>`
+. Ecrivez le code de la méthode `int compare(String s1, String s2)` de telle sorte qu'elle compare ses deux paramètres sur leur longueur de chaine. La méthode renverra :
+..  -1 si s1 considérée plus petit que s2 (sur la longueur donc), 
+..  0 si s1 est considérée égale à s2,
+..  +1 si s1 est considérée supérieure à s2.
+. Utiliser un objet de cette classe pour trier la liste `li` dans le code fourni en utilisant `sort()`.
+
+==== Amélioration : classe interne
+
+La classe créée précédemment est déclarée dans le package mais a priori, seule la classe `TestSort` va l'utiliser. Ainsi, on expose une classe assez inutile.
+
+Pour résoudre cela, java permet de déclarer une classe `interne` à une autre classe. Pour plus d'infos link:https://fr.wikibooks.org/wiki/Programmation_Java/Classes_internes[voir ce site sur classes internes].
+
+.   *Reprenez* la classe `TestSort` et déclarez une classe interne `ComparaisonStringMajMin` qui implémente `Comparator<String>` et fera une comparaison alphabétique des chaînes sans différencier la casse (majuscules et minuscules). 
+..  Voir du côté de `String : toUppercase()` et `String : compareTo()`.
+..  Vous pouvez même déclarer la classe private (elle ne sera pas utilisée ailleurs).
+.   Utilisez cette classe pour, à la suite du test précédent, trier une deuxième fois `li` par ordre alphabétique sans différencier la casse et réafficher `li`.
+
+==== Amélioration + : Classe interne anonyme
+
+Au final, la classe décrite précédemment n'est utilisée qu'une seule fois car un seul new dans le code. De plus, elle est private, il y a peu de chances qu'elle soit utilisée ailleurs dans le code.
+
+Java propose de simplifier cette situation : déclarer la classe (code de la classe) lors du new lui-même ! Pour plus d'infos link:https://fr.wikibooks.org/wiki/Programmation_Java/Classes_internes[voir ce site sur classes anonymes].
+
+Dans notre cas, la syntaxe de déclaration de la classe anonyme sera du type :
+[source, java]
+----
+new Comparator<String> () {
+			@Override
+			public int compare(String s1, String s2) {
+				...
+			}		
+		}
+----
+
+[NOTE]
+====
+Vous pourriez avoir l'impression de faire un new d'une interface ce qui est interdit en java : *en fait vous faites un new d'une "classe anonyme"* (sans nom) dont le code est donné et implémente l'interface "sur le moment avant le new" (le `implements` est omis). La classe serait :
+[source, java]
+----
+Comparator<String> {
+  @Override
+  public int compare(String s1, String s2) {
+    ...
+  }
+}
+----
+====
+
+. *Reprenez* le code pour trier et afficher une troisième fois la liste par ordre alphabétique classique de `String` en utilisant une classe interne anonyme (le new et la classe anonyme viendront directement en paramètre de `sort()`).
+
+=== Synthèse
+
+. *Question* : En vous référant au patron stratégie repris en <<patstrat>>, dans le cadre de la méthode `sort()` de l'exercice précédent :
+..  Qui joue le rôle de la classe `Contexte` ?
+..  Quelle est la méthode `contexte` ?
+..  Qui joue le rôle de la classe `Stratégie` ?
+..  Quelle est la méthode `algorithme()` ?
+
 
 == Reprise du TD
 
 [NOTE]
 =====
-Les TPs sont prévus se dérouler sur {eclipse}, mais vous êtes libre
-d'utiliser l'éditeur de votre choix.
+Les TPs sont prévus se dérouler sur {eclipse}.
+Les manipulations pour la rétro ingénierie (fin du dujet) ne seront expliqués que sur {eclipse}.
+Néanmoins, vous êtes libre d'utiliser l'éditeur de votre choix en y adaptant les éléments demandés.
 =====
 
-. Téléchargez le code de l'application `SuperCanardBof` existante link:TP1.zip[TP1.zip].
+. Récupérez le code de l'application `SuperCanardBof` existante (cf. <<utils>>).
 +
 [TIP]
 ======
 Attention quelques étapes sont nécessaires à l'utilisation de ces fichiers sous eclipse/Windows :
 
 . Importer dans {eclipse} le projet (menu:File[Import... > Existing Projects into Worspace]
- et choisir `TP1.zip` que vous venez de télécharger.
-. Positionner `Junit` dans le `Classpath`(btn:[Clic Droit] sur votre projet
+ et choisir `TP3.zip` que vous avez de télécharger.
+. Positionner `Junit` si besoin dans le `Classpath`(btn:[Clic Droit] sur votre projet
 menu:Properties[Java Build Path > Add Library] et choisir `Junit4`)
 . Si Windows, dans la ligne suivante de `SuperCanardTest`, il faut remplacer
 les deux points de l'option `-cp` par un point virgule :
@@ -129,7 +269,7 @@ manière automatique que tout fonctionne.
 . Regardez le programme de test fonctionnel `SuperCanardTest2` qui vérifie de
 manière automatique que tout fonctionne, mais d'une manière plus proche des
 tests unitaires.
-. Implémentez rapidement le patron _Strategy_ comme préparé en TD en modifiant
+. *Implémentez rapidement le patron _Strategy_ comme préparé en TD* en modifiant
 le code en conséquence.
 . Rejouez les tests pour vérifier que tout fonctionne toujours.
 
@@ -170,18 +310,48 @@ un personnage parmis les types possibles, et de lui affecter une arme.
 
 TIP: Lire la section <<reverse>> avant d'attaquer cette partie.
 
-Le rendu de ce TP doit se faire sous la forme du diagramme de classe de votre application finale.
+Le rendu de ce TP comprend le diagramme de classe de votre application finale.
+
+Nous allons utiliser un porcessus en 2 phases : générer un fichier en code plantuml (javadoc avec une doclet adaptée) puis utiliser planuml pour générer une sortie png)
 
 Pour cela utilisez les fichiers disponibles en début de ce TP et de l'une des techniques
 suivantes (*`build.xml` recommandée*) :
 
-- Utilisation de {ant} :
+- Utilisation de {ant} (`build.xml`):
 +
 [source,ant]
 ----
-include::util/build.xml[]
+<project default="main">
+<target name="main">
+<javadoc doclet="de.mallox.doclet.PlantUMLDoclet"
+   docletpath="./plantUmlDoclet.jar"
+   access="private"
+   additionalparam=
+   "-encoding utf-8 -J-DdestinationFile=uml.txt -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true"
+	executable="C:/SOFTS/Java/jdk1.8.0_201/bin/javadoc"
+	>
+  <packageset dir="./src">
+   <include name="**"/>
+  </packageset>
+</javadoc>
+
+<java jar="plantuml.jar" fork="true" maxmemory="128m">
+ <arg value="uml.txt"/>
+</java>
+</target>
+</project>
 ----
 +
+----
+Dans Eclipse : bouton droit sur build.xml > Run As > Ant Build.
+
+Rafraichissez le projet pour voir les fichiers produits (txt/uml et png).
+
+Si besoin metez le projet en "JDK Compliance" 1.8 (si ca ne marchait pas en version courante).
+----
+
+/////
+
 [WARNING]
 ====
 // Merci André! Merci Louis!
@@ -217,29 +387,29 @@ WARNING: pas vers le lien windows `jdk1.7\bin` qui existe, pas `jdk1.8.xx`
 et pas le lien windows vers jre1.7)
 *** Ca doit marcher
 ====
+/////
 
 - Utilisation d'un script Windows
 +
-.Exemple de `.BAT` qui devrait fonctionner
+.Exemple de `.BAT` qui devrait fonctionner - IL FAUDRA AJUSTER LES CHEMINS DE REPERTOIRE
 [source,shell]
 ----
-set UML=TD1.uml
+set UML=TP3.txt
 set TYPE='PNG'
-set DOCLETPATH=
+set DOCLETPATH=C:\TMP\WSPCE_2020_06_IUT_2022_2023\WspcesTPS_DEV_R3-04_22_23\Wspce_TP_R3\TP3_SuperCanardBof\SuperCanardBof
 echo "Creating %UML%..."
+C:\SOFTS\Java\jdk1.8.0_201\bin\javadoc -J-DdestinationFile=%UML% -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true -doclet de.mallox.doclet.PlantUMLDoclet -docletpath plantUmlDoclet.jar src/test/*.java 
 
-javadoc -J-DdestinationFile=%UML% -J-DcreatePackages=false
--J-DshowPublicMethods=true -J-DshowPublicConstructors=false
--J-DshowPublicFields=true -doclet de.mallox.doclet.PlantUMLDoclet
--docletpath plantUmlDoclet.jar src/appli/*.java
-src/comportements/arme/*.java src/comportements/arme/impl/*.java
-src/personnages/*.java
 echo "Done."
 
 set TYPE='png'
 echo "Converting %UML% to $TYPE..."
-java -jar plantuml.jar -config "config.cfg" -t %TYPE% %UML%
+java -cp . -jar  plantuml.jar -config ".\config.cfg" -t %TYPE% %UML%
 echo "Done."
+----
++
+----
+Dans l'explorateur de fichiers : allez dans le projet eclipse, lancez une fenêtre de commande sur ce répertoire, lancez plantuml.bat.
 ----
 +
 - Utilisation d'un script shell équivalent au précédent (cf. <<plantumlShell,plantuml.sh>>)
@@ -248,11 +418,15 @@ echo "Done."
 diagramme de classe à partir d'eclipse avec le plugin plantUML (attention, choisir
 menu:Window[Show View > Other... > PlantUML > PlantUML Source]).
 
-WARNING: Seul le fichier `TP1.uml` est à rendre (pas le `PNG`) sur le dépôt
-Moodle avant vendredi 18/11 à minuit.
+WARNING: Le fichier `TP3.uml` est à rendre (pas le `PNG`) sur le dépôt
+Moodle
 
 
-:numbered!:
+=== Pour aller plus loin
+
+Voir la section <<plusloin>> et essayez d'expérimenter quelques points.
+
+
 [appendix]
 [[setArme]]
 
@@ -306,7 +480,7 @@ image::packagesHierarchy.png[width=50%]
 En utilisant la doclet pour Javadoc de {plantUML}, il est possible d'obtenir
 le diagramme de classe correspondant à son architecture de manière automatique.
 
-NOTE: Vous aurez également besoin du fichier link:util/config.cfg[config.cfg].
+NOTE: Vous aurez également besoin du fichier *config.cfg* livré initialement.
 
 === Exemple
 
@@ -316,12 +490,23 @@ NOTE: Vous ne devez pas générer de modèle pour vos canards, mais pour votre
 jeux d'aventure. Ce qui suit est juste une illustration de ce que vous devez faire pour
 votre application de jeu.
 
-On peut écrire le script suivant :
+On peut écrire le script suivant (à adapter sur les chemins) :
 
-.Génération automatique de diagramme PlantUML (cf. <<utils>>)
+.Génération automatique de diagramme PlantUML (cf. <<utils>>) - IL FAUDRA AJUSTER LES CHEMINS DE REPERTOIRE
 [source,shell]
 ---------
-include::src/java/SuperCanardBof/plantuml.bat[]
+set UML=TP3.txt
+set TYPE='PNG'
+set DOCLETPATH=C:\TMP\WSPCE_2020_06_IUT_2022_2023\WspcesTPS_DEV_R3-04_22_23\Wspce_TP_R3\TP3_SuperCanardBof\SuperCanardBof
+echo "Creating %UML%..."
+C:\SOFTS\Java\jdk1.8.0_201\bin\javadoc -J-DdestinationFile=%UML% -J-DcreatePackages=false -J-DshowPublicMethods=true -J-DshowPublicConstructors=false -J-DshowPublicFields=true -doclet de.mallox.doclet.PlantUMLDoclet -docletpath plantUmlDoclet.jar src/test/*.java 
+
+echo "Done."
+
+set TYPE='png'
+echo "Converting %UML% to $TYPE..."
+java -cp . -jar  plantuml.jar -config ".\config.cfg" -t %TYPE% %UML%
+echo "Done."
 ---------
 
 Ce qui permet d'obtenir automatiquement le diagramme suivant :
@@ -340,7 +525,7 @@ L'intérêt est double :
 Voici un exemple simple de test qui vérifie quelques points simples de
 l'architecture de l'application :
 
-.Test du modèle UML généré en Ruby (source link:src/java/SuperCanardBof/checkModel.rb[ici])
+.Test du modèle UML généré en Ruby ((cf. <<utils>>)
 [source,ruby]
 ----------
 include::src/java/SuperCanardBof/checkModel.rb[lines=8..200]
@@ -365,7 +550,7 @@ Finished in 0.002029s, 1478.5609 runs/s, 1478.5609 assertions/s.
 Si vous voulez vérifier que votre modèle d'architecture est bien conforme
 à ce qui est demandé, vous pouvez utiliser le programme de test suivant :
 
-.Test du patron _Strategy_ sur les `Canard` en Ruby (source link:src/java/TD1/checkModel.rb[ici])
+.Test du patron _Strategy_ sur les `Canard` en Ruby
 [source,ruby]
 ----------
 include::src/java/TD1/checkModel.rb[lines=8..200]
@@ -399,6 +584,7 @@ Utilisez les annotations pour compléter vos codes Java de façon
 à générer un diagramme de classe le plus complet possible.
 
 [appendix]
+[[plusloin]]
 == Pour aller plus loin
 
 . Testez les limites de votre implémentation (par exemple avez-vous pensé à
