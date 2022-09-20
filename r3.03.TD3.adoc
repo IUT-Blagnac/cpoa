@@ -1,5 +1,5 @@
 :moduleTitle: R3.03-Analyse
-:authorDefault:  Dut/Info-S3/M3105
+:authorDefault:  Dut/Info-S3/R3.03
 :tdnum: TD 3
 
 :eleve:
