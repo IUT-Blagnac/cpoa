@@ -118,7 +118,7 @@ TIP: N'hésitez pas à (re)lire régulièrement le {sitecours}.
 
 == Stratégie dans `java.util` : méthode `sort()`
 
-=== La situation
+=== La situation : comprendre
 
 . Etudiez et comprenez la documentation de la méthode `sort()` de la classe `List` : link:https://docs.oracle.com/javase/8/docs/api/java/util/List.html[Documentation de `List`] et link:https://docs.oracle.com/javase/8/docs/api/java/util/List.html#sort-java.util.Comparator-[Documentation de `sort()`]
 
@@ -139,12 +139,16 @@ Ne prenez pas en compte les autres méthodes de `Comparator` (à regarder plus t
 
 === Mise en oeuvre
 
-Nous allons faire des tris de listes de chaînes de caractères (`List<String>`) en utilisant `sort()`.
+Nous allons faire des tris de listes de chaînes de caractères (`List<String>`) en utilisant `sort()`. 
 
 `Comparator` étant une interface, il va nous falloir implémenter `Comparator<String>`...
 
-Pour commencer, *reprenez* dans un projet {eclipse} le code suivant. Il vous faudra compléter la méthode `test()` pour trier la variable `li`.
+==== Première version simple
 
+Puisqu'il nous faut implémenter une interface : créons une classe !
+
+. Pour commencer, *reprenez* dans un projet {eclipse} le code suivant. Il vous faudra compléter la méthode `test()` pour trier la variable `li`.
++
 [source,java]
 .Code à reprendre
 -------
@@ -171,10 +175,6 @@ public class TestSort {
 	}
 }
 -------
-
-==== Première version simple
-
-Puisqu'il nous faut implémenter une interface : créons une classe !
 
 . Créez dans le projet une classe (`ComparaisonStringSurLongueur`) qui implémente `Comparator<String>`
 . Ecrivez le code de la méthode `int compare(String s1, String s2)` de telle sorte qu'elle compare ses deux paramètres sur leur longueur de chaine. La méthode renverra :
