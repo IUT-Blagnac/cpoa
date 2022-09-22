@@ -3,7 +3,7 @@ f=$(echo "$1" | cut -f 1 -d '.')
 echo "TRAITEMENT DE : $f"
 
 fSupport="${f}_Support"
-fSujet="${f}"
+fSujet="${f}_Sujet"
 fProfs="${f}_Profs"
 fSlides="${f}_SupportSlides"
 fPrint="${f}_SujetPrintable"

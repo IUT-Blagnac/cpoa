@@ -1,6 +1,5 @@
 /**
  * @author bruel (taken from Design Pattern - Head First, O'Reilly, 09/2004)
- *
  */
 public class BouilleurChocolat {
 	private boolean vide;
@@ -15,25 +14,25 @@ public class BouilleurChocolat {
 		if (estVide()) {
 			vide = false;
 			bouilli = false;
-			// remplir le bouilleur du mélange lait/chocolat
+			// Remplir le bouilleur du mélange lait/chocolat
 		}
 	}
 
 	public void vider() {
 		if (!estVide() && estBouilli()) {
-			// vider le mélange
+			// Vider le mélange
 			vide = true;
+			bouilli = false;
 		}
 	}
 
 	public void bouillir() {
 		if (!estVide() && !estBouilli()) {
-			// porter le contenu à ébullition
+			// Porter le contenu à ébullition
 			bouilli = true;
 		}
 	}
 
 	public boolean estVide() { return vide;}
-
 	public boolean estBouilli() { return bouilli;}
 }

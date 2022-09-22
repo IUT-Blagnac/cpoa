@@ -5,12 +5,13 @@
 public class BouilleurSafeChocolat { 
 	private boolean vide;
 	private boolean bouilli; 
+	
 	private static BouilleurSafeChocolat uniqueInstance;
 	
 	private BouilleurSafeChocolat() {
 		vide = true;
 		bouilli = false; 
-		}
+	}
 	
 	public static final BouilleurSafeChocolat getInstance() {
 		if (uniqueInstance == null) {

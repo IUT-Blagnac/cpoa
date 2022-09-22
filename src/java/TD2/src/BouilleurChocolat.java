@@ -24,6 +24,7 @@ public class BouilleurChocolat {
 	public void vider() {
 		if (!estVide() && estBouilli()) { // vider le mélange
 			vide = true;
+			bouilli = false;
 		}
 	}
 	public void bouillir() {

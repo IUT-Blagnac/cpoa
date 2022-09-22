@@ -17,7 +17,6 @@ public class BouilleurCptChocolat {
 		else {
 			return null;
 		}
-
 	}
 
 	public BouilleurCptChocolat getInstance() {
