@@ -1,13 +1,7 @@
-
-
 :moduleTitle: R3.04 Qualité
 :authorDefault:  BUT/Info/S3/R3.04
 
 :tdnum: TD 4 - Patron Singleton
-
-:numbered:
-:!linkcss:
-:toc:
 
 :sourcedir: src/java/TD2
 
@@ -17,6 +11,11 @@ endif::definitions[]
 ifndef::myasciidoconf[]
 include::asciidoc.conf[]
 endif::myasciidoconf[]
+
+
+:numbered:
+:!linkcss:
+:toc:
 
 
 :doctitle:  {moduleTitle} - Sujet {tdnum}
