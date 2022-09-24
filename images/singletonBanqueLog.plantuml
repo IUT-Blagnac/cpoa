@@ -1,0 +1,31 @@
+@startuml
+
+class Main [[java:Main]] {
+	+{static} main(args: String[]): void
+}
+
+
+class CompteBancaire [[java:CompteBancaire]] {
+	-numero: String
+	-solde: double
+	+CompteBancaire(_numero: String)
+	+deposerArgent(depot: double): void
+	+retirerArgent(retrait: double): void
+}
+
+class Journalisation [[java:Journalisation]] {
+	// ... autres attributs statiques ou pas
+	-log: String
+	---
+	// ... autres méthodes statiques ou pas
+	+ajouterLog(_log: String): void
+	+getLog(): String
+}
+
+Journalisation <. CompteBancaire
+
+Journalisation <.up. Main
+CompteBancaire <.up. Main
+
+
+@enduml

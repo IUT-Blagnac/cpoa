@@ -1,7 +1,7 @@
 :moduleTitle: R3.04 Qualité
 :authorDefault:  BUT/Info/S3/R3.04
 
-:tdnum: TP3 - Patron Stratégie
+:tdnum: TP4 - Patron Singleton
 
 :sourcedir: src/java/TD1
 
@@ -9,7 +9,7 @@ include::definitions.txt[]
 
 // ATTENTION !
 // Enlevé linkcss car car génére les css à côté du fichier html
-:linkcss:
+:!linkcss:
 
 // L'enlève au besoin (! undefines the variable)
 // :!linkcss:
@@ -74,9 +74,10 @@ endif::prof[]
 . Je sais programmer en {java}.
 . J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
 . J'ai compris ce qu'est un patron.
-. J'ai réalisé le TD `BonChoco` et donc connait le patron Singleton!
+. J'ai réalisé le TD `BouilleurChocolat` et donc connaît le patron Singleton!
 | {objtd}	| Comprendre ce qu'est une *conception* et implémenter mon deuxième patron.
 | {duree}	| *2* TP de 1,5h (sur 2 semaines).
+| {depot} | *Les répertoires src des codes produits + fichiers .uml (ou .txt) des codes plantuml produits durant le TPs*
 |======================
 
 == Rappel sur le patron Singleton
@@ -93,192 +94,330 @@ include::pattern/singleton.txt[]
 
 == `Singleton` dans la jre standard
 
-On trouve des implémentations de Singleton dans le jre standard.
+On trouve quelques implémentations de Singleton dans la jre standard.
 
 === Runtime
 
-. Etudiez la documentation de la classe `Runtime` : link:https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Runtime.html[elle se trouve ici, en version java 14]
-. Créez une classe avec un une méthoide `main()`.
+. Étudiez la documentation de la classe `Runtime` : link:https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Runtime.html[elle se trouve ici, en version java 14]
+. Créez une classe avec un une méthode `main()`.
 . Essayer de créer un objet de la classe `Runtime`. Et ce possible apr un new ? Pourquoi à votre avis ?
 +
 ifdef::prof[]
 [%collapsible]
-.Solution
+.Solution image:icons/solution.png[]
 ====
-Car construite ainis cf. doc.
+Car construite ainsi cf. doc.
+
+
   Every Java application has a single instance of class Runtime that allows the application to interface with the environment in which the application is running. The current runtime can be obtained from the getRuntime method.
   An application cannot create its own instance of this class.
 ====
 endif::prof[]
 . Récupérer un objet `Runtime` et avec cet objet :
 
-..  Affichez les informations sur : le nombre de procésseurs disponibles, la quantité de mémoire maximum, la quantioté de mémoire totale, la quantité de mémoire libre, la version de la jre au runtime
-..  Etudiez la mémoire de la méthode `gc()`. A quoi sert-elle ?
+..  Affichez les informations sur : le nombre de processeurs disponibles, la quantité de mémoire maximum, la quantité de mémoire totale, la quantité de mémoire libre, la version de la jre au runtime
+..  Étudiez la mémoire de la méthode `gc()`. A quoi sert-elle ?
 ..  Essayez la méthode `exit()` avec -20 en paramètre.
-. Vous comprenez maintenant pourquoi runtime est un `Singleton`.
 
 ===  Desktop
 
 
-. Etudiez la documentation de la classe `Desktop (java.awt)` : link:https://docs.oracle.com/en/java/javase/14/docs/api/java.desktop/java/awt/Desktop.html[elle se trouve ici, en version java 14]
+. Étudiez la documentation de la classe `Desktop (java.awt)` : link:https://docs.oracle.com/en/java/javase/14/docs/api/java.desktop/java/awt/Desktop.html[elle se trouve ici, en version java 14]
 
 . Récupérer un objet `Desktop` et avec cet objet :
-..  Ouvrez dans votre OS la page `https://www.iut-blagnac.fr/fr/` (1 ligne)
 ..  Ouvrez dans votre OS la page `https://www.iut-blagnac.fr/fr/` (1 ligne)
 ..  Ouvrez dans votre OS le fichier java que vous êtes en train d'éditer (sous Eclipse, le path sera quelque chose genre `./src/...` en notation Unix)
 ..  Essayez d'ouvrir l'outil de messagerie pour envoyer un mail. Vous pouvez chercher sur internet comment construire une URI `mailto` en java (a minima, `URI` avec en paramètre `"mailto:nom.prenom@adresse.fr"`)
 +
 ifdef::prof[]
 [%collapsible]
-.Solution
+.Solution image:icons/solution.png[]
 ====
-autre solution d.mail( new URI("mailto", "andre.peninou@univ-tlse2.fr", null));
+autre solution `d.mail( new URI("mailto", "andre.peninou@univ-tlse2.fr", null));`
 ====
 endif::prof[]
-. Vous pouvez comparez les résultats obtenus sur différentes machines (PC persos) qui n'ouvriront pas les mêmes application suivant le cas (chrome/firefox/opera, thunderbird/outlook/gmail, notpad++/vscode/...) 
-
-:prof: dfdf
-
-//////
-== Éléments utiles pour les TPs
-
-=== Fichiers utiles pour la génération de modèles
-
-- le link:util/plantuml.bat[plantuml.bat]
-- la link:util/plantUmlDoclet.jar[doclet pour javadoc]
-- le link:util/plantuml.jar[jar plantuml]
-
-=== Plugins eclipse utiles
-
-- http://infinitest.github.io/[InfiniTest]
-- Le plugin PlantUML, que vous pourrez installer comme ceci ({eclipse} Luna!):
-+
-image::market.png[link="images/market.png",width=30%]
-image::plugin.png[link="images/plugin.png",width=50%]
-+
-Ce qui permet, non seulement d'avoir un éditeur pour plantUML et d'immédiatement
-voir le rendu graphique (à condition d'avoir ouvert la vue par menu:Window[Show View > Other... > PlantUML]),
-mais aussi d'avoir immédiatement le source PlantUML et le rendu UML de vos classes java en édition
-(cf. <<eclipse-plant,ci-dessous>>)!
-+
-[[eclipse-plant]]
-.PlantUML en temps réel
-image::eclipse-plant.png[link="images/eclipse-plant.png",width=100%]
-
-//////
-
-//////
-== Rappel sur le patron Singleton
-
-[[Singleton]]
-[icon="pattern.jpeg"]
-[NOTE]
-.Design pattern : *Singleton*
-====
-include::pattern/singleton.txt[]
-====
-
-TIP: N'hésitez pas à (re)lire régulièrement le {sitecours}.
-
-//////
-
-//////
-
-== Reprise du TD 2 en mode Dojo (1ère séance de TP)
-
-Nous allons reprendre succinctement
-le http://iut-blagnac.github.io/cpoa/TD2.html[TD2] en mode
-http://fr.wikipedia.org/wiki/Coding_Dojo[Coding Dojo] en espérant
-que cela vous donne envie de participer à ceux organisés certains jeudi à l'IUT.
-
-=== Le principe :
-
-. Le prof de TP initie l'exercice en ouvrant un eclipse et en commençant un
-test qui commence par échouer et qui "passera" quand la fonctionalité attendue
-sera implémentée et fonctionnelle.
-. Il vérifie que son test échoue bien
-+
-TIP: On pourra avantageusement installer le plug-in eclipse
-http://infinitest.github.io/[InfiniTest] qui permet de runner les tests à
-chaque sauvegarde (cf. plus haut)
-+
-. Il fait en sorte que le test passe au vert  le plus vite possible
-. Il "refactor" éventuellement (faire passer le test au vert mais de façon
-  intelligente, éviter la duplication de code, réorganiser les classes, etc.)
-. Quand tout est au vert on passe à une fonctionnalité suivante
-
-=== Les règles
-
-- Toutes les 5 minutes (timer sonore) on change de personne aux commandes
-(au clavier/souris en l'occurence)
-- Il faut un "maître du temps"
-- Tout le monde participe au codage (et ne fait pas du code de son côté)
-+
-NOTE: Les machines ne sont donc pas utiles pour cette partie! Seule la machine
-connectée au vidéoprojecteur est utilisée.
-+
-- Le volontariat c'est mieux, mais le prof est libre d'organiser le tour de rôle.
-- En 90' de TP on peut faire passer 18 personnes, donc tout le monde y passe et
-le plus tôt est en général le moins compliqué.
-- Merci à ceux qui ont déjà participé aux coding dojos de montrer l'exemple ;-)
-
-////// 
+. Comparez les résultats obtenus sur différentes machines (PC persos/IUT) qui n'ouvriront pas les mêmes application suivant le cas (chrome/firefox/opera, thunderbird/outlook/gmail, notpad++/vscode/...).
 
 
 == Bouilleur de chocolat
 
 Nous allons reprendre succinctement le TD sur le Bouilleur de chocolat.
 
-Vous pouvez travailler cette partie en binomes ppour aller plus vite.
+N'hésitez pas à vous entraider.
 
-. *Reprendre le TD4* sur la partie Singleton du `BouilleurChocolat` et programmer la classe :
-* Faire attention au constructeur
-* Faire attention à l'attribut privé/static
-* Faire attention à la méthode public/static
-. Faire un petit main de test avce la `BouilleurChocolat` : faire remplir, bouillir et vider du chocolat.
-. Comment faire un test qui assure que votre clsse est bien un Singleton, qu'on ne peut pas créer un 2° objet `BouilleurChocolat` et qu'on travaille toiujours avec le même objet ? *Programmez ces tests*.
+. *Reprendre le TD* sur la partie Singleton du `BouilleurChocolat` et programmer la classe :
+* Faites attention au constructeur
+* Faites attention à l'attribut privé/static
+* Faites attention à la méthode public/static
+. Faites un petit main de test avec la `BouilleurChocolat` : remplir, bouillir et vider du chocolat.
+. Faites aussi un test avec 2 variables `BouilleurChocolat` et utilisez l'une ou l'autre pour faire fonctionner le `BouilleurChocolat`. Le `BouilleurChocolat` ne devrait jamais être dan sun "mauvais état".
+. Comment faire un test qui assure que votre classe est bien un Singleton, qu'on ne peut pas créer un 2° objet `BouilleurChocolat` et qu'on travaille toujours avec le même objet ? *Programmez ces tests*.
 
 
 
 == Jeu d'aventure
 
-=== Mise en oeuvre de Singleton
+=== Combiner plusieurs patrons : est ce possible ?
 
-En reprenant le jeu d'aventure du TP1 :
+Peut-on combiner les deux derniers patrons vus en TD (_Strategy_ et _Singleton_) ?
+En effet, les comportements des personnages sont portés par des objets pour l'aspect algorithme,
+mais il n'y a pas de raison de ne pas les partager entre tous les objets qui
+"utilisent" ce comportement puisqu'il est le même !
+
+*Oui : en faisant attention !*
+
+ifndef::compact[]
+[NOTE]
+=======
+endif::compact[]
+Dans la plupart des cas : *ces deux patrons ne vont pas du tout ensemble*.
+
+Cette combinaison n'est recommandée que dans un cas bien précis d'utilisation de
+_Strategy_ : celui où les comportements sont simples et "statiques" (pas de
+	consommation de ressources par exemple) et où l'on utilise une association :
+
+image::strategy-assoc.png[]
+
+Avec une implémentation du type :
+
+[source,java]
+------
+...
+vol = new VolerAvecDesAiles();
+cri = new Cancan();
+colV1 = new Colvert(vol,cri);
+...
+------
+ifndef::compact[]
+=======
+endif::compact[]
+
+=== Améliorer le jeu d'aventure avec Singleton
+
+En reprenant le jeu d'aventure du TP sur les Personnages et les armes :
 
 .Un jeu d'aventure minimaliste
 image::aventure.png[link="images/aventure.png"]
 
-Implémentez le patron singleton comme demandé à la
-http://iut-blagnac.github.io/cpoa/TD2.html#_et_si_on_améliorait_le_jeu_d_aventure_avec_singleton[section 4.2 du TD2].
 
-=== Modèles et tests d'architecture
+. *Modifiez le code de votre TP précédent* pour faire en sorte que les instances d'objet affectées à chaque comportement
+d'un `Personnage` soient uniques pour chaque comportement distinct.
+. Pourquoi ne devrait-on pas utiliser `getInstance()` dans le cas
+d'une composition (`getInstance()` réalisé dans le constructeur du composé) ?
 
-. En utilisant la doclet pour Javadoc de {plantUML}, comme au TP1, générez votre diagramme
-de classe automatiquement
-. Réalisez un test en Java de votre architecture, en vous inspirant du code de
-test qui vérifie quelques points simples de l'architecture de l'application `SuperCanard` :
+
+ifdef::prof[]
+[CAUTION]
+.Solution image:icons/solution.png[]
+====
+. Extrait de solution
 +
-.Test du patron _Strategy_ sur les `Canard` en Ruby (source link:src/java/TD1/checkModel.rb[ici])
-[source,ruby]
-----------
-include::src/java/TD1/checkModel.rb[lines=8..200]
-----------
+.Extrait de ComportemenEpee.java
+[source,java]
+-----
+include::src/java/TD3/src/simuaventure/comportements/arme/impl/ComportementEpee.java[lines=5..11]
+-----
++
+Qu'on enrichira nécessairement pour être complet avec :
++
+[source,java]
+-----
+private ComportementEpee(){}
+-----
++
+.Extrait de Chevalier.java
+[source,java]
+-----
+include::src/java/TD3/src/simuavanture/appli/Chevalier.java[lines=8..12]
+-----
++
+NOTE: Il faudra alors changer les appels comme `compAdequat = new ComportementEpee();`
+ en `compAdequat = ComportementEpee.getInstance();`
++
+. Car dans une composition les objets Personnage possèdent les instances de leur comportement.
+Elles sont donc uniques et leurs instances de comportement ne doivent pas être transmises, pour être sûr que la destruction du composite détruit les composés. La composition suppose l'unicité de l'objet composite dans l'objet composé. Ex : Voiture composée d'un moteur. Un Singleton n'est pas unique. 
+====
+endif::prof[]
+//----------------------------------------------------- fin Correction -------------------------
 
-:numbered!:
-[appendix]
-== Pour aller plus loin
 
-Reprenez les section "pour aller plus loin" des TDs 1 et 2.
+NOTE: On voit que ce n'est pas toujours évident de combiner les patrons entre eux.
 
-ifndef::compact[]
-== About...
 
-****************************************************************
-Document réalisé par mailto:{email}[{author}] via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
-Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
-image:88x31.png["Licence Creative
-Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
-http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
-****************************************************************
-endif::compact[]
+
+=== Modèle de l'architecture
+
+. En utilisant plantuml, *générez votre diagramme de classe* de l'application obtenue.
+
+== Des singletons "actifs"
+
+Nous allons implémenter des classes de _Singleton_ plus "actives" (si on peut dire) dont les objets ont des attributs et des méthodes qui modifient l'état de l'objet.
+
+=== Contexte 
+
+On part du code simpliste suivant : *récupérez-le dans un projet Eclipse* :
+
+[source,java]
+------
+// Classe des comptes bancaires simpliste.
+public class CompteBancaire {
+	private String numero; 	// Numéro du compte.
+	private double solde; 	// Argent disponible sur le compte.
+
+	public CompteBancaire(String _numero) {
+		this.numero = _numero;
+		this.solde = 0.0;
+	}
+
+	// Méthode pour déposer de l'argent sur le compte.
+	public void deposerArgent(double depot) {
+		if (depot > 0.0) {
+			this.solde += depot;
+		} else {
+		}
+	}
+
+	// Méthode qui permet de retirer de l'argent sur le compte.
+	public void retirerArgent(double retrait) {
+		if (retrait > 0.0) {
+			if (this.solde >= retrait) {
+				// On retranche la somme retirée au solde.
+				this.solde -= retrait;
+			} else {
+			}
+		} else {
+		}
+	}
+}
+public class Main {
+	public static void main(String[] args) {
+		// Création et utilisation du CompteBancaire cb1.
+		CompteBancaire cb1 = new CompteBancaire("123456789");
+		cb1.deposerArgent(100);
+		cb1.retirerArgent(80);
+
+		// Création et utilisation du CompteBancaire cb2.
+		CompteBancaire cb2 = new CompteBancaire("987654321");
+		cb2.retirerArgent(10);
+		cb2.deposerArgent(50);
+		cb2.retirerArgent(100);
+		
+		cb1.retirerArgent(20);
+		cb1.retirerArgent(100);
+		cb1.deposerArgent(-100);
+		cb1.retirerArgent(-100);	
+	}
+}
+------
+
+=== Des comptes qui journalisent les mises à jour
+
+Dans le code ci-dessus, les erreurs dans la classe `CompteBancaire` "passent à la trappe" (rien n'est fait dans le code). Un `System.out.println()` _pourrait paraître_  utile mais nécessite quelqu'un en permanence devant la console si on fait une vraie application ...
+
+Aujourd’hui, les banquiers souhaitent garder trace des opérations bancaires et des incidents qui surviennent. La trace sera simplifiée pour ce TP en une simple chaîne que l'on pourra récupérer (en vraie application, ce serait un fichier, des mails, ...).
+
+On va donc rajouter un objet qui permet de *journaliser* les actions effectuées sur *tous les comptes*. 
+
+Pour cela :
+
+. Une classe `Journalisation` permettra d'enregistrer des messages à journaliser et éventuellement de les horodater.
+. La classe `CompteBancaire` journalisera les opérations par un message idoine sur la journalisation. Exemple de message attendue : "Dépot de ... sur le compte ...", "Erreur, ..."
+. *Tous les comptes utilisent bien sûr le même journal ...*
+
+.Diagramme de classe partiel pour démarrer (à compléter).
+image::singletonBanqueLog.png[]
+
+*A faire :*
+
+. *Complétez le diagramme ci-dessus et implémentez la solution.*
+**  Avez vous trouvé quelle classe est _Singleton_ ?
+**  Pour horodater les messages, voir du côté des classes java `Date` et `SimpleDateFormat`.
+
+. En utilisant plantuml, *générez votre diagramme de classe* de l'application obtenue.
+. Vérifiez bien que la classe _Singleton_ respecte les attentes du pattern (constructeur ...).
+
+. Utiliser la journalisation : essayez dans votre main, à la fin, d'afficher la log des mouvements réalisés sur tous les comptes (afficher ce que donne `getLog()`).
+
+[NOTE]
+.Exemple de sortie attendue :
+=======
+  [24/09/22 12h31] Dépôt de 100.0€ sur le compte 123456789.
+  [24/09/22 12h31] Retrait de 80.0€ sur le compte 123456789.
+  [24/09/22 12h31] /!\ La banque n'autorise pas de découvert (987654321).
+  [24/09/22 12h31] Dépôt de 50.0€ sur le compte 987654321.
+  [24/09/22 12h31] /!\ La banque n'autorise pas de découvert (987654321).
+  [24/09/22 12h31] Retrait de 20.0€ sur le compte 123456789.
+  [24/09/22 12h31] /!\ La banque n'autorise pas de découvert (123456789).
+  [24/09/22 12h31] /!\ Dépôt d'une valeur négative impossible (123456789).
+  [24/09/22 12h31] /!\ Retrait d'une valeur négative impossible (123456789).
+=======
+
+
+=== Séparer les journalisations
+
+La banque, qui dispose en fait de beaucoup de clients, trouve le journal difficile à exploiter car il mélange les opérations normales et les opérations erronées qui peuvent être des suspicions de tentatives de fraudes. Elle souhaite donc retrouver rapidement ces messages. Par ailleurs, la banque souhaite effectuer des statistiques sur les opérations normales et elle souhaite aussi les séparer.
+
+. Première idée : créer deux classes de Journalisation.
+
+* Ca marche certes ...
+* Mais la banque nous indique que plus tard peut être il faudra faire encore des sous-catégories de journaux : retraits, dépôts, tentatives de dépassement de solde lors d'un retrait, ...
+
+. Deuxième idée : `Journalisation` ne vas pas gérer _un_ objet de journalisation mais *_plusieurs_*. Les objets de journalisation seront obtenus  à partir d'un type de log attendue. Bien ententu, pour un type de log donné : un seul objet `Journalisation` devra être utilisé dans toute l'application.
++
+[%collapsible]
+.Besoin d'aide ?
+====
+* Pour faire court, `getInstance()` devient `getInstance(String typeLog)` et gère : soit la création d'un objet `Journalisation` si c'est la première demande de `typeLog`, soit renvoie l'objet `Journalisation` déjà existant pour cette `typeLog`. Exemple de `typeLog` possible : "Information", "Erreur".
+====
+
+. *Implémentez cette solution*
+
+* Quelques questions à se poser : 
+**  Comment stocker plusieurs objets `Journalisation` dans la classe `Journalisation` ?
+**  Comment retrouver l'objet `Journalisation` associé à un type de log ? Par exemple, comment retrouver l'objet `Journalisation` associé à "Information" ?
+
+* Ce sont les objets comptes qui choisiront dans quelle log ils journalisent leurs messages (selon le if impliqué).
+
+. *Testez votre solution* : à la fin du `main()` vous afficherez le journal d'information et le journal d'erreur séparément.
++
+[NOTE]
+.Exemple de sortie attendue :
+=======
+  Journal Opérations : 
+  [24/09/22 14h03] Dépôt de 100.0€ sur le compte 123456789.
+  [24/09/22 14h03] Retrait de 80.0€ sur le compte 123456789.
+  [24/09/22 14h03] Dépôt de 50.0€ sur le compte 987654321.
+  [24/09/22 14h03] Retrait de 20.0€ sur le compte 123456789.
+  Journal Erreurs : 
+  [24/09/22 14h03] /!\ La banque n'autorise pas de découvert (987654321).
+  [24/09/22 14h03] /!\ La banque n'autorise pas de découvert (987654321).
+  [24/09/22 14h03] /!\ La banque n'autorise pas de découvert (123456789).
+  [24/09/22 14h03] /!\ Dépôt d'une valeur négative impossible (123456789).
+  [24/09/22 14h03] /!\ Retrait d'une valeur négative impossible (123456789).
+=======
+
+. *Amélioration et refactoring* : pour ne pas que chaque nom de journal soit écrit en dur à chaque ligne de code (avec risques d'erreurs), et parce que la banque souhaite s'exporter à l'international, on souhaite définir des constantes de classe pour chaque nom de journal. Pour par exemple "Informations", "Erreurs", "Débits", ... :
+
+* Quelle est la classe candidate pour cela (existante ou à créer) ?
+* *Corrigez votre code en ce sens (partout)*. 
+
+**  Idée : utilisez la recherche d'Eclipse pour localiser rapidement les endroits à corriger : Menu `Search` option `Search`. Explorez ses possibilités. La recherche "File search" devrait vous aider grandement : trouver tous les endroits à corriger en une seule passe et obtenir toutes les lignes à potentiellement corriger.
+
+. En utilisant plantuml, *générez votre diagramme de classe* de l'application obtenue.
+
+[NOTE]
+====
+Vous venez de découvrir un patron moins connu : le multiton (multi singleton).
+
+Et vous l'avez programmé ! Bravo !
+====
+
+
+
+ifdef::prof[]
+[CAUTION]
+.Solution image:icons/solution.png[]
+====
+image:singletonBanqueLogFinalMultiton.png[]
+====
+endif::prof[]

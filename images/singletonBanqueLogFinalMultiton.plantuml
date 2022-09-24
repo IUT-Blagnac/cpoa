@@ -1,0 +1,28 @@
+@startuml
+class CompteBancaire [[java:simple.compte.appli.CompteBancaire]] {
+	-numero: String
+	-solde: double
+	+CompteBancaire(_numero: String)
+	+deposerArgent(depot: double): void
+	+retirerArgent(retrait: double): void
+}
+class Journalisation [[java:simple.compte.appli.Journalisation]] {
+	-{static} instances: HashMap<String,Journalisation>
+	-log: String
+	+{static} info: String
+	+{static} erreur: String
+	-Journalisation()
+	+{static} getInstance(typelog: String): Journalisation
+	+ajouterLog(_log: String): void
+	+getLog(): String
+}
+class Main [[java:simple.compte.main.Main]] {
+	+{static} main(args: String[]): void
+}
+
+Journalisation <. CompteBancaire
+
+Journalisation <.up. Main
+CompteBancaire <.up. Main
+
+@enduml
