@@ -251,7 +251,7 @@ NOTE: On voit que ce n'est pas toujours évident de combiner les patrons entre e
 
 == Des singletons "actifs"
 
-Nous allons implémenter des classes de _Singleton_ plus "actives" (si on peut dire) dont les objets ont des attributs et des méthodes qui modifient l'état de l'objet.
+Nous allons implémenter des classes de _Singleton_ plus "actives", si on peut dire, dont les objets ont des attributs et des méthodes qui modifient l'état de l'objet. (inspiré d’exercices partagés par https://www.djouabri.com/).
 
 === Contexte 
 
@@ -378,6 +378,8 @@ La banque, qui dispose en fait de beaucoup de clients, trouve le journal diffici
 
 * Ce sont les objets comptes qui choisiront dans quelle log ils journalisent leurs messages (selon le if impliqué).
 
+* Dans une première approche, ne prenez pas en compte l'aspect multithread et les problèmes potentiels induits. Si vous avez une solution éprouvée : mettez-la en oeuvre ET testez-la.
+
 . *Testez votre solution* : à la fin du `main()` vous afficherez le journal d'information et le journal d'erreur séparément.
 +
 [NOTE]
@@ -411,7 +413,6 @@ Vous venez de découvrir un patron moins connu : le multiton (multi singleton).
 
 Et vous l'avez programmé ! Bravo !
 ====
-
 
 
 ifdef::prof[]
