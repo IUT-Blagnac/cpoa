@@ -57,7 +57,7 @@ Jean-Michel Bruel - André Péninou
 
 
 
-== Un peu d'histoire sur la définition des patrons de conception
+== Un peu d'histoire sur la conception et la définition des patrons de conception
 
 
 1977::
@@ -82,7 +82,7 @@ NOTE:  Les auteurs de ce livre sont connus comme les *Gof* pour « _Gang of Four
 
 
 
-== Exemples de bons principes
+== Exemples de bons principes de développement
 
 
 *Principes SOLID* :
@@ -102,18 +102,20 @@ image::solid-s.jpg[width=50%,scaledwidth="20%"]
 
 [IMPORTANT]
 ====
-*Responsabilité => Sujet à changement*
+*Responsabilité d'une classe => Sujet à changement*
 
 *	Limitez le plus possible ce que doit réaliser une classe.
 *	Combiner plusieurs classes qui chacune fait bien ce qu'elle doit faire.
-*	Définir une classe :
-**	Etre capable de dire ce que fait la classe : "La classe X fait ..."
-**	Le plus spécifique possible.
-**	Pas de "et" ou de "ou.
-**	Pas de mot génériques : "gère", "objet" (exemple: gère les utilisateurs, stocke els objets, valide les objets).
+
+Définir une classe :
+
+*	Etre capable de dire ce que fait la classe : "La classe X ..."
+*	Le plus spécifique possible.
+*	Pas de "et" ou de "ou.
+*	Pas de mot génériques : "gère", "objet" (exemple: gère les utilisateurs, stocke els objets, valide les objets).
 ====
 
-==== Exemple : non SRP
+==== Exemple : Non SRP
 
 [source, java]
 -----
@@ -129,7 +131,7 @@ class User {
 }
 -----
 
-Dans ce cas, la méthode `store` est en dehors de la portée.
+Dans ce cas, la méthode `store()` est en dehors de la portée de la classe `User` elle-même.
 Cette responsabilité doit appartenir à une classe qui gère la base de données.
 
 ==== Exemple : SRP
@@ -166,7 +168,7 @@ image::solid-o.jpg[width="40%",scaledwidth="70%"]
 ====
 *Ouvert à l'extension mais fermé à la modification*
 
-Principe : En cas de nouveauté à intégrer (état/comportement)
+Principe : En cas de nouveauté à intégrer (état/comportement) :
 
 *	On doit pouvoir le faire par création d'une sous-classe 
 *	Ou on doit pouvoir le faire en ajoutant des membres (attributs/méthodes)
@@ -174,17 +176,19 @@ Principe : En cas de nouveauté à intégrer (état/comportement)
 
 Ainsi, une fois écrite et testée, une classe ne devrait être modifiée que pour
 être corrigée des bugs contenus ! Toute modification devrait être possible par extension.
-
-Se voit souvent par :
-
-*	Beaucoup de `if (pFparam instanceof Xxxx)` sur les paramètres
-*	Un grand `switch` pour tester des cas d'exécution possible
-
 ====
 
-==== Exemple : non OC
+[NOTE]
+====
+Les problèmes potentiels se voit souvent lorsque :
 
-[source, php]
+*	Un grand `switch` pour tester des cas d'exécution possible.
+*	Beaucoup de `if (pFparam instanceof Xxxx)` sur les paramètres.
+====
+
+==== Exemple : Non OCP
+
+[source,php]
 ----
 <?php
 class Car {
@@ -209,11 +213,11 @@ class Car {
 -----
 class Formatter {
 	public String format(String format, String text) {
-		if (format == "lower")
+		if (format.equals("lower"))
 			return text.toLowerCase();
-		if (format == "html")
+		if (format.equals("html"))
 			return "<p>" + text + "</p>";
-		if (format == "json")
+		if (format.equals("json"))
 			return  "{" + "\"text\":\"" + text + "\" }";
 		return ""; // default
 	}
@@ -224,9 +228,9 @@ L'ajout d'un format va nécessiter de revoir le code.
 
 A noter : le cas final "par défaut" + nécessite de connaître le texte des formats
 
-==== Exemple : OC
+==== Exemple : OCP
 
-[source, php]
+[source,php]
 .Deux solutions possibles
 ----
 <?php
@@ -311,7 +315,7 @@ sous-types, sans modifier la cohérence du programme ni altérer son fonctionnem
 
 ==== Exemple : Non LSP
 
-[source, php]
+[source,php]
 ----
 public class User {
   private String emailAddress;
@@ -331,7 +335,7 @@ Ici *la sous classe lève une exception non prévue dans la superclasse* => la s
 
 ==== Exemple : LSP
 
-[source, php]
+[source,php]
 .Une solution possible
 ----
 public abstract class User {}
@@ -465,25 +469,103 @@ class LspTest {
 ifdef::backend-pdf[._**I**nterface Segregation Principle_ (source <<SOLID>>)]
 image::solid-i.jpg[scaledwidth="70%"]
 
-.......
-Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une seule interface générale
-.......
+[IMPORTANT]
+====
+*Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une seule interface générale.*
 
-//-------------- book
-ifdef::backend-pdf[]
+
+Une interface est censé vous permettre de "contractualiser", d’obliger un objet à contenir certaines fonctionnalités.
+====
+
+[NOTE]
+====
 C'est un peu le même principe que la _Single Responsibility_ des classes,
 mais appliqué aux interfaces.
-endif::backend-pdf[]
-//--------------------
+====
 
-=== _**D**ependency Inversion Principle_ (Ségrégation des interfaces - Inversion des dépendances)
+
+==== Exemple : Non ISP
+
+[source,php]
+----
+<?php
+
+interface VehicleInterface {
+    public function drive();
+    public function fly();
+}
+
+class FutureCar implements VehicleInterface {
+    public function drive() {
+        echo 'Driving a future car!';
+    }
+    public function fly() {
+        echo 'Flying a future car!';
+    }
+}
+
+class Car implements VehicleInterface {
+    public function drive() {
+        echo 'Driving a car!';
+    }
+    public function fly() {
+        throw new Exception('Not implemented method');
+    }
+}
+
+class Airplane implements VehicleInterface {
+    public function drive() {
+        throw new Exception('Not implemented method');
+    }
+    public function fly() {
+        echo 'Flying an airplane!';
+    }
+}
+----
+
+==== Exemple : ISP
+
+[source,php]
+----
+<?php
+
+interface CarInterface {
+    public function drive();
+}
+interface AirplaneInterface {
+    public function fly();
+}
+
+class FutureCar implements CarInterface, AirplaneInterface {
+    public function drive() {
+        echo 'Driving a future car!';
+    }
+    public function fly() {
+        echo 'Flying a future car!';
+    }
+}
+
+class Car implements CarInterface {
+    public function drive() {
+        echo 'Driving a car!';
+    }
+}
+
+class Airplane implements AirplaneInterface {
+    public function fly() {
+        echo 'Flying an airplane!';
+    }
+}
+----
+
+=== _**D**ependency Inversion Principle_ (Inversion des dépendances)
 
 ifdef::backend-pdf[._**I**nterface Segregation Principle_ (source <<SOLID>>)]
 image::solid-d.jpg[width="60%", scaledwidth="90%"]
 
 [IMPORTANT]
 ====
-*Il faut dépendre des abstractions, pas des implémentations*
+*Il faut dépendre des abstractions, pas des implémentations.*
 
 Autre formulation : *Un client ne doit jamais être forcé à implémenter une interface qu’il n’utilise pas et les clients ne doivent pas être forcés à dépendre de méthodes qu’ils n’utilisent pas.*
 
@@ -493,13 +575,12 @@ Ce principe indique :
 - Les modules de haut niveau (abstraits) ne doivent pas dépendre des modules de bas niveau. Les deux doivent dépendre d'abstractions.
 - Les abstractions ne doivent pas dépendre des détails d'implémentation.
 C'est l'inverse : les détails doivent dépendre des abstractions.
-
-Une interface est censé vous permettre de "contractualiser", d’obliger un objet à contenir certaines fonctionnalités.
 ====
 
 NOTE: Ainsi ce principe va à l'encontre de l'intuition classique.
 
-ifdef::slides[=== Exemple (bad)]
+
+==== Exemple en UML
 
 .Exemple de code violant le principe d'inversion des dépendances
 image::dip-bad.png[width=80%,scaledwidth="90%"]
@@ -508,6 +589,66 @@ ifdef::slides[=== Exemple (good)]
 
 .Exemple de code ne violant plus le principe d'inversion des dépendances
 image::dip.png[width=90%,scaledwidth="90%"]
+
+==== Exemple : Non DIP
+
+[source,java]
+----
+class Logger {
+  public void log(String msg) {
+    System.out.println(msg);
+  }
+}
+ 
+class SomeService {
+  private Logger logger;
+ 
+  public SomeService() {
+    this.logger = new Logger();
+  }
+  public void someMethod() {
+    this.logger.log("Hi!");
+  }
+}
+----
+
+Logger et SomeService sont *fortement couplées* :
+
+Problème : journaliser dans un fichier au lieu de la console, surtout si Logger est utilisée comme telle partout dans l’application. 
+
+==== Exemple : DIP
+
+.Inversion des dépendances
+[source,java]
+----
+interface Logger {
+  void log(String msg);
+}
+ 
+class ConsoleLogger implements Logger {
+  public void log(String msg) {
+    System.out.println(msg);
+  }
+}
+ 
+class SomeService {
+  private Logger logger;
+ 
+  public SomeService(Logger logger) {
+    this.logger = logger;
+  }
+  public void someMethod() {
+    this.logger.log("Hi!");
+  }
+}
+----
+
+Ici, `SomeService` :
+
+*	N'est lié au `Logger` que par une interface
+*	N'est pas lié à un objet de `Logger` particulier (la dépendance est injectée dans `SomeService`)
+
+//////
 
 == GRASP
 
@@ -522,6 +663,8 @@ aborderons certains au travers des exemples de ce module (cf. <<Larman05>>).
 
 
 TIP: Notez que les principes SOLID ne s'appliquent pas qu'à la programmation objet. Pour une discussion sur leur application avec React (language fonctionnel), cf. https://dev.to/shadid12/can-you-apply-solid-principles-to-your-react-applications-46il.
+
+//////
 
 == Les patrons : comment ça marche ?
 
@@ -549,12 +692,16 @@ Pour un patron :
 - Solution
 - Conséquences
 
+.Patron _Stratégie_
+image::strategy.svg[]
+
 Exemple pour _Strategy_ :
 
 -	*Nom*: _Strategy_
 -	*Problème*:  Situations où il est nécessaire de pouvoir définir dynamiquement les algorithmes utilisés.
 - *Solution*:  Définir une famille d'algorithmes, encapsuler chacun d'eux en tant qu'objet, et les rendre interchangeables.
 - *Conséquences*:  Ce patron laisse les algorithmes changer indépendamment des clients qui les emploient.
+
 
 === (non) Réutilisation
 
