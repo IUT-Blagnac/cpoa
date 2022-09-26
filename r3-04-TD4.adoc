@@ -316,6 +316,8 @@ plaçant dans les colonnes du tableau suivant pour mettre en évidence le
 problème en reconstituant un enchaînement erroné possible avec deux threads
 :
 +
+<<<
++
 [cols="3"]
 |===
 |*Thread 1*

@@ -49,13 +49,13 @@ include::definitions.txt[]
 
 
 
-= R3.04 Qualité - CM2 - Introduction aux Pattrons
+= R3.04 Qualité - CM2 - Introduction aux Patrons
 Jean-Michel Bruel - André Péninou
 
-include::introduction.asc[]
+include::introduction_2022_AP.asc[]
 
 
-include::typage.asc[]
+include::typage_2022_AP.asc[]
 
 
 //////////
@@ -72,14 +72,14 @@ endif::slides[]
 //////////
 
 
-include::static.asc[]
+include::static_2022_AP.asc[]
 
 
 
 include::enum.asc[]
 
 
-include::patterns-intro.adoc[]
+include::patterns-intro_2022_AP.adoc[]
 
 
 // A ISOLER

@@ -1,0 +1,683 @@
+
+:icons: font
+:experimental:
+:status:
+:imagesdir: images
+:inclusion:
+// :siteurl: http://bit.ly/jmb-cpoa
+//--------------------- slides
+
+
+// ------------------------------------------
+include::definitions.txt[]
+//-------- directories -----------
+//:icons:
+:icons: font
+:iconsdir: images/icons
+:imagesdir: images
+:images: images
+:src: src
+// :sectlinks:
+//:stylesheet: /Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
+//--------------------------------
+:coderay-css: style
+:data-uri:
+:numbered:
+//coderay highlightjs prettify pygments
+:pygments:
+:source-highlighter: pygments
+// :pygments_style: native
+// :pygments-style: manni
+:pygments-linenums-mode: inline
+:scrollable:
+
+// Enlevé linkcss car car génére les css à côté du fichier html
+// :linkcss:
+//----------- deck.js --------------
+//:navigation:
+// swiss, neon, beamer, web-2.0
+:deckjs_theme: swiss
+//fade, horizontal-slide, vertical-slide
+//:deckjs_transition: fade
+:deckjs_transition: horizontal
+:status: bottom
+//----------- general --------------
+// :status: bottom
+:inclusion:
+:experimental:
+:icons: font
+:toc-title: Table des Matières
+:toc: left
+
+:!linkcss:
+
+= R3.04 Qualité - CM3 - Conception Objet - Patrons
+Jean-Michel Bruel - André Péninou
+
+
+
+
+== Un peu d'histoire sur la définition des patrons de conception
+
+
+1977::
+  *Alexander* : patterns pour les architectures (les vraies)
++
+image::Alexander.png[width=30%,scaledwidth=30%]
+1987::
+  *Beck* et *Cunningham* : patterns pour des interfaces utilisateurs
+1988::
+  *Meyer* : livre sur l'orienté objet (langage {eiffel}), devenu la bible pour
+  beaucoup de programmeurs (cf. <<Meyer88>>)
+1990-1995::
+  *Gamma*, Helm, Johnson et Vlissides : LE livre de référence (cf. <<GoF>>)
++
+image::GoF.png[width=30%,scaledwidth=30%]
++
+NOTE:  Les auteurs de ce livre sont connus comme les *Gof* pour « _Gang of Four_ ».
+2003::
+  *Martin* : principes SOLID (cf. <<Martin03>>)
+2004::
+  *Craig Larman* décrit des modèles de conception : les Patterns *GRASP* (cf. <<Larman05>>)
+
+
+
+== Exemples de bons principes
+
+
+*Principes SOLID* :
+
+- _**S**ingle Responsibility Principle_
+- _**O**pen-Closed Principle_
+- _**L**iskov Substitution Principle_
+- _**I**nterface Segregation Principle_
+- _**D**ependency Inversion Principle_
+
+
+=== _**S**ingle Responsibility Principle_
+
+._**S**ingle Responsibility Principle_ (source <<SOLID>>)
+image::solid-s.jpg[width=50%,scaledwidth="20%"]
+
+
+[IMPORTANT]
+====
+*Responsabilité => Sujet à changement*
+
+*	Limitez le plus possible ce que doit réaliser une classe.
+*	Combiner plusieurs classes qui chacune fait bien ce qu'elle doit faire.
+*	Définir une classe :
+**	Etre capable de dire ce que fait la classe : "La classe X fait ..."
+**	Le plus spécifique possible.
+**	Pas de "et" ou de "ou.
+**	Pas de mot génériques : "gère", "objet" (exemple: gère les utilisateurs, stocke els objets, valide les objets).
+====
+
+==== Exemple : non SRP
+
+[source, java]
+-----
+class User {
+  
+    private String email, name, surname;
+    
+    // Getters and setters...
+    
+    public void function store(Database _db) {
+        // Store attributes into a database...
+    }
+}
+-----
+
+Dans ce cas, la méthode `store` est en dehors de la portée.
+Cette responsabilité doit appartenir à une classe qui gère la base de données.
+
+==== Exemple : SRP
+
+[source, java]
+.Une solution possible
+-----
+class User {
+  
+    private String email, name, surname;
+
+    // Getters and setters...
+}
+
+class UserDB {
+  
+    public function store(Database _db) {
+        // Store the user into a database...
+    }
+}
+-----
+
+Chaque classe *a une seule responsabilité*.
+
+Facile à dire, moins facile à garantir ... Exemple : pattern Singleton !
+
+
+=== _**O**pen-Closed Principle_
+
+._**O**pen-Closed Principle_ (source <<SOLID>>)
+image::solid-o.jpg[width="40%",scaledwidth="70%"]
+
+[IMPORTANT]
+====
+*Ouvert à l'extension mais fermé à la modification*
+
+Principe : En cas de nouveauté à intégrer (état/comportement)
+
+*	On doit pouvoir le faire par création d'une sous-classe 
+*	Ou on doit pouvoir le faire en ajoutant des membres (attributs/méthodes)
+*	*Mais pas en modifiant les membres existants, en particulier le corps des méthodes.*
+
+Ainsi, une fois écrite et testée, une classe ne devrait être modifiée que pour
+être corrigée des bugs contenus ! Toute modification devrait être possible par extension.
+
+Se voit souvent par :
+
+*	Beaucoup de `if (pFparam instanceof Xxxx)` sur les paramètres
+*	Un grand `switch` pour tester des cas d'exécution possible
+
+====
+
+==== Exemple : non OC
+
+[source, php]
+----
+<?php
+class Car {
+  public function __construct($engineType)   {
+    switch ($engineType) {
+      case ‘fuel’:
+        $this->engine = new FuelEngine;
+        break;      
+	  case ‘diesel’:
+        $this->engine = new DieselEngine;
+        break;      
+	  case ‘electric’:
+        $this->engine = new ElectricEngine;
+        break;
+    }
+  }
+}
+?>
+----
+
+[source, java]
+-----
+class Formatter {
+	public String format(String format, String text) {
+		if (format == "lower")
+			return text.toLowerCase();
+		if (format == "html")
+			return "<p>" + text + "</p>";
+		if (format == "json")
+			return  "{" + "\"text\":\"" + text + "\" }";
+		return ""; // default
+	}
+}
+-----
+
+L'ajout d'un format va nécessiter de revoir le code.
+
+A noter : le cas final "par défaut" + nécessite de connaître le texte des formats
+
+==== Exemple : OC
+
+[source, php]
+.Deux solutions possibles
+----
+<?php
+class Car {
+  protected $engine;
+}
+class FuelCar extends Car {
+  public function __construct()   {
+    $this->engine = new FuelEngine;
+  }
+}
+class DieselCar extends Car {
+  public function __construct()   {
+    $this->engine = new DieselEngine;
+  }
+}
+class ElectricCar extends Car {
+  public function __construct($engineType)   {
+      $this->engine = new ElectricEngine;
+  }
+}
+
+// Ou bien 
+class Car {
+  protected $engine;
+  public function __construct(Engine $e)   {
+    $this->engine = $e;
+  }
+}
+?>
+----
+
+[source, java]
+.Une solution possible
+-----
+abstract class Formatter {
+	public abstract String format(String text);
+}
+class FormatLower extends Formatter {
+	public String format(String text) {
+		return text.toLowerCase();
+	}
+}
+class FormatHtml extends Formatter {
+	public String format(String text) {
+		return "<p>" + text + "</p>";
+	}
+}
+class FormatJson extends Formatter {
+	public String format(String text) {
+		return  "{" + "\"text\":\"" + text + "\" }";
+	}
+}
+-----
+
+On pourrait se dire :
+
+*	_Ca fait beaucoup de classes_ : oui mais pas plus de code
+*	_Le client doit savoir quelle classe instancier_ : oui, tout comme il doit connaître les formats possibles (en Non OC) et leur nom exact (source d'erreur).
+
+
+=== _**L**iskov Substitution Principle_
+
+Barbara Liskov, pionnière en informatique et plus précisément en OO,
+a donné son nom à un principe important et bien connu : le principe default:
+  substitution de Liskov. Elle a reçu l'équivalent du prix Nobel d'Informatique
+(le _Turing Award_) en 2009.
+
+.Barbara Liskov reçoit le _Turing Award_
+image::liskov.jpg[width="50%", scaledwidth="50%", link="https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0"]
+
+
+
+._**L**iskov Substitution Principle_ (source <<SOLID>>)
+image::solid-l.jpg[width="50%", scaledwidth="70%"]
+
+[IMPORTANT]
+====
+*Une classe doit pouvoir être remplacée par une instance d'un de ses
+sous-types, sans modifier la cohérence du programme ni altérer son fonctionnement.*
+====
+
+==== Exemple : Non LSP
+
+[source, php]
+----
+public class User {
+  private String emailAddress;
+  
+  public String getEmailAddress() {
+    return this.emailAddress;
+  }
+}
+public class AnonymousUser extends User {
+  public String getEmailAddress() {
+    throw new RuntimeException("Anonymous users don't have an email address.");
+  }
+}
+----
+
+Ici *la sous classe lève une exception non prévue dans la superclasse* => la substitution de `User` par `AnonymousUser` ne marche pas ...
+
+==== Exemple : LSP
+
+[source, php]
+.Une solution possible
+----
+public abstract class User {}
+ 
+public class RegisteredUser extends User{
+  private String emailAddress;
+  
+  public String getEmailAddress() {
+    return this.emailAddress;
+  }
+}
+ 
+public class AnonymousUser extends User {}
+----
+
+==== Exemple : toujours NON LSP : Rectangle/Carré
+
+[quote]
+__________________
+Un carré est un rectangle particulier.
+__________________
+
+.Exemple classique de violation du principe de substitution de Liskov
+image::carre.png[width=10%,scaledwidth=20%]
+
+.Question
+NOTE: Peut-on toujours substituer un `Carré` à la place d'un `Rectangle` ?
+
+ifdef::slides[=== Vraiment?]
+
+
+Examinons avec un exemple concret pourquoi la réponse est non.
+
+.Code de Rectangle.java
+[source,java]
+----
+class Rectangle {
+	protected int m_width;
+	protected int m_height;
+
+	public void setWidth(int width) {
+		m_width = width;
+	}
+	public void setHeight(int height) {
+		m_height = height;
+	}
+	public int getWidth() {
+		return m_width;
+	}
+	public int getHeight() {
+		return m_height;
+	}
+	public int getArea() {
+		return m_width * m_height;
+	}
+}
+----
+
+.Code de Square.java
+[source,java]
+----
+// Violation of Likov's Substitution Principle
+class Square extends Rectangle {
+	public void setWidth(int width) {
+		m_width = width;
+		m_height = width;
+	}
+	public void setHeight(int height) {
+		m_width = height;
+		m_height = height;
+	}
+}
+----
+
+IMPORTANT: Mais ca marche pas toujours comme on croit ...
+
+
+.Test de Square hérite de Rectangle
+[source,java]
+----
+class LspTest {
+	private static Rectangle getNewRectangle() {
+		return new Square();
+	}
+
+	public static void main (String args[]) {
+		Rectangle r = LspTest.getNewRectangle();
+
+		r.setWidth(5);
+		r.setHeight(10);
+		// User knows that r is a rectangle.
+		// It assumes that he's able to set the width and height as for the base class
+
+		System.out.println(r.getArea());
+		// Now she's surprised to see that the area is 100 instead of 50.
+	}
+}
+----
+
+NOTE: Et si on essaye l'inverse ?
+
+.Et si on essaye l'inverse
+image::rectangle.png[width=40%,scaledwidth=70%]
+
+IMPORTANT: Même problème? PAS MIEUX ...
+
+.Test de Rectangle hérite de Square
+[source,java]
+----
+class LspTest {
+	private static Square getNewSquare() {
+		return new Rectangle();
+	}
+
+	public static void main (String args[]) {
+		Square s = LspTest.getNewSquare();
+
+		s.setWidth(5);
+		// User knows that r is a rectangle.
+		// It assumes that he's able to set the width and height as for the base class
+
+		System.out.println(s.getArea());
+		// Now she's surprised to see that the area is 0 instead of 25.
+	}
+}
+----
+
+
+=== _**I**nterface Segregation Principle_
+
+ifdef::backend-pdf[._**I**nterface Segregation Principle_ (source <<SOLID>>)]
+image::solid-i.jpg[scaledwidth="70%"]
+
+.......
+Préférer plusieurs interfaces spécifiques pour chaque client plutôt qu'une seule interface générale
+.......
+
+//-------------- book
+ifdef::backend-pdf[]
+C'est un peu le même principe que la _Single Responsibility_ des classes,
+mais appliqué aux interfaces.
+endif::backend-pdf[]
+//--------------------
+
+=== _**D**ependency Inversion Principle_ (Ségrégation des interfaces - Inversion des dépendances)
+
+ifdef::backend-pdf[._**I**nterface Segregation Principle_ (source <<SOLID>>)]
+image::solid-d.jpg[width="60%", scaledwidth="90%"]
+
+[IMPORTANT]
+====
+*Il faut dépendre des abstractions, pas des implémentations*
+
+Autre formulation : *Un client ne doit jamais être forcé à implémenter une interface qu’il n’utilise pas et les clients ne doivent pas être forcés à dépendre de méthodes qu’ils n’utilisent pas.*
+
+
+Ce principe indique :
+
+- Les modules de haut niveau (abstraits) ne doivent pas dépendre des modules de bas niveau. Les deux doivent dépendre d'abstractions.
+- Les abstractions ne doivent pas dépendre des détails d'implémentation.
+C'est l'inverse : les détails doivent dépendre des abstractions.
+
+Une interface est censé vous permettre de "contractualiser", d’obliger un objet à contenir certaines fonctionnalités.
+====
+
+NOTE: Ainsi ce principe va à l'encontre de l'intuition classique.
+
+ifdef::slides[=== Exemple (bad)]
+
+.Exemple de code violant le principe d'inversion des dépendances
+image::dip-bad.png[width=80%,scaledwidth="90%"]
+
+ifdef::slides[=== Exemple (good)]
+
+.Exemple de code ne violant plus le principe d'inversion des dépendances
+image::dip.png[width=90%,scaledwidth="90%"]
+
+== GRASP
+
+[quote,Craig Larman,2005]
+________________
+The critical design tool for software development is *a mind well educated in
+design principles*. It is not the UML or any other technology.
+________________
+
+Il s'agit d'un ensemble de patrons, plutôt orientés conception (UML). Nous en
+aborderons certains au travers des exemples de ce module (cf. <<Larman05>>).
+
+
+TIP: Notez que les principes SOLID ne s'appliquent pas qu'à la programmation objet. Pour une discussion sur leur application avec React (language fonctionnel), cf. https://dev.to/shadid12/can-you-apply-solid-principles-to-your-react-applications-46il.
+
+== Les patrons : comment ça marche ?
+
+=== Intérêt
+
+- Réponses éprouvées à des problèmes récurrents
+- Vocabulaire commun
+
+
+Exemple de phrase qu'on entend dans un _open space_ de programmeurs
+(et qui justifie qu'à défaut de les connaître tous, il faut savoir
+rapidement se documenter et les comprendre) :
+
+[quote]
+___________________
+T'as qu'à utiliser une _factory_!
+___________________
+
+=== Définition
+
+Pour un patron :
+
+- Nom
+- Problème
+- Solution
+- Conséquences
+
+Exemple pour _Strategy_ :
+
+-	*Nom*: _Strategy_
+-	*Problème*:  Situations où il est nécessaire de pouvoir définir dynamiquement les algorithmes utilisés.
+- *Solution*:  Définir une famille d'algorithmes, encapsuler chacun d'eux en tant qu'objet, et les rendre interchangeables.
+- *Conséquences*:  Ce patron laisse les algorithmes changer indépendamment des clients qui les emploient.
+
+=== (non) Réutilisation
+
+WARNING: Les patrons *ne sont pas réutilisables*!
+
+Il faut implémeter la solution qu'il représente à chaque fois.
+
+ifdef::slides[=== Réutilisation (exception)]
+
+Exception : certains font l'objet d'une librairie (comme <<observerJava,_Observer_ de Java>>).
+
+Par exemple le patron Singleton existe dans la bibliothèque standard du
+langage  en {Ruby}.
+C'est un _mixin_ qu'il suffit d'inclure dans la classe qui doit être un singleton.
+
+[source,ruby]
+------
+class Klass
+   include Singleton
+   # ...
+end
+
+a,b  = Klass.instance, Klass.instance
+
+a == b
+# => true
+
+Klass.new
+# => NoMethodError - new is private ...
+------
+
+=== Association ou composition
+
+On trouve deux modèles {uml} :
+
+ifndef::slides[._Strategy_  et composition]
+image::strategy-compo.png[]
+
+ifndef::slides[._Strategy_  et association]
+image::strategy-assoc.png[]
+
+ifdef::slides[=== Association ou composition (suite)]
+
+Et donc deux implémentations :
+
+.Composition => le composé encapsule les composants
+[source,java]
+------
+public class Colvert extends Canard {
+
+	protected Colvert() {
+		this(new VolerAvecDesAiles(), new Cancan());
+	}
+...
+c1 = new Colvert();
+------
+
+.Association => le composant existe "en dehors"
+[source,java]
+------
+...
+vol = new VolerAvecDesAiles();
+cri = new Cancan();
+c1 = new Colvert(vol,cri);
+...
+------
+
+
+
+//////
+=== Patrons abordés
+
+//-------------- book
+ifdef::backend-pdf[]
+Voici la liste des patrons abordés dans ce cours.
+endif::backend-pdf[]
+//--------------------
+
+[%step]
+- <<Singleton>>
+- <<strategy,Stratégie>>
+- <<Fabrique>> (_factory_)
+- <<Observateur>>
+- <<Itérateur>>
+- <<Composite>>
+- <<Etat>>
+- <<Visiteur>>
+- <<Proxy>>
+- <<Adaptateur>>
+
+=== Patrons non abordés
+
+//-------------- book
+ifdef::backend-pdf[]
+Voici une liste (non-exhaustive) des patrons *non abordés* dans ce cours
+(pour donner une idée du chemin qu'il vous reste à parcourir).
+endif::backend-pdf[]
+//--------------------
+
+- Décorateur
+- Commande
+- Façade
+- Patron de méthode
+- Chaînes de responsabilité
+- Prototype
+- Mémento
+- Médiateur
+- Interprète
+- Poids-mouche
+- Monteur
+- Pont
+//////
+
+[appendix]
+// :!numbered:
+
+
+// include::glossaire.txt[]
+
+include::refs_2022_AP.txt[]
+
+// include::conventions.txt[]
+
+// include::creditPhoto.txt[]
+
+
