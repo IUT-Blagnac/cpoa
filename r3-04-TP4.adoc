@@ -77,7 +77,7 @@ endif::prof[]
 . J'ai réalisé le TD `BouilleurChocolat` et donc connaît le patron Singleton!
 | {objtd}	| Comprendre ce qu'est une *conception* et implémenter mon deuxième patron.
 | {duree}	| *2* TP de 1,5h (sur 2 semaines).
-| {depot} | *Les répertoires src des codes produits + fichiers .uml (ou .txt) des codes plantuml produits durant le TPs*
+| {depot} | *Les répertoires src des codes produits + fichiers .uml (ou .txt) des codes plantuml produits durant le TPs. Pas les png.*
 |======================
 
 == Rappel sur le patron Singleton
@@ -116,8 +116,11 @@ endif::prof[]
 . Récupérer un objet `Runtime` et avec cet objet :
 
 ..  Affichez les informations sur : le nombre de processeurs disponibles, la quantité de mémoire maximum, la quantité de mémoire totale, la quantité de mémoire libre, la version de la jre au runtime
-..  Étudiez la mémoire de la méthode `gc()`. A quoi sert-elle ?
-..  Essayez la méthode `exit()` avec -20 en paramètre.
+..  Étudiez la documentation de la méthode `gc()`. A quoi sert-elle ?
+..  Étudiez la documentation de la méthode `exit()`. Essayez la méthode `exit()` avec -20 en paramètre.
+..	Rajoutez un affichage après le `exit()`, que se passe-t-il ?
++
+NOTE: N'oubliez pas de commenter l'appel de `exit()` si vous continuez le `main()` pour lma suite.
 
 ===  Desktop
 
@@ -196,14 +199,19 @@ endif::compact[]
 
 En reprenant le jeu d'aventure du TP sur les Personnages et les armes :
 
+[[fig2]]
 .Un jeu d'aventure minimaliste
-image::aventure.png[link="images/aventure.png"]
+image::aventure-assoc.png[link="images/aventure.png"]
 
 
 . *Modifiez le code de votre TP précédent* pour faire en sorte que les instances d'objet affectées à chaque comportement
 d'un `Personnage` soient uniques pour chaque comportement distinct.
-. Pourquoi ne devrait-on pas utiliser `getInstance()` dans le cas
-d'une composition (`getInstance()` réalisé dans le constructeur du composé) ?
+. Veillez à programmer proprement :
+* Faites attention au constructeur
+* Faites attention à l'attribut privé/static
+* Faites attention à la méthode public/static
+. Le modèle proposé ci-dessus (<<fig2>>) est basé sur une association. Pourquoi ne devrait-on pas utiliser `getInstance()` dans le cas
+d'une composition (`getInstance()` réalisé dans le constructeur du  `Personnage`) ?
 
 
 ifdef::prof[]
@@ -370,7 +378,7 @@ La banque, qui dispose en fait de beaucoup de clients, trouve le journal diffici
 * Pour faire court, `getInstance()` devient `getInstance(String typeLog)` et gère : soit la création d'un objet `Journalisation` si c'est la première demande de `typeLog`, soit renvoie l'objet `Journalisation` déjà existant pour cette `typeLog`. Exemple de `typeLog` possible : "Information", "Erreur".
 ====
 
-. *Implémentez cette solution*
+. *Implémentez cette solution (sur une copie du projet précédent)*
 
 * Quelques questions à se poser : 
 **  Comment stocker plusieurs objets `Journalisation` dans la classe `Journalisation` ?
@@ -378,7 +386,7 @@ La banque, qui dispose en fait de beaucoup de clients, trouve le journal diffici
 
 * Ce sont les objets comptes qui choisiront dans quelle log ils journalisent leurs messages (selon le if impliqué).
 
-* Dans une première approche, ne prenez pas en compte l'aspect multithread et les problèmes potentiels induits. Si vous avez une solution éprouvée : mettez-la en oeuvre ET testez-la.
+* Dans une première approche, ne prenez pas en compte l'aspect multithread et les problèmes potentiels induits. Si vous avez une solution éprouvée à ce problème : mettez-la en oeuvre ET testez-la, sinon ne prenez pas en compte le multithreading.
 
 . *Testez votre solution* : à la fin du `main()` vous afficherez le journal d'information et le journal d'erreur séparément.
 +
