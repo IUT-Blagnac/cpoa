@@ -19,5 +19,4 @@ public class SimpleFabriqueDePizzas {
 
 		return pizza;
 	}
-
 }

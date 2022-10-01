@@ -1,0 +1,36 @@
+@startuml
+
+'-----------------------------------
+' UML concepts illustrated
+' JMB 2014
+'-----------------------------------
+
+'hide circle
+hide empty members
+hide empty methods
+
+abstract class Pizza {
+    Pizza()
+    void preparer()
+    void cuire()
+    void couper()
+    void emballer()
+}
+
+class PizzaFromage extends Pizza {
+    PizzaFromage()
+}
+class PizzaGrecque extends Pizza {
+    PizzaGrecque()
+}
+class PizzaPoivrons extends Pizza {
+    PizzaPoivrons()
+}
+
+class PizzaFromageStyleCorse as "..." {
+        ...()
+}
+
+Pizza <|-- PizzaFromageStyleCorse
+
+@enduml

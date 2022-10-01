@@ -48,8 +48,7 @@ endif::todoprof[]
 // todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
 
 //----------- définitions --------------
-:sitecours: http://iut-blagnac.github.io/cpoa/[Support de Cours]
-:pre: PreReq
+:sitecours: http://webetud.iut-blagnac.fr/[Support de Cours]
 :objtd: ObjTD
 :duree: Durée
 :depot: À rendre

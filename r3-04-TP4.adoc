@@ -77,7 +77,7 @@ endif::prof[]
 . J'ai réalisé le TD `BouilleurChocolat` et donc connaît le patron Singleton!
 | {objtd}	| Comprendre ce qu'est une *conception* et implémenter mon deuxième patron.
 | {duree}	| *2* TP de 1,5h (sur 2 semaines).
-| {depot} | *Les répertoires src des codes produits + fichiers .uml (ou .txt) des codes plantuml produits durant le TPs. Pas les png.*
+| {depot} | *Les répertoires src des différentes versions de codes produits + fichiers .uml (ou .txt) des codes plantuml produits durant le TPs.* Ne pas déposer les fichiers .png des modèles car on peut les régénérer.
 |======================
 
 == Rappel sur le patron Singleton
@@ -368,7 +368,7 @@ La banque, qui dispose en fait de beaucoup de clients, trouve le journal diffici
 . Première idée : créer deux classes de Journalisation.
 
 * Ca marche certes ...
-* Mais la banque nous indique que plus tard peut être il faudra faire encore des sous-catégories de journaux : retraits, dépôts, tentatives de dépassement de solde lors d'un retrait, ...
+* Mais la banque nous indique que *plus tard peut être il faudra faire encore des sous-catégories de journaux* : retraits, dépôts, tentatives de dépassement de solde lors d'un retrait, ...
 
 . Deuxième idée : `Journalisation` ne vas pas gérer _un_ objet de journalisation mais *_plusieurs_*. Les objets de journalisation seront obtenus  à partir d'un type de log attendue. Bien ententu, pour un type de log donné : un seul objet `Journalisation` devra être utilisé dans toute l'application.
 +
@@ -377,11 +377,19 @@ La banque, qui dispose en fait de beaucoup de clients, trouve le journal diffici
 ====
 * Pour faire court, `getInstance()` devient `getInstance(String typeLog)` et gère : soit la création d'un objet `Journalisation` si c'est la première demande de `typeLog`, soit renvoie l'objet `Journalisation` déjà existant pour cette `typeLog`. Exemple de `typeLog` possible : "Information", "Erreur".
 ====
++
+[%collapsible]
+.Piège à éviter ?
+====
+*	Ne pas faire simplement 2 objets `Journalisation`, 1 pour chaque de type de log attendue pour le moment dans ce sujet.
+**	Car la banque souhaite faire d'autres catégories de journaux (voir plus haut).
+**	Vous risquez de programmer uen suite de "`if`" => voir le principe OCP (Open/closed Principle) qui ne serait pas respecté.
+====
 
-. *Implémentez cette solution (sur une copie du projet précédent)*
+. *Implémentez cette solution (sur une copie du projet précédent qui est à rendre séparément)*
 
 * Quelques questions à se poser : 
-**  Comment stocker plusieurs objets `Journalisation` dans la classe `Journalisation` ?
+**  Comment stocker *plusieurs objets* `Journalisation` dans la classe `Journalisation` ?
 **  Comment retrouver l'objet `Journalisation` associé à un type de log ? Par exemple, comment retrouver l'objet `Journalisation` associé à "Information" ?
 
 * Ce sont les objets comptes qui choisiront dans quelle log ils journalisent leurs messages (selon le if impliqué).
@@ -406,7 +414,7 @@ La banque, qui dispose en fait de beaucoup de clients, trouve le journal diffici
   [24/09/22 14h03] /!\ Retrait d'une valeur négative impossible (123456789).
 =======
 
-. *Amélioration et refactoring* : pour ne pas que chaque nom de journal soit écrit en dur à chaque ligne de code (avec risques d'erreurs), et parce que la banque souhaite s'exporter à l'international, on souhaite définir des constantes de classe pour chaque nom de journal. Pour par exemple "Informations", "Erreurs", "Débits", ... :
+. *Amélioration et refactoring* : pour ne pas que chaque nom de journal soit écrit "en dur" à chaque ligne de code (entre ", avec risques d'erreurs), et parce que la banque souhaite s'exporter à l'international, on souhaite définir des constantes de classe pour chaque nom de journal. Pour par exemple "Informations", "Erreurs", "Débits", ... :
 
 * Quelle est la classe candidate pour cela (existante ou à créer) ?
 * *Corrigez votre code en ce sens (partout)*. 
