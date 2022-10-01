@@ -1,0 +1,64 @@
+------------------------
+c:\blt\gitcpoa-REMOTE-WORKING\cpoa\images\Pizzeria2.png
+
+@startuml
+
+' definitions
+' -----------
+
+' package ""
+abstract Pizza
+
+class Pizzeria {
+    + Pizzeria(SimpleFabriqueDePizzas)
+    + Pizza commanderPizza(String)
+}
+
+abstract class SimpleFabriqueDePizzas {
+    + SimpleFabriqueDePizzas()
+    + Pizza {abstract} creerPizza(String)
+}
+class FabriqueDePizzasBrest
+class FabriqueDePizzasStrasbourg
+
+' end package
+
+Pizzeria  ..>  "*" Pizza 
+
+' content
+' -------
+
+' Pizzeria:
+Pizzeria -> "1" SimpleFabriqueDePizzas
+
+
+' SimpleFabriqueDePizzas:
+
+
+SimpleFabriqueDePizzas <|-- FabriqueDePizzasBrest
+FabriqueDePizzasBrest : + FabriqueDePizzasBrest()
+FabriqueDePizzasBrest : + Pizza creerPizza(String)
+
+SimpleFabriqueDePizzas <|-- FabriqueDePizzasStrasbourg
+FabriqueDePizzasStrasbourg : + FabriqueDePizzasStrasbourg()
+FabriqueDePizzasStrasbourg : + Pizza creerPizza(String)
+
+FabriqueDePizzasBrest ..>  Pizza:new (sous-classe)
+FabriqueDePizzasStrasbourg ..>  Pizza:new (sous-classe)
+
+' Pizza:
+Pizza : + Pizza()
+Pizza : + void preparer()
+Pizza : + void cuire()
+Pizza : + void couper()
+Pizza : + void emballer()
+
+@enduml
+
+PlantUML version 8009beta1(8009beta1)
+(GPL source distribution)
+Java(TM) SE Runtime Environment
+Java HotSpot(TM) 64-Bit Server VM
+1.6.0_65-b14-466.1-11M4716
+Mac OS X
+------------------------

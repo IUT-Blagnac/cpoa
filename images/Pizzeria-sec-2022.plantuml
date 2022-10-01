@@ -1,0 +1,34 @@
+@startuml
+
+'-----------------------------------
+' UML concepts illustrated
+' JMB 2014
+'-----------------------------------
+
+actor c as ":Client"
+
+participant s as ":System"
+
+c -> s : commander Pizza fromage de Strasbourg
+create p as ":PizzeriaStrasbourg"
+s -> p : new
+s -> p : commanderPizza("fromage")
+
+activate p
+
+p -> p : creerPizza("fromage");
+create pizza as ":PizzaFromage"
+p -> pizza : new
+pizza --> p : pizza
+
+deactivate p
+
+p -> pizza : preparer()
+p -> pizza : cuire()
+p -> pizza : couper()
+p -> pizza : emballer()
+
+p --> s : pizza
+s --> c : pizza
+
+@enduml

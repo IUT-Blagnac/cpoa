@@ -24,6 +24,9 @@ endif::todoprof[]
 
 :icons: font
 
+//
+:prof: sdsdsdsdsdsdsdsdsdsds
+
 = {doctitle}
 :Author:  {authorDefault} - (Semaine 47)
 :lang: fr

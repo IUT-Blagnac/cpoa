@@ -22,35 +22,36 @@ SimpleFabriqueDePizzas  ..>  Pizza:new
 ' -------
 
 ' Pizzeria:
-Pizzeria --> "1" SimpleFabriqueDePizzas
-Pizzeria : Pizzeria(SimpleFabriqueDePizzas)
+Pizzeria -> "1" SimpleFabriqueDePizzas
+Pizzeria : + Pizzeria(SimpleFabriqueDePizzas)
+Pizzeria : + Pizza commanderPizza(String)
 
 ' PizzaRoyale:
 Pizza <|-- PizzaRoyale
-PizzaRoyale : PizzaRoyale()
+PizzaRoyale : + PizzaRoyale()
 
 ' SimpleFabriqueDePizzas:
-SimpleFabriqueDePizzas : SimpleFabriqueDePizzas()
-SimpleFabriqueDePizzas : Pizza creerPizza(String)
+SimpleFabriqueDePizzas : + SimpleFabriqueDePizzas()
+SimpleFabriqueDePizzas : + Pizza creerPizza(String)
 
 ' PizzaVegetarienne:
 Pizza <|-- PizzaVegetarienne
-PizzaVegetarienne : PizzaVegetarienne()
+PizzaVegetarienne : + PizzaVegetarienne()
 
 ' Pizza:
-Pizza : Pizza()
-Pizza : void preparer()
-Pizza : void cuire()
-Pizza : void couper()
-Pizza : void emballer()
+Pizza : + Pizza()
+Pizza : + void preparer()
+Pizza : + void cuire()
+Pizza : + void couper()
+Pizza : + void emballer()
 
 ' PizzaSaumon:
 Pizza <|-- PizzaSaumon
-PizzaSaumon : PizzaSaumon()
+PizzaSaumon : + PizzaSaumon()
 
 ' PizzaFromage:
 Pizza <|-- PizzaFromage
-PizzaFromage : PizzaFromage()
+PizzaFromage : + PizzaFromage()
 
 @enduml
 

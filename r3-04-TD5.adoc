@@ -145,26 +145,41 @@ ifdef::prof[]
 [CAUTION]
 ========
 .	La fabrication de la pizza elle-même suivant le type : la suite de `if (type.equals("..."))`
-+
-Le `if` à remplacer par un `pizza = fabrique.creerPizza(type);`
-et on ajoute le code suivant dans la classe Pizzeria :
-+
-[source,java]
-------
-	SimpleFabriqueDePizzas fabrique;
-
-	public Pizzeria(SimpleFabriqueDePizzas fabrique) {
-		this.fabrique = fabrique;
-	}
-------
-+
-NOTE: Faire remarquer que la pizza n'est plus la propriété de la pizzeria, mais
-de la fabrique !
-. Code de `SimpleFabriqueDePizzas`
+.	Code de SimpleFabriqueDePizzas
 +
 [source,java]
 ------
 include::src/java/JMIsPizzas/src/SimpleFabriqueDePizzas.java[]
+------
+ 
++
+NOTE: Faire remarquer que la pizza n'est plus la propriété de la pizzeria, mais
+de la fabrique !
++
+Dans `Pizzeria`, le `if` à remplacer par un `pizza = fabrique.creerPizza(type);`
++
+et on ajoute le code suivant dans la classe Pizzeria :
++
+[source,java]
+------
+public class Pizzeria {
+
+	private SimpleFabriqueDePizzas fabrique;
+
+	public Pizzeria(SimpleFabriqueDePizzas fabrique) {
+		this.fabrique = fabrique;
+	}
+
+	public Pizza commanderPizza(String type) {
+
+		Pizza pizza;
+		
+		pizza = fabrique.creerPizza(type);
+
+		pizza.preparer();	pizza.cuire();	pizza.couper();	pizza.emballer();
+
+		return pizza;
+	}
 ------
 +
 . Diagramme de classe :
@@ -218,6 +233,8 @@ Pizzeria boutiqueStrasbourg = new Pizzeria(fabriqueStrasbourg);
 boutiqueStrasbourg.commander("Végétarienne");
 ------
 
+image::PizzeriaAbstraiteDepart.png[width=80%,scaledwidth=90%]
+
 ========
 endif::prof[]
 
@@ -225,10 +242,10 @@ endif::prof[]
 
 Les pizzerias utilisent bien vos fabriques mais ont changé
 leurs procédures : certaines ne coupent pas les pizzas, changent les
-temps de cuissons, et les pizzerias O'Reilly perdent leur
+temps de cuissons, ne les emballent pas, et les pizzerias O'Reilly perdent leur
 identité. Il nous faut donc *restructurer* les pizzerias.
 
-Un consultant italien payé fort cher (heureusement en pizzas !)
+Un consultant italien payé fort cher d'ailleurs (heureusement en pizzas !)
 propose de revenir à la structure suivante :
 
 [source,java]
@@ -265,8 +282,8 @@ ifdef::prof[]
 - Pizzeria est maintenant abstraite (vous allez voir pourquoi ci-dessous).
 - Maintenant, `creerPizza()` est de nouveau un appel à une méthode de Pizzeria
 et non à un objet fabrique.
-- Notre "méthode de fabrication" est maintenant abstraite dans `Pizzeria`.
 - Et nous avons transféré la fonctionnalité de notre objet fabrique à cette méthode.
+- Notre "méthode de fabrication de pizza" `commanderPizza(String type)` est maintenant final dans `Pizzeria` => les sous classes ne peuvent pas la redéfinir ! Toutes les pizzerias prépareront, cuiront, couperont, emballeront les pizzas de la même manière. Seule la méthode `creerPizza()` changera ...
 ========
 endif::prof[]
 
@@ -299,17 +316,18 @@ Voici un exemple de Pizzeria concrète :
 [source,java]
 ------
 public class PizzeriaBrest extends Pizzeria {
-	Pizza creerPizza(String item) {
+	... Pizza creerPizza(String item) {
 	if (choix.equals("fromage")) {
-		return new PizzaFromageStyleBrest();
+			return new PizzaFromageStyleBrest();
 		} else if (choix.equals("vegetarienne")) {
-		return new PizzaVegetarienneStyleBrest();
+			return new PizzaVegetarienneStyleBrest();
 		} else if (choix.equals("fruitsDeMer")) {
-		return new PizzaFruitsDeMerStyleBrest();
+			return new PizzaFruitsDeMerStyleBrest();
 		} else if (choix.equals("poivrons")) {
-		return new PizzaPoivronsStyleBrest();
-		} else
-		return null;
+			return new PizzaPoivronsStyleBrest();
+		} else {
+			return null;
+		}
 	}
 }
 ------
@@ -343,6 +361,7 @@ protected abstract Pizza creerPizza(String type);
 
 - `protected abstract` : Comme une méthode de fabrication est abstraite,
 on compte sur les sous-classes pour gérer la création des objets.
+- `protected` : inutile d'exposer la méthode à l'extérieur; aux sous-classes oui pour la redéfinir.
 - `Pizza` : Une méthode de fabrication retourne un Produit qu'on utilise généralement
 dans les méthodes définies dans la superclasse.
 - `creerPizza`: Une méthode de fabrique isole le client (le code de la superclasse,
@@ -365,7 +384,7 @@ ifdef::prof[]
 .Solution image:icons/solution.png[]
 [CAUTION]
 ========
-image::Pizzeria-sec.png[width=100%,scaledwidth=100%]
+image::Pizzeria-sec-2022.png[width=100%,scaledwidth=100%]
 ========
 endif::prof[]
 
@@ -389,7 +408,6 @@ image::google-fabrique.png[link="images/google-fabrique.png",width=100%,scaledwi
 endif::compact[]
 
 
-:numbered!:
 == Pour aller plus loin
 
 === Et les pizzas dans tout ça !?
@@ -405,7 +423,7 @@ ifdef::prof[]
 .Solution image:icons/solution.png[]
 [CAUTION]
 ========
-image::Pizzas-dc.png[width=100%,scaledwidth=100%]
+image::Pizzas-dc-2022.png[width=100%,scaledwidth=100%]
 
 Exemple de code pour `Pizza` :
 
@@ -415,8 +433,15 @@ public abstract class Pizza {
 	private String nom;
 	private String pate;
 	private String sauce;
-	private ArrayList <Ingredient> garnitures = new ArrayList<>();
+	private List <Ingredient> garnitures;
 
+	public Pizza (String _n, String _p, String _s, List<Ingredients> _l) {
+		nom = _n;
+		pate = _p;
+		sauce = _s;
+		garnitures = new ArrayList<>();
+		gernitures.addAll(_l);
+	}
 	public void preparer() {
 		System.out.println("Préparation de " + nom);
 		System.out.println("Étalage de la pâte...");
@@ -434,7 +459,7 @@ public abstract class Pizza {
 	}
 	public void emballer() {
 		System.out.println("Emballage dans une boîte officielle");
-	￼￼￼￼￼}
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -460,6 +485,7 @@ include::src/java/JMIsPizzas/src/PizzeriaDependante.java[]
 ====
 . Faites le compte du nombre de classes concrètes dont cette classe dépend.
 . Et si vous ajoutez des pizzas de style Marseille à cette Pizzeria ?
+. Quel est le principe SOLID non respecté par cette classe ?
 ====
 //----------------------------------------------------- Correction -------------------------
 ifdef::prof[]
@@ -470,6 +496,8 @@ ifdef::prof[]
 . 12
 +
 TIP: À comparer aux 2 (fabrique et pizza) des Pizzérias avec Fabrique
++
+.	OCP : Open/Close Principle : suite de `if` qu'il faut modifier à chaque changement. Elle n'est pas fermée à la modification.
 
 ========
 endif::prof[]
@@ -503,7 +531,7 @@ Ce code est peu adaptatif et va soufrir des évolutions, par exemple :
 .*QUESTION*
 [WARNING]
 ====
-. Isoler ce code dans une classe `SimpleFabriqueArme` qui possèdera
+. Isoler ce code dans une classe `SimpleFabriqueArme` qui possédera
 une méthode `creerComportementArme(String type)` qui retourne le comportement
 adapté en fonction du paramètre reçu.
 . Donnez le diagramme de classe {UML} de la nouvelle organisation.
@@ -512,7 +540,7 @@ adapté en fonction du paramètre reçu.
 +
 [source,java]
 ------
-Chevalier perso = new Chevalier("JMI");
+Chevalier perso = new Chevalier("JMB");
 
 SimpleFabriqueArme fabrique = new SimpleFabriqueArme();
 ComportementArme c = fabrique.creerComportementArme("Epee");
@@ -531,7 +559,7 @@ ifdef::prof[]
 .Extrait de FabriqueArme.java
 [source,java]
 -----
-include::{sourcedir}/src/simuaventure/comportements/arme/impl/SimpleFabriqueArme.java[lines=12..25]
+include::src/java/TD3/src/simuaventure/comportements/arme/impl/SimpleFabriqueArme.java[lines=12..25]
 -----
 +
 . Diagramme de classe de la fabrique de comportements d'armes
@@ -547,6 +575,7 @@ image::fabriqueArme-seq.svg[width=100%,scaledwidth=100%]
 endif::prof[]
 //----------------------------------------------------- fin Correction -------------------------
 
+///////
 ifndef::backend-pdf[]
 
 ifndef::compact[]
@@ -562,3 +591,4 @@ http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternit
 endif::compact[]
 
 endif::backend-pdf[]
+///////

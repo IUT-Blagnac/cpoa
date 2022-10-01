@@ -10,25 +10,25 @@ hide empty members
 hide empty methods
 
 abstract class Pizza {
-    Pizza()
-    void preparer()
-    void cuire()
-    void couper()
-    void emballer()
+    + Pizza()
+    + void preparer()
+    + void cuire()
+    + void couper()
+    + void emballer()
 }
 
 class PizzaFromage extends Pizza {
-    PizzaFromage()
+    + PizzaFromage()
 }
 class PizzaGrecque extends Pizza {
-    PizzaGrecque()
+    + PizzaGrecque()
 }
 class PizzaPoivrons extends Pizza {
-    PizzaPoivrons()
+    + PizzaPoivrons()
 }
 
 class PizzaFromageStyleCorse as "..." {
-        ...()
+    + ...()
 }
 
 Pizza <|-- PizzaFromageStyleCorse
