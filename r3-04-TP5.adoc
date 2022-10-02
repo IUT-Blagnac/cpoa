@@ -1,0 +1,303 @@
+:moduleTitle: R3.04 Qualité
+:authorDefault:  BUT/Info/S3/R3.04
+
+:tdnum: TP5 - Patron Fabrique
+
+:sourcedir: src/java/TD1
+
+include::definitions.txt[]
+
+// ATTENTION !
+// Enlevé linkcss car car génére les css à côté du fichier html
+:!linkcss:
+
+// L'enlève au besoin (! undefines the variable)
+// :!linkcss:
+
+:sourcedir: src/java/TD2
+
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+:icons: font
+
+= {doctitle}
+:Author:  {authorDefault}
+:lang: fr
+:slideshowlocation: Your computer
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169; 
+:toc-title: Table des Matières
+:toc: left
+:incremental!:
+:source-highlighter: pygments
+:numbered:
+:iconsdir: icons/
+:icons: true
+:imagesdir: images
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+// :prof: sdsd
+
+//----------- définitions --------------
+:sitecours: http://jmbruel.github.io/cpoa/[Support de Cours]
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+
+:pizzeriaSRC: src/java/PizzeriaJMB-2022/src/appli
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[CAUTION]
+.Version corrigée
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[[cartouche]]
+[align="left",cols="1,10a",width="90%"]
+|======================
+| {pre}		|
+. Je sais programmer en {java}.
+. J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
+. J'ai compris ce qu'est un patron.
+. J'ai réalisé les TDs `Pizza` et donc connaît le patron _Factory_!
+| {objtd}	| Comprendre ce qu'est une *conception* et implémenter des patrons.
+| {duree}	| *2* TP de 1,5h (sur 1 semaine).
+| {depot} | *Les répertoires src des différentes versions de codes produits + fichiers .uml (ou .txt) des codes plantuml produits durant le TPs.* Ne pas déposer les fichiers .png des modèles car on peut les régénérer.
+
+|======================
+
+== Rappel : le patron Fabrique (_Factory_)
+
+Vous avez décortiqué en TD 3 le patron Fabrique dans le cadre de la fabrication des pizzas
+
+[NOTE]
+.Design pattern : *Fabrique (_Factoty_)*
+====
+include::pattern/fabrique.txt[]
+====
+
+== `Fabrique` dans la jre standard : `NumberFormat`
+
+On trouve quelques implémentations de Fabrique dans la jre standard.
+
+. Étudiez la documentation de la classe `NumberFormat` : link:https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/text/NumberFormat.html#getNumberInstance[elle se trouve ici, en version java 14]
++
+Cette classe permet de formatter des nombre en String et de parser des String pour en obtenir des nombres.
++
+[TIP]
+=====
+Cette classe manipule des `Number` et non pas des types de base (int, float, double);
+
+Notez que la classe `Number` contient des méthodes pour obtenir la valeur en type de base.
+=====
+. Créez une classe avec un une méthode `main()`.
+. Déclarez deux variables afin d'obtenir deux instances de la classe `NumberFormat` :
+..  `nff` pour un `NumberFormat` avec la locale `Locale.FRANCE`
+..  `nfe` pour un `NumberFormat` avec la locale `Locale.ENGLISH`
++
+Notez aussi que `NumberFormat` est une fabrique.
++
+Notez que la "locale" permet de fixer le format des nombres : à la française ou à l'anglaise.
+. Vérifiez que vous obtenez bien deux instances d'objets différentes (2 références).
++
+Vous pouvez essayer de créer un autre objet `NumberFormat` de locale France par exemple et vérifier que c'est bien un autre objet => c'est bien une fabrique !
+. Si vous avez bien lu la documentation : `NumberFormat` est abstraite. Elle ne peut donc pas nous renvoyer des objets de ce type ...
+..  Affichez le type des objets obtenus (en utilisant la méthode `getClass()`).
+. Formatage :
+..  Affichez directement à l'écran la valeur 123456789.123456789
+..  Afficher la valeur 123456789.123456789 formatée par `nff` 
+..  Afficher la valeur 123456789.123456789 formatée par `nfe`
++
+Notez les différences de formatage : standard en notation avec exposant, à la française, à l'anglaise. 
+. Parsing : 
+..  Parsez la chaîne `"10,23"` avec `nff` et affichez le résultat obtenu.
+..  Parsez la chaîne `"10.23"` avec `nfe` et affichez le résultat obtenu.
+. Parsing à la française
+..  Essayez de : 
+... Parser la chaîne `"123 456 789,123"` avec `nff` : ca doit marcher.
+... Afficher le résultat obtenu
+... Afficher le résultat obtenu formaté par `nff`
+. Parsing à l'anglaise
+..  Essayez de : 
+... Parser la chaîne `"123,456,789.123"` avec `nfe` : ca doit marcher.
+... Afficher le résultat obtenu
+... Afficher le résultat obtenu formaté par `nfe`
+. Autres parsing moins fructueux :
+..  Parsez `"123,456,789.123"` avec `nff` cette fois : résultat ?
+..  Parsez `"123 456 789,123"` avec `nfe` cette fois : résultat ?
+. Essayez de formater la valeur 123456789.123456789 à l'italienne et à l'allemande. Quel est le résultat ?
+
+== Mise en oeuvre de Fabrique : les pizzas
+
+En reprenant le TD sur le patron Fabrique (reprenez le sujet)
+et en utilisant le code de la classe `Pizza` suivant :
+
+[source,java]
+-------
+include::{pizzeriaSRC}/Pizza.java[lines=3..100]
+-------
+
+.Aide de syntaxe
+[NOTE]
+=====
+Notez la signature du constructeur : `Pizza (String n, String p, String s, String ... l)`
+
+Les "..." signifie un nombre d'arguments variables qui sont manipulés dans le corps de la fonction comme un tableau.
+
+cf. : link:https:http://info.clg.qc.ca/java/objets/methode-nombre-variable-parametres[explication rapide ici]
+=====
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Implémentez complètement l'application de Pizzeria de manière à ce que le
+programme de test ci-dessous produise le résultat ci-dessous.
++
+TIP: Commencez par écrire ce programme et servez-vous des _QuickFix_ pour "générer"
+un maximum de code.
++
+. Générez votre diagramme de classe.
+====
+
+On utilisera le modèle de départ suivant pour les pizzas :
+
+image::Pizzas-dc-2022.png[]
+
+Quelques rappels sur le modèle mis en oeuvre en TD :
+
+image::PizzeriaAbstraiteDepart.png[width=80%,scaledwidth=90%]
+
+
+.Programme de test
+[source,java]
+-------
+public class PizzeriaTest {
+	public static void main(String[] args) {
+		Pizzeria boutiqueBrest = new PizzeriaBrest();
+		Pizzeria boutiqueStrasbourg = new PizzeriaStrasbourg();
+		
+		Pizza pizza = boutiqueBrest.commanderPizza("fromage"); 
+		System.out.println("JMB a commandé une " + pizza.getNom() + "\n");
+		
+		pizza = boutiqueStrasbourg.commanderPizza("fromage");
+		System.out.println("AP a commandé une " + pizza.getNom() + "\n"); 
+	}
+-------
+
+
+.Résultat d'exécution
+
+  Préparation de Pizza sauce style brest et fromage
+  Étalage de la pâte...
+  Ajout de la sauce...
+  Ajout des garnitures: 
+  Parmigiano reggiano râpé
+  Parmigiano poivré
+  Cuisson 25 minutes à 180°
+  Découpage en quatre parts triangulaires
+  En on emballe!
+  JMB a commandé une Pizza sauce style brest et fromage
+
+  Préparation de Pizza pâte Strasbourg et fromage
+  Étalage de la pâte...
+  Ajout de la sauce...
+  Ajout des garnitures: 
+  Mozzarella en lamelles
+  Choucroutte
+  Cuisson 25 minutes à 180°
+  Découpage en quatre parts triangulaires
+  En on emballe!
+  AP a commandé une Pizza pâte Strasbourg et fromage
+
+
+== Plus de pizzas
+
+.*QUESTION*
+[WARNING]
+====
+. Ajoutez deux autres types de pizzas avec une versions Brestoise et Strasbourgeoise.
+. Complétez le `main()` pour tester leur production.
+====
+
+== Jeu d'aventure et Fabrique
+
+On reprend le jeu d'aventures avec son main de test et la petite application qui, à partir d’un menu, permet de créer un personnage parmi les types possibles, et de choisir et lui affecter une arme et de la changer.
+
+Vous avez sûrement dans votre `main` de l'application de jeu d'aventure
+une partie du code ressemblant à ceci :
+
+.Adaptation des comportements à la situation
+[source,java]
+-----
+if (choix.equals("épée")) {
+	perso.setArme(new ComportementEpee());
+}
+else if (choix.equals("arc")) {
+	perso.setArme(new ComportementArc());
+}
+else if (...) {
+	...
+}
+-----
+
+Ce code est peu adaptatif et va souffrir des évolutions, par exemple :
+
+- changement de la liste des armes possibles
+- rajouter des `if then else` à chaque nouvelle arme
+- suppression de certaines armes
+- ...
+
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Isolez ce code dans une classe `SimpleFabriqueArme` qui possédera
+une méthode `creerComportementArme(String type)` qui retourne le comportement
+adapté en fonction du paramètre reçu.
+. Implémentez la solution.
+. Réalisez aussi la fabrique de comportements de déplacements.
+. Donnez le diagramme de classe {UML} de la nouvelle organisation.
+. Question : serait il intelligent de faire ce TP avec des fabriques en reprenant les classes de la version du jeu d'aventure ou les armes étaient des Singleton ? Pourquoi ne faut-il pas le faire ?
+====
+
+ifdef::prof[]
+[%collapsible]
+.Solution image:icons/solution.png[]
+====
+Car on attend d'une fabrique qu'elle fasse des objets différents. Le Singleton dans une fabrique casserait cette création de nouvel objet à chaque appel.
+
+Exemple de ce qu'on obtiendrait et qui contredit l'idée même de fabrique :
+
+[source,java]
+-----
+public class SimpleFabriqueArme {
+	public ComportementArme creerArme (Arme type) {
+		switch (type) {
+		case ARC : return  ComportementArc.getInstance();
+		case EPEE : return  ComportementEpee.getInstance();
+    ...
+-----
+====
+endif::prof[]
+
+

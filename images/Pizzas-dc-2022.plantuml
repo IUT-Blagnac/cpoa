@@ -10,11 +10,11 @@ hide empty members
 hide empty methods
 
 abstract class Pizza {
-  - String nom
-  - String pate
-  - String sauce
-  - List<Ingredients> garnitures
-  + Pizza (String, String, String, List<Ingredients>)
+  # String nom
+  # String pate
+  # String sauce
+  # List<Ingredients> garnitures
+  # Pizza (String, String, String, List<Ingredients>)
   + void preparer()
   + void cuire()
   + void couper()

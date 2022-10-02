@@ -1,7 +1,7 @@
 :moduleTitle: R3.04 Qualité
 :authorDefault:  BUT/Info/S3/R3.04
 
-:tdnum: TD 5 - Patron Factory
+:tdnum: TD5 - Patron Factory
 
 :sourcedir: src/java/TD2
 
@@ -38,7 +38,7 @@ endif::todoprof[]
 = {doctitle}
 // TESTS
 
-:prof:
+// :prof:
 
 :Author:  {authorDefault} - (Semaine 46)
 :lang: fr
@@ -402,8 +402,12 @@ include::pattern/fabrique.txt[]
 
 ifndef::compact[]
 
+ifndef::pdf[]
+
 .Quelques exemples de description du patron Fabrique
 image::google-fabrique.png[link="images/google-fabrique.png",width=100%,scaledwidth=100%]
+
+endif::pdf[]
 
 endif::compact[]
 
@@ -430,17 +434,17 @@ Exemple de code pour `Pizza` :
 [source,java]
 ---------
 public abstract class Pizza {
-	private String nom;
-	private String pate;
-	private String sauce;
-	private List <Ingredient> garnitures;
+	protected String nom;
+	protected String pate;
+	protected String sauce;
+	protected List <Ingredient> garnitures;
 
-	public Pizza (String _n, String _p, String _s, List<Ingredients> _l) {
+	protected Pizza (String _n, String _p, String _s, List<Ingredients> _l) {
 		nom = _n;
 		pate = _p;
 		sauce = _s;
 		garnitures = new ArrayList<>();
-		gernitures.addAll(_l);
+		garnitures.addAll(_l);
 	}
 	public void preparer() {
 		System.out.println("Préparation de " + nom);
@@ -520,7 +524,7 @@ else if (choix.equals("Arc")) {
 }
 -----
 
-Ce code est peu adaptatif et va soufrir des évolutions, par exemple :
+Ce code est peu adaptatif et va souffrir des évolutions, par exemple :
 
 - changement de la liste des armes possibles
 - rajouter des `if then else` à chaque nouvelle arme

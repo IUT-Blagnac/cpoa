@@ -9,7 +9,7 @@ fSlides="${f}_SupportSlides"
 fPrint="${f}_SujetPrintable"
 
 echo "GENERATION PDF SUJET"
-asciidoctor-pdf      -a data-uri   -a icons   -a eleve   -o ./htmlGenerated/$fSujet.pdf   $f.adoc
+asciidoctor-pdf      -a data-uri   -a icons   -a eleve   -a pdf   -o ./htmlGenerated/$fSujet.pdf   $f.adoc
 
 # echo "GENERATION HTML SLIDES"
 # asciidoc --backend slidy2 -a data-uri -a icons -a toc -a prof  -o htmlGenerated/$fSlides.html   $f.asc
