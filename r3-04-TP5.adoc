@@ -109,7 +109,8 @@ Cette classe manipule des `Number` et non pas des types de base (int, float, dou
 
 Notez que la classe `Number` contient des méthodes pour obtenir la valeur en type de base.
 =====
-. Créez une classe avec un une méthode `main()`.
+. Créez un répertoire de workspace et ouvrir Eclipse dessus. *Modifier l'encodage du workspace en UTF-8.* (Sinon il peut subsister des soucis pour la suite)
+Créez une classe avec un une méthode `main()`.
 . Déclarez deux variables afin d'obtenir deux instances de la classe `NumberFormat` :
 ..  `nff` pour un `NumberFormat` avec la locale `Locale.FRANCE`
 ..  `nfe` pour un `NumberFormat` avec la locale `Locale.ENGLISH`
@@ -120,6 +121,20 @@ Notez que la "locale" permet de fixer le format des nombres : à la française o
 . Vérifiez que vous obtenez bien deux instances d'objets différentes (2 références).
 +
 Vous pouvez essayer de créer un autre objet `NumberFormat` de locale France par exemple et vérifier que c'est bien un autre objet => c'est bien une fabrique !
++
+[IMPORTANT]
+=====
+Si vous tentez un truc du genre `System.out.println(nfe);` et `System.out.println(nff);` vous pourriez obtenir 2 sorties identiques du genre `java.text.DecimalFormat@674dc`, donnant l'impresison d'avoir deux objets identiques ... bizarre ?
+
+*Tentez `System.out.println(nff == nfe);` vous devriez obtenir `false` ...*
+
+Pour vérifier que ce sont des objets différents : tentez `System.out.println(System.identityHashCode(nff));` puis avec `nfe` => vous devriez avoir le bon résultat
+
+Exeplication :
+
+- `System.out.println(nfe);` : affiche le hashcode() de la classe, qui peut être redéfini par la classe elle-même.
+- `System.identityHashCode(nff)` : renvoie le hashcode interne à la jvm qui lui est unique au runtime et n'est pas modifiable dans la classe.
+=====
 . Si vous avez bien lu la documentation : `NumberFormat` est abstraite. Elle ne peut donc pas nous renvoyer des objets de ce type ...
 ..  Affichez le type des objets obtenus (en utilisant la méthode `getClass()`).
 . Formatage :
@@ -149,7 +164,7 @@ Notez les différences de formatage : standard en notation avec exposant, à la 
 == Mise en oeuvre de Fabrique : les pizzas
 
 En reprenant le TD sur le patron Fabrique (reprenez le sujet)
-et en utilisant le code de la classe `Pizza` suivant :
+et en utilisant le code de la classe `Pizza` suivant *A ne pas modifier dans le TP*:
 
 [source,java]
 -------
@@ -170,12 +185,27 @@ cf. : link:https:http://info.clg.qc.ca/java/objets/methode-nombre-variable-param
 .*QUESTION*
 [WARNING]
 ====
-. Implémentez complètement l'application de Pizzeria de manière à ce que le
+. En vous appuyant sur les diagrammes ci-dessous, *implémentez* complètement l'application de Pizzeria de manière à ce que le
 programme de test ci-dessous produise le résultat ci-dessous.
 +
 TIP: Commencez par écrire ce programme et servez-vous des _QuickFix_ pour "générer"
 un maximum de code.
 +
+. Rappel : on programme *EN* objet *ET* avec qualité => attention aux visibilités des membres (private, ...), ne mettre que ce qui est utile, attention aux abstract, final, ... !!!!!
+. Vous organiserez votre application an packages (en refactoring final éventuellement) : a minima : 
++
+-----
+  pizza
+    Pizza
+    SimpleFabriqueDePizzas
+    ...
+  pizzeria
+    Pizzeria
+    PizzeriaBrest
+    ...
+  main
+    Main
+-----
 . Générez votre diagramme de classe.
 ====
 
@@ -183,10 +213,26 @@ On utilisera le modèle de départ suivant pour les pizzas :
 
 image::Pizzas-dc-2022.png[]
 
+[NOTE]
+=====
+Notez bien que `Pizza` est abstraite.
+
+Vous *ne changerez pas* le code de `Pizza` (en particulier les constructeurs)
+=====
+
 Quelques rappels sur le modèle mis en oeuvre en TD :
 
 image::PizzeriaAbstraiteDepart.png[width=80%,scaledwidth=90%]
 
+[NOTE]
+=====
+Notez bien :
+
+* `SimpleFabriqueDePizzas` est abstraite.
+* Dans `SimpleFabriqueDePizzas` : `creerPizza` est en italique dans le diagramme UML : c'est une méthode abstraite !
+* La `Pizzeria` est déclarée concrète dans le diagramme : vous pouvez reprendre la version abstraite vue en TD.
+* Ci-dessous, la classe `PizzeriaBrest` a un constructeur sans paramètre : normal : dans les `PizzeriaBrest` on ne paramètre pas la fabrique, c'est une `FabriqueDePizzasBrest` qui est toujours utilisée bien sûr !
+=====
 
 .Programme de test
 [source,java]
@@ -275,7 +321,8 @@ Ce code est peu adaptatif et va souffrir des évolutions, par exemple :
 une méthode `creerComportementArme(String type)` qui retourne le comportement
 adapté en fonction du paramètre reçu.
 . Implémentez la solution.
-. Réalisez aussi la fabrique de comportements de déplacements.
+. Rappel : programmez *EN* objet *ET* avec qualité *ET* en structurant le code en packages.
+. Vous rajouterez aux personnages la possibilité de se déplacer : à pied, à cheval, en calèche, en chaise à porteurs. Mettrez en oeuvre ce comportement des personnages (stratégie) en utilisant là aussi une fabrique de comportements de déplacements.
 . Donnez le diagramme de classe {UML} de la nouvelle organisation.
 . Question : serait il intelligent de faire ce TP avec des fabriques en reprenant les classes de la version du jeu d'aventure ou les armes étaient des Singleton ? Pourquoi ne faut-il pas le faire ?
 ====
