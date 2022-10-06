@@ -1,0 +1,418 @@
+@startuml
+interface Action [[java:action.Action]] {
+	actionMessage(): String
+	actionCode(): String
+	execute(ag: AgenceBancaire): void
+}
+interface ActionList [[java:action.ActionList]] {
+	listTitle(): String
+	size(): int
+	addAction(ac: Action): boolean
+}
+Action <|-- ActionList
+
+class Action3 [[java:application.action.Action3]] {
+	+Action3(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+
+GenericAction <|-- Action3
+
+class Action2 [[java:application.action.Action2]] {
+	+Action2(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+
+GenericAction <|-- Action2
+
+class Action4 [[java:application.action.Action4]] {
+	+Action4(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+
+GenericAction <|-- Action4
+
+class Action1 [[java:application.action.Action1]] {
+	+Action1(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+
+GenericAction <|-- Action1
+
+abstract class GenericAction [[java:application.action.GenericAction]] {
+	-lineMessage: String
+	-code: String
+	+GenericAction(m: String, c: String)
+	+actionMessage(): String
+	+actionCode(): String
+}
+interface Action {
+}
+Action <|.. GenericAction
+class ActionListAgenceBancaire [[java:application.actionlist.ActionListAgenceBancaire]] {
+	-title: String
+	-dec: String
+	-decTwice: String
+	-numberOptSep: String
+	+ActionListAgenceBancaire(m: String, c: String, t: String)
+	+listTitle(): String
+	+addAction(ac: Action, index: int): boolean
+	+addAction(ac: Action): boolean
+	+removeAction(ac: Action): boolean
+	+listOfActions(): String[]
+	+removeAction(index: int): boolean
+	+size(): int
+	+execute(ab: AgenceBancaire): void
+	-readResponse(): int
+	-printMenu(): void
+	-printTitle(ac: AgenceBancaire): void
+	-tempo(): void
+}
+class Action {
+}
+ActionListAgenceBancaire --> "*" Action : myMenu
+class GenericAction {
+}
+GenericAction <|-- ActionListAgenceBancaire
+interface ActionList {
+}
+ActionList <|.. ActionListAgenceBancaire
+class Action3 [[java:application.action.Action3]] {
+	+Action3(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action3
+class Action2 [[java:application.action.Action2]] {
+	+Action2(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action2
+class Action4 [[java:application.action.Action4]] {
+	+Action4(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action4
+class Action6 [[java:application.action.Action6]] {
+	+Action6(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action6
+class Action5 [[java:application.action.Action5]] {
+	+Action5(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action5
+class Action1 [[java:application.action.Action1]] {
+	+Action1(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action1
+abstract class GenericAction [[java:application.action.GenericAction]] {
+	-lineMessage: String
+	-code: String
+	+GenericAction(m: String, c: String)
+	+actionMessage(): String
+	+actionCode(): String
+}
+interface Action {
+}
+Action <|.. GenericAction
+class ActionListAgenceBancaire [[java:application.actionlist.ActionListAgenceBancaire]] {
+	-title: String
+	-dec: String
+	-decTwice: String
+	-numberOptSep: String
+	+ActionListAgenceBancaire(m: String, c: String, t: String)
+	+listTitle(): String
+	+addAction(ac: Action, index: int): boolean
+	+addAction(ac: Action): boolean
+	+removeAction(ac: Action): boolean
+	+listOfActions(): String[]
+	+removeAction(index: int): boolean
+	+size(): int
+	+execute(ab: AgenceBancaire): void
+	-readResponse(): int
+	-printMenu(): void
+	-printTitle(ac: AgenceBancaire): void
+	-tempo(): void
+}
+class Action {
+}
+ActionListAgenceBancaire --> "*" Action : myMenu
+class GenericAction {
+}
+GenericAction <|-- ActionListAgenceBancaire
+interface ActionList {
+}
+ActionList <|.. ActionListAgenceBancaire
+class AgenceBancaire [[java:banque.AgenceBancaire]] {
+	-nom: String
+	-loc: String
+	+AgenceBancaire(pNomAgence: String, pLocAgence: String)
+	+getNomAgence(): String
+	+getLocAgence(): String
+	+getNbComptes(): int
+	+getCompte(pNumCompte: String): Compte
+	+getComptesDe(pNomProprietaire: String): Compte[]
+	+afficher(): void
+	+toString(): String
+	+addCompte(pCompteAAjouter: Compte): void
+	+removeCompte(pNumCompte: String): void
+	-trouveCompte(pNC: String): Compte
+}
+class Compte {
+}
+AgenceBancaire --> "*" Compte : alCptes
+class Compte [[java:banque.Compte]] {
+	-proprietaire: String
+	-numCompte: String
+	-debits: double
+	-credits: double
+	-nbDebits: int
+	-nbCredits: int
+	+Compte()
+	+Compte(pNumCompte: String, pNomProp: String)
+	+soldeCompte(): double
+	+getProprietaire(): String
+	+getNumCompte(): String
+	+afficher(): void
+	+toString(): String
+	+retirer(pSomme: double): void
+	+deposer(pSomme: double): void
+	+setProprietaire(pNomProp: String): void
+}
+class ABCompteNullException [[java:banque.exception.ABCompteNullException]] {
+	+ABCompteNullException()
+	+ABCompteNullException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteNullException
+class ABCompteDejaExistantException [[java:banque.exception.ABCompteDejaExistantException]] {
+	+ABCompteDejaExistantException()
+	+ABCompteDejaExistantException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteDejaExistantException
+class ABCompteInexistantException [[java:banque.exception.ABCompteInexistantException]] {
+	+ABCompteInexistantException()
+	+ABCompteInexistantException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteInexistantException
+class CompteException [[java:banque.exception.CompteException]] {
+	+CompteException()
+	+CompteException(message: String)
+}
+class Exception {
+}
+Exception <|-- CompteException
+class ABCompteNullException [[java:banque.exception.ABCompteNullException]] {
+	+ABCompteNullException()
+	+ABCompteNullException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteNullException
+class ABCompteDejaExistantException [[java:banque.exception.ABCompteDejaExistantException]] {
+	+ABCompteDejaExistantException()
+	+ABCompteDejaExistantException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteDejaExistantException
+class ABCompteInexistantException [[java:banque.exception.ABCompteInexistantException]] {
+	+ABCompteInexistantException()
+	+ABCompteInexistantException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteInexistantException
+class CompteException [[java:banque.exception.CompteException]] {
+	+CompteException()
+	+CompteException(message: String)
+}
+class Exception {
+}
+Exception <|-- CompteException
+interface Action [[java:action.Action]] {
+	actionMessage(): String
+	actionCode(): String
+	execute(ag: AgenceBancaire): void
+}
+interface ActionList [[java:action.ActionList]] {
+	listTitle(): String
+	size(): int
+	addAction(ac: Action): boolean
+	addAction(ac: Action, index: int): boolean
+	removeAction(index: int): boolean
+	removeAction(ac: Action): boolean
+	listOfActions(): String[]
+}
+interface Action {
+}
+Action <|-- ActionList
+class AccesAgenceBancaire [[java:application.AccesAgenceBancaire]] {
+	-AccesAgenceBancaire()
+	+{static} getAgenceBancaire(): AgenceBancaire
+	+{static} saveAgenceBancaire(a: AgenceBancaire): void
+}
+class Action3 [[java:application.action.Action3]] {
+	+Action3(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action3
+class Action2 [[java:application.action.Action2]] {
+	+Action2(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action2
+class Action4 [[java:application.action.Action4]] {
+	+Action4(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action4
+class Action6 [[java:application.action.Action6]] {
+	+Action6(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action6
+class Action5 [[java:application.action.Action5]] {
+	+Action5(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action5
+class Action1 [[java:application.action.Action1]] {
+	+Action1(m: String, c: String)
+	+execute(ab: AgenceBancaire): void
+}
+class GenericAction {
+}
+GenericAction <|-- Action1
+abstract class GenericAction [[java:application.action.GenericAction]] {
+	-lineMessage: String
+	-code: String
+	+GenericAction(m: String, c: String)
+	+actionMessage(): String
+	+actionCode(): String
+}
+interface Action {
+}
+Action <|.. GenericAction
+class ActionListAgenceBancaire [[java:application.actionlist.ActionListAgenceBancaire]] {
+	-title: String
+	-dec: String
+	-decTwice: String
+	-numberOptSep: String
+	+ActionListAgenceBancaire(m: String, c: String, t: String)
+	+listTitle(): String
+	+addAction(ac: Action, index: int): boolean
+	+addAction(ac: Action): boolean
+	+removeAction(ac: Action): boolean
+	+listOfActions(): String[]
+	+removeAction(index: int): boolean
+	+size(): int
+	+execute(ab: AgenceBancaire): void
+	-readResponse(): int
+	-printMenu(): void
+	-printTitle(ac: AgenceBancaire): void
+	-tempo(): void
+}
+class Action {
+}
+ActionListAgenceBancaire --> "*" Action : myMenu
+class GenericAction {
+}
+GenericAction <|-- ActionListAgenceBancaire
+interface ActionList {
+}
+ActionList <|.. ActionListAgenceBancaire
+class AgenceBancaire [[java:banque.AgenceBancaire]] {
+	-nom: String
+	-loc: String
+	+AgenceBancaire(pNomAgence: String, pLocAgence: String)
+	+getNomAgence(): String
+	+getLocAgence(): String
+	+getNbComptes(): int
+	+getCompte(pNumCompte: String): Compte
+	+getComptesDe(pNomProprietaire: String): Compte[]
+	+afficher(): void
+	+toString(): String
+	+addCompte(pCompteAAjouter: Compte): void
+	+removeCompte(pNumCompte: String): void
+	-trouveCompte(pNC: String): Compte
+}
+class Compte {
+}
+AgenceBancaire --> "*" Compte : alCptes
+class Compte [[java:banque.Compte]] {
+	-proprietaire: String
+	-numCompte: String
+	-debits: double
+	-credits: double
+	-nbDebits: int
+	-nbCredits: int
+	+Compte()
+	+Compte(pNumCompte: String, pNomProp: String)
+	+soldeCompte(): double
+	+getProprietaire(): String
+	+getNumCompte(): String
+	+afficher(): void
+	+toString(): String
+	+retirer(pSomme: double): void
+	+deposer(pSomme: double): void
+	+setProprietaire(pNomProp: String): void
+}
+class ABCompteNullException [[java:banque.exception.ABCompteNullException]] {
+	+ABCompteNullException()
+	+ABCompteNullException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteNullException
+class ABCompteDejaExistantException [[java:banque.exception.ABCompteDejaExistantException]] {
+	+ABCompteDejaExistantException()
+	+ABCompteDejaExistantException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteDejaExistantException
+class ABCompteInexistantException [[java:banque.exception.ABCompteInexistantException]] {
+	+ABCompteInexistantException()
+	+ABCompteInexistantException(message: String)
+}
+class Exception {
+}
+Exception <|-- ABCompteInexistantException
+class CompteException [[java:banque.exception.CompteException]] {
+	+CompteException()
+	+CompteException(message: String)
+}
+class Exception {
+}
+Exception <|-- CompteException
+@enduml
