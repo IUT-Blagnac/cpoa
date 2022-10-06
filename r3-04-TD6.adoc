@@ -1,0 +1,390 @@
+:moduleTitle: R3.04 Qualité
+:authorDefault:  BUT/Info/S3/R3.04
+
+:tdnum: TD6 - Passer du code à des objets
+
+:sourcedir: src/java/TD2
+
+//////
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+//////
+
+ifndef::myasciidoconf[]
+include::asciidoc.conf[]
+endif::myasciidoconf[]
+
+
+:numbered:
+:!linkcss:
+:toc:
+
+
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+:icons: font
+:experimental:
+
+= {doctitle}
+// TESTS
+
+// :prof:
+
+:Author:  {authorDefault} - (Semaine 46)
+:lang: fr
+:incremental:
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+
+// POUR TEST
+// :prof: jkjik
+
+
+//----------- définitions --------------
+:sitecours: http://webetud.iut-blagnac.fr/[Support de Cours]
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+:principe: Principe de conception
+:allerPlusLoin: Pour aller plus loin
+:about: À propos
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[CAUTION,solution]
+.Version corrigée image:icons/solution.png[]
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[align="left",cols="1,10a",width="100%"]
+|======================
+| {pre}		|
+1. Je sais programmer en {java}.
+2. J'ai conscience qu'il faut réfléchir avant de se lancer dans le codage.
+3. Je maîtrise les concepts objet de base (héritage, polymorphisme, ...).
+4. J'ai compris ce qu'est un patron et j'ai envie de voir d'autres approches de programmation
+_Strategy_ et Singleton
+| {objtd}	| Aborder le patron *fabrique*.
+| {duree}	| *1* TD de 1,5h.
+|======================
+
+
+ifndef::compact[]
+
+
+
+
+== Au départ : du code 
+
+.`ApplicationAgenceBancaire.java`
+[source,java]
+-------
+public class ApplicationAgenceBancaire {
+
+	public static void main(String argv[]) {
+
+		String choix;
+
+		boolean continuer ;
+		Scanner lect;
+		AgenceBancaire monAg ;
+
+		String nom, numero;
+		Compte c;
+		double montant;
+
+		lect = new Scanner ( System.in );
+		lect.useLocale(Locale.US);
+
+		monAg = AccesAgenceBancaire.getAgenceBancaire();
+
+
+		continuer = true;
+		while (continuer) {
+			ApplicationAgenceBancaire.afficherMenu(monAg);
+			choix = lect.next();
+			choix = choix.toLowerCase();
+			switch (choix) {
+				case "q" :
+					System.out.println("ByeBye");
+					continuer = false;
+				break;
+				case "l" :
+					monAg.afficher();
+				break;
+				case "v" :
+					System.out.print("Num compte -> ");
+					numero = lect.next();
+					c = monAg.getCompte(numero);
+					if (c==null) {
+						System.out.println("Compte inexistant ...");
+					} else {
+						c.afficher();
+					}
+				break;
+				case "p" :
+					System.out.print("Propriétaire -> ");
+					nom = lect.next();
+					ApplicationAgenceBancaire.comptesDUnPropretaire (monAg, nom);
+				break;
+				case "d" :
+					...
+				break;
+				case "r" :
+					...
+				break;
+				default :
+					...
+				break;
+			}
+		}
+	}
+
+	public static void comptesDUnPropretaire (AgenceBancaire ag,
+				String nomProprietaire) {...}
+	public static void deposerSurUnCompte (AgenceBancaire ag,
+				String numeroCompte, double montant) {...}
+	public static void retirerSurUnCompte (AgenceBancaire ag,
+				String numeroCompte, double montant) {...}
+	public static void afficherMenu(AgenceBancaire ag) { ... }
+}
+-------
+
+.Extrait de `AccesAgenceBancaire`
+[source,java]
+------
+public class AccesAgenceBancaire {
+
+	private AccesAgenceBancaire () {}
+	public static AgenceBancaire getAgenceBancaire () {
+
+		AgenceBancaire ag = new AgenceBancaire("CAISSE ECUREUIL", "PIBRAC");
+		// Load data from file or create fake objects to load something in ag
+		return ag;
+	}
+...
+}
+------
+//----------------------------- Question ------------------
+.*QUESTION*
+[WARNING]
+====
+. Réalisez le diagramme de classe de l'application
+. Que vous rappelle la classe `AccesAgenceBancaire`?
+. Réalisez un diagramme de séquence illustrant le fonctionnement de cette
+application (`main`). On utilisera des blocs "ref" pour les appels aux méthodes
+statiques, et on ne s'occupera pas des scanners.
+====
+
+//----------------------------------------------------- Correction -------------------------
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Diagramme de classe
++
+.Diagramme de classe
+image::banque.png[]
++
+NOTE: Les étudiants ne peuvent avoir tous ces détails, mais ça leur
+servira pour le TP.
++
+. Cette classe s'approche de deux patrons que vous avez étudiés:
+  - la structure du Singleton (getInstance() remplacé par getAgenceBancaire ()), sans la gestion de l'instance unique,
+  - le comportement du créateur concret de la Factory.
+
+. Diagramme de séquence
++
+.Diagramme de séquence de `ApplicationAgenceBancaire`
+image::banque-seq.png[]
+========
+endif::prof[]
+
+== Et si on en rajoute ?
+
+.*QUESTION*
+[WARNING]
+====
+. Comment s'y prendre pour ajouter des fonctions dans le menu proposé ?
+. Quel est l'impact sur le Diagramme de Séquence ?
+====
+
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Comment s'y prendre pour ajouter des fonctions dans le menu proposé ?
+**	Rajouter des `case` dans le switch
+**	Rajouter des méthodes statiques pour traiter les nouveaux cas
+**	A noter : toutes les méthodes pourraient être en `private`
+. Le DS s'allonge et devient de plus en plus complexe !!
+
+========
+endif::prof[]
+
+.*QUESTION*
+[WARNING]
+====
+. Le menu comportant de nombreuses options, on souhaite le hiérarchiser en sous-menus :
+
+	Menu général 
+		1 - Liste des comptes de l'agence
+		2 - Voir un compte (par son numéro)
+		3 - Menu opérations sur comptes
+		4 - Menu gestion des comptes
+	Menu opérations sur comptes
+		1 - Déposer de l'argent sur un compte
+		2 - Retirer de l'argent sur un compte
+	Menu gestion des comptes
+		1 - Ajouter un compte
+		2 - Supprimer un compte
++
+Comment s'y prendre pour ajouter les deux sous menus "opérations" et "gestion" ci-dessus ?
+
+====
+
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Comment s'y prendre pour ajouter un sous-menu pour gérer un compte (voir un compte, ...)
+**	Solution 1 : Rajouter des boucles dans le `case` de chaque sous-menu : code imbriqué
+**	Solution 2 : Rajouter des méthodes statiques pour traiter les sous-menus
+** Code de plus en plus compliqué
+========
+endif::prof[]
+
+== Simplifier le code
+
+.*QUESTION*
+[WARNING]
+====
+. Quelles sont les solutions pour simplifier ce code ? Chercher largement, même à créer des classes (même beaucoup de classe) ?
+.	Qu'est ce qui garanti que cette approche sera respectée lors des évolutions de l'application ?
+====
+
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Plusieurs solutions s'offrent à nous :
+**	Continuer dans la logique ci-dessus avec un code "spaghetti"
+**	Faire une classe de gestion de chaque menu et sous-menu comportant des méthodes statiques pour les traitements associés
++
+.Extrait de diagramme de classe
+image:applicationBanquePlusieursclasses-2022.png[]
+
+. Rien n'oblige à suivre ce "schéma" qui n'est pas décrit en tant que tel
+. Et les classes de sous-menu se ressemblent sans pour autant qu'on ne puisse écrire du code commun (en tout cas pas fait ici)
+========
+endif::prof[]
+
+== Et tout en objet : est ce possible ?
+
+.*QUESTION*
+[WARNING]
+====
+On prend un principe "radical" : tout devient objet : un menu, un sous-menu, une option de menu pour encapsuler le code qui correspond
+
+. Quelles seraient les (catégories de) classes mises en oeuvre ?
+. Comment faire pour qu'un menu traite toutes les actions de façon "identique" ?
+. Donnez le code d'un simple menu contenant 2 options/actions.
+. Donnez un diagramme de classe minimal solution du problème.
+====
+
+ifdef::prof[]
+.Solution image:icons/solution.png[]
+[CAUTION]
+========
+. Classes : `Action` (option) et `ListeDAction` (menu)
+. Faire uen super-classe aux actions ou mieux : une interface !
+. Exemple de code
++
+[source,java]
+-------
+public interface Action {
+	void doAction () ;
+	String message() ;
+}
+
+public class VoirCompte implements Action {
+	private AgenceBancaire ag;
+
+	public VoirCompte (AgenceBancaire _ag) {
+		this.ag = _ag;
+	}
+	public void doAction () {
+		System.out.println ("Voir Compte d'un propriétaire");
+		// Use this.ag
+	}
+	public String message() {
+		return "Voir un compte (par son numéro)";
+	}
+}
+
+public class VoirTousLesCompte implements Action {
+	private AgenceBancaire ag;
+
+	public VoirTousLesCompte (AgenceBancaire _ag) {
+		this.ag = _ag;
+	}
+	public void doAction () {
+		System.out.println ("Voir les comptes");
+		// Use this.ag
+	}
+	public String message() {
+		return "Liste des comptes de l'agence";
+	}
+}
+
+public class MenuGeneral {
+	private AgenceBancaire ag;
+	private List<Action> list;
+
+	public MenuGeneral (AgenceBancaire _ag) {
+		this.ag = _ag;
+		list =new ArrayList<> ();
+		list.add(new VoirCompte(this.ag));
+		list.add(new VoirTousLesCompte(this.ag));
+	}
+	public void doMenu () {
+		// Afficher le menu
+		// saisie et définir i pour agir sur action i
+		this.list.get(i).doAction();
+	}
+	private void showMenu() {
+		for (Action a : this.list) {
+			System.out.println(a.message());
+		}
+	}
+}
+-------
++
+.Extrait de diagramme de classe
+image:applicationBanqueV0-2022.png[]
+. Et si on faisait une classe de menus ? Ca donnerait quoi ?
+
+========
+
+
+endif::prof[]

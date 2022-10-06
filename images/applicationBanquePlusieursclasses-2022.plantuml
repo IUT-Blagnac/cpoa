@@ -1,0 +1,25 @@
+@startuml
+
+class ApplicationAgenceBancaire {
+	+ {static}  main(String argv[])	: void
+	- {static}  comptesDUnPropretaire (AgenceBancaire ag) : void
+	- {static}  listeDesComptes (AgenceBancaire ag) : void
+	- {static}  afficherMenu(AgenceBancaire ag) : void
+}
+
+class AABMenuOperationCompte {
+	+ {static}  doMenuOperationCompte (AgenceBancaire ag) : void
+	- {static}  deposerSurCompte (AgenceBancaire ag) : void
+	- {static}  retirerSurCompte (AgenceBancaire ag) : void
+}
+
+class AABMenuGestionCompte {
+	+ {static}  doMenuGestionCompte (AgenceBancaire ag) : void
+	- {static}  ajouterCompte (AgenceBancaire ag) : void
+	- {static}  supprimerCompte (AgenceBancaire ag) : void
+}
+
+ApplicationAgenceBancaire ..> AABMenuOperationCompte
+ApplicationAgenceBancaire ..> AABMenuGestionCompte
+
+@enduml

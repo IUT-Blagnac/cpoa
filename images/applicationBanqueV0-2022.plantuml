@@ -1,0 +1,39 @@
+@startuml
+
+class AgenceBancaire [[java:AgenceBancaire]] {
+}
+
+interface Action [[java:Action]] {
+	+ doAction(): void
+	+ message(): String
+}
+
+class VoirCompte [[java:VoirCompte]] {
+	+VoirCompte(_ag: AgenceBancaire)
+	+doAction(): void
+	+message(): String
+}
+
+Action <|.. VoirCompte
+
+class VoirTousLesCompte [[java:VoirTousLesCompte]] {
+	+VoirTousLesCompte(_ag: AgenceBancaire)
+	+doAction(): void
+	+message(): String
+}
+
+Action <|.. VoirTousLesCompte
+
+class MenuGeneral [[java:MenuGeneral]] {
+	+MenuGeneral(_ag: AgenceBancaire)
+	+doMenu(): void
+	-showMenu(): void
+}
+
+MenuGeneral -> "*" Action : list
+
+VoirCompte --> "1" AgenceBancaire : ag
+VoirTousLesCompte --> "1" AgenceBancaire : ag
+MenuGeneral --> "1" AgenceBancaire : ag
+
+@enduml

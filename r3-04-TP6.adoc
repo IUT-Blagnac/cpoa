@@ -47,7 +47,8 @@ endif::todoprof[]
 // prof : support prof pour séance
 // todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
 
-:prof: sdsd
+// TEST
+// :prof: sdsd
 
 
 
