@@ -129,7 +129,7 @@ endif::prof[]
 
 .	Etudier le code proposé pour {app}.
 .	Comprendre la structure des méthodes (menus, méthodes réalisant les opérations)
-.	Ajouter les fonctions et sous-menu correspondant à l'exécution suivante :
+.	*Ajouter les fonctions et sous-menu correspondant à l'exécution suivante* :
 
 -------
 --
@@ -240,8 +240,8 @@ Nous allons modifier le code en plusieurs classes en observant que :
 
 === Les fonctions utilisateurs comme des objets
 
-.	Faire une copie du code source précédent sous le nom +applicationBanqueAction+.
-.	Créer les packages suivants dans Eclipse :
+.	*Faire une copie du code source* précédent sous le nom +applicationBanqueAction+.
+.	*Créer les packages suivants* dans Eclipse :
 +
 -------
    application
@@ -249,7 +249,7 @@ Nous allons modifier le code en plusieurs classes en observant que :
    application.actionlist
 -------
 +
-.	Etudier la définition d'interface suivante et insérer sa définition dans votre projet dans le package +action+ :
+.	Etudier la définition d'interface suivante et *insérer sa définition* dans votre projet dans le package +action+ :
 +
 [source,java]
 ----
@@ -284,17 +284,17 @@ public interface Action  {
 }
 ----
 +
-.	Déclarer une classe par action (option de menu) à utiliser. Commencer par "Liste des comptes de l'agence" :
+.	*Déclarer une classe par action* (option de menu) à utiliser. Commencer par "Liste des comptes de l'agence" :
 ..	Créer une classe (le nom +ActionListeDesComptes+ paraît adapté) dans le package +application.action+,
 ..	qui implémente +Action+,
 ..	dotée de deux attributs (message, code)
 ..	écrire le code dont un constructeur correctement paramétré,
 ..	la méthode +execute(AgenceBancaire)+ réalisera l'affichage écran de la liste des comptes de l'agence bancaire en paramètre.
-.	De la même manière, déclarer une classe pour l'action "Voir un compte (par son numéro)" (classe +ActionVoirCompteNumero+) dans le package +application.action+.
+.	*De la même manière, déclarer une classe pour l'action "Voir un compte (par son numéro)"* (classe +ActionVoirCompteNumero+) dans le package +application.action+.
 
 === Les menus utilisateurs comme des objets
 
-.	Etudier la définition d'interface suivante et insérer sa définition dans votre projet dans le package +action+ :
+.	*Etudier la définition d'interface suivante et insérer* sa définition dans votre projet dans le package +action+ :
 +
 [source,java]
 ----
@@ -335,7 +335,7 @@ public interface ActionList extends Action {
 }
 ----
 +
-.	Déclarer une classe +ActionListAgenceBancaire+ dans le package +application.actionlist+,
+.	*Déclarer une classe `ActionListAgenceBancaire`* dans le package +application.actionlist+,
 ..	qui implémente +ActionList+,
 ..	dotée de quatre attributs (message, code, title, liste des actions). La liste des actions sera les différentes options que l'action list (menu) devra afficher.
 ..	écrire le code dont un constructeur correctement paramétré,
@@ -348,7 +348,7 @@ image:applicationbanque.svg[]
 
 === Et maintenant : go ! Maintenance et extension facilitées
 
-.	Créer une classe contenant un main et permettant :
+.	*Créer une classe contenant un main* et permettant :
 ..	de créer une instance de chaque classe +Action+ créée,
 ..	de créer une instance de +ActionListAgenceBancaire+,
 ..	lancer +execute()+ sur l'instance de +ActionListAgenceBancaire+.
@@ -365,6 +365,7 @@ Ca marche ?
 ====
 On aurait pu utiliser un autre patron appelé Composite ... plus tard peut être
 ====
+. *Générez votre diagramme de classe.*
 
 ifdef::prof[]
 [icon="solution.png"]
@@ -392,7 +393,7 @@ Ca vous rappelle des choses ?
 
 Questions :
 
-.	Considérant les nouvelles classes +Eleve+ et +GroupeEleve+, peut-on réutiliser telles quelles (sans les modifier) les interfaces +Action+ et +ActionList+ dans la nouvelle application ?
+.	*Considérant les nouvelles classes* +Eleve+ et +GroupeEleve+, peut-on réutiliser telles quelles (sans les modifier) les interfaces +Action+ et +ActionList+ dans la nouvelle application ?
 .	Si oui : pourquoi ?
 .	Si non : pourquoi ?
 
@@ -409,8 +410,8 @@ endif::prof[]
 
 Compte tenu des observations de la section précédente, il faudrait des classes +Action+ et +ActionList+ dont +execute()+ prendrait en paramètre n'importe quel objet. Utiliser la classe Object ? Non, la généricité est là pour nous aider ...
 
-.	Faire une copie du code source précédent sous le nom +applicationBanqueActionGenerique+.
-.	Modifier les déclarations des interfaces +Action+ et +ActionList+ comme suit (attention, tout le code va devenir "erroné") :
+.	*Faire une copie* du code source précédent sous le nom +applicationBanqueActionGenerique+.
+.	*Modifier les déclarations des interfaces* +Action+ et +ActionList+ comme suit (attention, tout le code va devenir "erroné") :
 +
 [source,java]
 ----
@@ -487,16 +488,17 @@ public interface ActionList<E> extends Action<E>{
 
 ----
 +
-.	Modifier chaque classe créée (les +Action+ puis +ActionList+ puis le +main()+) pour soit implémenter la bonne instanciation des interfaces, soit instancier correctement les objets.
+.	*Modifier chaque classe créée* (les +Action+ puis +ActionList+ puis le +main()+) pour soit implémenter la bonne instanciation des interfaces, soit instancier correctement les objets.
 .	Tout doit fonctionner.
+.	*Générez votre diagramme de classe.*
 .	Il n'y a plus qu'à faire la nouvelle application.
 
 == Pour aller plus loin : complétons et encore plus d'abstraction
 
 === Une interface +ActionList+ plus complète
 
-.	Faire une copie du projet précédent
-.	Pour de vraies applications, ajouter à l'interface +ActionList+ les opérations suivantes :
+.	*Faire une copie* du projet précédent
+.	Pour de vraies applications, *ajouter à l'interface +ActionList+* les opérations suivantes :
 +
 [source,java]
 ----
@@ -542,8 +544,8 @@ La classe +ActionListAgenceBancaire+ qui met en oeuvre un menu (qui implémente 
 
 Alors essayons :
 
-.	Faire une copie du projet de la section précédente
-.	Déplacer la classe +ActionListAgenceBancaire+ dans le package +action+.
+.	*Faire une copie* du projet de la section précédente
+.	*Déplacer* la classe +ActionListAgenceBancaire+ dans le package +action+.
 .	Renommer cette classe en un nom contenant "ActionList" et bien choisi. 
 .	Pour rendre cette classe générique (et non pas abstraite), modifier l'en-tête en
 +
@@ -556,13 +558,14 @@ public class GenericActionList<E>
 .	Attention, tout le code va maintenant "klaxonner" en rouge ! normal ...
 .	Modifier chaque fois que nécessaire pour utiliser le type générique E
 .	Enlever tout accès à la classe {ag} (affichage nom de la banque, ...)
-.	Vous devriez arriver au bout ...
+.	*Vous devriez arriver au bout ...*
 .	Enfin dans le main il y aura quelques "klaxons warnings" sur la création d'objets de cette nouvelle classe car il faudra indiquer le type paramètre à la création.
 +
 [WARNING]
 ====
 ATTENTION : faire une classe générique n'est pas toujours aussi simple. Ici le cas a été simplifié à l'extrême.
 ====
+.	*Générez votre diagramme de classe.*
 
 === Troisième étape : abstraction encore plus
 
@@ -575,14 +578,15 @@ Le problème :
 
 Allons-y !
 
-.	Faire une copie du projet de la section précédente (sans généricité).
+.	*Faire une copie* du projet de la section précédente (sans généricité).
 .	Dans le package +application+, créer une classe +ApplicationContextAgenceBancaire+ implémentant le pattern +Singleton+ permettant d'accéder :
 ..	A l'agence bancaire "en cours".
 ..	Au +Scanner+ à utiliser. L'initialiser ici avec un Scanner sur System.in mais autre chose pourrait être utilisé (un fichier, un flux vers un terminal, ...).
 ..	A la sortie +PrintStream+ à utiliser. Ici ce sera System.out mais autre chose pourrait être utilisé (un fichier, un flux vers un terminal, ...).
-.	Refactorer tout le code :
+.	*Refactorer* tout le code :
 ..	Les classes +Action+ et +ActionList+ utilisant maintenant le type +ApplicationContextAgenceBancaire+ (à la place de +AgenceBancaire+)
 ..	Modifier les accès à l'agence bancaire en utilisant +ApplicationContextAgenceBancaire+.
 ..	Modifier les accès à l'entrée standard en utilisant +ApplicationContextAgenceBancaire+.
 ..	Modifier les accès à la sortie standard en utilisant +ApplicationContextAgenceBancaire+.
 .	Ca marche ??
+.	*Générez votre diagramme de classe.*
