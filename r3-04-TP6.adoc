@@ -341,11 +341,6 @@ public interface ActionList extends Action {
 ..	écrire le code dont un constructeur correctement paramétré,
 ..	la méthode +execute(AgenceBancaire)+ réalisera ce qui est défini dans la documentation. Le menu affiché sera identique à celui de la version antérieure de l'application. Chaque option de menu sera numérotée par +execute()+ de 1 à n (nombre d'action) + 0 pour sortir du menu.
 
-Vous devez obtenir une architecture inclue dans celle-ci. Attention, votre structure de classe sera légèrement différente, avec un attribut code par exemple, des méthodes et des classes en moins :
-
-.Structure de l'application
-image:applicationbanque.svg[]
-
 === Et maintenant : go ! Maintenance et extension facilitées
 
 .	*Créer une classe contenant un main* et permettant :
@@ -358,6 +353,11 @@ image:applicationbanque.svg[]
 Ca marche ?
 ====
 +
+Vous devez obtenir une architecture très proche de celle-ci :
++
+.Architecture de l'application
+image:applicationBanqueV1-TP-2022.png[]
++
 .	Vous pouvez créer les autres actions et sous-menus.
 .	Pourquoi ActionList hérite de Action à votre avis ?
 +
@@ -365,7 +365,7 @@ Ca marche ?
 ====
 On aurait pu utiliser un autre patron appelé Composite ... plus tard peut être
 ====
-. *Générez votre diagramme de classe.*
+. *Générez votre diagramme de classe complet.*
 
 ifdef::prof[]
 [icon="solution.png"]
