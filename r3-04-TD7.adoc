@@ -1,0 +1,457 @@
+:moduleTitle: CPOA
+:authorDefault:  Dut/Info-S3/M3105
+:tdnum: TD 6
+
+:eleve:
+:sourcedir: src/java/TD5
+
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+ifndef::myasciidoconf[]
+include::asciidoc.conf[]
+endif::myasciidoconf[]
+
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+:icons: font
+
+// TEST
+:prof: sdsd
+
+= {doctitle}
+:Author:  {authorDefault} - (Semaine 50)
+:lang: fr
+:incremental:
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIONS DEROULEMENT pour profs
+
+//----------- définitions --------------
+:sitecours: http://jmbruel.github.io/cpoa/[Support de Cours]
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+:principe: Principe de conception
+:allerPlusLoin: Pour aller plus loin
+:about: À propos
+
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[CAUTION]
+.Version corrigée
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[align="left",cols="1,10a",width="90%"]
+|======================
+| {pre}		|
+.	Je sais programmer en Java.
+.	J'ai compris le modèle MVC.
+| {objtd}	| Le but de ce TD est de comprendre un composant Swing complexe : le JTable.
+| {duree}	| *1* TD de 1,5h.
+|======================
+
+ifndef::compact[]
+
+== Rappel du cours
+
+TIP: N'hésitez pas à (re)lire régulièrement le {sitecours}.
+
+endif::compact[]
+
+== Motivation
+
+La bibliothèque java Swing (disponible depuis la version 2 de Java (java 1.5)) définit des composants graphiques pour construire des interfaces utilisateurs indépendantes des plateformes d'exécution (cf. http://docs.oracle.com/javase/tutorial/uiswing/).
+
+Le but de ce TD et du prochain TP est de manipuler un composant Swing complexe : `JTable`. 
+Nous verrons :
+
+.	En TD : les principes du composant et la séparation MV/C.
+.	En TP : la mise en œuvre de ce composant.
+
+//== Pour commencer : une démo de ce qu'on va faire
+
+== Présentation JTable : ce qu'il n'est pas
+
+Imaginons que nous voulions programmer cette interface en java :
+
+image:TD6fen1.png[]
+
+Avec ce que nous savons de Swing, quels composants graphiques utiliserions nous pour programmer le tableau ci-dessus ?
+
+-----
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+-----
+
+ifdef::prof[]
+
+[IMPORTANT]
+.Eléments de solution
+====
+.	Un JPanel
+..	Organisé en gridLayout 4 colonnes et x lignes suivant le nombre de lignes
+..	Première ligne des JLabels
+..	Lignes suivantes : un JTextField par cellule
+.	un JScrollPane qui contient le JPanel
+
+
+====
+
+image:jtabletd.svg[]
+
+endif::prof[]
+
+Quelles sont les limites de cette approche ? Imaginez l'UT2J => 30.000 étudiants! ...
+
+-----
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+-----
+
+ifdef::prof[]
+
+[IMPORTANT]
+.Eléments de solution
+====
+.	Non, mauvaise solution :
+..	Trop de JTextField (30 000 x 4 == 120 000 pour l'université)
+..	Or tout le tableau n'est pas visible, maximum 50 lignes => maximum 400 JTF utiles
+..	Les données sont dans les composants graphiques
+..	Mises à jour ?
+..	Ajout d'un étudiant ?
+..	...
+====
+endif::prof[]
+
+== Présentation JTable : mise en œuvre
+
+La bibliothèque java Swing propose une gestion graphique de tableaux dans une architecture MVC, ou plutôt M-VC. Il s'appuie sur 2 composants :
+
+*	*`JTable`* qui affiche des données dans un tableau
+** 	Il est à la fois Vue et Contrôleur.
+**	Rôle : afficher les quelques lignes visibles et gérer les mises à jour à l'écran de ces lignes
+**	Il est composé lui-même d'un UIDelegate qui est la Vue mais rarement utilisé
+**	Un tableau est généralement entouré d’ascenseurs => le JTable ne demande au modèle QUE les données nécessaires à l’affichage, pas toutes
+**	Programmé pour utiliser le minimum de composants graphiques possibles (habituellement 1 seul et même composant par type de données affichée)
+*	*`TableModel`* qui régit la gestion des données (les stocke)
+**	Il est le Modèle
+**	Rôle : contient et stocke toutes les données potentiellement affichables
+
+À l'usage :
+
+*	On va rarement modifier le JTable.
+*	On va très souvent créer son propre TableModel
+
+Illustration :
+
+image:TD6-MVC-1.png[]
+
+Avec accès à une base de données :
+
+image:TD6-MVC-2.png[]
+
+Avec mise à jour d'une base de données :
+
+image:TD6-MVC-3.png[]
+
+== Utilisation d'un TableModel
+
+=== Composant graphique
+
+Côté graphique : un `JScrollPane` qui contient un JTable et une méthode *`setModel()`* pour associer un modèle.
+
+[source,java]
+----
+// Partie composants : un JTable et son TableModel
+JTable jta = new JTable ();
+MonTableModel mm = new MonTableModel();
+jta.setModel (mm);
+
+// Partie graphique : le JTable est mis dans un JScrollPane
+JScrollPane jsp = new JScrollPane();
+jsp.setViewportView (jta);
+----
+
+=== TableModel : accès aux données
+
+Les données sont accessibles par un modèle. Elles peuvent être stockées ou calculées, de façon transparente.
+
+Un modèle doit implémenter l'interface `TableModel` définissant 9 méthodes utilisées pour beaucoup par le composant JTable.
+
+La classe `AbstractTableModel` propose des services complémentaires pour les modèles de table et implémente par défaut les méthodes du modèle de table TableModel, sauf :
+
+*	`public int getRowCount()` : nombre de lignes affichables
+*	`public int getColumnCount()` : nombre de colonnes affichables
+*	`public Object getValueAt(int row, int column)` : l’objet à afficher dans la ligne et la colonne indiquées (sa méthode toString est utilisée).
+
+Les numérotations de lignes et colonnes commencent à 0.
+
+L'exemple suivant crée un modèle de 2000 lignes x 30 colonnes, chaque cellule vaut ligne*colonne.
+
+[source,java]
+----
+class SimpleTableModel extends AbstractTableModel {
+	public int getColumnCount() { return 30; }
+	public int getRowCount() { return 2000;}
+	public Object getValueAt(int row, int column) {
+		return new Integer((1+row)*(1+column));
+	}
+}
+class SimpleJPanelTable extends JPanel {
+	public SimpleJPanelTable() {
+		this.setLayout(new BorderLayout());
+
+		TableModel dataModel = new SimpleTableModel() ;
+		JTable table = new JTable();
+		table.setModel (dataModel);
+		this.add(new JScrollPane(table));
+	}
+}
+----
+
+Notez que le JTable n'affiche pas les 2000 lignes ...
+
+image:TD6fenExemple1.png[]
+
+Au plus simple, créer un TableModel revient donc à créer une classe :
+
+*	qui hérite de AbstractTableModel
+*	qui, a minima, redéfinit `getRowCount(), getColumnCount()` et `getValueAt()`
+*	redéfinit aussi `public String getColumnName(int column)` qui donne les en-têtes de colonne (sinon "A", "B", ... par défaut).
+
+*Question* : En supposant que le table ci-dessus reçoive le message `paint()` pour s'afficher, donner le pseudo algorithme java exécuté par table pour s'afficher.
+
+-----
+// On suppose démarrer en ligne 0 et colonne 0 !!
+// Le JTable et le JScrollPane gèrent les scrolls correctement ...
+// On suppose disposer :
+// - d'un attribut this.dataModel pour interroger le datamodel
+// - d'une méthode this.maxViewableCols() : nb max de colonnes affichables
+// - d'une méthode this.maxViewableRows() : nb de lignes affichables
+// d'une méthode this.drawAtScreen(x) : dessine une valeur sur la fenêtre (la position se calcule "toute seule")
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+-----
+
+ifdef::prof[]
+
+[IMPORTANT]
+.Eléments de solution
+====
+[source,java]
+----
+// On suppose démarrer en ligne 0 et colonne 0 !!
+// Le JTable et le JScrollPane gèrent les scrolls correctement ...
+// L'algorithme réel est plus complexe ...
+
+int nvc = min (this.dataModel.getColumnCount(), this.maxViewableCols() );
+int nvr = min (this.dataModel.getRowCount(), this.maxViewableRows() );
+
+for (j=0; j<nvc; j++) {
+	String titreCol = this.dataModel.getColumnName(j);
+	this.drawAtScreen (titreCol);
+}
+for (i=0; i<nvr; i++) {
+	for (j=0; j<nvc; j++) {
+		Object o = this.dataModel.getValueAt(i, j);
+		this.drawAtScreen (o);
+	}
+}
+----
+====
+endif::prof[]
+
+*Question* : En supposant que le table ci-dessus reçoive le message paint() pour s'afficher, compléter le diagramme de séquence suivant avec les messages échangés entre table et dataModel pour réaliser l'affichage en suivant l'algorithme défini.
+
+image:td6.DSaffichageVide.png[]
+
+-----
+// On suppose démarrer en ligne 0 et colonne 0 !!
+// Le JTable et le JScrollPane gèrent les scrolls correctement ...
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+-----
+
+ifdef::prof[]
+
+[IMPORTANT]
+.Eléments de solution
+====
+image:td6.DSaffichage.png[]
+====
+endif::prof[]
+
+=== Table Model : Mise à jour des données
+
+Pour la mise à jour (update) :
+
+*	Elle est faite dans la vue (JTable)
+*	La mise à jour doit être reportée dans le modèle (TableModel)
+
+Méthodes de TableModel utilisées par JTable :
+
+*	`boolean isCellEditable(int row, int column)` : renvoie true si la cellule peut être modifiée (par défaut false)
+*	`void setValueAt(Object val, int row, int column)` : modifie une donnée du modèle (par défaut aucune modification)
+
+Elles sont donc à rédéfinir selon les besoins :
+
+*	Colonnes non modifiables (ids, ...)
+*	Contrôle des données saisies (chaînes vides, nombre valides, ...)
+*	...
+
+Diagramme de séquence illustrant l'utilisation des méthodes par le JTable (pseudo algorithme, l'algorithme réel est plus complexe) :
+
+image:td6.DSmiseajour.png[]
+
+== Compléments
+
+===	Contrôle du JTable
+
+Beaucoup de méthodes existent (cf. javadoc) dont :
+
+*	int getSelectedRow() : ligne actuellement sélectionnée dans le JTable
+*	int getSelectedColumn(): colonne actuellement sélectionnée dans le JTable
+*	Relier la souris avec une donnée
+**	int columnAtPoint(Point p) : indice de la colonne relative à un point donée (souris)
+**	int rowAtPoint(Point p) : indice de la ligne relative à un point donée (souris)
+*	...
+
+=== Contrôle du TableModel
+
+Des méthodes peuvent être ajoutées au TableModel pour ajouter des lignes, supprimer des lignes, ... cf. TPs.
+
+Cependant, lorsqu'il est mis à jour en dehors du JTable, le modèle doit prévenir tous les JTable associés. Ca vous rappelle un design pattern ?
+
+ifdef::prof[]
+
+[IMPORTANT]
+.Eléments de solution
+====
+Observateur :
+
+*	Observateur == JTable
+*	Observé == TableModel
+====
+endif::prof[]
+
+Pour prévenir les JTable => il faut une méthode pour les notifier => pré-programmé dans AbstractTableModel :
+
+*	`void fireTableDataChanged()`
+*	`void fireTableStructureChanged()`
+*	`void fireTableRowsInserted(int first, int last)`
+*	`void fireTableRowsUpdated(int first, int last)`
+*	`void fireTableRowsDeleted(int first, int last)`
+*	`void fireTableCellUpdated(int row, int column)`
+*	`void fireTableChangedEvent(TableModelEvent e)`
+
+Exemple d'appel :
+
+image:td6.Fireupdate.png[]
+
+
+== Conclusion
+
+Encore une fois on retrouve ici plusieurs éléments des design patterns : "un problème de fond est la gestion des changements". Pour cela, il faut isoler les changements. En objet, cela est délégué à un objet particulier.
+
+Déjà rencontré : séparation des objets graphiques (JPanel) de leur organisation spatiale (Layout Managers).
+
+Le modèle MVC s'appuie sur ce constat. Il sépare :
+
+*	Le Modèle qui est responsable des données -> ici, le TableModel que l'on redéfinit à chaque fois
+*	La Vue qui est responsable de l'affichage écran de tout ou partie des données -> ici le UIDelegate contenu dans le JTable
+*	Le Contrôleur : qui gère la cohérence Vue-Modèle -> ici le JTable (et le pattern observateur entre Contrôleur et Modèle)
+
+Et le reste du JTable (affichage d'images, de nombre, saisies avec listes déroulantes, ...) ? => Même combat : isoler les changements dans des objets particuliers. Voici une partie du modèle que cela donne :
+
+image:td6.conclu.JTable.png[]
+
+On peut ainsi définir un composant `Renderer` pour redéfinir comment afficher une colonne, définir un composant `Editor` pour redéfinir comment saisir une valeur de colonne, ...
+
+image:td6.conclu.exemples.png[]
+
+Derrière l'apparente complexité se cachent des possibilités importantes :
+
+*	Décomposition des problèmes et isolement des parties qui "varient"
+*	Tous les composants proposent des éléments par défaut
+*	Tout est redéfinissable : on peut créer des sous classes des classes par défaut existantes et les associer aux composants.

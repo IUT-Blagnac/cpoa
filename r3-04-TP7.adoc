@@ -1,0 +1,308 @@
+:moduleTitle: CPOA
+:authorDefault:  Dut/Info-S3/M3105
+:tdnum: TP 5
+
+:eleve:
+:sourcedir: src/java/TD1
+
+ifndef::definitions[]
+include::definitions.txt[]
+endif::definitions[]
+ifndef::myasciidoconf[]
+include::asciidoc.conf[]
+endif::myasciidoconf[]
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+
+ifdef::eleve[]
+:doctitle:  {moduleTitle} - Sujet {tdnum}
+endif::eleve[]
+ifdef::prof[]
+:doctitle: {moduleTitle} - Support {tdnum}
+endif::prof[]
+ifdef::todoprof[]
+:doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
+endif::todoprof[]
+
+
+= {doctitle}
+
+:Author:  {authorDefault}
+:lang: fr
+:slideshowlocation: IUT Blagnac
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169;
+:incremental:
+:experimental:
+
+//----------- définitions --------------
+:sitecours: http://jmbruel.github.io/cpoa/[Support de Cours]
+:pre: PreReq
+:objtd: ObjTD
+:duree: Durée
+:depot: À rendre
+:lien: Lien
+:img: img
+
+
+//-------------------- Warning si correction -----------
+ifdef::prof[]
+[icon="{iconsdir}/solution.png"]
+[CAUTION]
+.Version corrigée
+=====
+Cette version comporte des indications pour les
+réponses aux exercices.
+=====
+endif::prof[]
+
+//-------------------- Cartouche d'en-tête -----------
+[[cartouche]]
+[align="left",cols="1,10a",width="90%"]
+|======================
+| {pre}		|
+.	Je sais programmer en Java.
+.	J'ai compris le modèle MVC.
+.	J'ai compris le TD sur les JTable
+| {objtd}	| Le but de ce TP est de manipuler un composant Swing complexe : le JTable.
+| {duree}	| *2* TP de 1,5h.
+|======================
+
+== Comprendre les JTable
+
+ifdef::prof[]
+[icon="{iconsdir}/solution.png"]
+[CAUTION]
+.Recommandation
+=====
+Cet exercice peut se faire par les étudiants ou en mode démo.
+Dans tous les cas, bien insister sur la partie modification de cellule : le setTableModel() dans Jtable fait le addTableModelListener() pour s'abonner au TableModel (on le voit en début de trace écran)
+=====
+endif::prof[]
+
+=== Je demande à voir ...
+
+.	Récupérer l'archive de projet Eclipse jtable0. L'importer dans un workspace Eclipse.
+.	Lire rapidement le code de la classe `gui.vue.SimpleFrame`.
+..	Elle crée un JTable (`MyVerySimpleJTable`) dans un JScrollPane et le met dans une JFrame
+.	Lancer l'application (`Main.main()`) et observer ce quelle affiche (un tableau de valeurs numériques).
+
+=== D'où viennent les lignes affichées sur la console ?
+
+.	Regarder les lignes 41-42 de `gui.vue.SimpleFrame`. A quoi servent-elles ?
+.	Regarder le code de `gui.model.SimpleTableModel`, en particulier
+..	La déclaration de l'attribut `values`
+..	Le constructeur
+..	Les méthodes `getColumnCount(), getRowCount(), getValueAt(), getColumnName()`
+.	Relancer l'application
+..	Observer la trace produite lors de l'ouverture de la fenêtre (sauf les 5-6 premières lignes, on verra plus tard ...)
+..	Redimensionner la fenêtre -> observer la trace produite.
+..	bouger le scroll de la fenêtre -> observer la trace produite.
+.	Quelles sont les méthodes appelées ?
+.	Qui provoque ces appels de méthodes ?
+
+=== Modifier une cellule du JTable
+
+.	Regarder le code de `gui.model.SimpleTableModel`, en particulier
+..	Les méthodes `isCellEditable(), setValueAt()`
+.	Relancer l'application
+..	Essayer de modifier le contenu d'une cellule.
+..	Essayer de saisir un nombre, des lettres.
+.	Observer la trace produite
+.	Regarder le code de `gui.vue.MyVerySimpleJTable`
+..	C'est un JTable
+..	Qui redéfinit 2 méthodes pour simplement en faire une trace écran (puis appel du comportement hérité).
+.	Regarder le code de `gui.model.SimpleTableModel`, en particulier
+..	La méthode `addTableModelListener()`
+..	La dernière ligne de la méthode `setValueAt()`
+.	Relancer l'application
+.	Observer la trace produite et expliquer
+..	Les premières lignes produites (setModel ... addTableModelListener ... tableChanged)
+..	Lors d'une modification d'une cellule : la ligne "...tableChanged..." obtenue dans la trace et faire le lien avec le `fireTableCellUpdated()` de `setValueAt()`.
+.	Quel patron connu est ici à l'oeuvre ? Quel est le rôle de `SimpleTableModel` (ou plus généralement du TableModel), de `MyVerySimpleJTable` (ou plus généralement du JTable)
+
+ifdef::prof[]
+[icon="{iconsdir}/solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+Patron Observeur :
+
+.	Sujet : TableModel
+..	Méthode d'abonnement : addTableModelListener()
+..	Méthode de notification : fireTableCellUpdated() et autres fireXxxxxx()
+.	Observateur : JTable
+..	Abonnement dans le setModel()
+..	Méthode appelée : tableChanged()
+====
+endif::prof[]
+
+== Développer un TableModel
+
+=== Le point de départ
+
+.	Récupérer le projet jtable1
+.	Le copier en projet jtable2
+.	Lancer l'application et tester ce qui marche (pas grand chose)
+
+=== Analyser le code
+
+Analyser le code fourni :
+
+.	Structure générale des classes
+..	Le code source des classes graphiques (initialisées avec W.B. puis modifiées par l’équipe projet) est structurée de la manière suivante :
+...	Les attributs « métiers de la classe »
+...	Les attributs graphiques (générés par W.B.)
+...	Les méthodes publiques (services offerts par la classe)
+...	Les méthodes privées gérées par W.B. (initialisation et accesseurs)
+...	Les méthodes privées liées aux fonctionnalités techniques du composant.
+..	Pour faciliter la compréhension de vos propres développements dans le cadre de ce projet, il est fortement conseillé de respecter cette classification pour les attributs et les méthodes que vous ajouterez aux composants existants.
+.	`Main`
+..	Contient le main() de lancement de l'appli.
+..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+.	`Student`
+..	Simple structure de données décrivant un étudiant (pourrait provenir d'un ex projet, par exemple pour la gestion des projets tutorés). Les données pourraient provenir d'une base de données
+..	Le Champ « id » serait l’identifiant unique de chaque student. Il sera géré par une base de données et nous ne l’utiliserons pour l’instant que par soucis de compatibilité future (sa valeur n’a pas d’importance).
+..	NB : Nous utilisons des attributs « public » pour des raisons de simplicité. Ce choix serait discutable dans le cadre d’un projet industrialisé.
+..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+.	`DataLoader`
+..	Classe en charge du chargement des données. En théorie depuis une base de données ou un fichier xml (ça vous rappelle des choses ?). Ici un simple bouchon de test.
+..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+.	`StudentDialog`
+..	Boite de dialogue utilisée pour créer ou modifier une donnée de type Student ainsi que pour confirmer la suppression d’une telle donnée.
+..	La classe dérive de JDialog et ne possède que 2 méthodes publiques :
+...	Le constructeur (en association avec une fenêtre appelante)
+...	La méthode `ouvrirDialogue()`
+..	L’appel de la méthode `ouvrirDialogue()` est bloquant pour le programme appelant (ouverture modale de boite de dialogue)
+..	Il existe 3 modes d’ouverture paramétrés par l’argument « mode » de la méthode `ouvrirDialogue()`.
+..	Quel que soit le mode d’ouverture, le programme appelant récupèrera :
+...	Le code de retour de la méthode (true si l’action est confirmée)
+...	L’objet Student concerné (éventuellement modifié par l’utilisateur).
+..	NB : Cette boite de dialogue a donc pour rôle de manipuler une donnée de type Student. Elle ne doit réaliser aucune action directe sur l’interface graphique appelante ou sur la base de données.
+..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+
+Ouf ... et enfin les classes utiles de travail :
+
+.	`StudentListFrame` : Fenêtre principale de l’application
+..	Elle comporte 3 boutons et une JTable.
+...	« Ajouter », « Modifier » et « Supprimer » devront permettre de modifier les données.
+...	Le JTable affiche les données manipulées.
+..	5 méthodes privées sont destinées au fonctionnement algorithmique de la fenêtre :
+...	ajoutStudent() : traitement d’un clic sur le bouton « Ajouter »
+...	modifStudent() : traitement d’un clic sur le bouton « Modifier »
+...	supprStudent() : traitement d’un clic sur le bouton « Supprimer »
+.	`StudentTableModel` :
+..	Dérive de AbstractTableModel
+..	Ses données sont représentées par un attribut `studentlist`
+..	Les données sont initialisées par une méthode loadDatas()
+..	Seules les 3 méthodes obligatoires (Cf. cours) sont implémentées
+
+=== Comprendre le code
+
+Répondre aux questions suivantes :
+
+.	Où (classe, ligne) est déclaré l'attribut JTable affiché à l'écran ?
+.	Où (classe, ligne) est déclaré l'attribut du TableModel utilisé dans cette application ?
+.	Où (classe, ligne) est réellement créé l'objet JTable affiché à l'écran ?
+.	Où (classe, ligne) est réellement créé l'objet TableModel utilisé dans cette application ?
+.	Où (classe, ligne) sont reliés le JTable et le TableModel ?
+.	D'où viennent les données affichées à l'écran (les étudiants) ?
+.	Où (classe, ligne) ces données sont réellement "mises" dans la fenêtre ?
+
+ifdef::prof[]
+[icon="{iconsdir}/solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+StudentListFrame -> constructeur -> this.studentTM.loadDatas(listeStudentsInitiale);
+====
+endif::prof[]
+
+
+=== Compléter le code du TableModel
+
+Vous allez compléter le fonctionnement du JTable/TableModel. On souhaite que :
+
+.	Les noms des colonnes soient remplacés par "Id", "Nom", "Prénom", "Groupe". Surcharger donc la méthode getColumnName(). Dans quelle classe ?
+.	On puisse modifier (entrer en modif) les colonnes nom, prénom, groupe directement sur chaque ligne du JTable. Mais pas la colonne Id. Modifier la méthode isCellEditable(). Dans quelle classe ?
+.	Modifier les valeurs des colonnes nom, prénom, groupe sur chaque ligne du JTable. Modifier la méthode setValueAt(). Dans quelle classe ? Avant modification, cette méthode vérifiera :
+..	que les noms et prénoms ne soient pas vides
+..	que le numéro de groupe soit 1A, 1B, 2A, 2B, 3A, 3B, 4A, 4B explicitement en acceptant les minuscules (et les passer en majuscules).
+
+=== Compléter le code applicatif
+
+.	Analyser le code de la méthode `modifStudent()` dans `StudentListFrame`. Pourquoi ne fonctionne-t-elle pas ?
+.	Ajouter une méthode `updateStudentAt( Student studentUpated, int lig )` à la classe `StudentTableModel` et modifiez la méthode ci-dessus.
+.	Tester.
+.	Vous ne voyez pas les students modifiés à l'écran ? Avez-vous prévenu le JTable (cf. fireTableDataChanged()) ? Qui doit le faire ?
+.	Gérer la suppression et l'ajout de student :
+..	Ajouter une méthode correspondante dans `StudentTableModel` : `addStudent( Student stud )` et `removeStudentAt(int lig)`
+..	En vous inspirant de `modifStudent()`, modifiez le code de `ajoutStudent()` et `supprStudent()` dans `StudentListFrame`.
+.	Tester, tout doit fonctionner.
+
+== Deux JTable
+
+On souhaite disposer, dans la même fenêtre, de deux affichage JTable des mêmes étudiants : celui existant, modifiable, et un autre qui montre les mêmes étudiants. Lorsqu'on ajoute ou supprime un étudiant dans le premier JTable, ils apparaissent/disparaissent automatiquement dans le deuxième.
+
+.	Copier le projet en jtable3
+.	Modifier la classe `StudentListFrame` pour que le JTable existant soit à l'Ouest de la fenêtre (à gauche)
+.	Ajouter un nouveau JTable à l'Est (à droite) de la fenêtre.
+.	Ce nouveau JTable doit afficher les mêmes données que le premier. Comment faire ? Faut il créer 1, 2, 3 `StudentTableModel` ? Comment associer les JTable au(x) TableModel(s) nécessaire(s) ?
+
+Exemple de résultat obtenu :
+
+image::TP6fen3.PNG[]
+
+== Deux JTable encore ...
+
+On souhaite faire un début d'interface permettant de créer des étudiants à la volée et de mettre des étudiants dans des groupes (pjt par exemple ...). 
+On souhaite donc modifier l'interface avec les deux boutons "gauche" et "droite", cf. image ci-dessous. Pour cela :
+
+.	Copier le projet en jtable4
+.	Ajouter au Centre de la fenêtre les deux boutons "<=" et "=>".
+.	Adaptez les JTable mis en oeuvre. Faut il créer 1, 2, 3 `StudentTableModel` ? Comment associer les JTable au(x) TableModel(s) nécessaire(s) ?
+.	Programmer le fonctionnement des 2 boutons ajoutés.
+.	Faire en sorte que les cellules du JTable de droite ne soient pas modifiables (contrairement à celui de gauche qui permet les éditions)
+
+ifdef::prof[]
+[icon="{iconsdir}/solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+Il faut créer un autre TableModel dont la méthode isCellEditable() renvoie faux, et sans méthode updateStudent().
+====
+endif::prof[]
+
+
+Exemple de résultat obtenu au lancement :
+
+image::TP6fen4-1.PNG[]
+
+Exemple de résultat obtenu après avoir transféré les students 1, 2 et 3 :
+
+image::TP6fen4-2.PNG[]
+
+== Pour aller plus loin
+
+Vous pouvez essayer de programmer un renderer pour la colonne groupe pour formatter le texte ainsi : "1 - A". Chercher dans la documentation en ligne et regarder du côté de `getCellRenderer()` de la classe JTable ainsi que créer une sous-classe de `DefaultTableCellRenderer`.
+
+Vous pouvez aussi programmer un editor pour la colonne groupe afin de mettre en place une liste déroulante de saisie avec les 8 valeurs possibles. Chercher dans la documentation en ligne et regarder du côté de `getColumnModel()` de la classe JTable pour récupérer un TableColumn et appliquer `setCellEditor()`.
+
+
+ifdef::prof[]
+[icon="{iconsdir}/solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+Renderer : http://docs.oracle.com/javase/tutorial/uiswing/components/table.html#renderer
+
+Editor : http://docs.oracle.com/javase/tutorial/uiswing/components/table.html#combobox
+====
+endif::prof[]
+
+
+== Remerciements
+
+Ce TP a bénéficié grandement d'une version antérieure réalisée par Fabrice Pelleau. Merci à lui.
