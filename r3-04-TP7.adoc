@@ -87,6 +87,7 @@ endif::prof[]
 .	J'ai compris le modèle MVC du `JTable` en TD.
 | {objtd}	| Le but de ce TP est de manipuler un composant Swing complexe : le JTable.
 | {duree}	| *2* TP de 1,5h.
+| {depot} | *Les répertoires src des différentes versions de codes produits.*
 |======================
 
 == Comprendre les JTable
@@ -112,7 +113,7 @@ endif::prof[]
 
 === D'où viennent les lignes affichées sur la console ?
 
-.	Regarder les lignes 41-42 de `gui.vue.SimpleFrame`. A quoi servent-elles ?
+.	Regarder les lignes 39-40 de `gui.vue.SimpleFrame`. A quoi servent-elles ?
 .	Regarder le code de `gui.model.SimpleTableModel`, en particulier
 ..	La déclaration de l'attribut `values`
 ..	Le constructeur
@@ -120,9 +121,28 @@ endif::prof[]
 .	Relancer l'application
 ..	Observer la trace produite lors de l'ouverture de la fenêtre (sauf les 5-6 premières lignes, on verra plus tard ...)
 ..	Redimensionner la fenêtre -> observer la trace produite.
-..	bouger le scroll de la fenêtre -> observer la trace produite.
+... Redimensionner en cachant/affichant des lignes entières
+... Redimensionner en cachant/affichant 1 seule colonne
+..	Bouger le scroll de la fenêtre -> observer la trace produite.
 .	Quelles sont les méthodes appelées ?
 .	Qui provoque ces appels de méthodes ?
+
+
+ifdef::prof[]
+[icon="solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+*	Quelles sont les méthodes appelées ?
+
+    getRowCount()
+    getValueAt(row, column)
+
+*	Qui provoque ces appels de méthodes ?
+
+    JTable
+====
+endif::prof[]
 
 === Modifier une cellule du JTable
 
@@ -170,6 +190,7 @@ La réalité : du M/VC :
 C'est du MVC mais on ne voir que le lien M <--> C
 ====
 endif::prof[]
+
 
 == Développer un TableModel
 
@@ -537,8 +558,8 @@ On souhaite disposer, dans la même fenêtre, de deux affichage JTable des même
 .Aide : Si besoin (essayer d'abord à la main) : la question du TableModel
 ====
     Là, ca se passe dans les constructeurs de `StudentListFrame`.
-    Il faut faire un `this.studentTableDeuxieme.setModel(unTableModel);`
-    A votre avis : avez vous déjà le `unTableModel` qui va bien ?
+    Il faut faire un this.studentTableDeuxieme.setModel(unTableModel);
+    A votre avis : avez vous déjà le unTableModel qui va bien ?
 ====
 
 [%collapsible]
@@ -679,6 +700,15 @@ Chaque JTable aura son TableModel pour gérer sa contenir sa propre liste d'étu
 ** lier la `JTable` de droite avec `studentTableModelDeuxieme` 
 ====
 
+Exemple de résultat obtenu au lancement :
+
+image::TP6fen4-1.PNG[]
+
+Exemple de résultat obtenu après avoir transféré les students 1, 2 et 3 :
+
+image::TP6fen4-2.PNG[]
+
+
 ifdef::prof[]
 [icon="solution.png"]
 [IMPORTANT]
@@ -744,14 +774,6 @@ private JPanel getJContentPane() {
 ====
 endif::prof[]
 
-
-Exemple de résultat obtenu au lancement :
-
-image::TP6fen4-1.PNG[]
-
-Exemple de résultat obtenu après avoir transféré les students 1, 2 et 3 :
-
-image::TP6fen4-2.PNG[]
 
 == Pour aller plus loin
 
