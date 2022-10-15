@@ -58,23 +58,23 @@ hide empty members
 hide empty methods
 
 
-package "Level 3" {
-	class execute_session
-}
-package "Level 2" {
-execute_session -- initial
-initial -[hidden] transition
-execute_session -- transition
-execute_session -- execute_state
-execute_session -- is_final
-}
+' package typing {
+' 	interface Iterator
+' }
 
+' package "code" {
+' class int
+' class ListInt
+' class Solution
+' }
+' ListInt -right--- "*" int
+' Solution -- "*" ListInt
 
-package "Level 1" {
-execute_state -- display
-execute_state -- read
-execute_state -- correct
-execute_state -- message
-execute_state -- process
+class Class {
+	attribute : Type
 }
+package Types {
+	class AnotherType
+}
+Class .> AnotherType : <<import>>\nType
 @enduml
