@@ -1,17 +1,27 @@
-:moduleTitle: CPOA
-:authorDefault:  Dut/Info-S3/M3105
-:tdnum: TD 6
+:moduleTitle: R3.04 Qualité
+:authorDefault:  BUT/Info/S3/R3.04
 
-:eleve:
-:sourcedir: src/java/TD5
+:tdnum: TD7 - Modèle MVC par l'exemple : `JTable`
 
+:sourcedir: src/java/TD2
+
+//////
 ifndef::definitions[]
 include::definitions.txt[]
 endif::definitions[]
+//////
+
 ifndef::myasciidoconf[]
 include::asciidoc.conf[]
 endif::myasciidoconf[]
 
+
+:numbered:
+:!linkcss:
+:toc:
+
+
+:doctitle:  {moduleTitle} - Sujet {tdnum}
 ifdef::eleve[]
 :doctitle:  {moduleTitle} - Sujet {tdnum}
 endif::eleve[]
@@ -23,18 +33,22 @@ ifdef::todoprof[]
 endif::todoprof[]
 
 :icons: font
-
-// TEST
-:prof: sdsd
+:experimental:
 
 = {doctitle}
-:Author:  {authorDefault} - (Semaine 50)
+
+
+:Author:  {authorDefault} - (Semaine 46)
 :lang: fr
 :incremental:
 
 // eleve : sujet pour élèves
 // prof : support prof pour séance
-// todoprof : support AVEC EXPLICATIONS DEROULEMENT pour profs
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+
+// POUR TEST
+// :prof: jkjik
 
 //----------- définitions --------------
 :sitecours: http://jmbruel.github.io/cpoa/[Support de Cours]
@@ -69,23 +83,30 @@ endif::prof[]
 | {duree}	| *1* TD de 1,5h.
 |======================
 
-ifndef::compact[]
-
-== Rappel du cours
-
-TIP: N'hésitez pas à (re)lire régulièrement le {sitecours}.
-
-endif::compact[]
 
 == Motivation
 
 La bibliothèque java Swing (disponible depuis la version 2 de Java (java 1.5)) définit des composants graphiques pour construire des interfaces utilisateurs indépendantes des plateformes d'exécution (cf. http://docs.oracle.com/javase/tutorial/uiswing/).
 
-Le but de ce TD et du prochain TP est de manipuler un composant Swing complexe : `JTable`. 
+A noter que Java Swing et JavaFX sont deux bibliothèques graphiques, JavaFX plus récente que Swing.
+Elles comportent des composants "assez proches", plus riches pour java FX.
+Nous allons ici étudier JavaFX et les aspects composants graphiques vous seront donnés en TD/TP.
+
+*Le but de ce TD et du prochain TP est de manipuler un composant Swing complexe : `JTable`*. 
 Nous verrons :
 
 .	En TD : les principes du composant et la séparation MV/C.
 .	En TP : la mise en œuvre de ce composant.
+
+*Démonstration*
+
+ifdef::prof[]
+[CAUTION]
+.Version corrigée
+=====
+Faire la démo de jtable5 => objectif final du TP
+=====
+endif::prof[]
 
 //== Pour commencer : une démo de ce qu'on va faire
 
@@ -95,9 +116,13 @@ Imaginons que nous voulions programmer cette interface en java :
 
 image:TD6fen1.png[]
 
-Avec ce que nous savons de Swing, quels composants graphiques utiliserions nous pour programmer le tableau ci-dessus ?
+Avec ce que nous savons de Swing ou Java FX, quels composants graphiques utiliserions nous pour programmer le tableau ci-dessus ?
 
 -----
+.
+.
+.
+.
 .
 .
 .
@@ -117,6 +142,12 @@ ifdef::prof[]
 [IMPORTANT]
 .Eléments de solution
 ====
+En JavaFX :
+.	Un GridPane 4 colonnes et x lignes suivant le nombre de lignes
+..	Ou un BorderPane et plusieurs VBox
+.	Première ligne : des Label
+.	Lignes suivantes : un TextField par cellule
+En Swing :
 .	Un JPanel
 ..	Organisé en gridLayout 4 colonnes et x lignes suivant le nombre de lignes
 ..	Première ligne des JLabels
@@ -144,7 +175,6 @@ Quelles sont les limites de cette approche ? Imaginez l'UT2J => 30.000 étudiant
 .
 .
 .
-.
 -----
 
 ifdef::prof[]
@@ -154,7 +184,7 @@ ifdef::prof[]
 ====
 .	Non, mauvaise solution :
 ..	Trop de JTextField (30 000 x 4 == 120 000 pour l'université)
-..	Or tout le tableau n'est pas visible, maximum 50 lignes => maximum 400 JTF utiles
+..	Or tout le tableau n'est pas visible, maximum 50 lignes => maximum 400 JTextField utiles
 ..	Les données sont dans les composants graphiques
 ..	Mises à jour ?
 ..	Ajout d'un étudiant ?
@@ -197,7 +227,7 @@ image:TD6-MVC-3.png[]
 
 === Composant graphique
 
-Côté graphique : un `JScrollPane` qui contient un JTable et une méthode *`setModel()`* pour associer un modèle.
+Côté graphique : un JTable qui a une méthode *`setModel()`* pour associer un modèle.
 
 [source,java]
 ----
@@ -205,10 +235,6 @@ Côté graphique : un `JScrollPane` qui contient un JTable et une méthode *`set
 JTable jta = new JTable ();
 MonTableModel mm = new MonTableModel();
 jta.setModel (mm);
-
-// Partie graphique : le JTable est mis dans un JScrollPane
-JScrollPane jsp = new JScrollPane();
-jsp.setViewportView (jta);
 ----
 
 === TableModel : accès aux données
@@ -262,12 +288,11 @@ Au plus simple, créer un TableModel revient donc à créer une classe :
 
 -----
 // On suppose démarrer en ligne 0 et colonne 0 !!
-// Le JTable et le JScrollPane gèrent les scrolls correctement ...
-// On suppose disposer :
+// On suppose disposer dans JTable :
 // - d'un attribut this.dataModel pour interroger le datamodel
 // - d'une méthode this.maxViewableCols() : nb max de colonnes affichables
 // - d'une méthode this.maxViewableRows() : nb de lignes affichables
-// d'une méthode this.drawAtScreen(x) : dessine une valeur sur la fenêtre (la position se calcule "toute seule")
+// - d'une méthode this.drawAtScreen(x) : dessine une valeur sur la fenêtre (la position se calcule "toute seule")
 .
 .
 .
@@ -303,7 +328,12 @@ ifdef::prof[]
 [source,java]
 ----
 // On suppose démarrer en ligne 0 et colonne 0 !!
-// Le JTable et le JScrollPane gèrent les scrolls correctement ...
+// On suppose disposer dans JTable :
+// - d'un attribut this.dataModel pour interroger le datamodel
+// - d'une méthode this.maxViewableCols() : nb max de colonnes affichables
+// - d'une méthode this.maxViewableRows() : nb de lignes affichables
+// - d'une méthode this.drawAtScreen(x) : dessine une valeur sur la fenêtre (la position se calcule "toute seule")
+
 // L'algorithme réel est plus complexe ...
 
 int nvc = min (this.dataModel.getColumnCount(), this.maxViewableCols() );
@@ -311,7 +341,7 @@ int nvr = min (this.dataModel.getRowCount(), this.maxViewableRows() );
 
 for (j=0; j<nvc; j++) {
 	String titreCol = this.dataModel.getColumnName(j);
-	this.drawAtScreen (titreCol);
+	this.drawAtScreen (titre ;
 }
 for (i=0; i<nvr; i++) {
 	for (j=0; j<nvc; j++) {
@@ -329,7 +359,13 @@ image:td6.DSaffichageVide.png[]
 
 -----
 // On suppose démarrer en ligne 0 et colonne 0 !!
-// Le JTable et le JScrollPane gèrent les scrolls correctement ...
+.
+.
+.
+.
+.
+.
+.
 .
 .
 .
@@ -433,8 +469,6 @@ image:td6.Fireupdate.png[]
 == Conclusion
 
 Encore une fois on retrouve ici plusieurs éléments des design patterns : "un problème de fond est la gestion des changements". Pour cela, il faut isoler les changements. En objet, cela est délégué à un objet particulier.
-
-Déjà rencontré : séparation des objets graphiques (JPanel) de leur organisation spatiale (Layout Managers).
 
 Le modèle MVC s'appuie sur ce constat. Il sépare :
 

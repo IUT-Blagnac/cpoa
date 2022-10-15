@@ -1,22 +1,22 @@
-:moduleTitle: CPOA
-:authorDefault:  Dut/Info-S3/M3105
-:tdnum: TP 5
+:moduleTitle: R3.04 Qualité
+:authorDefault:  BUT/Info/S3/R3.04
 
-:eleve:
+:tdnum: TP7 - MVC par l'exemple : `JTable`
+
 :sourcedir: src/java/TD1
 
-ifndef::definitions[]
 include::definitions.txt[]
-endif::definitions[]
-ifndef::myasciidoconf[]
-include::asciidoc.conf[]
-endif::myasciidoconf[]
 
-// eleve : sujet pour élèves
-// prof : support prof pour séance
-// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+// ATTENTION !
+// Enlevé linkcss car car génére les css à côté du fichier html
+:!linkcss:
 
+// L'enlève au besoin (! undefines the variable)
+// :!linkcss:
 
+:sourcedir: src/java/TD2
+
+:doctitle:  {moduleTitle} - Sujet {tdnum}
 ifdef::eleve[]
 :doctitle:  {moduleTitle} - Sujet {tdnum}
 endif::eleve[]
@@ -27,15 +27,34 @@ ifdef::todoprof[]
 :doctitle: {moduleTitle} - DEROULEMENT SEANCE PROF {tdnum}
 endif::todoprof[]
 
+:icons: font
 
 = {doctitle}
-
 :Author:  {authorDefault}
 :lang: fr
-:slideshowlocation: IUT Blagnac
-:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169;
-:incremental:
-:experimental:
+:slideshowlocation: Your computer
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} *** Powered by AsciiDoc and W3C Slidy &#169; 
+:toc-title: Table des Matières
+:toc: left
+:incremental!:
+:source-highlighter: pygments
+:numbered:
+:iconsdir: icons
+:icons: true
+:imagesdir: images
+
+// eleve : sujet pour élèves
+// prof : support prof pour séance
+// todoprof : support AVEC EXPLICATIOSN DEROULEMENT pour profs
+
+// TEST
+// :prof: sdsd
+
+
+
+:cpte: Compte
+:ag: AgenceBancaire
+:app: ApplicationAgenceBancaire
 
 //----------- définitions --------------
 :sitecours: http://jmbruel.github.io/cpoa/[Support de Cours]
@@ -49,7 +68,7 @@ endif::todoprof[]
 
 //-------------------- Warning si correction -----------
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [CAUTION]
 .Version corrigée
 =====
@@ -64,8 +83,8 @@ endif::prof[]
 |======================
 | {pre}		|
 .	Je sais programmer en Java.
-.	J'ai compris le modèle MVC.
 .	J'ai compris le TD sur les JTable
+.	J'ai compris le modèle MVC du `JTable` en TD.
 | {objtd}	| Le but de ce TP est de manipuler un composant Swing complexe : le JTable.
 | {duree}	| *2* TP de 1,5h.
 |======================
@@ -73,20 +92,22 @@ endif::prof[]
 == Comprendre les JTable
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [CAUTION]
 .Recommandation
 =====
 Cet exercice peut se faire par les étudiants ou en mode démo.
 Dans tous les cas, bien insister sur la partie modification de cellule : le setTableModel() dans Jtable fait le addTableModelListener() pour s'abonner au TableModel (on le voit en début de trace écran)
+
+*Éventuellement mieux de le faire en mode démo pour qu'ils ne ratent pas les éléments importants*
 =====
 endif::prof[]
 
 === Je demande à voir ...
 
-.	Récupérer l'archive de projet Eclipse jtable0. L'importer dans un workspace Eclipse.
+.	Récupérer l'archive de projet Eclipse `jtable0`. L'importer dans un workspace Eclipse.
 .	Lire rapidement le code de la classe `gui.vue.SimpleFrame`.
-..	Elle crée un JTable (`MyVerySimpleJTable`) dans un JScrollPane et le met dans une JFrame
+..	Elle crée un JTable (`MyVerySimpleJTable`) dans un JScrollPane (gère les ascenseurs) et le met dans une JFrame (fenêtre de Swing).
 .	Lancer l'application (`Main.main()`) et observer ce quelle affiche (un tableau de valeurs numériques).
 
 === D'où viennent les lignes affichées sur la console ?
@@ -124,11 +145,15 @@ endif::prof[]
 .	Quel patron connu est ici à l'oeuvre ? Quel est le rôle de `SimpleTableModel` (ou plus généralement du TableModel), de `MyVerySimpleJTable` (ou plus généralement du JTable)
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
-Patron Observeur :
+Doux mélange ...
+
+Ce qu'on voit :
+
+Patron Observer :
 
 .	Sujet : TableModel
 ..	Méthode d'abonnement : addTableModelListener()
@@ -136,6 +161,13 @@ Patron Observeur :
 .	Observateur : JTable
 ..	Abonnement dans le setModel()
 ..	Méthode appelée : tableChanged()
+
+La réalité : du M/VC :
+
+.   M : TableModel
+.   V/C : JTable qui fait la View (via le UIDelegate) et le Control
+
+C'est du MVC mais on ne voir que le lien M <--> C
 ====
 endif::prof[]
 
@@ -143,8 +175,8 @@ endif::prof[]
 
 === Le point de départ
 
-.	Récupérer le projet jtable1
-.	Le copier en projet jtable2
+.	Récupérer le projet `jtable1`
+.	Le copier en projet `jtable2`
 .	Lancer l'application et tester ce qui marche (pas grand chose)
 
 === Analyser le code
@@ -161,15 +193,21 @@ Analyser le code fourni :
 ..	Pour faciliter la compréhension de vos propres développements dans le cadre de ce projet, il est fortement conseillé de respecter cette classification pour les attributs et les méthodes que vous ajouterez aux composants existants.
 .	`Main`
 ..	Contient le main() de lancement de l'appli.
-..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+.. NB :
++
+WARNING: Noter que vous NE DEVEZ PAS LA MODIFIER dans le TP.
 .	`Student`
 ..	Simple structure de données décrivant un étudiant (pourrait provenir d'un ex projet, par exemple pour la gestion des projets tutorés). Les données pourraient provenir d'une base de données
 ..	Le Champ « id » serait l’identifiant unique de chaque student. Il sera géré par une base de données et nous ne l’utiliserons pour l’instant que par soucis de compatibilité future (sa valeur n’a pas d’importance).
 ..	NB : Nous utilisons des attributs « public » pour des raisons de simplicité. Ce choix serait discutable dans le cadre d’un projet industrialisé.
-..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+..	NB : 
++
+WARNING: Noter que vous NE DEVEZ PAS LA MODIFIER dans le TP.
 .	`DataLoader`
 ..	Classe en charge du chargement des données. En théorie depuis une base de données ou un fichier xml (ça vous rappelle des choses ?). Ici un simple bouchon de test.
-..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+..	NB :
++
+WARNING: Noter que vous NE DEVEZ PAS LA MODIFIER dans le TP.
 .	`StudentDialog`
 ..	Boite de dialogue utilisée pour créer ou modifier une donnée de type Student ainsi que pour confirmer la suppression d’une telle donnée.
 ..	La classe dérive de JDialog et ne possède que 2 méthodes publiques :
@@ -181,7 +219,9 @@ Analyser le code fourni :
 ...	Le code de retour de la méthode (true si l’action est confirmée)
 ...	L’objet Student concerné (éventuellement modifié par l’utilisateur).
 ..	NB : Cette boite de dialogue a donc pour rôle de manipuler une donnée de type Student. Elle ne doit réaliser aucune action directe sur l’interface graphique appelante ou sur la base de données.
-..	NB : Noter que vous NE DEVEZ PAS LA MODIFER dans le TP.
+..	
++
+WARNING: Noter que vous NE DEVEZ PAS LA MODIFIER dans le TP.
 
 Ouf ... et enfin les classes utiles de travail :
 
@@ -212,11 +252,33 @@ Répondre aux questions suivantes :
 .	Où (classe, ligne) ces données sont réellement "mises" dans la fenêtre ?
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
-StudentListFrame -> constructeur -> this.studentTM.loadDatas(listeStudentsInitiale);
+.	Où (classe, ligne) est déclaré l'attribut JTable affiché à l'écran ?
++
+StudentListFrame - 47
+.	Où (classe, ligne) est déclaré l'attribut du TableModel utilisé dans cette application ?
++
+StudentListFrame - 35
+.	Où (classe, ligne) est réellement créé l'objet JTable affiché à l'écran ?
++
+StudentListFrame - 141-142
+.	Où (classe, ligne) est réellement créé l'objet TableModel utilisé dans cette application ?
++
+StudentListFrame - 57 ou 69-70
+.	Où (classe, ligne) sont reliés le JTable et le TableModel ?
++
+StudentListFrame - 58 ou 71
+.	D'où viennent les données affichées à l'écran (les étudiants) ?
++
+StudentListFrame - paramètre du constructeur donnés au TableModel
+.	Où (classe, ligne) ces données sont réellement "mises" dans la fenêtre ?
++
+StudentListFrame - 70
++
+StudentListFrame -> constructeur -> this.studentTableModel.loadDatas(listeStudentsInitiale);
 ====
 endif::prof[]
 
@@ -231,6 +293,81 @@ Vous allez compléter le fonctionnement du JTable/TableModel. On souhaite que :
 ..	que les noms et prénoms ne soient pas vides
 ..	que le numéro de groupe soit 1A, 1B, 2A, 2B, 3A, 3B, 4A, 4B explicitement en acceptant les minuscules (et les passer en majuscules).
 
+ifdef::prof[]
+[icon="solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+
+[source,java]
+.StudentTableModel
+----
+@Override
+public String getColumnName(int columnIndex) {
+    switch (columnIndex) {
+    case 0:
+        return "ID";
+    case 1:
+        return "Name";
+    case 2:
+        return "Firstname";
+    case 3:
+        return "Group";
+    default:
+        return "???";
+    }
+}
+
+@Override
+public boolean isCellEditable(int lig, int col) {
+    if (col>=1 && col<=3) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+@Override
+public void setValueAt(Object valeur, int lig, int col) {
+    if ( this.studentlist != null ) {
+
+        if (this.studentlist.size()>lig) {
+            Student stud = this.studentlist.get(lig);
+            switch (col) {
+            case 1:
+                if (! valeur.toString().isEmpty())
+                    stud.surname = valeur.toString();
+                break;
+            case 2:
+                if (! valeur.toString().isEmpty())
+                    stud.firstname = valeur.toString();
+                break;
+            case 3:
+                if (valeur.toString().isEmpty())
+                    break;
+                String s = valeur.toString().toUpperCase();
+                if ( s.length() != 2 
+                        ||  ! (""+s.charAt(0)).matches("1|2|3|4")
+                        ||  ! (""+s.charAt(1)).matches("A|B")
+                    )
+                        break;
+                stud.TPgroup = s;
+                break;
+            default:
+                return ; // les autres colonnes ne sont pas éditables
+            }
+            this.fireTableCellUpdated(lig, col);
+        }
+    }
+    // transmission de l'information de modification du modèle vers la vue
+    this.fireTableCellUpdated(lig, col);
+    
+}
+----
+====
+endif::prof[]
+
+
 === Compléter le code applicatif
 
 .	Analyser le code de la méthode `modifStudent()` dans `StudentListFrame`. Pourquoi ne fonctionne-t-elle pas ?
@@ -242,36 +379,368 @@ Vous allez compléter le fonctionnement du JTable/TableModel. On souhaite que :
 ..	En vous inspirant de `modifStudent()`, modifiez le code de `ajoutStudent()` et `supprStudent()` dans `StudentListFrame`.
 .	Tester, tout doit fonctionner.
 
-== Deux JTable
+ifdef::prof[]
+[icon="solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+
+[source,java]
+.StudentListFrame
+----
+private void ajoutStudent() {
+    boolean popupResult;
+    Student stud = new Student();
+
+    // Création ou réutilisation de la boite de dialog "studentDialog"
+    // ouverture en mode "ajout"
+    // récupération du code de retour (true/false) et des données saisies (stud) 
+    popupResult = this.studentDialog.ouvrirDialogue( stud, StudentDialog.ModeEdition.CREATION ); 
+    
+    if ( popupResult) {
+        // action validée : "stud" contient les données sur le student à ajouter
+        this.studentTableModel.addStudent(stud);
+
+    } else {
+        // action non validée
+        JOptionPane.showMessageDialog(this,"ok on ajoute student");
+    }
+}
+
+
+private void modifStudent() {
+
+    int selectedRow = this.studentTable.getSelectedRow();
+            
+    if ( selectedRow >= 0 ) {
+        Student stud = this.studentTableModel.getStudentAt( selectedRow );
+        if ( stud != null ) {
+
+            boolean  popupResult;
+
+            // Création ou réutilisation de la boite de dialog "studentDialog"
+            // ouverture en mode "ajout"
+            // récupération du code de retour (true/false) et des données saisies (stud) 
+            popupResult = this.studentDialog.ouvrirDialogue( stud, StudentDialog.ModeEdition.MODIFICATION ); 
+            
+            if ( popupResult) {
+                
+                if (! this.studentTableModel.updateStudentAt(stud,selectedRow)) {
+                    JOptionPane.showMessageDialog(this,"Erreur de modif ... bizarre ...");
+                }
+                
+            } else {
+                // action non validée
+                JOptionPane.showMessageDialog(this,"ok on ne modifie rien");
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this,"Veuillez sélectionner la ligne à modifier");
+    }
+}
+
+private void supprStudent() {
+
+    int selectedRow = this.studentTable.getSelectedRow();
+    
+    if ( selectedRow >= 0 ) {
+        Student stud = this.studentTableModel.getStudentAt( selectedRow );
+        if ( stud != null ) {
+
+            boolean  popupResult;
+            // Création ou réutilisation de la boite de dialog "studentDialog"
+            // ouverture en mode "ajout"
+            // récupération du code de retour (true/false) et des données saisies (stud) 
+            popupResult = this.studentDialog.ouvrirDialogue( stud, StudentDialog.ModeEdition.SUPPRESSION ); 
+    
+            if ( popupResult) {
+                
+                this.studentTableModel.removeStudentAt( selectedRow );
+    
+            } else {
+                // action non validée
+                JOptionPane.showMessageDialog(this,"ok on ne supprime student");
+            }
+        }
+    }
+}
+----
+
+[source,java]
+.StudentTableModel
+----
+public void addStudent( Student stud ) {
+    if (this.studentlist == null) {
+        this.studentlist = new ArrayList<Student>();
+    }
+    this.studentlist.add(stud);
+    
+    this.fireTableDataChanged();
+}
+
+public boolean removeStudentAt(int lig) {
+    if ( this.studentlist != null ) {
+        if (this.studentlist.size()>lig) {
+            this.studentlist.remove(lig);
+            this.fireTableRowsUpdated(lig, this.studentlist.size());
+            return true;
+        }
+    }
+    return false;
+}
+
+public boolean updateStudentAt( Student studentUpated, int lig ) {
+    if ( this.studentlist != null ) {
+        if (this.studentlist.size()>lig) {
+            this.studentlist.set(lig, studentUpated);
+            this.fireTableRowsUpdated(lig, lig);
+            return true;
+        }
+    }
+    return false;
+}
+----
+====
+endif::prof[]
+
+
+== Deux JTable et un seul TableModel
 
 On souhaite disposer, dans la même fenêtre, de deux affichage JTable des mêmes étudiants : celui existant, modifiable, et un autre qui montre les mêmes étudiants. Lorsqu'on ajoute ou supprime un étudiant dans le premier JTable, ils apparaissent/disparaissent automatiquement dans le deuxième.
 
-.	Copier le projet en jtable3
+.	Copier le projet en `jtable3`
 .	Modifier la classe `StudentListFrame` pour que le JTable existant soit à l'Ouest de la fenêtre (à gauche)
 .	Ajouter un nouveau JTable à l'Est (à droite) de la fenêtre.
 .	Ce nouveau JTable doit afficher les mêmes données que le premier. Comment faire ? Faut il créer 1, 2, 3 `StudentTableModel` ? Comment associer les JTable au(x) TableModel(s) nécessaire(s) ?
+
+
+[%collapsible]
+.Aide : Si besoin (essayer d'abord à la main) : créer un JTable
+====
+[source,java]
+----
+// Déclarer deux attributs pour le JTable et son JScrollPane
+	private JTable studentTableDeuxieme = null;
+	private JScrollPane jScrollPaneTableDeuxieme = null;
+// Dans getJContentPane()
+//  Créer studentTableDeuxieme sur le modèle de studentTable
+//  Créer jScrollPaneTableDeuxieme sur le modèle de jScrollPaneTable
+//  Ajout dans la fenêtre :
+//      Modifier : 
+        this.jContentPane.add(this.jScrollPaneTable, BorderLayout.WEST);
+//      Ajouter : 
+        this.jContentPane.add(this.jScrollPaneTableDeuxieme, BorderLayout.EAST);
+----
+====
+
+[%collapsible]
+.Aide : Si besoin (essayer d'abord à la main) : la question du TableModel
+====
+    Là, ca se passe dans les constructeurs de `StudentListFrame`.
+    Il faut faire un `this.studentTableDeuxieme.setModel(unTableModel);`
+    A votre avis : avez vous déjà le `unTableModel` qui va bien ?
+====
+
+[%collapsible]
+.Aide : Un JTable qui ne réagit pas à la souris ...
+====
+`this.studentTableDeuxieme.setEnabled(false);`
+====
+
+
 
 Exemple de résultat obtenu :
 
 image::TP6fen3.PNG[]
 
-== Deux JTable encore ...
+ifdef::prof[]
+[icon="solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
 
-On souhaite faire un début d'interface permettant de créer des étudiants à la volée et de mettre des étudiants dans des groupes (pjt par exemple ...). 
+[source,java]
+.StudentListFrame
+----
+// AJOUTE
+private JTable studentTableDeuxieme = null;
+private JScrollPane jScrollPaneTableDeuxieme = null;
+
+public StudentListFrame() {
+    super();
+    // ...
+    
+    // AJOUTE
+    this.studentTableDeuxieme.setModel(this.studentTableModel);
+    this.studentTableDeuxieme.setEnabled(false);
+}
+
+public StudentListFrame(List<Student> listeStudentsInitiale) {
+    super();
+    // ...
+    
+    // AJOUTE
+    this.studentTableDeuxieme.setModel(this.studentTableModel);
+    this.studentTableDeuxieme.setEnabled(false);
+}
+
+private JPanel getJContentPane() {
+    // ...
+
+    // AJOUTE JTable 2 et JScrollpane qui la contient
+    
+    this.studentTableDeuxieme = new JTable();
+    this.studentTableDeuxieme.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    
+    this.jScrollPaneTableDeuxieme = new JScrollPane();
+    this.jScrollPaneTableDeuxieme.setViewportView(this.studentTableDeuxieme);
+    this.jScrollPaneTableDeuxieme.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+    this.jScrollPaneTableDeuxieme.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    
+    // Fenêtre de l'application 
+    
+    this.jContentPane.add(this.topPanel, BorderLayout.NORTH);
+    
+    // MODIFIE
+    this.jContentPane.add(this.jScrollPaneTable, BorderLayout.WEST);
+    
+    // AJOUTE
+    this.jContentPane.add(this.jScrollPaneTableDeuxieme, BorderLayout.EAST);
+
+    // ...
+}
+
+----
+====
+endif::prof[]
+
+
+== Deux JTable encore ... mais avec deux TableModel
+
+On souhaite faire un *début d'interface* permettant de créer des étudiants à la volée et de mettre des étudiants dans des groupes (SAE par exemple ...), indépendamment des groupes TPs qui ne changent pas. 
 On souhaite donc modifier l'interface avec les deux boutons "gauche" et "droite", cf. image ci-dessous. Pour cela :
 
-.	Copier le projet en jtable4
+.	Copier le projet en `jtable4`
 .	Ajouter au Centre de la fenêtre les deux boutons "<=" et "=>".
 .	Adaptez les JTable mis en oeuvre. Faut il créer 1, 2, 3 `StudentTableModel` ? Comment associer les JTable au(x) TableModel(s) nécessaire(s) ?
 .	Programmer le fonctionnement des 2 boutons ajoutés.
 .	Faire en sorte que les cellules du JTable de droite ne soient pas modifiables (contrairement à celui de gauche qui permet les éditions)
 
+[%collapsible]
+.Aide : Si besoin (essayer d'abord à la main) : éléments graphiques pour les 2 boutons
+====
+[source,java]
+----
+// Déclarer les pour le JPanel et les boutons
+	private JPanel panelCentreLeftRight;
+	private JButton leftToRight;
+	private JButton rigthToLeft;
+
+// Dans getJContentPane()
+//  Créer les boutons
+//  Créer le panel
+
+    this.leftToRight = new JButton("=>");
+    this.leftToRight.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            StudentListFrame.this.transferStudentLeftToRight();
+        }
+    });
+    // Il faudra écrire transferStudentLeftToRight()
+
+    this.rigthToLeft = new JButton("<=");
+    this.rigthToLeft.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            StudentListFrame.this.transferStudentRightToLeft();
+        }
+    });
+    // Il faudra écrire transferStudentRightToLeft()
+
+    this.panelCentreLeftRight = new JPanel();
+    this.panelCentreLeftRight.setLayout(new GridLayout(2, 1, 0, 0));
+    this.panelCentreLeftRight.add(this.leftToRight);
+    this.panelCentreLeftRight.add(this.rigthToLeft);
+    
+    // Fenêtre de l'application 
+    // ...    
+    
+    this.jContentPane.add(this.panelCentreLeftRight, BorderLayout.CENTER);
+----
+====
+
+[%collapsible]
+.Aide : Si besoin (essayer d'abord à la main) : la question du TableModel
+====
+Chaque JTable aura son TableModel pour gérer sa contenir sa propre liste d'étudiants :
+
+* déclarer un nouvel attribut de type `StudentTableModel`,  le nom `studentTableModelDeuxieme` semble bien adapté `studentTableModelDeuxieme` à la `JTable` de droite
+* dans les constructeurs :
+**  créer `studentTableModelDeuxieme`,
+** lier la `JTable` de droite avec `studentTableModelDeuxieme` 
+====
+
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
-Il faut créer un autre TableModel dont la méthode isCellEditable() renvoie faux, et sans méthode updateStudent().
+Il faut créer un autre TableModel pour avoir 2 listes.
+
+[source,java]
+.StudentListFrame
+----
+// AJOUTE 
+private StudentTableModel studentTableModelDeuxieme = null;
+// AJOUTE 
+private JPanel panelCentreLeftRight;
+private JButton leftToRight;
+private JButton rigthToLeft;
+
+public StudentListFrame() {
+    // ...
+    
+    // AJOUTE / MODFIE
+    this.studentTableModelDeuxieme = new StudentTableModel();
+    this.studentTableDeuxieme.setModel(this.studentTableModelDeuxieme);
+}
+
+public StudentListFrame(List<Student> listeStudentsInitiale) {
+    // ...
+
+    // AJOUTE / MODFIE
+    this.studentTableModelDeuxieme = new StudentTableModel();
+    this.studentTableDeuxieme.setModel(this.studentTableModelDeuxieme);
+}
+private JPanel getJContentPane() {
+    // ...
+    // Panel du milieu et ses deux boutons
+
+    // AJOUTE
+
+    this.leftToRight = new JButton("=>");
+    this.leftToRight.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            StudentListFrame.this.transferStudentLeftToRight();
+        }
+    });
+    this.rigthToLeft = new JButton("<=");
+    this.rigthToLeft.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            StudentListFrame.this.transferStudentRightToLeft();
+        }
+    });
+    this.panelCentreLeftRight = new JPanel();
+    this.panelCentreLeftRight.setLayout(new GridLayout(2, 1, 0, 0));
+    this.panelCentreLeftRight.add(this.leftToRight);
+    this.panelCentreLeftRight.add(this.rigthToLeft);
+    
+    // Fenêtre de l'application 
+    
+    // ...
+    // AJOUTE
+    
+    this.jContentPane.add(this.panelCentreLeftRight, BorderLayout.CENTER);	
+----
 ====
 endif::prof[]
 
@@ -286,19 +755,104 @@ image::TP6fen4-2.PNG[]
 
 == Pour aller plus loin
 
-Vous pouvez essayer de programmer un renderer pour la colonne groupe pour formatter le texte ainsi : "1 - A". Chercher dans la documentation en ligne et regarder du côté de `getCellRenderer()` de la classe JTable ainsi que créer une sous-classe de `DefaultTableCellRenderer`.
+Dans un projet `jtable5` (copie de `jtbale4`), vous pouvez essayer de programmer un renderer pour la colonne groupe pour formatter le texte ainsi : "1 - A". Chercher dans la documentation en ligne et regarder du côté de `getCellRenderer()` de la classe JTable ainsi que créer une sous-classe de `DefaultTableCellRenderer`.
 
 Vous pouvez aussi programmer un editor pour la colonne groupe afin de mettre en place une liste déroulante de saisie avec les 8 valeurs possibles. Chercher dans la documentation en ligne et regarder du côté de `getColumnModel()` de la classe JTable pour récupérer un TableColumn et appliquer `setCellEditor()`.
 
 
 ifdef::prof[]
-[icon="{iconsdir}/solution.png"]
+[icon="solution.png"]
 [IMPORTANT]
 .Eléments de solution
 ====
 Renderer : http://docs.oracle.com/javase/tutorial/uiswing/components/table.html#renderer
 
 Editor : http://docs.oracle.com/javase/tutorial/uiswing/components/table.html#combobox
+====
+endif::prof[]
+
+
+ifdef::prof[]
+[icon="solution.png"]
+[IMPORTANT]
+.Eléments de solution
+====
+[source,java]
+.StudentListFrame
+----
+public StudentListFrame(List<Student> listeStudentsInitiale) {
+    super();
+    this.initialize();
+    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    this.studentTableModel = new StudentTableModel();
+    
+    this.studentTableModel.loadDatas(listeStudentsInitiale);
+    this.studentTable.setModel(this.studentTableModel);		
+    
+    // AJOUTE Pour editor
+    //	Oblige ici pour avoir les colonnes dispos
+    
+    TableColumn groupeColumn = this.studentTable.getColumnModel().getColumn(3);
+    JComboBox<String> comboBox = new JComboBox<String>();
+    comboBox.addItem("1A");
+    comboBox.addItem("1B");
+    comboBox.addItem("2A");
+    comboBox.addItem("2B");
+    comboBox.addItem("3A");
+    comboBox.addItem("3B");
+    comboBox.addItem("4A");
+    comboBox.addItem("4B");
+    groupeColumn.setCellEditor(new DefaultCellEditor(comboBox));
+
+}
+	// AJOUTE / MODIFE pour RENDERER
+	
+	private class GroupRenderer extends DefaultTableCellRenderer {
+
+		public GroupRenderer() {
+			super();
+		}
+
+		public void setValue(Object value) {
+			if (value == null) {
+				this.setText("");
+				return;
+			}
+			if (value.toString().length() != 2) {
+				this.setText(value.toString());
+				return;
+			}
+			String s = value.toString();
+			s = "" + s.charAt(0) + " - " + s.charAt(1);
+			this.setText(s);
+		}
+	}
+
+private JPanel getJContentPane() {
+    
+    if (this.jContentPane == null) {
+      // ...
+        
+        // AJOUTE / MODIFE pour RENDERER
+        
+        final GroupRenderer gr = new GroupRenderer();
+        this.studentTable = new JTable() {
+            public TableCellRenderer getCellRenderer(int row, int column) {
+                if (column == 3) {
+                    return gr;
+                }
+                return super.getCellRenderer(row, column);
+            }
+        };
+        // ...
+     
+    }
+    return this.jContentPane;
+}
+
+----
+
 ====
 endif::prof[]
 
