@@ -191,7 +191,7 @@ TIP: Commencez par écrire ce programme et servez-vous des _QuickFix_ pour "gén
 un maximum de code.
 +
 . Rappel : on programme *EN* objet *ET* avec qualité => attention aux visibilités des membres (private, ...), ne mettre que ce qui est utile, attention aux abstract, final, ... !!!!!
-. Vous organiserez votre application an packages (en refactoring final éventuellement) : a minima : 
+. Vous organiserez votre application en packages (en refactoring final éventuellement) : a minima : 
 +
 -----
   pizza
