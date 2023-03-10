@@ -1,7 +1,7 @@
 // ------------------------------------------
 //  Created by Jean-Michel Bruel on 2019-12.
 //  Copyright (c) 2019 IRIT/U. Toulouse. All rights reserved.
-// Thanks to Louis Chanoua for code & idea
+// Thanks to Louis Chanouha for code & idea
 // ------------------------------------------
 = BUT-Info/S4.A.01 : Projet refactoring
 Jean-Michel Bruel, Louis Chanouha, Mahmoud Elhamlaoui
@@ -63,7 +63,7 @@ ifdef::slides[:leveloffset: -1]
 
 === Dépôt GitlHub
 
-Vous travaillerez sur un projet GitHub créé pour l'occasion sur le groupe de l'IUT de Blagnac (https://github.com/iut-blagnac.fr/) via un lien classroom (qui vus sera donné par ailleurs) et qui devra s'appeler : `s4-01-2023-xyz` où `xyz` sera remplacé par le nom que vous voulez. 
+Vous travaillerez sur un projet GitHub créé pour l'occasion sur le groupe de l'IUT de Blagnac (https://github.com/iut-blagnac/) via un lien classroom (qui vus sera donné par ailleurs) et qui devra s'appeler : `s4-01-2023-xyz` où `xyz` sera remplacé par le nom que vous voulez. 
 La branche `master` (ou `main`) sera celle où nous évaluerons votre `README` (en markdown ou asciidoc et contenant votre "rapport" avec entre autre le nom des 2 binômes), vos codes (répertoire `src`), vos documentations (répertoire `doc`).
 
 === Modèles à réaliser
