@@ -1,0 +1,169 @@
+// ------------------------------------------
+//  Created by Jean-Michel Bruel on 2014-11.
+//  Copyright (c) 2014-2020 IRIT/U. Toulouse. All rights reserved.
+// ------------------------------------------
+= BUT-Info/S3/R3.04 (Qualité)
+Jean-Michel Bruel <jbruel@gmail.com>
+v2024.9, {localdate}
+
+// ------------------------------------------
+include::definitions.txt[]
+:myasciidoconf:
+//-------- directories -----------
+//:icons:
+:icons: font
+:iconsdir: images/icons
+:imagesdir: images
+:images: images
+:src: src
+:sectlinks:
+//:stylesheet: /Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
+//--------------------------------
+:coderay-css: style
+:data-uri:
+:numbered:
+//coderay highlightjs prettify pygments
+:pygments:
+:source-highlighter: pygments
+//:pygments_style: native
+:pygments-style: manni
+:pygments-linenums-mode: inline
+:scrollable:
+:linkcss:
+//----------- deck.js --------------
+//:navigation:
+// swiss, neon, beamer, web-2.0
+:deckjs_theme: swiss
+//fade, horizontal-slide, vertical-slide
+//:deckjs_transition: fade
+:deckjs_transition: horizontal
+:status: bottom
+//----------- general --------------
+:status: bottom
+:inclusion:
+:experimental:
+:icons: font
+:toc-title: Table des Matières
+:toc: left
+:slides:
+ifdef::slides[]
+
+== Points divers...
+
+- Nuit de l'info
+- PTut et Cahier d'Analyse et de Conception
+- Stages
+
+// == Suivre ces slides icon:mobile[] icon:tablet[] icon:laptop[]...
+
+// image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
+
+// .........
+// http://bit.ly/jmb-cpoa
+// http://iut-blagnac.github.io/cpoa/
+// .........
+
+// endif::slides[]
+
+// include::introduction.asc[]
+
+// == Rappels sur des éléments Java importants
+
+// ifdef::slides[]
+// include::typage.asc[]
+// endif::slides[]
+// ifndef::slides[]
+// include::typage.asc[leveloffset=+1]
+// endif::slides[]
+
+// ifdef::slides[]
+// include::visibilite.asc[]
+// endif::slides[]
+// ifndef::slides[]
+// include::visibilite.asc[leveloffset=+1]
+// endif::slides[]
+
+// ifdef::slides[]
+// include::static.asc[]
+// endif::slides[]
+// ifndef::slides[]
+// include::static.asc[leveloffset=+1]
+// endif::slides[]
+
+// ifdef::slides[]
+// include::enum.asc[]
+// endif::slides[]
+// ifndef::slides[]
+// include::enum.asc[leveloffset=+1]
+// endif::slides[]
+
+// ifdef::slides[]
+
+// == Time for a quizz!
+
+// //----------------------------- Question ------------------
+// [icon="tuxteacher.png"]
+// .*QUESTION*
+// [WARNING]
+// ====
+
+// - Connectez-vous sur : http://www.socrative.com/ (*student login*)
+// - Ou téléchargez l'application pour étudiant image:socrative2.png[width=10%]
+// - Choisissez la room *44918d67*
+// ====
+
+// image::socrative1.png[width=50%,link=http://www.socrative.com/]
+
+// endif::slides[]
+
+// include::build.asc[]
+
+// //----------------
+// include::patterns.asc[leveloffset=+1]
+
+// include::fabrique.asc[]
+
+// include::machine-a-etat.asc[]
+
+// include::etat.adoc[]
+
+// include::retourProjet.asc[]
+
+// //include::sonar.asc[]
+
+// //include::codingDojo.asc[]
+
+// include::observer.asc[]
+
+// include::JTable.asc[]
+
+// include::adapteur.asc[]
+
+// include::visiteur.asc[]
+
+// include::proxy.asc[]
+
+// include::iterateur.asc[]
+
+// include::composite.asc[]
+
+// include::refactoringBanque.txt[]
+
+// include::patterns4.asc[]
+
+// :numbered!:
+// include::glossaire.txt[]
+
+// include::refs.txt[]
+
+
+// :numbered!:
+// == About...
+
+// ****************************************************************
+// Document réalisé par mailto:{email}[{author}] via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
+// Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
+// image:88x31.png["Licence Creative
+// Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+// http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+// ****************************************************************
