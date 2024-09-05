@@ -4,6 +4,7 @@ group :development, :test do
   gem 'asciidoctor'
   gem 'asciidoctor-diagram'
   gem 'pygments.rb'
+  gem 'asciidoctor-revealjs' 
 #  gem 'guard'
 #  gem 'guard-shell'
 #  gem 'guard-livereload'
