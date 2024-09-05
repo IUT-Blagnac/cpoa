@@ -1,5 +1,3 @@
-
-
 == Introduction : importance des patrons
 
 ifndef::slides[.Les patrons : des réponses éprouvées à des problèmes récurrents]
@@ -18,12 +16,7 @@ le patron _Strategy_.
 endif::backend-pdf[]
 //--------------------
 
-ifndef::slides[]
 include::strategy.adoc[leveloffset=+1]
-endif::slides[]
-ifdef::slides[]
-include::strategy.adoc[]
-endif::slides[]
 
 === (non) Réutilisation
 
@@ -40,7 +33,7 @@ langage  en {Ruby}.
 C'est un _mixin_ qu'il suffit d'inclure dans la classe qui doit être un singleton.
 
 [source,ruby]
-------
+----------
 class Klass
    include Singleton
    # ...
@@ -53,7 +46,7 @@ a == b
 
 Klass.new
 # => NoMethodError - new is private ...
-------
+----------
 
 === Association ou composition
 
@@ -550,10 +543,6 @@ endif::backend-pdf[]
 - Monteur
 - Pont
 
-//////
-
-
-
 ifndef::inclusion[]
 
 [appendix]
@@ -573,4 +562,3 @@ ifdef::inclusion[]
 ifdef::slides[:leveloffset: +1]
 
 endif::inclusion[]
-//////

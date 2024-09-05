@@ -24,7 +24,7 @@ include::definitions.txt[]
 :numbered:
 //coderay highlightjs prettify pygments
 :pygments:
-:source-highlighter: pygments
+:source-highlighter: highlight.js
 //:pygments_style: native
 :pygments-style: manni
 :pygments-linenums-mode: inline

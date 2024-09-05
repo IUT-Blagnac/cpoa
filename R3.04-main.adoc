@@ -5,7 +5,6 @@
 = BUT-Info/S3/R3.04 (Qualité)
 Jean-Michel Bruel <jbruel@gmail.com>
 v2024.9, {localdate}
-
 // ------------------------------------------
 include::definitions.txt[]
 :myasciidoconf:
@@ -19,25 +18,15 @@ include::definitions.txt[]
 :sectlinks:
 //:stylesheet: /Users/bruel/Dropbox/Public/dev/asciidoc/stylesheets/golo-jmb.css
 //--------------------------------
-:coderay-css: style
 :data-uri:
 :numbered:
-//coderay highlightjs prettify pygments
-:pygments:
-:source-highlighter: pygments
-//:pygments_style: native
-:pygments-style: manni
-:pygments-linenums-mode: inline
+:source-highlighter: highlight.js
+:revealjs_theme: simple
+// beige, black, league, night, serif, simple, sky, solarized, white
+:revealjs_controlsTutorial: true
+:revealjs_slideNumber: true
 :scrollable:
 :linkcss:
-//----------- deck.js --------------
-//:navigation:
-// swiss, neon, beamer, web-2.0
-:deckjs_theme: swiss
-//fade, horizontal-slide, vertical-slide
-//:deckjs_transition: fade
-:deckjs_transition: horizontal
-:status: bottom
 //----------- general --------------
 :status: bottom
 :inclusion:
@@ -48,54 +37,33 @@ include::definitions.txt[]
 :slides:
 ifdef::slides[]
 
+:numbered!:
+
 == Points divers...
 
 - Nuit de l'info
 - PTut et Cahier d'Analyse et de Conception
 - Stages
 
-// == Suivre ces slides icon:mobile[] icon:tablet[] icon:laptop[]...
+== Suivre ces slides icon:mobile[] icon:tablet[] icon:laptop[]...
 
-// image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
+image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
 
-// .........
-// http://bit.ly/jmb-cpoa
-// http://iut-blagnac.github.io/cpoa/
-// .........
+.........
+http://bit.ly/jmb-cpoa
+http://iut-blagnac.github.io/cpoa/
+.........
 
-// endif::slides[]
+endif::slides[]
 
 // include::introduction.asc[]
 
 // == Rappels sur des éléments Java importants
 
-// ifdef::slides[]
-// include::typage.asc[]
-// endif::slides[]
-// ifndef::slides[]
 // include::typage.asc[leveloffset=+1]
-// endif::slides[]
-
-// ifdef::slides[]
-// include::visibilite.asc[]
-// endif::slides[]
-// ifndef::slides[]
 // include::visibilite.asc[leveloffset=+1]
-// endif::slides[]
-
-// ifdef::slides[]
-// include::static.asc[]
-// endif::slides[]
-// ifndef::slides[]
 // include::static.asc[leveloffset=+1]
-// endif::slides[]
-
-// ifdef::slides[]
-// include::enum.asc[]
-// endif::slides[]
-// ifndef::slides[]
 // include::enum.asc[leveloffset=+1]
-// endif::slides[]
 
 // ifdef::slides[]
 
@@ -118,8 +86,8 @@ ifdef::slides[]
 
 // include::build.asc[]
 
-// //----------------
-// include::patterns.asc[leveloffset=+1]
+//----------------
+include::patterns.asc[]
 
 // include::fabrique.asc[]
 
@@ -157,13 +125,13 @@ ifdef::slides[]
 // include::refs.txt[]
 
 
-// :numbered!:
-// == About...
+:numbered!:
+== About...
 
-// ****************************************************************
-// Document réalisé par mailto:{email}[{author}] via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
-// Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
-// image:88x31.png["Licence Creative
-// Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
-// http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
-// ****************************************************************
+****************************************************************
+Document réalisé par mailto:{email}[{author}] via  {asciidoctorlink} (version `{asciidoctor-version}`) de 'Dan Allen', lui même basé sur {asciidoc}.
+Pour l'instant ce document est libre d'utilisation et géré par la 'Licence Creative Commons'.
+image:88x31.png["Licence Creative
+Commons",style="border-width:0",link="http://creativecommons.org/licenses/by-sa/3.0/"]
+http://creativecommons.org/licenses/by-sa/3.0/[licence Creative Commons Paternité - Partage à l&#39;Identique 3.0 non transposé].
+****************************************************************

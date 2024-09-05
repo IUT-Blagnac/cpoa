@@ -5,7 +5,7 @@ Your Name
 :dzslides-transition: fade
 :dzslides-fonts: family=Yanone+Kaffeesatz:400,700,200,300&family=Cedarville+Cursive
 :dzslides-highlight: monokai
-:source-highlighter: highlightjs
+:source-highlighter: highlight.js
 
 [.topic.intro]
 == Intro

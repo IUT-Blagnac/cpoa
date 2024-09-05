@@ -11,9 +11,9 @@ group :development, :test do
 #  gem 'rspec'
 #  gem 'rspec-expectations'
 #  gem 'link-checker'
-  gem 'tilt'
   gem 'haml'
   gem 'thread_safe'
-  gem 'slim'
   gem 'concurrent-ruby'
+  gem 'tilt', '~>2.0'
+  gem 'slim', '~>4.0'
 end

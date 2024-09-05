@@ -14,7 +14,7 @@ ifdef::slides[]
 :dzslides-fonts: family=Yanone+Kaffeesatz:400,700,200,300&family=Cedarville+Cursive
 //:dzslides-highlight: asciidoctor
 :dzslides-highlight: monokai
-:source-highlighter: highlightjs
+:source-highlighter: highlight.js
 :dzslides-status:
 :topic: .topic
 :intro: .topic.intro
@@ -24,7 +24,7 @@ ifdef::slides[]
 endif::slides[]
 //--------------------- cours
 ifndef::slides[]
-:source-highlighter: highlight
+:source-highlighter: highlight.js
 :topic:
 :intro:
 :statement:

@@ -1,4 +1,6 @@
+//-----------------------------------------------------
 //Layouts
+//-----------------------------------------------------
 :standHeight: 250
 :standScreen: 500
 :standWidth: 250
@@ -6,8 +8,9 @@
 :urlcours: link:http://iut-blagnac.github.io/cpoa/
 :sitecours: {urlcours}[Support de Cours]
 :siteurl: link:http://bit.ly/jmb-cpoa
-
+//-----------------------------------------------------
 // raccourcis sites
+//-----------------------------------------------------
 :aadl: link:http://www.aadl.info/[AADL]indexterm:[AADL]
 :ant: link:http://ant.apache.org/[ant]
 :androidicon: Android icon:android[role=lime]
@@ -86,8 +89,9 @@
 :wikirover: https://polarsys.org/wiki/Rover_Demo_Master_DL_UPS[Rover Demo Wiki]
 :xtext: link:http://www.eclipse.org/Xtext/[Xtext]
 :yuml: link:http://yuml.me/[yuml]
-
+//-----------------------------------------------------
 // personnes et institutions
+//-----------------------------------------------------
 :afis: link:http://www.afis.fr/[AFIS](((AFIS)))
 :agusti: Agusti Canals
 :ap: André Péninou
@@ -131,8 +135,9 @@
 :lups: link:http://www.univ-tlse3.fr[l'UPS]
 :upsti: link:http://www.upsti.fr/[UPSTI]
 :lupsti: link:http://www.upsti.fr/[l'UPSTI]
-
+//-----------------------------------------------------
 // SysML diagrams
+//-----------------------------------------------------
 :act: act(((act)))
 :bdd: bdd(((bdd)))
 :dc: dc(((dc)))
@@ -145,8 +150,9 @@
 :par: par(((par)))
 :seq: sd(((sd)))
 :sd: sd(((sd)))
-
+//-----------------------------------------------------
 // data divers
+//-----------------------------------------------------
 :eggstitle: Humour
 :STI2D: STI2D(((STI2D)))
 :Requirements: Requirements
@@ -166,3 +172,4 @@ ifndef::uk[]
 endif::uk[]
 :satisfy: +<<satisfy>>+
 :verify: +<<verify>>+
+//-----------------------------------------------------
