@@ -1,4 +1,4 @@
-= CPOA : les premiers *patrons*
+= R3.04 : les premiers *patrons*
 Jean-Michel Bruel <jbruel@gmail.com>
 v2.0, {localdate}
 :icons: font
@@ -40,21 +40,6 @@ include::definitions.txt[]
 endif::definitions[]
 :androidicon: Android icon:android[role=lime]
 :iosicon: http://www.apple.com/fr/ios/[iOS icon:apple[]]
-
-ifdef::slides[]
-
-[{topic}]
-== Suivre ces slides icon:mobile[] icon:tablet[] icon:laptop[]...
-
-image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
-
-.........
-http://bit.ly/jmb-cpoa
-http://iut-blagnac.github.io/cpoa/
-.........
-
-endif::slides[]
-
 
 [{topic}]
 == icon:book[] Plan
@@ -145,7 +130,7 @@ public class Customer {
 }
 ----
 
-include::introduction.asc[]
+//include::introduction.asc[]
 
 
 [{topic}]
@@ -187,116 +172,3 @@ ifndef::slides[]
 include::enum.asc[leveloffset=+1]
 endif::slides[]
 
-== Retour TP1
-
-.Moulinette (Ruby) de note automatique
-[source,ruby]
-----
-MODEL_NAME = "TP1.uml"
-
-$assertFileContains = [
- /@startuml/m,
- /@enduml/m,
- /abstract Personnage/m,
- /Personnage\s+--> ".*" ComportementArme/m,
- /interface\s+ComportementArme/m,
- /ComportementArme\s+<\|\.\./m,
-]
-
-Dir.foreach("...") do |file_name|
-  ...
-----
-
-NOTE: Moyenne: *[red]#6,4/20 !!#* (7,9 en 2018)
-
-ifdef::slides[== Retour TP1 (suite)]
-
-[horizontal,%step]
-Attendus::	90
-Rendus::	40	(44%) => 50 `0/20`
-Nom OK::	16	(plus que 26%) => 16 `0/20` de plus
-+
-Exemple de noms : `TP1-Toto-G1A.uml`, `toto.rar`, `toto.zip`, `uml.txt`, `TP1.UML`
-+
-20/20::	12
-17/20:: 8
-14/20::	2
-11/20::	1
-08/20::	1
-Moy.:: 17,7/20
-
-
-include::patterns-content.adoc[]
-
-ifdef::slides[]
-
-ifdef::slides[:leveloffset: +1]
-
-
-
-== Time for a quizz!
-
-//----------------------------- Question ------------------
-.*QUESTION*
-[WARNING]
-====
-- Connectez-vous sur : http://www.socrative.com/ (*student login*)
-- Ou téléchargez l'application pour étudiant image:socrative2.png[width=10%]
-- Choisissez la room *44918d67*
-====
-
-image::socrative1.png[width=50%,link=http://www.socrative.com/]
-
-== Quizz
-
-image::quizz1.png[]
-
-== Quizz
-
-image::quizz2.png[]
-
-== Quizz
-
-image::quizz3.png[]
-
-== Quizz
-
-image::quizz4.png[]
-
-== Quizz
-
-image::quizz5.png[]
-
-== Quizz
-
-image::quizz6.png[]
-
-== Quizz
-
-image::quizz7.png[]
-
-== Quizz
-
-image::quizz8.png[]
-
-== Quizz
-
-image::quizz9.png[]
-
-== Quizz
-
-image::quizz10.png[]
-
-== Quizz
-
-image::quizz11.png[]
-
-== Quizz
-
-image::quizz12.png[]
-
-== Quizz
-
-image::quizz13.png[]
-
-endif::slides[]
