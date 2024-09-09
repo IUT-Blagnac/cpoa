@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="author" content="Dut/Info-S3/M3105">
-<meta name="copyright" content="{date=2022-01-11}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
+<meta name="copyright" content="{date=2024-09-09}, IUT Blagnac *** Dut/Info-S3/M3105 *** Powered by AsciiDoc and W3C Slidy &amp;#169;">
 <title>CPOA - Sujet TP 4</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -86,10 +86,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -142,7 +142,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -164,6 +164,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -195,7 +196,8 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
 details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
 details{margin-left:1.25rem}
-details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;-webkit-tap-highlight-color:transparent}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
 details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
 details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
 details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
@@ -209,13 +211,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -237,9 +236,8 @@ pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
 table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
 table.linenotable td.code{padding-left:.75em}
-table.linenotable td.linenos{border-right:1px solid;opacity:.35;padding-right:.5em}
-pre.pygments .lineno{border-right:1px solid;opacity:.35;display:inline-block;margin-right:.75em}
-pre.pygments .lineno::before{content:"";margin-right:-.125em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
 .quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
@@ -276,7 +274,7 @@ table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-c
 table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
 table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
 table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
-table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -292,10 +290,11 @@ ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
 ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
 ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
 ul.checklist>li>p:first-child{margin-left:-1em}
 ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
 ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
@@ -331,15 +330,13 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
-.gist .file-data>table td.line-data{width:99%}
 div.unbreakable{page-break-inside:avoid}
 .big{font-size:larger}
 .small{font-size:smaller}
@@ -396,7 +393,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -440,11 +437,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 pre.pygments .hll { background-color: #ffffcc }
 pre.pygments { background: #f0f3f3; }
 pre.pygments .tok-c { color: #0099FF; font-style: italic } /* Comment */
@@ -459,6 +451,7 @@ pre.pygments .tok-c1 { color: #0099FF; font-style: italic } /* Comment.Single */
 pre.pygments .tok-cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
 pre.pygments .tok-gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
 pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
 pre.pygments .tok-gr { color: #FF0000 } /* Generic.Error */
 pre.pygments .tok-gh { color: #003300; font-weight: bold } /* Generic.Heading */
 pre.pygments .tok-gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
@@ -834,34 +827,34 @@ Votre choix ?</pre>
 <p>Etudier la définition d&#8217;interface suivante et insérer sa définition dans votre projet dans le package action :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">action</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">banque.AgenceBancaire</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span><span class="tok-w"> </span><span class="tok-nn">action</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">banque.AgenceBancaire</span><span class="tok-p">;</span>
 <span class="tok-cm">/**</span>
 <span class="tok-cm"> * An Action is an object that implements some action of a user&#39;s menu.&lt;BR&gt;</span>
 <span class="tok-cm"> * It is defined by a message, an optional code, an execute method to &quot;do&quot; the action.</span>
 <span class="tok-cm"> */</span>
-<span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Action</span>  <span class="tok-p">{</span>
-	<span class="tok-cm">/**</span>
+<span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">interface</span> <span class="tok-nc">Action</span><span class="tok-w">  </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Message of the action (to show on screen).</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return the message of the action</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionMessage</span> <span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-nf">actionMessage</span><span class="tok-w"> </span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Code of the action (may be used to identify the action among other ones).</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return the code of the action</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionCode</span> <span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-nf">actionCode</span><span class="tok-w"> </span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * The method to call in order to &quot;execute&quot; the action on &lt;code&gt;ag&lt;/code&gt;.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @param ag the AgenceBancaire on which the action may act on</span>
 <span class="tok-cm">	 * @throws Exception when an uncaught exception occurs during execution</span>
 <span class="tok-cm">	*/</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span><span class="tok-p">)</span> <span class="tok-kd">throws</span> <span class="tok-n">Exception</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">execute</span><span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-n">ag</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kd">throws</span><span class="tok-w"> </span><span class="tok-n">Exception</span><span class="tok-p">;</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -902,7 +895,7 @@ Votre choix ?</pre>
 <p>Etudier la définition d&#8217;interface suivante et insérer sa définition dans votre projet dans le package action :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">action</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span><span class="tok-w"> </span><span class="tok-nn">action</span><span class="tok-p">;</span>
 
 <span class="tok-cm">/**</span>
 <span class="tok-cm"> * An ActionList is an object that implements a end-user menu.&lt;BR&gt;</span>
@@ -914,28 +907,28 @@ Votre choix ?</pre>
 <span class="tok-cm"> * - wait for some user response.&lt;BR&gt;</span>
 <span class="tok-cm"> * - launch the requested action.&lt;BR&gt;</span>
 <span class="tok-cm"> */</span>
-<span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span> <span class="tok-kd">extends</span> <span class="tok-n">Action</span> <span class="tok-p">{</span>
-	<span class="tok-cm">/**</span>
+<span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span><span class="tok-w"> </span><span class="tok-kd">extends</span><span class="tok-w"> </span><span class="tok-n">Action</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Title of the list of actions (menu).</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return the title of the action list</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">listTitle</span><span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-nf">listTitle</span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * The number of actions in the action list.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return number of actions in the action list.</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">size</span><span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Add an action at the end of the list action if it does not yet exists.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @param ac the action to add</span>
 <span class="tok-cm">	 * @return true if action is added, else false</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">addAction</span><span class="tok-p">(</span><span class="tok-n">Action</span> <span class="tok-n">ac</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-nf">addAction</span><span class="tok-p">(</span><span class="tok-n">Action</span><span class="tok-w"> </span><span class="tok-n">ac</span><span class="tok-p">);</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -1092,7 +1085,7 @@ Votre choix ?</pre>
 <p>Modifier les déclarations des interfaces Action et ActionList comme suit (attention, tout le code va devenir "erroné") :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">action</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span><span class="tok-w"> </span><span class="tok-nn">action</span><span class="tok-p">;</span>
 <span class="tok-cm">/**</span>
 <span class="tok-cm"> * An Action is an object that implements some action of a user&#39;s menu.&lt;BR&gt;</span>
 <span class="tok-cm"> * It is defined by a message, an optional code, an execute method to &quot;do&quot; the action.&lt;BR&gt;</span>
@@ -1100,31 +1093,31 @@ Votre choix ?</pre>
 <span class="tok-cm"> *</span>
 <span class="tok-cm"> * @param &lt;E&gt; The type of object on which the action may act on.</span>
 <span class="tok-cm"> */</span>
-<span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">Action</span> <span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span> <span class="tok-p">{</span>
-	<span class="tok-cm">/**</span>
+<span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">interface</span> <span class="tok-nc">Action</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Message of the action (to show on screen).</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return the message of the action</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionMessage</span> <span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-nf">actionMessage</span><span class="tok-w"> </span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Code of the action (may be used to identify the action among an action list).</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return the code of the action</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">actionCode</span> <span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-nf">actionCode</span><span class="tok-w"> </span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * The method to call in order to &quot;execute&quot; the action on &lt;code&gt;e&lt;/code&gt;.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @param e the object on which the action may act on</span>
 <span class="tok-cm">	 * @throws Exception when an uncaught exception occurs during execution</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">execute</span><span class="tok-p">(</span><span class="tok-n">E</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-kd">throws</span> <span class="tok-n">Exception</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">execute</span><span class="tok-p">(</span><span class="tok-n">E</span><span class="tok-w"> </span><span class="tok-n">e</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-kd">throws</span><span class="tok-w"> </span><span class="tok-n">Exception</span><span class="tok-p">;</span>
 <span class="tok-p">}</span>
 
-<span class="tok-kn">package</span> <span class="tok-nn">action</span><span class="tok-p">;</span>
+<span class="tok-kn">package</span><span class="tok-w"> </span><span class="tok-nn">action</span><span class="tok-p">;</span>
 <span class="tok-cm">/**</span>
 <span class="tok-cm"> * An ActionList is an object that implements a end-user menu.&lt;BR&gt;</span>
 <span class="tok-cm"> * It is defined by a title (printed on top of the menu).&lt;BR&gt;</span>
@@ -1139,28 +1132,28 @@ Votre choix ?</pre>
 <span class="tok-cm"> *</span>
 <span class="tok-cm"> * @param &lt;E&gt; The type of object on which the list action may act on.</span>
 <span class="tok-cm"> */</span>
-<span class="tok-kd">public</span> <span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span> <span class="tok-kd">extends</span> <span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span><span class="tok-p">{</span>
-	<span class="tok-cm">/**</span>
+<span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">interface</span> <span class="tok-nc">ActionList</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-kd">extends</span><span class="tok-w"> </span><span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Title of the list of actions (menu).</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return the title of the action list</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-nf">listTitle</span><span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-nf">listTitle</span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * The number of actions in the action list.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return number of actions in the action list.</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">int</span> <span class="tok-nf">size</span><span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">();</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Add an action at the end of the list action if it does not yet exists.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @param ac the action to add</span>
 <span class="tok-cm">	 * @return true if action is added, else false</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">addAction</span><span class="tok-p">(</span><span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span> <span class="tok-n">ac</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-nf">addAction</span><span class="tok-p">(</span><span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">ac</span><span class="tok-p">);</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -1193,7 +1186,7 @@ Votre choix ?</pre>
 <p>Pour de vraies applications, ajouter à l&#8217;interface ActionList les opérations suivantes :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span>	<span class="tok-cm">/**</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Add an action in the list action at the specified index if it does not yet exists.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @param ac the action to add</span>
@@ -1201,31 +1194,31 @@ Votre choix ?</pre>
 <span class="tok-cm">	 * @return true if action is added, else false</span>
 <span class="tok-cm">	 * @throws IndexOutOfBoundsException if (index &lt; 0) || (index &gt; size())</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">addAction</span><span class="tok-p">(</span><span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span> <span class="tok-n">ac</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">index</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-nf">addAction</span><span class="tok-p">(</span><span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">ac</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">index</span><span class="tok-p">);</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Remove an action from the list action at the specified index.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @param index index to remove the action</span>
 <span class="tok-cm">	 * @return true</span>
 <span class="tok-cm">	 * @throws IndexOutOfBoundsException if (index &lt; 0) || (index &gt; size())</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">removeAction</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">index</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-nf">removeAction</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">index</span><span class="tok-p">);</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * Remove an action from the list action.</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @param ac the action to remove</span>
 <span class="tok-cm">	 * @return true if action is removed (found), else false</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">removeAction</span><span class="tok-p">(</span><span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span> <span class="tok-n">ac</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-nf">removeAction</span><span class="tok-p">(</span><span class="tok-n">Action</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">ac</span><span class="tok-p">);</span>
 
-	<span class="tok-cm">/**</span>
+<span class="tok-w">	</span><span class="tok-cm">/**</span>
 <span class="tok-cm">	 * List of the messages of actions contained in the action list</span>
 <span class="tok-cm">	 *</span>
 <span class="tok-cm">	 * @return an array of messages of the list action</span>
 <span class="tok-cm">	 */</span>
-	<span class="tok-kd">public</span> <span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-nf">listOfActions</span><span class="tok-p">()</span> <span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-o">[]</span><span class="tok-w"> </span><span class="tok-nf">listOfActions</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">;</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -1256,8 +1249,8 @@ Votre choix ?</pre>
 <p>Pour rendre cette classe générique (et non pas abstraite), modifier l&#8217;en-tête en</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">GenericActionList</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span>
-	<span class="tok-kd">implements</span> <span class="tok-n">ActionList</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">GenericActionList</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span>
+<span class="tok-w">	</span><span class="tok-kd">implements</span><span class="tok-w"> </span><span class="tok-n">ActionList</span><span class="tok-o">&lt;</span><span class="tok-n">E</span><span class="tok-o">&gt;</span></code></pre>
 </div>
 </div>
 </li>
@@ -1368,7 +1361,7 @@ Votre choix ?</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-10-23 11:57:26 +0200
+Last updated 2024-09-05 08:18:29 +0200
 </div>
 </div>
 </body>

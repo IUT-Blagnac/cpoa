@@ -1,5 +1,5 @@
 pre.pygments .hll { background-color: #ffffcc }
-pre.pygments  { background: #f0f3f3; }
+pre.pygments { background: #f0f3f3; }
 pre.pygments .tok-c { color: #0099FF; font-style: italic } /* Comment */
 pre.pygments .tok-err { color: #AA0000; background-color: #FFAAAA } /* Error */
 pre.pygments .tok-k { color: #006699; font-weight: bold } /* Keyword */
@@ -12,6 +12,7 @@ pre.pygments .tok-c1 { color: #0099FF; font-style: italic } /* Comment.Single */
 pre.pygments .tok-cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
 pre.pygments .tok-gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
 pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
 pre.pygments .tok-gr { color: #FF0000 } /* Generic.Error */
 pre.pygments .tok-gh { color: #003300; font-weight: bold } /* Generic.Heading */
 pre.pygments .tok-gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */

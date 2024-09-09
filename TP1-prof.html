@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="author" content="Dut/Info-S3/M3105 - (Semaine 46)">
 <title>CPOA - Support TP 1</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -185,7 +185,7 @@ et choisir <code>TP1.zip</code> que vous venez de télécharger.</p>
 les deux points de l&#8217;option <code>-cp</code> par un point virgule :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">executionProgrammeATester</span> <span class="tok-o">=</span> <span class="tok-n">Runtime</span><span class="tok-p">.</span><span class="tok-na">getRuntime</span><span class="tok-p">().</span><span class="tok-na">exec</span><span class="tok-p">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-p">);</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">executionProgrammeATester</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">Runtime</span><span class="tok-p">.</span><span class="tok-na">getRuntime</span><span class="tok-p">().</span><span class="tok-na">exec</span><span class="tok-p">(</span><span class="tok-s">&quot;java -cp .;./bin &quot;</span><span class="tok-o">+</span><span class="tok-n">programmeATester</span><span class="tok-p">);</span></code></pre>
 </div>
 </div>
 </li>
@@ -462,23 +462,23 @@ et pas le lien windows vers jre1.7)</p>
 <div class="listingblock">
 <div class="title">Exemple de <code>.BAT</code> qui devrait fonctionner</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-nb">set</span> <span class="tok-nv">UML</span><span class="tok-o">=</span>TD1.uml
-<span class="tok-nb">set</span> <span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;PNG&#39;</span>
-<span class="tok-nb">set</span> <span class="tok-nv">DOCLETPATH</span><span class="tok-o">=</span>
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Creating %UML%...&quot;</span>
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">UML</span><span class="tok-o">=</span>TD1.uml
+<span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;PNG&#39;</span>
+<span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">DOCLETPATH</span><span class="tok-o">=</span>
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Creating %UML%...&quot;</span>
 
-javadoc -J-DdestinationFile<span class="tok-o">=</span>%UML% -J-DcreatePackages<span class="tok-o">=</span><span class="tok-nb">false</span>
--J-DshowPublicMethods<span class="tok-o">=</span><span class="tok-nb">true</span> -J-DshowPublicConstructors<span class="tok-o">=</span><span class="tok-nb">false</span>
--J-DshowPublicFields<span class="tok-o">=</span><span class="tok-nb">true</span> -doclet de.mallox.doclet.PlantUMLDoclet
--docletpath plantUmlDoclet.jar src/appli/*.java
-src/comportements/arme/*.java src/comportements/arme/impl/*.java
+javadoc<span class="tok-w"> </span>-J-DdestinationFile<span class="tok-o">=</span>%UML%<span class="tok-w"> </span>-J-DcreatePackages<span class="tok-o">=</span><span class="tok-nb">false</span>
+-J-DshowPublicMethods<span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-w"> </span>-J-DshowPublicConstructors<span class="tok-o">=</span><span class="tok-nb">false</span>
+-J-DshowPublicFields<span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-w"> </span>-doclet<span class="tok-w"> </span>de.mallox.doclet.PlantUMLDoclet
+-docletpath<span class="tok-w"> </span>plantUmlDoclet.jar<span class="tok-w"> </span>src/appli/*.java
+src/comportements/arme/*.java<span class="tok-w"> </span>src/comportements/arme/impl/*.java
 src/personnages/*.java
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Done.&quot;</span>
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Done.&quot;</span>
 
-<span class="tok-nb">set</span> <span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;png&#39;</span>
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Converting %UML% to </span><span class="tok-nv">$TYPE</span><span class="tok-s2">...&quot;</span>
-java -jar plantuml.jar -config <span class="tok-s2">&quot;config.cfg&quot;</span> -t %TYPE% %UML%
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Done.&quot;</span></code></pre>
+<span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;png&#39;</span>
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Converting %UML% to </span><span class="tok-nv">$TYPE</span><span class="tok-s2">...&quot;</span>
+java<span class="tok-w"> </span>-jar<span class="tok-w"> </span>plantuml.jar<span class="tok-w"> </span>-config<span class="tok-w"> </span><span class="tok-s2">&quot;config.cfg&quot;</span><span class="tok-w"> </span>-t<span class="tok-w"> </span>%TYPE%<span class="tok-w"> </span>%UML%
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Done.&quot;</span></code></pre>
 </div>
 </div>
 </li>
@@ -536,25 +536,25 @@ aux implémentations (<code>impl</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="shell"><span></span>        ├── appli
-        │   ├── Canard.java
-        │   ├── CanardEnPlastique.java
-        │   ├── Colvert.java
-        │   ├── Leurre.java
-        │   ├── Main.java
-        │   └── Mandarin.java
-        └── comportements
-            ├── cancaner
-            │   ├── ComportementCancan.java
-            │   └── impl
-            │       ├── CanardMuet.java
-            │       ├── Cancan.java
-            │       └── Coincoin.java
-            └── voler
-                ├── ComportementVol.java
-                └── impl
-                    ├── NePasVoler.java
-                    └── VolerAvecDesAiles.java</code></pre>
+<pre class="pygments highlight"><code data-lang="shell"><span></span><span class="tok-w">        </span>├──<span class="tok-w"> </span>appli
+<span class="tok-w">        </span>│<span class="tok-w">   </span>├──<span class="tok-w"> </span>Canard.java
+<span class="tok-w">        </span>│<span class="tok-w">   </span>├──<span class="tok-w"> </span>CanardEnPlastique.java
+<span class="tok-w">        </span>│<span class="tok-w">   </span>├──<span class="tok-w"> </span>Colvert.java
+<span class="tok-w">        </span>│<span class="tok-w">   </span>├──<span class="tok-w"> </span>Leurre.java
+<span class="tok-w">        </span>│<span class="tok-w">   </span>├──<span class="tok-w"> </span>Main.java
+<span class="tok-w">        </span>│<span class="tok-w">   </span>└──<span class="tok-w"> </span>Mandarin.java
+<span class="tok-w">        </span>└──<span class="tok-w"> </span>comportements
+<span class="tok-w">            </span>├──<span class="tok-w"> </span>cancaner
+<span class="tok-w">            </span>│<span class="tok-w">   </span>├──<span class="tok-w"> </span>ComportementCancan.java
+<span class="tok-w">            </span>│<span class="tok-w">   </span>└──<span class="tok-w"> </span>impl
+<span class="tok-w">            </span>│<span class="tok-w">       </span>├──<span class="tok-w"> </span>CanardMuet.java
+<span class="tok-w">            </span>│<span class="tok-w">       </span>├──<span class="tok-w"> </span>Cancan.java
+<span class="tok-w">            </span>│<span class="tok-w">       </span>└──<span class="tok-w"> </span>Coincoin.java
+<span class="tok-w">            </span>└──<span class="tok-w"> </span>voler
+<span class="tok-w">                </span>├──<span class="tok-w"> </span>ComportementVol.java
+<span class="tok-w">                </span>└──<span class="tok-w"> </span>impl
+<span class="tok-w">                    </span>├──<span class="tok-w"> </span>NePasVoler.java
+<span class="tok-w">                    </span>└──<span class="tok-w"> </span>VolerAvecDesAiles.java</code></pre>
 </div>
 </div>
 <div class="admonitionblock warning">
@@ -631,19 +631,19 @@ votre application de jeu.
 <span class="tok-c1"># Génération par javadoc de modèles plantUML</span>
 <span class="tok-c1"># Version 2015</span>
 <span class="tok-c1">#---------------------</span>
-<span class="tok-nb">set</span> <span class="tok-nv">UML</span><span class="tok-o">=</span>TD1.uml
-<span class="tok-nb">set</span> <span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;PNG&#39;</span>
-<span class="tok-nb">set</span> <span class="tok-nv">DOCLETPATH</span><span class="tok-o">=</span>
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Creating %UML%...&quot;</span>
-rem javadoc -private -quiet -J-DdestinationFile<span class="tok-o">=</span>%UML% -J-DcreatePackages<span class="tok-o">=</span><span class="tok-nb">false</span> -J-DshowPublicMethods<span class="tok-o">=</span><span class="tok-nb">true</span> -J-DshowPublicConstructors<span class="tok-o">=</span><span class="tok-nb">false</span> -J-DshowPublicFields<span class="tok-o">=</span><span class="tok-nb">true</span> -doclet de.mallox.doclet.PlantUMLDoclet -docletpath %DOCLETPATH%<span class="tok-se">\p</span>lantUmlDoclet.jar src<span class="tok-se">\c</span>anard<span class="tok-se">\*</span>.java
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Done.&quot;</span>
+<span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">UML</span><span class="tok-o">=</span>TD1.uml
+<span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;PNG&#39;</span>
+<span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">DOCLETPATH</span><span class="tok-o">=</span>
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Creating %UML%...&quot;</span>
+rem<span class="tok-w"> </span>javadoc<span class="tok-w"> </span>-private<span class="tok-w"> </span>-quiet<span class="tok-w"> </span>-J-DdestinationFile<span class="tok-o">=</span>%UML%<span class="tok-w"> </span>-J-DcreatePackages<span class="tok-o">=</span><span class="tok-nb">false</span><span class="tok-w"> </span>-J-DshowPublicMethods<span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-w"> </span>-J-DshowPublicConstructors<span class="tok-o">=</span><span class="tok-nb">false</span><span class="tok-w"> </span>-J-DshowPublicFields<span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-w"> </span>-doclet<span class="tok-w"> </span>de.mallox.doclet.PlantUMLDoclet<span class="tok-w"> </span>-docletpath<span class="tok-w"> </span>%DOCLETPATH%<span class="tok-se">\p</span>lantUmlDoclet.jar<span class="tok-w"> </span>src<span class="tok-se">\c</span>anard<span class="tok-se">\*</span>.java
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Done.&quot;</span>
 
-javadoc -J-DdestinationFile<span class="tok-o">=</span>%UML% -J-DcreatePackages<span class="tok-o">=</span><span class="tok-nb">false</span> -J-DshowPublicMethods<span class="tok-o">=</span><span class="tok-nb">true</span> -J-DshowPublicConstructors<span class="tok-o">=</span><span class="tok-nb">false</span> -J-DshowPublicFields<span class="tok-o">=</span><span class="tok-nb">true</span> -doclet de.mallox.doclet.PlantUMLDoclet -docletpath plantUmlDoclet.jar src/appli/*.java src/comportements/arme/*.java src/comportements/arme/impl/*.java src/personnages/*.java
+javadoc<span class="tok-w"> </span>-J-DdestinationFile<span class="tok-o">=</span>%UML%<span class="tok-w"> </span>-J-DcreatePackages<span class="tok-o">=</span><span class="tok-nb">false</span><span class="tok-w"> </span>-J-DshowPublicMethods<span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-w"> </span>-J-DshowPublicConstructors<span class="tok-o">=</span><span class="tok-nb">false</span><span class="tok-w"> </span>-J-DshowPublicFields<span class="tok-o">=</span><span class="tok-nb">true</span><span class="tok-w"> </span>-doclet<span class="tok-w"> </span>de.mallox.doclet.PlantUMLDoclet<span class="tok-w"> </span>-docletpath<span class="tok-w"> </span>plantUmlDoclet.jar<span class="tok-w"> </span>src/appli/*.java<span class="tok-w"> </span>src/comportements/arme/*.java<span class="tok-w"> </span>src/comportements/arme/impl/*.java<span class="tok-w"> </span>src/personnages/*.java
 
-<span class="tok-nb">set</span> <span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;png&#39;</span>
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Converting %UML% to </span><span class="tok-nv">$TYPE</span><span class="tok-s2">...&quot;</span>
-java -jar plantuml.jar -config <span class="tok-s2">&quot;config.cfg&quot;</span> -t %TYPE% %UML%
-<span class="tok-nb">echo</span> <span class="tok-s2">&quot;Done.&quot;</span></code></pre>
+<span class="tok-nb">set</span><span class="tok-w"> </span><span class="tok-nv">TYPE</span><span class="tok-o">=</span><span class="tok-s1">&#39;png&#39;</span>
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Converting %UML% to </span><span class="tok-nv">$TYPE</span><span class="tok-s2">...&quot;</span>
+java<span class="tok-w"> </span>-jar<span class="tok-w"> </span>plantuml.jar<span class="tok-w"> </span>-config<span class="tok-w"> </span><span class="tok-s2">&quot;config.cfg&quot;</span><span class="tok-w"> </span>-t<span class="tok-w"> </span>%TYPE%<span class="tok-w"> </span>%UML%
+<span class="tok-nb">echo</span><span class="tok-w"> </span><span class="tok-s2">&quot;Done.&quot;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -688,25 +688,25 @@ l&#8217;architecture de l&#8217;application :</p>
 <div class="listingblock">
 <div class="title">Test du modèle UML généré en Ruby (source <a href="src/java/SuperCanardBof/checkModel.rb">ici</a>)</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="ruby"><span></span><span class="tok-nb">require</span> <span class="tok-s2">&quot;minitest/autorun&quot;</span>
-<span class="tok-no">MODEL_NAME</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;model.uml&quot;</span>
+<pre class="pygments highlight"><code data-lang="ruby"><span></span><span class="tok-nb">require</span><span class="tok-w"> </span><span class="tok-s2">&quot;minitest/autorun&quot;</span>
+<span class="tok-no">MODEL_NAME</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s2">&quot;model.uml&quot;</span>
 
 
-<span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
+<span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">TestGeneratedModel</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
 
-  <span class="tok-c1">#------------ General tests about plantUML</span>
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-c1">#------------ General tests about plantUML</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_generated_model_exists</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_generated_model_is_plantuml</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-c1">#------------ Specific tests about expected content</span>
-  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_is_abstract</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-c1">#------------ Specific tests about expected content</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_class_Canard_is_abstract</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
 
 <span class="tok-k">end</span></code></pre>
@@ -738,67 +738,67 @@ Finished in 0.002029s, 1478.5609 runs/s, 1478.5609 assertions/s.
 <div class="title">Test du patron <em>Strategy</em> sur les <code>Canard</code> en Ruby (source <a href="src/java/TD1/checkModel.rb">ici</a>)</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="ruby"><span></span>
-<span class="tok-nb">require</span> <span class="tok-s2">&quot;minitest/autorun&quot;</span>
-<span class="tok-no">MODEL_NAME</span> <span class="tok-o">=</span> <span class="tok-s2">&quot;model.uml&quot;</span>
+<span class="tok-nb">require</span><span class="tok-w"> </span><span class="tok-s2">&quot;minitest/autorun&quot;</span>
+<span class="tok-no">MODEL_NAME</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s2">&quot;model.uml&quot;</span>
 
-<span class="tok-k">module</span> <span class="tok-nn">MiniTest</span>
-  <span class="tok-k">class</span> <span class="tok-nc">Unit</span>
-    <span class="tok-k">class</span> <span class="tok-nc">TestCase</span>
-      <span class="tok-c1">#Define new assertion</span>
-      <span class="tok-k">def</span> <span class="tok-nf">assert_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-        <span class="tok-n">assert_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-      <span class="tok-k">end</span>
-      <span class="tok-k">def</span> <span class="tok-nf">assert_not_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-        <span class="tok-n">assert_not_match</span><span class="tok-p">(</span> <span class="tok-n">string_to_test</span><span class="tok-p">,</span> <span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
-      <span class="tok-k">end</span>
-    <span class="tok-k">end</span>
-  <span class="tok-k">end</span>
+<span class="tok-k">module</span><span class="tok-w"> </span><span class="tok-nn">MiniTest</span>
+<span class="tok-w">  </span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Unit</span>
+<span class="tok-w">    </span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">TestCase</span>
+<span class="tok-w">      </span><span class="tok-c1">#Define new assertion</span>
+<span class="tok-w">      </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">assert_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+<span class="tok-w">        </span><span class="tok-n">assert_match</span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-n">string_to_test</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+<span class="tok-w">      </span><span class="tok-k">end</span>
+<span class="tok-w">      </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">assert_not_contains</span><span class="tok-p">(</span><span class="tok-n">string_to_test</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+<span class="tok-w">        </span><span class="tok-n">assert_not_match</span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-n">string_to_test</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">substring_to_verify</span><span class="tok-p">)</span>
+<span class="tok-w">      </span><span class="tok-k">end</span>
+<span class="tok-w">    </span><span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 <span class="tok-k">end</span>
-<span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">.</span><span class="tok-n">after_tests</span> <span class="tok-p">{</span> <span class="tok-nb">p</span> <span class="tok-vi">@_assertions</span> <span class="tok-p">}</span>
+<span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">.</span><span class="tok-n">after_tests</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nb">p</span><span class="tok-w"> </span><span class="tok-vi">@_assertions</span><span class="tok-w"> </span><span class="tok-p">}</span>
 
-<span class="tok-k">class</span> <span class="tok-nc">TestGeneratedModel</span> <span class="tok-o">&lt;</span> <span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
-  <span class="tok-c1">#------------ General tests about plantUML</span>
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
-    <span class="tok-nb">print</span> <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
-  <span class="tok-k">end</span>
+<span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">TestGeneratedModel</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-no">MiniTest</span><span class="tok-o">::</span><span class="tok-no">Unit</span><span class="tok-o">::</span><span class="tok-no">TestCase</span>
+<span class="tok-w">  </span><span class="tok-c1">#------------ General tests about plantUML</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_generated_model_exists</span>
+<span class="tok-w">    </span><span class="tok-nb">print</span><span class="tok-w"> </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_is_plantuml</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@enduml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_generated_model_is_plantuml</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@startuml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/@enduml/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_generated_model_exists</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_generated_model_exists</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">exists?</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">))</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-c1">#------------ Specific tests about expected content</span>
-  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_is_abstract</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-c1">#------------ Specific tests about expected content</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_class_Canard_is_abstract</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/abstract Canard/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementCancan_behavior</span>
-    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementCancan/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_class_Canard_has_ComportementCancan_behavior</span>
+<span class="tok-w">    </span><span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementCancan/</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_class_Canard_has_ComportementVol_behavior</span>
-    <span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementVol/</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_class_Canard_has_ComportementVol_behavior</span>
+<span class="tok-w">    </span><span class="tok-n">assert_contains</span><span class="tok-p">(</span><span class="tok-sr">/Canard\s+--&gt; &quot;.*&quot; ComportementVol/</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">join</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_is_an_Interface</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementCancan/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_ComportementCancan_is_an_Interface</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementCancan/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_is_an_Interface</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementVol/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_ComportementVol_is_an_Interface</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/interface\s+ComportementVol/</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementCancan_Interface_has_concrete_implementation</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementCancan\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_ComportementCancan_Interface_has_concrete_implementation</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementCancan\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
-  <span class="tok-k">def</span> <span class="tok-nf">test_ComportementVol_Interface_has_concrete_implementation</span>
-    <span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span> <span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementVol\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
-  <span class="tok-k">end</span>
+<span class="tok-w">  </span><span class="tok-k">def</span><span class="tok-w"> </span><span class="tok-nf">test_ComportementVol_Interface_has_concrete_implementation</span>
+<span class="tok-w">    </span><span class="tok-n">assert_equal</span><span class="tok-p">(</span><span class="tok-kp">true</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-no">File</span><span class="tok-o">.</span><span class="tok-n">readlines</span><span class="tok-p">(</span><span class="tok-no">MODEL_NAME</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">grep</span><span class="tok-p">(</span><span class="tok-sr">/ComportementVol\s+&lt;\|\.\./</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-n">any?</span><span class="tok-p">)</span>
+<span class="tok-w">  </span><span class="tok-k">end</span>
 
 <span class="tok-k">end</span></code></pre>
 </div>
@@ -819,14 +819,14 @@ les associations (ni les dépendances). Plutôt que d&#8217;aller les rajouter
 <span class="tok-cm">* @navassoc - - 1..* PowerManager</span>
 <span class="tok-cm">* @note this is a note</span>
 <span class="tok-cm">*/</span>
-<span class="tok-kd">class</span> <span class="tok-nc">SetTopController</span> <span class="tok-kd">implements</span> <span class="tok-n">URLStreamHandler</span> <span class="tok-p">{</span>
-  <span class="tok-kd">public</span> <span class="tok-n">String</span> <span class="tok-n">name</span><span class="tok-p">;</span>
+<span class="tok-kd">class</span> <span class="tok-nc">SetTopController</span><span class="tok-w"> </span><span class="tok-kd">implements</span><span class="tok-w"> </span><span class="tok-n">URLStreamHandler</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">  </span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">name</span><span class="tok-p">;</span>
 
-  <span class="tok-kt">int</span> <span class="tok-n">authorizationLevel</span><span class="tok-p">;</span>
-  <span class="tok-kt">void</span> <span class="tok-nf">startUp</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
-    <span class="tok-kt">void</span> <span class="tok-nf">shutDown</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
-      <span class="tok-kt">void</span> <span class="tok-nf">connect</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
-      <span class="tok-p">}</span></code></pre>
+<span class="tok-w">  </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">authorizationLevel</span><span class="tok-p">;</span>
+<span class="tok-w">  </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">startUp</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{}</span>
+<span class="tok-w">    </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">shutDown</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{}</span>
+<span class="tok-w">      </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">connect</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{}</span>
+<span class="tok-w">      </span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -904,7 +904,7 @@ pour les versions avant Java 7, et <code>System.lineSeparator()</code> depuis Ja
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-10-23 11:57:26 +0200
+Last updated 2024-09-05 08:18:29 +0200
 </div>
 </div>
 </body>

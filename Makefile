@@ -96,9 +96,7 @@ full.pdf: full.$(EXT) $(DEP)
 
 %.reveal.html: %.$(EXT)  $(DEP)
 	@echo '==> Compiling asciidoc files to generate reveal.js'
-	$(DOCTOR) -T ../asciidoctor-backends/haml/reveal/ \
-	-a slides -a data-uri -a deckjs_theme=$(DECK) -a icons=font \
-	-a stylesheet=$(STYLE) -o $@ $<
+	bundle exec asciidoctor-revealjs -a data-uri -o $@ $<
 
 %.xml: %.$(EXT)
 	@echo '==> Compiling asciidoc files to generate DocBook'
@@ -140,9 +138,6 @@ deploy:
 	git co gh-pages
 	git co master index.html
 	git push
-
-cours2:
-	$(DOCTOR) -a toc2 -b html5 -a numbered -a stylesheet=$(STYLE) -a data-uri -o cours2.html wip.asc
 
 test:
 	$(DOCTOR) -a toc2 -b html5 -a numbered -a stylesheet=$(STYLE) -o wip2.html wip.asc

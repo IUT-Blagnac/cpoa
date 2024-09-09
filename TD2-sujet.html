@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="author" content="Dut/Info-S3/M3105 - (Semaine 46)">
 <title>CPOA - Sujet TD 2</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -88,40 +88,40 @@ transformé en plaquettes de chocolat.</p>
 <span class="tok-cm"> * @author bruel (taken from Design Pattern - Head First, O&#39;Reilly, 09/2004)</span>
 <span class="tok-cm"> *</span>
 <span class="tok-cm"> */</span>
-<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-p">{</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span>
+<span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">vide</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">bouilli</span><span class="tok-p">;</span>
 
-	<span class="tok-kd">public</span> <span class="tok-nf">BouilleurChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-	<span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-nf">BouilleurChocolat</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-p">}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remplir</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">estVide</span><span class="tok-p">())</span> <span class="tok-p">{</span>
-			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-			<span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat</span>
-		<span class="tok-p">}</span>
-	<span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">remplir</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">estVide</span><span class="tok-p">())</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">			</span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">			</span><span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-p">}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">vider</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">estVide</span><span class="tok-p">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">estBouilli</span><span class="tok-p">())</span> <span class="tok-p">{</span>
-			<span class="tok-c1">// vider le mélange</span>
-			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-		<span class="tok-p">}</span>
-	<span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">vider</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">estVide</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-n">estBouilli</span><span class="tok-p">())</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-c1">// vider le mélange</span>
+<span class="tok-w">			</span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-p">}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">bouillir</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">estVide</span><span class="tok-p">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-o">!</span><span class="tok-n">estBouilli</span><span class="tok-p">())</span> <span class="tok-p">{</span>
-			<span class="tok-c1">// porter le contenu à ébullition</span>
-			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-		<span class="tok-p">}</span>
-	<span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">bouillir</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">estVide</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-o">!</span><span class="tok-n">estBouilli</span><span class="tok-p">())</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-c1">// porter le contenu à ébullition</span>
+<span class="tok-w">			</span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-p">}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">estVide</span><span class="tok-p">()</span> <span class="tok-p">{</span> <span class="tok-k">return</span> <span class="tok-n">vide</span><span class="tok-p">;}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-nf">estVide</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">vide</span><span class="tok-p">;}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kt">boolean</span> <span class="tok-nf">estBouilli</span><span class="tok-p">()</span> <span class="tok-p">{</span> <span class="tok-k">return</span> <span class="tok-n">bouilli</span><span class="tok-p">;}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-nf">estBouilli</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">bouilli</span><span class="tok-p">;}</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -196,21 +196,21 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurCptChocolat</span> <span class="tok-p">{</span> 
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span> 
-	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kt">int</span> <span class="tok-n">nbInstance</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">BouilleurCptChocolat</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">vide</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">bouilli</span><span class="tok-p">;</span><span class="tok-w"> </span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">nbInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
 
-	<span class="tok-kd">public</span> <span class="tok-nf">BouilleurCptChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">nbInstance</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-			<span class="tok-n">nbInstance</span> <span class="tok-o">=</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
-			<span class="tok-k">return</span> <span class="tok-k">this</span><span class="tok-p">;</span>
-		<span class="tok-p">}</span>
-		<span class="tok-k">else</span> <span class="tok-p">{</span>
-			<span class="tok-k">return</span> <span class="tok-kc">null</span><span class="tok-p">;</span>
-		<span class="tok-p">}</span></code></pre>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-nf">BouilleurCptChocolat</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">nbInstance</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-n">nbInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="tok-w">			</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-k">this</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-kc">null</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 </td>
@@ -226,8 +226,8 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 <div class="listingblock">
 <div class="title">Idée!</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MaClasse</span> <span class="tok-p">{</span>
-	<span class="tok-kd">private</span> <span class="tok-nf">MaClasse</span><span class="tok-p">()</span> <span class="tok-p">{...}</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">MaClasse</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-nf">MaClasse</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{...}</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -251,29 +251,29 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 <p>Complétez le code suivant de façon à résoudre le problème :</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span> <span class="tok-p">{</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span>
-	<span class="tok-p">...</span>
-	<span class="tok-p">...</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">BouilleurChocolat</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">vide</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">bouilli</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-p">...</span>
+<span class="tok-w">	</span><span class="tok-p">...</span>
 
-	        <span class="tok-n">BouilleurChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-p">...</span>
-		<span class="tok-p">...</span>
-		<span class="tok-p">}</span>
+<span class="tok-w">	        </span><span class="tok-n">BouilleurChocolat</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-p">...</span>
+<span class="tok-w">		</span><span class="tok-p">...</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
 
-	<span class="tok-p">...</span>
-	<span class="tok-p">...</span>
-	<span class="tok-p">...</span>
-	<span class="tok-p">...</span>
+<span class="tok-w">	</span><span class="tok-p">...</span>
+<span class="tok-w">	</span><span class="tok-p">...</span>
+<span class="tok-w">	</span><span class="tok-p">...</span>
+<span class="tok-w">	</span><span class="tok-p">...</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kt">void</span> <span class="tok-nf">remplir</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">estVide</span><span class="tok-p">())</span> <span class="tok-p">{</span>
-			<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-			<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-			<span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat }</span>
-		<span class="tok-p">}</span>
-		<span class="tok-c1">// reste du code de BouilleurChocolat...</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">remplir</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">estVide</span><span class="tok-p">())</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">			</span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">			</span><span class="tok-c1">// remplir le bouilleur du mélange lait/chocolat }</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-c1">// reste du code de BouilleurChocolat...</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -304,22 +304,22 @@ Qu&#8217;est-ce qui ne va pas dans le code suivant :</p>
 <div class="listingblock">
 <div class="title">Extrait de la solution</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span> <span class="tok-p">{</span> 
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
-	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span> 
-	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
-	
-	<span class="tok-kd">private</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-		<span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span> 
-		<span class="tok-p">}</span>
-	
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kd">final</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-			<span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span>
-		<span class="tok-p">}</span>
-		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
-	<span class="tok-p">}</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">vide</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">bouilli</span><span class="tok-p">;</span><span class="tok-w"> </span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
+<span class="tok-w">	</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span><span class="tok-w"> </span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">	</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kd">final</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-nf">getInstance</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-kc">null</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -458,37 +458,37 @@ problème en reconstituant un enchaînement erroné possible avec deux threads.
 <div class="listingblock">
 <div class="title">Bloc 1</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-p">()</span> <span class="tok-p">{</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-n">BouilleurChocolat</span><span class="tok-w"> </span><span class="tok-nf">getInstance</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 2</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-p">)</span> <span class="tok-p">{</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-kc">null</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 3</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 4</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span>		<span class="tok-p">}</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-w">		</span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 5</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span>		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Bloc 6</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span>	<span class="tok-p">}</span></code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-w">	</span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock caution">
@@ -506,22 +506,22 @@ problème en reconstituant un enchaînement erroné possible avec deux threads.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="linenos"> 1</span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span> <span class="tok-p">{</span>
-<span class="linenos"> 2</span>	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
-<span class="linenos"> 3</span>	<span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span>
-<span class="linenos"> 4</span>	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="linenos"> 1</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">vide</span><span class="tok-p">;</span>
+<span class="linenos"> 3</span><span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">bouilli</span><span class="tok-p">;</span>
+<span class="linenos"> 4</span><span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span>	<span class="tok-kd">private</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-<span class="linenos"> 7</span>	  <span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-<span class="linenos"> 8</span>	  <span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-<span class="linenos"> 9</span>	<span class="tok-p">}</span>
+<span class="linenos"> 6</span><span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 7</span><span class="tok-w">	  </span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">	  </span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="linenos"> 9</span><span class="tok-w">	</span><span class="tok-p">}</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span>	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kd">final</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-<span class="linenos">12</span>	  <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-<span class="linenos">13</span>        <span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span>
-<span class="linenos">14</span>	  <span class="tok-p">}</span>
-<span class="linenos">15</span>	  <span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
-<span class="linenos">16</span>	<span class="tok-p">}</span></code></pre>
+<span class="linenos">11</span><span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kd">final</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-nf">getInstance</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">12</span><span class="tok-w">	  </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-kc">null</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">13</span><span class="tok-w">        </span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span>
+<span class="linenos">14</span><span class="tok-w">	  </span><span class="tok-p">}</span>
+<span class="linenos">15</span><span class="tok-w">	  </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-w">	</span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -598,22 +598,22 @@ assigne ce nouvel objet à la variable <code>uniqueInstance</code> en ligne  13<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span> <span class="tok-p">{</span>
-  <span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">vide</span><span class="tok-p">;</span>
-  <span class="tok-kd">private</span> <span class="tok-kt">boolean</span> <span class="tok-n">bouilli</span><span class="tok-p">;</span>
-  <span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">  </span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">vide</span><span class="tok-p">;</span>
+<span class="tok-w">  </span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">bouilli</span><span class="tok-p">;</span>
+<span class="tok-w">  </span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
 
-  <span class="tok-kd">private</span> <span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-    <span class="tok-n">vide</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-    <span class="tok-n">bouilli</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-  <span class="tok-p">}</span>
+<span class="tok-w">  </span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-nf">BouilleurSafeChocolat</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-n">vide</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="tok-w">    </span><span class="tok-n">bouilli</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">  </span><span class="tok-p">}</span>
 
-  <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kd">synchronized</span> <span class="tok-n">BouilleurSafeChocolat</span> <span class="tok-nf">getInstance</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-    <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">uniqueInstance</span> <span class="tok-o">==</span> <span class="tok-kc">null</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-      <span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span>
-    <span class="tok-p">}</span>
-    <span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
-  <span class="tok-p">}</span></code></pre>
+<span class="tok-w">  </span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kd">synchronized</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-w"> </span><span class="tok-nf">getInstance</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-kc">null</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">      </span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">BouilleurSafeChocolat</span><span class="tok-p">();</span>
+<span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
+<span class="tok-w">  </span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 </td>
@@ -669,10 +669,10 @@ blocs de mémoire, ce qui prend du temps.</p>
 <div class="listingblock">
 <div class="title">Création de l&#8217;instance unique au démarrage</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Singleton</span> <span class="tok-p">{</span>
-	<span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-kd">final</span> <span class="tok-n">Singleton</span> <span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Singleton</span><span class="tok-p">();</span>
-	<span class="tok-kd">private</span> <span class="tok-nf">Singleton</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">Singleton</span> <span class="tok-nf">getInstance</span><span class="tok-p">()</span> <span class="tok-p">{</span> <span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;}</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">Singleton</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kd">final</span><span class="tok-w"> </span><span class="tok-n">Singleton</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">Singleton</span><span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-nf">Singleton</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-n">Singleton</span><span class="tok-w"> </span><span class="tok-nf">getInstance</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;}</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -769,9 +769,9 @@ Cette stratégie n&#8217;est recommandée que dans un cas bien précis d&#8217;u
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-p">...</span>
-<span class="tok-n">vol</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">VolerAvecDesAiles</span><span class="tok-p">();</span>
-<span class="tok-n">cri</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Cancan</span><span class="tok-p">();</span>
-<span class="tok-n">c1</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Colvert</span><span class="tok-p">(</span><span class="tok-n">vol</span><span class="tok-p">,</span><span class="tok-n">cri</span><span class="tok-p">);</span>
+<span class="tok-n">vol</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">VolerAvecDesAiles</span><span class="tok-p">();</span>
+<span class="tok-n">cri</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">Cancan</span><span class="tok-p">();</span>
+<span class="tok-n">c1</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">Colvert</span><span class="tok-p">(</span><span class="tok-n">vol</span><span class="tok-p">,</span><span class="tok-n">cri</span><span class="tok-p">);</span>
 <span class="tok-p">...</span></code></pre>
 </div>
 </div>
@@ -816,13 +816,13 @@ d&#8217;une composition (dans le constructeur du composé) ?</p>
 <div class="listingblock">
 <div class="title">Extrait de ComportemenEpee.java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ComportementEpee</span> <span class="tok-kd">implements</span> <span class="tok-n">ComportementArme</span> <span class="tok-p">{</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">ComportementEpee</span><span class="tok-w"> </span><span class="tok-kd">implements</span><span class="tok-w"> </span><span class="tok-n">ComportementArme</span><span class="tok-w"> </span><span class="tok-p">{</span>
 
-	<span class="tok-kd">private</span> <span class="tok-kd">final</span> <span class="tok-kd">static</span> <span class="tok-n">ComportementEpee</span> <span class="tok-n">uniqueInstance</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">ComportementEpee</span><span class="tok-p">();</span>
-	
-	<span class="tok-kd">public</span> <span class="tok-kd">final</span> <span class="tok-kd">static</span>  <span class="tok-n">ComportementEpee</span> <span class="tok-nf">getInstance</span><span class="tok-p">()</span> <span class="tok-p">{</span>
-		<span class="tok-k">return</span> <span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
-	<span class="tok-p">}</span></code></pre>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-kd">final</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-n">ComportementEpee</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">ComportementEpee</span><span class="tok-p">();</span>
+<span class="tok-w">	</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">final</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w">  </span><span class="tok-n">ComportementEpee</span><span class="tok-w"> </span><span class="tok-nf">getInstance</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">uniqueInstance</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -830,19 +830,19 @@ d&#8217;une composition (dans le constructeur du composé) ?</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">private</span> <span class="tok-nf">ComportementEpee</span><span class="tok-p">(){</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-nf">ComportementEpee</span><span class="tok-p">(){</span>
 
-	<span class="tok-p">}</span></code></pre>
+<span class="tok-w">	</span><span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Extrait de Chevalier.java</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">Chevalier</span> <span class="tok-kd">extends</span> <span class="tok-n">Personnage</span> <span class="tok-p">{</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">Chevalier</span><span class="tok-w"> </span><span class="tok-kd">extends</span><span class="tok-w"> </span><span class="tok-n">Personnage</span><span class="tok-w"> </span><span class="tok-p">{</span>
 
-	<span class="tok-kd">protected</span> <span class="tok-nf">Chevalier</span><span class="tok-p">(</span><span class="tok-n">String</span> <span class="tok-n">nom</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-		<span class="tok-k">this</span><span class="tok-p">(</span><span class="tok-n">nom</span><span class="tok-p">,</span> <span class="tok-n">ComportementEpee</span><span class="tok-p">.</span><span class="tok-na">getInstance</span><span class="tok-p">(),</span> <span class="tok-n">ComportementACheval</span><span class="tok-p">.</span><span class="tok-na">getInstance</span><span class="tok-p">());</span>
-	<span class="tok-p">}</span>	</code></pre>
+<span class="tok-w">	</span><span class="tok-kd">protected</span><span class="tok-w"> </span><span class="tok-nf">Chevalier</span><span class="tok-p">(</span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">nom</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-k">this</span><span class="tok-p">(</span><span class="tok-n">nom</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">ComportementEpee</span><span class="tok-p">.</span><span class="tok-na">getInstance</span><span class="tok-p">(),</span><span class="tok-w"> </span><span class="tok-n">ComportementACheval</span><span class="tok-p">.</span><span class="tok-na">getInstance</span><span class="tok-p">());</span>
+<span class="tok-w">	</span><span class="tok-p">}</span><span class="tok-w">	</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1060,7 +1060,7 @@ les articles sur le "verrouillage à double vérification" (qui ne fonctionne qu
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-11-17 11:15:02 +0100
+Last updated 2024-09-05 08:18:28 +0200
 </div>
 </div>
 </body>

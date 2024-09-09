@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="author" content="Dut/Info-S3/M3105 - (Semaine 48)">
 <title>CPOA - Sujet TD 4</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -166,17 +166,17 @@ identifier.
 <div class="listingblock">
 <div class="title">Méthode statique <code>comptesDUnPropretaire</code> (<code>ApplicationAgenceBancaire.java</code>)</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">comptesDUnPropretaire</span> <span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span><span class="tok-p">,</span> <span class="tok-n">String</span> <span class="tok-n">nomProprietaire</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-	<span class="tok-n">Compte</span> <span class="tok-o">[]</span>  <span class="tok-n">t</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">comptesDUnPropretaire</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-n">ag</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">nomProprietaire</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-n">Compte</span><span class="tok-w"> </span><span class="tok-o">[]</span><span class="tok-w">  </span><span class="tok-n">t</span><span class="tok-p">;</span>
 
-	<span class="tok-n">t</span> <span class="tok-o">=</span> <span class="tok-n">ag</span><span class="tok-p">.</span><span class="tok-na">getComptesDe</span><span class="tok-p">(</span><span class="tok-n">nomProprietaire</span><span class="tok-p">);</span>
-	<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">t</span><span class="tok-p">.</span><span class="tok-na">length</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-		<span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;pas de compte à ce nom ...&quot;</span><span class="tok-p">);</span>
-	<span class="tok-p">}</span> <span class="tok-k">else</span> <span class="tok-p">{</span>
-		<span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;  &quot;</span> <span class="tok-o">+</span> <span class="tok-n">t</span><span class="tok-p">.</span><span class="tok-na">length</span> <span class="tok-o">+</span> <span class="tok-s">&quot; comptes pour &quot;</span> <span class="tok-o">+</span> <span class="tok-n">nomProprietaire</span><span class="tok-p">);</span>
-		<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">t</span><span class="tok-p">.</span><span class="tok-na">length</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">)</span>
-			<span class="tok-n">t</span><span class="tok-o">[</span><span class="tok-n">i</span><span class="tok-o">]</span><span class="tok-p">.</span><span class="tok-na">afficher</span><span class="tok-p">();</span>
-	<span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-n">t</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">ag</span><span class="tok-p">.</span><span class="tok-na">getComptesDe</span><span class="tok-p">(</span><span class="tok-n">nomProprietaire</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">t</span><span class="tok-p">.</span><span class="tok-na">length</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;pas de compte à ce nom ...&quot;</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">		</span><span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;  &quot;</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-n">t</span><span class="tok-p">.</span><span class="tok-na">length</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-s">&quot; comptes pour &quot;</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-n">nomProprietaire</span><span class="tok-p">);</span>
+<span class="tok-w">		</span><span class="tok-k">for</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">t</span><span class="tok-p">.</span><span class="tok-na">length</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">)</span>
+<span class="tok-w">			</span><span class="tok-n">t</span><span class="tok-o">[</span><span class="tok-n">i</span><span class="tok-o">]</span><span class="tok-p">.</span><span class="tok-na">afficher</span><span class="tok-p">();</span>
+<span class="tok-w">	</span><span class="tok-p">}</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
@@ -199,88 +199,88 @@ méthode.</p>
 <div class="listingblock">
 <div class="title"><code>ApplicationAgenceBancaire.java</code></div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">ApplicationAgenceBancaire</span> <span class="tok-p">{</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">ApplicationAgenceBancaire</span><span class="tok-w"> </span><span class="tok-p">{</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-n">String</span> <span class="tok-n">argv</span><span class="tok-o">[]</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">argv</span><span class="tok-o">[]</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
 
-		<span class="tok-n">String</span> <span class="tok-n">choix</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">choix</span><span class="tok-p">;</span>
 
-		<span class="tok-kt">boolean</span> <span class="tok-n">continuer</span> <span class="tok-p">;</span>
-		<span class="tok-n">Scanner</span> <span class="tok-n">lect</span><span class="tok-p">;</span>
-		<span class="tok-n">AgenceBancaire</span> <span class="tok-n">monAg</span> <span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-kt">boolean</span><span class="tok-w"> </span><span class="tok-n">continuer</span><span class="tok-w"> </span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">Scanner</span><span class="tok-w"> </span><span class="tok-n">lect</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-n">monAg</span><span class="tok-w"> </span><span class="tok-p">;</span>
 
-		<span class="tok-n">String</span> <span class="tok-n">nom</span><span class="tok-p">,</span> <span class="tok-n">numero</span><span class="tok-p">;</span>
-		<span class="tok-n">Compte</span> <span class="tok-n">c</span><span class="tok-p">;</span>
-		<span class="tok-kt">double</span> <span class="tok-n">montant</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">nom</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">numero</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-n">Compte</span><span class="tok-w"> </span><span class="tok-n">c</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">montant</span><span class="tok-p">;</span>
 
-		<span class="tok-n">lect</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Scanner</span> <span class="tok-p">(</span> <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">in</span> <span class="tok-p">);</span>
-		<span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">useLocale</span><span class="tok-p">(</span><span class="tok-n">Locale</span><span class="tok-p">.</span><span class="tok-na">US</span><span class="tok-p">);</span>
+<span class="tok-w">		</span><span class="tok-n">lect</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">Scanner</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-w"> </span><span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">in</span><span class="tok-w"> </span><span class="tok-p">);</span>
+<span class="tok-w">		</span><span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">useLocale</span><span class="tok-p">(</span><span class="tok-n">Locale</span><span class="tok-p">.</span><span class="tok-na">US</span><span class="tok-p">);</span>
 
-		<span class="tok-n">monAg</span> <span class="tok-o">=</span> <span class="tok-n">AccesAgenceBancaire</span><span class="tok-p">.</span><span class="tok-na">getAgenceBancaire</span><span class="tok-p">();</span>
+<span class="tok-w">		</span><span class="tok-n">monAg</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">AccesAgenceBancaire</span><span class="tok-p">.</span><span class="tok-na">getAgenceBancaire</span><span class="tok-p">();</span>
 
-		<span class="tok-n">continuer</span> <span class="tok-o">=</span> <span class="tok-kc">true</span><span class="tok-p">;</span>
-		<span class="tok-k">while</span> <span class="tok-p">(</span><span class="tok-n">continuer</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-			<span class="tok-p">...</span>
-			<span class="tok-n">choix</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">next</span><span class="tok-p">();</span>
-			<span class="tok-n">choix</span> <span class="tok-o">=</span> <span class="tok-n">choix</span><span class="tok-p">.</span><span class="tok-na">toLowerCase</span><span class="tok-p">();</span>
-			<span class="tok-k">switch</span> <span class="tok-p">(</span><span class="tok-n">choix</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-				<span class="tok-k">case</span> <span class="tok-s">&quot;q&quot;</span> <span class="tok-p">:</span>
-				<span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;ByeBye&quot;</span><span class="tok-p">);</span>
-				<span class="tok-n">continuer</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">;</span>
-				<span class="tok-k">break</span><span class="tok-p">;</span>
-				<span class="tok-k">case</span> <span class="tok-s">&quot;l&quot;</span> <span class="tok-p">:</span>
-				<span class="tok-n">monAg</span><span class="tok-p">.</span><span class="tok-na">afficher</span><span class="tok-p">();</span>
-				<span class="tok-k">break</span><span class="tok-p">;</span>
-				<span class="tok-k">case</span> <span class="tok-s">&quot;v&quot;</span> <span class="tok-p">:</span>
-				<span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">print</span><span class="tok-p">(</span><span class="tok-s">&quot;Num compte -&gt; &quot;</span><span class="tok-p">);</span>
-				<span class="tok-n">numero</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">next</span><span class="tok-p">();</span>
-				<span class="tok-n">c</span> <span class="tok-o">=</span> <span class="tok-n">monAg</span><span class="tok-p">.</span><span class="tok-na">getCompte</span><span class="tok-p">(</span><span class="tok-n">numero</span><span class="tok-p">);</span>
-				<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">c</span><span class="tok-o">==</span><span class="tok-kc">null</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-					<span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Compte inexistant ...&quot;</span><span class="tok-p">);</span>
-				<span class="tok-p">}</span> <span class="tok-k">else</span> <span class="tok-p">{</span>
-					<span class="tok-n">c</span><span class="tok-p">.</span><span class="tok-na">afficher</span><span class="tok-p">();</span>
-				<span class="tok-p">}</span>
-				<span class="tok-k">break</span><span class="tok-p">;</span>
-				<span class="tok-k">case</span> <span class="tok-s">&quot;p&quot;</span> <span class="tok-p">:</span>
-				<span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">print</span><span class="tok-p">(</span><span class="tok-s">&quot;Propriétaire -&gt; &quot;</span><span class="tok-p">);</span>
-				<span class="tok-n">nom</span> <span class="tok-o">=</span> <span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">next</span><span class="tok-p">();</span>
-				<span class="tok-n">ApplicationAgenceBancaire</span><span class="tok-p">.</span><span class="tok-na">comptesDUnPropretaire</span> <span class="tok-p">(</span><span class="tok-n">monAg</span><span class="tok-p">,</span> <span class="tok-n">nom</span><span class="tok-p">);</span>
-				<span class="tok-k">break</span><span class="tok-p">;</span>
-				<span class="tok-k">case</span> <span class="tok-s">&quot;d&quot;</span> <span class="tok-p">:</span>
-				<span class="tok-p">...</span>
-				<span class="tok-k">break</span><span class="tok-p">;</span>
-				<span class="tok-k">case</span> <span class="tok-s">&quot;r&quot;</span> <span class="tok-p">:</span>
-				<span class="tok-p">...</span>
-				<span class="tok-k">break</span><span class="tok-p">;</span>
-				<span class="tok-k">default</span> <span class="tok-p">:</span>
-				<span class="tok-p">...</span>
-				<span class="tok-k">break</span><span class="tok-p">;</span>
-			<span class="tok-p">}</span>
-		<span class="tok-p">}</span>
-	<span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-n">continuer</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span>
+<span class="tok-w">		</span><span class="tok-k">while</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">continuer</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">			</span><span class="tok-p">...</span>
+<span class="tok-w">			</span><span class="tok-n">choix</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">next</span><span class="tok-p">();</span>
+<span class="tok-w">			</span><span class="tok-n">choix</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">choix</span><span class="tok-p">.</span><span class="tok-na">toLowerCase</span><span class="tok-p">();</span>
+<span class="tok-w">			</span><span class="tok-k">switch</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">choix</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">				</span><span class="tok-k">case</span><span class="tok-w"> </span><span class="tok-s">&quot;q&quot;</span><span class="tok-w"> </span><span class="tok-p">:</span>
+<span class="tok-w">				</span><span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;ByeBye&quot;</span><span class="tok-p">);</span>
+<span class="tok-w">				</span><span class="tok-n">continuer</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span>
+<span class="tok-w">				</span><span class="tok-k">break</span><span class="tok-p">;</span>
+<span class="tok-w">				</span><span class="tok-k">case</span><span class="tok-w"> </span><span class="tok-s">&quot;l&quot;</span><span class="tok-w"> </span><span class="tok-p">:</span>
+<span class="tok-w">				</span><span class="tok-n">monAg</span><span class="tok-p">.</span><span class="tok-na">afficher</span><span class="tok-p">();</span>
+<span class="tok-w">				</span><span class="tok-k">break</span><span class="tok-p">;</span>
+<span class="tok-w">				</span><span class="tok-k">case</span><span class="tok-w"> </span><span class="tok-s">&quot;v&quot;</span><span class="tok-w"> </span><span class="tok-p">:</span>
+<span class="tok-w">				</span><span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">print</span><span class="tok-p">(</span><span class="tok-s">&quot;Num compte -&gt; &quot;</span><span class="tok-p">);</span>
+<span class="tok-w">				</span><span class="tok-n">numero</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">next</span><span class="tok-p">();</span>
+<span class="tok-w">				</span><span class="tok-n">c</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">monAg</span><span class="tok-p">.</span><span class="tok-na">getCompte</span><span class="tok-p">(</span><span class="tok-n">numero</span><span class="tok-p">);</span>
+<span class="tok-w">				</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">c</span><span class="tok-o">==</span><span class="tok-kc">null</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">					</span><span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Compte inexistant ...&quot;</span><span class="tok-p">);</span>
+<span class="tok-w">				</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">					</span><span class="tok-n">c</span><span class="tok-p">.</span><span class="tok-na">afficher</span><span class="tok-p">();</span>
+<span class="tok-w">				</span><span class="tok-p">}</span>
+<span class="tok-w">				</span><span class="tok-k">break</span><span class="tok-p">;</span>
+<span class="tok-w">				</span><span class="tok-k">case</span><span class="tok-w"> </span><span class="tok-s">&quot;p&quot;</span><span class="tok-w"> </span><span class="tok-p">:</span>
+<span class="tok-w">				</span><span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">print</span><span class="tok-p">(</span><span class="tok-s">&quot;Propriétaire -&gt; &quot;</span><span class="tok-p">);</span>
+<span class="tok-w">				</span><span class="tok-n">nom</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">lect</span><span class="tok-p">.</span><span class="tok-na">next</span><span class="tok-p">();</span>
+<span class="tok-w">				</span><span class="tok-n">ApplicationAgenceBancaire</span><span class="tok-p">.</span><span class="tok-na">comptesDUnPropretaire</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">monAg</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">nom</span><span class="tok-p">);</span>
+<span class="tok-w">				</span><span class="tok-k">break</span><span class="tok-p">;</span>
+<span class="tok-w">				</span><span class="tok-k">case</span><span class="tok-w"> </span><span class="tok-s">&quot;d&quot;</span><span class="tok-w"> </span><span class="tok-p">:</span>
+<span class="tok-w">				</span><span class="tok-p">...</span>
+<span class="tok-w">				</span><span class="tok-k">break</span><span class="tok-p">;</span>
+<span class="tok-w">				</span><span class="tok-k">case</span><span class="tok-w"> </span><span class="tok-s">&quot;r&quot;</span><span class="tok-w"> </span><span class="tok-p">:</span>
+<span class="tok-w">				</span><span class="tok-p">...</span>
+<span class="tok-w">				</span><span class="tok-k">break</span><span class="tok-p">;</span>
+<span class="tok-w">				</span><span class="tok-k">default</span><span class="tok-w"> </span><span class="tok-p">:</span>
+<span class="tok-w">				</span><span class="tok-p">...</span>
+<span class="tok-w">				</span><span class="tok-k">break</span><span class="tok-p">;</span>
+<span class="tok-w">			</span><span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-p">}</span>
+<span class="tok-w">	</span><span class="tok-p">}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">comptesDUnPropretaire</span> <span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span><span class="tok-p">,</span>
-		<span class="tok-n">String</span> <span class="tok-n">nomProprietaire</span><span class="tok-p">)</span> <span class="tok-p">{...}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">comptesDUnPropretaire</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-n">ag</span><span class="tok-p">,</span>
+<span class="tok-w">		</span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">nomProprietaire</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{...}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">deposerSurUnCompte</span> <span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span><span class="tok-p">,</span>
-		<span class="tok-n">String</span> <span class="tok-n">numeroCompte</span><span class="tok-p">,</span> <span class="tok-kt">double</span> <span class="tok-n">montant</span><span class="tok-p">)</span> <span class="tok-p">{...}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">deposerSurUnCompte</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-n">ag</span><span class="tok-p">,</span>
+<span class="tok-w">		</span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">numeroCompte</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">montant</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{...}</span>
 
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">retirerSurUnCompte</span> <span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span><span class="tok-p">,</span>
-		<span class="tok-n">String</span> <span class="tok-n">numeroCompte</span><span class="tok-p">,</span> <span class="tok-kt">double</span> <span class="tok-n">montant</span><span class="tok-p">)</span> <span class="tok-p">{...}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">retirerSurUnCompte</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-n">ag</span><span class="tok-p">,</span>
+<span class="tok-w">		</span><span class="tok-n">String</span><span class="tok-w"> </span><span class="tok-n">numeroCompte</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">montant</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{...}</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Extrait de <code>AccesAgenceBancaire</code></div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">AccesAgenceBancaire</span> <span class="tok-p">{</span>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">class</span> <span class="tok-nc">AccesAgenceBancaire</span><span class="tok-w"> </span><span class="tok-p">{</span>
 
-	<span class="tok-kd">private</span> <span class="tok-nf">AccesAgenceBancaire</span> <span class="tok-p">()</span> <span class="tok-p">{}</span>
-	<span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-n">AgenceBancaire</span> <span class="tok-nf">getAgenceBancaire</span> <span class="tok-p">()</span> <span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-kd">private</span><span class="tok-w"> </span><span class="tok-nf">AccesAgenceBancaire</span><span class="tok-w"> </span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{}</span>
+<span class="tok-w">	</span><span class="tok-kd">public</span><span class="tok-w"> </span><span class="tok-kd">static</span><span class="tok-w"> </span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-nf">getAgenceBancaire</span><span class="tok-w"> </span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
 
-		<span class="tok-n">AgenceBancaire</span> <span class="tok-n">ag</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">AgenceBancaire</span><span class="tok-p">(</span><span class="tok-s">&quot;CAISSE ECUREUIL&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;PIBRAC&quot;</span><span class="tok-p">);</span>
-		<span class="tok-p">...</span>
-	<span class="tok-p">}</span>
+<span class="tok-w">		</span><span class="tok-n">AgenceBancaire</span><span class="tok-w"> </span><span class="tok-n">ag</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">AgenceBancaire</span><span class="tok-p">(</span><span class="tok-s">&quot;CAISSE ECUREUIL&quot;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-s">&quot;PIBRAC&quot;</span><span class="tok-p">);</span>
+<span class="tok-w">		</span><span class="tok-p">...</span>
+<span class="tok-w">	</span><span class="tok-p">}</span>
 <span class="tok-p">...</span>
 <span class="tok-p">}</span></code></pre>
 </div>
@@ -371,7 +371,7 @@ agrégation <code>1 &lt;&gt;-&gt; *</code> et association <code>1 -&gt; *</code>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-11-26 12:55:45 +0100
+Last updated 2024-09-05 08:18:28 +0200
 </div>
 </div>
 </body>

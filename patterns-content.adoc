@@ -177,7 +177,7 @@ a donné son nom à un principe important et bien connu : le principe default:
 endif::slides[]
 
 ifndef::slides[.Barbara Liskov reçoit le _Turing Award_]
-image::liskov.jpg[scaledwidth="70%", link="https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0"]
+image::liskov.jpg[scaledwidth="60%", link="https://www.dropbox.com/s/u4wenpfkbml8et0/Capture%20d%27%C3%A9cran%202017-11-08%2015.12.20.png?dl=0"]
 
 ifdef::slides[=== Barbara Liskov est toujours active!]
 
