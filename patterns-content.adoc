@@ -115,6 +115,7 @@ NOTE:  Les auteurs de ce livre sont connus comme les *Gof* pour « _Gang of Four
 2004::
   *Craig Larman* décrit des modèles de conception : les Patterns *GRASP* (cf. <<Larman05>>)
 
+ifdef::slides[:leveloffset: -1]
 
 == Exemples de bons principes
 
@@ -124,7 +125,7 @@ Nous ne pouvons être exhaustifs sur la liste des bons principes objets
 ni sur de longues explications sur chacun d'eux (une fois encore nous
 renvoyons le lecteur à <<Meyer>> pour les fondements), mais nous
 examinons dans ce qui suit quelques exemples clefs.
-endif::backend-pdf[]
+endif::[]
 //--------------------
 
 *SOLID*:
@@ -135,7 +136,6 @@ endif::backend-pdf[]
 - _**I**nterface Segregation Principle_
 - _**D**ependency Inversion Principle_
 
-ifdef::slides[:leveloffset: -1]
 
 === _**S**ingle Responsibility Principle_
 
@@ -215,7 +215,7 @@ endif::backend-pdf[]
 //--------------------
 
 .Réponse (`Rectangle.java`)
-[source,java]
+[source,java,highlight=3..4|6..13|15..33]
 ----
 class Rectangle
 {
@@ -308,7 +308,7 @@ endif::backend-pdf[]
 //--------------------
 
 .Réponse (`Rectangle.java`)
-[source,java]
+[source,java,highlight=1..7|9..19]
 ----
 class LspTest
 {

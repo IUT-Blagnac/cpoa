@@ -38,13 +38,7 @@ include::definitions.txt[]
 ifdef::slides[]
 
 :numbered!:
-
-== Points divers...
-
-- Nuit de l'info
-- PTut et Cahier d'Analyse et de Conception
-- Stages
-
+:cours: R3.04
 == Suivre ces slides icon:mobile[] icon:tablet[] icon:laptop[]...
 
 image::qrcode.png[link="qrcode.png",alt="http://bit.ly/jmb-cpoa",width=40%]
@@ -56,11 +50,11 @@ http://iut-blagnac.github.io/cpoa/
 
 endif::slides[]
 
-// include::introduction.asc[]
+include::{cours}-introduction.asc[]
 
-// == Rappels sur des éléments Java importants
+== Rappels sur des éléments Java importants
 
-// include::typage.asc[leveloffset=+1]
+include::typage.asc[leveloffset=+1]
 // include::visibilite.asc[leveloffset=+1]
 // include::static.asc[leveloffset=+1]
 // include::enum.asc[leveloffset=+1]
@@ -87,7 +81,7 @@ endif::slides[]
 // include::build.asc[]
 
 //----------------
-include::patterns.asc[]
+include::patterns-content.adoc[]
 
 // include::fabrique.asc[]
 
